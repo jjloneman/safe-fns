@@ -176,7 +176,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - **AI-written text on GitHub opens with a disclaimer banner.** Any issue body, PR body, or comment an AI agent writes begins with this line, then a blank line:
 
   ```md
-  > **🤖 Disclaimer**: This description was generated with AI. (Model: _<model name and version>_)
+  > **🤖 Disclaimer**: This description was generated with AI. (**Model**: _<model name and version>_)
   ```
 
   - Use "description" for an issue or PR body, and "comment" for a comment.
