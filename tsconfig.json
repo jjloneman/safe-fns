@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
-    /*
-     * Typecheck only — tsc never writes output here.
-     *
-     * - The package is built by a bundler, which emits the JS and `.d.ts`.
-     *
-     * - `declaration` is still on because `isolatedDeclarations` requires it.
-     */
+    // Required by `isolatedDeclarations`, even though nothing is emitted here.
     "declaration": true,
-    "noEmit": true,
+
+    /*
+     * Optional properties reject an explicit `undefined` unless the type
+     * includes it.
+     *
+     * - Keeps `{ fallback?: F }` distinct from `{ fallback: F | undefined }`,
+     *   which matters for options objects whose absence and `undefined` mean
+     *   different things.
+     */
+    "exactOptionalPropertyTypes": true,
 
     /*
      * Every export must carry types a declaration emitter can read without
@@ -19,19 +22,32 @@
      */
     "isolatedDeclarations": true,
 
-    "exactOptionalPropertyTypes": true,
-    "noUncheckedIndexedAccess": true,
-    "strict": true,
+    // Built-in APIs up to ES2022 — no DOM, since the library must not rely on one.
+    "lib": ["ES2022"],
+
+    // Modern ESM syntax, left for the bundler to transform.
+    "module": "ESNext",
+
+    // Resolve imports the way a bundler does, including `package.json` `exports`.
+    "moduleResolution": "bundler",
 
     /*
-     * `import type` is required for type-only imports, and imports are emitted
-     * exactly as written — what a bundler and a published ESM package expect.
+     * Typecheck only — tsc never writes output here.
+     *
+     * - The package is built by a bundler, which emits the JS and `.d.ts`.
      */
-    "verbatimModuleSyntax": true,
+    "noEmit": true,
 
-    "lib": ["ES2022"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    // Index access (`array[i]`, `record[key]`) includes `undefined` in its type.
+    "noUncheckedIndexedAccess": true,
+
+    // Skip checking `.d.ts` files in `node_modules`; they're not ours to fix.
+    "skipLibCheck": true,
+
+    // All strict-mode checks (`strictNullChecks`, `noImplicitAny`, …).
+    "strict": true,
+
+    // The syntax level code is checked against, matching `lib`.
     "target": "ES2022",
 
     /*
@@ -44,7 +60,11 @@
      */
     "types": ["node"],
 
-    "skipLibCheck": true
+    /*
+     * `import type` is required for type-only imports, and imports are emitted
+     * exactly as written — what a bundler and a published ESM package expect.
+     */
+    "verbatimModuleSyntax": true
   },
   "include": [
     /*
@@ -60,8 +80,13 @@
      */
     "*.config.ts",
 
+    // Repo scripts (release helpers, CI annotations).
     "scripts",
+
+    // The library source.
     "src",
+
+    // Tests and test helpers.
     "test"
   ]
 }

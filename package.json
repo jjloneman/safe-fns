@@ -1,15 +1,19 @@
 {
   "name": "safe-fns",
   "version": "0.0.0",
-  "description": "Zero-dependency, strongly typed helpers that turn an unknown value into a safe, typed result — and never throw",
+  "description": "🛟 Zero-dependency, strongly typed helpers that never throw — bad input returns a fallback you choose.",
   "keywords": [
     "coerce",
     "empty",
+    "fns",
+    "functions",
     "guard",
+    "helpers",
     "parse",
     "safe",
     "typescript",
-    "unknown"
+    "unknown",
+    "utils"
   ],
   "homepage": "https://github.com/jjloneman/safe-fns#readme",
   "bugs": {
