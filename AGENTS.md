@@ -44,7 +44,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - **But don't over-architect.** No speculative abstraction, factories, or config layers a single call site doesn't justify. The simplest design that keeps concerns separated wins.
 - **Watch for god files and god functions.** When one starts accreting unrelated responsibilities, split it rather than piling on.
 - **Semantic naming everywhere.** Files, types, functions, and params say what the thing is or does. Avoid vague names (`data`, `tmp`, `obj`) except where scope is trivial.
-- **American English in all prose** — comments, JSDoc, test names, docs, commit messages, and issue/PR bodies (`color`, `behavior`, `-ize`).
+- **American English in all prose** — comments, TSDoc, test names, docs, commit messages, and issue/PR bodies (`color`, `behavior`, `-ize`).
   - Identifiers and third-party APIs keep whatever spelling they already have.
 
 ### 🔷 TypeScript
@@ -60,22 +60,40 @@ These bind every exported function. A change that breaks one is a bug, even if i
 ### 🧱 Code shape
 
 - **Lexicographic ordering**: object keys, type members, imports, and named imports/exports stay alphabetized.
+  - Ordering is case-insensitive unless a tool says otherwise — `fallback` sorts before `Options`.
 - **Function parameters**: one positional argument is fine; with two or more, take a single object with sorted keys. Options go in an object even when there is only one.
 - **Prefer functional over imperative** — `map`/`filter`/`reduce` and pure helpers over mutable loops, unless the loop is genuinely clearer.
+  - When `reduce` builds an object or array, **mutate the accumulator** and return it, rather than spreading a fresh copy on every iteration — a spread per item turns a linear pass quadratic.
+  - This is safe only because the accumulator is the `reduce`'s own initial value; never mutate a seed object the caller passed in.
+  - **Name the accumulator for what it holds** (`countsByType`, `keysByLength`), never `acc` or `accumulator`.
+
+  ```ts
+  const typeCounts = values.reduce<Record<string, number>>(
+    (countsByType, value) => {
+      const valueType = typeof value;
+      countsByType[valueType] = (countsByType[valueType] ?? 0) + 1;
+
+      return countsByType;
+    },
+    {},
+  );
+  ```
+
 - **Prefer `??` and `?.`** over `||` and `&&` chains when the intent is "fall back if nullish". Keep `||` only when every falsy value should trigger the fallback.
 - **Coerce with the constructor, not an operator** — `Boolean(value)` not `!!value`, `Number(value)` not `+value`, `String(value)` not `"" + value`.
   - Inside a library function, remember that the constructors themselves can throw on hostile input — guard them per the design principles.
 - **No nested ternaries.** Use a named helper whose guards read top to bottom, or a lookup keyed by the discriminant.
 - **Property access**: dot notation for valid identifiers; brackets only for dynamic or special-character keys.
-- **Array access**: `.at(-1)` for the last element only; plain `array[i]` everywhere else.
+- **Array access**: `.at(-1)` for the last element only — briefer and cleaner than `array[array.length - 1]`; plain `array[i]` everywhere else.
 - **Strings**: template literals over concatenation.
 
-### 💬 Comments and JSDoc
+### 💬 Comments and TSDoc
 
 - **Comment only _why_** — non-obvious constraints, workarounds, invariants. Never restate what the code does, and never reference current tasks, PRs, or callers; those rot.
-  - Tests are the exception: each test body uses `// Given` / `// When` / `// Then` section comments.
+  - Tests are the exception: each test body uses `// Given` / `// When` / `// Then` section comments, with `// And` to continue the previous phase.
+  - `// Setup` and `// Cleanup` mark setup or teardown that belongs to one specific test rather than a shared hook.
 - **Comment shape: lead sentence, then bullets.**
-  - A comment of three lines or more uses the block form (`/* … */`, or `/** … */` for JSDoc), not stacked `//` lines.
+  - A comment of three lines or more uses the block form (`/* … */`, or `/** … */` for TSDoc), not stacked `//` lines.
   - The first sentence is prose; every following point is a `-` bullet, with a blank line between bullets.
   - One- and two-line comments stay a plain `//`.
 
@@ -92,7 +110,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
    */
   ```
 
-- **JSDoc every export** — a one-line summary plus `@returns`, and `@example` where a value clarifies. Document the contract and invariants, not the implementation.
+- **Doc comments follow [TSDoc](https://tsdoc.org)**, TypeScript's standardization of JSDoc-style comments.
+  - The familiar tags carry over (`@param`, `@returns`, `@example`, `@deprecated`), but TSDoc drops JSDoc's `{type}` annotations — the types come from TypeScript — and writes `@param name - description` with a hyphen.
+- **TSDoc every export** — functions, constants, objects, types, and classes alike: a one-line summary plus `@returns` where it applies, and `@example` where a value clarifies. Document the contract and invariants, not the implementation.
 - **`@param` is for positional params only.** An object param documents each key on the **property in its type literal**, where the editor's tooltip actually reads it. `@param options.fallback` is invisible to IntelliSense.
 
   ```ts
@@ -110,7 +130,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   ): number | F {
   ```
 
-- **Blank line between JSDoc'd members.** When each property of a type carries its own doc comment, separate them with a blank line. Undocumented members can stay packed.
+- **Blank line between TSDoc'd members.** When each property of a type carries its own doc comment, separate them with a blank line. Undocumented members can stay packed.
 
 ## ✍️ Commit conventions
 
@@ -142,15 +162,26 @@ These bind every exported function. A change that breaks one is a bug, even if i
 
 - Prefixes: `feature/`, `bugfix/`, `release/`.
 - When tied to an issue, insert `gh-<n>-` after the prefix, then a short kebab-case description — e.g. `feature/gh-12-add-safe-parse-number`.
-- Without an issue, drop the `gh-<n>-` segment.
+- Almost every branch should be tied to an issue; file one first rather than branching without it.
+- Only in the rare branch without an issue, drop the `gh-<n>-` segment.
 
 ### 🏷️ Issues & PRs
 
 - **Assign** issues and PRs to the repo owner (`jjloneman`).
-- **Type label**: `enhancement` for features, `bug` for bugfixes, `dependencies` for dependency-only PRs.
-- **Area label** where one fits (`area: tooling`, `area: docs`, …).
+- **Type label**: `✨ feature` for features, `🐞 bug` for bugfixes, `📦 dependencies` for dependency-only PRs.
+- **Area label** where one fits (`area: 🛠️ tooling`, `area: 📝 docs`, …).
+- Label names carry an emoji prefix, so spell them exactly (`gh issue create --label "✨ feature"`).
 - Apply the same labels to an issue and its matching PR.
 - PRs are **squash-merged**, so the PR title becomes the commit on `main` — keep it in the commit format above.
+- **AI-written text on GitHub opens with a disclaimer banner.** Any issue body, PR body, or comment an AI agent writes begins with this line, then a blank line:
+
+  ```md
+  > **🤖 Disclaimer**: This description was generated with AI. (Model: _<model name and version>_)
+  ```
+
+  - Use "description" for an issue or PR body, and "comment" for a comment.
+  - Name the model that actually wrote the text, by its human-readable name and version, not its raw API id.
+  - Never add the banner to text a human wrote.
 
 ## 🧪 Pre-commit checks
 
@@ -159,11 +190,11 @@ These bind every exported function. A change that breaks one is a bug, even if i
 
 ## 🕒 7-day dependency moratorium
 
-No npm dependency may enter the lockfile until it has been published for **7 days** — a supply-chain guard that gives the registry time to yank a compromised release.
+No npm dependency may enter the lockfile until it has been published for **at least 7 days** — a supply-chain guard that gives the registry time to yank a compromised release.
 
 - Enforced by `minimumReleaseAge: 10080` (minutes) in [pnpm-workspace.yaml](pnpm-workspace.yaml), checked on every `pnpm install`, including `--frozen-lockfile`.
 - A too-new version fails the install with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`.
-- When bumping a dependency by hand, pick the newest version that is already ≥7 days old. If the lockfile fails the check, downgrade the offending entry rather than relaxing the floor.
+- When bumping a dependency by hand, pick the newest version that is already at least 7 days old (exactly 7 days is fine). If the lockfile fails the check, downgrade the offending entry rather than relaxing the floor.
 - Versions are pinned exactly (`saveExact: true` in [pnpm-workspace.yaml](pnpm-workspace.yaml)); the lockfile is the only thing that moves them.
 - **TypeScript stays on 6.0** until `typescript-eslint` supports TypeScript 7; upgrade it in its own `chore(deps)` change.
 - **`@types/node` tracks the `engines.node` floor (22)**, not the newest Node, so the typecheck rejects APIs that a supported Node doesn't have.

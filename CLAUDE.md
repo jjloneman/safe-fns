@@ -7,7 +7,6 @@
 ## 🧠 Claude-specific notes
 
 - **Put a convention in AGENTS.md, not here**, unless it only makes sense to Claude (an `@` import, a skill, a path-scoped rule). Other agents read AGENTS.md and never see this file.
-- **Issue, PR, and comment bodies Claude writes open with the AI disclaimer banner** as their first line, so a reader can tell AI-written text from the repo owner's.
 - **In a decision's `generated.by`**, record the agent as `claude-code/<model-id>`, per the OKF actor convention (`<producer>/<version>`).
 
 ## 🗺️ Where the rest of the guidance lives
