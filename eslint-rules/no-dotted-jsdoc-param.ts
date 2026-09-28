@@ -7,9 +7,9 @@ import type { Rule } from "eslint";
  *   positional param and is correct, so matching `@param` broadly would flag
  *   every one of those instead.
  *
- * - Group 1 is the line's `* ` prefix, which the report's column arithmetic
- *   needs; group 2 is the object's own name (`options`, `params`), so the
- *   message can quote the site as written.
+ * - `linePrefix` is the line's `* ` prefix, which the report's column
+ *   arithmetic needs; `objectName` is the object's own name (`options`,
+ *   `params`), so the message can quote the site as written.
  *
  * - The asterisk is optional because a doc block can be written without one
  *   per line, and Prettier reformats no comment's interior — so requiring it
@@ -20,7 +20,7 @@ import type { Rule } from "eslint";
  *   too.
  */
 const DOTTED_PARAM =
-  /^(\s*\*?\s*)@param\s+(?:\{[^}]*\}\s*)?\[?([A-Za-z_$][\w$]*)\.[\w$.]+/;
+  /^(?<linePrefix>\s*\*?\s*)@param\s+(?:\{[^}]*\}\s*)?\[?(?<objectName>[A-Za-z_$][\w$]*)\.[\w$.]+/;
 
 /*
  * `getAllComments` hands back the comment's *value* — its delimiters stripped —
@@ -74,7 +74,8 @@ export const noDottedJsdocParam: Rule.RuleModule = {
               return;
             }
 
-            const [matched, linePrefix = "", objectName] = match;
+            const [matched] = match;
+            const { linePrefix = "", objectName = "" } = match.groups ?? {};
 
             // The match spans the line's `* ` prefix too, so the underline is
             // the remainder — the `@param name.key` a reader would delete.
@@ -88,7 +89,7 @@ export const noDottedJsdocParam: Rule.RuleModule = {
                 : linePrefix.length;
 
             context.report({
-              data: { name: objectName ?? "" },
+              data: { name: objectName },
               loc: {
                 end: {
                   column: column + dottedParam.length,

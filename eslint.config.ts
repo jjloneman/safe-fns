@@ -108,6 +108,10 @@ const config: Linter.Config[] = defineConfig(
 
       "object-shorthand": ["error", "always"],
 
+      // A named group says what it captured; `match[2]` makes the reader
+      // count parentheses.
+      "prefer-named-capture-group": "error",
+
       "tsdoc/syntax": "error",
     },
     /*

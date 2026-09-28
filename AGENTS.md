@@ -95,6 +95,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - **Property access**: dot notation for valid identifiers; brackets only for dynamic or special-character keys.
 - **Array access**: `.at(-1)` for the last element only — briefer and cleaner than `array[array.length - 1]`; plain `array[i]` everywhere else.
 - **Strings**: template literals over concatenation.
+- **Regexes use named capture groups** — `(?<objectName>…)`, read through `match.groups`, never a positional `match[2]`.
+  - A group whose text isn't read is non-capturing, `(?:…)`.
+  - Enforced by ESLint's `prefer-named-capture-group`.
 
 ### 💬 Comments and TSDoc
 
