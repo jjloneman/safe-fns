@@ -35,7 +35,21 @@ What to know before editing a workflow. AGENTS.md's CI section lists what runs; 
 
 - The workflow sets `permissions: {}`, and each job grants only what it uses.
   - Only `report` gets `pull-requests: write` (to comment) and `actions: read` (to list the run's jobs and download the coverage artifact).
+  - In `release.yml`, `release-please` gets `contents`, `issues`, and `pull-requests: write` to manage the release PR, tags, and labels.
+  - Only `publish` gets `id-token: write`, which npm trusted publishing exchanges for a one-off publish token.
 - `actions/checkout` sets `persist-credentials: false`; the comment scripts authenticate `gh` through `GH_TOKEN`, not the git credential.
+
+## 🚀 Release workflow
+
+- **`publish` lives in `release.yml`, gated on `release_created`**, not in a workflow triggered by the tag or release.
+  - Events created with `GITHUB_TOKEN` never start another workflow, so an `on: release` workflow would never fire.
+- **`publish` checks out `tag_name`, not the triggering commit.**
+  - A later push can replace the run on the release PR's merge commit, and that later run still tags the merge commit.
+  - Building the run's own `github.sha` would then ship code the tag doesn't hold.
+- **`concurrency` queues, never cancels**: a cancelled run could be the one on the release PR's merge commit.
+  - A newer push may still replace a queued run; release-please finds a merged release PR by its `autorelease: pending` label, so the next run cuts the release.
+- **Keep release-please's `label` and `release-label` at their defaults.** It finds its open release PR by `label`; `extra-label` (`🚀 release`) is applied only when the PR is first opened.
+- `release.yml` is not in `report`'s `needs:`: it is a separate workflow that runs only on `main`.
 
 ## 💬 Sticky comments
 
