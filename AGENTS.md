@@ -34,6 +34,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Each function's tests sit beside it as `*.test.ts` and `*.test-d.ts`.
 - `test/` — shared test harnesses, imported as `#test/*` (see [Testing](#-testing)).
 - `.githooks/` — the pre-commit and pre-push hooks (see [Pre-commit checks](#-pre-commit-checks)).
+- `.github/rulesets/` — the repository rulesets that protect `main` (see [Issues & PRs](#️-issues--prs)).
 - `docs/decisions/` — the design-decision bundle (see [Design decisions](#-design-decisions)).
 - `eslint-rules/` — local ESLint rules, loaded by `eslint.config.ts`.
 - `eslint.config.ts` — ESLint flat config.
@@ -189,6 +190,10 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - Label names carry an emoji prefix, so spell them exactly (`gh issue create --label "✨ feature"`).
 - Apply the same labels to an issue and its matching PR.
 - PRs are **squash-merged**, so the PR title becomes the commit on `main` — keep it in the commit format above.
+- **`main` is protected** by the ruleset in [.github/rulesets/main.json](.github/rulesets/main.json), with no bypass for anyone:
+  - every change lands through a PR, squash-merged, and unresolved review threads block the merge;
+  - no force pushes, no deletion, and linear history only.
+- **The ruleset file is the source of truth** — after editing it, reapply it with `gh api --method PUT repos/jjloneman/safe-fns/rulesets/<id> --input .github/rulesets/main.json` (`gh api repos/jjloneman/safe-fns/rulesets` lists the id).
 - **AI-written text on GitHub opens with a disclaimer banner.** Any issue body, PR body, or comment an AI agent writes begins with this line, then a blank line:
 
   ```md
