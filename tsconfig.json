@@ -80,6 +80,9 @@
      */
     "*.config.ts",
 
+    // Local ESLint rules, imported by eslint.config.ts.
+    "eslint-rules",
+
     // Repo scripts (release helpers, CI annotations).
     "scripts",
 
