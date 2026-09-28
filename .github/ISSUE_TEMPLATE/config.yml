@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🤝 Code of conduct
+    url: https://github.com/jjloneman/safe-fns/blob/main/CODE_OF_CONDUCT.md
+    about: How to report unacceptable behavior.
+  - name: 📖 README
+    url: https://github.com/jjloneman/safe-fns#readme
+    about: Usage, the API, and the support matrix.
+  - name: 🔒 Report a security vulnerability
+    url: https://github.com/jjloneman/safe-fns/security/advisories/new
+    about: Report it privately, not as a public issue.

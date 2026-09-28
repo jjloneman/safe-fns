@@ -1,0 +1,22 @@
+name: 🤝 Conduct report
+description: Report behavior that breaks the code of conduct. Reports are public.
+labels:
+  - 📥 needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        GitHub has no private messages, so this report is public. See the [code of conduct](https://github.com/jjloneman/safe-fns/blob/main/CODE_OF_CONDUCT.md) for how reports are handled.
+  - type: input
+    id: location
+    attributes:
+      label: 🔗 Where it happened
+      description: A link to the issue, pull request, or comment.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 What happened
+    validations:
+      required: true
