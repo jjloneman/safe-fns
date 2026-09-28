@@ -5,26 +5,24 @@ import jsoncPlugin from "eslint-plugin-jsonc";
 import perfectionistPlugin from "eslint-plugin-perfectionist";
 import tsdocPlugin from "eslint-plugin-tsdoc";
 import ymlPlugin from "eslint-plugin-yml";
-import { defineConfig } from "eslint/config";
+import { defineConfig, globalIgnores, includeIgnoreFile } from "eslint/config";
+import path from "node:path";
 import { configs as tsConfigs } from "typescript-eslint";
 
 import { noDottedJsdocParam } from "./eslint-rules/no-dotted-jsdoc-param";
 
 const config: Linter.Config[] = defineConfig(
-  {
-    /*
-     * ESLint doesn't read `.gitignore`, so gitignored paths it would otherwise
-     * reach are listed here — notably the per-user editor and agent settings,
-     * which are dotfiles ESLint does lint.
-     */
-    ignores: [
-      ".claude/**",
-      ".vscode/**",
-      "coverage/**",
-      "dist/**",
-      "pnpm-lock.yaml",
-    ],
-  },
+  /*
+   * ESLint doesn't read `.gitignore` on its own, so load it — one list of
+   * ignored paths, which can't drift from git's.
+   *
+   * - Without it, `eslint .` lints gitignored dotfiles such as a per-user
+   *   `.vscode/settings.json`, and `lint:fix` rewrites them.
+   */
+  includeIgnoreFile(path.resolve(import.meta.dirname, ".gitignore")),
+
+  // Tracked, but generated: pnpm rewrites the lockfile on every install.
+  globalIgnores(["pnpm-lock.yaml"]),
 
   /*
    * TypeScript, with the full typed presets.
