@@ -46,10 +46,17 @@ const BLOCK_DELIMITER_WIDTH = "/*".length;
 export const noDottedJsdocParam: Rule.RuleModule = {
   create(context) {
     return {
+      // `Program` runs once per linted file, and `sourceCode` is that file
+      // alone, so this scans one file's comments, never the whole project.
       Program() {
         for (const comment of context.sourceCode.getAllComments()) {
-          // A `loc` is always present here (ESLint parses with `loc: true`),
-          // but it is optional on the estree type, so narrow it here too.
+          /*
+           * `loc` is the comment's source location — the line and column where
+           * it starts and ends — which the report needs to underline the match.
+           *
+           * - Always present here (ESLint parses with `loc: true`), but optional
+           *   on the estree type, so narrow it rather than assert it.
+           */
           const commentStart = comment.loc?.start;
 
           if (
