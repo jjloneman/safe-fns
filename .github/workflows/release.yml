@@ -1,0 +1,85 @@
+name: 🚀 Release
+
+on:
+  push:
+    branches: [main]
+
+# Queue rather than cancel: a cancelled run could be the one on the release
+# PR's merge commit.
+#
+# - Only one run waits at a time, so a newer push can still replace a queued
+#   one; that is safe, since release-please finds a merged release PR by its
+#   `autorelease: pending` label, not by the commit that triggered the run.
+concurrency:
+  cancel-in-progress: false
+  group: ${{ github.workflow }}
+
+# Nothing by default; each job grants only what it uses.
+permissions: {}
+
+jobs:
+  # In this workflow rather than one triggered by the tag or release, because
+  # events created with `GITHUB_TOKEN` never start another workflow.
+  publish:
+    name: 📦 Publish to npm
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    needs: [release-please]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # Trusted publishing: npm trades this OIDC token for a one-off publish
+      # token, and the same identity signs the provenance statement.
+      id-token: write
+    steps:
+      # The tag, not the triggering commit: a later push can replace the run on
+      # the release PR's merge commit, and that later run still cuts the
+      # release, at the merge commit.
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ needs.release-please.outputs.tag_name }}
+      - uses: ./.github/actions/setup
+
+      # Actions sets `CI`, so a stale `exports` map fails here instead of
+      # shipping.
+      - run: pnpm build
+
+      # The first version is published by hand before trusted publishing can be
+      # configured, so the release that tags it must not publish it again.
+      #
+      # - `--no-git-checks`: the checkout is the tag, a detached HEAD that pnpm's
+      #   branch check would reject.
+      - env:
+          VERSION: ${{ needs.release-please.outputs.version }}
+        run: |
+          if [ -n "$(npm view "safe-fns@$VERSION" version 2>/dev/null)" ]; then
+            echo "::notice::safe-fns@$VERSION is already on npm; skipping publish."
+          else
+            pnpm publish --no-git-checks
+          fi
+
+  release-please:
+    name: 🏷️ Release PR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      version: ${{ steps.release.outputs.version }}
+    steps:
+      # Maintains the rolling release PR (version bump + changelog) and, when
+      # that PR is merged, tags vX.Y.Z and cuts the GitHub Release.
+      - id: release
+        uses: googleapis/release-please-action@v5.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # release-please has no assignee option, so assign the owner here.
+      - if: ${{ steps.release.outputs.prs_created == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr).number }}
+        run: gh pr edit "$PR_NUMBER" --add-assignee jjloneman --repo "$GITHUB_REPOSITORY"
