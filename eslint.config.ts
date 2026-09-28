@@ -45,6 +45,7 @@ const config: Linter.Config[] = defineConfig(
       jsPlugin.configs.recommended,
       tsConfigs.strictTypeChecked,
       tsConfigs.stylisticTypeChecked,
+      perfectionistPlugin.configs["recommended-alphabetical"],
     ],
     files: ["**/*.ts"],
     languageOptions: {
@@ -55,7 +56,6 @@ const config: Linter.Config[] = defineConfig(
     },
     plugins: {
       local: { rules: { "no-dotted-jsdoc-param": noDottedJsdocParam } },
-      perfectionist: perfectionistPlugin,
       tsdoc: tsdocPlugin,
     },
     rules: {
@@ -108,25 +108,18 @@ const config: Linter.Config[] = defineConfig(
 
       "object-shorthand": ["error", "always"],
 
-      /*
-       * Lexicographic, case-insensitive ordering of imports, exports, object
-       * keys, and type members.
-       *
-       * - Picked rule by rule rather than from a preset, which would also
-       *   reorder classes, unions, and whole module members.
-       */
-      "perfectionist/sort-exports": "error",
-      "perfectionist/sort-imports": "error",
-      "perfectionist/sort-interfaces": "error",
-      "perfectionist/sort-named-exports": "error",
-      "perfectionist/sort-named-imports": "error",
-      "perfectionist/sort-object-types": "error",
-      "perfectionist/sort-objects": "error",
-
       "tsdoc/syntax": "error",
     },
+    /*
+     * Every perfectionist rule sorts case-insensitively, so `fallback` sorts
+     * before `Options`.
+     *
+     * - Where an order carries meaning (a `Set`'s iteration order, a module
+     *   read top to bottom), disable the rule on that line with a comment
+     *   saying why, rather than turning it off here.
+     */
     settings: {
-      perfectionist: { ignoreCase: true, order: "asc", type: "alphabetical" },
+      perfectionist: { ignoreCase: true },
     },
   },
 

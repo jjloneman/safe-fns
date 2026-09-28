@@ -35,7 +35,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - `docs/decisions/` — the design-decision bundle (see [Design decisions](#-design-decisions)).
 - `eslint-rules/` — local ESLint rules, loaded by `eslint.config.ts`.
 - `eslint.config.ts` — ESLint flat config.
-  - TypeScript gets the full typed presets (`strictTypeChecked` + `stylisticTypeChecked`), perfectionist ordering, and `tsdoc/syntax`.
+  - TypeScript gets the full typed presets (`strictTypeChecked` + `stylisticTypeChecked`), perfectionist's `recommended-alphabetical` ordering, and `tsdoc/syntax`.
   - JSON and YAML get `jsonc/sort-keys` and `yml/sort-keys`; `package.json` is excluded and keeps the `sort-package-json` order through `prettier-plugin-packagejson`.
 - `prettier.config.ts` — Prettier defaults plus `trailingComma: "es5"`, the `package.json` sorter, and a shell parser for `.githooks/`.
 - `tsconfig.json` — one root covering `src`, `test`, `scripts`, `eslint-rules`, and the root-level `*.config.ts` files.
@@ -65,7 +65,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
 
 ### 🧱 Code shape
 
-- **Lexicographic ordering**: object keys, type members, imports, and named imports/exports stay alphabetized.
+- **Lexicographic ordering**: everything perfectionist's `recommended-alphabetical` preset can sort stays alphabetized.
+  - That covers object keys, type members, imports and exports, union and intersection members, `Set`/`Map`/array-`includes` entries, switch cases, class members, and a module's top-level declarations.
+  - Where an order carries meaning, disable the rule on that line with an `eslint-disable-next-line` comment saying why, rather than turning it off in the config.
   - Ordering is case-insensitive unless a tool says otherwise — `fallback` sorts before `Options`.
 - **Function parameters**: one positional argument is fine; with two or more, take a single object with sorted keys. Options go in an object even when there is only one.
 - **Prefer functional over imperative** — `map`/`filter`/`reduce` and pure helpers over mutable loops, unless the loop is genuinely clearer.
