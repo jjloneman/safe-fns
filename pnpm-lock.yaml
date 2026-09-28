@@ -169,6 +169,9 @@ importers:
       '@types/node':
         specifier: 22.20.4
         version: 22.20.4
+      git-removed-branches:
+        specifier: 2.3.1
+        version: 2.3.1
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -177,6 +180,14 @@ packages:
 
   '@types/node@22.20.4':
     resolution: {integrity: sha512-zJRE40jpHtKqE/C4fgHrAKQLJuSpzEnP9ff9Y7YtoR3Wd2pwqzlekDeEuUQXjRd+QCYnVnNwuJYmhdk9XV8gvA==}
+
+  git-removed-branches@2.3.1:
+    resolution: {integrity: sha512-9LuXcbodbNlfBU1wK60a8CIDaMnR5Br7yncHEdo90NtUMqTVowLjz+orLZvmn/oFEGEXzI9+zBqv/Pn05pYZrQ==}
+    engines: {node: '>=7.10.1'}
+    hasBin: true
+
+  minimist@1.2.8:
+    resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
   typescript@6.0.3:
     resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
@@ -191,6 +202,12 @@ snapshots:
   '@types/node@22.20.4':
     dependencies:
       undici-types: 6.21.0
+
+  git-removed-branches@2.3.1:
+    dependencies:
+      minimist: 1.2.8
+
+  minimist@1.2.8: {}
 
   typescript@6.0.3: {}
 

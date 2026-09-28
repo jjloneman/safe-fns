@@ -1,7 +1,3 @@
-# Write exact versions on `pnpm add`, so the lockfile is the only thing that
-# moves a dependency.
-saveExact: true
-
 # Supply-chain floor: refuse to install any version younger than 7 days, giving
 # the registry time to yank a compromised release before it reaches our
 # lockfile.
@@ -10,3 +6,7 @@ saveExact: true
 #
 # - Value is in minutes.
 minimumReleaseAge: 10080
+
+# Write exact versions on `pnpm add`, so the lockfile is the only thing that
+# moves a dependency.
+saveExact: true

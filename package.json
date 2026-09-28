@@ -30,11 +30,12 @@
   },
   "type": "module",
   "scripts": {
-    "prune-branches": "git fetch --prune && pnpm dlx git-removed-branches --force --prune",
+    "prune-branches": "git fetch --prune && git-removed-branches --force --prune",
     "typecheck": "tsc"
   },
   "devDependencies": {
     "@types/node": "22.20.4",
+    "git-removed-branches": "2.3.1",
     "typescript": "6.0.3"
   },
   "packageManager": "pnpm@12.5.1",
