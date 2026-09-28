@@ -143,7 +143,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 | Type       | Gitmoji | Use for                             |
 | ---------- | ------- | ----------------------------------- |
 | `build`    | 🔨      | build system / typecheck infra      |
-| `chore`    | ✏️ / ⬆️ | housekeeping, dependency bumps      |
+| `chore`    | 🧹 / ⬆️ | housekeeping, dependency bumps      |
 | `ci`       | 🤖      | CI / dependabot / workflow changes  |
 | `config`   | 🔧      | tooling config (eslint, vitest, …)  |
 | `docs`     | 📝      | documentation                       |
