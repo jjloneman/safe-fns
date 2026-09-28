@@ -4,4 +4,4 @@
  *
  * - Removed once the first real function lands.
  */
-export const placeholder = true;
+export const isPlaceholder = true;
