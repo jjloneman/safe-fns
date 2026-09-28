@@ -8,13 +8,6 @@ on:
   # Weekly, so a newly published query catches code that hasn't changed.
   schedule:
     # 9:00 AM every Monday, New York time.
-    #
-    # ┌───────────── minute (0)
-    # │ ┌───────────── hour (9)
-    # │ │ ┌───────────── day of the month (any)
-    # │ │ │ ┌───────────── month (any)
-    # │ │ │ │ ┌───────────── day of the week (Monday)
-    # │ │ │ │ │
     - cron: "0 9 * * MON"
       timezone: "America/New_York"
 
