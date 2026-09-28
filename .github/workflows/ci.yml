@@ -1,0 +1,152 @@
+# A PR that gets a second push has no use for the first push's verdict, so
+# supersede it. A `main` push is a historical record of that commit — never
+# cancelled, even when the next commit lands seconds later.
+#
+# - The group is keyed per-commit on a push, so two `main` pushes landing close
+#   together (a squash-merge, then release-please's rolling release PR) still
+#   run concurrently rather than queueing behind each other.
+concurrency:
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name == 'pull_request' && 'pr' || github.sha }}
+
+jobs:
+  lint:
+    name: 🧹 Lint & format
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+
+      # Uncached, unlike `pnpm lint`: typed linting makes a file's verdict
+      # depend on the types it imports, which a content-keyed cache can't see,
+      # and a cold run takes only seconds.
+      - run: pnpm exec eslint .
+
+      # After ESLint, so the richer error surfaces first when both fail.
+      - run: pnpm format:check
+
+  package:
+    name: 📦 Package
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+
+      # Each script builds first. Actions sets `CI`, so the build fails on a
+      # stale committed `exports` map instead of rewriting it.
+      - run: pnpm lint:package
+      - run: pnpm size
+      - run: pnpm test:consumer
+
+  # PR-only, and after everything else, so the timings cover the whole run.
+  #
+  # - Both comments post from here rather than from the jobs they describe, so a
+  #   broken report fails this check and never masks a real result as "Tests".
+  report:
+    if: ${{ always() && github.event_name == 'pull_request' }}
+    name: 📊 Reports
+    needs: [lint, package, test, typecheck]
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      # No `pnpm install`: the scripts need only Node, which strips their types.
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 26
+
+      # A `pattern` rather than a `name`, so a run whose tests never wrote
+      # coverage downloads nothing instead of failing; `merge-multiple` keeps
+      # the files in `coverage/` rather than a per-artifact subdirectory.
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          merge-multiple: true
+          path: coverage
+          pattern: coverage
+
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        if: ${{ hashFiles('coverage/coverage-summary.json') != '' }}
+        name: 📊 Coverage PR comment
+        run: node scripts/post-coverage-pr-comment.ts
+
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        if: ${{ !cancelled() }}
+        name: ⏱️ CI timings PR comment
+        run: node scripts/post-ci-timings.ts
+
+  test:
+    name: 🧪 Tests (Node ${{ matrix.node-version }})
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # One leg carries the coverage gate; the others only prove the suite
+      # passes on their Node.
+      - if: ${{ matrix.node-version != 26 }}
+        run: pnpm test
+
+      - if: ${{ matrix.node-version == 26 }}
+        run: pnpm test:coverage
+
+      # Handed to the `report` job, even when the gate fails, since a coverage
+      # drop is exactly when the table is wanted — but only if the run got far
+      # enough to write it.
+      - if: ${{ !cancelled() && matrix.node-version == 26 && github.event_name == 'pull_request' && hashFiles('coverage/coverage-summary.json') != '' }}
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: coverage
+          path: |
+            coverage/coverage-summary.json
+            coverage/coverage.txt
+          retention-days: 1
+    strategy:
+      # Every Node version reports, rather than the first failure cancelling
+      # the rest.
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
+
+  typecheck:
+    name: 🔎 Typecheck
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+      - run: pnpm typecheck
+
+name: ☁️ CI
+
+on:
+  pull_request: {}
+  push:
+    branches: [main]
+
+# Nothing by default; each job grants only what it uses.
+permissions: {}

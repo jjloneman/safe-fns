@@ -1,0 +1,96 @@
+# Weekly dependency updates that flow through the standard CI workflow.
+#
+# - Labels are applied by exact name, so the emoji-prefixed ones are spelled out
+#   in full; a misspelled label is silently skipped.
+#
+# - Commit prefixes follow AGENTS.md's dependency-bump format. Dependabot always
+#   says "bump", so a subject reads `chore(deps): ⬆️ bump foo from 1.0.0 to
+#   1.0.1`.
+
+updates:
+  - assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(actions): ⬆️"
+
+    # Actions resolves a `uses:` ref as a literal git tag, so a compromised
+    # release reaches CI the moment it is tagged. Every ref is pinned to an
+    # exact vX.Y.Z, which makes each bump a reviewable PR, and this gives the
+    # registry 7 days to yank one first.
+    cooldown:
+      default-days: 7
+
+    # The root covers `.github/workflows/`; a composite action's own `uses:`
+    # pins are only scanned where its directory is listed.
+    directories:
+      - "/"
+      - "/.github/actions/*"
+
+    # Majors stay ungrouped, so a breaking action bump gets its own review.
+    groups:
+      patch-and-minor:
+        update-types:
+          - "minor"
+          - "patch"
+    labels:
+      - "📦 dependencies"
+      - "🤖 ci"
+    package-ecosystem: "github-actions"
+    schedule:
+      day: "monday"
+      interval: "weekly"
+      time: "09:00"
+      timezone: "America/New_York"
+
+  - assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps): ⬆️"
+      prefix-development: "chore(deps-dev): ⬆️"
+
+    # Past pnpm's `minimumReleaseAge` floor (pnpm-workspace.yaml), so the
+    # frozen-lockfile install in CI accepts the bump instead of rejecting a
+    # too-new version.
+    cooldown:
+      default-days: 7
+    directory: "/"
+
+    # Majors stay ungrouped, so a breaking bump gets its own review.
+    groups:
+      patch-and-minor:
+        update-types:
+          - "minor"
+          - "patch"
+
+    # Pins AGENTS.md sets on purpose; only the ignored update types are held,
+    # so smaller bumps still flow.
+    ignore:
+      # Tracks the `engines.node` floor (22), so the typecheck rejects an API a
+      # supported Node doesn't have.
+      - dependency-name: "@types/node"
+        update-types:
+          - "version-update:semver-major"
+
+      # Stays on 6.x until typescript-eslint supports TypeScript 7.
+      - dependency-name: "typescript"
+        update-types:
+          - "version-update:semver-major"
+
+      # The `typescript-<major.minor>` aliases are consumer-test fixtures, each
+      # pinned to one release line; only patches within it are wanted.
+      - dependency-name: "typescript-*"
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
+    labels:
+      - "📦 dependencies"
+    open-pull-requests-limit: 10
+    package-ecosystem: "npm"
+    schedule:
+      day: "monday"
+      interval: "weekly"
+      time: "09:00"
+      timezone: "America/New_York"
+    versioning-strategy: "increase"
+
+version: 2

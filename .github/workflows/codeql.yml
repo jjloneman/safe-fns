@@ -1,0 +1,35 @@
+jobs:
+  analyze:
+    name: 🔐 Analyze
+    permissions:
+      contents: read
+      security-events: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      # `build-mode: none` reads the source directly; TypeScript needs no build.
+      - uses: github/codeql-action/init@v4.38.1
+        with:
+          build-mode: none
+          languages: javascript-typescript
+
+      - uses: github/codeql-action/analyze@v4.38.1
+        with:
+          category: /language:javascript-typescript
+
+name: 🔐 CodeQL
+
+on:
+  pull_request: {}
+  push:
+    branches: [main]
+
+  # Weekly, so a newly published query catches code that hasn't changed.
+  schedule:
+    - cron: "0 9 * * 1"
+
+# Nothing by default; the job grants only what it uses.
+permissions: {}
