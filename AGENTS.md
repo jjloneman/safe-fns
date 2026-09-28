@@ -39,7 +39,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Relative imports name the `.ts` file (`./lib/publish-ci-report.ts`), since Node resolves only the real file name.
 - `dist/` — build output (gitignored), the only directory published.
 - `.githooks/` — the pre-commit and pre-push hooks (see [Pre-commit checks](#-pre-commit-checks)).
-- `.github/workflows/` — CI and CodeQL (see [CI](#-ci)); `.github/actions/setup/` is the shared pnpm + Node + install prelude.
+- `.github/workflows/` — CI, CodeQL, and release (see [CI](#-ci)); `.github/actions/setup/` is the shared pnpm + Node + install prelude.
 - `.github/dependabot.yml` — weekly npm and GitHub Actions updates (see [CI](#-ci)).
 - `.github/rulesets/` — the repository rulesets that protect `main` (see [Issues & PRs](#️-issues--prs)).
 - `docs/decisions/` — the design-decision bundle (see [Design decisions](#-design-decisions)).
@@ -49,6 +49,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - JSON and YAML get `jsonc/sort-keys` and `yml/sort-keys`; `package.json` is excluded and keeps the `sort-package-json` order through `prettier-plugin-packagejson`.
   - YAML under `.github/` follows GitHub's documented key order instead (`name`, `on`, … `jobs`), with any other key alphabetized after it.
 - `prettier.config.ts` — Prettier defaults plus `trailingComma: "es5"`, the `package.json` sorter, and a shell parser for `.githooks/`.
+- `release-please-config.json` and `.release-please-manifest.json` — release-please's config and the last released version (see [Versioning & releases](#-versioning--releases)).
 - `size-limit.config.ts` — the size budget for every public entry.
 - `tsdown.config.ts` — the build, and the generated `exports` map in `package.json`.
 - `tsconfig.json` — one root covering `src`, `test`, `scripts`, `eslint-rules`, and the root-level `*.config.ts` files.
@@ -283,6 +284,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - `## ⏱️ CI timings`, from `scripts/post-ci-timings.ts`.
   - A bug in either script fails `report`; a failure to post it can't fix, such as the read-only token Dependabot and fork PRs get, only warns.
 - `.github/workflows/codeql.yml` scans on PRs, `main`, and weekly.
+- `.github/workflows/release.yml` runs on every push to `main` (see [Versioning & releases](#-versioning--releases)):
+  - `release-please` — opens or updates the release PR, and tags the release once it is merged;
+  - `publish` — only when a release was just created; builds and publishes to npm.
 - **Dependabot** opens weekly grouped patch/minor PRs for npm and Actions, after a 7-day cooldown that matches the [moratorium](#-7-day-dependency-moratorium).
   - Its `ignore` rules hold the pins below: `typescript` and `@types/node` majors, and each `typescript-<version>` alias to its minor.
 - Every action is pinned to an exact `vX.Y.Z`, and every job declares its own `permissions`.
@@ -309,7 +313,17 @@ No npm dependency may enter the lockfile until it has been published for **at le
 - Releases are automated by [release-please](https://github.com/googleapis/release-please), which reads the commit conventions above — this is why the types and gitmojis matter beyond tidiness.
   - It maintains a single rolling release PR; merging that PR bumps `package.json`, writes the changelog, and tags the release.
   - Squash-merge the release PR so its title becomes the commit.
+  - **Only `feat`, `fix`, `perf`, `revert`, and a `!` breaking change cut a release** and appear in `CHANGELOG.md`.
+  - Every other type is hidden, so a tooling-only change never publishes a new version.
+  - The PR carries the `🚀 release` label and a `chore(release): 🚀 bump to vX.Y.Z` title.
 - **Never hand-run a version bump or `git tag`**; the release PR owns both.
+- **Merging the release PR publishes to npm**, from the `publish` job in `.github/workflows/release.yml`.
+  - It uses npm trusted publishing (OIDC), so no npm token exists anywhere; provenance is signed by the same identity.
+  - A version already on npm is skipped, so the release that tags the hand-published first version doesn't publish it twice.
+- **CI never runs on the release PR**: a PR opened with `GITHUB_TOKEN` starts no workflows.
+  - Every commit it lists already passed CI on `main`, and the PR only touches `package.json`'s version, `CHANGELOG.md`, and the manifest.
+  - Requiring checks on `main` would block it, unless release-please switches to a GitHub App token.
+- `CHANGELOG.md` is in `.prettierignore`, since release-please writes it and Prettier would reformat it.
 
 ## 📚 Design decisions
 
