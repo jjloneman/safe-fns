@@ -162,7 +162,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 | `docs`     | 📝      | documentation                      |
 | `feat`     | ✨      | new feature                        |
 | `fix`      | 🔧      | bug fix                            |
-| `perf`     | ⚡      | performance                        |
+| `perf`     | ⚡️      | performance                        |
 | `refactor` | 🏗️      | refactor                           |
 | `test`     | 🧪      | tests                              |
 
