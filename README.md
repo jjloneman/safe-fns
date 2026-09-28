@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/jjloneman/safe-fns/main/assets/logo-dark.svg">
+  <img src="https://raw.githubusercontent.com/jjloneman/safe-fns/main/assets/logo-light.svg" alt="safe-fns logo: a gear whose rim is a charcoal and amber lifebuoy" width="96" height="96">
+</picture>
+
 # 🛟 safe-fns
 
 Zero-dependency, strongly typed helpers that take an `unknown` value and never throw — bad input returns a fallback you choose. (Not to be confused with [`safe-fn`](https://www.npmjs.com/package/safe-fn), an unrelated server-action builder.)
