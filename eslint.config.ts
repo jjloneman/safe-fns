@@ -89,6 +89,18 @@ const config: Linter.Config[] = defineConfig(
         },
       ],
 
+      /*
+       * Numbers interpolate safely; the rule's worth is catching `undefined`,
+       * `null`, and `[object Object]` slipping into a string.
+       *
+       * - Without this, every number in a template needs a `String()` wrapper
+       *   that changes nothing.
+       */
+      "@typescript-eslint/restrict-template-expressions": [
+        "error",
+        { allowNumber: true },
+      ],
+
       // A brace-less guard reads fine until a second statement is added to it,
       // at which point that one runs unconditionally.
       curly: ["error", "all"],

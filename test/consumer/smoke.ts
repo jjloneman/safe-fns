@@ -48,5 +48,5 @@ for (const subpath of subpaths) {
 }
 
 console.log(
-  `[smoke] Loaded ${String(subpaths.length + 1)} entries via import and require.`
+  `[smoke] Loaded ${subpaths.length + 1} entries via import and require.`
 );
