@@ -23,19 +23,28 @@ import { publishCiReport } from "./lib/publish-ci-report.ts";
 
 /** The slice of an Actions job the report reads. */
 type ActionsJob = {
+  /** The job's display name, e.g. `🧪 Tests (Node 26)`. */
   name: string;
+
+  /** The job's steps; absent for a job that never started. */
   steps?: ActionsStep[];
 } & TimedSpan;
 
 /** The slice of an Actions step the report reads. */
 type ActionsStep = {
+  /** The step's `name:`, or `Run <command>` when it has none. */
   name: string;
 } & TimedSpan;
 
 /** A job's or step's outcome and span; the times are `null` until it has run. */
 type TimedSpan = {
+  /** When it finished, as an ISO timestamp. */
   completed_at: null | string;
+
+  /** How it ended (`success`, `failure`, `skipped`, …); `null` while running. */
   conclusion: null | string;
+
+  /** When it started, as an ISO timestamp. */
   started_at: null | string;
 };
 
@@ -217,7 +226,7 @@ const main = (): void => {
 
   if (runId === undefined) {
     console.warn(
-      "[CI] No run id — pass one as an argument, or set GITHUB_RUN_ID."
+      "[post-ci-timings] No run id — pass one as an argument, or set GITHUB_RUN_ID."
     );
 
     return;
@@ -243,6 +252,6 @@ try {
    *   warned about and swallowed in `publishCiReport`, so they never reach
    *   here.
    */
-  console.error("[CI] Fatal error:", error);
+  console.error("[post-ci-timings] Fatal error:", error);
   process.exit(1);
 }

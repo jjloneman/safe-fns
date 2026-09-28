@@ -20,7 +20,10 @@ import { appendFileSync, readFileSync } from "node:fs";
 
 /** The `id`/`body` slice of a GitHub issue comment the upsert matches against. */
 type IssueCommentSlice = {
+  /** The comment's opening characters, enough to hold a report's marker. */
   body: string;
+
+  /** The comment's id, used to edit it in place. */
   id: number;
 };
 
@@ -120,7 +123,10 @@ const upsertStickyPrComment = ({
       { input: JSON.stringify({ body }), stdio: ["pipe", "ignore", "inherit"] }
     );
   } catch (error: unknown) {
-    console.warn("[CI] Failed to upsert the sticky PR comment:", error);
+    console.warn(
+      "[publish-ci-report] Failed to upsert the sticky PR comment:",
+      error
+    );
   }
 };
 
@@ -170,7 +176,9 @@ export const publishCiReport = ({
   }
 
   if (!GITHUB_EVENT_PATH || !GITHUB_REPOSITORY) {
-    console.warn("[CI] Missing GitHub Actions env — skipping the PR comment.");
+    console.warn(
+      "[publish-ci-report] Missing GitHub Actions env — skipping the PR comment."
+    );
     return;
   }
 

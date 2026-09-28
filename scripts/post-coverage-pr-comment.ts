@@ -76,7 +76,7 @@ const readTextReport = (): string | undefined => {
     return readFileSync(TEXT_REPORT_PATH, "utf8").trimEnd();
   } catch (error: unknown) {
     console.warn(
-      `[CI] No text coverage report at ${TEXT_REPORT_PATH} — posting the table alone:`,
+      `[post-coverage-pr-comment] No text coverage report at ${TEXT_REPORT_PATH} — posting the table alone:`,
       error
     );
     return undefined;
@@ -130,6 +130,6 @@ ${buildDetails(textReport)}`;
 try {
   main();
 } catch (error: unknown) {
-  console.error("[CI] Fatal error:", error);
+  console.error("[post-coverage-pr-comment] Fatal error:", error);
   process.exit(1);
 }
