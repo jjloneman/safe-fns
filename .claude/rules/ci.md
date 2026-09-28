@@ -49,6 +49,7 @@ What to know before editing a workflow. AGENTS.md's CI section lists what runs; 
 - **`concurrency` queues, never cancels**: a cancelled run could be the one on the release PR's merge commit.
   - A newer push may still replace a queued run; release-please finds a merged release PR by its `autorelease: pending` label, so the next run cuts the release.
 - **Keep release-please's `label` and `release-label` at their defaults.** It finds its open release PR by `label`; `extra-label` (`🚀 release`) is applied only when the PR is first opened.
+- **A step's `env` is evaluated even when its `if` skips the step.** Guard any expression that can fail on a missing output, such as `fromJSON(steps.release.outputs.pr || '{}')`.
 - `release.yml` is not in `report`'s `needs:`: it is a separate workflow that runs only on `main`.
 
 ## 💬 Sticky comments
