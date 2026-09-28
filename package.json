@@ -28,25 +28,69 @@
     "name": "JJ Loneman",
     "url": "https://github.com/jjloneman"
   },
+  "sideEffects": false,
   "type": "module",
   "imports": {
     "#test/*": "./test/*.ts"
   },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./is-placeholder": {
+      "import": {
+        "types": "./dist/is-placeholder.d.ts",
+        "default": "./dist/is-placeholder.js"
+      },
+      "require": {
+        "types": "./dist/is-placeholder.d.cts",
+        "default": "./dist/is-placeholder.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*.d.ts",
+        "./*"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsdown",
     "check": "pnpm lint:fix && pnpm format && pnpm typecheck",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --cache --cache-strategy content",
     "lint:fix": "eslint . --fix",
+    "lint:package": "pnpm build && publint && attw --pack",
     "prepare": "git config core.hooksPath .githooks || true",
     "prune-branches": "git fetch --prune && git-removed-branches --force --prune",
+    "size": "pnpm build && size-limit --config size-limit.config.ts",
     "test": "vitest run",
+    "test:consumer": "pnpm build && node scripts/test-consumer.ts",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "typecheck": "tsc"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.5",
     "@eslint/js": "10.0.1",
+    "@size-limit/preset-small-lib": "14.0.0",
     "@types/node": "22.20.4",
     "@vitest/coverage-v8": "5.0.1",
     "eslint": "10.11.0",
@@ -60,12 +104,24 @@
     "prettier": "3.9.8",
     "prettier-plugin-packagejson": "3.0.2",
     "prettier-plugin-sh": "0.19.0",
+    "publint": "0.3.24",
+    "size-limit": "14.0.0",
+    "tsdown": "0.23.0",
     "typescript": "6.0.3",
+    "typescript-4.9": "npm:typescript@4.9.5",
+    "typescript-5.0": "npm:typescript@5.0.4",
+    "typescript-5.4": "npm:typescript@5.4.5",
+    "typescript-5.9": "npm:typescript@5.9.3",
+    "typescript-7.0": "npm:typescript@7.0.2",
     "typescript-eslint": "8.70.0",
     "vitest": "5.0.1"
   },
   "packageManager": "pnpm@12.5.1",
   "engines": {
     "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

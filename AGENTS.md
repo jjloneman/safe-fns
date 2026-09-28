@@ -30,9 +30,13 @@ These bind every exported function. A change that breaks one is a bug, even if i
 
 - `src/` — library source.
   - `src/index.ts` is the root entry and re-exports every function.
-  - It currently holds a single placeholder export, removed when the first real function lands.
+  - Every other `src/*.ts` file is one function and one public subpath, named in kebab-case (`src/is-safe-empty.ts` → `safe-fns/is-safe-empty`).
+  - Today the only one is the `src/is-placeholder.ts` placeholder, removed when the first real function lands.
   - Each function's tests sit beside it as `*.test.ts` and `*.test-d.ts`.
 - `test/` — shared test harnesses, imported as `#test/*` (see [Testing](#-testing)).
+  - `test/consumer/` — fixtures run by `pnpm test:consumer` against the packed tarball (see [Build & package](#-build--package)).
+- `scripts/` — repo scripts, run directly by Node (which strips their types), so they stick to erasable TypeScript syntax.
+- `dist/` — build output (gitignored), the only directory published.
 - `.githooks/` — the pre-commit and pre-push hooks (see [Pre-commit checks](#-pre-commit-checks)).
 - `.github/rulesets/` — the repository rulesets that protect `main` (see [Issues & PRs](#️-issues--prs)).
 - `docs/decisions/` — the design-decision bundle (see [Design decisions](#-design-decisions)).
@@ -41,7 +45,10 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - TypeScript gets the full typed presets (`strictTypeChecked` + `stylisticTypeChecked`), perfectionist's `recommended-alphabetical` ordering, and `tsdoc/syntax`.
   - JSON and YAML get `jsonc/sort-keys` and `yml/sort-keys`; `package.json` is excluded and keeps the `sort-package-json` order through `prettier-plugin-packagejson`.
 - `prettier.config.ts` — Prettier defaults plus `trailingComma: "es5"`, the `package.json` sorter, and a shell parser for `.githooks/`.
+- `size-limit.config.ts` — the size budget for every public entry.
+- `tsdown.config.ts` — the build, and the generated `exports` map in `package.json`.
 - `tsconfig.json` — one root covering `src`, `test`, `scripts`, `eslint-rules`, and the root-level `*.config.ts` files.
+  - `paths` maps `safe-fns` and `safe-fns/*` to `src/`, so `test/consumer/` typechecks and lints before any build.
   - An editor and ESLint's project service both resolve a file by walking up to the nearest config named exactly `tsconfig.json`, so every TypeScript file must fall inside this root's `include`.
   - Don't add a differently named config (`tsconfig.eslint.json`, …) to cover a directory; it typechecks in CI while leaving the editor and the linter blind.
 - `vitest.config.ts` — the `node` and `jsdom` test projects and the coverage gate.
@@ -218,6 +225,33 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - `hostile-inputs.ts` (plus the Node-only `cross-realm-inputs.ts`) — values that trap on inspection, for proving an export never throws.
 - How to write a test is covered by `.claude/rules/testing.md`.
 
+## 📦 Build & package
+
+- `pnpm build` runs tsdown: ESM (`.js`) and CJS (`.cjs`) with `.d.ts`/`.d.cts`, one unbundled, unminified file per `src/*.ts` entry, target ES2022.
+  - Tests beside the source are excluded from the entry glob, so they never reach `dist/`.
+  - Declarations come from tsc, not Oxc: Oxc widens a `const` literal's type (`true` → `boolean`).
+- **`exports` in `package.json` is generated**, along with the legacy `main`, `module`, and `types`.
+  - The build rewrites it from the entry list, adding a `types` condition first under each `import`/`require`; commit the result.
+  - With `CI` set, a stale map fails the build instead of being rewritten.
+  - `typesVersions` is a static wildcard (`./dist/*.d.ts`, then `./*` for the root's own `types`), so subpaths resolve under `moduleResolution: "node"` with nothing to regenerate.
+- `pnpm lint:package` builds, then runs publint and `attw --pack` (Are the Types Wrong).
+- `pnpm size` builds, then checks each entry against its budget in `size-limit.config.ts` (passed by `--config`, since size-limit only finds `.size-limit.*` on its own); an entry without a budget fails.
+- `pnpm test:consumer` builds, packs, and installs the tarball into a scratch project, then:
+  - fails if the tarball holds a test file;
+  - typechecks `test/consumer/types.ts` against every supported consumer TypeScript version;
+  - loads every entry via `import` and `require` with `test/consumer/smoke.ts`, and checks the root re-exports each subpath.
+- **Consumer TypeScript support is 4.9+.**
+
+  | TypeScript       | `node10` | `node16` (CJS + ESM) | `bundler` |
+  | ---------------- | :------: | :------------------: | :-------: |
+  | 4.9              |    ✅    |          ✅          |     —     |
+  | 5.0, 5.4, 5.9    |    ✅    |          ✅          |    ✅     |
+  | 6.0 (the repo's) |    ✅    |          ✅          |    ✅     |
+  | 7.0              |    —     |          ✅          |    ✅     |
+  - The older compilers are dev-dependency aliases (`typescript-4.9`, …), used only by `test:consumer`.
+  - Public types must avoid syntax TS 4.9 can't parse, such as `const` type parameters and `NoInfer`.
+  - When a function is added or the placeholder removed, update `test/consumer/types.ts` to import it.
+
 ## ✅ Pre-commit checks
 
 - Run `pnpm check` before committing; it must pass.
@@ -240,6 +274,7 @@ No npm dependency may enter the lockfile until it has been published for **at le
 - When bumping a dependency by hand, pick the newest version that is already at least 7 days old (exactly 7 days is fine). If the lockfile fails the check, downgrade the offending entry rather than relaxing the floor.
 - Versions are pinned exactly (`saveExact: true` in [pnpm-workspace.yaml](pnpm-workspace.yaml)); the lockfile is the only thing that moves them.
 - **TypeScript stays on 6.0** until `typescript-eslint` supports TypeScript 7; upgrade it in its own `chore(deps)` change.
+  - The `typescript-<version>` aliases are consumer-test fixtures, not the repo's compiler; bump them freely within their minor.
 - **`@types/node` tracks the `engines.node` floor (22)**, not the newest Node, so the typecheck rejects APIs that a supported Node doesn't have.
 - **Developing needs a newer Node than `engines.node`.**
   - `engines.node` is the floor for code that imports the package; the dev tools set their own (jsdom 30 needs `^22.22.2 || ^24.15.0 || >=26`).

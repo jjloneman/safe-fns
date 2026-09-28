@@ -41,6 +41,18 @@
     // Index access (`array[i]`, `record[key]`) includes `undefined` in its type.
     "noUncheckedIndexedAccess": true,
 
+    /*
+     * Resolves the package's own name to its source.
+     *
+     * - Lets `test/consumer/` typecheck and lint in place, before any build;
+     *   `pnpm test:consumer` checks the same fixture against the packed
+     *   tarball instead.
+     */
+    "paths": {
+      "safe-fns": ["./src/index.ts"],
+      "safe-fns/*": ["./src/*.ts"]
+    },
+
     // Skip checking `.d.ts` files in `node_modules`; they're not ours to fix.
     "skipLibCheck": true,
 
