@@ -1,0 +1,45 @@
+{
+  "name": "safe-fns",
+  "version": "0.0.0",
+  "description": "🛟 Zero-dependency, strongly typed helpers that never throw — bad input returns a fallback you choose.",
+  "keywords": [
+    "coerce",
+    "empty",
+    "fns",
+    "functions",
+    "guard",
+    "helpers",
+    "parse",
+    "safe",
+    "typescript",
+    "unknown",
+    "utils"
+  ],
+  "homepage": "https://github.com/jjloneman/safe-fns#readme",
+  "bugs": {
+    "url": "https://github.com/jjloneman/safe-fns/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjloneman/safe-fns.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "JJ Loneman",
+    "url": "https://github.com/jjloneman"
+  },
+  "type": "module",
+  "scripts": {
+    "prune-branches": "git fetch --prune && git-removed-branches --force --prune",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.4",
+    "git-removed-branches": "2.3.1",
+    "typescript": "6.0.3"
+  },
+  "packageManager": "pnpm@12.5.1",
+  "engines": {
+    "node": ">=22"
+  }
+}

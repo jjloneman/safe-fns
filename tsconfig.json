@@ -1,0 +1,92 @@
+{
+  "compilerOptions": {
+    // Required by `isolatedDeclarations`, even though nothing is emitted here.
+    "declaration": true,
+
+    /*
+     * Optional properties reject an explicit `undefined` unless the type
+     * includes it.
+     *
+     * - Keeps `{ fallback?: F }` distinct from `{ fallback: F | undefined }`,
+     *   which matters for options objects whose absence and `undefined` mean
+     *   different things.
+     */
+    "exactOptionalPropertyTypes": true,
+
+    /*
+     * Every export must carry types a declaration emitter can read without
+     * running the checker.
+     *
+     * - Forces explicit return types on exported functions — intended for a
+     *   published API, whose `.d.ts` should never depend on inference.
+     */
+    "isolatedDeclarations": true,
+
+    // Built-in APIs up to ES2022 — no DOM, since the library must not rely on one.
+    "lib": ["ES2022"],
+
+    // Modern ESM syntax, left for the bundler to transform.
+    "module": "ESNext",
+
+    // Resolve imports the way a bundler does, including `package.json` `exports`.
+    "moduleResolution": "bundler",
+
+    /*
+     * Typecheck only — tsc never writes output here.
+     *
+     * - The package is built by a bundler, which emits the JS and `.d.ts`.
+     */
+    "noEmit": true,
+
+    // Index access (`array[i]`, `record[key]`) includes `undefined` in its type.
+    "noUncheckedIndexedAccess": true,
+
+    // Skip checking `.d.ts` files in `node_modules`; they're not ours to fix.
+    "skipLibCheck": true,
+
+    // All strict-mode checks (`strictNullChecks`, `noImplicitAny`, …).
+    "strict": true,
+
+    // The syntax level code is checked against, matching `lib`.
+    "target": "ES2022",
+
+    /*
+     * TypeScript 6 defaults `types` to none, so Node's are opted in by name.
+     *
+     * - `@types/node` is pinned to the `engines.node` floor (22), so the
+     *   typecheck rejects an API a supported Node doesn't have.
+     *
+     * - The public API must never reference a Node type.
+     */
+    "types": ["node"],
+
+    /*
+     * `import type` is required for type-only imports, and imports are emitted
+     * exactly as written — what a bundler and a published ESM package expect.
+     */
+    "verbatimModuleSyntax": true
+  },
+  "include": [
+    /*
+     * The repo's own config files.
+     *
+     * - A glob rather than a list, so a new one is covered the day it is
+     *   written.
+     *
+     * - They live in this root because an editor and ESLint's project service
+     *   both resolve a file by walking up to the nearest config named exactly
+     *   `tsconfig.json`; anywhere else they typecheck in CI while showing
+     *   phantom errors in the editor.
+     */
+    "*.config.ts",
+
+    // Repo scripts (release helpers, CI annotations).
+    "scripts",
+
+    // The library source.
+    "src",
+
+    // Tests and test helpers.
+    "test"
+  ]
+}
