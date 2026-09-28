@@ -38,9 +38,15 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - `scripts/` — repo scripts, run directly by Node (which strips their types), so they stick to erasable TypeScript syntax.
   - Relative imports name the `.ts` file (`./lib/publish-ci-report.ts`), since Node resolves only the real file name.
 - `dist/` — build output (gitignored), the only directory published.
+- `README.md` — the public face: why the package exists, install and usage, the API, the support matrix, scripts, and what each label means.
+- `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` — the community-health files.
+  - `CONTRIBUTING.md` links to this file's sections rather than repeating them, so conventions change here only.
+  - Security reports go through GitHub private vulnerability reporting.
 - `.githooks/` — the pre-commit and pre-push hooks (see [Pre-commit checks](#-pre-commit-checks)).
 - `.github/workflows/` — CI, CodeQL, and release (see [CI](#-ci)); `.github/actions/setup/` is the shared pnpm + Node + install prelude.
 - `.github/dependabot.yml` — weekly npm and GitHub Actions updates (see [CI](#-ci)).
+- `.github/ISSUE_TEMPLATE/` — YAML issue forms (🐞 bug, ✨ feature, 🤔 semantics question, 🤝 conduct report), each labeled `📥 needs-triage`, plus `config.yml`, which disables blank issues.
+- `.github/PULL_REQUEST_TEMPLATE.md` — summary, `Closes #`, verification, and a checklist.
 - `.github/rulesets/` — the repository rulesets that protect `main` (see [Issues & PRs](#️-issues--prs)).
 - `docs/decisions/` — the design-decision bundle (see [Design decisions](#-design-decisions)).
 - `eslint-rules/` — local ESLint rules, loaded by `eslint.config.ts`.
@@ -48,6 +54,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - TypeScript gets the full typed presets (`strictTypeChecked` + `stylisticTypeChecked`), perfectionist's `recommended-alphabetical` ordering, and `tsdoc/syntax`.
   - JSON and YAML get `jsonc/sort-keys` and `yml/sort-keys`; `package.json` is excluded and keeps the `sort-package-json` order through `prettier-plugin-packagejson`.
   - YAML under `.github/` follows GitHub's documented key order instead (`name`, `on`, … `jobs`), with any other key alphabetized after it.
+  - Issue forms have their own documented order (`name`, `description`, `title`, `labels`, … `body`).
 - `prettier.config.ts` — Prettier defaults plus `trailingComma: "es5"`, the `package.json` sorter, and a shell parser for `.githooks/`.
 - `release-please-config.json` and `.release-please-manifest.json` — release-please's config and the last released version (see [Versioning & releases](#-versioning--releases)).
 - `size-limit.config.ts` — the size budget for every public entry.
