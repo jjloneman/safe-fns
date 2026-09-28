@@ -36,8 +36,11 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - `test/` — shared test harnesses, imported as `#test/*` (see [Testing](#-testing)).
   - `test/consumer/` — fixtures run by `pnpm test:consumer` against the packed tarball (see [Build & package](#-build--package)).
 - `scripts/` — repo scripts, run directly by Node (which strips their types), so they stick to erasable TypeScript syntax.
+  - Relative imports name the `.ts` file (`./lib/publish-ci-report.ts`), since Node resolves only the real file name.
 - `dist/` — build output (gitignored), the only directory published.
 - `.githooks/` — the pre-commit and pre-push hooks (see [Pre-commit checks](#-pre-commit-checks)).
+- `.github/workflows/` — CI and CodeQL (see [CI](#-ci)); `.github/actions/setup/` is the shared pnpm + Node + install prelude.
+- `.github/dependabot.yml` — weekly npm and GitHub Actions updates (see [CI](#-ci)).
 - `.github/rulesets/` — the repository rulesets that protect `main` (see [Issues & PRs](#️-issues--prs)).
 - `docs/decisions/` — the design-decision bundle (see [Design decisions](#-design-decisions)).
 - `eslint-rules/` — local ESLint rules, loaded by `eslint.config.ts`.
@@ -101,6 +104,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - **Boolean variables and parameters read as questions** — `isEmpty`, `hasKey`, `shouldTrim` — with a `can`, `has`, `is`, or `should` prefix. Destructured bindings keep their source key's name.
 - **Prefer `??` and `?.`** over `||` and `&&` chains when the intent is "fall back if nullish". Keep `||` only when every falsy value should trigger the fallback.
 - **Coerce with the constructor, not an operator** — `Boolean(value)` not `!!value`, `Number(value)` not `+value`, `String(value)` not `"" + value`.
+  - A number interpolates into a template literal as-is (`${count}`); anything else non-string needs an explicit `String()`, which `restrict-template-expressions` enforces.
   - Inside a library function, remember that the constructors themselves can throw on hostile input — guard them per the design principles.
 - **No nested ternaries.** Use a named helper whose guards read top to bottom, or a lookup keyed by the discriminant.
 - **Property access**: dot notation for valid identifiers; brackets only for dynamic or special-character keys.
@@ -264,6 +268,24 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - `pnpm lint` can serve a stale pass for a file whose own content is unchanged; delete `.eslintcache` when a result looks impossible.
   - The hook and `lint:fix` run without the cache.
 - Don't bypass git hooks (`--no-verify`) without explicit approval from the repo owner.
+
+## 🤖 CI
+
+- `.github/workflows/ci.yml` runs on every PR and every push to `main`, as parallel jobs:
+  - `lint` — ESLint (uncached, unlike `pnpm lint`) and `pnpm format:check`;
+  - `typecheck` — `pnpm typecheck`;
+  - `test` — `pnpm test` on Node 22 and 24, and `pnpm test:coverage` on Node 26;
+  - `package` — `pnpm lint:package`, `pnpm size`, and `pnpm test:consumer`, with `CI` set, so a stale `exports` map fails the build;
+  - `report` — PR-only, after the rest; posts both PR comments.
+- **Two sticky PR comments**, each found by its opening heading and edited in place rather than re-posted:
+  - `## 📊 Code coverage`, from `scripts/post-coverage-pr-comment.ts`;
+  - `## ⏱️ CI timings`, from `scripts/post-ci-timings.ts`.
+  - A bug in either script fails `report`; a failure to post it can't fix, such as the read-only token Dependabot and fork PRs get, only warns.
+- `.github/workflows/codeql.yml` scans on PRs, `main`, and weekly.
+- **Dependabot** opens weekly grouped patch/minor PRs for npm and Actions, after a 7-day cooldown that matches the [moratorium](#-7-day-dependency-moratorium).
+  - Its `ignore` rules hold the pins below: `typescript` and `@types/node` majors, and each `typescript-<version>` alias to its minor.
+- Every action is pinned to an exact `vX.Y.Z`, and every job declares its own `permissions`.
+- How to change a workflow is covered by `.claude/rules/ci.md`.
 
 ## 🕒 7-day dependency moratorium
 
