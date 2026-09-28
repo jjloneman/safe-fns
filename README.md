@@ -21,6 +21,10 @@ Zero-dependency, strongly typed helpers that take an `unknown` value and never t
 
 - [📚 Table of Contents](#-table-of-contents)
 - [🤔 Why](#-why)
+  - [🫙 Is it empty?](#-is-it-empty)
+  - [🧱 Is it a plain object?](#-is-it-a-plain-object)
+  - [🔢 Parse a number](#-parse-a-number)
+  - [🔤 Turn a value into a string](#-turn-a-value-into-a-string)
 - [📦 Install](#-install)
 - [🚀 Usage](#-usage)
 - [📖 API](#-api)
@@ -35,32 +39,89 @@ Zero-dependency, strongly typed helpers that take an `unknown` value and never t
 
 ## 🤔 Why
 
-- **Popular "is empty" checks disagree, and each has a sharp edge.**
-  - lodash calls `0`, `false`, and `NaN` empty.
-  - None of them trim, so `'   '` counts as populated.
-  - remeda duck-types anything with a `length`, so `{ length: 0, name: 'x' }` counts as empty.
-- **The built-in coercers throw or return junk on real input.**
-  - `String(Object.create(null))` and `Number(Symbol())` throw.
-  - `String({})` is `'[object Object]'`, and `Number([5])` is `5`.
+- **The popular libraries disagree on the basics**, and each has a sharp edge.
+- **The built-in coercers throw or return junk** on real input.
 - **safe-fns gives one documented definition per check**, and every export is total:
   - it never throws, even on getters, proxies, or `toString` traps;
   - bad input returns the fallback you pass in;
   - it returns the same result in Node, every browser, and any other JS runtime.
 
-Is the value empty?
+The tables below show where today's options disagree. ✅ is `true`, ❌ is `false`, and 💥 means the call throws.
 
-| Value                      | lodash `isEmpty` | ramda `isEmpty` | remeda `isEmptyish` | safe-fns `isSafeEmpty` (planned) |
-| -------------------------- | :--------------: | :-------------: | :-----------------: | :------------------------------: |
-| `0`                        |        ✅        |       ❌        |         ❌          |                ❌                |
-| `false`                    |        ✅        |       ❌        |         ❌          |                ❌                |
-| `NaN`                      |        ✅        |       ❌        |         ❌          |                ❌                |
-| `''`                       |        ✅        |       ✅        |         ✅          |                ✅                |
-| `'   '`                    |        ❌        |       ❌        |         ❌          |                ✅                |
-| `{}`                       |        ✅        |       ✅        |         ✅          |                ✅                |
-| `{ length: 0, name: 'x' }` |        ❌        |       ❌        |         ✅          |                ❌                |
-| `new Map()`                |        ✅        |       ✅        |         ✅          |                ✅                |
+### 🫙 Is it empty?
 
-<sub>Measured with lodash 4.18.1, ramda 0.32.0, and remeda 2.50.0.</sub>
+| Value                      | lodash [`isEmpty`][lodash-isEmpty] | ramda [`isEmpty`][ramda-isEmpty] | remeda [`isEmptyish`][remeda-isEmptyish] | safe-fns `isSafeEmpty` (planned) |
+| -------------------------- | :--------------------------------: | :------------------------------: | :--------------------------------------: | :------------------------------: |
+| `0`                        |                 ✅                 |                ❌                |                    ❌                    |                ❌                |
+| `false`                    |                 ✅                 |                ❌                |                    ❌                    |                ❌                |
+| `NaN`                      |                 ✅                 |                ❌                |                    ❌                    |                ❌                |
+| `null`                     |                 ✅                 |                ❌                |                    ✅                    |                —                 |
+| `''`                       |                 ✅                 |                ✅                |                    ✅                    |                ✅                |
+| `'   '`                    |                 ❌                 |                ❌                |                    ❌                    |                ✅                |
+| `{}`                       |                 ✅                 |                ✅                |                    ✅                    |                ✅                |
+| `{ length: 0, name: 'x' }` |                 ❌                 |                ❌                |                    ✅                    |                ❌                |
+| `new Map()`                |                 ✅                 |                ✅                |                    ✅                    |                ✅                |
+| `new Date()`               |                 ✅                 |                ❌                |                    ✅                    |                ❌                |
+
+- — marks a case the planned semantics haven't settled yet.
+- es-toolkit's [`compat/isEmpty`][es-toolkit-compat-isEmpty] matches lodash on every row.
+
+### 🧱 Is it a plain object?
+
+| Value                           | lodash [`isPlainObject`][lodash-isPlainObject] | remeda [`isPlainObject`][remeda-isPlainObject] | es-toolkit [`isPlainObject`][es-toolkit-isPlainObject] |
+| ------------------------------- | :--------------------------------------------: | :--------------------------------------------: | :----------------------------------------------------: |
+| `{}`                            |                       ✅                       |                       ✅                       |                           ✅                           |
+| `Object.create(null)`           |                       ✅                       |                       ✅                       |                           ✅                           |
+| `new (class Foo {})()`          |                       ❌                       |                       ❌                       |                           ❌                           |
+| `Math`                          |                       ❌                       |                       ✅                       |                           ❌                           |
+| `{ [Symbol.toStringTag]: 'X' }` |                       ✅                       |                       ✅                       |                           ❌                           |
+
+### 🔢 Parse a number
+
+| Value                 | [`Number()`][mdn-Number] | [`parseFloat()`][mdn-parseFloat] | lodash [`toNumber`][lodash-toNumber] | lodash [`toFinite`][lodash-toFinite] |
+| --------------------- | :----------------------: | :------------------------------: | :----------------------------------: | :----------------------------------: |
+| `''`                  |           `0`            |              `NaN`               |                 `0`                  |                 `0`                  |
+| `'   '`               |           `0`            |              `NaN`               |                 `0`                  |                 `0`                  |
+| `null`                |           `0`            |              `NaN`               |                 `0`                  |                 `0`                  |
+| `true`                |           `1`            |              `NaN`               |                 `1`                  |                 `1`                  |
+| `[5]`                 |           `5`            |               `5`                |                 `5`                  |                 `5`                  |
+| `'12px'`              |          `NaN`           |               `12`               |                `NaN`                 |                 `0`                  |
+| `'0x1f'`              |           `31`           |               `0`                |                 `31`                 |                 `31`                 |
+| `Symbol()`            |            💥            |                💥                |                `NaN`                 |                 `0`                  |
+| `Object.create(null)` |            💥            |                💥                |                  💥                  |                  💥                  |
+
+- es-toolkit's [`compat/toNumber`][es-toolkit-compat-toNumber] matches lodash's `toNumber` on every row.
+
+### 🔤 Turn a value into a string
+
+| Value                 | [`String()`][mdn-String] | lodash [`toString`][lodash-toString] |
+| --------------------- | :----------------------: | :----------------------------------: |
+| `null`                |         `'null'`         |                 `''`                 |
+| `undefined`           |      `'undefined'`       |                 `''`                 |
+| `-0`                  |          `'0'`           |                `'-0'`                |
+| `{}`                  |   `'[object Object]'`    |         `'[object Object]'`          |
+| `[1, [2, 3]]`         |        `'1,2,3'`         |              `'1,2,3'`               |
+| `Object.create(null)` |            💥            |                  💥                  |
+
+- es-toolkit's [`compat/toString`][es-toolkit-compat-toString] matches lodash's `toString` on every row.
+
+<sub>Measured with lodash 4.18.1, ramda 0.32.0, remeda 2.50.0, es-toolkit 1.52.0, and Node 26.</sub>
+
+[es-toolkit-compat-isEmpty]: https://es-toolkit.dev/reference/compat/predicate/isEmpty.html
+[es-toolkit-compat-toNumber]: https://es-toolkit.dev/reference/compat/util/toNumber.html
+[es-toolkit-compat-toString]: https://es-toolkit.dev/reference/compat/util/toString.html
+[es-toolkit-isPlainObject]: https://es-toolkit.dev/reference/predicate/isPlainObject.html
+[lodash-isEmpty]: https://lodash.com/docs/#isEmpty
+[lodash-isPlainObject]: https://lodash.com/docs/#isPlainObject
+[lodash-toFinite]: https://lodash.com/docs/#toFinite
+[lodash-toNumber]: https://lodash.com/docs/#toNumber
+[lodash-toString]: https://lodash.com/docs/#toString
+[mdn-Number]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number
+[mdn-parseFloat]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
+[mdn-String]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/String
+[ramda-isEmpty]: https://ramdajs.com/docs/#isEmpty
+[remeda-isEmptyish]: https://remedajs.com/docs/#isEmptyish
+[remeda-isPlainObject]: https://remedajs.com/docs/#isPlainObject
 
 ---
 
