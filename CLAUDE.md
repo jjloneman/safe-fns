@@ -15,4 +15,5 @@ Claude loads path-scoped rules by itself when it reads a matching file; this map
 
 - [AGENTS.md](AGENTS.md) — every convention: design principles, code style, commits, dependencies, releases.
 - [docs/decisions/](docs/decisions/index.md) — the design-decision bundle.
-- `.claude/rules/` — path-scoped rules, each with a `paths:` frontmatter glob. None yet; list each one here as it is added.
+- `.claude/rules/` — path-scoped rules, each with a `paths:` frontmatter glob; list each one here as it is added.
+  - [testing.md](.claude/rules/testing.md) — how to write a test: file placement, test shape, hostile values, type tests.

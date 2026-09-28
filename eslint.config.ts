@@ -59,6 +59,9 @@ const config: Linter.Config[] = defineConfig(
       tsdoc: tsdocPlugin,
     },
     rules: {
+      // The stylistic preset defaults to `interface`; the repo prefers `type`.
+      "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+
       "@typescript-eslint/consistent-type-imports": [
         "error",
         { fixStyle: "separate-type-imports", prefer: "type-imports" },

@@ -31,6 +31,8 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - `src/` — library source.
   - `src/index.ts` is the root entry and re-exports every function.
   - It currently holds a single placeholder export, removed when the first real function lands.
+  - Each function's tests sit beside it as `*.test.ts` and `*.test-d.ts`.
+- `test/` — shared test harnesses, imported as `#test/*` (see [Testing](#-testing)).
 - `.githooks/` — the pre-commit and pre-push hooks (see [Pre-commit checks](#-pre-commit-checks)).
 - `docs/decisions/` — the design-decision bundle (see [Design decisions](#-design-decisions)).
 - `eslint-rules/` — local ESLint rules, loaded by `eslint.config.ts`.
@@ -41,6 +43,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - `tsconfig.json` — one root covering `src`, `test`, `scripts`, `eslint-rules`, and the root-level `*.config.ts` files.
   - An editor and ESLint's project service both resolve a file by walking up to the nearest config named exactly `tsconfig.json`, so every TypeScript file must fall inside this root's `include`.
   - Don't add a differently named config (`tsconfig.eslint.json`, …) to cover a directory; it typechecks in CI while leaving the editor and the linter blind.
+- `vitest.config.ts` — the `node` and `jsdom` test projects and the coverage gate.
 
 ## 🎨 Code style guidelines
 
@@ -196,7 +199,21 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Name the model that actually wrote the text, by its human-readable name and version, not its raw API id.
   - Never add the banner to text a human wrote.
 
-## 🧪 Pre-commit checks
+## 🧪 Testing
+
+- `pnpm test` runs the suite once; `pnpm test:watch` reruns it on change; `pnpm test:coverage` adds the coverage gate.
+- **Two projects run the same tests:**
+  - `node` — also runs `*.node.test.ts` (Node built-ins such as `node:vm`) and the `*.test-d.ts` type tests;
+  - `jsdom` — a DOM-shaped environment, standing in for a browser until real-browser runs exist.
+- **Coverage must be 100%** on statements, branches, functions, and lines across `src/`, or `pnpm test:coverage` fails.
+  - Untested files count against the total rather than dropping out of the report.
+  - Reports land in `coverage/` (gitignored).
+- **Every export plugs into two harnesses in `test/`:**
+  - `cross-env.cases.ts` — a table of calls and expected results, run unchanged by both projects;
+  - `hostile-inputs.ts` (plus the Node-only `cross-realm-inputs.ts`) — values that trap on inspection, for proving an export never throws.
+- How to write a test is covered by `.claude/rules/testing.md`.
+
+## ✅ Pre-commit checks
 
 - Run `pnpm check` before committing; it must pass.
   - It runs `lint:fix`, then `format`, then `typecheck`, so it rewrites files; read the diff after.
@@ -219,6 +236,8 @@ No npm dependency may enter the lockfile until it has been published for **at le
 - Versions are pinned exactly (`saveExact: true` in [pnpm-workspace.yaml](pnpm-workspace.yaml)); the lockfile is the only thing that moves them.
 - **TypeScript stays on 6.0** until `typescript-eslint` supports TypeScript 7; upgrade it in its own `chore(deps)` change.
 - **`@types/node` tracks the `engines.node` floor (22)**, not the newest Node, so the typecheck rejects APIs that a supported Node doesn't have.
+- **Developing needs a newer Node than `engines.node`.**
+  - `engines.node` is the floor for code that imports the package; the dev tools set their own (jsdom 30 needs `^22.22.2 || ^24.15.0 || >=26`).
 
 ## 🚀 Versioning & releases
 
