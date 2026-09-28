@@ -1,3 +1,11 @@
+/*
+ * Type tests for `defineCrossEnvCase`, which checks each row against its
+ * function before erasing the row's types.
+ *
+ * - A regression in its generics would let a mistyped row into the table with
+ *   no error, so the rejection itself is what's under test.
+ */
+
 import { describe, expectTypeOf, test } from "vitest";
 
 import { defineCrossEnvCase } from "#test/cross-env.cases";

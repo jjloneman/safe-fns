@@ -1,3 +1,13 @@
+/*
+ * Values from another realm, backing the "Never widen a narrow check" design
+ * principle in AGENTS.md.
+ *
+ * - A check built on `instanceof` misreads them, so any guard for a built-in
+ *   type runs over this list to prove it uses a reliable brand check instead.
+ *
+ * - Kept apart from `hostile-inputs.ts` because `node:vm` exists only in Node.
+ */
+
 import { runInNewContext } from "node:vm";
 
 import type { HostileInput } from "#test/hostile-inputs";

@@ -1,3 +1,14 @@
+/*
+ * Values that throw when inspected without guards, backing the "Never throw"
+ * design principle in AGENTS.md.
+ *
+ * - Every export runs over the whole list and must return the caller's
+ *   fallback for each value.
+ *
+ * - `hostile-inputs.test.ts` checks that each entry still throws, so the list
+ *   can't quietly stop testing anything.
+ */
+
 /** A value built to throw when a helper inspects it without guarding. */
 export type HostileInput = {
   /** Names the test, so a failing case never prints the value itself. */

@@ -1,3 +1,14 @@
+/*
+ * The cross-environment table: calls whose results every runtime must agree
+ * on, backing the "Environment-independent" design principle in AGENTS.md.
+ *
+ * - `cross-env.test.ts` runs every row unchanged in each test project, so a
+ *   function that behaves differently between them fails there.
+ *
+ * - Each function adds its own rows here with `defineCrossEnvCase`, rather
+ *   than repeating the same assertions per environment in its own tests.
+ */
+
 /**
  * One row of the cross-environment table: a call and the result every runtime
  * must agree on.
