@@ -1,0 +1,32 @@
+name: ✨ Feature or new function
+description: Propose a new function, or a change to an existing one.
+title: "feat(<function>): ✨ <what to add>"
+labels:
+  - ✨ feature
+  - 📥 needs-triage
+body:
+  - attributes:
+      description: What are you doing today, and where does it go wrong or get repetitive?
+      label: 🏷️ Problem
+    id: problem
+    type: textarea
+    validations:
+      required: true
+  - attributes:
+      description: The function's name, signature, and a few example calls with their results.
+      label: 💡 Proposal
+      render: ts
+    id: proposal
+    type: textarea
+    validations:
+      required: true
+  - attributes:
+      description: Inputs whose result isn't obvious — `0`, `NaN`, whitespace, proxies, cross-realm values, …
+      label: ⚠️ Edge cases
+    id: edge-cases
+    type: textarea
+  - attributes:
+      description: How other libraries handle it, and why that falls short.
+      label: 🔎 Alternatives
+    id: alternatives
+    type: textarea

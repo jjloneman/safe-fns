@@ -1,0 +1,24 @@
+name: 🤔 Semantics question
+description: Ask why a function treats some input the way it does.
+labels:
+  - ❓ question
+  - 📥 needs-triage
+body:
+  - attributes:
+      label: 🧩 Function
+      placeholder: isSafeEmpty
+    id: function
+    type: input
+    validations:
+      required: true
+  - attributes:
+      description: The input, what the function returns for it, and what you'd have expected.
+      label: 🤔 Question
+    id: question
+    type: textarea
+    validations:
+      required: true
+  - attributes:
+      value: |
+        Design decisions are recorded in [docs/decisions/](https://github.com/jjloneman/safe-fns/tree/main/docs/decisions) — the answer may already be there.
+    type: markdown

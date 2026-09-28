@@ -213,7 +213,8 @@ const config: Linter.Config[] = defineConfig(
 
   /*
    * GitHub's YAML files read in their documented order instead: a workflow
-   * opens with `name` and `on`, a step with `name` and `uses`.
+   * opens with `name` and `on`, a step with `name` and `uses`, and an issue
+   * form with `name`, `description`, `title`, and `labels`.
    *
    * - Each mapping lists its well-known keys first, in that order; any other
    *   key follows, alphabetized.
@@ -231,6 +232,8 @@ const config: Linter.Config[] = defineConfig(
           keys: [
             "name",
             "description",
+            "title",
+            "labels",
             "on",
             "inputs",
             "outputs",
