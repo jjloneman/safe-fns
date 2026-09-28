@@ -5,56 +5,56 @@ labels:
   - 🐞 bug
   - 📥 needs-triage
 body:
-  - type: markdown
-    attributes:
+  - attributes:
       value: |
         Thanks for reporting! For a security problem, please use [private reporting](https://github.com/jjloneman/safe-fns/security) instead.
-  - type: input
-    id: function
-    attributes:
-      label: 🧩 Function
+    type: markdown
+  - attributes:
       description: Which export misbehaves?
+      label: 🧩 Function
       placeholder: isSafeEmpty
+    id: function
+    type: input
     validations:
       required: true
-  - type: textarea
-    id: reproduction
-    attributes:
-      label: 🔁 Reproduction
+  - attributes:
       description: The smallest call that shows the problem.
+      label: 🔁 Reproduction
       placeholder: |
         import { isSafeEmpty } from "safe-fns";
 
         isSafeEmpty("   ");
       render: ts
+    id: reproduction
+    type: textarea
     validations:
       required: true
-  - type: textarea
-    id: expected
-    attributes:
-      label: ✅ Expected
+  - attributes:
       description: What you expected it to return, and why.
+      label: ✅ Expected
+    id: expected
+    type: textarea
     validations:
       required: true
-  - type: textarea
-    id: actual
-    attributes:
-      label: ❌ Actual
+  - attributes:
       description: What it returned or threw instead.
+      label: ❌ Actual
+    id: actual
+    type: textarea
     validations:
       required: true
-  - type: input
-    id: safe-fns-version
-    attributes:
+  - attributes:
       label: 📦 safe-fns version
       placeholder: 0.1.0
+    id: safe-fns-version
+    type: input
     validations:
       required: true
-  - type: input
-    id: environment
-    attributes:
-      label: 🌐 Environment
+  - attributes:
       description: Runtime and version — Node, a browser, Deno, Bun, …
+      label: 🌐 Environment
       placeholder: Node 24.15.0
+    id: environment
+    type: input
     validations:
       required: true

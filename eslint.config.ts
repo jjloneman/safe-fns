@@ -213,7 +213,8 @@ const config: Linter.Config[] = defineConfig(
 
   /*
    * GitHub's YAML files read in their documented order instead: a workflow
-   * opens with `name` and `on`, a step with `name` and `uses`.
+   * opens with `name` and `on`, a step with `name` and `uses`, and an issue
+   * form with `name`, `description`, `title`, and `labels`.
    *
    * - Each mapping lists its well-known keys first, in that order; any other
    *   key follows, alphabetized.
@@ -231,6 +232,8 @@ const config: Linter.Config[] = defineConfig(
           keys: [
             "name",
             "description",
+            "title",
+            "labels",
             "on",
             "inputs",
             "outputs",
@@ -275,56 +278,6 @@ const config: Linter.Config[] = defineConfig(
         documentedOrder({
           keys: ["interval", "day", "time", "timezone"],
           pathPattern: String.raw`^updates\[\d+\]\.schedule$`,
-        }),
-        documentedOrder({ keys: [], pathPattern: ".*" }),
-      ],
-    },
-  },
-
-  /*
-   * Issue forms and the template chooser follow GitHub's documented order too.
-   *
-   * - After `name` and `description`, a form's keys differ from a workflow's,
-   *   so this block replaces the options above rather than widening them.
-   */
-  {
-    files: [".github/ISSUE_TEMPLATE/*.yml"],
-    rules: {
-      "yml/sort-keys": [
-        "error",
-        documentedOrder({
-          keys: [
-            "name",
-            "description",
-            "title",
-            "labels",
-            "assignees",
-            "blank_issues_enabled",
-            "contact_links",
-            "body",
-          ],
-          pathPattern: "^$",
-        }),
-        documentedOrder({
-          keys: ["type", "id", "attributes", "validations"],
-          pathPattern: String.raw`^body\[\d+\]$`,
-        }),
-        documentedOrder({
-          keys: [
-            "label",
-            "description",
-            "placeholder",
-            "value",
-            "render",
-            "multiple",
-            "options",
-            "default",
-          ],
-          pathPattern: String.raw`^body\[\d+\]\.attributes$`,
-        }),
-        documentedOrder({
-          keys: ["name", "url", "about"],
-          pathPattern: String.raw`^contact_links\[\d+\]$`,
         }),
         documentedOrder({ keys: [], pathPattern: ".*" }),
       ],
