@@ -253,6 +253,7 @@ const config: Linter.Config[] = defineConfig(
             "runs-on",
             "permissions",
             "strategy",
+            "outputs",
             "env",
             "steps",
           ],
