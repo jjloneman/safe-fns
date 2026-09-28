@@ -48,6 +48,11 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - `.github/ISSUE_TEMPLATE/` — YAML issue forms (🐞 bug, ✨ feature, 🤔 semantics question, 🤝 conduct report), each labeled `📥 needs-triage`, plus `config.yml`, which disables blank issues.
 - `.github/PULL_REQUEST_TEMPLATE.md` — summary, `Closes #`, verification, and a checklist.
 - `.github/rulesets/` — the repository rulesets that protect `main` (see [Issues & PRs](#️-issues--prs)).
+- `assets/` — the brand files, outside `files`, so never published.
+  - The mark (`logo-light.svg`, `logo-dark.svg`) and the mark-plus-name lockup (`logo-wordmark-light.svg`, `logo-wordmark-dark.svg`), each cropped tight to its shapes.
+  - The lockup's lettering is Inter Bold, outlined to paths so it renders without the font.
+  - A theme-aware `favicon.svg`, and the 1280×640 `social-preview.png` for the repo's link previews, rendered from `social-preview.svg`.
+  - The README loads the logos by absolute `raw.githubusercontent.com` URL, since npm can't resolve repo-relative images.
 - `docs/decisions/` — the design-decision bundle (see [Design decisions](#-design-decisions)).
 - `eslint-rules/` — local ESLint rules, loaded by `eslint.config.ts`.
 - `eslint.config.ts` — ESLint flat config.
