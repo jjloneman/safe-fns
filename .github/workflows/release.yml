@@ -78,8 +78,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       # release-please has no assignee option, so assign the owner here.
+      #
+      # - A step's `env` is evaluated even when its `if` skips it, and `pr` is
+      #   empty when no PR was touched, so parse a fallback rather than `''`.
       - if: ${{ steps.release.outputs.prs_created == 'true' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr).number }}
+          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr || '{}').number }}
         run: gh pr edit "$PR_NUMBER" --add-assignee jjloneman --repo "$GITHUB_REPOSITORY"
