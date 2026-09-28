@@ -1,5 +1,14 @@
 # 🔒 Security policy
 
+## 📚 Table of Contents
+
+- [📚 Table of Contents](#-table-of-contents)
+- [🎯 Supported versions](#-supported-versions)
+- [📣 Reporting a vulnerability](#-reporting-a-vulnerability)
+- [🧭 What counts](#-what-counts)
+
+---
+
 ## 🎯 Supported versions
 
 safe-fns is pre-stable (`0.x`), so only the latest release gets security fixes.
