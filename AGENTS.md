@@ -31,8 +31,14 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - `src/` — library source.
   - `src/index.ts` is the root entry and re-exports every function.
   - It currently holds a single placeholder export, removed when the first real function lands.
+- `.githooks/` — the pre-commit and pre-push hooks (see [Pre-commit checks](#-pre-commit-checks)).
 - `docs/decisions/` — the design-decision bundle (see [Design decisions](#-design-decisions)).
-- `tsconfig.json` — one root covering `src`, `test`, `scripts`, and the root-level `*.config.ts` files.
+- `eslint-rules/` — local ESLint rules, loaded by `eslint.config.ts`.
+- `eslint.config.ts` — ESLint flat config.
+  - TypeScript gets the full typed presets (`strictTypeChecked` + `stylisticTypeChecked`), perfectionist ordering, and `tsdoc/syntax`.
+  - JSON and YAML get `jsonc/sort-keys` and `yml/sort-keys`; `package.json` is excluded and keeps the `sort-package-json` order through `prettier-plugin-packagejson`.
+- `prettier.config.ts` — Prettier defaults plus `trailingComma: "es5"`, the `package.json` sorter, and a shell parser for `.githooks/`.
+- `tsconfig.json` — one root covering `src`, `test`, `scripts`, `eslint-rules`, and the root-level `*.config.ts` files.
   - An editor and ESLint's project service both resolve a file by walking up to the nearest config named exactly `tsconfig.json`, so every TypeScript file must fall inside this root's `include`.
   - Don't add a differently named config (`tsconfig.eslint.json`, …) to cover a directory; it typechecks in CI while leaving the editor and the linter blind.
 
@@ -75,10 +81,11 @@ These bind every exported function. A change that breaks one is a bug, even if i
 
       return countsByType;
     },
-    {},
+    {}
   );
   ```
 
+- **Boolean variables and parameters read as questions** — `isEmpty`, `hasKey`, `shouldTrim` — with a `can`, `has`, `is`, or `should` prefix. Destructured bindings keep their source key's name.
 - **Prefer `??` and `?.`** over `||` and `&&` chains when the intent is "fall back if nullish". Keep `||` only when every falsy value should trigger the fallback.
 - **Coerce with the constructor, not an operator** — `Boolean(value)` not `!!value`, `Number(value)` not `+value`, `String(value)` not `"" + value`.
   - Inside a library function, remember that the constructors themselves can throw on hostile input — guard them per the design principles.
@@ -114,6 +121,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - The familiar tags carry over (`@param`, `@returns`, `@example`, `@deprecated`), but TSDoc drops JSDoc's `{type}` annotations — the types come from TypeScript — and writes `@param name - description` with a hyphen.
 - **TSDoc every export** — functions, constants, objects, types, and classes alike: a one-line summary plus `@returns` where it applies, and `@example` where a value clarifies. Document the contract and invariants, not the implementation.
 - **`@param` is for positional params only.** An object param documents each key on the **property in its type literal**, where the editor's tooltip actually reads it. `@param options.fallback` is invisible to IntelliSense.
+- **Lint enforces the TSDoc rules it can**: `tsdoc/syntax` rejects malformed or unknown tags, and the local `no-dotted-jsdoc-param` rule rejects a dotted `@param`.
 
   ```ts
   /**
@@ -140,18 +148,18 @@ These bind every exported function. A change that breaks one is a bug, even if i
 <type>(scope): <gitmoji> <subject>
 ```
 
-| Type       | Gitmoji | Use for                             |
-| ---------- | ------- | ----------------------------------- |
-| `build`    | 🔨      | build system / typecheck infra      |
-| `chore`    | 🧹 / ⬆️ | housekeeping, dependency bumps      |
-| `ci`       | 🤖      | CI / dependabot / workflow changes  |
-| `config`   | 🔧      | tooling config (eslint, vitest, …)  |
-| `docs`     | 📝      | documentation                       |
-| `feat`     | ✨      | new feature                         |
-| `fix`      | 🔧      | bug fix                             |
-| `perf`     | ⚡      | performance                         |
-| `refactor` | 🏗️      | refactor                            |
-| `test`     | 🧪      | tests                               |
+| Type       | Gitmoji | Use for                            |
+| ---------- | ------- | ---------------------------------- |
+| `build`    | 🔨      | build system / typecheck infra     |
+| `chore`    | 🧹 / ⬆️ | housekeeping, dependency bumps     |
+| `ci`       | 🤖      | CI / dependabot / workflow changes |
+| `config`   | 🔧      | tooling config (eslint, vitest, …) |
+| `docs`     | 📝      | documentation                      |
+| `feat`     | ✨      | new feature                        |
+| `fix`      | 🔧      | bug fix                            |
+| `perf`     | ⚡      | performance                        |
+| `refactor` | 🏗️      | refactor                           |
+| `test`     | 🧪      | tests                              |
 
 - **Scope** is the area touched — a function name, or `repo`, `package`, `lint`, `workflow`, `deps`, etc.
 - **Subject** is imperative, lowercase, with no trailing period.
@@ -185,7 +193,15 @@ These bind every exported function. A change that breaks one is a bug, even if i
 
 ## 🧪 Pre-commit checks
 
-- Run `pnpm typecheck` before committing; it must pass.
+- Run `pnpm check` before committing; it must pass.
+  - It runs `lint:fix`, then `format`, then `typecheck`, so it rewrites files; read the diff after.
+  - `pnpm lint` and `pnpm format:check` are the read-only versions.
+- Git hooks back this up, installed by `pnpm install` (the `prepare` script points `core.hooksPath` at `.githooks/`):
+  - `pre-commit` runs `eslint --fix` and `prettier --write` on the staged files, and re-stages only the files it rewrote.
+  - `pre-push` runs `pnpm typecheck` over the whole project, since a per-file typecheck misses the files that depend on a changed type.
+- Typed linting makes a file's result depend on the types it imports, which `.eslintcache` can't track.
+  - `pnpm lint` can serve a stale pass for a file whose own content is unchanged; delete `.eslintcache` when a result looks impossible.
+  - The hook and `lint:fix` run without the cache.
 - Don't bypass git hooks (`--no-verify`) without explicit approval from the repo owner.
 
 ## 🕒 7-day dependency moratorium
