@@ -11,6 +11,34 @@ import { configs as tsConfigs } from "typescript-eslint";
 
 import { noDottedJsdocParam } from "./eslint-rules/no-dotted-jsdoc-param";
 
+/**
+ * One `yml/sort-keys` option: the mappings whose path matches `pathPattern`
+ * list `keys` first, in that order, then any other key alphabetized.
+ *
+ * @returns the rule option.
+ */
+function documentedOrder({
+  keys,
+  pathPattern,
+}: {
+  /** The keys whose order carries meaning, in that order. */
+  keys: readonly string[];
+
+  /**
+   * A regex source matched against a mapping's path, such as
+   * `jobs.lint.steps[0]`; the root mapping's path is empty.
+   */
+  pathPattern: string;
+}): {
+  order: ({ order: { caseSensitive: boolean; type: "asc" } } | string)[];
+  pathPattern: string;
+} {
+  return {
+    order: [...keys, { order: { caseSensitive: false, type: "asc" } }],
+    pathPattern,
+  };
+}
+
 const config: Linter.Config[] = defineConfig(
   /*
    * ESLint doesn't read `.gitignore` on its own, so load it — one list of
@@ -94,7 +122,8 @@ const config: Linter.Config[] = defineConfig(
        * `null`, and `[object Object]` slipping into a string.
        *
        * - Without this, every number in a template needs a `String()` wrapper
-       *   that changes nothing.
+       *   that changes nothing: `${count}` reads the same as
+       *   `${String(count)}` and prints the same.
        */
       "@typescript-eslint/restrict-template-expressions": [
         "error",
@@ -179,6 +208,75 @@ const config: Linter.Config[] = defineConfig(
     files: ["**/*.yaml", "**/*.yml"],
     rules: {
       "yml/sort-keys": ["error", "asc", { caseSensitive: false }],
+    },
+  },
+
+  /*
+   * GitHub's YAML files read in their documented order instead: a workflow
+   * opens with `name` and `on`, a step with `name` and `uses`.
+   *
+   * - Each mapping lists its well-known keys first, in that order; any other
+   *   key follows, alphabetized.
+   *
+   * - The first `pathPattern` matching a mapping's path wins, so the
+   *   alphabetical fallback comes last.
+   */
+  {
+    files: [".github/**/*.yml"],
+    rules: {
+      "yml/sort-keys": [
+        "error",
+        // A workflow's, an action's, or dependabot.yml's top level.
+        documentedOrder({
+          keys: [
+            "name",
+            "description",
+            "on",
+            "inputs",
+            "outputs",
+            "concurrency",
+            "permissions",
+            "env",
+            "defaults",
+            "jobs",
+            "runs",
+            "version",
+            "updates",
+          ],
+          pathPattern: "^$",
+        }),
+        documentedOrder({
+          keys: [
+            "name",
+            "if",
+            "needs",
+            "runs-on",
+            "permissions",
+            "strategy",
+            "env",
+            "steps",
+          ],
+          pathPattern: String.raw`^jobs(?:\.[^.[]+|\[[^\]]+\])$`,
+        }),
+        documentedOrder({
+          keys: ["name", "id", "if", "uses", "with", "env", "shell", "run"],
+          pathPattern: String.raw`\.steps\[\d+\]$`,
+        }),
+        documentedOrder({ keys: ["using", "steps"], pathPattern: "^runs$" }),
+        documentedOrder({
+          keys: ["cron", "timezone"],
+          pathPattern: String.raw`^on\.schedule\[\d+\]$`,
+        }),
+        documentedOrder({
+          keys: ["package-ecosystem", "directory", "directories", "schedule"],
+          pathPattern: String.raw`^updates\[\d+\]$`,
+        }),
+        documentedOrder({
+          keys: ["interval", "day", "time", "timezone"],
+          pathPattern: String.raw`^updates\[\d+\]\.schedule$`,
+        }),
+        documentedOrder({ keys: [], pathPattern: ".*" }),
+      ],
     },
   }
 );

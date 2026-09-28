@@ -52,4 +52,6 @@ What to know before editing a workflow. AGENTS.md's CI section lists what runs; 
 ## 📌 Pins
 
 - Every `uses:` is pinned to an exact `vX.Y.Z`; Dependabot proposes bumps after a 7-day cooldown.
-- The keys in each workflow file are alphabetized by `yml/sort-keys`, which is why `name` and `on` sit below `jobs`.
+- Keys under `.github/` follow GitHub's documented order, not the alphabet: `name`, `on`, … `jobs` in a workflow; `name`, `if`, `uses`, `with`, `env`, `run` in a step.
+  - `yml/sort-keys` enforces it through the `documentedOrder` options in `eslint.config.ts`; a key it doesn't list follows the listed ones, alphabetized.
+  - `eslint --fix` reorders the keys but can strand a comment on the wrong key; check the diff after.

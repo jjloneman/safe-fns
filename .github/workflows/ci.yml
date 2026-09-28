@@ -1,3 +1,10 @@
+name: ☁️ CI
+
+on:
+  pull_request: {}
+  push:
+    branches: [main]
+
 # A PR that gets a second push has no use for the first push's verdict, so
 # supersede it. A `main` push is a historical record of that commit — never
 # cancelled, even when the next commit lands seconds later.
@@ -9,12 +16,15 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name == 'pull_request' && 'pr' || github.sha }}
 
+# Nothing by default; each job grants only what it uses.
+permissions: {}
+
 jobs:
   lint:
     name: 🧹 Lint & format
+    runs-on: ubuntu-latest
     permissions:
       contents: read
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -31,9 +41,9 @@ jobs:
 
   package:
     name: 📦 Package
+    runs-on: ubuntu-latest
     permissions:
       contents: read
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -51,14 +61,14 @@ jobs:
   # - Both comments post from here rather than from the jobs they describe, so a
   #   broken report fails this check and never masks a real result as "Tests".
   report:
-    if: ${{ always() && github.event_name == 'pull_request' }}
     name: 📊 Reports
+    if: ${{ always() && github.event_name == 'pull_request' }}
     needs: [lint, package, test, typecheck]
+    runs-on: ubuntu-latest
     permissions:
       actions: read
       contents: read
       pull-requests: write
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -78,23 +88,29 @@ jobs:
           path: coverage
           pattern: coverage
 
-      - env:
-          GH_TOKEN: ${{ github.token }}
+      - name: 📊 Coverage PR comment
         if: ${{ hashFiles('coverage/coverage-summary.json') != '' }}
-        name: 📊 Coverage PR comment
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: node scripts/post-coverage-pr-comment.ts
 
-      - env:
-          GH_TOKEN: ${{ github.token }}
+      - name: ⏱️ CI timings PR comment
         if: ${{ !cancelled() }}
-        name: ⏱️ CI timings PR comment
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: node scripts/post-ci-timings.ts
 
   test:
     name: 🧪 Tests (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
     permissions:
       contents: read
-    runs-on: ubuntu-latest
+    strategy:
+      # Every Node version reports, rather than the first failure cancelling
+      # the rest.
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -122,31 +138,15 @@ jobs:
             coverage/coverage-summary.json
             coverage/coverage.txt
           retention-days: 1
-    strategy:
-      # Every Node version reports, rather than the first failure cancelling
-      # the rest.
-      fail-fast: false
-      matrix:
-        node-version: [22, 24, 26]
 
   typecheck:
     name: 🔎 Typecheck
+    runs-on: ubuntu-latest
     permissions:
       contents: read
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       - uses: ./.github/actions/setup
       - run: pnpm typecheck
-
-name: ☁️ CI
-
-on:
-  pull_request: {}
-  push:
-    branches: [main]
-
-# Nothing by default; each job grants only what it uses.
-permissions: {}

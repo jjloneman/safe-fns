@@ -47,6 +47,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - `eslint.config.ts` — ESLint flat config.
   - TypeScript gets the full typed presets (`strictTypeChecked` + `stylisticTypeChecked`), perfectionist's `recommended-alphabetical` ordering, and `tsdoc/syntax`.
   - JSON and YAML get `jsonc/sort-keys` and `yml/sort-keys`; `package.json` is excluded and keeps the `sort-package-json` order through `prettier-plugin-packagejson`.
+  - YAML under `.github/` follows GitHub's documented key order instead (`name`, `on`, … `jobs`), with any other key alphabetized after it.
 - `prettier.config.ts` — Prettier defaults plus `trailingComma: "es5"`, the `package.json` sorter, and a shell parser for `.githooks/`.
 - `size-limit.config.ts` — the size budget for every public entry.
 - `tsdown.config.ts` — the build, and the generated `exports` map in `package.json`.
