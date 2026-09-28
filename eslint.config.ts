@@ -1,10 +1,10 @@
 import type { Linter } from "eslint";
 
-import js from "@eslint/js";
-import jsonc from "eslint-plugin-jsonc";
-import perfectionist from "eslint-plugin-perfectionist";
-import tsdoc from "eslint-plugin-tsdoc";
-import yml from "eslint-plugin-yml";
+import jsPlugin from "@eslint/js";
+import jsoncPlugin from "eslint-plugin-jsonc";
+import perfectionistPlugin from "eslint-plugin-perfectionist";
+import tsdocPlugin from "eslint-plugin-tsdoc";
+import ymlPlugin from "eslint-plugin-yml";
 import { defineConfig } from "eslint/config";
 import { configs as tsConfigs } from "typescript-eslint";
 
@@ -44,7 +44,7 @@ const config: Linter.Config[] = defineConfig(
    */
   {
     extends: [
-      js.configs.recommended,
+      jsPlugin.configs.recommended,
       tsConfigs.strictTypeChecked,
       tsConfigs.stylisticTypeChecked,
     ],
@@ -57,8 +57,8 @@ const config: Linter.Config[] = defineConfig(
     },
     plugins: {
       local: { rules: { "no-dotted-jsdoc-param": noDottedJsdocParam } },
-      perfectionist,
-      tsdoc,
+      perfectionist: perfectionistPlugin,
+      tsdoc: tsdocPlugin,
     },
     rules: {
       "@typescript-eslint/consistent-type-imports": [
@@ -142,16 +142,16 @@ const config: Linter.Config[] = defineConfig(
    *   the JSONC preset, which allows them.
    */
   {
-    extends: [jsonc.configs["flat/recommended-with-json"]],
+    extends: [jsoncPlugin.configs["flat/recommended-with-json"]],
     files: ["**/*.json"],
     ignores: ["**/package.json", "**/tsconfig.json"],
   },
   {
-    extends: [jsonc.configs["flat/recommended-with-jsonc"]],
+    extends: [jsoncPlugin.configs["flat/recommended-with-jsonc"]],
     files: ["**/*.jsonc", "**/tsconfig.json"],
   },
   {
-    extends: [jsonc.configs["flat/prettier"]],
+    extends: [jsoncPlugin.configs["flat/prettier"]],
     files: ["**/*.json", "**/*.jsonc"],
     ignores: ["**/package.json"],
     rules: {
@@ -162,7 +162,10 @@ const config: Linter.Config[] = defineConfig(
   // YAML keys stay alphabetized too; `flat/prettier` defers formatting to
   // Prettier.
   {
-    extends: [yml.configs["flat/recommended"], yml.configs["flat/prettier"]],
+    extends: [
+      ymlPlugin.configs["flat/recommended"],
+      ymlPlugin.configs["flat/prettier"],
+    ],
     files: ["**/*.yaml", "**/*.yml"],
     rules: {
       "yml/sort-keys": ["error", "asc", { caseSensitive: false }],
