@@ -15,12 +15,22 @@ const config: ViteUserConfig = defineConfig({
      *
      * - A re-export-only file has no statements, so `src/index.ts` needs no
      *   exclusion once it holds nothing but re-exports.
+     *
+     * - `text` is listed twice: the bare entry prints to the log, and the one
+     *   given a `file` writes the per-file table the PR coverage comment
+     *   embeds. A reporter given a `file` writes only there.
      */
     coverage: {
       exclude: ["src/**/*.test.ts", "src/**/*.test-d.ts"],
       include: ["src/**/*.ts"],
       provider: "v8",
-      reporter: ["html", "json", "json-summary", "text"],
+      reporter: [
+        "html",
+        "json",
+        "json-summary",
+        "text",
+        ["text", { file: "coverage.txt" }],
+      ],
       thresholds: { 100: true },
     },
     projects: [

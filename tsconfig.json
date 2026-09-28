@@ -1,8 +1,15 @@
 {
   "compilerOptions": {
+    /*
+     * Relative imports may name a `.ts` file.
+     *
+     * - `scripts/` runs directly under Node's type stripping, which resolves
+     *   only the real file name; allowed because `noEmit` is set.
+     */
+    "allowImportingTsExtensions": true,
+
     // Required by `isolatedDeclarations`, even though nothing is emitted here.
     "declaration": true,
-
     /*
      * Optional properties reject an explicit `undefined` unless the type
      * includes it.
