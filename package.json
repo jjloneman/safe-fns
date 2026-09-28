@@ -80,7 +80,7 @@
     "lint:package": "pnpm build && publint && attw --pack",
     "prepare": "git config core.hooksPath .githooks || true",
     "prune-branches": "git fetch --prune && git-removed-branches --force --prune",
-    "size": "pnpm build && size-limit",
+    "size": "pnpm build && size-limit --config size-limit.config.ts",
     "test": "vitest run",
     "test:consumer": "pnpm build && node scripts/test-consumer.ts",
     "test:coverage": "vitest run --coverage",

@@ -165,7 +165,7 @@ function typecheck(consumerDir: string): void {
           ? ["--ignoreDeprecations", "6.0"]
           : [];
 
-      console.log(`TypeScript ${version} · ${name}`);
+      console.log(`[test-consumer] TypeScript ${version} · ${name}`);
       run(
         process.execPath,
         [
@@ -188,6 +188,7 @@ try {
   copyFixtures(consumerDir);
   typecheck(consumerDir);
   run(process.execPath, ["smoke.ts"], consumerDir);
+  // No `catch`: a failure should propagate and exit non-zero, after cleanup.
 } finally {
   rmSync(consumerDir, { force: true, recursive: true });
 }

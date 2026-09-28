@@ -92,9 +92,6 @@
      */
     "*.config.ts",
 
-    // size-limit reads only a dotfile config.
-    ".size-limit.ts",
-
     // Local ESLint rules, imported by eslint.config.ts.
     "eslint-rules",
 

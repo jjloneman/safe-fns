@@ -3,8 +3,8 @@
  * `pnpm test:consumer` against every supported TypeScript version and module
  * resolution mode.
  *
- * - Must stay parseable by TypeScript 4.9: no `const` type parameters, no
- *   `NoInfer`, no `satisfies`.
+ * - Must stay parseable by TypeScript 4.9: no `const` type parameters (5.0)
+ *   and no `NoInfer` (5.4).
  *
  * - Each annotation fails to compile if a published declaration is missing or
  *   loses its type.

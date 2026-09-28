@@ -21,7 +21,7 @@ const loadExportNames = async (specifier: string): Promise<string[]> => {
 
   if (esmNames.length === 0 || esmNames.join() !== cjsNames.join()) {
     throw new Error(
-      `${specifier}: import gave [${esmNames.join()}], require gave [${cjsNames.join()}]`
+      `[smoke.ts] ${specifier}: import gave [${esmNames.join()}], require gave [${cjsNames.join()}]`
     );
   }
 
@@ -42,11 +42,11 @@ for (const subpath of subpaths) {
 
   if (missingFromRoot.length > 0) {
     throw new Error(
-      `${specifier}: not re-exported from the root: ${missingFromRoot.join()}`
+      `[smoke.ts] ${specifier}: not re-exported from the root: ${missingFromRoot.join()}`
     );
   }
 }
 
 console.log(
-  `Loaded ${String(subpaths.length + 1)} entries via import and require.`
+  `[smoke.ts] Loaded ${String(subpaths.length + 1)} entries via import and require.`
 );

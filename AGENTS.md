@@ -45,9 +45,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - TypeScript gets the full typed presets (`strictTypeChecked` + `stylisticTypeChecked`), perfectionist's `recommended-alphabetical` ordering, and `tsdoc/syntax`.
   - JSON and YAML get `jsonc/sort-keys` and `yml/sort-keys`; `package.json` is excluded and keeps the `sort-package-json` order through `prettier-plugin-packagejson`.
 - `prettier.config.ts` — Prettier defaults plus `trailingComma: "es5"`, the `package.json` sorter, and a shell parser for `.githooks/`.
-- `.size-limit.ts` — the size budget for every public entry.
+- `size-limit.config.ts` — the size budget for every public entry.
 - `tsdown.config.ts` — the build, and the generated `exports` map in `package.json`.
-- `tsconfig.json` — one root covering `src`, `test`, `scripts`, `eslint-rules`, `.size-limit.ts`, and the root-level `*.config.ts` files.
+- `tsconfig.json` — one root covering `src`, `test`, `scripts`, `eslint-rules`, and the root-level `*.config.ts` files.
   - `paths` maps `safe-fns` and `safe-fns/*` to `src/`, so `test/consumer/` typechecks and lints before any build.
   - An editor and ESLint's project service both resolve a file by walking up to the nearest config named exactly `tsconfig.json`, so every TypeScript file must fall inside this root's `include`.
   - Don't add a differently named config (`tsconfig.eslint.json`, …) to cover a directory; it typechecks in CI while leaving the editor and the linter blind.
@@ -235,7 +235,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - With `CI` set, a stale map fails the build instead of being rewritten.
   - `typesVersions` is a static wildcard (`./dist/*.d.ts`, then `./*` for the root's own `types`), so subpaths resolve under `moduleResolution: "node"` with nothing to regenerate.
 - `pnpm lint:package` builds, then runs publint and `attw --pack` (Are the Types Wrong).
-- `pnpm size` builds, then checks each entry against its budget in `.size-limit.ts`; an entry without a budget fails.
+- `pnpm size` builds, then checks each entry against its budget in `size-limit.config.ts` (passed by `--config`, since size-limit only finds `.size-limit.*` on its own); an entry without a budget fails.
 - `pnpm test:consumer` builds, packs, and installs the tarball into a scratch project, then:
   - fails if the tarball holds a test file;
   - typechecks `test/consumer/types.ts` against every supported consumer TypeScript version;

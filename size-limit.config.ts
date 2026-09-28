@@ -27,7 +27,9 @@ const config: SizeLimitConfig = Object.entries(packageJson.exports)
     const limit = limitsBySubpath[subpath];
 
     if (limit === undefined || typeof target === "string") {
-      throw new Error(`No size budget in .size-limit.ts for "${subpath}"`);
+      throw new Error(
+        `No size budget in size-limit.config.ts for "${subpath}"`
+      );
     }
 
     return { limit, name: subpath, path: target.import.default };
