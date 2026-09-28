@@ -17,6 +17,7 @@ The scripts, projects, and coverage gate are described in [AGENTS.md](../../AGEN
   - `#test/cross-env.cases` — the cross-environment table; add a row per behavior every runtime must agree on.
   - `#test/hostile-inputs` — values that trap on inspection; run every export over them.
   - `#test/cross-realm-inputs` — Node-only values from `node:vm`.
+  - `test/consumer/` is not a Vitest suite: `pnpm test:consumer` runs its fixtures against the packed tarball, so don't name them `*.test.ts`.
 - **`*.node.test.ts` runs only in the `node` project.**
   - Use it for anything that needs a Node built-in, such as the cross-realm inputs.
   - Everything else must pass unchanged in both projects, so keep it free of Node and DOM APIs.
