@@ -279,6 +279,56 @@ const config: Linter.Config[] = defineConfig(
         documentedOrder({ keys: [], pathPattern: ".*" }),
       ],
     },
+  },
+
+  /*
+   * Issue forms and the template chooser follow GitHub's documented order too.
+   *
+   * - After `name` and `description`, a form's keys differ from a workflow's,
+   *   so this block replaces the options above rather than widening them.
+   */
+  {
+    files: [".github/ISSUE_TEMPLATE/*.yml"],
+    rules: {
+      "yml/sort-keys": [
+        "error",
+        documentedOrder({
+          keys: [
+            "name",
+            "description",
+            "title",
+            "labels",
+            "assignees",
+            "blank_issues_enabled",
+            "contact_links",
+            "body",
+          ],
+          pathPattern: "^$",
+        }),
+        documentedOrder({
+          keys: ["type", "id", "attributes", "validations"],
+          pathPattern: String.raw`^body\[\d+\]$`,
+        }),
+        documentedOrder({
+          keys: [
+            "label",
+            "description",
+            "placeholder",
+            "value",
+            "render",
+            "multiple",
+            "options",
+            "default",
+          ],
+          pathPattern: String.raw`^body\[\d+\]\.attributes$`,
+        }),
+        documentedOrder({
+          keys: ["name", "url", "about"],
+          pathPattern: String.raw`^contact_links\[\d+\]$`,
+        }),
+        documentedOrder({ keys: [], pathPattern: ".*" }),
+      ],
+    },
   }
 );
 
