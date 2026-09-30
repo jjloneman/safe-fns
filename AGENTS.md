@@ -98,6 +98,8 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Where an order carries meaning, disable the rule on that line with an `eslint-disable-next-line` comment saying why, rather than turning it off in the config.
   - Ordering is case-insensitive unless a tool says otherwise — `fallback` sorts before `Options`.
 - **Function parameters**: one positional argument is fine; with two or more, take a single object with sorted keys. Options go in an object even when there is only one.
+  - Exception: a function that mirrors a native API's signature (`safeObjectHasOwn(value, key)`) or compares two values (`isDeepEqual(a, b)`) stays positional, with any options as a trailing object.
+  - Nothing is variadic — see [the decision](docs/decisions/function-parameters.md).
 - **Prefer functional over imperative** — `map`/`filter`/`reduce` and pure helpers over mutable loops, unless the loop is genuinely clearer.
   - When `reduce` builds an object or array, **mutate the accumulator** and return it, rather than spreading a fresh copy on every iteration — a spread per item turns a linear pass quadratic.
   - This is safe only because the accumulator is the `reduce`'s own initial value; never mutate a seed object the caller passed in.
