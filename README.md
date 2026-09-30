@@ -161,12 +161,12 @@ import { isSafeEmpty } from "safe-fns/is-safe-empty";
 
 _No functions have shipped yet._ The planned families are:
 
-| Family  | Functions                                                                                                      |
-| :------ | :------------------------------------------------------------------------------------------------------------- |
-| Guards  | `isSafeEmpty`, `isSafePopulated`, `isNonBlankString`, `isNonEmptyArray`, `isPlainObject`                       |
-| Parsers | `safeParseBoolean`, `safeParseNumber`, `safeParseInteger`, `safeParseString`, `safeParseJson`, `safeParseDate` |
-| Errors  | `getErrorMessage`, `toError`                                                                                   |
-| Sort    | `deepSortObject`                                                                                               |
+| Family  | Functions                                                                                     |
+| :------ | :-------------------------------------------------------------------------------------------- |
+| Guards  | `isSafeEmpty`, `isSafePopulated`, `isPlainObject`                                             |
+| Parsers | `safeParseBoolean`, `safeParseNumber`, `safeParseInteger`, `safeParseString`, `safeJsonParse` |
+| Errors  | `getErrorMessage`, `toError`                                                                  |
+| Sort    | `deepSortObject`                                                                              |
 
 Parsers share one shape:
 
@@ -202,7 +202,7 @@ safe-fns replaces helpers that were copy-pasted between projects and had drifted
 | Copy-pasted pattern                                         | safe-fns                                     |
 | :---------------------------------------------------------- | :------------------------------------------- |
 | `error instanceof Error ? error.message : String(error)`    | `getErrorMessage(error)`                     |
-| `typeof value === "string" && value.trim() !== ""`          | `isNonBlankString(value)`                    |
+| `value.trim() !== ""` on a string                           | `isSafePopulated(value)`                     |
 | Hand-rolled number parsing that returns `null` on bad input | `safeParseNumber(value, { fallback: null })` |
 | A local `sortKeysRecursively`                               | `deepSortObject(value)`                      |
 
