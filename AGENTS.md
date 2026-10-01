@@ -22,6 +22,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Loosening a published check is a breaking change, never a drive-by.
 - **Fail safe toward preserving data.** When a value can't be inspected safely, pick the answer that keeps it: an uninspectable value is "populated", not "empty".
 - **Never throw.** Every export catches what it touches — getters, proxies, `toString`/`valueOf` traps, revoked proxies — and returns the caller's fallback instead.
+- **Fast on the common path.** Match or beat the fastest competitor, measured by benchmark — but robustness beats speed.
+  - Cheapest checks first (`typeof`, `=== null`), then built-in checks, then walking the value; no allocation or wrapper layers on the common case.
+  - See [the decision](docs/decisions/performance.md).
 - **No unreachable branches.** Coverage is 100%; a branch nothing can reach is dead code to delete, not a line to exempt.
 - **Zero runtime dependencies.** `dependencies` and `peerDependencies` stay empty.
 - **One function per file.** Each export lives in its own file under `src/`, so each gets its own subpath and its own output file.
@@ -101,6 +104,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Exception: a function that mirrors a native API's signature (`safeObjectHasOwn(value, key)`) or compares two values (`isDeepEqual(a, b)`) stays positional, with any options as a trailing object.
   - Nothing is variadic — see [the decision](docs/decisions/function-parameters.md).
 - **Prefer functional over imperative** — `map`/`filter`/`reduce` and pure helpers over mutable loops, unless the loop is genuinely clearer.
+  - In `src/`, a plain loop is also fine where a benchmark shows it's faster.
   - When `reduce` builds an object or array, **mutate the accumulator** and return it, rather than spreading a fresh copy on every iteration — a spread per item turns a linear pass quadratic.
   - This is safe only because the accumulator is the `reduce`'s own initial value; never mutate a seed object the caller passed in.
   - **Name the accumulator for what it holds** (`countsByType`, `keysByLength`), never `acc` or `accumulator`.
