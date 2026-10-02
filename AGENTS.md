@@ -4,7 +4,7 @@ Conventions for any AI agent (or human) working in this repo. Read top to bottom
 
 ## 🎯 Purpose of this repo
 
-`safe-fns` is a standalone, zero-dependency, strongly typed npm package of helpers that take an `unknown` value and return a safe, typed result.
+`safe-fns` is a standalone, zero-dependency, strongly typed npm package of helpers that never throw — most take an `unknown` value and return a safe, typed result.
 
 - **Every export is total**: it never throws, and bad input returns a fallback the caller chooses.
 - It replaces helpers that were copy-pasted across several projects and had drifted apart.
@@ -16,6 +16,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 
 - **Environment-independent.** A function returns the same result in Node, every browser, and any other JS runtime.
   - Never branch on `typeof window`, `process`, or any other environment probe.
+  - A side-effecting export (storage, logging) runs the same code everywhere, but its result can depend on what the environment provides — `safeLocalStorageGetItem` returns the fallback where there's no `localStorage`; document it.
   - Where an engine genuinely differs (ICU data, non-ISO date parsing), document it rather than papering over it.
 - **Never widen a narrow check.** A check matches exactly what its name says, identified by a reliable test (`Array.isArray`, a brand check) rather than by shape.
   - Don't duck-type: an object with a `length` or `size` key is not a collection, and `{ length: 0, name: "x" }` is not "empty".
@@ -100,9 +101,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - That covers object keys, type members, imports and exports, union and intersection members, `Set`/`Map`/array-`includes` entries, switch cases, class members, and a module's top-level declarations.
   - Where an order carries meaning, disable the rule on that line with an `eslint-disable-next-line` comment saying why, rather than turning it off in the config.
   - Ordering is case-insensitive unless a tool says otherwise — `fallback` sorts before `Options`.
-- **Function parameters**: one positional argument is fine; with two or more, take a single object with sorted keys. Options go in an object even when there is only one.
-  - Exception: a function that mirrors a native API's signature (`safeObjectHasOwn(value, key)`) or compares two values (`isDeepEqual(a, b)`) stays positional, with any options as a trailing object.
-  - Nothing is variadic — see [the decision](docs/decisions/function-parameters.md).
+- **Function parameters**: the one or two values a function works on are positional (`isSafePopulated(value)`, `isDeepEqual(a, b)`); configuration goes in a trailing options object, even with one key (`deepSortObject(value, { sortArrays: true })`).
+  - More than two values go in one object with sorted keys.
+  - A function that wraps a native API keeps the native parameter order; nothing is variadic — see [the decision](docs/decisions/function-parameters.md).
 - **Prefer functional over imperative** — `map`/`filter`/`reduce` and pure helpers over mutable loops, unless the loop is genuinely clearer.
   - In `src/`, a plain loop is also fine where a benchmark shows it's faster.
   - When `reduce` builds an object or array, **mutate the accumulator** and return it, rather than spreading a fresh copy on every iteration — a spread per item turns a linear pass quadratic.

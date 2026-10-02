@@ -3,7 +3,7 @@ type: Decision
 title: How fast an export must be
 description: The common case runs cheap checks first and allocates nothing; each export is benchmarked against the fastest competitor, and robustness beats speed.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-09-30T23:10:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-01T15:00:00Z }
 ---
 
 # How fast an export must be
@@ -25,7 +25,7 @@ Every export aims to match or beat the fastest library doing the same job, witho
   - A `try` block runs at full speed in current engines until something throws, so wrapping a risky step is free on the common case.
   - Wrap whole risky steps, not each property read.
 - **Benchmarks decide, not intuition.**
-  - Each export ships with a benchmark against its competitors (e.g. `isDeepEqual` against `fast-deep-equal`, `dequal`, and lodash's `isEqual`).
+  - Each export ships with a benchmark against its competitors (e.g. `isDeepEqual` against `fast-deep-equal`, `dequal`, lodash's `isEqual`, and ramda's `equals`).
   - The target is the fastest competitor's speed on representative input.
 - **Robustness beats speed.**
   - When a guarantee costs speed — no duck-typing, no throwing, cross-realm safety — keep the guarantee and document the cost.

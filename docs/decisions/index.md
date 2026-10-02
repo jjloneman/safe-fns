@@ -4,13 +4,13 @@ okf_version: "0.2"
 
 # Decisions
 
+- [How a function takes its parameters](function-parameters.md) - Up to two positional parameters for the values a function works on, configuration in a trailing options object, and nothing variadic.
 - [How exports share code](internal-dependencies.md) - Shared logic lives in non-public modules under `src/internal/`; imports stay shallow, and each entry's size budget catches bloat.
 - [How fast an export must be](performance.md) - The common case runs cheap checks first and allocates nothing; each export is benchmarked against the fastest competitor, and robustness beats speed.
 - [How predicates are named](predicate-naming.md) - Predicates start with `is`, name the positive case, and come in positive/negative pairs rather than negated names.
 - [What a parser returns when it can't parse](parser-fallbacks.md) - Parsers return the caller's fallback, `undefined` by default, for any input they don't recognize — never a guess.
 - [What every export promises](package-promise.md) - Every export is total and precisely typed; taking an `unknown` value is the common case, not a requirement.
-- [What the package leaves to native APIs and other libraries](native-first-scope.md) - No reimplementing what native JavaScript does well, no wrappers around native one-liners, and dates, byte formatting, and validation stay with dedicated libraries.
-- [When a function takes positional parameters](function-parameters.md) - Two or more parameters go in one object, except for a function that mirrors a native signature or compares two values; nothing is variadic.
+- [What the package leaves to native APIs and other libraries](native-first-scope.md) - No reimplementing what native JavaScript does well, no wrappers around native one-liners, newer native APIs parked rather than excluded, and date parsing and validation left to dedicated libraries.
 - [When a name starts with `safe`](safe-prefix-naming.md) - `safe` + the native API's path for a wrapper of one native API, `safeParse*` for coercers, `isSafe*` against a same-named unsafe helper, and plain names otherwise.
 
 # About this bundle

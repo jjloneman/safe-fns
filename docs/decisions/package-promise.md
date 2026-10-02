@@ -3,7 +3,7 @@ type: Decision
 title: What every export promises
 description: Every export is total and precisely typed; taking an `unknown` value is the common case, not a requirement.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-09-30T20:24:01Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-01T15:00:00Z }
 ---
 
 # What every export promises
@@ -32,13 +32,10 @@ Every export keeps the same four promises, whatever its input type.
 - The original promise, "an `unknown` value in, a safe typed value out", shut out helpers the owner copies between projects (`range`, `upperFirst`, `pluralize`, `toMs`).
 - Those helpers share what makes the package worth depending on: they can't throw, and their types are exact.
 - "Never throws" is the property callers rely on; the input type is incidental.
+- The owner confirmed the wider promise on PR [#28](https://github.com/jjloneman/safe-fns/pull/28).
 
 ## Consequences
 
-- The README's first line and AGENTS.md's "Purpose of this repo" say the helpers "take an `unknown` value"; both change to this wider promise once it is verified.
-- AGENTS.md's "Environment-independent" principle gains the same side-effect wording at that point.
+- The README's first line and AGENTS.md's "Purpose of this repo" describe this wider promise, not just `unknown` input.
+- AGENTS.md's "Environment-independent" principle carries the same side-effect wording.
 - The scope test moves from "is the input `unknown`?" to "is it total, typed, dependency-free, and not already native?" — see [What the package leaves to native APIs and other libraries](native-first-scope.md).
-
-## Open
-
-- The owner hasn't confirmed the wider promise yet; it was an open question on [#10](https://github.com/jjloneman/safe-fns/issues/10).

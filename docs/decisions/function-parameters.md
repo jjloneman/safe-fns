@@ -1,33 +1,37 @@
 ---
 type: Decision
-title: When a function takes positional parameters
-description: Two or more parameters go in one object, except for a function that mirrors a native signature or compares two values; nothing is variadic.
+title: How a function takes its parameters
+description: Up to two positional parameters for the values a function works on, configuration in a trailing options object, and nothing variadic.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-09-30T20:24:01Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-01T15:00:00Z }
 ---
 
-# When a function takes positional parameters
+# How a function takes its parameters
 
-Most exports take one object; a few keep the positional shape their callers already know.
+A function's parameters split into the values it works on, which are positional, and the configuration that tweaks its behavior, which goes in an object.
 
 ## Decision
 
-- **The default:** one positional parameter is fine; with two or more, the function takes a single object with sorted keys.
-  - Options always go in an object, even when there is only one.
-- **The exception (owner's call, 2026-09-30):** positional parameters are allowed for a function that
-  - mirrors a native API's signature — `safeObjectHasOwn(value, key)`, like `Object.hasOwn(value, key)`; or
-  - compares two values — `isDeepEqual(a, b)`.
-  - Options still follow as a trailing object: `isDeepEqual(a, b, { ignoreArrayOrder: true })`.
+- **Values are positional, one or two of them.**
+  - One value: `isSafePopulated(value)`, `safeJsonParse(text)`, `upperFirst(text)`.
+  - Two values, where the function naturally relates them: `isDeepEqual(a, b)`, `safeObjectHasOwn(value, key)`, `keyBy(items, key)`.
+  - A function that wraps a native API keeps its parameters in the native order: `safeObjectHasOwn(value, key)`, like `Object.hasOwn(value, key)`.
+- **Configuration goes in a trailing options object, even with one key.**
+  - `deepSortObject(value, { sortArrays: true })`, never `deepSortObject(value, true)`.
+  - `isDeepEqual(a, b, { ignoreArrayOrder: true })`.
+  - The key names the setting at the call site, and new settings can be added later without breaking callers.
+- **More than two values go in one object** with sorted keys.
 - **Nothing is variadic.**
-  - A trailing options object would be indistinguishable from one more value to compare.
+  - A trailing options object would be indistinguishable from one more value.
   - Every equality helper checked takes exactly two values: lodash's `isEqual`, es-toolkit's `isEqual`, ramda's `equals`, remeda's `isDeepEqual` (which throws on a third), and Node's `util.isDeepStrictEqual`.
   - Several values compare against the first: `rest.every((value) => isDeepEqual(first, value))`.
 
 ## Why
 
-- `isDeepEqual({ left, right })` and `safeObjectHasOwn({ key, value })` read worse than the positional forms, and break the "stay close to native" naming rule (see [When a name starts with `safe`](safe-prefix-naming.md)).
-- Everywhere else, an object keeps call sites self-describing and lets options grow without breaking changes.
+- Positional values read naturally for the one or two things a function is about: `isDeepEqual(a, b)`, not `isDeepEqual({ left, right })`.
+- A bare positional flag or number hides its meaning: `deepSortObject(value, true)` doesn't say what `true` does, and `safeParseInteger(value, 10)` reads like `parseInt`'s radix.
 
 ## Consequences
 
-- AGENTS.md's "Function parameters" rule names this exception.
+- AGENTS.md's "Function parameters" rule says the same.
+- The base storage wrapper takes its area as configuration: `safeStorageGetItem(key, { area: "session" })`.

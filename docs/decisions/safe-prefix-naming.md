@@ -3,7 +3,7 @@ type: Decision
 title: When a name starts with `safe`
 description: "`safe` + the native API's path for a wrapper of one native API, `safeParse*` for coercers, `isSafe*` against a same-named unsafe helper, and plain names otherwise."
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-09-30T20:24:01Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-01T15:00:00Z }
 ---
 
 # When a name starts with `safe`
@@ -22,7 +22,7 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-09-30T20:24:01Z }
   | `structuredClone`           | `safeStructuredClone` |
   | `Storage.prototype.getItem` | `safeStorageGetItem`  |
   - Its shape stays close to the native API: the native arguments in the native order, and the same result on success; anything extra goes in an options object.
-  - `safeLocalStorageGetItem(key)` and `safeSessionStorageGetItem(key)` mirror `getItem(key)` exactly; the base `safeStorageGetItem({ area, key })` takes one object, per [the parameter rule](function-parameters.md).
+  - `safeLocalStorageGetItem(key)` and `safeSessionStorageGetItem(key)` mirror `getItem(key)` exactly; the base `safeStorageGetItem(key, { area })` takes the area as configuration, per [the parameter rule](function-parameters.md).
 
 - **A coercer from `unknown` to a primitive type is `safeParse` + the type:** `safeParseNumber`, `safeParseInteger`, `safeParseBoolean`, `safeParseString`.
   - These wrap no single native call; mirroring one would read worse (`safeNumberParseFloat`).
