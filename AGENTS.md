@@ -37,6 +37,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - `test/consumer/` — fixtures run by `pnpm test:consumer` against the packed tarball (see [Build & package](#-build--package)).
 - `scripts/` — repo scripts, run directly by Node (which strips their types), so they stick to erasable TypeScript syntax.
   - Relative imports name the `.ts` file (`./lib/publish-ci-report.ts`), since Node resolves only the real file name.
+  - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/**/*.test.ts` runs in the `node` project.
 - `dist/` — build output (gitignored), the only directory published.
 - `README.md` — the public face: why the package exists, install and usage, the API, the support matrix, scripts, and what each label means.
 - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` — the community-health files.
@@ -346,6 +347,9 @@ Semantic and design decisions — what "empty" means, how a function is named, w
   - `verified` by `human:jjloneman` means the repo owner reviewed it — change it only with their agreement.
   - No `verified` means it is an unreviewed draft.
 - An agent that writes or edits a decision records itself in `generated` and **never** adds a `verified` entry.
+- **To verify records, run `pnpm okf:verify`** (or edit the two frontmatter lines by hand):
+  - it lists the records changed on the branch, marks the ones you pick `status: stable` with a `verified` entry, and commits just those files;
+  - it refuses to run without an interactive terminal and has no flag to skip its prompts, which is what keeps `verified` a human act.
 
 ## 🛑 Deleting things
 
