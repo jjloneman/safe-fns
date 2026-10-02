@@ -27,7 +27,7 @@ describe("verifyRecord", () => {
     const text = record(draftLines);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - stable status and a verified line after generated
     expect(result).toStrictEqual({
@@ -47,7 +47,7 @@ describe("verifyRecord", () => {
     const text = record(["title: T", "status: draft", "type: Decision"]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - the verified line follows status
     expect(result).toStrictEqual({
@@ -71,7 +71,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it again
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - the entry's timestamp is renewed, not duplicated
     expect(result).toStrictEqual({
@@ -91,7 +91,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it again
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - only the owner's timestamp is renewed
     expect(result).toStrictEqual({
@@ -112,7 +112,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - the owner's entry is appended to the list
     expect(result).toStrictEqual({
@@ -137,7 +137,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - their entry becomes a list item beside the owner's
     expect(result).toStrictEqual({
@@ -164,7 +164,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - the verified line follows the whole block
     expect(result).toStrictEqual({
@@ -189,7 +189,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - their timestamp is kept and the owner gets a separate entry
     expect(result).toStrictEqual({
@@ -228,7 +228,7 @@ describe("verifyRecord", () => {
       const text = record([...draftLines, `verified: ${verified}`]);
 
       // When - verifying it
-      const result = verifyRecord(text, { at, verifiedBy });
+      const result = verifyRecord({ at, text, verifiedBy });
 
       // Then - the entry is added or renewed inside the same sequence
       expect(result).toStrictEqual({
@@ -256,7 +256,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - only the owner's at: line changes
     expect(result).toStrictEqual({
@@ -278,7 +278,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - the new entry follows the whole item
     expect(result).toStrictEqual({
@@ -306,7 +306,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - it is rejected rather than rewritten into invalid YAML
     expect(result).toStrictEqual({
@@ -324,7 +324,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - the status becomes stable
     expect(result).toMatchObject({
@@ -342,7 +342,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - the status stays deprecated
     expect(result).toMatchObject({
@@ -356,7 +356,7 @@ describe("verifyRecord", () => {
     const text = record(draftLines).replaceAll("\n", "\r\n");
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - every line keeps its CRLF ending
     expect(result).toStrictEqual({
@@ -378,7 +378,7 @@ describe("verifyRecord", () => {
     },
   ])("rejects a record with $description", ({ text }) => {
     // When - verifying a record with $description
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - it is rejected for the missing block
     expect(result).toStrictEqual({
@@ -392,7 +392,7 @@ describe("verifyRecord", () => {
     const text = record(["type: Decision", "title: T"]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - the entry is added at the end and no status line appears
     expect(result).toStrictEqual({
@@ -412,7 +412,7 @@ describe("verifyRecord", () => {
       const text = record([...draftLines.slice(0, 2), statusLine]);
 
       // When - verifying it
-      const result = verifyRecord(text, { at, verifiedBy });
+      const result = verifyRecord({ at, text, verifiedBy });
 
       // Then - the status becomes stable
       expect(result).toMatchObject({
@@ -429,7 +429,7 @@ describe("verifyRecord", () => {
       const text = record([...draftLines, `verified: ${emptyValue}`]);
 
       // When - verifying it
-      const result = verifyRecord(text, { at, verifiedBy });
+      const result = verifyRecord({ at, text, verifiedBy });
 
       // Then - the null becomes the owner's inline entry
       expect(result).toStrictEqual({
@@ -454,7 +454,7 @@ describe("verifyRecord", () => {
     ]);
 
     // When - verifying it
-    const result = verifyRecord(text, { at, verifiedBy });
+    const result = verifyRecord({ at, text, verifiedBy });
 
     // Then - a timestamped entry is appended rather than a wrong line edited
     expect(result).toMatchObject({
@@ -475,7 +475,7 @@ describe("readRecordSummary", () => {
     ]);
 
     // When - reading its summary
-    const summary = readRecordSummary(text, { verifiedBy });
+    const summary = readRecordSummary({ text, verifiedBy });
 
     // Then - the checklist fields come back
     expect(summary).toStrictEqual({
@@ -497,7 +497,7 @@ describe("readRecordSummary", () => {
     ]);
 
     // When - reading its summary
-    const summary = readRecordSummary(text, { verifiedBy });
+    const summary = readRecordSummary({ text, verifiedBy });
 
     // Then - only the owner's timestamp is read
     expect(summary?.verifiedAt).toBe("2026-09-28T09:00:00Z");
@@ -513,7 +513,7 @@ describe("readRecordSummary", () => {
     ]);
 
     // When - reading its summary
-    const summary = readRecordSummary(text, { verifiedBy });
+    const summary = readRecordSummary({ text, verifiedBy });
 
     // Then - the timestamp is found inside the block
     expect(summary?.generatedAt).toBe("2026-10-01T15:00:00Z");
@@ -527,7 +527,7 @@ describe("readRecordSummary", () => {
     ]);
 
     // When - reading its summary
-    const summary = readRecordSummary(text, { verifiedBy });
+    const summary = readRecordSummary({ text, verifiedBy });
 
     // Then - the owner has not verified it
     expect(summary?.verifiedAt).toBeUndefined();
@@ -538,7 +538,7 @@ describe("readRecordSummary", () => {
     const text = record(["status: draft"]);
 
     // When - reading its summary
-    const summary = readRecordSummary(text, { verifiedBy });
+    const summary = readRecordSummary({ text, verifiedBy });
 
     // Then - every other field is undefined
     expect(summary).toStrictEqual({
@@ -552,7 +552,7 @@ describe("readRecordSummary", () => {
 
   test("returns undefined without a frontmatter block", () => {
     // When - reading text with no frontmatter block
-    const summary = readRecordSummary("# Title\n", { verifiedBy });
+    const summary = readRecordSummary({ text: "# Title\n", verifiedBy });
 
     // Then - there is no summary
     expect(summary).toBeUndefined();

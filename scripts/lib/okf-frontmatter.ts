@@ -8,102 +8,281 @@
  *   timestamp in.
  */
 
+/** The lifecycle statuses OKF defines for a record. */
+export const RECORD_STATUSES = {
+  deprecated: "deprecated",
+  draft: "draft",
+  stable: "stable",
+} as const;
+
+/** The line that opens and closes a frontmatter block. */
+const FENCE = "---";
+
+/** A line that continues the key above it: indented text. */
+const INDENTED_LINE = /^\s+\S/;
+
+/** A line that starts a list item. */
+const LIST_ITEM_LINE = /^\s*-\s/;
+
+/** What a timestamp looks like on a line: up to the next separator. */
+const TIMESTAMP = String.raw`[^\s,}\]]+`;
+
+/** A line that continues `verified`: a list item, or indented text. */
+const VERIFIED_CONTINUATION = /^(?:\s*-\s|\s+\S)/;
+
+/** What `readRecordSummary` needs: the record, and whose sign-off counts. */
+export type ReadRecordSummaryParams = Pick<
+  VerifyRecordParams,
+  "text" | "verifiedBy"
+>;
+
 /**
  * Where a record stands with the human sign-off.
  *
  * - `unverified` has no sign-off from the verifier yet.
- *
  * - `changed` was regenerated after the sign-off, so it needs a fresh one.
- *
  * - `verified` was signed off and left alone since.
  */
 export type RecordState = "changed" | "unverified" | "verified";
 
-/**
- * The frontmatter fields the verify flow shows and decides on.
- */
+/** A lifecycle status OKF defines, such as `draft`. */
+export type RecordStatus =
+  (typeof RECORD_STATUSES)[keyof typeof RECORD_STATUSES];
+
+/** The frontmatter fields the verify flow shows and decides on. */
 export type RecordSummary = {
-  /** When the record was last generated, if it says. */
+  /**
+   * When the record was last generated, if it says.
+   *
+   * @example "2026-10-01T15:00:00Z"
+   */
   generatedAt: string | undefined;
 
-  /** The record's `status`; OKF treats an absent one as `stable`. */
-  status: string | undefined;
+  /**
+   * The record's `status`, when it is one OKF defines.
+   *
+   * - Absent means `stable`, as OKF defines it.
+   *
+   * @example "draft"
+   */
+  status: RecordStatus | undefined;
 
-  /** The record's `title`, without its quotes. */
+  /**
+   * The record's `title`, without its quotes.
+   *
+   * @example "What every export promises"
+   */
   title: string | undefined;
 
-  /** The record's `type`, e.g. `Decision`. */
+  /**
+   * The record's `type`.
+   *
+   * @example "Decision"
+   */
   type: string | undefined;
 
-  /** When `verifiedBy` last signed the record off, if they did. */
+  /**
+   * When `verifiedBy` last signed the record off, if they did.
+   *
+   * @example "2026-10-02T13:30:00Z"
+   */
   verifiedAt: string | undefined;
 };
 
-/**
- * The outcome of verifying one record: its new text, or why it was refused.
- */
+/** The outcome of verifying one record: its new text, or why it was refused. */
 export type RecordVerification =
   | {
-      /** Whether the record was verified; `false` here. */
+      /**
+       * Whether the record was verified; `false` here.
+       *
+       * @example false
+       */
       isOk: false;
 
-      /** Why the record can't be verified. */
+      /**
+       * Why the record can't be verified.
+       *
+       * @example "no frontmatter block"
+       */
       reason: string;
     }
   | {
-      /** Whether the record was verified; `true` here. */
+      /**
+       * Whether the record was verified; `true` here.
+       *
+       * @example true
+       */
       isOk: true;
 
-      /** The record's new text. */
+      /**
+       * The record's new text.
+       *
+       * @example
+       * ```ts
+       * "---\nstatus: stable\n---\n"
+       * ```
+       */
       text: string;
     };
 
-/**
- * A record's text split around its frontmatter.
- */
+/** What `verifyRecord` needs: the record, who signs it, and when. */
+export type VerifyRecordParams = {
+  /**
+   * The UTC timestamp to record.
+   *
+   * @example "2026-10-02T13:30:00Z"
+   */
+  at: string;
+
+  /**
+   * The record's text, frontmatter included.
+   *
+   * @example
+   * ```ts
+   * "---\nstatus: draft\n---\n"
+   * ```
+   */
+  text: string;
+
+  /**
+   * Who is signing off.
+   *
+   * @example "human:jjloneman"
+   */
+  verifiedBy: string;
+};
+
+/** What `appendToFlowSequence` needs: the sequence, and the entry to add. */
+type AppendToFlowSequenceParams = {
+  /**
+   * The entry to add.
+   *
+   * @example `"{ by: human:jjloneman, at: 2026-10-02T13:30:00Z }"`
+   */
+  entry: string;
+
+  /**
+   * The existing flow sequence.
+   *
+   * @example `"[{ by: human:someone, at: 2026-09-01T00:00:00Z }]"`
+   */
+  sequence: string;
+};
+
+/** What `findKeyRange` needs: where to look, and which lines continue the key. */
+type FindKeyRangeParams = {
+  /**
+   * Decides which following lines belong to the key.
+   *
+   * @example `/^\s+\S/`
+   */
+  isContinuation: RegExp;
+} & KeyParams &
+  LinesParams;
+
+/** What `findOwnEntry` needs: the lines, and whose entry to find. */
+type FindOwnEntryParams = LinesParams & Pick<VerifyRecordParams, "verifiedBy">;
+
+/** A record's text split around its frontmatter. */
 type FrontmatterBlock = {
-  /** The line break the file uses, kept for every line written back. */
+  /**
+   * The line break the file uses, kept for every line written back.
+   *
+   * @example
+   * ```ts
+   * "\n"
+   * ```
+   */
   lineBreak: string;
 
-  /** Frontmatter lines, without the `---` fences. */
+  /**
+   * Frontmatter lines, without the `---` fences.
+   *
+   * @example ["status: draft"]
+   */
   lines: string[];
 
-  /** Everything after the opening fence, including the closing one. */
+  /**
+   * Everything after the opening fence, including the closing one.
+   *
+   * @example ["---", "", "# Title"]
+   */
   rest: string[];
 };
 
-/**
- * A run of consecutive lines, both ends inclusive.
- */
+/** A top-level frontmatter key, named by itself. */
+type KeyParams = {
+  /**
+   * The key, without its colon.
+   *
+   * @example "status"
+   */
+  key: string;
+};
+
+/** A run of consecutive lines, both ends inclusive. */
 type LineRange = {
-  /** Index of the run's last line. */
+  /**
+   * Index of the run's last line.
+   *
+   * @example 4
+   */
   endIndex: number;
 
-  /** Index of the run's first line. */
+  /**
+   * Index of the run's first line.
+   *
+   * @example 3
+   */
   startIndex: number;
 };
 
-/** The line that opens and closes a frontmatter block. */
-const fence = "---";
+/** The frontmatter lines a helper searches or edits. */
+type LinesParams = Pick<FrontmatterBlock, "lines">;
 
-/** What a timestamp looks like on a line: up to the next separator. */
-const timestamp = String.raw`[^\s,}\]]+`;
+/** The `verified` entry that belongs to the person signing off. */
+type OwnEntry = {
+  /**
+   * The entry's timestamp, when the entry carries a readable one.
+   *
+   * @example "2026-09-28T09:00:00Z"
+   */
+  at: string | undefined;
 
-/** A line that continues the key above it: indented text. */
-const indentedLine = /^\s+\S/;
+  /**
+   * The line that carries the timestamp: for a block-style list item, its `at:` line rather than its `- by:` line.
+   *
+   * @example 5
+   */
+  index: number;
 
-/** A line that continues `verified`: a list item, or indented text. */
-const verifiedContinuation = /^(?:\s*-\s|\s+\S)/;
+  /**
+   * Whether the entry is a block-style list item.
+   *
+   * @example false
+   */
+  isBlock: boolean;
+};
 
-/** A line that starts a list item. */
-const listItemLine = /^\s*-\s/;
+/** A run of lines a helper works within. */
+type RangeParams = {
+  /**
+   * The run of lines that holds a whole field.
+   *
+   * @example `{ endIndex: 4, startIndex: 3 }`
+   */
+  range: LineRange;
+};
+
+/** What `upsertVerified` needs: the lines to edit, who signs, and when. */
+type UpsertVerifiedParams = LinesParams &
+  Pick<VerifyRecordParams, "at" | "verifiedBy">;
 
 /**
  * Judge whether a record still needs a human sign-off.
  *
  * - `changed` means it was generated after `verifiedBy` last signed it off, or
  *   that the sign-off's timestamp can't be read.
- *
  * - `verified` means it was signed off and not touched since.
  */
 export function getRecordState(summary: RecordSummary): RecordState {
@@ -128,12 +307,9 @@ export function getRecordState(summary: RecordSummary): RecordState {
  * @returns the summary, or `undefined` when the text has no frontmatter block.
  */
 export function readRecordSummary(
-  text: string,
-  options: {
-    /** Whose `verified` entry counts, e.g. `human:jjloneman`. */
-    verifiedBy: string;
-  }
+  params: ReadRecordSummaryParams
 ): RecordSummary | undefined {
+  const { text, verifiedBy } = params;
   const block = splitFrontmatter(text);
 
   if (block === undefined) {
@@ -144,10 +320,10 @@ export function readRecordSummary(
 
   return {
     generatedAt: readGeneratedAt(lines),
-    status: readScalar(lines, "status"),
-    title: readScalar(lines, "title"),
-    type: readScalar(lines, "type"),
-    verifiedAt: findOwnEntry(lines, options.verifiedBy)?.at,
+    status: readStatus(lines),
+    title: readScalar({ key: "title", lines }),
+    type: readScalar({ key: "type", lines }),
+    verifiedAt: findOwnEntry({ lines, verifiedBy })?.at,
   };
 }
 
@@ -158,23 +334,13 @@ export function readRecordSummary(
  * - An existing entry for `verifiedBy` has its `at` updated, in the inline,
  *   list, block-style, or flow-sequence form, rather than gaining a second
  *   entry.
- *
  * - A new entry lands after the `generated` field, or after `status` when there
  *   is no `generated`; `generated` may be inline or a nested block.
- *
  * - A `status` other than `draft` is left alone, and an absent one counts as
  *   `stable`, as OKF defines it, so only the `verified` entry is added.
  */
-export function verifyRecord(
-  text: string,
-  options: {
-    /** The UTC timestamp to record, e.g. `2026-10-02T13:30:00Z`. */
-    at: string;
-
-    /** Who is signing off, e.g. `human:jjloneman`. */
-    verifiedBy: string;
-  }
-): RecordVerification {
+export function verifyRecord(params: VerifyRecordParams): RecordVerification {
+  const { at, text, verifiedBy } = params;
   const block = splitFrontmatter(text);
 
   if (block === undefined) {
@@ -182,17 +348,17 @@ export function verifyRecord(
   }
 
   const lines = [...block.lines];
-  const statusIndex = findKeyIndex(lines, "status");
+  const statusIndex = findKeyIndex({ key: "status", lines });
 
   if (
     /^status:\s*(?<quote>["']?)draft\k<quote>\s*(?:#.*)?$/.test(
       lines[statusIndex] ?? ""
     )
   ) {
-    lines[statusIndex] = "status: stable";
+    lines[statusIndex] = `status: ${RECORD_STATUSES.stable}`;
   }
 
-  const layoutProblem = upsertVerified(lines, options);
+  const layoutProblem = upsertVerified({ at, lines, verifiedBy });
 
   if (layoutProblem !== undefined) {
     return { isOk: false, reason: layoutProblem };
@@ -200,22 +366,19 @@ export function verifyRecord(
 
   return {
     isOk: true,
-    text: [fence, ...lines, ...block.rest].join(block.lineBreak),
+    text: [FENCE, ...lines, ...block.rest].join(block.lineBreak),
   };
 }
 
-/**
- * Add an entry to the end of a flow sequence such as `[{ … }]`.
- */
-function appendToFlowSequence(sequence: string, entry: string): string {
+/** Add an entry to the end of a flow sequence such as `[{ … }]`. */
+function appendToFlowSequence(params: AppendToFlowSequenceParams): string {
+  const { entry, sequence } = params;
   const items = sequence.replace(/^\[\s*/, "").replace(/\s*\]$/, "");
 
   return items === "" ? `[${entry}]` : `[${items}, ${entry}]`;
 }
 
-/**
- * Escape the characters that are special in a regular expression.
- */
+/** Escape the characters that are special in a regular expression. */
 function escapeRegExp(text: string): string {
   return text.replace(/[$()*+.?[\\\]^{|}]/g, String.raw`\$&`);
 }
@@ -224,10 +387,8 @@ function escapeRegExp(text: string): string {
  * Split the `verified` field into entries: the inline value on the key line,
  * then each list item with the indented lines that continue it.
  */
-function findEntryItems(
-  lines: readonly string[],
-  range: LineRange
-): LineRange[] {
+function findEntryItems(params: LinesParams & RangeParams): LineRange[] {
+  const { lines, range } = params;
   const items: LineRange[] = [];
 
   if (lines[range.startIndex]?.slice("verified:".length).trim() !== "") {
@@ -237,7 +398,7 @@ function findEntryItems(
   for (let index = range.startIndex + 1; index <= range.endIndex; index += 1) {
     const lastItem = items.at(-1);
 
-    if (listItemLine.test(lines[index] ?? "") || lastItem === undefined) {
+    if (LIST_ITEM_LINE.test(lines[index] ?? "") || lastItem === undefined) {
       items.push({ endIndex: index, startIndex: index });
     } else {
       lastItem.endIndex = index;
@@ -252,31 +413,23 @@ function findEntryItems(
  *
  * @returns its index, or `-1` when there is none.
  */
-function findKeyIndex(lines: readonly string[], key: string): number {
+function findKeyIndex(params: KeyParams & LinesParams): number {
+  const { key, lines } = params;
+
   return lines.findIndex((line) => line.startsWith(`${key}:`));
 }
 
-/**
- * Find the top-level line that starts with `key:`.
- */
-function findKeyLine(
-  lines: readonly string[],
-  key: string
-): string | undefined {
-  return lines[findKeyIndex(lines, key)];
+/** Find the top-level line that starts with `key:`. */
+function findKeyLine(params: KeyParams & LinesParams): string | undefined {
+  return params.lines[findKeyIndex(params)];
 }
 
 /**
  * Locate a key and the lines that continue it, if the key is present.
- *
- * - `isContinuation` decides which following lines belong to the key.
  */
-function findKeyRange(
-  lines: readonly string[],
-  key: string,
-  isContinuation: RegExp
-): LineRange | undefined {
-  const startIndex = findKeyIndex(lines, key);
+function findKeyRange(params: FindKeyRangeParams): LineRange | undefined {
+  const { isContinuation, key, lines } = params;
+  const startIndex = findKeyIndex({ key, lines });
 
   if (startIndex === -1) {
     return undefined;
@@ -293,29 +446,24 @@ function findKeyRange(
 
 /**
  * Find the line holding `verifiedBy`'s `verified` entry, in any of the forms.
- *
- * - `index` is the line that carries the timestamp, which for a block-style
- *   list item is its `at:` line rather than the `- by:` line.
  */
-function findOwnEntry(
-  lines: readonly string[],
-  verifiedBy: string
-): { at: string | undefined; index: number; isBlock: boolean } | undefined {
+function findOwnEntry(params: FindOwnEntryParams): OwnEntry | undefined {
+  const { lines, verifiedBy } = params;
   const range = findVerifiedRange(lines);
 
   if (range === undefined) {
     return undefined;
   }
 
-  const inlineEntry = new RegExp(
-    `${ownEntryPrefix(verifiedBy)}(?<at>${timestamp})`
-  );
   const blockActor = new RegExp(
     `^\\s*(?:-\\s+)?by:\\s*${escapeRegExp(verifiedBy)}\\s*$`
   );
-  const blockAt = new RegExp(`^\\s*(?:-\\s+)?at:\\s*(?<at>${timestamp})\\s*$`);
+  const blockAt = new RegExp(`^\\s*(?:-\\s+)?at:\\s*(?<at>${TIMESTAMP})\\s*$`);
+  const inlineEntry = new RegExp(
+    `${ownEntryPrefix(verifiedBy)}(?<at>${TIMESTAMP})`
+  );
 
-  for (const item of findEntryItems(lines, range)) {
+  for (const item of findEntryItems({ lines, range })) {
     const itemLines = lines.slice(item.startIndex, item.endIndex + 1);
 
     if (itemLines.length === 1) {
@@ -343,11 +491,18 @@ function findOwnEntry(
   return undefined;
 }
 
-/**
- * Locate the `verified` key and every line that continues it.
- */
-function findVerifiedRange(lines: readonly string[]): LineRange | undefined {
-  return findKeyRange(lines, "verified", verifiedContinuation);
+/** Locate the `verified` key and every line that continues it. */
+function findVerifiedRange(lines: string[]): LineRange | undefined {
+  return findKeyRange({
+    isContinuation: VERIFIED_CONTINUATION,
+    key: "verified",
+    lines,
+  });
+}
+
+/** Whether a value is one of the statuses OKF defines. */
+function isRecordStatus(value: string): value is RecordStatus {
+  return Object.values<string>(RECORD_STATUSES).includes(value);
 }
 
 /**
@@ -358,28 +513,40 @@ function ownEntryPrefix(verifiedBy: string): string {
   return String.raw`\bby:\s*${escapeRegExp(verifiedBy)}\s*,\s*at:\s*`;
 }
 
-/**
- * Read `generated.at`, whether `generated` is inline or a nested block.
- */
-function readGeneratedAt(lines: readonly string[]): string | undefined {
-  const range = findKeyRange(lines, "generated", indentedLine);
+/** Read `generated.at`, whether `generated` is inline or a nested block. */
+function readGeneratedAt(lines: string[]): string | undefined {
+  const range = findKeyRange({
+    isContinuation: INDENTED_LINE,
+    key: "generated",
+    lines,
+  });
 
   return range === undefined
     ? undefined
-    : new RegExp(`\\bat:\\s*(?<at>${timestamp})`).exec(
+    : new RegExp(`\\bat:\\s*(?<at>${TIMESTAMP})`).exec(
         lines.slice(range.startIndex, range.endIndex + 1).join(" ")
       )?.groups?.at;
 }
 
-/**
- * Read a one-line scalar value, without its surrounding quotes.
- */
-function readScalar(lines: readonly string[], key: string): string | undefined {
-  const value = findKeyLine(lines, key)
-    ?.slice(key.length + 1)
+/** Read a one-line scalar value, without its surrounding quotes. */
+function readScalar(params: KeyParams & LinesParams): string | undefined {
+  const value = findKeyLine(params)
+    ?.slice(params.key.length + 1)
     .trim();
 
   return value?.replace(/^(?<quote>["'])(?<inner>.*)\k<quote>$/, "$<inner>");
+}
+
+/**
+ * Read `status`, narrowed to the statuses OKF defines.
+ *
+ * - The text is external input, so narrowing happens here, once, and a value
+ *   that isn't a known status reads as absent instead of passing through.
+ */
+function readStatus(lines: string[]): RecordStatus | undefined {
+  const status = readScalar({ key: "status", lines })?.replace(/\s+#.*$/, "");
+
+  return status !== undefined && isRecordStatus(status) ? status : undefined;
 }
 
 /**
@@ -391,11 +558,11 @@ function splitFrontmatter(text: string): FrontmatterBlock | undefined {
   const lineBreak = text.includes("\r\n") ? "\r\n" : "\n";
   const [first, ...remaining] = text.split(lineBreak);
 
-  if (first !== fence) {
+  if (first !== FENCE) {
     return undefined;
   }
 
-  const closingIndex = remaining.indexOf(fence);
+  const closingIndex = remaining.indexOf(FENCE);
 
   if (closingIndex === -1) {
     return undefined;
@@ -413,18 +580,20 @@ function splitFrontmatter(text: string): FrontmatterBlock | undefined {
  *
  * @returns why the `verified` field can't be edited safely, or `undefined`.
  */
-function upsertVerified(
-  lines: string[],
-  options: { at: string; verifiedBy: string }
-): string | undefined {
-  const { at, verifiedBy } = options;
+function upsertVerified(params: UpsertVerifiedParams): string | undefined {
+  const { at, lines, verifiedBy } = params;
   const entry = `{ by: ${verifiedBy}, at: ${at} }`;
   const range = findVerifiedRange(lines);
 
   if (range === undefined) {
     const anchor =
-      findKeyRange(lines, "generated", indentedLine) ??
-      findKeyRange(lines, "status", indentedLine);
+      findKeyRange({
+        isContinuation: INDENTED_LINE,
+        key: "generated",
+        lines,
+      }) ??
+      findKeyRange({ isContinuation: INDENTED_LINE, key: "status", lines });
+
     lines.splice(
       anchor === undefined ? lines.length : anchor.endIndex + 1,
       0,
@@ -434,12 +603,13 @@ function upsertVerified(
     return undefined;
   }
 
-  const own = findOwnEntry(lines, verifiedBy);
+  const own = findOwnEntry({ lines, verifiedBy });
 
   if (own !== undefined) {
     const timestampPattern = own.isBlock
-      ? new RegExp(`(?<=\\bat:\\s*)${timestamp}`)
-      : new RegExp(`(?<=${ownEntryPrefix(verifiedBy)})${timestamp}`);
+      ? new RegExp(`(?<=\\bat:\\s*)${TIMESTAMP}`)
+      : new RegExp(`(?<=${ownEntryPrefix(verifiedBy)})${TIMESTAMP}`);
+
     lines[own.index] = (lines[own.index] ?? "").replace(timestampPattern, at);
 
     return undefined;
@@ -448,9 +618,10 @@ function upsertVerified(
   const inlineValue = (lines[range.startIndex] ?? "")
     .slice("verified:".length)
     .trim();
+
   const hasListItem = lines
     .slice(range.startIndex + 1, range.endIndex + 1)
-    .some((line) => listItemLine.test(line));
+    .some((line) => LIST_ITEM_LINE.test(line));
 
   if (/^(?:null|~)$/.test(inlineValue)) {
     lines[range.startIndex] = `verified: ${entry}`;
@@ -466,7 +637,7 @@ function upsertVerified(
     lines.splice(range.endIndex + 1, 0, `  - ${entry}`);
   } else if (inlineValue.startsWith("[")) {
     lines[range.startIndex] =
-      `verified: ${appendToFlowSequence(inlineValue, entry)}`;
+      `verified: ${appendToFlowSequence({ entry, sequence: inlineValue })}`;
   } else {
     // Someone else signed off in the inline form; keep theirs as a list item.
     lines.splice(

@@ -10,7 +10,17 @@
  * - Run through `pnpm okf:verify [bundle-dir]`; the bundle defaults to
  *   `docs/decisions`.
  */
-import * as prompts from "@clack/prompts";
+import {
+  cancel,
+  confirm,
+  intro,
+  isCancel,
+  log,
+  multiselect,
+  note,
+  outro,
+  select,
+} from "@clack/prompts";
 import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -24,82 +34,81 @@ import {
   verifyRecord,
 } from "./lib/okf-frontmatter.ts";
 
-/**
- * A record in the bundle that could be verified.
- */
+/** A record in the bundle that could be verified. */
 type Candidate = {
-  /** Path from the repo root, as git prints it. */
+  /**
+   * Path from the repo root, as git prints it.
+   *
+   * @example "docs/decisions/package-promise.md"
+   */
   filePath: string;
 
-  /** Whether the record still needs a sign-off. */
+  /**
+   * Whether the record still needs a sign-off.
+   *
+   * @example "unverified"
+   */
   state: RecordState;
 
-  /** The frontmatter fields shown in the checklist. */
+  /**
+   * The frontmatter fields shown in the checklist.
+   *
+   * @example `{ status: "draft", title: "What every export promises" }`
+   */
   summary: RecordSummary;
 
-  /** The record as it is on disk. */
+  /**
+   * The record as it is on disk.
+   *
+   * @example
+   * ```ts
+   * "---\ntype: Decision\n---\n"
+   * ```
+   */
   text: string;
 };
 
-/** Who a `verified` entry is recorded as. */
-const verifiedBy = "human:jjloneman";
-/** The bundle verified when no directory is given. */
-const defaultBundleDir = "docs/decisions";
+/** The changed files under a bundle, and whether the branch diff worked. */
+type ChangedPaths = {
+  /**
+   * Whether the diff against the base branch could be read.
+   *
+   * @example true
+   */
+  hasBranchDiff: boolean;
+
+  /**
+   * Paths from the repo root, as git prints them.
+   *
+   * @example `new Set(["docs/decisions/package-promise.md"])`
+   */
+  paths: Set<string>;
+};
+
+/** The fields a failed git call carries. */
+type GitFailure = Partial<Record<"code" | "stderr" | "stdout", string>>;
+
 /** The branch a record counts as changed against. */
-const baseBranch = "main";
+const BASE_BRANCH = "main";
 
-/**
- * Report that nothing changed, then end the run.
- */
-function cancelAndExit(): never {
-  prompts.cancel("Nothing changed.");
-
-  return process.exit(0);
-}
-
-/**
- * Print an error, then end the run with a failing exit code.
- */
-function fail(message: string): never {
-  console.error(message);
-
-  return process.exit(1);
-}
-
-/**
- * Find the root of the repo the script was run from.
- */
-function findRepoRoot(): string {
-  try {
-    return execFileSync("git", ["rev-parse", "--show-toplevel"], {
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
-    }).trim();
-  } catch {
-    return fail("okf:verify must run inside the safe-fns git repository.");
-  }
-}
-
-/**
- * Run a git command from the repo root.
- *
- * @returns its standard output.
- */
-function git(args: string[]): string {
-  return execFileSync("git", args, { cwd: repoRoot, encoding: "utf8" });
-}
+/** The bundle verified when no directory is given. */
+const DEFAULT_BUNDLE_DIR = "docs/decisions";
 
 /** The root every git command and record path is relative to. */
-const repoRoot = findRepoRoot();
+const REPO_ROOT = findRepoRoot();
+
+/** Who a `verified` entry is recorded as. */
+const VERIFIED_BY = "human:jjloneman";
 
 /**
  * Build the commit message: a subject counting the records, then one bullet
  * per record.
  */
-function buildCommitMessage(
-  bundleName: string,
-  selected: readonly Candidate[]
-): string {
+function buildCommitMessage(params: {
+  bundleName: string;
+  selected: readonly Candidate[];
+}): string {
+  const { bundleName, selected } = params;
   const types = new Set(selected.map(({ summary }) => summary.type));
   const [onlyType] = types.size === 1 ? types : [];
   const noun = onlyType?.toLowerCase() ?? "okf";
@@ -116,17 +125,25 @@ function buildCommitMessage(
   ].join("\n");
 }
 
+/** Report that nothing changed, then end the run. */
+function cancelAndExit(): never {
+  cancel("Nothing changed.");
+
+  return process.exit(0);
+}
+
 /**
  * Ask which records to verify.
  *
  * - Offers the changed records first, with a choice to widen to all of them.
- *
  * - Ends the run when the user cancels or nothing is left to verify.
  */
-async function chooseCandidates(
-  all: readonly Candidate[],
-  changed: readonly Candidate[]
-): Promise<readonly Candidate[]> {
+async function chooseCandidates(params: {
+  all: readonly Candidate[];
+  changed: readonly Candidate[];
+}): Promise<readonly Candidate[]> {
+  const { all, changed } = params;
+
   if (all.length === 0) {
     return fail("No records found.");
   }
@@ -135,7 +152,7 @@ async function chooseCandidates(
   let shown = changed.length > 0 ? changed : all;
 
   if (shouldOfferToggle) {
-    const scope = await prompts.select({
+    const scope = await select({
       message: "Which records?",
       options: [
         {
@@ -146,26 +163,24 @@ async function chooseCandidates(
       ],
     });
 
-    if (prompts.isCancel(scope)) {
+    if (isCancel(scope)) {
       return cancelAndExit();
     }
 
     shown = scope === "all" ? all : changed;
   } else if (changed.length === 0) {
-    prompts.log.info(
-      "No records changed on this branch; showing every record."
-    );
+    log.info("No records changed on this branch; showing every record.");
   }
 
   const selectable = shown.filter(({ state }) => state !== "verified");
 
   if (selectable.length === 0) {
-    prompts.outro("Every listed record is already verified.");
+    outro("Every listed record is already verified.");
 
     return process.exit(0);
   }
 
-  const chosen = await prompts.multiselect({
+  const chosen = await multiselect({
     message: "Which records do you verify? (space toggles, a toggles all)",
     options: shown.map((candidate) => ({
       disabled: candidate.state === "verified",
@@ -176,25 +191,67 @@ async function chooseCandidates(
     required: true,
   });
 
-  return prompts.isCancel(chosen) ? cancelAndExit() : chosen;
+  return isCancel(chosen) ? cancelAndExit() : chosen;
 }
 
-/**
- * Word a candidate's state as the hint shown beside it in the checklist.
- */
+/** Word a candidate's state as the hint shown beside it in the checklist. */
 function describeState(candidate: Candidate): string {
   const hints: Record<RecordState, string> = {
     changed: "changed since you verified it",
-    unverified: candidate.summary.status ?? "stable",
+    unverified: candidate.summary.status ?? "no status",
     verified: "already verified, unchanged",
   };
 
   return hints[candidate.state];
 }
 
+/** Print an error, then end the run with a failing exit code. */
+function fail(message: string): never {
+  console.error(`[okf-verify] ${message}`);
+
+  return process.exit(1);
+}
+
 /**
- * Whether git sees any uncommitted change to a file.
+ * Find the root of the repo the script was run from.
+ *
+ * - Says why git failed rather than guessing: a missing `git` binary and a
+ *   directory outside any repo are different problems.
  */
+function findRepoRoot(): string {
+  try {
+    return execFileSync("git", ["rev-parse", "--show-toplevel"], {
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+    }).trim();
+  } catch (error) {
+    const { code, stderr } = error as GitFailure;
+
+    return fail(
+      code === "ENOENT"
+        ? "git isn't installed, or isn't on PATH."
+        : `couldn't find the repo root: ${stderr?.trim() ?? "git failed"}`
+    );
+  }
+}
+
+/**
+ * Run a git command from the repo root.
+ *
+ * - Pipes stderr, so git's own messages never scribble over the prompts, and a
+ *   failure carries them for the caller to report.
+ *
+ * @returns its standard output.
+ */
+function git(args: string[]): string {
+  return execFileSync("git", args, {
+    cwd: REPO_ROOT,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+}
+
+/** Whether git sees any uncommitted change to a file. */
 function hasUncommittedChanges(filePath: string): boolean {
   return git(["status", "--porcelain", "--", filePath]).trim() !== "";
 }
@@ -202,18 +259,13 @@ function hasUncommittedChanges(filePath: string): boolean {
 /**
  * List the changed files under `bundleDir`, from the branch diff and the
  * working tree.
- *
- * @returns the paths, and whether the branch diff was unavailable.
  */
-function listChangedPaths(bundleDir: string): {
-  hasBranchDiff: boolean;
-  paths: Set<string>;
-} {
+function listChangedPaths(bundleDir: string): ChangedPaths {
   const paths = new Set<string>();
   let hasBranchDiff = true;
 
   try {
-    git(["diff", "--name-only", "-z", `${baseBranch}...HEAD`, "--", bundleDir])
+    git(["diff", "--name-only", "-z", `${BASE_BRANCH}...HEAD`, "--", bundleDir])
       .split("\0")
       .filter(Boolean)
       .forEach((changedPath) => paths.add(changedPath));
@@ -244,17 +296,15 @@ function listChangedPaths(bundleDir: string): {
  * @returns the candidate, or `undefined` when it has no frontmatter block.
  */
 function loadCandidate(filePath: string): Candidate | undefined {
-  const text = readFileSync(path.join(repoRoot, filePath), "utf8");
-  const summary = readRecordSummary(text, { verifiedBy });
+  const text = readFileSync(path.join(REPO_ROOT, filePath), "utf8");
+  const summary = readRecordSummary({ text, verifiedBy: VERIFIED_BY });
 
   return summary === undefined
     ? undefined
     : { filePath, state: getRecordState(summary), summary, text };
 }
 
-/**
- * Run the interactive flow: choose, confirm, edit, commit.
- */
+/** Run the interactive flow: choose, confirm, edit, commit. */
 async function main(): Promise<void> {
   if (!process.stdin.isTTY || !process.stdout.isTTY) {
     fail(
@@ -264,34 +314,34 @@ async function main(): Promise<void> {
 
   const { positionals } = parseArgs({ allowPositionals: true });
   const bundleDir = path
-    .normalize(positionals[0] ?? defaultBundleDir)
+    .normalize(positionals[0] ?? DEFAULT_BUNDLE_DIR)
     .replace(/[/\\]+$/, "");
 
   const bundleName = path.basename(bundleDir);
 
-  prompts.intro(`Verify records in ${bundleDir}`);
+  intro(`Verify records in ${bundleDir}`);
 
   const { hasBranchDiff, paths: changedPaths } = listChangedPaths(bundleDir);
 
   if (!hasBranchDiff) {
-    prompts.log.warn(
-      `Can't diff against ${baseBranch}; showing uncommitted changes only.`
+    log.warn(
+      `Can't diff against ${BASE_BRANCH}; showing uncommitted changes only.`
     );
   }
 
-  const all = readdirSync(path.join(repoRoot, bundleDir))
+  const all = readdirSync(path.join(REPO_ROOT, bundleDir))
     .filter((name) => name.endsWith(".md") && name !== "index.md")
     .sort()
     .map((name) => loadCandidate(path.posix.join(bundleDir, name)))
     .filter((candidate) => candidate !== undefined);
 
   const changed = all.filter(({ filePath }) => changedPaths.has(filePath));
-  const selected = await chooseCandidates(all, changed);
+  const selected = await chooseCandidates({ all, changed });
 
   const at = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
   const edits = selected.map((candidate) => ({
     candidate,
-    result: verifyRecord(candidate.text, { at, verifiedBy }),
+    result: verifyRecord({ at, text: candidate.text, verifiedBy: VERIFIED_BY }),
   }));
   const failures = edits.flatMap(({ candidate, result }) =>
     result.isOk ? [] : [`${candidate.filePath}: ${result.reason}`]
@@ -301,32 +351,29 @@ async function main(): Promise<void> {
     return fail(`No files changed.\n${failures.join("\n")}`);
   }
 
-  const message = buildCommitMessage(bundleName, selected);
+  const message = buildCommitMessage({ bundleName, selected });
   const filePaths = selected.map(({ filePath }) => filePath);
   const dirtyPaths = filePaths.filter((filePath) =>
     hasUncommittedChanges(filePath)
   );
 
-  prompts.note(
-    `${filePaths.join("\n")}\n\n${message}`,
-    "Files and commit message"
-  );
+  note(`${filePaths.join("\n")}\n\n${message}`, "Files and commit message");
 
   if (dirtyPaths.length > 0) {
-    prompts.log.warn(
+    log.warn(
       `These also have other uncommitted changes, which the commit will include:\n${dirtyPaths.join("\n")}`
     );
   }
 
-  const isConfirmed = await prompts.confirm({ message: "Verify and commit?" });
+  const isConfirmed = await confirm({ message: "Verify and commit?" });
 
-  if (prompts.isCancel(isConfirmed) || !isConfirmed) {
+  if (isCancel(isConfirmed) || !isConfirmed) {
     return cancelAndExit();
   }
 
   edits.forEach(({ candidate, result }) => {
     if (result.isOk) {
-      writeFileSync(path.join(repoRoot, candidate.filePath), result.text);
+      writeFileSync(path.join(REPO_ROOT, candidate.filePath), result.text);
     }
   });
 
@@ -334,14 +381,14 @@ async function main(): Promise<void> {
     git(["add", "--", ...filePaths]);
     git(["commit", "-m", message, "--", ...filePaths]);
   } catch (error) {
-    const output = error as { stderr?: string; stdout?: string };
+    const { stderr, stdout } = error as GitFailure;
 
     return fail(
-      `The files are edited on disk but the commit failed:\n${output.stdout ?? ""}${output.stderr ?? ""}`
+      `The files are edited on disk but the commit failed:\n${stdout ?? ""}${stderr ?? ""}`
     );
   }
 
-  prompts.outro(`Verified ${filePaths.length}, committed.`);
+  outro(`Verified ${filePaths.length}, committed.`);
 }
 
 await main();
