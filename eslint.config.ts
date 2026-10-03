@@ -172,6 +172,45 @@ const config: Linter.Config[] = defineConfig(
   },
 
   /*
+   * A script's entry point reads last, just above the call that runs it.
+   *
+   * - `sort-modules` takes the whole `groups` list, so this repeats the
+   *   preset's default order and appends a `main` group after it.
+   */
+  {
+    files: ["scripts/**/*.ts"],
+    rules: {
+      "perfectionist/sort-modules": [
+        "error",
+        {
+          customGroups: [
+            {
+              elementNamePattern: "^main$",
+              groupName: "entry-point",
+              selector: "function",
+            },
+          ],
+          groups: [
+            "declare-enum",
+            "export-enum",
+            "enum",
+            ["declare-interface", "declare-type"],
+            ["export-interface", "export-type"],
+            ["interface", "type"],
+            "declare-class",
+            "class",
+            "export-class",
+            "declare-function",
+            "export-function",
+            "function",
+            "entry-point",
+          ],
+        },
+      ],
+    },
+  },
+
+  /*
    * JSON keys stay alphabetized, like object keys in TypeScript.
    *
    * - `package.json` is excluded: it keeps the conventional `sort-package-json`
