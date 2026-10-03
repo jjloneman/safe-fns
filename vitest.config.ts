@@ -4,6 +4,9 @@ import { defineConfig } from "vitest/config";
 
 const testFiles = ["{src,test}/**/*.test.ts"];
 
+// Repo scripts are Node-only, so only the `node` project runs their tests.
+const scriptTestFiles = ["scripts/**/*.test.ts"];
+
 const config: ViteUserConfig = defineConfig({
   test: {
     /*
@@ -38,7 +41,7 @@ const config: ViteUserConfig = defineConfig({
         extends: true,
         test: {
           environment: "node",
-          include: testFiles,
+          include: [...testFiles, ...scriptTestFiles],
           name: "node",
 
           // Type tests run once; they don't depend on the runtime environment.

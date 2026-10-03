@@ -78,6 +78,7 @@
     "lint": "eslint . --cache --cache-strategy content",
     "lint:fix": "eslint . --fix",
     "lint:package": "pnpm build && publint && attw --pack",
+    "okf:verify": "node scripts/okf-verify.ts",
     "prepare": "git config core.hooksPath .githooks || true",
     "prune-branches": "git fetch --prune && git-removed-branches --force --prune",
     "size": "pnpm build && size-limit --config size-limit.config.ts",
@@ -89,6 +90,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.5",
+    "@clack/prompts": "1.8.1",
     "@eslint/js": "10.0.1",
     "@size-limit/preset-small-lib": "14.0.0",
     "@types/node": "22.20.4",
