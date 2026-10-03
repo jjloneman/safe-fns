@@ -3,7 +3,7 @@ type: Decision
 title: How a function takes its parameters
 description: Up to two positional parameters for the values a function works on, configuration in a trailing options object, and nothing variadic.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T19:45:01Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T21:14:18Z }
 ---
 
 # How a function takes its parameters
@@ -16,7 +16,7 @@ A public export's parameters split into the values it works on, which are positi
 ## Decision
 
 - **Values are positional, one or two of them.**
-  - One value: `isSafePopulated(value)`, `safeJsonParse(text)`, `upperFirst(text)`.
+  - One value: `isSafePopulated(value)`, `safeParseJson(value)`, `upperFirst(text)`.
   - Two values, where the function naturally relates them: `isDeepEqual(a, b)`, `safeObjectHasOwn(value, key)`, `keyBy(items, key)`.
   - A function that wraps a native API keeps its parameters in the native order: `safeObjectHasOwn(value, key)`, like `Object.hasOwn(value, key)`.
 - **Configuration goes in a trailing options object, even with one key.**

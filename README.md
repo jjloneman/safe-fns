@@ -164,7 +164,7 @@ _No functions have shipped yet._ The planned families are:
 | Family  | Functions                                                                                     |
 | :------ | :-------------------------------------------------------------------------------------------- |
 | Guards  | `isSafeEmpty`, `isSafePopulated`, `isPlainObject`                                             |
-| Parsers | `safeParseBoolean`, `safeParseNumber`, `safeParseInteger`, `safeParseString`, `safeJsonParse` |
+| Parsers | `safeParseBoolean`, `safeParseNumber`, `safeParseInteger`, `safeParseString`, `safeParseJson` |
 | Errors  | `getErrorMessage`, `toError`                                                                  |
 | Sort    | `deepSortObject`                                                                              |
 

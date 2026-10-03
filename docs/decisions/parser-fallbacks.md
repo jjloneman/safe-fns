@@ -3,7 +3,7 @@ type: Decision
 title: What a parser returns when it can't parse
 description: Parsers return the caller's fallback, `undefined` by default, for any input they don't recognize — never a guess.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T19:45:01Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T21:14:18Z }
 ---
 
 # What a parser returns when it can't parse
@@ -12,9 +12,10 @@ A parser either recognizes its input or returns the caller's fallback; it never 
 
 ## Decision
 
-- **Every coercer has one shape:** `safeParseX(value: unknown, options?: { fallback?: F }): X | F`.
-- **A `safe` wrapper of a native API keeps its native arguments and adds the same option:** `safeJsonParse(text, { fallback })`.
-  - The rules below apply to both, wherever a function returns a fallback.
+- **Every parser has one shape:** `safeParseX(value: unknown, options?: { fallback?: F }): X | F`.
+  - That includes `safeParseJson(value, { fallback })`: a value that isn't a string, or isn't valid JSON, returns the fallback.
+- **Any other `safe` wrapper keeps its native arguments and adds the same option,** e.g. `safeStructuredClone(value, { fallback })`.
+  - The rules below apply wherever a function returns a fallback.
 - **The fallback defaults to `undefined`,** so a caller can tell "missing or invalid" from a real value.
 - **Unrecognized input returns the fallback, never a coercion.**
   - `safeParseBoolean("maybe")` returns the fallback, not `Boolean("maybe")`, which is `true`.
