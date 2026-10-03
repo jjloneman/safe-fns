@@ -1,3 +1,5 @@
+import type { ExecFileSyncOptionsWithStringEncoding } from "node:child_process";
+
 /*
  * Signs off OKF records interactively: marks the ones you pick `status: stable`
  * with a `verified` entry, then commits just those files.
@@ -85,28 +87,32 @@ type ChangedPaths = {
   paths: Set<string>;
 };
 
-/** The fields a failed child process carries. */
+/**
+ * The fields a failed `execFileSync` call attaches to its error.
+ *
+ * - Each is `undefined` when the error doesn't carry it as a string.
+ */
 type GitFailure = {
   /**
    * The system error code, set when git couldn't be started at all.
    *
    * @example "ENOENT"
    */
-  code?: string;
+  code: string | undefined;
 
   /**
    * What git printed to stderr before it failed.
    *
    * @example "fatal: not a git repository (or any of the parent directories): .git"
    */
-  stderr?: string;
+  stderr: string | undefined;
 
   /**
    * What git printed to stdout before it failed, such as a hook's output.
    *
    * @example "eslint found 1 problem"
    */
-  stdout?: string;
+  stdout: string | undefined;
 };
 
 /** The branch a record counts as changed against. */
@@ -114,6 +120,23 @@ const BASE_BRANCH = "main";
 
 /** The bundle verified when no directory is given, from the repo root. */
 const DEFAULT_BUNDLE_DIR = "docs/decisions";
+
+/**
+ * The options every git call shares.
+ *
+ * - stdin is ignored: no git call here needs input, and the prompts own the
+ *   terminal.
+ *
+ * - stdout is piped, so the call returns it.
+ *
+ * - stderr is piped too, so git's messages never print over the prompts, and a
+ *   failure carries them on its error; `execFileSync` would otherwise inherit
+ *   it.
+ */
+const GIT_EXEC_OPTIONS = {
+  encoding: "utf8",
+  stdio: ["ignore", "pipe", "pipe"],
+} satisfies ExecFileSyncOptionsWithStringEncoding;
 
 /** The root every git command and record path is relative to. */
 const REPO_ROOT = findRepoRoot();
@@ -251,12 +274,13 @@ function fail(message: string): never {
  */
 function findRepoRoot(): string {
   try {
-    return execFileSync("git", ["rev-parse", "--show-toplevel"], {
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "pipe"],
-    }).trim();
+    return execFileSync(
+      "git",
+      ["rev-parse", "--show-toplevel"],
+      GIT_EXEC_OPTIONS
+    ).trim();
   } catch (error) {
-    const { code, stderr } = error as GitFailure;
+    const { code, stderr } = readGitFailure(error);
 
     return fail(
       code === "ENOENT"
@@ -269,17 +293,10 @@ function findRepoRoot(): string {
 /**
  * Run a git command from the repo root.
  *
- * - Pipes stderr, so git's own messages never scribble over the prompts, and a
- *   failure carries them for the caller to report.
- *
  * @returns its standard output.
  */
 function git(args: string[]): string {
-  return execFileSync("git", args, {
-    cwd: REPO_ROOT,
-    encoding: "utf8",
-    stdio: ["ignore", "pipe", "pipe"],
-  });
+  return execFileSync("git", args, { ...GIT_EXEC_OPTIONS, cwd: REPO_ROOT });
 }
 
 /** Whether git sees any uncommitted change to a file. */
@@ -422,7 +439,7 @@ async function main(): Promise<void> {
     git(["add", "--", ...filePaths]);
     git(["commit", "-m", message, "--", ...filePaths]);
   } catch (error) {
-    const { stderr, stdout } = error as GitFailure;
+    const { stderr, stdout } = readGitFailure(error);
 
     return fail(
       `The files are edited on disk but the commit failed:\n${stdout ?? ""}${stderr ?? ""}`
@@ -467,6 +484,27 @@ function readBundleArg(): string | undefined {
   }
 
   return positionals[0];
+}
+
+/**
+ * Read what a failed `execFileSync` call attached to its error.
+ *
+ * - A `catch` binding is `unknown`, and Node documents these fields rather
+ *   than typing them on the error, so each is checked rather than cast.
+ */
+function readGitFailure(error: unknown): GitFailure {
+  const readField = (key: keyof GitFailure): string | undefined => {
+    const value: unknown =
+      error instanceof Error ? Reflect.get(error, key) : undefined;
+
+    return typeof value === "string" ? value : undefined;
+  };
+
+  return {
+    code: readField("code"),
+    stderr: readField("stderr"),
+    stdout: readField("stdout"),
+  };
 }
 
 /**

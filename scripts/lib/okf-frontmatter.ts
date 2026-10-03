@@ -15,8 +15,31 @@ export const RECORD_STATUSES = {
   stable: "stable",
 } as const;
 
+/** A YAML comment: whitespace, then `#` through the end of the line. */
+const COMMENT = String.raw`\s+#.*`;
+
+/** The keys of one `verified` or `generated` entry. */
+const ENTRY_KEYS = {
+  at: "at",
+  by: "by",
+} as const;
+
 /** The line that opens and closes a frontmatter block. */
 const FENCE = "---";
+
+/**
+ * The frontmatter keys this module reads or writes.
+ *
+ * - OKF v0.2 requires only `type` and lets producers add any key, so this is
+ *   the module's working set, not the format's full list.
+ */
+const FRONTMATTER_KEYS = {
+  generated: "generated",
+  status: "status",
+  title: "title",
+  type: "type",
+  verified: "verified",
+} as const;
 
 /** A line that continues the key above it: indented text. */
 const INDENTED_LINE = /^\s+\S/;
@@ -24,17 +47,26 @@ const INDENTED_LINE = /^\s+\S/;
 /** A line that starts a list item. */
 const LIST_ITEM_LINE = /^\s*-\s/;
 
+/** The start of a block-style line: indent, then an optional list dash. */
+const OPTIONAL_LIST_DASH = String.raw`^\s*(?:-\s+)?`;
+
 /** An optional quote around a scalar, which YAML allows on any of them. */
 const QUOTE = String.raw`["']?`;
 
 /** What a timestamp looks like on a line: up to the next separator or quote. */
 const TIMESTAMP = String.raw`[^\s,}\]"'#]+`;
 
-/** An optional comment after a value, through the end of the line. */
-const TRAILING_COMMENT = String.raw`\s*(?:#.*)?`;
+/** A timestamp, captured as the `at` group. */
+const TIMESTAMP_CAPTURE = `(?<at>${TIMESTAMP})`;
+
+// Below `QUOTE`, since it is built from it.
+/** An `at:` key and the optional quote before its timestamp. */
+const AT_KEY = String.raw`\bat:\s*${QUOTE}`;
 
 /** A line that continues `verified`: a list item, or indented text. */
-const VERIFIED_CONTINUATION = /^(?:\s*-\s|\s+\S)/;
+const VERIFIED_CONTINUATION = new RegExp(
+  `${LIST_ITEM_LINE.source}|${INDENTED_LINE.source}`
+);
 
 /** What `readRecordSummary` needs: the record, and whose sign-off counts. */
 export type ReadRecordSummaryParams = Pick<
@@ -62,7 +94,7 @@ export type RecordSummary = {
    *
    * @example "2026-10-01T15:00:00Z"
    */
-  generatedAt: string | undefined;
+  generatedAt: Timestamp | undefined;
 
   /**
    * The record's `status`, when it is one OKF defines.
@@ -92,7 +124,7 @@ export type RecordSummary = {
    *
    * @example "2026-10-02T13:30:00Z"
    */
-  verifiedAt: string | undefined;
+  verifiedAt: Timestamp | undefined;
 };
 
 /** The outcome of verifying one record: its new text, or why it was refused. */
@@ -123,13 +155,13 @@ export type RecordVerification =
       /**
        * The record's new text.
        *
-       * @example
-       * ```ts
-       * "---\nstatus: stable\n---\n"
-       * ```
+       * @example `"---\nstatus: stable\n---\n"`
        */
       text: string;
     };
+
+/** An ISO 8601 timestamp as a record writes it, such as `2026-10-02T13:30:00Z`. */
+export type Timestamp = string;
 
 /** What `verifyRecord` needs: the record, who signs it, and when. */
 export type VerifyRecordParams = {
@@ -138,15 +170,12 @@ export type VerifyRecordParams = {
    *
    * @example "2026-10-02T13:30:00Z"
    */
-  at: string;
+  at: Timestamp;
 
   /**
    * The record's text, frontmatter included.
    *
-   * @example
-   * ```ts
-   * "---\nstatus: draft\n---\n"
-   * ```
+   * @example `"---\nstatus: draft\n---\n"`
    */
   text: string;
 
@@ -175,6 +204,26 @@ type AppendToFlowSequenceParams = {
   sequence: string;
 };
 
+/** What `blockFieldLine` needs: the key, and the pattern for its value. */
+type BlockFieldLineParams = {
+  /**
+   * The entry key the line holds.
+   *
+   * @example "at"
+   */
+  key: EntryKey;
+
+  /**
+   * A regex source matching the value, without its quotes.
+   *
+   * @example `"(?<at>[^\\s]+)"`
+   */
+  valueSource: string;
+};
+
+/** A key of one `verified` or `generated` entry. */
+type EntryKey = (typeof ENTRY_KEYS)[keyof typeof ENTRY_KEYS];
+
 /** What `findKeyRange` needs: where to look, and which lines continue the key. */
 type FindKeyRangeParams = {
   /**
@@ -194,10 +243,7 @@ type FrontmatterBlock = {
   /**
    * The line break the file uses, kept for every line written back.
    *
-   * @example
-   * ```ts
-   * "\n"
-   * ```
+   * @example `"\n"`
    */
   lineBreak: string;
 
@@ -216,6 +262,9 @@ type FrontmatterBlock = {
   rest: string[];
 };
 
+/** A frontmatter key this module reads or writes. */
+type FrontmatterKey = (typeof FRONTMATTER_KEYS)[keyof typeof FRONTMATTER_KEYS];
+
 /** A top-level frontmatter key, named by itself. */
 type KeyParams = {
   /**
@@ -223,7 +272,7 @@ type KeyParams = {
    *
    * @example "status"
    */
-  key: string;
+  key: FrontmatterKey;
 };
 
 /** A run of consecutive lines, both ends inclusive. */
@@ -253,7 +302,7 @@ type OwnEntry = {
    *
    * @example "2026-09-28T09:00:00Z"
    */
-  at: string | undefined;
+  at: RecordSummary["verifiedAt"];
 
   /**
    * The line that carries the timestamp: for a block-style list item, its `at:` line rather than its `- by:` line.
@@ -279,6 +328,16 @@ type RangeParams = {
    */
   range: LineRange;
 };
+
+/** What `readKeyValue` needs: the key, and the line it starts. */
+type ReadKeyValueParams = {
+  /**
+   * A line that starts with `key:`.
+   *
+   * @example "status: draft"
+   */
+  line: string | undefined;
+} & KeyParams;
 
 /** What `upsertVerified` needs: the lines to edit, who signs, and when. */
 type UpsertVerifiedParams = LinesParams &
@@ -318,8 +377,8 @@ export function getRecordState(summary: RecordSummary): RecordState {
     return "verified";
   }
 
-  const verifiedTime = Date.parse(summary.verifiedAt);
   const generatedTime = Date.parse(summary.generatedAt);
+  const verifiedTime = Date.parse(summary.verifiedAt);
 
   // Written so an unreadable timestamp (`NaN`) reads as "changed".
   return generatedTime <= verifiedTime ? "verified" : "changed";
@@ -345,8 +404,8 @@ export function readRecordSummary(
   return {
     generatedAt: readGeneratedAt(lines),
     status: readStatus(lines),
-    title: readScalar({ key: "title", lines }),
-    type: readScalar({ key: "type", lines }),
+    title: readScalar({ key: FRONTMATTER_KEYS.title, lines }),
+    type: readScalar({ key: FRONTMATTER_KEYS.type, lines }),
     verifiedAt: findOwnEntry({ lines, verifiedBy })?.at,
   };
 }
@@ -374,16 +433,13 @@ export function verifyRecord(params: VerifyRecordParams): RecordVerification {
   }
 
   const lines = [...block.lines];
-  const statusIndex = findKeyIndex({ key: "status", lines });
 
-  if (
-    /^status:\s*(?<quote>["']?)draft\k<quote>\s*(?:#.*)?$/.test(
-      lines[statusIndex] ?? ""
-    )
-  ) {
+  if (readStatus(lines) === RECORD_STATUSES.draft) {
+    const statusIndex = findKeyIndex({ key: FRONTMATTER_KEYS.status, lines });
     const { comment } = splitTrailingComment(lines[statusIndex] ?? "");
 
-    lines[statusIndex] = `status: ${RECORD_STATUSES.stable}${comment}`;
+    lines[statusIndex] =
+      `${FRONTMATTER_KEYS.status}: ${RECORD_STATUSES.stable}${comment}`;
   }
 
   const layoutProblem = upsertVerified({ at, lines, verifiedBy });
@@ -406,6 +462,19 @@ function appendToFlowSequence(params: AppendToFlowSequenceParams): string {
   return items === "" ? `[${entry}]` : `[${items}, ${entry}]`;
 }
 
+/**
+ * Match one whole block-style line, `key: value`, as a list item or under one.
+ *
+ * - The value may be quoted and followed by a comment, as YAML allows.
+ */
+function blockFieldLine(params: BlockFieldLineParams): RegExp {
+  const { key, valueSource } = params;
+
+  return new RegExp(
+    `${OPTIONAL_LIST_DASH}${key}:\\s*${QUOTE}${valueSource}${QUOTE}(?:${COMMENT})?\\s*$`
+  );
+}
+
 /** Escape the characters that are special in a regular expression. */
 function escapeRegExp(text: string): string {
   return text.replace(/[$()*+.?[\\\]^{|}]/g, String.raw`\$&`);
@@ -419,7 +488,12 @@ function findEntryItems(params: LinesParams & RangeParams): LineRange[] {
   const { lines, range } = params;
   const items: LineRange[] = [];
 
-  if (lines[range.startIndex]?.slice("verified:".length).trim() !== "") {
+  const inlineValue = readKeyValue({
+    key: FRONTMATTER_KEYS.verified,
+    line: lines[range.startIndex],
+  });
+
+  if (inlineValue !== "") {
     items.push({ endIndex: range.startIndex, startIndex: range.startIndex });
   }
 
@@ -445,11 +519,6 @@ function findKeyIndex(params: KeyParams & LinesParams): number {
   const { key, lines } = params;
 
   return lines.findIndex((line) => line.startsWith(`${key}:`));
-}
-
-/** Find the top-level line that starts with `key:`. */
-function findKeyLine(params: KeyParams & LinesParams): string | undefined {
-  return params.lines[findKeyIndex(params)];
 }
 
 /** Locate a key and the lines that continue it, if the key is present. */
@@ -479,16 +548,18 @@ function findOwnEntry(params: FindOwnEntryParams): OwnEntry | undefined {
     return undefined;
   }
 
-  const blockActor = new RegExp(
-    `^\\s*(?:-\\s+)?by:\\s*${QUOTE}${escapeRegExp(verifiedBy)}${QUOTE}${TRAILING_COMMENT}$`
-  );
+  const blockActor = blockFieldLine({
+    key: ENTRY_KEYS.by,
+    valueSource: escapeRegExp(verifiedBy),
+  });
 
-  const blockAt = new RegExp(
-    `^\\s*(?:-\\s+)?at:\\s*${QUOTE}(?<at>${TIMESTAMP})${QUOTE}${TRAILING_COMMENT}$`
-  );
+  const blockAt = blockFieldLine({
+    key: ENTRY_KEYS.at,
+    valueSource: TIMESTAMP_CAPTURE,
+  });
 
   const inlineEntry = new RegExp(
-    `${ownEntryPrefix(verifiedBy)}${QUOTE}(?<at>${TIMESTAMP})`
+    `${ownEntryPrefix(verifiedBy)}${TIMESTAMP_CAPTURE}`
   );
 
   for (const item of findEntryItems({ lines, range })) {
@@ -530,7 +601,7 @@ function findOwnEntry(params: FindOwnEntryParams): OwnEntry | undefined {
 function findVerifiedRange(lines: string[]): LineRange | undefined {
   return findKeyRange({
     isContinuation: VERIFIED_CONTINUATION,
-    key: "verified",
+    key: FRONTMATTER_KEYS.verified,
     lines,
   });
 }
@@ -541,37 +612,45 @@ function isRecordStatus(value: string): value is RecordStatus {
 }
 
 /**
- * Match `by: <verifiedBy>, at: ` exactly, so `human:jjloneman2` is no one's
- * alias; a lookbehind on it picks out just the timestamp.
+ * Match `by: <verifiedBy>, at: ` exactly, through the timestamp's optional
+ * quote, so `human:jjloneman2` is no one's alias.
  */
 function ownEntryPrefix(verifiedBy: string): string {
-  return String.raw`\bby:\s*${QUOTE}${escapeRegExp(verifiedBy)}${QUOTE}\s*,\s*at:\s*`;
+  return String.raw`\bby:\s*${QUOTE}${escapeRegExp(verifiedBy)}${QUOTE}\s*,\s*${AT_KEY}`;
 }
 
 /** Read `generated.at`, whether `generated` is inline or a nested block. */
-function readGeneratedAt(lines: string[]): string | undefined {
+function readGeneratedAt(lines: string[]): RecordSummary["generatedAt"] {
   const range = findKeyRange({
     isContinuation: INDENTED_LINE,
-    key: "generated",
+    key: FRONTMATTER_KEYS.generated,
     lines,
   });
 
   return range === undefined
     ? undefined
-    : new RegExp(`\\bat:\\s*${QUOTE}(?<at>${TIMESTAMP})`).exec(
+    : new RegExp(`${AT_KEY}${TIMESTAMP_CAPTURE}`).exec(
         lines.slice(range.startIndex, range.endIndex + 1).join(" ")
       )?.groups?.at;
 }
 
+/** Read the raw text after `key:` on a line, trimmed. */
+function readKeyValue(params: ReadKeyValueParams): string {
+  const { key, line } = params;
+
+  return (line ?? "").slice(`${key}:`.length).trim();
+}
+
 /** Read a one-line scalar value, without its quotes or a trailing comment. */
 function readScalar(params: KeyParams & LinesParams): string | undefined {
-  const value = findKeyLine(params)
-    ?.slice(params.key.length + 1)
-    .trim();
+  const { key, lines } = params;
+  const line = lines[findKeyIndex(params)];
 
-  if (value === undefined) {
+  if (line === undefined) {
     return undefined;
   }
+
+  const value = readKeyValue({ key, line });
 
   const quoted = /^(?<quote>["'])(?<inner>.*?)\k<quote>/.exec(value)?.groups
     ?.inner;
@@ -586,7 +665,7 @@ function readScalar(params: KeyParams & LinesParams): string | undefined {
  *   that isn't a known status reads as absent instead of passing through.
  */
 function readStatus(lines: string[]): RecordStatus | undefined {
-  const status = readScalar({ key: "status", lines });
+  const status = readScalar({ key: FRONTMATTER_KEYS.status, lines });
 
   return status !== undefined && isRecordStatus(status) ? status : undefined;
 }
@@ -617,12 +696,9 @@ function splitFrontmatter(text: string): FrontmatterBlock | undefined {
   };
 }
 
-/**
- * Split a value from a trailing YAML comment, which needs whitespace before
- * its `#`.
- */
+/** Split a value from a trailing YAML comment. */
 function splitTrailingComment(text: string): ValueWithComment {
-  const match = /^(?<value>.*?)(?<comment>\s+#.*)?$/.exec(text);
+  const match = new RegExp(`^(?<value>.*?)(?<comment>${COMMENT})?$`).exec(text);
 
   return {
     comment: match?.groups?.comment ?? "",
@@ -644,15 +720,19 @@ function upsertVerified(params: UpsertVerifiedParams): string | undefined {
     const anchor =
       findKeyRange({
         isContinuation: INDENTED_LINE,
-        key: "generated",
+        key: FRONTMATTER_KEYS.generated,
         lines,
       }) ??
-      findKeyRange({ isContinuation: INDENTED_LINE, key: "status", lines });
+      findKeyRange({
+        isContinuation: INDENTED_LINE,
+        key: FRONTMATTER_KEYS.status,
+        lines,
+      });
 
     lines.splice(
       anchor === undefined ? lines.length : anchor.endIndex + 1,
       0,
-      `verified: ${entry}`
+      `${FRONTMATTER_KEYS.verified}: ${entry}`
     );
 
     return undefined;
@@ -661,17 +741,21 @@ function upsertVerified(params: UpsertVerifiedParams): string | undefined {
   const own = findOwnEntry({ lines, verifiedBy });
 
   if (own !== undefined) {
-    const timestampPattern = own.isBlock
-      ? new RegExp(`(?<=\\bat:\\s*${QUOTE})${TIMESTAMP}`)
-      : new RegExp(`(?<=${ownEntryPrefix(verifiedBy)}${QUOTE})${TIMESTAMP}`);
+    const timestampPrefix = own.isBlock ? AT_KEY : ownEntryPrefix(verifiedBy);
 
-    lines[own.index] = (lines[own.index] ?? "").replace(timestampPattern, at);
+    lines[own.index] = (lines[own.index] ?? "").replace(
+      new RegExp(`(?<=${timestampPrefix})${TIMESTAMP}`),
+      at
+    );
 
     return undefined;
   }
 
   const { comment, value: inlineValue } = splitTrailingComment(
-    (lines[range.startIndex] ?? "").slice("verified:".length).trim()
+    readKeyValue({
+      key: FRONTMATTER_KEYS.verified,
+      line: lines[range.startIndex],
+    })
   );
 
   const continuationLines = lines.slice(
@@ -686,7 +770,8 @@ function upsertVerified(params: UpsertVerifiedParams): string | undefined {
       .find((indent) => indent !== undefined) ?? "  ";
 
   if (/^(?:null|~)$/.test(inlineValue)) {
-    lines[range.startIndex] = `verified: ${entry}${comment}`;
+    lines[range.startIndex] =
+      `${FRONTMATTER_KEYS.verified}: ${entry}${comment}`;
 
     return undefined;
   }
@@ -707,13 +792,13 @@ function upsertVerified(params: UpsertVerifiedParams): string | undefined {
     lines.splice(range.endIndex + 1, 0, `${itemIndent}- ${entry}`);
   } else if (inlineValue.startsWith("[")) {
     lines[range.startIndex] =
-      `verified: ${appendToFlowSequence({ entry, sequence: inlineValue })}${comment}`;
+      `${FRONTMATTER_KEYS.verified}: ${appendToFlowSequence({ entry, sequence: inlineValue })}${comment}`;
   } else {
     // Someone else signed off in the inline form; keep theirs as a list item.
     lines.splice(
       range.startIndex,
       1,
-      `verified:${comment}`,
+      `${FRONTMATTER_KEYS.verified}:${comment}`,
       `  - ${inlineValue}`,
       `  - ${entry}`
     );
