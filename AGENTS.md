@@ -37,6 +37,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - `test/consumer/` — fixtures run by `pnpm test:consumer` against the packed tarball (see [Build & package](#-build--package)).
 - `scripts/` — repo scripts, run directly by Node (which strips their types), so they stick to erasable TypeScript syntax.
   - Relative imports name the `.ts` file (`./lib/publish-ci-report.ts`), since Node resolves only the real file name.
+  - Every line a script prints starts with `[<script-name>]` (`[okf-verify] …`), so its output is traceable in a log.
+  - A child process sets `stdio` explicitly; `execFileSync` inherits stderr by default, which leaks the child's messages into the terminal.
+  - An error message says only what the error shows — read its `code` or `stderr` rather than guessing a cause.
   - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/**/*.test.ts` runs in the `node` project.
 - `dist/` — build output (gitignored), the only directory published.
 - `README.md` — the public face: why the package exists, install and usage, the API, the support matrix, scripts, and what each label means.
@@ -88,6 +91,10 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Exported functions always declare their return type — `isolatedDeclarations` enforces it.
 - **Avoid `as unknown as T`.** Prefer `satisfies`; when a full `T` isn't practical (e.g. a test stub), assert through a `Partial` first: `({ … }) satisfies Partial<T> as T`.
 - **Derive types from existing types** (`Options["fallback"]`, `Pick<…>`, indexed access) rather than re-spelling a primitive, so a change propagates through tsc instead of drifting.
+- **Name object types rather than writing them inline** — a param, return, or options shape gets a named `type` whose properties carry TSDoc, built with `Pick<…>` from an existing type where one overlaps.
+- **A field with a known, finite set of values is a literal union**, not `string` — derived from an `as const` object.
+  - Narrow untrusted input (file contents, CLI args, JSON) once, at the boundary where it's parsed, with a type guard.
+  - A value outside the set reads as absent; never cast it into the union.
 - **`type` over `interface`** — use `interface` only when declaration merging is genuinely needed.
 - **`import type`** for type-only imports (`verbatimModuleSyntax` enforces it).
 - **`as const` objects over `enum`s**, paired with `(typeof OBJ)[keyof typeof OBJ]` for the union type.
@@ -99,6 +106,12 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Where an order carries meaning, disable the rule on that line with an `eslint-disable-next-line` comment saying why, rather than turning it off in the config.
   - Ordering is case-insensitive unless a tool says otherwise — `fallback` sorts before `Options`.
 - **Function parameters**: one positional argument is fine; with two or more, take a single object with sorted keys. Options go in an object even when there is only one.
+  - An object reads clearly at the call site (`verifyRecord({ at, text, verifiedBy })`) and survives adding or reordering a parameter.
+- **Group independent declarations in lexicographic order** — module constants, function declarations, and runs of `const`s in a function body, wherever none depends on another being declared first.
+  - A script's entry point (`main`) is the exception: it goes last, just above the call that runs it.
+- **Module-level constants are `SCREAMING_SNAKE_CASE`** (`BASE_BRANCH`, `RECORD_STATUSES`), including one computed once at startup and never reassigned; locals stay camelCase.
+- **Named imports over a namespace import** — `import { confirm, select } from "…"`, not `import * as prompts`.
+- **Give multi-line statements breathing room**: a blank line separates a statement that spans several lines from its neighbors, and a TSDoc'd declaration from the one above it.
 - **Prefer functional over imperative** — `map`/`filter`/`reduce` and pure helpers over mutable loops, unless the loop is genuinely clearer.
   - When `reduce` builds an object or array, **mutate the accumulator** and return it, rather than spreading a fresh copy on every iteration — a spread per item turns a linear pass quadratic.
   - This is safe only because the accumulator is the `reduce`'s own initial value; never mutate a seed object the caller passed in.
@@ -136,7 +149,8 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - `// Setup` and `// Cleanup` mark setup or teardown that belongs to one specific test rather than a shared hook.
 - **Comment shape: lead sentence, then bullets.**
   - A comment of three lines or more uses the block form (`/* … */`, or `/** … */` for TSDoc), not stacked `//` lines.
-  - The first sentence is prose; every following point is a `-` bullet, with a blank line between bullets.
+  - The first sentence is prose; every following point is a `-` bullet, and a blank line always separates the sentence from the bullets.
+  - When every bullet fits on one line, the bullets can sit together; once any bullet wraps, put a blank line between all of them.
   - One- and two-line comments stay a plain `//`.
 
   ```ts
@@ -173,6 +187,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
   ): number | F {
   ```
 
+- **A short TSDoc is one line** — a doc that is just a sentence is written `/** … */` on a single line; it opens up only for bullets or tags.
+- **Every documented type property carries one `@example`** with a representative value.
+  - `tsdoc/syntax` rejects a bare backslash or brace, so put a value with braces in a code span (`` `{ a: 1 }` ``) and one with a backslash in a fenced block.
 - **Blank line between TSDoc'd members.** When each property of a type carries its own doc comment, separate them with a blank line. Undocumented members can stay packed.
 
 ## ✍️ Commit conventions
