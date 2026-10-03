@@ -448,7 +448,6 @@ function resolveBundleDir(bundleArg: string | undefined): string {
 }
 
 /** Run the interactive flow: choose, confirm, edit, commit. */
-// eslint-disable-next-line perfectionist/sort-modules -- the entry point reads last, just above the call that runs it.
 async function main(): Promise<void> {
   // Arguments first, so `--help` and a bad path answer even without a terminal.
   const bundleDir = resolveBundleDir(readBundleArg());

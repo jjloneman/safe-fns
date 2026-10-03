@@ -111,7 +111,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - **Public API** (an export of `src/`): the one or two values a function works on are positional (`isSafePopulated(value)`, `isDeepEqual(a, b)`); configuration goes in a trailing options object, even with one key. More than two values go in one object with sorted keys, and nothing is variadic.
   - **Internal code** (`scripts/`, and helpers no consumer imports): one positional parameter is fine; with two or more, take a single object with sorted keys, which reads clearly at the call site (`verifyRecord({ at, text, verifiedBy })`) and survives adding or reordering a parameter.
 - **Group independent declarations in lexicographic order** — module constants, function declarations, and runs of `const`s in a function body, wherever none depends on another being declared first.
-  - A script's entry point (`main`) is the exception: it goes last, just above the call that runs it, with an `eslint-disable-next-line perfectionist/sort-modules` comment saying so.
+  - A script's entry point (`main`) is the exception: it goes last, just above the call that runs it. `eslint.config.ts` gives `sort-modules` a `main` group after every other function for `scripts/`, so lint enforces it.
   - perfectionist's `sort-modules` enforces the order of module-level functions and types, not of constants; `const` runs are kept sorted by hand.
 - **Module-level constants are `SCREAMING_SNAKE_CASE`** (`BASE_BRANCH`, `RECORD_STATUSES`), including one computed once at startup and never reassigned; locals stay camelCase.
 - **Named imports over a namespace import** — `import { confirm, select } from "…"`, not `import * as prompts`.
