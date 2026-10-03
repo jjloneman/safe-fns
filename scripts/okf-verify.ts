@@ -361,7 +361,94 @@ function loadCandidate(filePath: string): Candidate | undefined {
     : { filePath, state: getRecordState(summary), summary, text };
 }
 
+/**
+ * Read the optional bundle-dir argument.
+ *
+ * - Prints usage and exits for `--help`, and fails with usage on any other flag
+ *   or an extra argument, rather than letting `parseArgs` throw.
+ */
+function readBundleArg(): string | undefined {
+  let positionals: string[];
+  let isHelp: boolean | undefined;
+
+  try {
+    const parsed = parseArgs({
+      allowPositionals: true,
+      options: { help: { short: "h", type: "boolean" } },
+    });
+
+    positionals = parsed.positionals;
+    isHelp = parsed.values.help;
+  } catch (error) {
+    return fail(
+      `${error instanceof Error ? error.message : String(error)}\n${USAGE}`
+    );
+  }
+
+  if (isHelp === true) {
+    console.log(`[okf-verify] ${USAGE}`);
+
+    return process.exit(0);
+  }
+
+  if (positionals.length > 1) {
+    return fail(`Expected at most one bundle directory.\n${USAGE}`);
+  }
+
+  return positionals[0];
+}
+
+/**
+ * Read what a failed `execFileSync` call attached to its error.
+ *
+ * - A `catch` binding is `unknown`, and Node documents these fields rather
+ *   than typing them on the error, so each is checked rather than cast.
+ */
+function readGitFailure(error: unknown): GitFailure {
+  const readField = (key: keyof GitFailure): string | undefined => {
+    const value: unknown =
+      error instanceof Error ? Reflect.get(error, key) : undefined;
+
+    return typeof value === "string" ? value : undefined;
+  };
+
+  return {
+    code: readField("code"),
+    stderr: readField("stderr"),
+    stdout: readField("stdout"),
+  };
+}
+
+/**
+ * Resolve the bundle directory to a path from the repo root, as git prints it.
+ *
+ * - A given directory is relative to where the command was run (`INIT_CWD`
+ *   under pnpm, which runs scripts from the package root); the default is
+ *   relative to the repo root.
+ *
+ * - Fails when the directory is missing or outside the repo.
+ */
+function resolveBundleDir(bundleArg: string | undefined): string {
+  const absoluteDir =
+    bundleArg === undefined
+      ? path.join(REPO_ROOT, DEFAULT_BUNDLE_DIR)
+      : path.resolve(process.env.INIT_CWD ?? process.cwd(), bundleArg);
+
+  const relativeDir = path.relative(REPO_ROOT, absoluteDir);
+
+  if (relativeDir.startsWith("..") || path.isAbsolute(relativeDir)) {
+    return fail(`${absoluteDir} is outside the repo at ${REPO_ROOT}.`);
+  }
+
+  if (!isDirectory(absoluteDir)) {
+    return fail(`No bundle directory at ${absoluteDir}.`);
+  }
+
+  return relativeDir.split(path.sep).join(path.posix.sep);
+}
+
 /** Run the interactive flow: choose, confirm, edit, commit. */
+// eslint-disable-next-line perfectionist/sort-modules -- the entry point reads last, just above the call that runs it.
 async function main(): Promise<void> {
   // Arguments first, so `--help` and a bad path answer even without a terminal.
   const bundleDir = resolveBundleDir(readBundleArg());
@@ -447,92 +534,6 @@ async function main(): Promise<void> {
   }
 
   outro(`Verified ${filePaths.length}, committed.`);
-}
-
-/**
- * Read the optional bundle-dir argument.
- *
- * - Prints usage and exits for `--help`, and fails with usage on any other flag
- *   or an extra argument, rather than letting `parseArgs` throw.
- */
-function readBundleArg(): string | undefined {
-  let positionals: string[];
-  let isHelp: boolean | undefined;
-
-  try {
-    const parsed = parseArgs({
-      allowPositionals: true,
-      options: { help: { short: "h", type: "boolean" } },
-    });
-
-    positionals = parsed.positionals;
-    isHelp = parsed.values.help;
-  } catch (error) {
-    return fail(
-      `${error instanceof Error ? error.message : String(error)}\n${USAGE}`
-    );
-  }
-
-  if (isHelp === true) {
-    console.log(`[okf-verify] ${USAGE}`);
-
-    return process.exit(0);
-  }
-
-  if (positionals.length > 1) {
-    return fail(`Expected at most one bundle directory.\n${USAGE}`);
-  }
-
-  return positionals[0];
-}
-
-/**
- * Read what a failed `execFileSync` call attached to its error.
- *
- * - A `catch` binding is `unknown`, and Node documents these fields rather
- *   than typing them on the error, so each is checked rather than cast.
- */
-function readGitFailure(error: unknown): GitFailure {
-  const readField = (key: keyof GitFailure): string | undefined => {
-    const value: unknown =
-      error instanceof Error ? Reflect.get(error, key) : undefined;
-
-    return typeof value === "string" ? value : undefined;
-  };
-
-  return {
-    code: readField("code"),
-    stderr: readField("stderr"),
-    stdout: readField("stdout"),
-  };
-}
-
-/**
- * Resolve the bundle directory to a path from the repo root, as git prints it.
- *
- * - A given directory is relative to where the command was run (`INIT_CWD`
- *   under pnpm, which runs scripts from the package root); the default is
- *   relative to the repo root.
- *
- * - Fails when the directory is missing or outside the repo.
- */
-function resolveBundleDir(bundleArg: string | undefined): string {
-  const absoluteDir =
-    bundleArg === undefined
-      ? path.join(REPO_ROOT, DEFAULT_BUNDLE_DIR)
-      : path.resolve(process.env.INIT_CWD ?? process.cwd(), bundleArg);
-
-  const relativeDir = path.relative(REPO_ROOT, absoluteDir);
-
-  if (relativeDir.startsWith("..") || path.isAbsolute(relativeDir)) {
-    return fail(`${absoluteDir} is outside the repo at ${REPO_ROOT}.`);
-  }
-
-  if (!isDirectory(absoluteDir)) {
-    return fail(`No bundle directory at ${absoluteDir}.`);
-  }
-
-  return relativeDir.split(path.sep).join(path.posix.sep);
 }
 
 await main();
