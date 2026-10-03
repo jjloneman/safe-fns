@@ -37,8 +37,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - `test/consumer/` — fixtures run by `pnpm test:consumer` against the packed tarball (see [Build & package](#-build--package)).
 - `scripts/` — repo scripts, run directly by Node (which strips their types), so they stick to erasable TypeScript syntax.
   - Relative imports name the `.ts` file (`./lib/publish-ci-report.ts`), since Node resolves only the real file name.
-  - Every console log line a script prints starts with `[<script-name>]` (`[okf-verify] …`), including each line of a multi-line message, so its output is traceable in a log; an interactive prompt's own UI is exempt.
+  - Every console log line a script prints starts with `[<script-name>]` (e.g. `[okf-verify] …`), including each line of a multi-line message, so its output is traceable in a log; an interactive prompt's own UI is exempt.
   - A child process sets `stdio` explicitly; `execFileSync` inherits stderr by default, which leaks the child's messages into the terminal.
+  - Readability beats a few ops/second here: nothing in `scripts/` is public API or a hot path, so `map` / `filter` / `reduce` are fine even where a plain loop would be faster.
   - An error message says only what the error shows — read its `code` or `stderr` rather than guessing a cause.
   - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/**/*.test.ts` runs in the `node` project.
 - `dist/` — build output (gitignored), the only directory published.
@@ -89,6 +90,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 
 - **Strict types**: no `any`. Let inference work where an annotation would be redundant.
   - Exported functions always declare their return type — `isolatedDeclarations` enforces it.
+- **A `catch` binding is `unknown`; narrow it, don't cast it.** Read the fields you need with `instanceof` and `typeof` checks in a small helper, rather than `error as SomeShape`.
 - **Avoid `as unknown as T`.** Prefer `satisfies`; when a full `T` isn't practical (e.g. a test stub), assert through a `Partial` first: `({ … }) satisfies Partial<T> as T`.
 - **Derive types from existing types** (`Options["fallback"]`, `Pick<…>`, indexed access) rather than re-spelling a primitive, so a change propagates through tsc instead of drifting.
 - **Name object types rather than writing them inline** — a param, return, or options shape gets a named `type` whose properties carry TSDoc, built with `Pick<…>` from an existing type where one overlaps.
@@ -114,6 +116,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - **Named imports over a namespace import** — `import { confirm, select } from "…"`, not `import * as prompts`.
 - **Give multi-line statements breathing room**: a blank line separates a statement that spans several lines from its neighbors, and a TSDoc'd declaration from the one above it.
 - **Prefer functional over imperative** — `map`/`filter`/`reduce` and pure helpers over mutable loops, unless the loop is genuinely clearer.
+  - Where speed matters (a public export), a benchmark decides; in `scripts/`, readability wins, so take the functional form even when a loop is a little faster.
   - When `reduce` builds an object or array, **mutate the accumulator** and return it, rather than spreading a fresh copy on every iteration — a spread per item turns a linear pass quadratic.
   - This is safe only because the accumulator is the `reduce`'s own initial value; never mutate a seed object the caller passed in.
   - **Name the accumulator for what it holds** (`countsByType`, `keysByLength`), never `acc` or `accumulator`.
@@ -142,6 +145,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - **Regexes use named capture groups** — `(?<objectName>…)`, read through `match.groups`, never a positional `match[2]`.
   - A group whose text isn't read is non-capturing, `(?:…)`.
   - Enforced by ESLint's `prefer-named-capture-group`.
+- **Build a repeated regex fragment once.** When the same sequence recurs across patterns, name it as a `String.raw` constant (`QUOTE`, `TIMESTAMP`) or a small builder function, and compose the patterns from it.
+- **Unicode property escapes are welcome where they say more** — `\p{Letter}`, `\P{White_Space}`, `\p{Script=Latin}`, with the `u` or `v` flag.
+  - Use them when they match the intent better than a hand-written class; don't swap one in where the format is narrower (YAML quotes are only `"` and `'`, not `\p{Quotation_Mark}`).
 
 ### 💬 Comments and TSDoc
 
@@ -190,7 +196,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 
 - **A short TSDoc is one line** — a doc that is just a sentence is written `/** … */` on a single line; it opens up only for bullets or tags.
 - **Every documented type property carries one `@example`** with a representative value.
-  - `tsdoc/syntax` rejects a bare backslash or brace, so put a value with braces in a code span (`` `{ a: 1 }` ``) and one with a backslash in a fenced block.
+  - Keep the value on the `@example` line. `tsdoc/syntax` rejects a bare backslash or brace there, so wrap such a value in a code span: `` @example `"\n"` ``.
 - **Blank line between TSDoc'd members.** When each property of a type carries its own doc comment, separate them with a blank line. Undocumented members can stay packed.
 
 ## ✍️ Commit conventions
