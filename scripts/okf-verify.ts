@@ -113,6 +113,7 @@ function buildCommitMessage(params: {
   const [onlyType] = types.size === 1 ? types : [];
   const noun = onlyType?.toLowerCase() ?? "okf";
   const count = selected.length;
+
   const bullets = selected.map(
     ({ filePath, summary }) =>
       `- ${summary.title ?? path.basename(filePath)} (${path.basename(filePath)})`
@@ -313,6 +314,7 @@ async function main(): Promise<void> {
   }
 
   const { positionals } = parseArgs({ allowPositionals: true });
+
   const bundleDir = path
     .normalize(positionals[0] ?? DEFAULT_BUNDLE_DIR)
     .replace(/[/\\]+$/, "");
@@ -339,10 +341,12 @@ async function main(): Promise<void> {
   const selected = await chooseCandidates({ all, changed });
 
   const at = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
+
   const edits = selected.map((candidate) => ({
     candidate,
     result: verifyRecord({ at, text: candidate.text, verifiedBy: VERIFIED_BY }),
   }));
+
   const failures = edits.flatMap(({ candidate, result }) =>
     result.isOk ? [] : [`${candidate.filePath}: ${result.reason}`]
   );
@@ -353,6 +357,7 @@ async function main(): Promise<void> {
 
   const message = buildCommitMessage({ bundleName, selected });
   const filePaths = selected.map(({ filePath }) => filePath);
+
   const dirtyPaths = filePaths.filter((filePath) =>
     hasUncommittedChanges(filePath)
   );

@@ -283,6 +283,7 @@ type UpsertVerifiedParams = LinesParams &
  *
  * - `changed` means it was generated after `verifiedBy` last signed it off, or
  *   that the sign-off's timestamp can't be read.
+ *
  * - `verified` means it was signed off and not touched since.
  */
 export function getRecordState(summary: RecordSummary): RecordState {
@@ -334,8 +335,10 @@ export function readRecordSummary(
  * - An existing entry for `verifiedBy` has its `at` updated, in the inline,
  *   list, block-style, or flow-sequence form, rather than gaining a second
  *   entry.
+ *
  * - A new entry lands after the `generated` field, or after `status` when there
  *   is no `generated`; `generated` may be inline or a nested block.
+ *
  * - A `status` other than `draft` is left alone, and an absent one counts as
  *   `stable`, as OKF defines it, so only the `verified` entry is added.
  */
@@ -458,7 +461,9 @@ function findOwnEntry(params: FindOwnEntryParams): OwnEntry | undefined {
   const blockActor = new RegExp(
     `^\\s*(?:-\\s+)?by:\\s*${escapeRegExp(verifiedBy)}\\s*$`
   );
+
   const blockAt = new RegExp(`^\\s*(?:-\\s+)?at:\\s*(?<at>${TIMESTAMP})\\s*$`);
+
   const inlineEntry = new RegExp(
     `${ownEntryPrefix(verifiedBy)}(?<at>${TIMESTAMP})`
   );
