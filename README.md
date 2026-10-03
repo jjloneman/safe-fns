@@ -226,6 +226,7 @@ safe-fns replaces helpers that were copy-pasted between projects and had drifted
 | `pnpm lint:package`  | Builds, then checks the package with publint and Are the Types Wrong |
 | `pnpm size`          | Builds, then checks every entry against its size budget              |
 | `pnpm test:consumer` | Packs the tarball and typechecks and loads it as a consumer would    |
+| `pnpm okf:verify`    | Interactively signs off decision records and commits them            |
 
 ---
 
