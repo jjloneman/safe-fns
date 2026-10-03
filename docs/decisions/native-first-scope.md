@@ -1,9 +1,9 @@
 ---
 type: Decision
 title: What the package leaves to native APIs and other libraries
-description: No reimplementing what native JavaScript does well, no wrappers around native one-liners, newer native APIs parked rather than excluded, and date parsing and validation left to dedicated libraries.
+description: No reimplementing what native JavaScript does well, no wrappers around native one-liners, newer native APIs and date parsing parked rather than excluded, and validation left to dedicated libraries.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-01T15:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T00:06:32Z }
 ---
 
 # What the package leaves to native APIs and other libraries
@@ -30,7 +30,8 @@ Every export has to earn its place over what the platform or an established libr
   - `areAllSafeEmpty` / `areSomeSafeEmpty` — `values.every(isSafeEmpty)`;
   - `areAllDeepEqual` — `rest.every((value) => isDeepEqual(first, value))`.
 - **Dedicated libraries own these:**
-  - date parsing — `safeParseDate` is out; recommend [luxon](https://www.npmjs.com/package/luxon);
+  - date parsing — `safeParseDate` is parked, and [luxon](https://www.npmjs.com/package/luxon) is the recommendation until it lands;
+    - `Date.parse` returns `NaN` for input it can't read, and parses non-ISO strings differently per engine, so a total wrapper with a caller-chosen fallback may still earn a place;
   - byte formatting — `formatBytes` is parked.
     - [`Intl.NumberFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) with `style: "unit"` formats a value you've already scaled (`2.5 megabytes`, `2.5 MB`, `2.5MB`), but doesn't pick the unit, and has no binary units (`kibibyte` throws a `RangeError`).
     - [`bytes`](https://www.npmjs.com/package/bytes), [`pretty-bytes`](https://www.npmjs.com/package/pretty-bytes), and [`filesize`](https://www.npmjs.com/package/filesize) cover the scaling and its many options;

@@ -10,7 +10,7 @@ okf_version: "0.2"
 - [How predicates are named](predicate-naming.md) - Predicates start with `is`, name the positive case, and come in positive/negative pairs rather than negated names.
 - [What a parser returns when it can't parse](parser-fallbacks.md) - Parsers return the caller's fallback, `undefined` by default, for any input they don't recognize — never a guess.
 - [What every export promises](package-promise.md) - Every export is total and precisely typed; taking an `unknown` value is the common case, not a requirement.
-- [What the package leaves to native APIs and other libraries](native-first-scope.md) - No reimplementing what native JavaScript does well, no wrappers around native one-liners, newer native APIs parked rather than excluded, and date parsing and validation left to dedicated libraries.
+- [What the package leaves to native APIs and other libraries](native-first-scope.md) - No reimplementing what native JavaScript does well, no wrappers around native one-liners, newer native APIs and date parsing parked rather than excluded, and validation left to dedicated libraries.
 - [When a name starts with `safe`](safe-prefix-naming.md) - `safe` + the native API's path for a wrapper of one native API, `safeParse*` for coercers, `isSafe*` against a same-named unsafe helper, and plain names otherwise.
 
 # About this bundle
