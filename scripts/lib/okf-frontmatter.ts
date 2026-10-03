@@ -24,8 +24,14 @@ const INDENTED_LINE = /^\s+\S/;
 /** A line that starts a list item. */
 const LIST_ITEM_LINE = /^\s*-\s/;
 
-/** What a timestamp looks like on a line: up to the next separator. */
-const TIMESTAMP = String.raw`[^\s,}\]]+`;
+/** An optional quote around a scalar, which YAML allows on any of them. */
+const QUOTE = String.raw`["']?`;
+
+/** What a timestamp looks like on a line: up to the next separator or quote. */
+const TIMESTAMP = String.raw`[^\s,}\]"'#]+`;
+
+/** An optional comment after a value, through the end of the line. */
+const TRAILING_COMMENT = String.raw`\s*(?:#.*)?`;
 
 /** A line that continues `verified`: a list item, or indented text. */
 const VERIFIED_CONTINUATION = /^(?:\s*-\s|\s+\S)/;
@@ -278,6 +284,23 @@ type RangeParams = {
 type UpsertVerifiedParams = LinesParams &
   Pick<VerifyRecordParams, "at" | "verifiedBy">;
 
+/** A value split from its trailing comment. */
+type ValueWithComment = {
+  /**
+   * The comment, with the whitespace before it, or `""` when there is none.
+   *
+   * @example " # not settled"
+   */
+  comment: string;
+
+  /**
+   * The value without the comment.
+   *
+   * @example "draft"
+   */
+  value: string;
+};
+
 /**
  * Judge whether a record still needs a human sign-off.
  *
@@ -358,7 +381,9 @@ export function verifyRecord(params: VerifyRecordParams): RecordVerification {
       lines[statusIndex] ?? ""
     )
   ) {
-    lines[statusIndex] = `status: ${RECORD_STATUSES.stable}`;
+    const { comment } = splitTrailingComment(lines[statusIndex] ?? "");
+
+    lines[statusIndex] = `status: ${RECORD_STATUSES.stable}${comment}`;
   }
 
   const layoutProblem = upsertVerified({ at, lines, verifiedBy });
@@ -427,9 +452,7 @@ function findKeyLine(params: KeyParams & LinesParams): string | undefined {
   return params.lines[findKeyIndex(params)];
 }
 
-/**
- * Locate a key and the lines that continue it, if the key is present.
- */
+/** Locate a key and the lines that continue it, if the key is present. */
 function findKeyRange(params: FindKeyRangeParams): LineRange | undefined {
   const { isContinuation, key, lines } = params;
   const startIndex = findKeyIndex({ key, lines });
@@ -447,9 +470,7 @@ function findKeyRange(params: FindKeyRangeParams): LineRange | undefined {
   return { endIndex, startIndex };
 }
 
-/**
- * Find the line holding `verifiedBy`'s `verified` entry, in any of the forms.
- */
+/** Find the line holding `verifiedBy`'s `verified` entry, in any of the forms. */
 function findOwnEntry(params: FindOwnEntryParams): OwnEntry | undefined {
   const { lines, verifiedBy } = params;
   const range = findVerifiedRange(lines);
@@ -459,38 +480,47 @@ function findOwnEntry(params: FindOwnEntryParams): OwnEntry | undefined {
   }
 
   const blockActor = new RegExp(
-    `^\\s*(?:-\\s+)?by:\\s*${escapeRegExp(verifiedBy)}\\s*$`
+    `^\\s*(?:-\\s+)?by:\\s*${QUOTE}${escapeRegExp(verifiedBy)}${QUOTE}${TRAILING_COMMENT}$`
   );
 
-  const blockAt = new RegExp(`^\\s*(?:-\\s+)?at:\\s*(?<at>${TIMESTAMP})\\s*$`);
+  const blockAt = new RegExp(
+    `^\\s*(?:-\\s+)?at:\\s*${QUOTE}(?<at>${TIMESTAMP})${QUOTE}${TRAILING_COMMENT}$`
+  );
 
   const inlineEntry = new RegExp(
-    `${ownEntryPrefix(verifiedBy)}(?<at>${TIMESTAMP})`
+    `${ownEntryPrefix(verifiedBy)}${QUOTE}(?<at>${TIMESTAMP})`
   );
 
   for (const item of findEntryItems({ lines, range })) {
     const itemLines = lines.slice(item.startIndex, item.endIndex + 1);
 
-    if (itemLines.length === 1) {
-      const at = inlineEntry.exec(itemLines[0] ?? "")?.groups?.at;
+    // Checked on every line, so a flow sequence spread over several lines counts.
+    const inlineOffset = itemLines.findIndex((line) => inlineEntry.test(line));
 
-      if (at !== undefined) {
-        return { at, index: item.startIndex, isBlock: false };
-      }
-    } else if (itemLines.some((line) => blockActor.test(line))) {
-      const offset = itemLines.findIndex((line) => blockAt.test(line));
-
-      // An entry by the owner with no timestamp to renew isn't one to keep.
-      if (offset === -1) {
-        continue;
-      }
-
+    if (inlineOffset !== -1) {
       return {
-        at: blockAt.exec(itemLines[offset] ?? "")?.groups?.at,
-        index: item.startIndex + offset,
-        isBlock: true,
+        at: inlineEntry.exec(itemLines[inlineOffset] ?? "")?.groups?.at,
+        index: item.startIndex + inlineOffset,
+        isBlock: false,
       };
     }
+
+    if (!itemLines.some((line) => blockActor.test(line))) {
+      continue;
+    }
+
+    const offset = itemLines.findIndex((line) => blockAt.test(line));
+
+    // An entry by the owner with no timestamp to renew isn't one to keep.
+    if (offset === -1) {
+      continue;
+    }
+
+    return {
+      at: blockAt.exec(itemLines[offset] ?? "")?.groups?.at,
+      index: item.startIndex + offset,
+      isBlock: true,
+    };
   }
 
   return undefined;
@@ -515,7 +545,7 @@ function isRecordStatus(value: string): value is RecordStatus {
  * alias; a lookbehind on it picks out just the timestamp.
  */
 function ownEntryPrefix(verifiedBy: string): string {
-  return String.raw`\bby:\s*${escapeRegExp(verifiedBy)}\s*,\s*at:\s*`;
+  return String.raw`\bby:\s*${QUOTE}${escapeRegExp(verifiedBy)}${QUOTE}\s*,\s*at:\s*`;
 }
 
 /** Read `generated.at`, whether `generated` is inline or a nested block. */
@@ -528,18 +558,25 @@ function readGeneratedAt(lines: string[]): string | undefined {
 
   return range === undefined
     ? undefined
-    : new RegExp(`\\bat:\\s*(?<at>${TIMESTAMP})`).exec(
+    : new RegExp(`\\bat:\\s*${QUOTE}(?<at>${TIMESTAMP})`).exec(
         lines.slice(range.startIndex, range.endIndex + 1).join(" ")
       )?.groups?.at;
 }
 
-/** Read a one-line scalar value, without its surrounding quotes. */
+/** Read a one-line scalar value, without its quotes or a trailing comment. */
 function readScalar(params: KeyParams & LinesParams): string | undefined {
   const value = findKeyLine(params)
     ?.slice(params.key.length + 1)
     .trim();
 
-  return value?.replace(/^(?<quote>["'])(?<inner>.*)\k<quote>$/, "$<inner>");
+  if (value === undefined) {
+    return undefined;
+  }
+
+  const quoted = /^(?<quote>["'])(?<inner>.*?)\k<quote>/.exec(value)?.groups
+    ?.inner;
+
+  return quoted ?? splitTrailingComment(value).value;
 }
 
 /**
@@ -549,7 +586,7 @@ function readScalar(params: KeyParams & LinesParams): string | undefined {
  *   that isn't a known status reads as absent instead of passing through.
  */
 function readStatus(lines: string[]): RecordStatus | undefined {
-  const status = readScalar({ key: "status", lines })?.replace(/\s+#.*$/, "");
+  const status = readScalar({ key: "status", lines });
 
   return status !== undefined && isRecordStatus(status) ? status : undefined;
 }
@@ -577,6 +614,19 @@ function splitFrontmatter(text: string): FrontmatterBlock | undefined {
     lineBreak,
     lines: remaining.slice(0, closingIndex),
     rest: remaining.slice(closingIndex),
+  };
+}
+
+/**
+ * Split a value from a trailing YAML comment, which needs whitespace before
+ * its `#`.
+ */
+function splitTrailingComment(text: string): ValueWithComment {
+  const match = /^(?<value>.*?)(?<comment>\s+#.*)?$/.exec(text);
+
+  return {
+    comment: match?.groups?.comment ?? "",
+    value: match?.groups?.value ?? text,
   };
 }
 
@@ -612,43 +662,58 @@ function upsertVerified(params: UpsertVerifiedParams): string | undefined {
 
   if (own !== undefined) {
     const timestampPattern = own.isBlock
-      ? new RegExp(`(?<=\\bat:\\s*)${TIMESTAMP}`)
-      : new RegExp(`(?<=${ownEntryPrefix(verifiedBy)})${TIMESTAMP}`);
+      ? new RegExp(`(?<=\\bat:\\s*${QUOTE})${TIMESTAMP}`)
+      : new RegExp(`(?<=${ownEntryPrefix(verifiedBy)}${QUOTE})${TIMESTAMP}`);
 
     lines[own.index] = (lines[own.index] ?? "").replace(timestampPattern, at);
 
     return undefined;
   }
 
-  const inlineValue = (lines[range.startIndex] ?? "")
-    .slice("verified:".length)
-    .trim();
+  const { comment, value: inlineValue } = splitTrailingComment(
+    (lines[range.startIndex] ?? "").slice("verified:".length).trim()
+  );
 
-  const hasListItem = lines
-    .slice(range.startIndex + 1, range.endIndex + 1)
-    .some((line) => LIST_ITEM_LINE.test(line));
+  const continuationLines = lines.slice(
+    range.startIndex + 1,
+    range.endIndex + 1
+  );
+
+  // New items match the existing ones' indent, so the list stays one list.
+  const itemIndent =
+    continuationLines
+      .map((line) => /^(?<indent>\s*)-\s/.exec(line)?.groups?.indent)
+      .find((indent) => indent !== undefined) ?? "  ";
 
   if (/^(?:null|~)$/.test(inlineValue)) {
-    lines[range.startIndex] = `verified: ${entry}`;
+    lines[range.startIndex] = `verified: ${entry}${comment}`;
 
     return undefined;
   }
 
-  if (inlineValue === "" && range.endIndex > range.startIndex && !hasListItem) {
+  if (inlineValue.startsWith("[") && !inlineValue.endsWith("]")) {
+    return "`verified` is a flow sequence spread over several lines";
+  }
+
+  if (
+    inlineValue === "" &&
+    continuationLines.length > 0 &&
+    !continuationLines.some((line) => LIST_ITEM_LINE.test(line))
+  ) {
     return "`verified` is a nested mapping, not a list";
   }
 
   if (inlineValue === "") {
-    lines.splice(range.endIndex + 1, 0, `  - ${entry}`);
+    lines.splice(range.endIndex + 1, 0, `${itemIndent}- ${entry}`);
   } else if (inlineValue.startsWith("[")) {
     lines[range.startIndex] =
-      `verified: ${appendToFlowSequence({ entry, sequence: inlineValue })}`;
+      `verified: ${appendToFlowSequence({ entry, sequence: inlineValue })}${comment}`;
   } else {
     // Someone else signed off in the inline form; keep theirs as a list item.
     lines.splice(
       range.startIndex,
       1,
-      "verified:",
+      `verified:${comment}`,
       `  - ${inlineValue}`,
       `  - ${entry}`
     );

@@ -22,7 +22,7 @@ import {
   select,
 } from "@clack/prompts";
 import { execFileSync } from "node:child_process";
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { parseArgs } from "node:util";
 
@@ -85,17 +85,41 @@ type ChangedPaths = {
   paths: Set<string>;
 };
 
-/** The fields a failed git call carries. */
-type GitFailure = Partial<Record<"code" | "stderr" | "stdout", string>>;
+/** The fields a failed child process carries. */
+type GitFailure = {
+  /**
+   * The system error code, set when git couldn't be started at all.
+   *
+   * @example "ENOENT"
+   */
+  code?: string;
+
+  /**
+   * What git printed to stderr before it failed.
+   *
+   * @example "fatal: not a git repository (or any of the parent directories): .git"
+   */
+  stderr?: string;
+
+  /**
+   * What git printed to stdout before it failed, such as a hook's output.
+   *
+   * @example "eslint found 1 problem"
+   */
+  stdout?: string;
+};
 
 /** The branch a record counts as changed against. */
 const BASE_BRANCH = "main";
 
-/** The bundle verified when no directory is given. */
+/** The bundle verified when no directory is given, from the repo root. */
 const DEFAULT_BUNDLE_DIR = "docs/decisions";
 
 /** The root every git command and record path is relative to. */
 const REPO_ROOT = findRepoRoot();
+
+/** How to call the script, printed for `--help` and for bad arguments. */
+const USAGE = "usage: pnpm okf:verify [bundle-dir]";
 
 /** Who a `verified` entry is recorded as. */
 const VERIFIED_BY = "human:jjloneman";
@@ -208,7 +232,13 @@ function describeState(candidate: Candidate): string {
 
 /** Print an error, then end the run with a failing exit code. */
 function fail(message: string): never {
-  console.error(`[okf-verify] ${message}`);
+  console.error(
+    message
+      .trimEnd()
+      .split("\n")
+      .map((line) => `[okf-verify] ${line}`)
+      .join("\n")
+  );
 
   return process.exit(1);
 }
@@ -255,6 +285,15 @@ function git(args: string[]): string {
 /** Whether git sees any uncommitted change to a file. */
 function hasUncommittedChanges(filePath: string): boolean {
   return git(["status", "--porcelain", "--", filePath]).trim() !== "";
+}
+
+/** Whether a path exists and is a directory. */
+function isDirectory(directory: string): boolean {
+  try {
+    return statSync(directory).isDirectory();
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -307,17 +346,14 @@ function loadCandidate(filePath: string): Candidate | undefined {
 
 /** Run the interactive flow: choose, confirm, edit, commit. */
 async function main(): Promise<void> {
+  // Arguments first, so `--help` and a bad path answer even without a terminal.
+  const bundleDir = resolveBundleDir(readBundleArg());
+
   if (!process.stdin.isTTY || !process.stdout.isTTY) {
     fail(
       "okf:verify needs an interactive terminal: only a person may add `verified`."
     );
   }
-
-  const { positionals } = parseArgs({ allowPositionals: true });
-
-  const bundleDir = path
-    .normalize(positionals[0] ?? DEFAULT_BUNDLE_DIR)
-    .replace(/[/\\]+$/, "");
 
   const bundleName = path.basename(bundleDir);
 
@@ -394,6 +430,71 @@ async function main(): Promise<void> {
   }
 
   outro(`Verified ${filePaths.length}, committed.`);
+}
+
+/**
+ * Read the optional bundle-dir argument.
+ *
+ * - Prints usage and exits for `--help`, and fails with usage on any other flag
+ *   or an extra argument, rather than letting `parseArgs` throw.
+ */
+function readBundleArg(): string | undefined {
+  let positionals: string[];
+  let isHelp: boolean | undefined;
+
+  try {
+    const parsed = parseArgs({
+      allowPositionals: true,
+      options: { help: { short: "h", type: "boolean" } },
+    });
+
+    positionals = parsed.positionals;
+    isHelp = parsed.values.help;
+  } catch (error) {
+    return fail(
+      `${error instanceof Error ? error.message : String(error)}\n${USAGE}`
+    );
+  }
+
+  if (isHelp === true) {
+    console.log(`[okf-verify] ${USAGE}`);
+
+    return process.exit(0);
+  }
+
+  if (positionals.length > 1) {
+    return fail(`Expected at most one bundle directory.\n${USAGE}`);
+  }
+
+  return positionals[0];
+}
+
+/**
+ * Resolve the bundle directory to a path from the repo root, as git prints it.
+ *
+ * - A given directory is relative to where the command was run (`INIT_CWD`
+ *   under pnpm, which runs scripts from the package root); the default is
+ *   relative to the repo root.
+ *
+ * - Fails when the directory is missing or outside the repo.
+ */
+function resolveBundleDir(bundleArg: string | undefined): string {
+  const absoluteDir =
+    bundleArg === undefined
+      ? path.join(REPO_ROOT, DEFAULT_BUNDLE_DIR)
+      : path.resolve(process.env.INIT_CWD ?? process.cwd(), bundleArg);
+
+  const relativeDir = path.relative(REPO_ROOT, absoluteDir);
+
+  if (relativeDir.startsWith("..") || path.isAbsolute(relativeDir)) {
+    return fail(`${absoluteDir} is outside the repo at ${REPO_ROOT}.`);
+  }
+
+  if (!isDirectory(absoluteDir)) {
+    return fail(`No bundle directory at ${absoluteDir}.`);
+  }
+
+  return relativeDir.split(path.sep).join(path.posix.sep);
 }
 
 await main();

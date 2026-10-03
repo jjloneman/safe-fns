@@ -326,10 +326,127 @@ describe("verifyRecord", () => {
     // When - verifying it
     const result = verifyRecord({ at, text, verifiedBy });
 
-    // Then - the status becomes stable
+    // Then - the status becomes stable and keeps its comment
     expect(result).toMatchObject({
       isOk: true,
-      text: expect.stringContaining("status: stable\n") as string,
+      text: expect.stringContaining("status: stable # not settled\n") as string,
+    });
+  });
+
+  test("renews a quoted timestamp and keeps its quotes", () => {
+    // Given - the owner's entry with a quoted timestamp
+    const text = record([
+      ...draftLines,
+      `verified: { by: ${verifiedBy}, at: "2026-09-28T09:00:00Z" }`,
+    ]);
+
+    // When - verifying it
+    const result = verifyRecord({ at, text, verifiedBy });
+
+    // Then - only the timestamp inside the quotes changes
+    expect(result).toStrictEqual({
+      isOk: true,
+      text: text
+        .replace("2026-09-28T09:00:00Z", at)
+        .replace("status: draft", "status: stable"),
+    });
+  });
+
+  test("indents a new list item like the existing ones", () => {
+    // Given - list items that start at column 0
+    const text = record([
+      ...draftLines,
+      "verified:",
+      "- { by: human:someone, at: 2026-09-01T00:00:00Z }",
+    ]);
+
+    // When - verifying it
+    const result = verifyRecord({ at, text, verifiedBy });
+
+    // Then - the new item also starts at column 0
+    expect(result).toMatchObject({
+      isOk: true,
+      text: expect.stringContaining(
+        `\n- { by: human:someone, at: 2026-09-01T00:00:00Z }\n- { by: ${verifiedBy}, at: ${at} }\n`
+      ) as string,
+    });
+  });
+
+  test("renews the owner's entry inside a multi-line flow sequence", () => {
+    // Given - a flow sequence spread over several lines
+    const text = record([
+      ...draftLines,
+      "verified: [",
+      "    { by: human:someone, at: 2026-09-01T00:00:00Z },",
+      `    { by: ${verifiedBy}, at: 2026-09-28T09:00:00Z },`,
+      "  ]",
+    ]);
+
+    // When - verifying it
+    const result = verifyRecord({ at, text, verifiedBy });
+
+    // Then - the owner's line is renewed in place
+    expect(result).toStrictEqual({
+      isOk: true,
+      text: text
+        .replace("2026-09-28T09:00:00Z", at)
+        .replace("status: draft", "status: stable"),
+    });
+  });
+
+  test("rejects a multi-line flow sequence without the owner's entry", () => {
+    // Given - a flow sequence spread over several lines, missing the owner
+    const text = record([
+      ...draftLines,
+      "verified: [",
+      "    { by: human:someone, at: 2026-09-01T00:00:00Z },",
+      "  ]",
+    ]);
+
+    // When - verifying it
+    const result = verifyRecord({ at, text, verifiedBy });
+
+    // Then - it is rejected rather than left with a dangling bracket
+    expect(result).toStrictEqual({
+      isOk: false,
+      reason: "`verified` is a flow sequence spread over several lines",
+    });
+  });
+
+  test("renews a block-style at: line that ends in a comment", () => {
+    // Given - the owner's block entry with a trailing comment
+    const text = record([
+      ...draftLines,
+      "verified:",
+      `  - by: ${verifiedBy}`,
+      "    at: 2026-09-28T09:00:00Z # first pass",
+    ]);
+
+    // When - verifying it
+    const result = verifyRecord({ at, text, verifiedBy });
+
+    // Then - the timestamp changes and the comment stays
+    expect(result).toStrictEqual({
+      isOk: true,
+      text: text
+        .replace("2026-09-28T09:00:00Z", at)
+        .replace("status: draft", "status: stable"),
+    });
+  });
+
+  test("keeps a trailing comment on an inline flow sequence", () => {
+    // Given - a one-line flow sequence with a comment
+    const text = record([...draftLines, "verified: [] # none yet"]);
+
+    // When - verifying it
+    const result = verifyRecord({ at, text, verifiedBy });
+
+    // Then - the entry goes inside the brackets, before the comment
+    expect(result).toMatchObject({
+      isOk: true,
+      text: expect.stringContaining(
+        `verified: [{ by: ${verifiedBy}, at: ${at} }] # none yet\n`
+      ) as string,
     });
   });
 
@@ -531,6 +648,45 @@ describe("readRecordSummary", () => {
 
     // Then - the owner has not verified it
     expect(summary?.verifiedAt).toBeUndefined();
+  });
+
+  test("reads quoted timestamps without their quotes", () => {
+    // Given - quoted generated and verified timestamps
+    const text = record([
+      "status: stable",
+      'generated: { by: claude-code/model, at: "2026-10-01T15:00:00Z" }',
+      `verified: { by: ${verifiedBy}, at: '2026-10-02T15:00:00Z' }`,
+    ]);
+
+    // When - reading its summary
+    const summary = readRecordSummary({ text, verifiedBy });
+
+    // Then - both timestamps parse, so the record reads as verified
+    expect(summary === undefined ? undefined : getRecordState(summary)).toBe(
+      "verified"
+    );
+  });
+
+  test("reads a quoted status that carries a trailing comment", () => {
+    // Given - a quoted draft status with a comment after it
+    const text = record(['status: "draft" # wip']);
+
+    // When - reading its summary
+    const summary = readRecordSummary({ text, verifiedBy });
+
+    // Then - the status is draft
+    expect(summary?.status).toBe("draft");
+  });
+
+  test("reads an unknown status as absent", () => {
+    // Given - a status OKF doesn't define
+    const text = record(["status: stabel"]);
+
+    // When - reading its summary
+    const summary = readRecordSummary({ text, verifiedBy });
+
+    // Then - the status is undefined
+    expect(summary?.status).toBeUndefined();
   });
 
   test("leaves absent fields undefined", () => {
