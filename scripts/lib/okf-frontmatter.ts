@@ -53,6 +53,16 @@ const OPTIONAL_LIST_DASH = String.raw`^\s*(?:-\s+)?`;
 /** An optional quote around a scalar, which YAML allows on any of them. */
 const QUOTE = String.raw`["']?`;
 
+/**
+ * The statuses OKF defines, as a set for the type guard to look values up in.
+ *
+ * - Typed as `ReadonlySet<string>`, so `has` accepts any string, not only a
+ *   status already known to be one.
+ */
+const RECORD_STATUS_VALUES: ReadonlySet<string> = new Set(
+  Object.values(RECORD_STATUSES)
+);
+
 /** What a timestamp looks like on a line: up to the next separator or quote. */
 const TIMESTAMP = String.raw`[^\s,}\]"'#]+`;
 
@@ -608,7 +618,7 @@ function findVerifiedRange(lines: string[]): LineRange | undefined {
 
 /** Whether a value is one of the statuses OKF defines. */
 function isRecordStatus(value: string): value is RecordStatus {
-  return Object.values<string>(RECORD_STATUSES).includes(value);
+  return RECORD_STATUS_VALUES.has(value);
 }
 
 /**

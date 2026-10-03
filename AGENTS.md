@@ -114,6 +114,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - A script's entry point (`main`) is the exception: it goes last, just above the call that runs it. `eslint.config.ts` gives `sort-modules` a `main` group after every other function for `scripts/`, so lint enforces it.
   - perfectionist's `sort-modules` enforces the order of module-level functions and types, not of constants; `const` runs are kept sorted by hand.
 - **Module-level constants are `SCREAMING_SNAKE_CASE`** (`BASE_BRANCH`, `RECORD_STATUSES`), including one computed once at startup and never reassigned; locals stay camelCase.
+- **Build fixed lookup data once, outside the function** — a membership check against a known set of values is a module-level `Set` and `.has(value)`, not an array rebuilt and searched on every call.
 - **Named imports over a namespace import** — `import { confirm, select } from "…"`, not `import * as prompts`.
 - **Give multi-line statements breathing room**: a blank line separates a statement that spans several lines from its neighbors, and a TSDoc'd declaration from the one above it.
 - **Prefer functional over imperative** — `map`/`filter`/`reduce` and pure helpers over mutable loops, unless the loop is genuinely clearer.
