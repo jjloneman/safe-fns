@@ -3,7 +3,7 @@ type: Decision
 title: What the package leaves to native APIs and other libraries
 description: Excludes what native JavaScript already does and wrappers around native one-liners; parks newer native APIs, date parsing, and duration and byte formatting as future candidates; leaves validation to dedicated libraries.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T06:15:30Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T19:45:01Z }
 ---
 
 # What the package leaves to native APIs and other libraries
@@ -20,7 +20,8 @@ Every candidate the catalog weighed against a native API or another library land
 - `uniq` — `[...new Set(array)]` is already linear.
 - Random IDs — `crypto.randomUUID()` and `crypto.getRandomValues()`.
 - lodash's `cloneDeep` — use native `structuredClone`.
-  - This package does ship `safeStructuredClone`, which returns the caller's fallback where `structuredClone` throws.
+  - This package plans `safeStructuredClone`, which returns the caller's fallback where `structuredClone` throws.
+  - That isn't a one-liner wrapper of the kind excluded below: making a native call that can throw safe is the package's purpose, like `safeJsonParse`.
 - An error check — `Error.isError` (Node 24+ and current browsers, not Node 22).
   - A library can't reproduce it reliably across realms, so callers on older runtimes keep `instanceof Error` and its limits.
 - Wrappers around native one-liners:

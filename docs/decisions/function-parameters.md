@@ -3,12 +3,15 @@ type: Decision
 title: How a function takes its parameters
 description: Up to two positional parameters for the values a function works on, configuration in a trailing options object, and nothing variadic.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-01T15:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T19:45:01Z }
 ---
 
 # How a function takes its parameters
 
-A function's parameters split into the values it works on, which are positional, and the configuration that tweaks its behavior, which goes in an object.
+A public export's parameters split into the values it works on, which are positional, and the configuration that tweaks its behavior, which goes in an object.
+
+- This covers the public API — the exports of `src/`.
+- Internal code (`scripts/`, and helpers no consumer imports) takes a single object for two or more parameters, per AGENTS.md.
 
 ## Decision
 
@@ -33,5 +36,5 @@ A function's parameters split into the values it works on, which are positional,
 
 ## Consequences
 
-- AGENTS.md's "Function parameters" rule says the same.
+- AGENTS.md's "Function parameters" rule states this as its public-API case, beside the rule for internal code.
 - The base storage wrapper takes its area as configuration: `safeStorageGetItem(key, { area: "session" })`.

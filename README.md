@@ -5,7 +5,7 @@
   </picture>
 </h1>
 
-Zero-dependency, strongly typed helpers that never throw — bad input returns a fallback you choose. (Not to be confused with [`safe-fn`](https://www.npmjs.com/package/safe-fn), an unrelated server-action builder.)
+Zero-dependency, strongly typed helpers that never throw — bad input returns a fallback you choose, or a documented neutral result. (Not to be confused with [`safe-fn`](https://www.npmjs.com/package/safe-fn), an unrelated server-action builder.)
 
 [![npm version](https://img.shields.io/npm/v/safe-fns)](https://www.npmjs.com/package/safe-fns)
 [![npm downloads](https://img.shields.io/npm/dw/safe-fns)](https://www.npmjs.com/package/safe-fns)

@@ -3,7 +3,7 @@ type: Decision
 title: When a name starts with `safe`
 description: "`safe` + the native API's path for a wrapper of one native API, `safeParse*` for coercers, `isSafe*` against a same-named unsafe helper, and plain names otherwise."
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-01T15:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T19:45:01Z }
 ---
 
 # When a name starts with `safe`
@@ -42,5 +42,5 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-10-01T15:00:00Z }
   - `safeParseJson` → `safeJsonParse`;
   - `safeStringify` → `safeJsonStringify`;
   - `safeHasOwn` → `safeObjectHasOwn`.
-- The README's planned API table uses the new names.
+- Wherever the README's planned API lists these functions, it uses the new names; part 2 of [#10](https://github.com/jjloneman/safe-fns/issues/10) brings the table up to date with the full catalog.
 - The owner adopted this rule on 2026-09-30 in [#10](https://github.com/jjloneman/safe-fns/issues/10).

@@ -6,7 +6,7 @@ Conventions for any AI agent (or human) working in this repo. Read top to bottom
 
 `safe-fns` is a standalone, zero-dependency, strongly typed npm package of helpers that never throw — most take an `unknown` value and return a safe, typed result.
 
-- **Every export is total**: it never throws, and bad input returns a fallback the caller chooses.
+- **Every export is total**: it never throws; bad input returns a fallback the caller chooses, or a documented neutral result (`range` returns `[]`).
 - It replaces helpers that were copy-pasted across several projects and had drifted apart.
 - The roadmap and the reasoning behind the package live in the umbrella issue, [#1](https://github.com/jjloneman/safe-fns/issues/1).
 
