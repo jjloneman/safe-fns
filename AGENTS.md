@@ -37,7 +37,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - `test/consumer/` — fixtures run by `pnpm test:consumer` against the packed tarball (see [Build & package](#-build--package)).
 - `scripts/` — repo scripts, run directly by Node (which strips their types), so they stick to erasable TypeScript syntax.
   - Relative imports name the `.ts` file (`./lib/publish-ci-report.ts`), since Node resolves only the real file name.
-  - Every line a script prints starts with `[<script-name>]` (`[okf-verify] …`), so its output is traceable in a log.
+  - Every console log line a script prints starts with `[<script-name>]` (`[okf-verify] …`), including each line of a multi-line message, so its output is traceable in a log; an interactive prompt's own UI is exempt.
   - A child process sets `stdio` explicitly; `execFileSync` inherits stderr by default, which leaks the child's messages into the terminal.
   - An error message says only what the error shows — read its `code` or `stderr` rather than guessing a cause.
   - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/**/*.test.ts` runs in the `node` project.
@@ -105,8 +105,9 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - That covers object keys, type members, imports and exports, union and intersection members, `Set`/`Map`/array-`includes` entries, switch cases, class members, and a module's top-level declarations.
   - Where an order carries meaning, disable the rule on that line with an `eslint-disable-next-line` comment saying why, rather than turning it off in the config.
   - Ordering is case-insensitive unless a tool says otherwise — `fallback` sorts before `Options`.
-- **Function parameters**: one positional argument is fine; with two or more, take a single object with sorted keys. Options go in an object even when there is only one.
-  - An object reads clearly at the call site (`verifyRecord({ at, text, verifiedBy })`) and survives adding or reordering a parameter.
+- **Function parameters** depend on who calls the function.
+  - **Public API** (an export of `src/`): the one or two values a function works on are positional (`isSafePopulated(value)`, `isDeepEqual(a, b)`); configuration goes in a trailing options object, even with one key. More than two values go in one object with sorted keys, and nothing is variadic.
+  - **Internal code** (`scripts/`, and helpers no consumer imports): one positional parameter is fine; with two or more, take a single object with sorted keys, which reads clearly at the call site (`verifyRecord({ at, text, verifiedBy })`) and survives adding or reordering a parameter.
 - **Group independent declarations in lexicographic order** — module constants, function declarations, and runs of `const`s in a function body, wherever none depends on another being declared first.
   - A script's entry point (`main`) is the exception: it goes last, just above the call that runs it.
 - **Module-level constants are `SCREAMING_SNAKE_CASE`** (`BASE_BRANCH`, `RECORD_STATUSES`), including one computed once at startup and never reassigned; locals stay camelCase.
