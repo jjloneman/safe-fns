@@ -4,9 +4,9 @@ Conventions for any AI agent (or human) working in this repo. Read top to bottom
 
 ## 🎯 Purpose of this repo
 
-`safe-fns` is a standalone, zero-dependency, strongly typed npm package of helpers that take an `unknown` value and return a safe, typed result.
+`safe-fns` is a standalone, zero-dependency, strongly typed npm package of helpers that never throw — most take an `unknown` value and return a safe, typed result.
 
-- **Every export is total**: it never throws, and bad input returns a fallback the caller chooses.
+- **Every export is total**: it never throws; bad input returns a fallback the caller chooses, or a documented neutral result (`range` returns `[]`).
 - It replaces helpers that were copy-pasted across several projects and had drifted apart.
 - The roadmap and the reasoning behind the package live in the umbrella issue, [#1](https://github.com/jjloneman/safe-fns/issues/1).
 
@@ -16,12 +16,16 @@ These bind every exported function. A change that breaks one is a bug, even if i
 
 - **Environment-independent.** A function returns the same result in Node, every browser, and any other JS runtime.
   - Never branch on `typeof window`, `process`, or any other environment probe.
+  - A side-effecting export (storage, logging) runs the same code everywhere, but its result can depend on what the environment provides — `safeLocalStorageGetItem` returns the fallback where there's no `localStorage`; document it.
   - Where an engine genuinely differs (ICU data, non-ISO date parsing), document it rather than papering over it.
 - **Never widen a narrow check.** A check matches exactly what its name says, identified by a reliable test (`Array.isArray`, a brand check) rather than by shape.
   - Don't duck-type: an object with a `length` or `size` key is not a collection, and `{ length: 0, name: "x" }` is not "empty".
   - Loosening a published check is a breaking change, never a drive-by.
 - **Fail safe toward preserving data.** When a value can't be inspected safely, pick the answer that keeps it: an uninspectable value is "populated", not "empty".
 - **Never throw.** Every export catches what it touches — getters, proxies, `toString`/`valueOf` traps, revoked proxies — and returns the caller's fallback instead.
+- **Fast on the common path.** Match or beat the fastest competitor, measured by benchmark — but robustness beats speed.
+  - Cheapest checks first (`typeof`, `=== null`), then built-in checks, then walking the value; no allocation or wrapper layers on the common case.
+  - See [the decision](docs/decisions/performance.md).
 - **No unreachable branches.** Coverage is 100%; a branch nothing can reach is dead code to delete, not a line to exempt.
 - **Zero runtime dependencies.** `dependencies` and `peerDependencies` stay empty.
 - **One function per file.** Each export lives in its own file under `src/`, so each gets its own subpath and its own output file.
@@ -108,7 +112,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Where an order carries meaning, disable the rule on that line with an `eslint-disable-next-line` comment saying why, rather than turning it off in the config.
   - Ordering is case-insensitive unless a tool says otherwise — `fallback` sorts before `Options`.
 - **Function parameters** depend on who calls the function.
-  - **Public API** (an export of `src/`): the one or two values a function works on are positional (`isSafePopulated(value)`, `isDeepEqual(a, b)`); configuration goes in a trailing options object, even with one key. More than two values go in one object with sorted keys, and nothing is variadic.
+  - **Public API** (an export of `src/`): the one or two values a function works on are positional (`isSafePopulated(value)`, `isDeepEqual(a, b)`); configuration goes in a trailing options object, even with one key. More than two values go in one object with sorted keys, a function that wraps a native API keeps the native parameter order, and nothing is variadic — see [the decision](docs/decisions/function-parameters.md).
   - **Internal code** (`scripts/`, and helpers no consumer imports): one positional parameter is fine; with two or more, take a single object with sorted keys, which reads clearly at the call site (`verifyRecord({ at, text, verifiedBy })`) and survives adding or reordering a parameter.
 - **Group independent declarations in lexicographic order** — module constants, function declarations, and runs of `const`s in a function body, wherever none depends on another being declared first.
   - A script's entry point (`main`) is the exception: it goes last, just above the call that runs it. `eslint.config.ts` gives `sort-modules` a `main` group after every other function for `scripts/`, so lint enforces it.
