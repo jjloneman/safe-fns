@@ -2,8 +2,9 @@
 type: Decision
 title: What the package leaves to native APIs and other libraries
 description: Excludes what native JavaScript already does and wrappers around native one-liners; parks newer native APIs, date parsing, and duration and byte formatting as future candidates; leaves validation to dedicated libraries.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T21:14:18Z }
+verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }
 ---
 
 # What the package leaves to native APIs and other libraries

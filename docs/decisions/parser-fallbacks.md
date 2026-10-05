@@ -2,8 +2,9 @@
 type: Decision
 title: What a parser returns when it can't parse
 description: Parsers return the caller's fallback, `undefined` by default, for any input they don't recognize — never a guess.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T21:14:18Z }
+verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }
 ---
 
 # What a parser returns when it can't parse

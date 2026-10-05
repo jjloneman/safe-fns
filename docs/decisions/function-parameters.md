@@ -2,8 +2,9 @@
 type: Decision
 title: How a function takes its parameters
 description: Up to two positional parameters for the values a function works on, configuration in a trailing options object, and nothing variadic.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T21:14:18Z }
+verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }
 ---
 
 # How a function takes its parameters
