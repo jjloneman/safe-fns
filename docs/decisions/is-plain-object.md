@@ -1,0 +1,60 @@
+---
+type: Decision
+title: What counts as a plain object
+description: isPlainObject is true only for objects whose prototype is Object.prototype from any realm, or null, and that carry no Symbol.toStringTag or Symbol.iterator; no isRecord ships alongside it.
+status: draft
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-12T18:00:00Z }
+---
+
+# What counts as a plain object
+
+A plain object is one made by `{}`, `Object.create(null)`, or `JSON.parse`, the kind that holds data rather than behavior.
+
+## Decision
+
+- **`isPlainObject(value)` is true when all of these hold:**
+  - `value` is a non-null object;
+  - its prototype is `null`, or a prototype whose own prototype is `null`, which is `Object.prototype` from this realm or any other (an iframe, `node:vm`);
+  - it has no `Symbol.toStringTag` key, so `Math`, `JSON`, `Reflect`, `Atomics`, `Intl`, and `{ [Symbol.toStringTag]: "X" }` are false;
+  - it has no `Symbol.iterator` key, so an object literal that makes itself iterable isn't treated as plain data.
+- **Arrays, `Date`, `Map`, `Set`, class instances, boxed primitives, and functions are false.**
+- **A proxy whose `getPrototypeOf` or `has` trap throws, or a revoked proxy, is false.** A predicate's false means "not confirmed".
+- **It narrows only its true branch,** with the same kind of type-only brand (a fake tag property that exists only in the type system) as `isSafePopulated`:
+
+  ```ts
+  declare const plainObject: unique symbol;
+  export type PlainObject<T> = T &
+    Record<PropertyKey, unknown> & { readonly [plainObject]: true };
+  export function isPlainObject<T>(value: T): value is PlainObject<T>;
+  ```
+
+  - On `unknown` input, the true branch is a readable `Record<PropertyKey, unknown>`, so `value.name` can be read after the check.
+  - On typed input, the else branch keeps its full type: for a `User | Date`, a class-built `User` returns `false`, so the else branch stays `User | Date` rather than collapsing to `Date`.
+  - It works as a callback: `items.filter(isPlainObject)`.
+  - `PlainObject<T>` is exported, for the same declaration-emit reason as `Populated<T>`.
+
+- **Edge cases, each decided:**
+  - `Object.create(Object.create(null))` is plain: it passes the prototype rule, as it does in `is-plain-obj`, and rejecting it would mean comparing against this realm's `Object.prototype`, which breaks cross-realm objects.
+  - `Object.prototype` itself is plain, for the same reason: its prototype is `null` and it has no tag or iterator; `is-plain-obj` agrees.
+  - `{ __proto__: null }`, `Object.setPrototypeOf(obj, null)`, `structuredClone({ … })`, `Object.fromEntries(…)`, and frozen or sealed plain objects are plain.
+  - `JSON.parse('{"__proto__": {}}')` is plain: `__proto__` is an own data key there, not the prototype.
+  - `Object.create({})` isn't plain: its prototype is an ordinary object, not `Object.prototype`.
+  - A module namespace (`import * as ns`) isn't plain: its prototype is `null`, but it carries `Symbol.toStringTag` (`"Module"`).
+  - `globalThis`, `arguments`, and `{ [Symbol.toStringTag]: undefined }` aren't plain; the tag rule tests whether the key exists, not its value.
+  - Getters are never called, so `{ get x() { throw 1; } }` is plain.
+  - A proxy answers through its traps: `new Proxy({}, {})` is plain, and the check can't see through a proxy that lies consistently, since nothing in JavaScript can detect a proxy.
+- **No `isRecord`.** "Any non-null, non-array object" accepts `Date`, `Map`, and class instances, which is rarely what code handling untrusted data wants; it can be added later if a caller needs it.
+
+## Why
+
+- The owner judged `isPlainObject(Math) === true` (remeda's answer) wrong: `Math` is a namespace, not data.
+- es-toolkit gives the same answers for the `Symbol.toStringTag` rows; [`is-plain-obj`](https://www.npmjs.com/package/is-plain-obj) (146M weekly downloads) uses the same prototype and symbol rules.
+- Checking the prototype's prototype, rather than comparing with this realm's `Object.prototype`, keeps objects from another realm plain without trusting `Object.prototype.toString`, which `Symbol.toStringTag` can spoof.
+
+## Consequences
+
+- **Tests cover every built-in.** The test file builds an instance of every object type Node exposes (each global constructor, plus `arguments`, module namespaces, proxies, and objects from a `node:vm` context), and the `jsdom` project adds DOM objects.
+  - Each result is compared with [`is-plain-obj`](https://www.npmjs.com/package/is-plain-obj), added as a dev dependency.
+  - Every case must agree, except where `is-plain-obj` throws (a revoked proxy), where this one returns `false`.
+- The README's "Is it a plain object?" table gains a safe-fns column: `{}` ✅, `Object.create(null)` ✅, a class instance ❌, `Math` ❌, a tagged literal ❌.
+- `isSafeEmpty` uses this check to decide which objects it counts keys on.
