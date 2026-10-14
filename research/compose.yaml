@@ -573,7 +573,7 @@ services:
   python:
     entrypoint: ["python", "/work/research/adapters/python.py"]
     environment: *adapter-environment
-    image: python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2
+    image: python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none
@@ -583,11 +583,12 @@ services:
   # The last Python with `distutils`, for `strtobool`; the setting makes it
   # the standard library's copy rather than the one setuptools injects.
   python311:
+    build:
+      context: docker/python311
     entrypoint: ["python", "/work/research/adapters/python.py"]
     environment:
       <<: *adapter-environment
       SETUPTOOLS_USE_DISTUTILS: stdlib
-    image: python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none
@@ -691,7 +692,7 @@ services:
   sqlite:
     entrypoint: ["python", "/work/research/adapters/sqlite.py"]
     environment: *adapter-environment
-    image: python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2
+    image: python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none

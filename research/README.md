@@ -70,7 +70,7 @@ Each adapter service sits in one profile, named for its image.
 | `node`       | `node`, plus `package.json`'s libraries                            | JS built-ins; lodash, es-toolkit, remeda, Underscore, Ramda, radash, Effect, `@sindresorhus/is`, is-plain-obj; zod, valibot, joi, yup, envalid, yn, validator.js, Ajv; JSON, YAML, TOML, CSV, INI, and the HTML spec (jsdom) |
 | `php`        | `php` (CLI)                                                        | PHP                                                                                                                                                                                                                          |
 | `powershell` | .NET SDK, which ships PowerShell                                   | PowerShell                                                                                                                                                                                                                   |
-| `python`     | `python`                                                           | Python 3.15 and 3.11, SQLite                                                                                                                                                                                                 |
+| `python`     | `python`, plus `docker/python311`                                  | Python 3.14 and 3.11, SQLite                                                                                                                                                                                                 |
 | `ruby`       | `ruby`, plus `docker/ruby/Gemfile.lock`                            | Ruby, Rails' ActiveModel                                                                                                                                                                                                     |
 | `rust`       | `rust`, plus `adapters/rust/Cargo.lock`                            | Rust                                                                                                                                                                                                                         |
 | `shell`      | `debian`, plus Debian's packages                                   | bash, dash (POSIX sh), fish, zsh, git, systemd                                                                                                                                                                               |
@@ -138,6 +138,9 @@ Each adapter service sits in one profile, named for its image.
   - `docker/firebase/` — the Firebase emulators: Node, a JRE, and
     `firebase-tools` from its own pnpm root, with the emulator jars fetched at
     build time.
+  - `docker/python311/` — only a `FROM`, with no build step: a separate
+    Dockerfile gives Dependabot a separate dependency, so it can hold
+    `python311` on 3.11 without holding the other `python` pins.
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` — the Node adapter's
   libraries, a separate pnpm root with the repo's 7-day moratorium.
 - `tsconfig.json` — a nested config, so the editor and ESLint resolve the Node
