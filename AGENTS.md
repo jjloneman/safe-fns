@@ -246,6 +246,10 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Subject** is imperative, lowercase, with no trailing period.
 - **Body**, when needed, is `-` bullet points, not prose paragraphs.
 - **Dependency bumps**: `chore(deps): ⬆️ bump <package> from X to Y` (`chore(deps-dev): ⬆️ …` for dev dependencies).
+- **The `research` scope takes 🔬** in place of its type's gitmoji: `chore(research): 🔬 …`, `ci(research): 🔬 …`, `docs(research): 🔬 …`.
+  - The type still decides the release; release-please hides `chore`, `ci`, and `docs`.
+- **A change that adds or updates a development script under `scripts/` takes 🔨**, gitmoji's "add or update development scripts", whatever its type (`chore(okf): 🔨 add an interactive okf:verify script`).
+- Dependabot's own `chore(deps): ⬆️` and `chore(deps-dev): ⬆️` prefixes don't change.
 
 ### 🌿 Branch naming
 
