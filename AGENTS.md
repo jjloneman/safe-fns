@@ -246,6 +246,10 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Subject** is imperative, lowercase, with no trailing period.
 - **Body**, when needed, is `-` bullet points, not prose paragraphs.
 - **Dependency bumps**: `chore(deps): ⬆️ bump <package> from X to Y` (`chore(deps-dev): ⬆️ …` for dev dependencies).
+- **The `research` scope takes 🔬** in place of its type's gitmoji: `chore(research): 🔬 …`, `ci(research): 🔬 …`, `docs(research): 🔬 …`.
+  - The type still decides the release; release-please hides `chore`, `ci`, and `docs`.
+- **A change that adds or updates a development script under `scripts/` takes 🔨**, gitmoji's "add or update development scripts", whatever its type (`chore(okf): 🔨 add an interactive okf:verify script`).
+- Dependabot's own `chore(deps): ⬆️` and `chore(deps-dev): ⬆️` prefixes don't change.
 
 ### 🌿 Branch naming
 
@@ -288,7 +292,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Every export plugs into two harnesses in `test/`:**
   - `cross-env.cases.ts` — a table of calls and expected results, run unchanged by both projects;
   - `hostile-inputs.ts` (plus the Node-only `cross-realm-inputs.ts`) — values that trap on inspection, for proving an export never throws.
-- `scripts/research/*.test.ts` covers the research harness's codec, merging, sources, and tables; it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
+- `scripts/research/*.test.ts` covers the research harness's codec, merging, sources, and tables, and checks its image pins (no pre-release, one shared Python hold in `dependabot.yml`); it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
 - How to write a test is covered by `.claude/rules/testing.md`.
 
 ## 📦 Build & package
@@ -350,8 +354,9 @@ The conventions below are written for TypeScript, but they bind code in every la
   - `release-please` — opens or updates the release PR, and tags the release once it is merged;
   - `publish` — only when a release was just created; builds and publishes to npm.
 - **Dependabot** opens weekly grouped patch/minor PRs for npm and Actions, after a 7-day cooldown that matches the [moratorium](#-7-day-dependency-moratorium).
-  - `research/`'s npm libraries, its Compose images, its Dockerfiles, the JVM adapter's Gradle libraries, the database adapters' pip drivers, the XML Schema adapter's pip libraries, and the Firebase emulators' npm root get their own entries, each one grouped PR a week, majors included.
+  - `research/`'s npm libraries, its Compose images, its Dockerfiles, the `python311` image, the JVM adapter's Gradle libraries, the database adapters' pip drivers, the XML Schema adapter's pip libraries, and the Firebase emulators' npm root get their own entries, each one grouped PR a week, majors included.
   - Its `ignore` rules hold the pins below: `typescript` and `@types/node` majors, and each `typescript-<version>` alias to its minor.
+  - They also hold every `python` image off Python's pre-releases, and `python311` on 3.11, the last Python with `distutils`.
 - Every action is pinned to an exact `vX.Y.Z`, and every job declares its own `permissions`.
 - How to change a workflow is covered by `.claude/rules/ci.md`.
 
