@@ -4,65 +4,65 @@
 
 ## Tiers 0–2
 
-| Case | safe-fns (planned)<br>`safeParseBoolean` | JS built-ins<br>`JSON.parse(value)` | yn<br>`yn(value)` | zod<br>`z.stringbool().parse(value)` | Python<br>`ConfigParser().getboolean(…)` | Python<br>`distutils.util.strtobool(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"true"` | `true` | `true` | `true` | `true` | `true` | `1` |
-| `"TRUE"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"True"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"t"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | `1` |
-| `"T"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | `1` |
-| `"yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"YES"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"Yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"y"` | `true` | 💥 `SyntaxError` | `true` | `true` | 💥 `ValueError` | `1` |
-| `"Y"` | `true` | 💥 `SyntaxError` | `true` | `true` | 💥 `ValueError` | `1` |
-| `"on"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"ON"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"1"` | `true` | `1` | `true` | `true` | `true` | `1` |
-| `"false"` | `false` | `false` | `false` | `false` | `false` | `0` |
-| `"FALSE"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"False"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"f"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | `0` |
-| `"F"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | `0` |
-| `"no"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"NO"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"n"` | `false` | 💥 `SyntaxError` | `false` | `false` | 💥 `ValueError` | `0` |
-| `"N"` | `false` | 💥 `SyntaxError` | `false` | `false` | 💥 `ValueError` | `0` |
-| `"off"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"OFF"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"0"` | `false` | `0` | `false` | `false` | `false` | `0` |
-| `" yes "` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"\u{9}no\u{A}"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"\u{A0}true\u{A0}"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"true\u{200B}"` | `true` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"enabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `true` | 💥 `ValueError` | 💥 `ValueError` |
-| `"disabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `false` | 💥 `ValueError` | 💥 `ValueError` |
-| `"tru"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"2"` | `undefined` | `2` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"-1"` | `undefined` | `-1` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"1.0"` | `undefined` | `1` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"-0"` | `undefined` | `-0` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"01"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"0x1"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `""` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"   "` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"yes please"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"ｔｒｕｅ"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `true` | `true` | — | `true` | 💥 `ZodError` | — | — |
-| `false` | `false` | — | `false` | 💥 `ZodError` | — | — |
-| `1` | `true` | — | `true` | 💥 `ZodError` | — | — |
-| `0` | `false` | — | `false` | 💥 `ZodError` | — | — |
-| `-0` | `false` | — | `false` | 💥 `ZodError` | — | — |
-| `1.5` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `2` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `NaN` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `1n` | `true` | — | `true` | 💥 `ZodError` | — | — |
-| `0n` | `false` | — | `false` | 💥 `ZodError` | — | — |
-| `2n` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `null` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `undefined` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `[]` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `{}` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
+| Case | safe-fns (planned)<br>`safeParseBoolean` | JS built-ins<br>`JSON.parse(value)` | yn<br>`yn(value)` | zod<br>`z.stringbool().parse(value)` | Commons Lang<br>`BooleanUtils.toBoolean(value)` | Commons Lang<br>`BooleanUtils.toBooleanObject(value)` | Groovy<br>`value as boolean` | Groovy<br>`value.toBoolean()` | Java<br>`Boolean.parseBoolean(value)` | Kotlin<br>`value.toBoolean()` | Kotlin<br>`value.toBooleanStrict()` | Kotlin<br>`value.toBooleanStrictOrNull()` | Python<br>`ConfigParser().getboolean(…)` | Python<br>`distutils.util.strtobool(value)` | Spring<br>`conversionService.convert(value, Boolean.class)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"true"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `1` | `true` |
+| `"TRUE"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` |
+| `"True"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` |
+| `"t"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `1` | 💥 `ConversionFailedException` |
+| `"T"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `1` | 💥 `ConversionFailedException` |
+| `"yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` |
+| `"YES"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` |
+| `"Yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` |
+| `"y"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `1` | 💥 `ConversionFailedException` |
+| `"Y"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `1` | 💥 `ConversionFailedException` |
+| `"on"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` |
+| `"ON"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` |
+| `"1"` | `true` | `1` | `true` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` |
+| `"false"` | `false` | `false` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `0` | `false` |
+| `"FALSE"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` |
+| `"False"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` |
+| `"f"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `0` | 💥 `ConversionFailedException` |
+| `"F"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `0` | 💥 `ConversionFailedException` |
+| `"no"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` |
+| `"NO"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` |
+| `"n"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `0` | 💥 `ConversionFailedException` |
+| `"N"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `0` | 💥 `ConversionFailedException` |
+| `"off"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` |
+| `"OFF"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` |
+| `"0"` | `false` | `0` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` |
+| `" yes "` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | `true` |
+| `"\u{9}no\u{A}"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | `false` |
+| `"\u{A0}true\u{A0}"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `"true\u{200B}"` | `true` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `"enabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `true` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `"disabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `false` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `"tru"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `"2"` | `undefined` | `2` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `"-1"` | `undefined` | `-1` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `"1.0"` | `undefined` | `1` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `"-0"` | `undefined` | `-0` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `"01"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `"0x1"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `""` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `false` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | `null` |
+| `"   "` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | `null` |
+| `"yes please"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `"ｔｒｕｅ"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` |
+| `true` | `true` | — | `true` | 💥 `ZodError` | — | — | `true` | `true` | — | — | — | — | — | — | `true` |
+| `false` | `false` | — | `false` | 💥 `ZodError` | — | — | `false` | `false` | — | — | — | — | — | — | `false` |
+| `1` | `true` | — | `true` | 💥 `ZodError` | — | — | `true` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` |
+| `0` | `false` | — | `false` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` |
+| `-0` | `false` | — | `false` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` |
+| `1.5` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `true` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` |
+| `2` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `true` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` |
+| `NaN` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` |
+| `1n` | `true` | — | `true` | 💥 `ZodError` | — | — | `true` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` |
+| `0n` | `false` | — | `false` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` |
+| `2n` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `true` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` |
+| `null` | `undefined` | — | `undefined` | 💥 `ZodError` | `false` | `null` | `false` | 💥 `NullPointerException` | `false` | `false` | — | — | — | — | `null` |
+| `undefined` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — |
+| `[]` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | `null` |
+| `{}` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` |
 
 ## By outcome
 
@@ -72,8 +72,17 @@
 | JS built-ins<br>`JSON.parse(value)` | `"true"` | `"false"` |  | `"1"` → `1` `"0"` → `0` `"2"` → `2` `"-1"` → `-1` `"1.0"` → `1` `"-0"` → `-0` | `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
 | yn<br>`yn(value)` | `"true"` `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `" yes "` `"\u{A0}true\u{A0}"` `true` `1` `1n` | `"false"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `"\u{9}no\u{A}"` `false` `0` `-0` `0n` | `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `1.5` `2` `NaN` `2n` `null` `undefined` `[]` `{}` |  |  |
 | zod<br>`z.stringbool().parse(value)` | `"true"` `"TRUE"` `"True"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `"enabled"` | `"false"` `"FALSE"` `"False"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `"disabled"` |  |  | `"t"` `"T"` `"f"` `"F"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `true` `false` `1` `0` `-0` `1.5` `2` `NaN` `1n` `0n` `2n` `null` `undefined` `[]` `{}` |
+| Commons Lang<br>`BooleanUtils.toBoolean(value)` | `"true"` `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` | `"false"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `null` |  |  |  |
+| Commons Lang<br>`BooleanUtils.toBooleanObject(value)` | `"true"` `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` | `"false"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` |  | `" yes "` → `null` `"\u{9}no\u{A}"` → `null` `"\u{A0}true\u{A0}"` → `null` `"true\u{200B}"` → `null` `"enabled"` → `null` `"disabled"` → `null` `"tru"` → `null` `"2"` → `null` `"-1"` → `null` `"1.0"` → `null` `"-0"` → `null` `"01"` → `null` `"0x1"` → `null` `""` → `null` `"   "` → `null` `"yes please"` → `null` `"ｔｒｕｅ"` → `null` `null` → `null` |  |
+| Groovy<br>`value as boolean` | `"true"` `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `"false"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `"   "` `"yes please"` `"ｔｒｕｅ"` `true` `1` `1.5` `2` `1n` `2n` | `""` `false` `0` `-0` `NaN` `0n` `null` `[]` `{}` |  |  |  |
+| Groovy<br>`value.toBoolean()` | `"true"` `"TRUE"` `"True"` `"y"` `"Y"` `"1"` `true` | `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"on"` `"ON"` `"false"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `false` |  |  | `1` `0` `-0` `1.5` `2` `NaN` `1n` `0n` `2n` `null` `[]` `{}` |
+| Java<br>`Boolean.parseBoolean(value)` | `"true"` `"TRUE"` `"True"` | `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `"false"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `null` |  |  |  |
+| Kotlin<br>`value.toBoolean()` | `"true"` `"TRUE"` `"True"` | `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `"false"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `null` |  |  |  |
+| Kotlin<br>`value.toBooleanStrict()` | `"true"` | `"false"` |  |  | `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
+| Kotlin<br>`value.toBooleanStrictOrNull()` | `"true"` | `"false"` |  | `"TRUE"` → `null` `"True"` → `null` `"t"` → `null` `"T"` → `null` `"yes"` → `null` `"YES"` → `null` `"Yes"` → `null` `"y"` → `null` `"Y"` → `null` `"on"` → `null` `"ON"` → `null` `"1"` → `null` `"FALSE"` → `null` `"False"` → `null` `"f"` → `null` `"F"` → `null` `"no"` → `null` `"NO"` → `null` `"n"` → `null` `"N"` → `null` `"off"` → `null` `"OFF"` → `null` `"0"` → `null` `" yes "` → `null` `"\u{9}no\u{A}"` → `null` `"\u{A0}true\u{A0}"` → `null` `"true\u{200B}"` → `null` `"enabled"` → `null` `"disabled"` → `null` `"tru"` → `null` `"2"` → `null` `"-1"` → `null` `"1.0"` → `null` `"-0"` → `null` `"01"` → `null` `"0x1"` → `null` `""` → `null` `"   "` → `null` `"yes please"` → `null` `"ｔｒｕｅ"` → `null` |  |
 | Python<br>`ConfigParser().getboolean(…)` | `"true"` `"TRUE"` `"True"` `"yes"` `"YES"` `"Yes"` `"on"` `"ON"` `"1"` | `"false"` `"FALSE"` `"False"` `"no"` `"NO"` `"off"` `"OFF"` `"0"` |  |  | `"t"` `"T"` `"y"` `"Y"` `"f"` `"F"` `"n"` `"N"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
 | Python<br>`distutils.util.strtobool(value)` |  |  |  | `"true"` → `1` `"TRUE"` → `1` `"True"` → `1` `"t"` → `1` `"T"` → `1` `"yes"` → `1` `"YES"` → `1` `"Yes"` → `1` `"y"` → `1` `"Y"` → `1` `"on"` → `1` `"ON"` → `1` `"1"` → `1` `"false"` → `0` `"FALSE"` → `0` `"False"` → `0` `"f"` → `0` `"F"` → `0` `"no"` → `0` `"NO"` → `0` `"n"` → `0` `"N"` → `0` `"off"` → `0` `"OFF"` → `0` `"0"` → `0` | `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
+| Spring<br>`conversionService.convert(value, Boolean.class)` | `"true"` `"TRUE"` `"True"` `"yes"` `"YES"` `"Yes"` `"on"` `"ON"` `"1"` `" yes "` `true` | `"false"` `"FALSE"` `"False"` `"no"` `"NO"` `"off"` `"OFF"` `"0"` `"\u{9}no\u{A}"` `false` |  | `""` → `null` `"   "` → `null` `null` → `null` `[]` → `null` | `"t"` `"T"` `"y"` `"Y"` `"f"` `"F"` `"n"` `"N"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `"yes please"` `"ｔｒｕｅ"` `1` `0` `-0` `1.5` `2` `NaN` `1n` `0n` `2n` `{}` |
 | SQLite<br>`SELECT ? IS TRUE` |  |  |  | `"true"` → `0` `"TRUE"` → `0` `"True"` → `0` `"t"` → `0` `"T"` → `0` `"yes"` → `0` `"YES"` → `0` `"Yes"` → `0` `"y"` → `0` `"Y"` → `0` `"on"` → `0` `"ON"` → `0` `"1"` → `1` `"false"` → `0` `"FALSE"` → `0` `"False"` → `0` `"f"` → `0` `"F"` → `0` `"no"` → `0` `"NO"` → `0` `"n"` → `0` `"N"` → `0` `"off"` → `0` `"OFF"` → `0` `"0"` → `0` `" yes "` → `0` `"\u{9}no\u{A}"` → `0` `"\u{A0}true\u{A0}"` → `0` `"true\u{200B}"` → `0` `"enabled"` → `0` `"disabled"` → `0` `"tru"` → `0` `"2"` → `1` `"-1"` → `1` `"1.0"` → `1` `"-0"` → `0` `"01"` → `1` `"0x1"` → `0` `""` → `0` `"   "` → `0` `"yes please"` → `0` `"ｔｒｕｅ"` → `0` `1` → `1` `0` → `0` `-0` → `0` `1.5` → `1` `2` → `1` `NaN` → `0` `1n` → `1` `0n` → `0` `2n` → `1` `null` → `0` |  |
 | YAML 1.1<br>`parse(value, { version: "1.1" })` | `"true"` `"TRUE"` `"True"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `" yes "` | `"false"` `"FALSE"` `"False"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` |  | `"t"` → `"t"` `"T"` → `"T"` `"1"` → `1` `"f"` → `"f"` `"F"` → `"F"` `"0"` → `0` `"\u{A0}true\u{A0}"` → `"\u{A0}true\u{A0}"` `"true\u{200B}"` → `"true\u{200B}"` `"enabled"` → `"enabled"` `"disabled"` → `"disabled"` `"tru"` → `"tru"` `"2"` → `2` `"-1"` → `-1` `"1.0"` → `1` `"-0"` → `-0` `"01"` → `1` `"0x1"` → `1` `""` → `null` `"   "` → `null` `"yes please"` → `"yes please"` `"ｔｒｕｅ"` → `"ｔｒｕｅ"` | `"\u{9}no\u{A}"` |
 | YAML 1.2 core<br>`parse(value)` | `"true"` `"TRUE"` `"True"` | `"false"` `"FALSE"` `"False"` |  | `"t"` → `"t"` `"T"` → `"T"` `"yes"` → `"yes"` `"YES"` → `"YES"` `"Yes"` → `"Yes"` `"y"` → `"y"` `"Y"` → `"Y"` `"on"` → `"on"` `"ON"` → `"ON"` `"1"` → `1` `"f"` → `"f"` `"F"` → `"F"` `"no"` → `"no"` `"NO"` → `"NO"` `"n"` → `"n"` `"N"` → `"N"` `"off"` → `"off"` `"OFF"` → `"OFF"` `"0"` → `0` `" yes "` → `"yes"` `"\u{A0}true\u{A0}"` → `"\u{A0}true\u{A0}"` `"true\u{200B}"` → `"true\u{200B}"` `"enabled"` → `"enabled"` `"disabled"` → `"disabled"` `"tru"` → `"tru"` `"2"` → `2` `"-1"` → `-1` `"1.0"` → `1` `"-0"` → `-0` `"01"` → `1` `"0x1"` → `1` `""` → `null` `"   "` → `null` `"yes please"` → `"yes please"` `"ｔｒｕｅ"` → `"ｔｒｕｅ"` | `"\u{9}no\u{A}"` |
@@ -83,65 +92,65 @@
 
 ## Every tool
 
-| Case | safe-fns (planned)<br>`safeParseBoolean` | JS built-ins<br>`JSON.parse(value)` | yn<br>`yn(value)` | zod<br>`z.stringbool().parse(value)` | Python<br>`ConfigParser().getboolean(…)` | Python<br>`distutils.util.strtobool(value)` | SQLite<br>`SELECT ? IS TRUE` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` | envalid<br>`bool()._parse(value)` | joi<br>`Joi.attempt(value, Joi.boolean())` | yup<br>`boolean().validateSync(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"true"` | `true` | `true` | `true` | `true` | `true` | `1` | `0` | `true` | `true` | `true` | `true` | `true` |
-| `"TRUE"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `true` | 💥 `EnvError` | `true` | `true` |
-| `"True"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `true` | 💥 `EnvError` | `true` | `true` |
-| `"t"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | `1` | `0` | `"t"` | `"t"` | `true` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"T"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | `1` | `0` | `"T"` | `"T"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `"yes"` | `true` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"YES"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `"YES"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"Yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `"Yes"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"y"` | `true` | 💥 `SyntaxError` | `true` | `true` | 💥 `ValueError` | `1` | `0` | `true` | `"y"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"Y"` | `true` | 💥 `SyntaxError` | `true` | `true` | 💥 `ValueError` | `1` | `0` | `true` | `"Y"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"on"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `"on"` | `true` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"ON"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `"ON"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"1"` | `true` | `1` | `true` | `true` | `true` | `1` | `1` | `1` | `1` | `true` | 💥 `ValidationError` | `true` |
-| `"false"` | `false` | `false` | `false` | `false` | `false` | `0` | `0` | `false` | `false` | `false` | `false` | `false` |
-| `"FALSE"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `false` | 💥 `EnvError` | `false` | `false` |
-| `"False"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `false` | 💥 `EnvError` | `false` | `false` |
-| `"f"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | `0` | `0` | `"f"` | `"f"` | `false` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"F"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | `0` | `0` | `"F"` | `"F"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"no"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `"no"` | `false` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"NO"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `"NO"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"n"` | `false` | 💥 `SyntaxError` | `false` | `false` | 💥 `ValueError` | `0` | `0` | `false` | `"n"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"N"` | `false` | 💥 `SyntaxError` | `false` | `false` | 💥 `ValueError` | `0` | `0` | `false` | `"N"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"off"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `"off"` | `false` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"OFF"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `"OFF"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"0"` | `false` | `0` | `false` | `false` | `false` | `0` | `0` | `0` | `0` | `false` | 💥 `ValidationError` | `false` |
-| `" yes "` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `true` | `"yes"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"\u{9}no\u{A}"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | 💥 `YAMLParseError` | 💥 `YAMLParseError` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"\u{A0}true\u{A0}"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"\u{A0}true\u{A0}"` | `"\u{A0}true\u{A0}"` | 💥 `EnvError` | `true` | 💥 `ValidationError` |
-| `"true\u{200B}"` | `true` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"true\u{200B}"` | `"true\u{200B}"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"enabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `true` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"enabled"` | `"enabled"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"disabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `false` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"disabled"` | `"disabled"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"tru"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"tru"` | `"tru"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"2"` | `undefined` | `2` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `1` | `2` | `2` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"-1"` | `undefined` | `-1` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `1` | `-1` | `-1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"1.0"` | `undefined` | `1` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `1` | `1` | `1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"-0"` | `undefined` | `-0` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `-0` | `-0` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"01"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `1` | `1` | `1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"0x1"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `1` | `1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `""` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `null` | `null` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"   "` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `null` | `null` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"yes please"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"yes please"` | `"yes please"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"ｔｒｕｅ"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"ｔｒｕｅ"` | `"ｔｒｕｅ"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `true` | `true` | — | `true` | 💥 `ZodError` | — | — | — | — | — | — | `true` | `true` |
-| `false` | `false` | — | `false` | 💥 `ZodError` | — | — | — | — | — | — | `false` | `false` |
-| `1` | `true` | — | `true` | 💥 `ZodError` | — | — | `1` | — | — | — | 💥 `ValidationError` | `true` |
-| `0` | `false` | — | `false` | 💥 `ZodError` | — | — | `0` | — | — | — | 💥 `ValidationError` | `false` |
-| `-0` | `false` | — | `false` | 💥 `ZodError` | — | — | `0` | — | — | — | 💥 `ValidationError` | `false` |
-| `1.5` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `1` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
-| `2` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `1` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
-| `NaN` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `0` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
-| `1n` | `true` | — | `true` | 💥 `ZodError` | — | — | `1` | — | — | — | 💥 `ValidationError` | `true` |
-| `0n` | `false` | — | `false` | 💥 `ZodError` | — | — | `0` | — | — | — | 💥 `ValidationError` | `false` |
-| `2n` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `1` | — | — | — | 💥 `ValidationError` | 💥 `TypeError` |
-| `null` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `0` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
-| `undefined` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | `undefined` | `undefined` |
-| `[]` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
-| `{}` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
+| Case | safe-fns (planned)<br>`safeParseBoolean` | JS built-ins<br>`JSON.parse(value)` | yn<br>`yn(value)` | zod<br>`z.stringbool().parse(value)` | Commons Lang<br>`BooleanUtils.toBoolean(value)` | Commons Lang<br>`BooleanUtils.toBooleanObject(value)` | Groovy<br>`value as boolean` | Groovy<br>`value.toBoolean()` | Java<br>`Boolean.parseBoolean(value)` | Kotlin<br>`value.toBoolean()` | Kotlin<br>`value.toBooleanStrict()` | Kotlin<br>`value.toBooleanStrictOrNull()` | Python<br>`ConfigParser().getboolean(…)` | Python<br>`distutils.util.strtobool(value)` | Spring<br>`conversionService.convert(value, Boolean.class)` | SQLite<br>`SELECT ? IS TRUE` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` | envalid<br>`bool()._parse(value)` | joi<br>`Joi.attempt(value, Joi.boolean())` | yup<br>`boolean().validateSync(value)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"true"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `1` | `true` | `0` | `true` | `true` | `true` | `true` | `true` |
+| `"TRUE"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` | `0` | `true` | `true` | 💥 `EnvError` | `true` | `true` |
+| `"True"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` | `0` | `true` | `true` | 💥 `EnvError` | `true` | `true` |
+| `"t"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `1` | 💥 `ConversionFailedException` | `0` | `"t"` | `"t"` | `true` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"T"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `1` | 💥 `ConversionFailedException` | `0` | `"T"` | `"T"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` | `0` | `true` | `"yes"` | `true` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"YES"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` | `0` | `true` | `"YES"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"Yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` | `0` | `true` | `"Yes"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"y"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `1` | 💥 `ConversionFailedException` | `0` | `true` | `"y"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"Y"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `1` | 💥 `ConversionFailedException` | `0` | `true` | `"Y"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"on"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` | `0` | `true` | `"on"` | `true` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"ON"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` | `0` | `true` | `"ON"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"1"` | `true` | `1` | `true` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `true` | `1` | `true` | `1` | `1` | `1` | `true` | 💥 `ValidationError` | `true` |
+| `"false"` | `false` | `false` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `0` | `false` | `0` | `false` | `false` | `false` | `false` | `false` |
+| `"FALSE"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` | `0` | `false` | `false` | 💥 `EnvError` | `false` | `false` |
+| `"False"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` | `0` | `false` | `false` | 💥 `EnvError` | `false` | `false` |
+| `"f"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `0` | 💥 `ConversionFailedException` | `0` | `"f"` | `"f"` | `false` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"F"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `0` | 💥 `ConversionFailedException` | `0` | `"F"` | `"F"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"no"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` | `0` | `false` | `"no"` | `false` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"NO"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` | `0` | `false` | `"NO"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"n"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `0` | 💥 `ConversionFailedException` | `0` | `false` | `"n"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"N"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | `0` | 💥 `ConversionFailedException` | `0` | `false` | `"N"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"off"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` | `0` | `false` | `"off"` | `false` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"OFF"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` | `0` | `false` | `"OFF"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"0"` | `false` | `0` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | `false` | `0` | `false` | `0` | `0` | `0` | `false` | 💥 `ValidationError` | `false` |
+| `" yes "` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | `true` | `0` | `true` | `"yes"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"\u{9}no\u{A}"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | `false` | `0` | 💥 `YAMLParseError` | 💥 `YAMLParseError` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"\u{A0}true\u{A0}"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `0` | `"\u{A0}true\u{A0}"` | `"\u{A0}true\u{A0}"` | 💥 `EnvError` | `true` | 💥 `ValidationError` |
+| `"true\u{200B}"` | `true` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `0` | `"true\u{200B}"` | `"true\u{200B}"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"enabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `true` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `0` | `"enabled"` | `"enabled"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"disabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `false` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `0` | `"disabled"` | `"disabled"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"tru"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `0` | `"tru"` | `"tru"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"2"` | `undefined` | `2` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `1` | `2` | `2` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"-1"` | `undefined` | `-1` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `1` | `-1` | `-1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"1.0"` | `undefined` | `1` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `1` | `1` | `1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"-0"` | `undefined` | `-0` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `0` | `-0` | `-0` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"01"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `1` | `1` | `1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"0x1"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `0` | `1` | `1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `""` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `false` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | `null` | `0` | `null` | `null` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"   "` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | `null` | `0` | `null` | `null` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"yes please"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `0` | `"yes please"` | `"yes please"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `"ｔｒｕｅ"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | `false` | `null` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ConversionFailedException` | `0` | `"ｔｒｕｅ"` | `"ｔｒｕｅ"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
+| `true` | `true` | — | `true` | 💥 `ZodError` | — | — | `true` | `true` | — | — | — | — | — | — | `true` | — | — | — | — | `true` | `true` |
+| `false` | `false` | — | `false` | 💥 `ZodError` | — | — | `false` | `false` | — | — | — | — | — | — | `false` | — | — | — | — | `false` | `false` |
+| `1` | `true` | — | `true` | 💥 `ZodError` | — | — | `true` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` | `1` | — | — | — | 💥 `ValidationError` | `true` |
+| `0` | `false` | — | `false` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` | `0` | — | — | — | 💥 `ValidationError` | `false` |
+| `-0` | `false` | — | `false` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` | `0` | — | — | — | 💥 `ValidationError` | `false` |
+| `1.5` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `true` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` | `1` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
+| `2` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `true` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` | `1` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
+| `NaN` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` | `0` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
+| `1n` | `true` | — | `true` | 💥 `ZodError` | — | — | `true` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` | `1` | — | — | — | 💥 `ValidationError` | `true` |
+| `0n` | `false` | — | `false` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` | `0` | — | — | — | 💥 `ValidationError` | `false` |
+| `2n` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `true` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` | `1` | — | — | — | 💥 `ValidationError` | 💥 `TypeError` |
+| `null` | `undefined` | — | `undefined` | 💥 `ZodError` | `false` | `null` | `false` | 💥 `NullPointerException` | `false` | `false` | — | — | — | — | `null` | `0` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
+| `undefined` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | `undefined` | `undefined` |
+| `[]` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | `null` | — | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
+| `{}` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `false` | 💥 `MissingMethodException` | — | — | — | — | — | — | 💥 `ConverterNotFoundException` | — | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
 
 ## Versions
 
@@ -151,8 +160,17 @@
 | JS built-ins<br>`JSON.parse(value)` | 1 | `v26.9.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | yn<br>`yn(value)` | 1 | `5.1.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | zod<br>`z.stringbool().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| Commons Lang<br>`BooleanUtils.toBoolean(value)` | 2 | `3.21.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Commons Lang<br>`BooleanUtils.toBooleanObject(value)` | 2 | `3.21.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Groovy<br>`value as boolean` | 2 | `6.0.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Groovy<br>`value.toBoolean()` | 2 | `6.0.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Java<br>`Boolean.parseBoolean(value)` | 2 | `25.0.4.1+1-LTS` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`value.toBoolean()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`value.toBooleanStrict()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`value.toBooleanStrictOrNull()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Python<br>`ConfigParser().getboolean(…)` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
 | Python<br>`distutils.util.strtobool(value)` | 2 | `3.11.16` | `C.UTF-8` | `python:3.11.16-slim-bookworm@sha256:a36c24f9cbdf4fd0f52d67f0823eeac19c2028c637cecc392d97f980d4fec56b` |
+| Spring<br>`conversionService.convert(value, Boolean.class)` | 2 | `7.0.9` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | SQLite<br>`SELECT ? IS TRUE` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
 | YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
