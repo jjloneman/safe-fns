@@ -44,39 +44,48 @@
 | remeda<br>`isEmpty(value)` | `undefined` `""` `0` `false` `NaN` `[]` `{}` `‹an empty Map›` `‹a Map with an entry›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a cross-realm Map›` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  | `null` `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
 | remeda<br>`isEmptyish(value)` | `null` `undefined` `""` `[]` `{}` `{ "length": 0 }` `{ "size": 0 }` `‹an empty Map›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a Date›` `‹a cross-realm Map›` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `0` `false` `NaN` `[0]` `[null]` `{ "a": 1 }` `‹a Map with an entry›` `‹a URLSearchParams with an entry›` `‹a function›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
 | Python<br>`not value` | `null` `""` `0` `false` `[]` `{}` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `NaN` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
+| bash<br>`[ -z "$1" ]` | `""` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` |  |  |
+| dash (POSIX sh)<br>`[ -z "$1" ]` | `""` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` |  |  |
+| fish<br>`[ -z "$argv[1]" ]` | `""` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` |  |  |
+| PHP<br>`empty($value)` | `null` `""` `0` `false` `[]` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `NaN` `[0]` `[null]` `{}` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
+| PowerShell<br>`-not $value` | `null` `""` `0` `false` `[]` `[0]` `[null]` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `NaN` `{}` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
+| Rails (ActiveModel)<br>`value.blank?` | `null` `""` `" "` `"\u{A0}"` `false` `[]` `{}` | `"\u{2800}"` `"a"` `0` `NaN` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
+| Ruby<br>`value.empty?` | `""` `[]` `{}` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  | `null` `0` `false` `NaN` |
+| Swift<br>`value.isEmpty` | `""` `[]` `{}` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
+| zsh<br>`[ -z "$1" ]` | `""` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` |  |  |
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.isEmpty(value)` | lodash<br>`_.isEmpty(value)` | remeda<br>`isEmpty(value)` | remeda<br>`isEmptyish(value)` | Python<br>`not value` |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `null` | `true` | `true` | 💥 `TypeError` | `true` | `true` |
-| `undefined` | `true` | `true` | `true` | `true` | — |
-| `""` | `true` | `true` | `true` | `true` | `true` |
-| `" "` | `false` | `false` | `false` | `false` | `false` |
-| `"\u{A0}"` | `false` | `false` | `false` | `false` | `false` |
-| `"\u{2800}"` | `false` | `false` | `false` | `false` | `false` |
-| `"a"` | `false` | `false` | `false` | `false` | `false` |
-| `0` | `true` | `true` | `true` | `false` | `true` |
-| `false` | `true` | `true` | `true` | `false` | `true` |
-| `NaN` | `true` | `true` | `true` | `false` | `false` |
-| `[]` | `true` | `true` | `true` | `true` | `true` |
-| `[0]` | `false` | `false` | `false` | `false` | `false` |
-| `[null]` | `false` | `false` | `false` | `false` | `false` |
-| `{}` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }` | `false` | `false` | `false` | `false` | `false` |
-| `{ "length": 0 }` | `false` | `false` | `false` | `true` | `false` |
-| `{ "size": 0 }` | `false` | `false` | `false` | `true` | `false` |
-| `‹an empty Map›` | `true` | `true` | `true` | `true` | — |
-| `‹a Map with an entry›` | `false` | `false` | `true` | `false` | — |
-| `‹an empty Set›` | `true` | `true` | `true` | `true` | — |
-| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — |
-| `‹an empty URLSearchParams›` | `true` | `true` | `true` | `true` | — |
-| `‹a URLSearchParams with an entry›` | `true` | `true` | `true` | `false` | — |
-| `‹a Date›` | `true` | `true` | `true` | `true` | — |
-| `‹a function›` | `true` | `true` | `true` | `false` | — |
-| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — |
-| `‹a proxy whose ownKeys trap throws›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | — |
-| `‹a cross-realm Map›` | `true` | `true` | `true` | `true` | — |
+| Case | es-toolkit<br>`compat.isEmpty(value)` | lodash<br>`_.isEmpty(value)` | remeda<br>`isEmpty(value)` | remeda<br>`isEmptyish(value)` | Python<br>`not value` | bash<br>`[ -z "$1" ]` | dash (POSIX sh)<br>`[ -z "$1" ]` | fish<br>`[ -z "$argv[1]" ]` | PHP<br>`empty($value)` | PowerShell<br>`-not $value` | Rails (ActiveModel)<br>`value.blank?` | Ruby<br>`value.empty?` | Swift<br>`value.isEmpty` | zsh<br>`[ -z "$1" ]` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `null` | `true` | `true` | 💥 `TypeError` | `true` | `true` | — | — | — | `true` | `true` | `true` | 💥 `NoMethodError` | — | — |
+| `undefined` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — |
+| `""` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `" "` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` |
+| `"\u{A0}"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` |
+| `"\u{2800}"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `"a"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `0` | `true` | `true` | `true` | `false` | `true` | — | — | — | `true` | `true` | `false` | 💥 `NoMethodError` | — | — |
+| `false` | `true` | `true` | `true` | `false` | `true` | — | — | — | `true` | `true` | `true` | 💥 `NoMethodError` | — | — |
+| `NaN` | `true` | `true` | `true` | `false` | `false` | — | — | — | `false` | `false` | `false` | 💥 `NoMethodError` | — | — |
+| `[]` | `true` | `true` | `true` | `true` | `true` | — | — | — | `true` | `true` | `true` | `true` | `true` | — |
+| `[0]` | `false` | `false` | `false` | `false` | `false` | — | — | — | `false` | `true` | `false` | `false` | `false` | — |
+| `[null]` | `false` | `false` | `false` | `false` | `false` | — | — | — | `false` | `true` | `false` | `false` | `false` | — |
+| `{}` | `true` | `true` | `true` | `true` | `true` | — | — | — | `false` | `false` | `true` | `true` | `true` | — |
+| `{ "a": 1 }` | `false` | `false` | `false` | `false` | `false` | — | — | — | `false` | `false` | `false` | `false` | `false` | — |
+| `{ "length": 0 }` | `false` | `false` | `false` | `true` | `false` | — | — | — | `false` | `false` | `false` | `false` | `false` | — |
+| `{ "size": 0 }` | `false` | `false` | `false` | `true` | `false` | — | — | — | `false` | `false` | `false` | `false` | `false` | — |
+| `‹an empty Map›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — |
+| `‹a Map with an entry›` | `false` | `false` | `true` | `false` | — | — | — | — | — | — | — | — | — | — |
+| `‹an empty Set›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — |
+| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — |
+| `‹an empty URLSearchParams›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — |
+| `‹a URLSearchParams with an entry›` | `true` | `true` | `true` | `false` | — | — | — | — | — | — | — | — | — | — |
+| `‹a Date›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — |
+| `‹a function›` | `true` | `true` | `true` | `false` | — | — | — | — | — | — | — | — | — | — |
+| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — | — | — | — | — |
+| `‹a proxy whose ownKeys trap throws›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | — | — | — | — | — | — | — | — | — | — |
+| `‹a cross-realm Map›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — |
 
 ## Versions
 
@@ -87,3 +96,12 @@
 | remeda<br>`isEmpty(value)` | 1 | `2.51.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | remeda<br>`isEmptyish(value)` | 1 | `2.51.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | Python<br>`not value` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
+| bash<br>`[ -z "$1" ]` | 4 | `5.2.37-2+b10` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
+| dash (POSIX sh)<br>`[ -z "$1" ]` | 4 | `0.5.12-12` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
+| fish<br>`[ -z "$argv[1]" ]` | 4 | `4.0.2-1` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
+| PHP<br>`empty($value)` | 4 | `8.5.11` | `C.UTF-8` | `php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7` |
+| PowerShell<br>`-not $value` | 4 | `7.6.6` | `Invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| Rails (ActiveModel)<br>`value.blank?` | 4 | `8.1.4` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
+| Ruby<br>`value.empty?` | 4 | `3.4.11` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
+| Swift<br>`value.isEmpty` | 4 | `6.4` | `C.UTF-8` | `swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66` |
+| zsh<br>`[ -z "$1" ]` | 4 | `5.9-8+b24` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |

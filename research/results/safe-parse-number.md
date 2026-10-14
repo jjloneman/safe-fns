@@ -50,49 +50,49 @@
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.toNumber(value)` | JS built-ins<br>`Number.parseFloat(value)` | JS built-ins<br>`Number(value)` | lodash<br>`_.toNumber(value)` | zod<br>`z.coerce.number().parse(value)` | Python<br>`float(value)` | SQLite<br>`SELECT CAST(? AS REAL)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
-| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"0"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` |
-| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` |
-| `"1.5"` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
-| `" 1.5 "` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
-| `"\u{A0}42\u{A0}"` | `42` | `42` | `42` | `42` | `42` | `42` | `0` | `"\u{A0}42\u{A0}"` | `"\u{A0}42\u{A0}"` |
-| `".5"` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` |
-| `"5."` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` |
-| `"1e3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` |
-| `"1E3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` |
-| `"1e-400"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` |
-| `"1e400"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` | `Infinity` | `Infinity` |
-| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` | `0` | `26` | `26` |
-| `"0b11"` | `3` | `0` | `3` | `3` | `3` | 💥 `ValueError` | `0` | `3` | `"0b11"` |
-| `"0o17"` | `15` | `0` | `15` | `15` | `15` | 💥 `ValueError` | `0` | `"0o17"` | `15` |
-| `"1_000"` | `NaN` | `1` | `NaN` | `NaN` | 💥 `ZodError` | `1000` | `1` | `1000` | `"1_000"` |
-| `"1,000"` | `NaN` | `1` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `ValueError` | `1` | `"1,000"` | `"1,000"` |
-| `"Infinity"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `0` | `"Infinity"` | `"Infinity"` |
-| `"-Infinity"` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | 💥 `ZodError` | `-Infinity` | `-0` | `"-Infinity"` | `"-Infinity"` |
-| `"NaN"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `NaN` | `0` | `"NaN"` | `"NaN"` |
-| `"inf"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `Infinity` | `0` | `"inf"` | `"inf"` |
-| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` |
-| `"   "` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` |
-| `"12px"` | `NaN` | `12` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `ValueError` | `12` | `"12px"` | `"12px"` |
-| `"٤٢"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `42` | `0` | `"٤٢"` | `"٤٢"` |
-| `"１２"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `12` | `0` | `"１２"` | `"１２"` |
-| `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — |
-| `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | — | — |
-| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `-0` | `-0` | — | — |
-| `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `NaN` | `null` | — | — |
-| `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` | — | — |
-| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | — | — |
-| `false` | `0` | `NaN` | `0` | `0` | `0` | `0` | — | — | — |
-| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | `null` | — | — |
-| `undefined` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | — | — | — | — |
-| `10n` | `10` | `10` | `10` | 💥 `TypeError` | `10` | `10` | `10` | — | — |
-| `[]` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | — | — | — |
-| `["7"]` | `7` | `7` | `7` | `7` | `7` | 💥 `TypeError` | — | — | — |
-| `{}` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `TypeError` | — | — | — |
+| Case | es-toolkit<br>`compat.toNumber(value)` | JS built-ins<br>`Number.parseFloat(value)` | JS built-ins<br>`Number(value)` | lodash<br>`_.toNumber(value)` | zod<br>`z.coerce.number().parse(value)` | Python<br>`float(value)` | SQLite<br>`SELECT CAST(? AS REAL)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` | C (glibc)<br>`atof(value)` | C (glibc)<br>`strtod(value, NULL)` | C++ (libstdc++)<br>`std::from_chars(first, last, double&)` | C++ (libstdc++)<br>`std::stod(value)` | fish<br>`math -- $argv[1]` | PHP<br>`filter_var($value, FILTER_VALIDATE_FLOAT)` | PHP<br>`floatval($value)` | PowerShell<br>`[double]::Parse($value)` | PowerShell<br>`[double]$value` | PowerShell<br>`$value -as [double]` | Rails (ActiveModel)<br>`ActiveModel::Type::Float.new.cast(value)` | Ruby<br>`Float(value)` | Ruby<br>`value.to_f` | Swift<br>`Double(value)` | zsh<br>`printf '%s' "$(( $1 ))"` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `"42"` |
+| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | 💥 `exit 1` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `"-42"` |
+| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | 💥 `std::errc::invalid_argument` | `42` | `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `"42"` |
+| `"0"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `"0"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `"0"` |
+| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | 💥 `exit 1` | `0` | `-0` | `-0` | `0` | `0` | `-0` | `-0` | `-0` | `-0` | `"0"` |
+| `"1.5"` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `"1.5"` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `"1.5"` |
+| `" 1.5 "` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | 💥 `std::errc::invalid_argument` | `1.5` | `"1.5"` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `null` | `"1.5"` |
+| `"\u{A0}42\u{A0}"` | `42` | `42` | `42` | `42` | `42` | `42` | `0` | `"\u{A0}42\u{A0}"` | `"\u{A0}42\u{A0}"` | `0` | `0` | 💥 `std::errc::invalid_argument` | 💥 `std::invalid_argument` | 💥 `exit 1` | `false` | `0` | 💥 `FormatException` | `42` | `42` | `0` | 💥 `ArgumentError` | `0` | `null` | 💥 `exit 1` |
+| `".5"` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `"0.5"` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `"0.5"` |
+| `"5."` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `"5"` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `"5."` |
+| `"1e3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `"1000"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `"1000."` |
+| `"1E3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `"1000"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `"1000."` |
+| `"1e-400"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | 💥 `std::errc::result_out_of_range` | 💥 `std::out_of_range` | `"0"` | `false` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `"0."` |
+| `"1e400"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `std::errc::result_out_of_range` | 💥 `std::out_of_range` | 💥 `exit 1` | `false` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `"Inf"` |
+| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` | `0` | `26` | `26` | `26` | `26` | `0` | `26` | `"26"` | `false` | `0` | 💥 `FormatException` | `26` | `26` | `0` | `26` | `0` | `26` | `"26"` |
+| `"0b11"` | `3` | `0` | `3` | `3` | `3` | 💥 `ValueError` | `0` | `3` | `"0b11"` | `0` | `0` | `0` | `0` | 💥 `exit 1` | `false` | `0` | 💥 `FormatException` | `3` | `3` | `0` | 💥 `ArgumentError` | `0` | `null` | `"3"` |
+| `"0o17"` | `15` | `0` | `15` | `15` | `15` | 💥 `ValueError` | `0` | `"0o17"` | `15` | `0` | `0` | `0` | `0` | 💥 `exit 1` | `false` | `0` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `0` | 💥 `ArgumentError` | `0` | `null` | 💥 `exit 1` |
+| `"1_000"` | `NaN` | `1` | `NaN` | `NaN` | 💥 `ZodError` | `1000` | `1` | `1000` | `"1_000"` | `1` | `1` | `1` | `1` | `"1000"` | `false` | `1` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `1000` | `1000` | `1000` | `null` | `"1000"` |
+| `"1,000"` | `NaN` | `1` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `ValueError` | `1` | `"1,000"` | `"1,000"` | `1` | `1` | `1` | `1` | 💥 `exit 1` | `false` | `1` | `1000` | `1000` | `1000` | `1` | 💥 `ArgumentError` | `1` | `null` | `"0"` |
+| `"Infinity"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `0` | `"Infinity"` | `"Infinity"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `exit 1` | `false` | `0` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ArgumentError` | `0` | `Infinity` | `"0"` |
+| `"-Infinity"` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | 💥 `ZodError` | `-Infinity` | `-0` | `"-Infinity"` | `"-Infinity"` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | 💥 `exit 1` | `false` | `0` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | 💥 `ArgumentError` | `0` | `-Infinity` | `"0"` |
+| `"NaN"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `NaN` | `0` | `"NaN"` | `"NaN"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `exit 1` | `false` | `0` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ArgumentError` | `0` | `NaN` | `"NaN"` |
+| `"inf"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `Infinity` | `0` | `"inf"` | `"inf"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `exit 1` | `false` | `0` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `0` | 💥 `ArgumentError` | `0` | `Infinity` | `"Inf"` |
+| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` | `0` | `0` | 💥 `std::errc::invalid_argument` | 💥 `std::invalid_argument` | 💥 `exit 1` | `false` | `0` | 💥 `FormatException` | `0` | `0` | `null` | 💥 `ArgumentError` | `0` | `null` | `"0"` |
+| `"   "` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` | `0` | `0` | 💥 `std::errc::invalid_argument` | 💥 `std::invalid_argument` | 💥 `exit 1` | `false` | `0` | 💥 `FormatException` | `0` | `0` | `null` | 💥 `ArgumentError` | `0` | `null` | `"0"` |
+| `"12px"` | `NaN` | `12` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `ValueError` | `12` | `"12px"` | `"12px"` | `12` | `12` | `12` | `12` | 💥 `exit 1` | `false` | `12` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `12` | 💥 `ArgumentError` | `12` | `null` | 💥 `exit 1` |
+| `"٤٢"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `42` | `0` | `"٤٢"` | `"٤٢"` | `0` | `0` | 💥 `std::errc::invalid_argument` | 💥 `std::invalid_argument` | 💥 `exit 1` | `false` | `0` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `0` | 💥 `ArgumentError` | `0` | `null` | `"0"` |
+| `"１２"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `12` | `0` | `"１２"` | `"１２"` | `0` | `0` | 💥 `std::errc::invalid_argument` | 💥 `std::invalid_argument` | 💥 `exit 1` | `false` | `0` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `0` | 💥 `ArgumentError` | `0` | `null` | `"0"` |
+| `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — | — | — | — | — | — | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — |
+| `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | — | — | — | — | — | — | — | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | — | — |
+| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `-0` | `-0` | — | — | — | — | — | — | — | `0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | — | — |
+| `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `NaN` | `null` | — | — | — | — | — | — | — | `false` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | — | — |
+| `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` | — | — | — | — | — | — | — | `false` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | — | — |
+| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | — | — | — | — | — | — | — | `1` | `1` | 💥 `FormatException` | `1` | `1` | `1` | 💥 `TypeError` | 💥 `NoMethodError` | — | — |
+| `false` | `0` | `NaN` | `0` | `0` | `0` | `0` | — | — | — | — | — | — | — | — | `false` | `0` | 💥 `FormatException` | `0` | `0` | `0` | 💥 `TypeError` | 💥 `NoMethodError` | — | — |
+| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | `null` | — | — | — | — | — | — | — | `false` | `0` | 💥 `FormatException` | `0` | `0` | `null` | 💥 `TypeError` | `0` | — | — |
+| `undefined` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `10n` | `10` | `10` | `10` | 💥 `TypeError` | `10` | `10` | `10` | — | — | — | — | — | — | — | `10` | `10` | `10` | `10` | `10` | `10` | `10` | `10` | — | — |
+| `[]` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | — | — | — | — | — | — | — | — | `false` | `0` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `null` | 💥 `TypeError` | 💥 `NoMethodError` | — | — |
+| `["7"]` | `7` | `7` | `7` | `7` | `7` | 💥 `TypeError` | — | — | — | — | — | — | — | — | `false` | `1` | `7` | 💥 `RuntimeException` | `null` | 💥 `NoMethodError` | 💥 `TypeError` | 💥 `NoMethodError` | — | — |
+| `{}` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `TypeError` | — | — | — | — | — | — | — | — | `false` | `1` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `null` | 💥 `TypeError` | 💥 `NoMethodError` | — | — |
 
 ## Versions
 
@@ -107,3 +107,18 @@
 | SQLite<br>`SELECT CAST(? AS REAL)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
 | YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| C (glibc)<br>`atof(value)` | 4 | `2.41-12+deb13u3` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
+| C (glibc)<br>`strtod(value, NULL)` | 4 | `2.41-12+deb13u3` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
+| C++ (libstdc++)<br>`std::from_chars(first, last, double&)` | 4 | `16.1.0` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
+| C++ (libstdc++)<br>`std::stod(value)` | 4 | `16.1.0` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
+| fish<br>`math -- $argv[1]` | 4 | `4.0.2-1` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
+| PHP<br>`filter_var($value, FILTER_VALIDATE_FLOAT)` | 4 | `8.5.11` | `C.UTF-8` | `php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7` |
+| PHP<br>`floatval($value)` | 4 | `8.5.11` | `C.UTF-8` | `php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7` |
+| PowerShell<br>`[double]::Parse($value)` | 4 | `7.6.6` | `Invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| PowerShell<br>`[double]$value` | 4 | `7.6.6` | `Invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| PowerShell<br>`$value -as [double]` | 4 | `7.6.6` | `Invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| Rails (ActiveModel)<br>`ActiveModel::Type::Float.new.cast(value)` | 4 | `8.1.4` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
+| Ruby<br>`Float(value)` | 4 | `3.4.11` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
+| Ruby<br>`value.to_f` | 4 | `3.4.11` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
+| Swift<br>`Double(value)` | 4 | `6.4` | `C.UTF-8` | `swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66` |
+| zsh<br>`printf '%s' "$(( $1 ))"` | 4 | `5.9-8+b24` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |

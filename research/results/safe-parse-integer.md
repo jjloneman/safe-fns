@@ -33,32 +33,32 @@
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` | SQLite<br>`SELECT CAST(? AS INTEGER)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
-| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `34` | `42` |
-| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` | `42` | `42` | `42` |
-| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `ValueError` | `42` | `42.5` | `42.5` |
-| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `ValueError` | `1` | `1000` | `1000` |
-| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` | `0` | `26` | `26` |
-| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | `9007199254740992` | `9007199254740992` |
-| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `-0` | `-0` |
-| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` |
-| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` |
-| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` | `0` | `"٤٢"` | `"٤٢"` |
-| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `ValueError` | `12` | `"12px"` | `"12px"` |
-| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | `1000` | `1` | `1000` | `"1_000"` |
-| `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — |
-| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` | `42` | — | — |
-| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` | `0` | — | — |
-| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowError` | `9223372036854775807n` | — | — |
-| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` | `42` | — | — |
-| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | — | — |
-| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | — | — |
-| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | `null` | — | — |
-| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — | — | — | — |
+| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` | SQLite<br>`SELECT CAST(? AS INTEGER)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` | bash<br>`printf '%d' "$1"` | bash<br>`printf '%s' "$(( $1 ))"` | C (glibc)<br>`atoi(value)` | C (glibc)<br>`strtol(value, NULL, 10)` | C++ (libstdc++)<br>`std::from_chars(first, last, int64_t&)` | C++ (libstdc++)<br>`std::stoi(value)` | dash (POSIX sh)<br>`printf '%d' "$1"` | dash (POSIX sh)<br>`printf '%s' "$(( $1 ))"` | git<br>`git config --type=int` | PHP<br>`filter_var($value, FILTER_VALIDATE_INT)` | PHP<br>`intval($value)` | PowerShell<br>`[int]::Parse($value)` | PowerShell<br>`[int]$value` | PowerShell<br>`$value -as [int]` | Rails (ActiveModel)<br>`ActiveModel::Type::Integer.new.cast(value)` | Ruby<br>`Integer(value)` | Ruby<br>`value.to_i` | Swift<br>`Int(value)` | zsh<br>`printf '%d' "$1"` | zsh<br>`printf '%s' "$(( $1 ))"` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `"42"` | `"42"` | `42` | `42` | `42` | `42` | `"42"` | `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `"42"` | `"42"` |
+| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `"-42"` | `"-42"` | `-42` | `-42` | `-42` | `-42` | `"-42"` | `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `"-42"` | `"-42"` |
+| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `"42"` | `"42"` | `42` | `42` | 💥 `std::errc::invalid_argument` | `42` | `"42"` | `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `"42"` | `"42"` |
+| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `34` | `42` | `"34"` | `"34"` | `42` | `42` | `42` | `42` | `"34"` | `"34"` | `34` | `false` | `42` | `42` | `42` | `42` | `42` | `34` | `42` | `42` | `"42"` | `"42"` |
+| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` | `42` | `42` | `42` | 💥 `exit 1` | 💥 `exit 1` | `42` | `42` | `42` | `42` | 💥 `exit 1` | 💥 `exit 2` | 💥 `exit 128` | `false` | `42` | 💥 `FormatException` | `42` | `42` | `42` | 💥 `ArgumentError` | `42` | `null` | `"42"` | `"42."` |
+| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `ValueError` | `42` | `42.5` | `42.5` | 💥 `exit 1` | 💥 `exit 1` | `42` | `42` | `42` | `42` | 💥 `exit 1` | 💥 `exit 2` | 💥 `exit 128` | `false` | `42` | 💥 `FormatException` | `42` | `42` | `42` | 💥 `ArgumentError` | `42` | `null` | `"42"` | `"42.5"` |
+| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `ValueError` | `1` | `1000` | `1000` | 💥 `exit 1` | 💥 `exit 1` | `1` | `1` | `1` | `1` | 💥 `exit 1` | 💥 `exit 2` | 💥 `exit 128` | `false` | `1000` | 💥 `FormatException` | `1000` | `1000` | `1` | 💥 `ArgumentError` | `1` | `null` | `"1000"` | `"1000."` |
+| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` | `0` | `26` | `26` | `"26"` | `"26"` | `0` | `0` | `0` | `0` | `"26"` | `"26"` | `26` | `false` | `0` | 💥 `FormatException` | `26` | `26` | `0` | `26` | `0` | `null` | `"26"` | `"26"` |
+| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | `9007199254740992` | `9007199254740992` | `"9007199254740993"` | `"9007199254740993"` | `1` | `9007199254740993n` | `9007199254740993n` | 💥 `std::out_of_range` | `"9007199254740993"` | `"9007199254740993"` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | 💥 `OverflowException` | 💥 `RuntimeException` | `null` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `"9007199254740993"` | `"9007199254740993"` |
+| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `-0` | `-0` | `"0"` | `"0"` | `0` | `0` | `0` | `0` | `"0"` | `"0"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `"0"` | `"0"` |
+| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | 💥 `exit 1` | `"7"` | `7` | `7` | 💥 `std::errc::invalid_argument` | `7` | 💥 `exit 1` | `"7"` | 💥 `exit 128` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `null` | `"7"` | `"7"` |
+| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` | `"0"` | `"0"` | `0` | `0` | 💥 `std::errc::invalid_argument` | 💥 `std::invalid_argument` | `"0"` | 💥 `exit 2` | 💥 `exit 128` | `false` | `0` | 💥 `FormatException` | `0` | `0` | `null` | 💥 `ArgumentError` | `0` | `null` | `"0"` | `"0"` |
+| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` | `0` | `"٤٢"` | `"٤٢"` | 💥 `exit 1` | 💥 `exit 1` | `0` | `0` | 💥 `std::errc::invalid_argument` | 💥 `std::invalid_argument` | 💥 `exit 1` | 💥 `exit 2` | 💥 `exit 128` | `false` | `0` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `0` | 💥 `ArgumentError` | `0` | `null` | 💥 `exit 1` | `"0"` |
+| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `ValueError` | `12` | `"12px"` | `"12px"` | 💥 `exit 1` | 💥 `exit 1` | `12` | `12` | `12` | `12` | 💥 `exit 1` | 💥 `exit 2` | 💥 `exit 128` | `false` | `12` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `12` | 💥 `ArgumentError` | `12` | `null` | 💥 `exit 1` | 💥 `exit 1` |
+| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | `1000` | `1` | `1000` | `"1_000"` | 💥 `exit 1` | 💥 `exit 1` | `1` | `1` | `1` | `1` | 💥 `exit 1` | 💥 `exit 2` | 💥 `exit 128` | `false` | `1` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `1000` | `1000` | `1000` | `null` | `"1000"` | `"1000"` |
+| `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — | — | — | — | — | — | — | — | — | — | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — | — |
+| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` | `42` | — | — | — | — | — | — | — | — | — | — | — | `false` | `42` | 💥 `FormatException` | `42` | `42` | `42` | `42` | `42` | — | — | — |
+| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` | `0` | — | — | — | — | — | — | — | — | — | — | — | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | — | — | — |
+| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowError` | `9223372036854775807n` | — | — | — | — | — | — | — | — | — | — | — | `false` | `0` | 💥 `FormatException` | 💥 `RuntimeException` | `null` | `null` | 💥 `FloatDomainError` | 💥 `FloatDomainError` | — | — | — |
+| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` | `42` | — | — | — | — | — | — | — | — | — | — | — | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — | — |
+| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | — | — | — | — | — | — | — | — | — | — | — | `9007199254740993n` | `9007199254740993n` | 💥 `OverflowException` | 💥 `RuntimeException` | `null` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | — | — | — |
+| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | — | — | — | — | — | — | — | — | — | — | — | `1` | `1` | 💥 `FormatException` | `1` | `1` | `1` | 💥 `TypeError` | 💥 `NoMethodError` | — | — | — |
+| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | `null` | — | — | — | — | — | — | — | — | — | — | — | `false` | `0` | 💥 `FormatException` | `0` | `0` | `null` | 💥 `TypeError` | `0` | — | — | — |
+| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
 
 ## Versions
 
@@ -73,3 +73,23 @@
 | SQLite<br>`SELECT CAST(? AS INTEGER)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
 | YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| bash<br>`printf '%d' "$1"` | 4 | `5.2.37-2+b10` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
+| bash<br>`printf '%s' "$(( $1 ))"` | 4 | `5.2.37-2+b10` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
+| C (glibc)<br>`atoi(value)` | 4 | `2.41-12+deb13u3` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
+| C (glibc)<br>`strtol(value, NULL, 10)` | 4 | `2.41-12+deb13u3` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
+| C++ (libstdc++)<br>`std::from_chars(first, last, int64_t&)` | 4 | `16.1.0` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
+| C++ (libstdc++)<br>`std::stoi(value)` | 4 | `16.1.0` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
+| dash (POSIX sh)<br>`printf '%d' "$1"` | 4 | `0.5.12-12` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
+| dash (POSIX sh)<br>`printf '%s' "$(( $1 ))"` | 4 | `0.5.12-12` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
+| git<br>`git config --type=int` | 4 | `1:2.47.3-0+deb13u1` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
+| PHP<br>`filter_var($value, FILTER_VALIDATE_INT)` | 4 | `8.5.11` | `C.UTF-8` | `php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7` |
+| PHP<br>`intval($value)` | 4 | `8.5.11` | `C.UTF-8` | `php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7` |
+| PowerShell<br>`[int]::Parse($value)` | 4 | `7.6.6` | `Invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| PowerShell<br>`[int]$value` | 4 | `7.6.6` | `Invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| PowerShell<br>`$value -as [int]` | 4 | `7.6.6` | `Invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| Rails (ActiveModel)<br>`ActiveModel::Type::Integer.new.cast(value)` | 4 | `8.1.4` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
+| Ruby<br>`Integer(value)` | 4 | `3.4.11` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
+| Ruby<br>`value.to_i` | 4 | `3.4.11` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
+| Swift<br>`Int(value)` | 4 | `6.4` | `C.UTF-8` | `swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66` |
+| zsh<br>`printf '%d' "$1"` | 4 | `5.9-8+b24` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
+| zsh<br>`printf '%s' "$(( $1 ))"` | 4 | `5.9-8+b24` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
