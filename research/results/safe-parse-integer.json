@@ -650,6 +650,312 @@
       "version": "4.6.5"
     },
     {
+      "call": "Convert.ToInt64(value, InvariantCulture)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "9007199254740993"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "OverflowException",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.12"
+    },
+    {
+      "call": "int.Parse(value, InvariantCulture)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "OverflowException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.12"
+    },
+    {
+      "call": "long.Parse(value, InvariantCulture)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "9007199254740993"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.12"
+    },
+    {
       "call": "NumberUtils.createInteger(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
       "locale": "en",
@@ -846,6 +1152,206 @@
       "service": "jvm",
       "tier": 2,
       "version": "3.21.0"
+    },
+    {
+      "call": "strconv.Atoi(value)",
+      "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "9007199254740993"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.1"
+    },
+    {
+      "call": "strconv.ParseInt(value, 0, 64)",
+      "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 34
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "9007199254740993"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.1"
     },
     {
       "call": "value as Integer",
@@ -1762,6 +2268,106 @@
       "service": "python",
       "tier": 2,
       "version": "3.14.7"
+    },
+    {
+      "call": "value.parse::<i64>()",
+      "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
+      "locale": "C.UTF-8",
+      "name": "Rust",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "error": "ParseIntError(InvalidDigit)",
+          "kind": "error"
+        },
+        {
+          "error": "ParseIntError(InvalidDigit)",
+          "kind": "error"
+        },
+        {
+          "error": "ParseIntError(InvalidDigit)",
+          "kind": "error"
+        },
+        {
+          "error": "ParseIntError(InvalidDigit)",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "9007199254740993"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "ParseIntError(InvalidDigit)",
+          "kind": "error"
+        },
+        {
+          "error": "ParseIntError(Empty)",
+          "kind": "error"
+        },
+        {
+          "error": "ParseIntError(InvalidDigit)",
+          "kind": "error"
+        },
+        {
+          "error": "ParseIntError(InvalidDigit)",
+          "kind": "error"
+        },
+        {
+          "error": "ParseIntError(InvalidDigit)",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "rust",
+      "tier": 2,
+      "version": "1.99.0"
     },
     {
       "call": "conversionService.convert(value, Integer.class)",
