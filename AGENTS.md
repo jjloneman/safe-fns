@@ -101,6 +101,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Same shape everywhere:** semantic names, lexicographic ordering, 80-column lines, a doc comment on every function, no nested ternaries, and the blank-line padding described under [Code shape](#-code-shape).
 - **Types as strong as the language allows** wherever they can't be inferred: Python annotations and `TypedDict`s, Groovy's declared types and `@CompileStatic`.
 - **A block for every `if`, `for`, and `while`**, even where the language allows a one-line form; Python's `x if y else z` is the one accepted inline conditional.
+  - Ruby is the exception: syntax_tree, its formatter, rewrites a short block into modifier form (`return x if y`) and has no setting to stop it, so its output stands.
 - **Keyword or named arguments** wherever the language has them, mirroring the single-object rule below: in Python, a function with two or more parameters makes them keyword-only (`def run_probe(*, args, probe)`).
 - **Enforce what a tool can:** each language's formatter and linter is configured to these rules (for Python, `research/ruff.toml`), and the rest is applied by hand.
 

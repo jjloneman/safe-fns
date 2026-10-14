@@ -13,6 +13,7 @@ the generated tables instead of summarizing other tools' docs.
 
 - [📚 Table of Contents](#-table-of-contents)
 - [🚀 Running it](#-running-it)
+- [🧰 Profiles](#-profiles)
 - [🗂️ Layout](#️-layout)
 - [📦 The case format](#-the-case-format)
 - [🧩 The adapter contract](#-the-adapter-contract)
@@ -37,7 +38,7 @@ the generated tables instead of summarizing other tools' docs.
 | :-------------------------------- | :------------------------------------------------------------------------------ |
 | `pnpm research`                   | Runs every adapter over every case file                                         |
 | `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats |
-| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (`node`, `python`); repeats                 |
+| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (see [Profiles](#-profiles)); repeats       |
 | `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                   |
 | `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter             |
 | `pnpm research --format --check`  | Reports formatting drift without writing                                        |
@@ -49,13 +50,38 @@ the generated tables instead of summarizing other tools' docs.
 - Clean up with `docker compose --file research/compose.yaml down` and
   `docker image prune`.
 
+## 🧰 Profiles
+
+Each adapter service sits in one profile, named for its image.
+
+| Profile      | Image                                   | Tools                                                    |
+| :----------- | :-------------------------------------- | :------------------------------------------------------- |
+| `c`          | `gcc`                                   | glibc (`ctypes`), libstdc++ (probes compiled at startup) |
+| `node`       | `node`, plus `package.json`'s libraries | JS built-ins and libraries                               |
+| `php`        | `php` (CLI)                             | PHP                                                      |
+| `powershell` | .NET SDK, which ships PowerShell        | PowerShell                                               |
+| `python`     | `python`                                | Python 3.15 and 3.11, SQLite                             |
+| `ruby`       | `ruby`, plus `docker/ruby/Gemfile.lock` | Ruby, Rails' ActiveModel                                 |
+| `shell`      | `debian`, plus Debian's packages        | bash, dash (POSIX sh), fish, zsh, git, systemd           |
+| `swift`      | `swift`                                 | Swift on Linux (swift-corelibs-foundation, not Darwin's) |
+
+- Microsoft no longer publishes PowerShell's own image, so PowerShell comes from
+  the .NET SDK image.
+- The `shell` image installs from the Debian snapshot its base image was built
+  from, so a rebuild gets the same package versions.
+
 ## 🗂️ Layout
 
 - `cases/<function>.json` — the inputs, in the portable format below.
   - `codec.json` isn't a function: every language adapter must return its values
     unchanged, which proves the codec twins agree.
-- `adapters/` — one adapter per language: `node.mts`, `python.py`, `sqlite.py`,
-  and `research_codec.py`, the Python codec.
+- `adapters/` — one adapter per language, beside its codec twin:
+  - `node.mts`;
+  - `python.py`, `sqlite.py`, `shell.py`, and `c.py` (with `cxx_probes.cpp`), on
+    `research_codec.py`;
+  - `ruby.rb` on `research_codec.rb`, `php.php` on `research_codec.php`,
+    `swift.swift` on `research_codec.swift`, and `powershell.ps1` on
+    `research_codec.psm1`.
 - `results/<function>.json` and `.md` — generated; never edit them by hand.
   - The Markdown has a tiers 0–2 summary for decision records, a by-outcome
     table for functions with few distinct results, the full table, and every
@@ -63,7 +89,8 @@ the generated tables instead of summarizing other tools' docs.
 - `sources/` — cached excerpts for tools that can't run in a container, each
   with its URL, version or commit, and fetch date.
 - `compose.yaml` — every service; `docker/` holds Dockerfiles for images that
-  need a build step.
+  need a build step, and `docker/ruby/` the Ruby gems' `Gemfile.lock`.
+- `.swift-format` — swift-format's settings: 80 columns, 2-space indents.
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` — the Node adapter's
   libraries, a separate pnpm root with the repo's 7-day moratorium.
 - `tsconfig.json` — a nested config, so the editor and ESLint resolve the Node
@@ -130,7 +157,23 @@ to stdout:
 - Report the tool's real version and the locale it actually ran under; the
   runner adds the pinned image.
 - Write nothing to disk: the repo is mounted read-only under `/work`, mirroring
-  its layout.
+  its layout. A compiled adapter (Swift, the C++ probes) builds into `/tmp`
+  inside its container.
+
+### 🔌 Two adapter shapes
+
+- **Native:** the language reads the case file itself, so the adapter needs a
+  codec twin of `scripts/research/codec.ts` and a `codec` column that
+  round-trips (Node, Python, Ruby, PHP, Swift, PowerShell).
+- **Driven:** the tool only ever sees a string, so a Python driver decodes the
+  cases with `research_codec.py` and hands each string to the real tool (shells,
+  git, systemd, C / C++).
+  - A shell gets the value as a positional parameter, never interpolated into
+    its script; git gets it through `GIT_CONFIG_VALUE_0`.
+  - Anything but a string is `n/a`, and so is a string holding NUL, which no
+    argument or environment variable can carry.
+  - A nonzero exit status is the error `exit <status>`; a C++ exception or
+    `std::errc` is reported by name.
 
 ## ➕ Adding a function or a tool
 
@@ -155,10 +198,17 @@ to stdout:
 | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TypeScript, JSON, YAML | Prettier, through the repo's root config                                                                                                                 |
 | Python                 | [Ruff](https://docs.astral.sh/ruff/) (`ruff.toml`): `ruff format` in the `ruff` service, `ruff check` (annotations, docstrings, imports) in `ruff-check` |
+| PHP                    | [`@prettier/plugin-php`](https://github.com/prettier/plugin-php), through the root Prettier config                                                       |
+| Ruby                   | [syntax_tree](https://github.com/ruby-syntax-tree/syntax_tree) (`stree`), in the `syntax-tree` service                                                   |
+| Swift                  | [swift-format](https://github.com/swiftlang/swift-format) (`.swift-format`), in the `swift-format` service; `--check` runs `lint --strict`               |
+| C / C++                | [clang-format](https://clang.llvm.org/docs/ClangFormat.html), LLVM style, in the `clang-format` service                                                  |
+| PowerShell             | PSScriptAnalyzer's `Invoke-Formatter`, one-true-brace style, through `docker/powershell/format.ps1` in the `psscriptanalyzer` service                    |
 
 - Every language follows the repo's conventions
   ([AGENTS.md → Every language](../AGENTS.md#-every-language)); each formatter
   and linter is configured to enforce what it can.
+- The shell, git, and systemd probes are scripts inside `shell.py`, so there are
+  no shell or fish files to format; `prettier-plugin-sh` would cover any.
 - `--format` runs the container formatters one at a time, since `ruff format`
   and `ruff check --fix` can rewrite the same file; `--format --check` runs them
   in parallel.
