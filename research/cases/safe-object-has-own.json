@@ -1,0 +1,113 @@
+{
+  "cases": [
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        "a"
+      ]
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        "b"
+      ]
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        "toString"
+      ]
+    },
+    {
+      "args": [
+        {
+          "a": null
+        },
+        "a"
+      ]
+    },
+    {
+      "args": [
+        {
+          "a.b": 1
+        },
+        "a.b"
+      ]
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "b": 1
+          }
+        },
+        "a.b"
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a null-prototype object with a"
+        },
+        "a"
+      ]
+    },
+    {
+      "args": [["x"], "0"]
+    },
+    {
+      "args": [["x"], "length"]
+    },
+    {
+      "args": ["abc", "0"]
+    },
+    {
+      "args": ["abc", "length"]
+    },
+    {
+      "args": [42, "toFixed"]
+    },
+    {
+      "args": [null, "a"]
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        },
+        "a"
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        },
+        "a"
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy of a plain object"
+        },
+        "a"
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm object"
+        },
+        "a"
+      ]
+    }
+  ],
+  "function": "safeObjectHasOwn"
+}
