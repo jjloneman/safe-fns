@@ -18,6 +18,7 @@ the generated tables instead of summarizing other tools' docs.
 - [🗂️ Layout](#️-layout)
 - [📦 The case format](#-the-case-format)
 - [🧩 The adapter contract](#-the-adapter-contract)
+- [🏅 Tiers](#-tiers)
 - [🗄️ Databases](#️-databases)
 - [➕ Adding a function or a tool](#-adding-a-function-or-a-tool)
 - [🖌️ Formatters](#️-formatters)
@@ -271,6 +272,27 @@ to stdout:
     argument or environment variable can carry.
   - A nonzero exit status is the error `exit <status>`; a C++ exception or
     `std::errc` is reported by name.
+
+## 🏅 Tiers
+
+Every column carries a tier, set by its adapter: `tier` on a Node `Tool`, or on
+each tool in a language adapter's own codec (`research_codec.Tool` in Python,
+and its twin in every other language). Tables sort columns by tier, and the
+summary table that decision records quote shows tiers 0–2 only, so a tier
+decides whether a column is quoted.
+
+| Tier | What                                          | Examples                                                                                                                                             |
+| :--: | :-------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  0   | safe-fns itself                               | **safe-fns (planned)**, from the case files' `expected` answers                                                                                      |
+|  1   | JavaScript runtimes and libraries             | JS built-ins, Hermes, lodash, es-toolkit, Ramda, remeda, zod, valibot, yn                                                                            |
+|  2   | Python, the JVM languages, .NET, Go, and Rust | their standard libraries, plus the libraries most code in them reaches for: Guava, Commons Lang, Spring                                              |
+|  3   | Formats, specs, and databases                 | JSON, YAML, TOML, CSV, INI, HTML, XML Schema, SQLite, PostgreSQL, MySQL, MariaDB, SQL Server, MongoDB, Firebase                                      |
+|  4   | Everything else                               | JS validation and config libraries (Ajv, envalid, joi, validator.js, yup); C, C++, PHP, Ruby, Rails, Swift, PowerShell, the shells, systemd, and git |
+
+- Tier 2 is set by language, not by "standard library": Guava is tier 2, while
+  Ruby's and PHP's standard libraries are tier 4.
+- Pick a new tool's tier from this table; a tool that fits none is a question
+  for the owner, not a new tier.
 
 ## 🗄️ Databases
 

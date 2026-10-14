@@ -52,6 +52,7 @@ paths:
 ## 🔷 Code
 
 - `scripts/research/*.ts` follows the `scripts/` conventions; the Node adapters (`research/adapters/*.mts` and `node/*.mts`) follow the TypeScript ones and are checked through `research/tsconfig.json`.
+- **Choose a new tool's tier by the [Tiers table](../../research/README.md#-tiers)**, not by judgment: tier 2 is set by language (Guava is 2, Ruby's standard library is 4), and tiers 0–2 are what decision records quote, so a wrong tier puts a column in or out of the summary.
 - **One module per Node tool.** A library joins as `research/adapters/node/<tool>.mts`, exporting its `Tool`, and is listed in `node.mts`; don't grow the entry file.
 - **Hermes runs the TS encoder's own source.** `ENCODER_SOURCE` (in `codec.ts`) and `errorName` (in `node/tool.mts`) are embedded as text in the program Hermes runs, so keep them free of imports and module-level names, and of syntax Hermes lacks, such as classes.
 - **The codecs are twins.** A change to `scripts/research/codec.ts` needs the same change in every adapter's codec under `research/adapters/`: `research_codec.py`, `research_codec.php`, `research_codec.psm1`, `research_codec.rb`, `research_codec.swift`, `dotnet/Codec.cs`, `go/codec.go`, `jvm/src/main/java/com/safefns/research/ResearchCodec.java`, and `rust/src/codec.rs`. A `codec.json` case proves it. Hermes needs no twin: it runs `ENCODER_SOURCE`, the encoder's own source.
