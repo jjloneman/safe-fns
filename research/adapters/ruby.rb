@@ -52,7 +52,7 @@ module RubyAdapter
             run: ->(value) { ActiveModel::Type::String.new.cast(value) }
           )
         ]
-      },
+      }.freeze,
       name: "Rails (ActiveModel)",
       tier: 4,
       version: ActiveModel.version.to_s
@@ -105,7 +105,7 @@ module RubyAdapter
             run: ->(value) { value.to_s.strip }
           )
         ]
-      },
+      }.freeze,
       name: "Ruby",
       tier: 4,
       version: RUBY_VERSION

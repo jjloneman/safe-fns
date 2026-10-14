@@ -284,14 +284,15 @@ function Get-ErrorName {
 
 .PARAMETER Tools
     Each tool: a hashtable with Functions (probes keyed by function name),
-    Name, Tier, and Version. A probe is a hashtable with Call, Run (a script
+    Name, Tier, Version, and optionally Locale, the culture its calls name
+    (the process's own culture otherwise). A probe is a hashtable with Call, Run (a script
     block), and optionally IsCodec.
 #>
 function Invoke-Adapter {
     param([string[]] $Paths, [hashtable[]] $Tools)
 
     $cultureName = (Get-Culture).Name
-    $locale = $cultureName -eq '' ? 'Invariant' : $cultureName
+    $processLocale = $cultureName -eq '' ? 'invariant' : $cultureName
 
     $columns = foreach ($path in $Paths) {
         $caseFile = Get-Content -LiteralPath $path -Raw -Encoding utf8 |
@@ -306,7 +307,7 @@ function Invoke-Adapter {
                 [ordered]@{
                     call     = $probe.Call
                     function = $caseFile.function
-                    locale   = $locale
+                    locale   = $tool['Locale'] ?? $processLocale
                     name     = $tool.Name
                     outcomes = [object[]] @($caseFile.cases | ForEach-Object {
                             Invoke-Probe -Arguments $_.args -Probe $probe

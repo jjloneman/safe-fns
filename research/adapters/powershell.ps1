@@ -69,4 +69,35 @@ $powerShell = @{
     Version   = $PSVersionTable.PSVersion.ToString()
 }
 
-Invoke-Adapter -Paths $args -Tools @($powerShell)
+<#
+.SYNOPSIS
+    Describe [double]::Parse under one named culture, as its own tool, since a
+    column reports one locale.
+#>
+function New-CultureTool {
+    param([string] $Culture)
+
+    return @{
+        Functions = @{
+            safeParseNumber = @(
+                @{
+                    Call = "[double]::Parse(`$value, [cultureinfo]'$Culture')"
+                    Run  = {
+                        param($value)
+                        [double]::Parse($value, [cultureinfo]$Culture)
+                    }.GetNewClosure()
+                }
+            )
+        }
+        Locale    = $Culture
+        Name      = 'PowerShell'
+        Tier      = 4
+        Version   = $PSVersionTable.PSVersion.ToString()
+    }
+}
+
+Invoke-Adapter -Paths $args -Tools @(
+    $powerShell
+    New-CultureTool -Culture 'de-DE'
+    New-CultureTool -Culture 'fr-FR'
+)
