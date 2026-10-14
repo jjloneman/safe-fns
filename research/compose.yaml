@@ -391,7 +391,7 @@ services:
     healthcheck:
       <<: *database-healthcheck
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-    image: mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15
+    image: mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4
     labels: *database-labels
     networks: [mariadb]
     profiles: ["db"]
@@ -414,7 +414,7 @@ services:
     healthcheck:
       <<: *database-healthcheck
       test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
-    image: mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2
+    image: mongo:9.0.2-noble@sha256:61dd87ff554dc20386c63ebe1f7ede27314370ad5a7bf357c685fab424672158
     labels: *database-labels
     networks: [mongo]
     profiles: ["db"]
