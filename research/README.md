@@ -1,17 +1,36 @@
 # 🔬 Research harness
 
-Runs each planned safe-fns function's edge cases through the equivalent calls in other languages, libraries, databases, and formats, and records what each one returns. Decision records in [docs/decisions/](../docs/decisions/index.md) quote the generated tables instead of summarizing other tools' docs.
+Runs each planned safe-fns function's edge cases through the equivalent calls in
+other languages, libraries, databases, and formats, and records what each one
+returns. Decision records in [docs/decisions/](../docs/decisions/index.md) quote
+the generated tables instead of summarizing other tools' docs.
 
-- Every tool runs in a pinned container, so anyone who clones the repo gets the same results with one command.
+- Every tool runs in a pinned container, so anyone who clones the repo gets the
+  same results with one command.
 - Nothing here is published or run by normal CI.
+
+## 📚 Table of Contents
+
+- [📚 Table of Contents](#-table-of-contents)
+- [🚀 Running it](#-running-it)
+- [🗂️ Layout](#️-layout)
+- [📦 The case format](#-the-case-format)
+- [🧩 The adapter contract](#-the-adapter-contract)
+- [➕ Adding a function or a tool](#-adding-a-function-or-a-tool)
+- [🖌️ Formatters](#️-formatters)
+
+---
 
 ## 🚀 Running it
 
 1. Install a Docker-compatible runtime.
-   - The owner's Mac mini uses [OrbStack](https://orbstack.dev) (`brew install --cask orbstack`), which is free for personal use.
-   - [Colima](https://github.com/abiosoft/colima), Docker Desktop, and GitHub Actions' runners run the same `compose.yaml` unchanged.
+   - The owner's Mac mini uses [OrbStack](https://orbstack.dev)
+     (`brew install --cask orbstack`), which is free for personal use.
+   - [Colima](https://github.com/abiosoft/colima), Docker Desktop, and GitHub
+     Actions' runners run the same `compose.yaml` unchanged.
 2. Run `pnpm research` from the repo root.
-   - It builds and pulls the images it needs, runs every adapter in parallel, and rewrites `research/results/`.
+   - It builds and pulls the images it needs, runs every adapter in parallel,
+     and rewrites `research/results/`.
    - The first run pulls ~1–2 GB of images; later runs take seconds.
 
 | Command                           | What it does                                                                    |
@@ -23,26 +42,40 @@ Runs each planned safe-fns function's edge cases through the equivalent calls in
 | `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter             |
 | `pnpm research --format --check`  | Reports formatting drift without writing                                        |
 
-- Results are byte-identical across runs and concurrency levels: columns are sorted, keys are sorted, and nothing records a timestamp.
-- The manual **🔬 Research** workflow (`.github/workflows/research.yml`) runs the same command on GitHub and uploads the results as an artifact.
-- Clean up with `docker compose --file research/compose.yaml down` and `docker image prune`.
+- Results are byte-identical across runs and concurrency levels: columns are
+  sorted, keys are sorted, and nothing records a timestamp.
+- The manual **🔬 Research** workflow (`.github/workflows/research.yml`) runs
+  the same command on GitHub and uploads the results as an artifact.
+- Clean up with `docker compose --file research/compose.yaml down` and
+  `docker image prune`.
 
 ## 🗂️ Layout
 
 - `cases/<function>.json` — the inputs, in the portable format below.
-  - `codec.json` isn't a function: every language adapter must return its values unchanged, which proves the codec twins agree.
-- `adapters/` — one adapter per language: `node.mts`, `python.py`, `sqlite.py`, and `research_codec.py`, the Python codec.
+  - `codec.json` isn't a function: every language adapter must return its values
+    unchanged, which proves the codec twins agree.
+- `adapters/` — one adapter per language: `node.mts`, `python.py`, `sqlite.py`,
+  and `research_codec.py`, the Python codec.
 - `results/<function>.json` and `.md` — generated; never edit them by hand.
-  - The Markdown has a tiers 0–2 summary for decision records, a by-outcome table for functions with few distinct results, the full table, and every column's version, locale, and image.
-- `sources/` — cached excerpts for tools that can't run in a container, each with its URL, version or commit, and fetch date.
-- `compose.yaml` — every service; `docker/` holds Dockerfiles for images that need a build step.
-- `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` — the Node adapter's libraries, a separate pnpm root with the repo's 7-day moratorium.
-- `tsconfig.json` — a nested config, so the editor and ESLint resolve the Node adapter's imports from `research/node_modules`.
-- The host-side TypeScript lives in [scripts/research/](../scripts/research/): the runner, the codec, result merging, and the table generator.
+  - The Markdown has a tiers 0–2 summary for decision records, a by-outcome
+    table for functions with few distinct results, the full table, and every
+    column's version, locale, and image.
+- `sources/` — cached excerpts for tools that can't run in a container, each
+  with its URL, version or commit, and fetch date.
+- `compose.yaml` — every service; `docker/` holds Dockerfiles for images that
+  need a build step.
+- `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` — the Node adapter's
+  libraries, a separate pnpm root with the repo's 7-day moratorium.
+- `tsconfig.json` — a nested config, so the editor and ESLint resolve the Node
+  adapter's imports from `research/node_modules`.
+- The host-side TypeScript lives in [scripts/research/](../scripts/research/):
+  the runner, the codec, result merging, and the table generator.
 
 ## 📦 The case format
 
-A case file names the function and lists its cases; each case has `args` and, where a decision record settles it, safe-fns' `expected` answer, which becomes the tier-0 **safe-fns (planned)** column.
+A case file names the function and lists its cases; each case has `args` and,
+where a decision record settles it, safe-fns' `expected` answer, which becomes
+the tier-0 **safe-fns (planned)** column.
 
 ```json
 {
@@ -62,13 +95,17 @@ Plain JSON passes through. Values JSON can't hold are single-key tagged objects:
 | `{ "$js": "a revoked proxy" }`      | a JavaScript-only value, built by the Node adapter            |
 | `{ "$repr": "[object Map]" }`       | an output with no encoding; never valid as an input           |
 
-- A `$js` name is a factory in `adapters/node.mts`, or the `description` of an entry in `test/hostile-inputs.ts` or `test/cross-realm-inputs.ts`.
-- A language that can't express an input (Python has no `undefined`) reports `n/a` for it.
+- A `$js` name is a factory in `adapters/node.mts`, or the `description` of an
+  entry in `test/hostile-inputs.ts` or `test/cross-realm-inputs.ts`.
+- A language that can't express an input (Python has no `undefined`) reports
+  `n/a` for it.
 - Write invisible characters as `\u` escapes, so a reviewer can see them.
 
 ## 🧩 The adapter contract
 
-An adapter is a Compose service labeled `dev.safe-fns.research.role: adapter`, in a profile, whose entrypoint takes case-file paths and prints one JSON object to stdout:
+An adapter is a Compose service labeled `dev.safe-fns.research.role: adapter`,
+in a profile, whose entrypoint takes case-file paths and prints one JSON object
+to stdout:
 
 ```json
 {
@@ -86,19 +123,30 @@ An adapter is a Compose service labeled `dev.safe-fns.research.role: adapter`, i
 }
 ```
 
-- One column per call: a tool with two relevant calls (`Number(value)`, `Number.parseFloat(value)`) prints two columns.
-- One outcome per case, in case-file order: `value` (the encoded return value), `error` (the thrown class's name), or `n/a`.
-- Report the tool's real version and the locale it actually ran under; the runner adds the pinned image.
-- Write nothing to disk: the repo is mounted read-only under `/work`, mirroring its layout.
+- One column per call: a tool with two relevant calls (`Number(value)`,
+  `Number.parseFloat(value)`) prints two columns.
+- One outcome per case, in case-file order: `value` (the encoded return value),
+  `error` (the thrown class's name), or `n/a`.
+- Report the tool's real version and the locale it actually ran under; the
+  runner adds the pinned image.
+- Write nothing to disk: the repo is mounted read-only under `/work`, mirroring
+  its layout.
 
 ## ➕ Adding a function or a tool
 
-- **A function:** add `cases/<kebab-name>.json`, add probes for it to each adapter that has an opinion, and run `pnpm research --function <name>`.
-- **A tool in an existing language:** add its library to `package.json` (a version at least 7 days old) or its probes to the Python adapter, then rerun.
+- **A function:** add `cases/<kebab-name>.json`, add probes for it to each
+  adapter that has an opinion, and run `pnpm research --function <name>`.
+- **A tool in an existing language:** add its library to `package.json` (a
+  version at least 7 days old) or its probes to the Python adapter, then rerun.
 - **A new language:**
-  1. Add a service to `compose.yaml` with a pinned `image: name:X.Y.Z@sha256:…` whose tag was last pushed at least 7 days ago, the `adapter` role label, a profile, `LANG`/`LC_ALL` set to `C.UTF-8`, and read-only mounts.
-  2. Write the adapter and its codec twin; the `codec` case file must round-trip.
-  3. Add the language's formatter as a `formatter` service with `format-args` and `check-args` labels (see `ruff`), or a Prettier plugin in `package.json`.
+  1. Add a service to `compose.yaml` with a pinned `image: name:X.Y.Z@sha256:…`
+     whose tag was last pushed at least 7 days ago, the `adapter` role label, a
+     profile, `LANG`/`LC_ALL` set to `C.UTF-8`, and read-only mounts.
+  2. Write the adapter and its codec twin; the `codec` case file must
+     round-trip.
+  3. Add the language's formatter as a `formatter` service with `format-args`
+     and `check-args` labels (see `ruff`), or a Prettier plugin in
+     `package.json`.
   4. Add a Dependabot entry if the image comes from a Dockerfile.
 
 ## 🖌️ Formatters
@@ -108,5 +156,9 @@ An adapter is a Compose service labeled `dev.safe-fns.research.role: adapter`, i
 | TypeScript, JSON, YAML | Prettier, through the repo's root config                                                                                                                 |
 | Python                 | [Ruff](https://docs.astral.sh/ruff/) (`ruff.toml`): `ruff format` in the `ruff` service, `ruff check` (annotations, docstrings, imports) in `ruff-check` |
 
-- Every language follows the repo's conventions ([AGENTS.md → Every language](../AGENTS.md#-every-language)); each formatter and linter is configured to enforce what it can.
-- `--format` runs the container formatters one at a time, since `ruff format` and `ruff check --fix` can rewrite the same file; `--format --check` runs them in parallel.
+- Every language follows the repo's conventions
+  ([AGENTS.md → Every language](../AGENTS.md#-every-language)); each formatter
+  and linter is configured to enforce what it can.
+- `--format` runs the container formatters one at a time, since `ruff format`
+  and `ruff check --fix` can rewrite the same file; `--format --check` runs them
+  in parallel.

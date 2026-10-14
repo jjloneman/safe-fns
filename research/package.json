@@ -2,7 +2,7 @@
   "name": "safe-fns-research",
   "version": "0.0.0",
   "private": true,
-  "description": "The cross-language comparison harness: the libraries the Node adapter runs, installed apart from the published package",
+  "description": "🔬 The cross-language comparison harness: the libraries the Node adapter runs, installed apart from the published package",
   "type": "module",
   "dependencies": {
     "envalid": "8.2.0",
