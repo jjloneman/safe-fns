@@ -197,3 +197,116 @@ updates:
           - "*"
     labels:
       - "📦 dependencies"
+
+  # The JVM adapter's Gradle image and its formatters' Temurin images; the
+  # Checkstyle and ktfmt jars are bumped by hand (see their Dockerfiles).
+  - package-ecosystem: "docker"
+    directories:
+      - "/research/docker/checkstyle"
+      - "/research/docker/jvm"
+      - "/research/docker/ktfmt"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    groups:
+      research-jvm-images:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"
+
+  # The JVM adapter's libraries and Kotlin plugin. Maven has no release-age
+  # floor, so this cooldown is what holds them 7 days back.
+  - package-ecosystem: "gradle"
+    directory: "/research/adapters/jvm"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+
+    # Majors included, like the Node adapter's libraries: a new major is a
+    # result to record, not a breaking change to the package.
+    groups:
+      research-jvm:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"
+
+  # The .NET, Go, and Rust adapters' images, each with its adapter compiled in.
+  - package-ecosystem: "docker"
+    directories:
+      - "/research/docker/dotnet"
+      - "/research/docker/go"
+      - "/research/docker/rust"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    groups:
+      research-compiled-images:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"
+
+  # The .NET adapter's tool manifest (`.config/dotnet-tools.json`): CSharpier.
+  - package-ecosystem: "nuget"
+    directory: "/research/adapters/dotnet"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    labels:
+      - "📦 dependencies"
+
+  # The Rust adapter's crates: `serde_json` and what it locks. Cargo has no
+  # release-age floor, so this cooldown is what holds them 7 days back.
+  - package-ecosystem: "cargo"
+    directory: "/research/adapters/rust"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    groups:
+      research-crates:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"

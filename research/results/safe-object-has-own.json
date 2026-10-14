@@ -336,6 +336,352 @@
       "version": "4.18.1"
     },
     {
+      "call": "dictionary.ContainsKey(key)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.12"
+    },
+    {
+      "call": "_, ok := obj[key]",
+      "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.1"
+    },
+    {
+      "call": "key in obj",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Groovy",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "6.0.0"
+    },
+    {
+      "call": "map.containsKey(key)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "key in map",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Kotlin",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "2.4.20"
+    },
+    {
       "call": "key in obj",
       "image": "python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56",
       "locale": "C.UTF-8",
@@ -410,232 +756,10 @@
       "version": "3.14.7"
     },
     {
-      "call": "property_exists($object, $key)",
-      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "call": "map.contains_key(key)",
+      "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
       "locale": "C.UTF-8",
-      "name": "PHP",
-      "outcomes": [
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "error": "TypeError",
-          "kind": "error"
-        },
-        {
-          "error": "TypeError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "error": "TypeError",
-          "kind": "error"
-        },
-        {
-          "error": "TypeError",
-          "kind": "error"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        }
-      ],
-      "service": "php",
-      "tier": 4,
-      "version": "8.5.11"
-    },
-    {
-      "call": "$object.ContainsKey($key)",
-      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
-      "locale": "Invariant",
-      "name": "PowerShell",
-      "outcomes": [
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "error": "RuntimeException",
-          "kind": "error"
-        },
-        {
-          "error": "RuntimeException",
-          "kind": "error"
-        },
-        {
-          "error": "RuntimeException",
-          "kind": "error"
-        },
-        {
-          "error": "RuntimeException",
-          "kind": "error"
-        },
-        {
-          "error": "RuntimeException",
-          "kind": "error"
-        },
-        {
-          "error": "RuntimeException",
-          "kind": "error"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        }
-      ],
-      "service": "powershell",
-      "tier": 4,
-      "version": "7.6.6"
-    },
-    {
-      "call": "object.key?(key)",
-      "image": "ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2",
-      "locale": "C.UTF-8",
-      "name": "Ruby",
-      "outcomes": [
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "error": "NoMethodError",
-          "kind": "error"
-        },
-        {
-          "error": "NoMethodError",
-          "kind": "error"
-        },
-        {
-          "error": "NoMethodError",
-          "kind": "error"
-        },
-        {
-          "error": "NoMethodError",
-          "kind": "error"
-        },
-        {
-          "error": "NoMethodError",
-          "kind": "error"
-        },
-        {
-          "error": "NoMethodError",
-          "kind": "error"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        }
-      ],
-      "service": "ruby",
-      "tier": 4,
-      "version": "3.4.11"
-    },
-    {
-      "call": "object.keys.contains(key)",
-      "image": "swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66",
-      "locale": "C.UTF-8",
-      "name": "Swift",
+      "name": "Rust",
       "outcomes": [
         {
           "kind": "value",
@@ -695,9 +819,9 @@
           "kind": "n/a"
         }
       ],
-      "service": "swift",
-      "tier": 4,
-      "version": "6.4"
+      "service": "rust",
+      "tier": 2,
+      "version": "1.99.0"
     }
   ],
   "function": "safeObjectHasOwn"
