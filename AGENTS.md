@@ -341,10 +341,10 @@ The conventions below are written for TypeScript, but they bind code in every la
   - `report` — PR-only, after the rest; posts both PR comments.
 - **Two sticky PR comments**, each found by its opening heading and edited in place rather than re-posted:
   - `## 📊 Code coverage`, from `scripts/post-coverage-pr-comment.ts`;
-  - `## ⏱️ CI timings`, from `scripts/post-ci-timings.ts`.
+  - `## ⏱️ CI timings`, from `scripts/post-ci-timings.ts`, which covers both `ci.yml` and `research-check.yml` on the PR's commit; each workflow's `report` job re-posts it, so the last to finish leaves the full table.
   - A bug in either script fails `report`; a failure to post it can't fix, such as the read-only token Dependabot and fork PRs get, only warns.
 - `.github/workflows/codeql.yml` scans on PRs, `main`, and weekly.
-- `.github/workflows/research-check.yml` runs only on PRs that touch the harness or what it depends on (its `paths:` list): it installs `research/`, lints and typechecks it, and runs `pnpm research --format --check`.
+- `.github/workflows/research-check.yml` runs only on PRs that touch the harness or what it depends on (its `paths:` list): it installs `research/`, lints and typechecks it, and runs `pnpm research --format --check`, then a `report` job re-posts the CI timings comment.
 - `.github/workflows/research.yml` is manual (`workflow_dispatch`): it runs `pnpm research` from the same Compose file and uploads `research/results/` as an artifact.
 - `.github/workflows/release.yml` runs on every push to `main` (see [Versioning & releases](#-versioning--releases)):
   - `release-please` — opens or updates the release PR, and tags the release once it is merged;
