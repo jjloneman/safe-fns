@@ -4,61 +4,61 @@
 
 ## Tiers 0–2
 
-| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
-| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` |
-| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `ValueError` |
-| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `ValueError` |
-| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` |
-| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` |
-| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` |
-| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` |
-| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` |
-| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` |
-| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `ValueError` |
-| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | `1000` |
-| `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` |
-| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` |
-| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowError` |
-| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` |
-| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | `9007199254740993n` |
-| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` |
-| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` |
-| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — |
+| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | .NET<br>`Convert.ToInt64(value, InvariantCulture)` | .NET<br>`int.Parse(value, InvariantCulture)` | .NET<br>`long.Parse(value, InvariantCulture)` | Go<br>`strconv.Atoi(value)` | Go<br>`strconv.ParseInt(value, 0, 64)` | Python<br>`int(value)` | Rust<br>`value.parse::<i64>()` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
+| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `34` | `42` | `42` |
+| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | 💥 `ValueError` | 💥 `ParseIntError(InvalidDigit)` |
+| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | 💥 `ValueError` | 💥 `ParseIntError(InvalidDigit)` |
+| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | 💥 `ValueError` | 💥 `ParseIntError(InvalidDigit)` |
+| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | `26` | 💥 `ValueError` | 💥 `ParseIntError(InvalidDigit)` |
+| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` | 💥 `OverflowException` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` |
+| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` |
+| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | `7` | 💥 `ParseIntError(InvalidDigit)` |
+| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | 💥 `ValueError` | 💥 `ParseIntError(Empty)` |
+| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | `42` | 💥 `ParseIntError(InvalidDigit)` |
+| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | 💥 `ValueError` | 💥 `ParseIntError(InvalidDigit)` |
+| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | `1000` | `1000` | 💥 `ParseIntError(InvalidDigit)` |
+| `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — | — | — | `42` | — |
+| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` | — | — | — | — | `42` | — |
+| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` | — | — | — | — | `0` | — |
+| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowException` | — | — | — | — | 💥 `OverflowError` | — |
+| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | 💥 `InvalidCastException` | — | — | — | — | `42` | — |
+| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | 💥 `InvalidCastException` | — | — | — | — | `9007199254740993n` | — |
+| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | — | — | — | `1` | — |
+| `null` | `0` | `NaN` | `0` | `0` | `0` | `0` | — | — | — | — | 💥 `TypeError` | — |
+| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — | — | — | — | — | — | — |
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` | SQLite<br>`SELECT CAST(? AS INTEGER)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
-| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `34` | `42` |
-| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` | `42` | `42` | `42` |
-| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `ValueError` | `42` | `42.5` | `42.5` |
-| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `ValueError` | `1` | `1000` | `1000` |
-| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` | `0` | `26` | `26` |
-| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | `9007199254740992` | `9007199254740992` |
-| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `-0` | `-0` |
-| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` |
-| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` |
-| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` | `0` | `"٤٢"` | `"٤٢"` |
-| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `ValueError` | `12` | `"12px"` | `"12px"` |
-| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | `1000` | `1` | `1000` | `"1_000"` |
-| `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — |
-| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` | `42` | — | — |
-| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` | `0` | — | — |
-| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowError` | `9223372036854775807n` | — | — |
-| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` | `42` | — | — |
-| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | — | — |
-| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | — | — |
-| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | `null` | — | — |
-| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — | — | — | — |
+| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | .NET<br>`Convert.ToInt64(value, InvariantCulture)` | .NET<br>`int.Parse(value, InvariantCulture)` | .NET<br>`long.Parse(value, InvariantCulture)` | Go<br>`strconv.Atoi(value)` | Go<br>`strconv.ParseInt(value, 0, 64)` | Python<br>`int(value)` | Rust<br>`value.parse::<i64>()` | SQLite<br>`SELECT CAST(? AS INTEGER)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
+| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `34` | `42` | `42` | `42` | `34` | `42` |
+| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | 💥 `ValueError` | 💥 `ParseIntError(InvalidDigit)` | `42` | `42` | `42` |
+| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | 💥 `ValueError` | 💥 `ParseIntError(InvalidDigit)` | `42` | `42.5` | `42.5` |
+| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | 💥 `ValueError` | 💥 `ParseIntError(InvalidDigit)` | `1` | `1000` | `1000` |
+| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | `26` | 💥 `ValueError` | 💥 `ParseIntError(InvalidDigit)` | `0` | `26` | `26` |
+| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` | 💥 `OverflowException` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740992` | `9007199254740992` |
+| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `-0` | `-0` |
+| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | `7` | 💥 `ParseIntError(InvalidDigit)` | `7` | `7` | `7` |
+| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | 💥 `ValueError` | 💥 `ParseIntError(Empty)` | `0` | `null` | `null` |
+| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | `42` | 💥 `ParseIntError(InvalidDigit)` | `0` | `"٤٢"` | `"٤٢"` |
+| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | 💥 `strconv.ErrSyntax` | 💥 `ValueError` | 💥 `ParseIntError(InvalidDigit)` | `12` | `"12px"` | `"12px"` |
+| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `strconv.ErrSyntax` | `1000` | `1000` | 💥 `ParseIntError(InvalidDigit)` | `1` | `1000` | `"1_000"` |
+| `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — | — | — | `42` | — | `42` | — | — |
+| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` | — | — | — | — | `42` | — | `42` | — | — |
+| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` | — | — | — | — | `0` | — | `0` | — | — |
+| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowException` | — | — | — | — | 💥 `OverflowError` | — | `9223372036854775807n` | — | — |
+| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | 💥 `InvalidCastException` | — | — | — | — | `42` | — | `42` | — | — |
+| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | 💥 `InvalidCastException` | — | — | — | — | `9007199254740993n` | — | `9007199254740993n` | — | — |
+| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | — | — | — | `1` | — | — | — | — |
+| `null` | `0` | `NaN` | `0` | `0` | `0` | `0` | — | — | — | — | 💥 `TypeError` | — | `null` | — | — |
+| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — |
 
 ## Versions
 
@@ -69,7 +69,13 @@
 | lodash<br>`_.toInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | lodash<br>`_.toSafeInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | zod<br>`z.coerce.number().int().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| .NET<br>`Convert.ToInt64(value, InvariantCulture)` | 2 | `10.0.12` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| .NET<br>`int.Parse(value, InvariantCulture)` | 2 | `10.0.12` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| .NET<br>`long.Parse(value, InvariantCulture)` | 2 | `10.0.12` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| Go<br>`strconv.Atoi(value)` | 2 | `1.27.1` | `C.UTF-8` | `golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66` |
+| Go<br>`strconv.ParseInt(value, 0, 64)` | 2 | `1.27.1` | `C.UTF-8` | `golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66` |
 | Python<br>`int(value)` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
+| Rust<br>`value.parse::<i64>()` | 2 | `1.99.0` | `C.UTF-8` | `rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa` |
 | SQLite<br>`SELECT CAST(? AS INTEGER)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
 | YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |

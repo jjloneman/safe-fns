@@ -4,71 +4,71 @@
 
 ## Tiers 0–2
 
-| Case | es-toolkit<br>`compat.toString(value)` | JS built-ins<br>`String(value)` | JS built-ins<br>`String(value).trim()` | lodash<br>`_.toString(value)` | zod<br>`z.coerce.string().parse(value)` | Python<br>`str(value)` | Python<br>`str(value).strip()` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` |
-| `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` |
-| `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` |
-| `"   "` | `"   "` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `""` |
-| `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` |
-| `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` |
-| `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `""` |
-| `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` |
-| `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` |
-| `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` |
-| `42` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` |
-| `-0` | `"-0"` | `"0"` | `"0"` | `"-0"` | `"0"` | `"-0.0"` | `"-0.0"` |
-| `1e+21` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` |
-| `1e-7` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-07"` | `"1e-07"` |
-| `0.1` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` |
-| `100` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` |
-| `NaN` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"nan"` | `"nan"` |
-| `Infinity` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"inf"` | `"inf"` |
-| `9007199254740993n` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` |
-| `true` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"True"` | `"True"` |
-| `false` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"False"` | `"False"` |
-| `null` | `""` | `"null"` | `"null"` | `""` | `"null"` | `"None"` | `"None"` |
-| `undefined` | `""` | `"undefined"` | `"undefined"` | `""` | `"undefined"` | — | — |
-| `[]` | `""` | `""` | `""` | `""` | `""` | `"[]"` | `"[]"` |
-| `["a", "b"]` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"['a', 'b']"` | `"['a', 'b']"` |
-| `{}` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"{}"` | `"{}"` |
-| `‹a symbol›` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | — | — |
-| `‹a Date›` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — |
-| `‹an object with a throwing toString›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `ZodError` | — | — |
+| Case | es-toolkit<br>`compat.toString(value)` | JS built-ins<br>`String(value)` | JS built-ins<br>`String(value).trim()` | lodash<br>`_.toString(value)` | zod<br>`z.coerce.string().parse(value)` | .NET<br>`Convert.ToString(value, InvariantCulture)` | .NET<br>`value.Trim()` | Go<br>`fmt.Sprint(value)` | Go<br>`strings.TrimSpace(value)` | Python<br>`str(value)` | Python<br>`str(value).strip()` | Rust<br>`value.to_string()` | Rust<br>`value.trim()` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` |
+| `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` |
+| `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` |
+| `"   "` | `"   "` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` |
+| `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` |
+| `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `""` | `"\u{A0}"` | `""` | `"\u{A0}"` | `""` |
+| `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `""` | `"\u{85}"` | `""` | `"\u{85}"` | `""` | `"\u{85}"` | `""` |
+| `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` |
+| `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` |
+| `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` |
+| `42` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | — | `"42"` | — | `"42"` | `"42"` | `"42"` | — |
+| `-0` | `"-0"` | `"0"` | `"0"` | `"-0"` | `"0"` | `"-0"` | — | `"-0"` | — | `"-0.0"` | `"-0.0"` | `"-0"` | — |
+| `1e+21` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1E+21"` | — | `"1e+21"` | — | `"1e+21"` | `"1e+21"` | `"1000000000000000000000"` | — |
+| `1e-7` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1E-07"` | — | `"1e-07"` | — | `"1e-07"` | `"1e-07"` | `"0.0000001"` | — |
+| `0.1` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | — | `"0.1"` | — | `"0.1"` | `"0.1"` | `"0.1"` | — |
+| `100` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | — | `"100"` | — | `"100"` | `"100"` | `"100"` | — |
+| `NaN` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | — | `"NaN"` | — | `"nan"` | `"nan"` | `"NaN"` | — |
+| `Infinity` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | — | `"+Inf"` | — | `"inf"` | `"inf"` | `"inf"` | — |
+| `9007199254740993n` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | — | `"9007199254740993"` | — | `"9007199254740993"` | `"9007199254740993"` | — | — |
+| `true` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"True"` | — | `"true"` | — | `"True"` | `"True"` | `"true"` | — |
+| `false` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"False"` | — | `"false"` | — | `"False"` | `"False"` | `"false"` | — |
+| `null` | `""` | `"null"` | `"null"` | `""` | `"null"` | `""` | — | `"<nil>"` | — | `"None"` | `"None"` | — | — |
+| `undefined` | `""` | `"undefined"` | `"undefined"` | `""` | `"undefined"` | — | — | — | — | — | — | — | — |
+| `[]` | `""` | `""` | `""` | `""` | `""` | `` "System.Collections.Generic.List`1[System.Object]" `` | — | `"[]"` | — | `"[]"` | `"[]"` | — | — |
+| `["a", "b"]` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `` "System.Collections.Generic.List`1[System.Object]" `` | — | `"[a b]"` | — | `"['a', 'b']"` | `"['a', 'b']"` | — | — |
+| `{}` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `` "System.Collections.Generic.Dictionary`2[System.String,System.Object]" `` | — | `"map[]"` | — | `"{}"` | `"{}"` | — | — |
+| `‹a symbol›` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | — | — | — | — | — | — | — | — |
+| `‹a Date›` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — | — | — | — | — | — | — |
+| `‹an object with a throwing toString›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `ZodError` | — | — | — | — | — | — | — | — |
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.toString(value)` | JS built-ins<br>`String(value)` | JS built-ins<br>`String(value).trim()` | lodash<br>`_.toString(value)` | zod<br>`z.coerce.string().parse(value)` | Python<br>`str(value)` | Python<br>`str(value).strip()` | SQLite<br>`SELECT CAST(? AS TEXT)` | SQLite<br>`SELECT trim(?)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` |
-| `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` |
-| `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` |
-| `"   "` | `"   "` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `""` | `"   "` | `""` |
-| `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` |
-| `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` |
-| `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `""` | `"\u{85}"` | `"\u{85}"` |
-| `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` |
-| `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` |
-| `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` |
-| `42` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` |
-| `-0` | `"-0"` | `"0"` | `"0"` | `"-0"` | `"0"` | `"-0.0"` | `"-0.0"` | `"0.0"` | `"0.0"` |
-| `1e+21` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1.0e+21"` | `"1.0e+21"` |
-| `1e-7` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-07"` | `"1e-07"` | `"1.0e-07"` | `"1.0e-07"` |
-| `0.1` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` |
-| `100` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` |
-| `NaN` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"nan"` | `"nan"` | `null` | `null` |
-| `Infinity` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"inf"` | `"inf"` | `"Inf"` | `"Inf"` |
-| `9007199254740993n` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` |
-| `true` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"True"` | `"True"` | — | — |
-| `false` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"False"` | `"False"` | — | — |
-| `null` | `""` | `"null"` | `"null"` | `""` | `"null"` | `"None"` | `"None"` | `null` | `null` |
-| `undefined` | `""` | `"undefined"` | `"undefined"` | `""` | `"undefined"` | — | — | — | — |
-| `[]` | `""` | `""` | `""` | `""` | `""` | `"[]"` | `"[]"` | — | — |
-| `["a", "b"]` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"['a', 'b']"` | `"['a', 'b']"` | — | — |
-| `{}` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"{}"` | `"{}"` | — | — |
-| `‹a symbol›` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | — | — | — | — |
-| `‹a Date›` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — | — | — |
-| `‹an object with a throwing toString›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `ZodError` | — | — | — | — |
+| Case | es-toolkit<br>`compat.toString(value)` | JS built-ins<br>`String(value)` | JS built-ins<br>`String(value).trim()` | lodash<br>`_.toString(value)` | zod<br>`z.coerce.string().parse(value)` | .NET<br>`Convert.ToString(value, InvariantCulture)` | .NET<br>`value.Trim()` | Go<br>`fmt.Sprint(value)` | Go<br>`strings.TrimSpace(value)` | Python<br>`str(value)` | Python<br>`str(value).strip()` | Rust<br>`value.to_string()` | Rust<br>`value.trim()` | SQLite<br>`SELECT CAST(? AS TEXT)` | SQLite<br>`SELECT trim(?)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` |
+| `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` |
+| `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` |
+| `"   "` | `"   "` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` |
+| `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` |
+| `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `""` | `"\u{A0}"` | `""` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` |
+| `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `""` | `"\u{85}"` | `""` | `"\u{85}"` | `""` | `"\u{85}"` | `""` | `"\u{85}"` | `"\u{85}"` |
+| `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` |
+| `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` |
+| `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` |
+| `42` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | — | `"42"` | — | `"42"` | `"42"` | `"42"` | — | `"42"` | `"42"` |
+| `-0` | `"-0"` | `"0"` | `"0"` | `"-0"` | `"0"` | `"-0"` | — | `"-0"` | — | `"-0.0"` | `"-0.0"` | `"-0"` | — | `"0.0"` | `"0.0"` |
+| `1e+21` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1E+21"` | — | `"1e+21"` | — | `"1e+21"` | `"1e+21"` | `"1000000000000000000000"` | — | `"1.0e+21"` | `"1.0e+21"` |
+| `1e-7` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1E-07"` | — | `"1e-07"` | — | `"1e-07"` | `"1e-07"` | `"0.0000001"` | — | `"1.0e-07"` | `"1.0e-07"` |
+| `0.1` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | — | `"0.1"` | — | `"0.1"` | `"0.1"` | `"0.1"` | — | `"0.1"` | `"0.1"` |
+| `100` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | — | `"100"` | — | `"100"` | `"100"` | `"100"` | — | `"100"` | `"100"` |
+| `NaN` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | — | `"NaN"` | — | `"nan"` | `"nan"` | `"NaN"` | — | `null` | `null` |
+| `Infinity` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | — | `"+Inf"` | — | `"inf"` | `"inf"` | `"inf"` | — | `"Inf"` | `"Inf"` |
+| `9007199254740993n` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | — | `"9007199254740993"` | — | `"9007199254740993"` | `"9007199254740993"` | — | — | `"9007199254740993"` | `"9007199254740993"` |
+| `true` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"True"` | — | `"true"` | — | `"True"` | `"True"` | `"true"` | — | — | — |
+| `false` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"False"` | — | `"false"` | — | `"False"` | `"False"` | `"false"` | — | — | — |
+| `null` | `""` | `"null"` | `"null"` | `""` | `"null"` | `""` | — | `"<nil>"` | — | `"None"` | `"None"` | — | — | `null` | `null` |
+| `undefined` | `""` | `"undefined"` | `"undefined"` | `""` | `"undefined"` | — | — | — | — | — | — | — | — | — | — |
+| `[]` | `""` | `""` | `""` | `""` | `""` | `` "System.Collections.Generic.List`1[System.Object]" `` | — | `"[]"` | — | `"[]"` | `"[]"` | — | — | — | — |
+| `["a", "b"]` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `` "System.Collections.Generic.List`1[System.Object]" `` | — | `"[a b]"` | — | `"['a', 'b']"` | `"['a', 'b']"` | — | — | — | — |
+| `{}` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `` "System.Collections.Generic.Dictionary`2[System.String,System.Object]" `` | — | `"map[]"` | — | `"{}"` | `"{}"` | — | — | — | — |
+| `‹a symbol›` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | — | — | — | — | — | — | — | — | — | — |
+| `‹a Date›` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — | — | — | — | — | — | — | — | — |
+| `‹an object with a throwing toString›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — |
 
 ## Versions
 
@@ -79,7 +79,13 @@
 | JS built-ins<br>`String(value).trim()` | 1 | `v26.9.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | lodash<br>`_.toString(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | zod<br>`z.coerce.string().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| .NET<br>`Convert.ToString(value, InvariantCulture)` | 2 | `10.0.12` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| .NET<br>`value.Trim()` | 2 | `10.0.12` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| Go<br>`fmt.Sprint(value)` | 2 | `1.27.1` | `C.UTF-8` | `golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66` |
+| Go<br>`strings.TrimSpace(value)` | 2 | `1.27.1` | `C.UTF-8` | `golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66` |
 | Python<br>`str(value)` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
 | Python<br>`str(value).strip()` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
+| Rust<br>`value.to_string()` | 2 | `1.99.0` | `C.UTF-8` | `rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa` |
+| Rust<br>`value.trim()` | 2 | `1.99.0` | `C.UTF-8` | `rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa` |
 | SQLite<br>`SELECT CAST(? AS TEXT)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
 | SQLite<br>`SELECT trim(?)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
