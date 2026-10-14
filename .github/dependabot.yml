@@ -7,9 +7,9 @@
 #   says "bump", so a subject reads `chore(deps): ⬆️ bump foo from 1.0.0 to
 #   1.0.1`.
 
-# - Settings every entry shares are written once and reused with YAML anchors
-#   (`&weekly`) and aliases (`*weekly`), so a schedule or cooldown change can't
-#   miss an entry.
+# - Each entry repeats its schedule, assignee, and cooldown: Dependabot's parser
+#   rejects YAML anchors and aliases ("YAML aliases are not supported"), so they
+#   can't be shared.
 
 version: 2
 updates:
@@ -21,12 +21,12 @@ updates:
       - "/"
       - "/.github/actions/*"
 
-    schedule: &weekly
+    schedule:
       interval: "weekly"
       day: "monday"
       time: "09:00"
       timezone: "America/New_York"
-    assignees: &owner
+    assignees:
       - jjloneman
     commit-message:
       prefix: "chore(actions): ⬆️"
@@ -35,7 +35,7 @@ updates:
     # release reaches CI the moment it is tagged. Every ref is pinned to an
     # exact vX.Y.Z, which makes each bump a reviewable PR, and this gives the
     # registry 7 days to yank one first.
-    cooldown: &cooldown
+    cooldown:
       default-days: 7
 
     # Majors stay ungrouped, so a breaking action bump gets its own review.
@@ -50,8 +50,13 @@ updates:
 
   - package-ecosystem: "npm"
     directory: "/"
-    schedule: *weekly
-    assignees: *owner
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
     commit-message:
       prefix: "chore(deps): ⬆️"
       prefix-development: "chore(deps-dev): ⬆️"
@@ -59,7 +64,8 @@ updates:
     # Past pnpm's `minimumReleaseAge` floor (pnpm-workspace.yaml), so the
     # frozen-lockfile install in CI accepts the bump instead of rejecting a
     # too-new version.
-    cooldown: *cooldown
+    cooldown:
+      default-days: 7
 
     # Majors stay ungrouped, so a breaking bump gets its own review.
     groups:
@@ -88,7 +94,7 @@ updates:
         update-types:
           - "version-update:semver-major"
           - "version-update:semver-minor"
-    labels: &dependencies-label
+    labels:
       - "📦 dependencies"
     open-pull-requests-limit: 10
     versioning-strategy: "increase"
@@ -96,13 +102,19 @@ updates:
   # The research harness's own libraries (`research/`), a separate pnpm root.
   - package-ecosystem: "npm"
     directory: "/research"
-    schedule: *weekly
-    assignees: *owner
-    commit-message: &research-commit-message
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
       prefix: "chore(deps-dev): ⬆️"
 
     # Past `research/pnpm-workspace.yaml`'s `minimumReleaseAge` floor.
-    cooldown: *cooldown
+    cooldown:
+      default-days: 7
 
     # One PR per week for every research bump, majors included: a library's
     # new major is a result to record, not a breaking change to the package.
@@ -110,30 +122,47 @@ updates:
       research:
         patterns:
           - "*"
-    labels: *dependencies-label
+    labels:
+      - "📦 dependencies"
 
   # The research harness's pinned images: `image:` lines in
   # `research/compose.yaml` here, and the Node Dockerfile's `FROM` below.
   - package-ecosystem: "docker-compose"
     directory: "/research"
-    schedule: *weekly
-    assignees: *owner
-    commit-message: *research-commit-message
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
 
     # A tag can be re-pushed with new contents; waiting 7 days matches the npm
     # moratorium.
-    cooldown: *cooldown
+    cooldown:
+      default-days: 7
 
     groups:
       research-images:
         patterns:
           - "*"
-    labels: *dependencies-label
+    labels:
+      - "📦 dependencies"
 
   - package-ecosystem: "docker"
     directory: "/research/docker/node"
-    schedule: *weekly
-    assignees: *owner
-    commit-message: *research-commit-message
-    cooldown: *cooldown
-    labels: *dependencies-label
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    labels:
+      - "📦 dependencies"
