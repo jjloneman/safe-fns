@@ -75,8 +75,20 @@ export function errorName(error: unknown): string {
       return typeof error;
     }
 
-    // Prefer `name`: some libraries throw instances of anonymous classes.
-    return error.name || error.constructor.name;
+    /*
+     * Prefer the class's own name when `name` is the one every subclass
+     * inherits, so `TomlError` isn't reported as `Error`.
+     *
+     * - Otherwise prefer `name`: some libraries throw instances of anonymous
+     *   classes, whose constructor name is empty.
+     */
+    const className = error.constructor.name;
+
+    if (error.name === "Error" && className !== "") {
+      return className;
+    }
+
+    return error.name || className;
   } catch {
     return "an uninspectable error";
   }

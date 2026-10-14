@@ -48,7 +48,8 @@ const VALIDATORS = new Map(
  *   `{ v }` and read back out.
  *
  * - An invalid value is reported, not thrown, so this throws Ajv's own
- *   `ValidationError` to record it as an error.
+ *   `ValidationError` to record it as an error; the call text names the
+ *   `coerce` wrapper.
  *
  * @returns the coerced value.
  */
@@ -57,10 +58,7 @@ function coerce({ type, value }: CoerceInput): unknown {
   const data = { v: value };
 
   if (validate !== undefined && !validate(data)) {
-    // Ajv's class leaves `name` as "Error"; name it so the table says why.
-    throw Object.assign(new Ajv.ValidationError(validate.errors ?? []), {
-      name: "ValidationError",
-    });
+    throw new Ajv.ValidationError(validate.errors ?? []);
   }
 
   return data.v;
