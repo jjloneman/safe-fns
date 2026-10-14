@@ -1,0 +1,45 @@
+/*
+ * The JVM adapter: Java's standard library, Commons Lang, Guava, Spring,
+ * Kotlin, and Groovy, compiled into one image so the JVM starts once per run.
+ *
+ * - Every version is exact and at least 7 days old; Dependabot's cooldown
+ *   keeps the bumps there, since Maven has no `minimumReleaseAge`.
+ */
+plugins {
+    application
+    groovy
+    kotlin("jvm") version "2.4.20"
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+    implementation("com.google.guava:guava:33.7.2-jre")
+    implementation("org.apache.commons:commons-lang3:3.21.0")
+    implementation("org.apache.groovy:groovy:6.0.0")
+    implementation("org.springframework:spring-core:7.0.9")
+    implementation("tools.jackson.core:jackson-databind:3.2.3")
+}
+
+application { mainClass = "dev.safefns.research.Main" }
+
+java { toolchain { languageVersion = JavaLanguageVersion.of(25) } }
+
+// Groovy compiles last and sees Java's classes by default, but not Kotlin's;
+// `Main.groovy` needs both.
+tasks.compileGroovy {
+    classpath += files(tasks.compileKotlin.flatMap { it.destinationDirectory })
+}
+
+// Downloads every jar the build needs, so the image caches them in a layer of
+// their own before the sources are copied in; the Groovy compiler's classpath
+// is resolved apart from any configuration.
+tasks.register("resolveDependencies") {
+    val classpaths = configurations.filter { it.isCanBeResolved }
+    val groovyCompiler = tasks.compileGroovy.map { it.groovyClasspath }
+
+    doLast {
+        classpaths.forEach { it.resolve() }
+        groovyCompiler.get().files
+    }
+}
