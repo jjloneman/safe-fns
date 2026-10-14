@@ -48,5 +48,40 @@ jobs:
       - run: pnpm exec eslint research scripts/research
       - run: pnpm exec tsc --project research
 
+      # Committed results must match the pinned images and inputs; reads
+      # Compose's config, the Dockerfiles, and the lockfiles, so it builds and
+      # pulls nothing.
+      - run: pnpm research --check-inputs
+
       # Prettier plus each language's formatter, in its pinned container.
       - run: pnpm research --format --check
+
+  # Re-posts the shared `## ⏱️ CI timings` comment once this workflow ends, so
+  # the table covers both workflows whichever finishes last.
+  #
+  # - Its own job, like `ci.yml`'s `report`, so the write token never reaches
+  #   the job that installs and builds the PR's code.
+  report:
+    name: 📊 Reports
+    if: ${{ always() }}
+    needs: [check]
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      # No `pnpm install`: the script needs only Node, which strips its types.
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 26
+
+      - name: ⏱️ CI timings PR comment
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/post-ci-timings.ts

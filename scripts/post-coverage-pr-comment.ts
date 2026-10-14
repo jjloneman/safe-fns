@@ -47,17 +47,26 @@ const REPORT_MARKER = "## 📊 Code coverage";
 const MAX_TEXT_REPORT_CHARS = 50_000;
 
 /**
- * Render one metric as a Markdown table row.
+ * Wrap the per-file report in a collapsed `<details>` block.
  *
- * - The percentage is floored, never rounded: the gate demands exactly 100%, so
- *   99.95% must not read as a passing "100%".
+ * - The blank lines around the fence are required: GitHub stops parsing
+ *   Markdown inside an HTML block without them, so the code fence would render
+ *   literally.
  */
-const metricRow = (label: string, metric: CoverageMetric): string =>
-  `| ${label} | ${Math.floor(metric.pct * 10) / 10}% | ${metric.covered}/${metric.total} |`;
+function buildDetails(textReport: string): string {
+  return `<details>
+<summary>📋 Per-file coverage (<code>text</code> reporter)</summary>
+
+\`\`\`text
+${clipToBudget(textReport)}
+\`\`\`
+
+</details>`;
+}
 
 /** Build the summary table — the part that always appears. */
-const buildTable = (total: CoverageTotal): string =>
-  `${REPORT_MARKER}
+function buildTable(total: CoverageTotal): string {
+  return `${REPORT_MARKER}
 
 | Metric | % | Covered |
 | :--- | ---: | ---: |
@@ -65,13 +74,31 @@ ${metricRow("📄 Statements", total.statements)}
 ${metricRow("🔀 Branches", total.branches)}
 ${metricRow("⚙️ Functions", total.functions)}
 ${metricRow("📏 Lines", total.lines)}`;
+}
+
+/** Clip an oversized report to the budget, flagging that it was cut. */
+function clipToBudget(textReport: string): string {
+  return textReport.length <= MAX_TEXT_REPORT_CHARS
+    ? textReport
+    : `${textReport.slice(0, MAX_TEXT_REPORT_CHARS)}\n\n…truncated — see the full table in the CI job log.`;
+}
+
+/**
+ * Render one metric as a Markdown table row.
+ *
+ * - The percentage is floored, never rounded: the gate demands exactly 100%, so
+ *   99.95% must not read as a passing "100%".
+ */
+function metricRow(label: string, metric: CoverageMetric): string {
+  return `| ${label} | ${Math.floor(metric.pct * 10) / 10}% | ${metric.covered}/${metric.total} |`;
+}
 
 /**
  * Read the `text` reporter's output.
  *
  * @returns the report, or `undefined` when it is missing or unreadable.
  */
-const readTextReport = (): string | undefined => {
+function readTextReport(): string | undefined {
   try {
     return readFileSync(TEXT_REPORT_PATH, "utf8").trimEnd();
   } catch (error: unknown) {
@@ -81,32 +108,9 @@ const readTextReport = (): string | undefined => {
     );
     return undefined;
   }
-};
+}
 
-/** Clip an oversized report to the budget, flagging that it was cut. */
-const clipToBudget = (textReport: string): string =>
-  textReport.length <= MAX_TEXT_REPORT_CHARS
-    ? textReport
-    : `${textReport.slice(0, MAX_TEXT_REPORT_CHARS)}\n\n…truncated — see the full table in the CI job log.`;
-
-/**
- * Wrap the per-file report in a collapsed `<details>` block.
- *
- * - The blank lines around the fence are required: GitHub stops parsing
- *   Markdown inside an HTML block without them, so the code fence would render
- *   literally.
- */
-const buildDetails = (textReport: string): string =>
-  `<details>
-<summary>📋 Per-file coverage (<code>text</code> reporter)</summary>
-
-\`\`\`text
-${clipToBudget(textReport)}
-\`\`\`
-
-</details>`;
-
-const main = (): void => {
+function main(): void {
   const summary = JSON.parse(readFileSync(SUMMARY_PATH, "utf8")) as Record<
     "total",
     CoverageTotal
@@ -125,7 +129,7 @@ ${buildDetails(textReport)}`;
   // Locally the `text` reporter has already printed the per-file table to
   // stdout, so echoing the details block back would just duplicate it.
   publishCiReport({ localConsole: table, markdown, marker: REPORT_MARKER });
-};
+}
 
 try {
   main();

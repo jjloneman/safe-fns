@@ -4,17 +4,19 @@ import type { FunctionResult, ResultColumn } from "./results.ts";
 
 import { renderResultMarkdown } from "./tables.ts";
 
-const column = (overrides: Partial<ResultColumn>): ResultColumn => ({
-  call: "f(value)",
-  image: "img@sha256:1",
-  locale: "C.UTF-8",
-  name: "tool",
-  outcomes: [],
-  service: "node",
-  tier: 1,
-  version: "1.0.0",
-  ...overrides,
-});
+function column(overrides: Partial<ResultColumn>): ResultColumn {
+  return {
+    call: "f(value)",
+    image: "img@sha256:1",
+    locale: "C.UTF-8",
+    name: "tool",
+    outcomes: [],
+    service: "node",
+    tier: 1,
+    version: "1.0.0",
+    ...overrides,
+  };
+}
 
 describe("renderResultMarkdown", () => {
   test("groups cases by the planned column's values, then other values, then throws", () => {
@@ -149,5 +151,28 @@ describe("renderResultMarkdown", () => {
       String.raw`| ${"`"}"a\|b"${"`"} | ${"`"}"x"${"`"} |`
     );
     expect(markdown).toContain('| `` "`" `` | — |');
+  });
+
+  test("marks a docs-only column and names its source instead of its image", () => {
+    // Given - a column transcribed from a cached source
+    const result: FunctionResult = {
+      cases: [["1e3"]],
+      columns: [
+        column({
+          outcomes: [{ kind: "value", value: 1000 }],
+          source: "research/sources/excel.md",
+        }),
+      ],
+      function: "f",
+    };
+
+    // When - rendering the Markdown
+    const markdown = renderResultMarkdown(result);
+
+    // Then - the header is marked, and the version table cites the source
+    expect(markdown).toContain('| `"1e3"` | `1000` |');
+    expect(markdown).toContain(
+      "| tool (docs only)<br>`f(value)` | 1 | `1.0.0` | `C.UTF-8` | `research/sources/excel.md` |"
+    );
   });
 });

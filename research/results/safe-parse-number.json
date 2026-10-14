@@ -138,8 +138,207 @@
   ],
   "columns": [
     {
+      "call": "Schema.decodeUnknownSync(Schema.NumberFromString)(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "locale": "en-US",
+      "name": "Effect",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.0.1"
+    },
+    {
       "call": "compat.toNumber(value)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -346,7 +545,428 @@
     },
     {
       "call": "Number.parseFloat(value)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:761948ce0352376a9dea504e5c2b6cef0ecbcabc60bb85bd2fa3778a1f5b209e",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "Number(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:761948ce0352376a9dea504e5c2b6cef0ecbcabc60bb85bd2fa3778a1f5b209e",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "Number.parseFloat(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -553,11 +1173,12 @@
       ],
       "service": "node",
       "tier": 1,
-      "version": "v26.9.0"
+      "version": "v26.10.0"
     },
     {
       "call": "Number(value)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -760,11 +1381,12 @@
       ],
       "service": "node",
       "tier": 1,
-      "version": "v26.9.0"
+      "version": "v26.10.0"
     },
     {
       "call": "_.toNumber(value)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -970,8 +1592,383 @@
       "version": "4.18.1"
     },
     {
+      "call": "toFloat(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "locale": "en-US",
+      "name": "radash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "kind": "value",
+          "value": 0
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "12.1.1"
+    },
+    {
+      "call": "v.parse(v.pipe(v.unknown(), v.toNumber()), value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "locale": "en-US",
+      "name": "valibot",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.5.0"
+    },
+    {
       "call": "z.coerce.number().parse(value)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "zod",
       "outcomes": [
@@ -1149,8 +2146,2340 @@
       "version": "4.6.5"
     },
     {
+      "call": "Convert.ToDouble(value, InvariantCulture)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "double.Parse(value, \"de-DE\")",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "de-DE",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "double.Parse(value, \"fr-FR\")",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "fr-FR",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "double.Parse(value, InvariantCulture)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "NumberUtils.createNumber(value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "locale": "en",
+      "name": "Commons Lang",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "3.21.0"
+    },
+    {
+      "call": "NumberUtils.toDouble(value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "locale": "en",
+      "name": "Commons Lang",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "3.21.0"
+    },
+    {
+      "call": "strconv.ParseFloat(value, 64)",
+      "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "inputs": "sha256:9d7311e1f994672a872ffacbbe9c894234379a07e4cc64f9c466d89f4d471805",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "strconv.ErrRange",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.1"
+    },
+    {
+      "call": "value as Double",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "locale": "en",
+      "name": "Groovy",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "GroovyCastException",
+          "kind": "error"
+        },
+        {
+          "error": "GroovyCastException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "error": "GroovyCastException",
+          "kind": "error"
+        },
+        {
+          "error": "GroovyCastException",
+          "kind": "error"
+        },
+        {
+          "error": "GroovyCastException",
+          "kind": "error"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "6.0.0"
+    },
+    {
+      "call": "value.toBigDecimal()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "locale": "en",
+      "name": "Groovy",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(42)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(-42)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(42)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(0)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(0)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(1.5)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(1.5)"
+          }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(0.5)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(5)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(1000)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(1000)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)"
+          }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(42)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(12)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(42)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(1.5)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(0.0)"
+          }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "NullPointerException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "BigDecimal(10)"
+          }
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "6.0.0"
+    },
+    {
+      "call": "value.toDouble()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "locale": "en",
+      "name": "Groovy",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "NullPointerException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "6.0.0"
+    },
+    {
+      "call": "Doubles.tryParse(value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "locale": "en",
+      "name": "Guava",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "33.7.2-jre"
+    },
+    {
+      "call": "Double.parseDouble(value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "value.toDoubleOrNull()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "locale": "en",
+      "name": "Kotlin",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "2.4.20"
+    },
+    {
       "call": "float(value)",
-      "image": "python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
       "locale": "C.UTF-8",
       "name": "Python",
       "outcomes": [
@@ -1338,11 +4667,1966 @@
       ],
       "service": "python",
       "tier": 2,
-      "version": "3.14.7"
+      "version": "3.14.8"
+    },
+    {
+      "call": "value.parse::<f64>()",
+      "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
+      "inputs": "sha256:746655cdcacce8cf4b85985d2a9833006fd1bbb749fd8bf989d767274d418adf",
+      "locale": "C.UTF-8",
+      "name": "Rust",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "rust",
+      "tier": 2,
+      "version": "1.99.0"
+    },
+    {
+      "call": "conversionService.convert(value, Double.class)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "locale": "en",
+      "name": "Spring",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "7.0.9"
+    },
+    {
+      "call": "parse(value, { cast: true })[0]?.[0]",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "locale": "en-US",
+      "name": "CSV",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": "1e400"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": "1_000"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": "Infinity"
+        },
+        {
+          "kind": "value",
+          "value": "-Infinity"
+        },
+        {
+          "kind": "value",
+          "value": "NaN"
+        },
+        {
+          "kind": "value",
+          "value": "inf"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
+          "value": "12px"
+        },
+        {
+          "kind": "value",
+          "value": "٤٢"
+        },
+        {
+          "kind": "value",
+          "value": "１２"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 3,
+      "version": "csv-parse 7.0.3"
+    },
+    {
+      "call": "input.value = value; input.valueAsNumber",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "locale": "en-US",
+      "name": "HTML (jsdom)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 3,
+      "version": "jsdom 30.1.2"
+    },
+    {
+      "call": "parse(`v = ${value}`).v",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "locale": "en-US",
+      "name": "INI",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "-42"
+        },
+        {
+          "kind": "value",
+          "value": "+42"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "-0"
+        },
+        {
+          "kind": "value",
+          "value": "1.5"
+        },
+        {
+          "kind": "value",
+          "value": "1.5"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": ".5"
+        },
+        {
+          "kind": "value",
+          "value": "5."
+        },
+        {
+          "kind": "value",
+          "value": "1e3"
+        },
+        {
+          "kind": "value",
+          "value": "1E3"
+        },
+        {
+          "kind": "value",
+          "value": "1e-400"
+        },
+        {
+          "kind": "value",
+          "value": "1e400"
+        },
+        {
+          "kind": "value",
+          "value": "0x1A"
+        },
+        {
+          "kind": "value",
+          "value": "0b11"
+        },
+        {
+          "kind": "value",
+          "value": "0o17"
+        },
+        {
+          "kind": "value",
+          "value": "1_000"
+        },
+        {
+          "kind": "value",
+          "value": "1,000"
+        },
+        {
+          "kind": "value",
+          "value": "Infinity"
+        },
+        {
+          "kind": "value",
+          "value": "-Infinity"
+        },
+        {
+          "kind": "value",
+          "value": "NaN"
+        },
+        {
+          "kind": "value",
+          "value": "inf"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "12px"
+        },
+        {
+          "kind": "value",
+          "value": "٤٢"
+        },
+        {
+          "kind": "value",
+          "value": "１２"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 3,
+      "version": "ini 7.0.0"
+    },
+    {
+      "call": "JSON.parse(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "locale": "en-US",
+      "name": "JSON",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 3,
+      "version": "RFC 8259"
+    },
+    {
+      "call": "SELECT CAST(? AS DOUBLE)",
+      "image": "mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "locale": "utf8mb4_uca1400_ai_ci",
+      "name": "MariaDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1.7976931348623157e+308
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mariadb-adapter",
+      "tier": 3,
+      "version": "12.3.3"
+    },
+    {
+      "call": "{ $toDouble: value }",
+      "image": "mongo:9.0.2-noble@sha256:61dd87ff554dc20386c63ebe1f7ede27314370ad5a7bf357c685fab424672158",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "locale": "simple",
+      "name": "MongoDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mongo-adapter",
+      "tier": 3,
+      "version": "9.0.2"
+    },
+    {
+      "call": "SELECT CAST(? AS DOUBLE)",
+      "image": "mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "locale": "utf8mb4_0900_ai_ci",
+      "name": "MySQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1.7976931348623157e+308
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mysql-adapter",
+      "tier": 3,
+      "version": "9.7.1"
+    },
+    {
+      "call": "SELECT CAST(? AS double precision)",
+      "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "locale": "C.UTF-8",
+      "name": "PostgreSQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "error": "22003",
+          "kind": "error"
+        },
+        {
+          "error": "22003",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "42846",
+          "kind": "error"
+        },
+        {
+          "error": "42846",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "postgres-adapter",
+      "tier": 3,
+      "version": "18.6"
+    },
+    {
+      "call": "SELECT CAST(? AS float)",
+      "image": "mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "locale": "SQL_Latin1_General_CP1_CI_AS",
+      "name": "SQL Server",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "Msg 8115",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mssql-adapter",
+      "tier": 3,
+      "version": "17.0.5005.3"
     },
     {
       "call": "SELECT CAST(? AS REAL)",
-      "image": "python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
       "locale": "C.UTF-8",
       "name": "SQLite",
       "outcomes": [
@@ -1520,8 +6804,345 @@
       "version": "3.40.1"
     },
     {
+      "call": "parse(`v = ${value}`).v",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "locale": "en-US",
+      "name": "TOML",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 3,
+      "version": "smol-toml 1.9.0"
+    },
+    {
+      "call": "decode(<double>value</double>)",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:a8a3e9ce51165e63dfd632a196ed157c66afbaef67eacdbaa2617ec3c6791d1a",
+      "locale": "C.UTF-8",
+      "name": "XML Schema 1.0",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "xml-schema",
+      "tier": 3,
+      "version": "xmlschema 4.3.2"
+    },
+    {
       "call": "parse(value, { version: \"1.1\" })",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "YAML 1.1",
       "outcomes": [
@@ -1687,7 +7308,8 @@
     },
     {
       "call": "parse(value)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "YAML 1.2 core",
       "outcomes": [
@@ -1850,6 +7472,3450 @@
       "service": "node",
       "tier": 3,
       "version": "2.9.1"
+    },
+    {
+      "call": "coerce({ type: \"number\" }, value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "locale": "en-US",
+      "name": "Ajv",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 4,
+      "version": "8.20.0"
+    },
+    {
+      "call": "atof(value)",
+      "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
+      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
+      "locale": "C.UTF-8",
+      "name": "C (glibc)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "c",
+      "tier": 4,
+      "version": "2.41-12+deb13u3"
+    },
+    {
+      "call": "strtod(value, NULL)",
+      "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
+      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
+      "locale": "C.UTF-8",
+      "name": "C (glibc)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "c",
+      "tier": 4,
+      "version": "2.41-12+deb13u3"
+    },
+    {
+      "call": "std::from_chars(first, last, double&)",
+      "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
+      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
+      "locale": "C.UTF-8",
+      "name": "C++ (libstdc++)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "error": "std::errc::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "std::errc::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "error": "std::errc::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "error": "std::errc::result_out_of_range",
+          "kind": "error"
+        },
+        {
+          "error": "std::errc::result_out_of_range",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "std::errc::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "error": "std::errc::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "error": "std::errc::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "error": "std::errc::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "c",
+      "tier": 4,
+      "version": "16.1.0"
+    },
+    {
+      "call": "std::stod(value)",
+      "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
+      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
+      "locale": "C.UTF-8",
+      "name": "C++ (libstdc++)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "std::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "error": "std::out_of_range",
+          "kind": "error"
+        },
+        {
+          "error": "std::out_of_range",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "std::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "error": "std::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "error": "std::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "error": "std::invalid_argument",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "c",
+      "tier": 4,
+      "version": "16.1.0"
+    },
+    {
+      "call": "math -- $argv[1]",
+      "image": "debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f",
+      "inputs": "sha256:e03a7e98b5ea27845fa265c13700e3ea8a933cfb9f4d98ef38f01687b8fd9bc1",
+      "locale": "C.UTF-8",
+      "name": "fish",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1.5"
+        },
+        {
+          "kind": "value",
+          "value": "1.5"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "0.5"
+        },
+        {
+          "kind": "value",
+          "value": "5"
+        },
+        {
+          "kind": "value",
+          "value": "1000"
+        },
+        {
+          "kind": "value",
+          "value": "1000"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "26"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1000"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "shell",
+      "tier": 4,
+      "version": "4.0.2-1"
+    },
+    {
+      "call": "filter_var($value, FILTER_VALIDATE_FLOAT)",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locale": "C.UTF-8",
+      "name": "PHP",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        }
+      ],
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    },
+    {
+      "call": "floatval($value)",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locale": "C.UTF-8",
+      "name": "PHP",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        }
+      ],
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    },
+    {
+      "call": "[double]::Parse($value, [cultureinfo]'de-DE')",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:c3c552d76dc2aa7d044e622792b0422c03ba4feb3adf3a7d13e8f80bb8a24d95",
+      "locale": "de-DE",
+      "name": "PowerShell",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        }
+      ],
+      "service": "powershell",
+      "tier": 4,
+      "version": "7.6.7"
+    },
+    {
+      "call": "[double]::Parse($value, [cultureinfo]'fr-FR')",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:c3c552d76dc2aa7d044e622792b0422c03ba4feb3adf3a7d13e8f80bb8a24d95",
+      "locale": "fr-FR",
+      "name": "PowerShell",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        }
+      ],
+      "service": "powershell",
+      "tier": 4,
+      "version": "7.6.7"
+    },
+    {
+      "call": "[double]::Parse($value)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:c3c552d76dc2aa7d044e622792b0422c03ba4feb3adf3a7d13e8f80bb8a24d95",
+      "locale": "invariant",
+      "name": "PowerShell",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        }
+      ],
+      "service": "powershell",
+      "tier": 4,
+      "version": "7.6.7"
+    },
+    {
+      "call": "[double]$value",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:c3c552d76dc2aa7d044e622792b0422c03ba4feb3adf3a7d13e8f80bb8a24d95",
+      "locale": "invariant",
+      "name": "PowerShell",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "error": "RuntimeException",
+          "kind": "error"
+        },
+        {
+          "error": "RuntimeException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "RuntimeException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "RuntimeException",
+          "kind": "error"
+        },
+        {
+          "error": "RuntimeException",
+          "kind": "error"
+        },
+        {
+          "error": "RuntimeException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "error": "RuntimeException",
+          "kind": "error"
+        },
+        {
+          "error": "RuntimeException",
+          "kind": "error"
+        },
+        {
+          "error": "RuntimeException",
+          "kind": "error"
+        }
+      ],
+      "service": "powershell",
+      "tier": 4,
+      "version": "7.6.7"
+    },
+    {
+      "call": "$value -as [double]",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:c3c552d76dc2aa7d044e622792b0422c03ba4feb3adf3a7d13e8f80bb8a24d95",
+      "locale": "invariant",
+      "name": "PowerShell",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        }
+      ],
+      "service": "powershell",
+      "tier": 4,
+      "version": "7.6.7"
+    },
+    {
+      "call": "ActiveModel::Type::Float.new.cast(value)",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Rails (ActiveModel)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "error": "NoMethodError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "8.1.4"
+    },
+    {
+      "call": "Float(value)",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Ruby",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "4.0.7"
+    },
+    {
+      "call": "value.to_f",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Ruby",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "NoMethodError",
+          "kind": "error"
+        },
+        {
+          "error": "NoMethodError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "error": "NoMethodError",
+          "kind": "error"
+        },
+        {
+          "error": "NoMethodError",
+          "kind": "error"
+        },
+        {
+          "error": "NoMethodError",
+          "kind": "error"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "4.0.7"
+    },
+    {
+      "call": "Double(value)",
+      "image": "swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66",
+      "inputs": "sha256:5b0e84cb182599a8af1ac16988411b10b787bf74f86b63c4fb4087555efb7c5f",
+      "locale": "C.UTF-8",
+      "name": "Swift",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "swift",
+      "tier": 4,
+      "version": "6.4"
+    },
+    {
+      "call": "validator.toFloat(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "locale": "en-US",
+      "name": "validator.js",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 4,
+      "version": "13.15.35"
+    },
+    {
+      "call": "printf '%s' \"$(( $1 ))\"",
+      "image": "debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f",
+      "inputs": "sha256:e03a7e98b5ea27845fa265c13700e3ea8a933cfb9f4d98ef38f01687b8fd9bc1",
+      "locale": "C.UTF-8",
+      "name": "zsh",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "-42"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "1.5"
+        },
+        {
+          "kind": "value",
+          "value": "1.5"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "0.5"
+        },
+        {
+          "kind": "value",
+          "value": "5."
+        },
+        {
+          "kind": "value",
+          "value": "1000."
+        },
+        {
+          "kind": "value",
+          "value": "1000."
+        },
+        {
+          "kind": "value",
+          "value": "0."
+        },
+        {
+          "kind": "value",
+          "value": "Inf"
+        },
+        {
+          "kind": "value",
+          "value": "26"
+        },
+        {
+          "kind": "value",
+          "value": "3"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1000"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "NaN"
+        },
+        {
+          "kind": "value",
+          "value": "Inf"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "shell",
+      "tier": 4,
+      "version": "5.9-8+b24"
     }
   ],
   "function": "safeParseNumber"

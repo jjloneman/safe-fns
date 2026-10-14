@@ -12,7 +12,9 @@ import { runInNewContext } from "node:vm";
 
 import type { HostileInput } from "#test/hostile-inputs";
 
-const fromOtherRealm = (source: string): unknown => runInNewContext(source);
+function fromOtherRealm(source: string): unknown {
+  return runInNewContext(source);
+}
 
 /**
  * Values created in another realm, whose prototypes aren't this realm's
@@ -24,7 +26,7 @@ const fromOtherRealm = (source: string): unknown => runInNewContext(source);
  * - Node-only, because they come from `node:vm`; import this only from a
  *   `*.node.test.ts` file.
  */
-export const crossRealmInputs: readonly HostileInput[] = [
+export const CROSS_REALM_INPUTS: readonly HostileInput[] = [
   { description: "a cross-realm array", value: fromOtherRealm("[1, 2]") },
   { description: "a cross-realm Date", value: fromOtherRealm("new Date(0)") },
   { description: "a cross-realm Error", value: fromOtherRealm("new Error()") },

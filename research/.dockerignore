@@ -1,6 +1,14 @@
-# The Node image copies only the manifest and lockfile; everything else is
-# mounted at run time.
+# Each image copies only what its build needs; everything else is mounted at
+# run time.
 *
 !package.json
 !pnpm-lock.yaml
 !pnpm-workspace.yaml
+
+# The database adapters' drivers, and the Firebase emulators' manifest and
+# config.
+!docker/db/requirements.txt
+!docker/firebase/firebase.json
+!docker/firebase/package.json
+!docker/firebase/pnpm-lock.yaml
+!docker/firebase/pnpm-workspace.yaml

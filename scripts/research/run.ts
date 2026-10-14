@@ -12,6 +12,10 @@
  * - `--format` formats every adapter (Prettier on the host, each other
  *   language's formatter in its container); `--format --check` only reports
  *   drift.
+ *
+ * - `--check-inputs` fails when a committed column records a different image,
+ *   or a different fingerprint of its service's Dockerfile and lockfiles,
+ *   than its service has now, without building or running anything.
  */
 import type { ChildProcess } from "node:child_process";
 
@@ -26,9 +30,23 @@ import {
 import path from "node:path";
 import { parseArgs } from "node:util";
 
+import type { ServiceInputs } from "./inputs.ts";
 import type { CaseFile, FunctionResult, ServiceColumns } from "./results.ts";
 
 import { isRecord } from "./codec.ts";
+import {
+  describeStaleImage,
+  findStaleImages,
+  ROLE_LABEL,
+  ROLES,
+  toReportedImage,
+  toStaleKey,
+} from "./images.ts";
+import {
+  describeStaleInputs,
+  findStaleInputs,
+  toServiceInputs,
+} from "./inputs.ts";
 import { parseJson, readJsonFile } from "./json.ts";
 import {
   buildResults,
@@ -103,11 +121,22 @@ type CommandResult = {
 /** One service from `research/compose.yaml`, as the runner needs it. */
 type ComposeService = {
   /**
-   * The pinned image it runs, or a built image's pinned base.
+   * The pinned image whose answers it reports: its own, or a built image's
+   * pinned base, or for a database adapter its database's.
    *
    * @example `"python:3.14.7-slim-bookworm@sha256:…"`
    */
   image: string;
+
+  /**
+   * Fingerprints the files its results depend on.
+   *
+   * - Called only by a run or check that needs it, so a bad input on one
+   *   service can't fail a command that never touches it.
+   *
+   * @example `() => ({ files: ["docker/python/Dockerfile"], fingerprint: "sha256:…" })`
+   */
+  inputs: () => ServiceInputs;
 
   /**
    * The labels it carries, such as its role and formatter arguments.
@@ -199,6 +228,23 @@ type ServiceRunInput = {
   service: ComposeService;
 };
 
+/** A task to run while the databases it queries are up. */
+type WithDatabasesInput<T> = {
+  /**
+   * The database services to start first and remove afterward.
+   *
+   * @example `[{ name: "postgres", profiles: ["db"], … }]`
+   */
+  databases: readonly ComposeService[];
+
+  /**
+   * The work that needs them.
+   *
+   * @example `() => runPool({ concurrency, tasks })`
+   */
+  task: () => Promise<T>;
+};
+
 /** The results to write, and what a narrowed run should keep. */
 type WriteResultsInput = {
   /**
@@ -252,14 +298,82 @@ const LOG_PREFIX = "[research]";
 /** The repo root, where every command runs. */
 const REPO_ROOT = path.resolve(import.meta.dirname, "../..");
 
+/** The harness's root, which input paths are relative to. */
+const RESEARCH_DIR = path.resolve(import.meta.dirname, "../../research");
+
 /** Where results are written. */
-const RESULTS_DIR = path.resolve(import.meta.dirname, "../../research/results");
+const RESULTS_DIR = path.join(RESEARCH_DIR, "results");
 
-/** The label saying whether a service is an adapter or a formatter. */
-const ROLE_LABEL = "dev.safe-fns.research.role";
+/**
+ * Compare every committed column's image and inputs with its service's now.
+ *
+ * - Reads only Compose's config, the Dockerfiles, and the declared inputs, so
+ *   it builds and pulls nothing, which keeps it cheap enough for every PR.
+ *
+ * - A service whose image moved is reported for its image alone, since the
+ *   Dockerfile that pins it is one of its inputs too.
+ *
+ * @returns whether every committed result still matches its pins.
+ */
+function checkInputs(services: readonly ComposeService[]): boolean {
+  const results = readdirSync(RESULTS_DIR)
+    .filter((file) => file.endsWith(".json"))
+    .sort()
+    .map((file) =>
+      parseFunctionResult(readJsonFile(path.join(RESULTS_DIR, file)))
+    );
 
-/** The roles a Compose service can carry in `ROLE_LABEL`. */
-const ROLES = { adapter: "adapter", formatter: "formatter" } as const;
+  const staleImages = findStaleImages({
+    reportedImages: new Map(services.map(({ image, name }) => [name, image])),
+    results,
+  });
+
+  const staleImageKeys = new Set(staleImages.map((stale) => toStaleKey(stale)));
+
+  const staleInputs = findStaleInputs({
+    results,
+    serviceInputs: new Map(
+      services.map(({ inputs, name }) => [name, inputs()])
+    ),
+  }).filter((stale) => !staleImageKeys.has(toStaleKey(stale)));
+
+  if (staleImages.length === 0 && staleInputs.length === 0) {
+    log(`every column in ${results.length} results matches its pins`);
+
+    return true;
+  }
+
+  const staleServices = new Set(
+    [...staleImages, ...staleInputs].map(({ service }) => service)
+  );
+
+  // A narrowed run keeps the columns of services it didn't run, so only a full
+  // run drops a removed service's.
+  const hasRemovedService = staleImages.some(
+    ({ reported }) => reported === undefined
+  );
+
+  const profiles = hasRemovedService
+    ? []
+    : [
+        ...new Set(
+          services
+            .filter(({ name }) => staleServices.has(name))
+            .flatMap((service) => service.profiles)
+        ),
+      ].sort();
+
+  logError(
+    [
+      "results no longer match their pins:",
+      ...staleImages.map((staleImage) => `  ${describeStaleImage(staleImage)}`),
+      ...staleInputs.map((stale) => `  ${describeStaleInputs(stale)}`),
+      `regenerate them: ${["pnpm research", ...profileArgs(profiles)].join(" ")}`,
+    ].join("\n")
+  );
+
+  return false;
+}
 
 /**
  * Run Compose against the research file.
@@ -360,22 +474,6 @@ async function formatAdapters({
 }
 
 /**
- * Read the base image a built service's Dockerfile pins.
- *
- * @returns the first `FROM` reference.
- */
-function imageFromDockerfile(build: Record<string, unknown>): string {
-  const context = typeof build.context === "string" ? build.context : ".";
-  const dockerfile =
-    typeof build.dockerfile === "string" ? build.dockerfile : "Dockerfile";
-
-  const text = readFileSync(path.resolve(context, dockerfile), "utf8");
-  const match = /^FROM\s+(?<image>\S+)/mu.exec(text);
-
-  return match?.groups?.image ?? "unknown";
-}
-
-/**
  * Read and narrow the case files, keeping `codec` and the requested functions.
  *
  * @throws Error when a requested function matches no case file, so a typo
@@ -435,6 +533,22 @@ async function loadServices(): Promise<ComposeService[]> {
     throw new Error("docker compose config printed no services");
   }
 
+  // Services share Dockerfiles and lockfiles, so each file is read once.
+  const filesByPath = new Map<string, Buffer>();
+
+  const readCached = (file: string): Buffer => {
+    const cached = filesByPath.get(file);
+
+    if (cached !== undefined) {
+      return cached;
+    }
+
+    const content = readFileSync(file);
+    filesByPath.set(file, content);
+
+    return content;
+  };
+
   return Object.entries(services).flatMap(([name, service]) => {
     if (!isRecord(service)) {
       return [];
@@ -442,7 +556,18 @@ async function loadServices(): Promise<ComposeService[]> {
 
     return [
       {
-        image: toImage(service),
+        image: toReportedImage({
+          readDockerfile: (file) => readCached(file).toString("utf8"),
+          service,
+          services,
+        }),
+        inputs: () =>
+          toServiceInputs({
+            name,
+            readInput: readCached,
+            researchDir: RESEARCH_DIR,
+            service,
+          }),
         labels: toStringRecord(service.labels),
         name,
         profiles: Array.isArray(service.profiles)
@@ -479,6 +604,27 @@ function readPreviousResult(stem: string): FunctionResult | undefined {
   const file = path.join(RESULTS_DIR, `${stem}.json`);
 
   return existsSync(file) ? parseFunctionResult(readJsonFile(file)) : undefined;
+}
+
+/** Stop and remove database services by name, logging any failure. */
+async function removeDatabases(
+  databases: readonly ComposeService[]
+): Promise<void> {
+  const names = databases.map(({ name }) => name);
+  const profiles = [...new Set(databases.flatMap(({ profiles }) => profiles))];
+
+  const removed = await compose([
+    ...profileArgs(profiles),
+    "rm",
+    "--force",
+    "--stop",
+    "--volumes",
+    ...names,
+  ]);
+
+  if (removed.exitCode !== 0) {
+    logError(`couldn't remove ${names.join(", ")}:\n${removed.stderr}`);
+  }
 }
 
 /** Read `--concurrency`, or default to the Docker VM's CPU count. */
@@ -530,7 +676,12 @@ async function runAdapter({
 
   log(`${service.name}: ${columns.length} columns in ${seconds}s`);
 
-  return { columns, image: service.image, service: service.name };
+  return {
+    columns,
+    image: service.image,
+    inputs: service.inputs().fingerprint,
+    service: service.name,
+  };
 }
 
 /** Run a command from the repo root, collecting its output. */
@@ -655,15 +806,6 @@ async function runService({
   return result;
 }
 
-/** Name the image a service runs: its pinned `image`, or a build's base. */
-function toImage(service: Record<string, unknown>): string {
-  if (isRecord(service.build)) {
-    return imageFromDockerfile(service.build);
-  }
-
-  return typeof service.image === "string" ? service.image : "unknown";
-}
-
 /** Keep only the string values of an object. */
 function toStringRecord(value: unknown): Record<string, string> {
   if (!isRecord(value)) {
@@ -675,6 +817,71 @@ function toStringRecord(value: unknown): Record<string, string> {
       typeof item === "string" ? [[key, item]] : []
     )
   );
+}
+
+/**
+ * Run a task while the databases it queries are up.
+ *
+ * - Adapters run with `--no-deps`, so their `depends_on` never starts a
+ *   database; this starts each once, waiting on its healthcheck.
+ *
+ * - The databases are removed whether the task succeeds or not, by name, so
+ *   nothing else in the Compose project is touched.
+ *
+ * - An interrupt (Ctrl+C) or a `SIGTERM` skips `finally`, so either one
+ *   removes them first and then re-raises, rather than leaving them running.
+ *
+ * @returns what the task returns.
+ */
+async function withDatabases<T>({
+  databases,
+  task,
+}: WithDatabasesInput<T>): Promise<T> {
+  if (databases.length === 0) {
+    return task();
+  }
+
+  const names = databases.map(({ name }) => name);
+  const profiles = [...new Set(databases.flatMap(({ profiles }) => profiles))];
+  let removal: Promise<void> | undefined;
+
+  // Once only: a signal and the `finally` it unwinds can both ask.
+  const removeOnce = (): Promise<void> => {
+    removal ??= removeDatabases(databases);
+
+    return removal;
+  };
+
+  const onSignal = (signal: NodeJS.Signals): void => {
+    void removeOnce().finally(() => {
+      process.kill(process.pid, signal);
+    });
+  };
+
+  process.once("SIGINT", onSignal);
+  process.once("SIGTERM", onSignal);
+
+  try {
+    log(`starting ${names.join(", ")}`);
+
+    const started = await compose([
+      ...profileArgs(profiles),
+      "up",
+      "--detach",
+      "--wait",
+      ...names,
+    ]);
+
+    if (started.exitCode !== 0) {
+      throw new Error(`docker compose up failed:\n${started.stderr}`);
+    }
+
+    return await task();
+  } finally {
+    process.off("SIGINT", onSignal);
+    process.off("SIGTERM", onSignal);
+    await removeOnce();
+  }
 }
 
 /**
@@ -731,6 +938,7 @@ async function main(): Promise<void> {
   const { values } = parseArgs({
     options: {
       check: { type: "boolean" },
+      "check-inputs": { type: "boolean" },
       concurrency: { type: "string" },
       format: { type: "boolean" },
       function: { multiple: true, type: "string" },
@@ -739,6 +947,22 @@ async function main(): Promise<void> {
   });
 
   const services = await loadServices();
+
+  if (values["check-inputs"] === true) {
+    const otherFlags = Object.keys(values).filter(
+      (flag) => flag !== "check-inputs"
+    );
+
+    if (otherFlags.length > 0) {
+      throw new Error(
+        `--check-inputs takes no other flags, got --${otherFlags.join(", --")}`
+      );
+    }
+
+    process.exitCode = checkInputs(services) ? 0 : 1;
+
+    return;
+  }
 
   if (values.format === true) {
     const isClean = await formatAdapters({
@@ -787,9 +1011,21 @@ async function main(): Promise<void> {
     }
   }
 
-  const serviceColumns = await runPool({
-    concurrency,
-    tasks: adapters.map((service) => () => runAdapter({ caseFiles, service })),
+  const databases = services.filter(
+    (service) =>
+      service.labels[ROLE_LABEL] === ROLES.database &&
+      service.profiles.some((profile) => activeProfiles.includes(profile))
+  );
+
+  const serviceColumns = await withDatabases({
+    databases,
+    task: () =>
+      runPool({
+        concurrency,
+        tasks: adapters.map(
+          (service) => () => runAdapter({ caseFiles, service })
+        ),
+      }),
   });
 
   const results = buildResults({ caseFiles, serviceColumns });

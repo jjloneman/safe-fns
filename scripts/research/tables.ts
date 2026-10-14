@@ -174,9 +174,11 @@ function renderGroupedSection(result: FunctionResult): string[] {
   return ["## By outcome", renderTable([header, ...rows])];
 }
 
-/** Render a column's header: its tool, then its call. */
+/** Render a column's header: its tool, marked if docs-only, then its call. */
 function renderHeader(column: ResultColumn): string {
-  return `${column.name}<br>${codeSpan(column.call)}`;
+  const marker = column.source === undefined ? "" : " (docs only)";
+
+  return `${column.name}${marker}<br>${codeSpan(column.call)}`;
 }
 
 /** Render one outcome as a table cell. */
@@ -199,16 +201,19 @@ function renderTable(rows: readonly (readonly string[])[]): string {
     .join("\n");
 }
 
-/** Render every column's version, locale, and image. */
+/**
+ * Render every column's version, locale, and origin: the image it ran in, or
+ * the cached source a docs-only column was transcribed from.
+ */
 function renderVersionTable(columns: readonly ResultColumn[]): string {
   return renderTable([
-    ["Tool", "Tier", "Version", "Locale", "Image"],
+    ["Tool", "Tier", "Version", "Locale", "Image or source"],
     ...columns.map((column) => [
       renderHeader(column),
       String(column.tier),
       codeSpan(column.version),
       codeSpan(column.locale),
-      codeSpan(column.image),
+      codeSpan(column.source ?? column.image),
     ]),
   ]);
 }

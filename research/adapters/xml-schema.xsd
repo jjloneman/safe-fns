@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  The XML Schema adapter's schema: one element per built-in type a case is
+  decoded as, so `xml_schema.py` reads each case as that element's content.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="boolean" type="xs:boolean" />
+  <xs:element name="double" type="xs:double" />
+  <xs:element name="integer" type="xs:integer" />
+  <xs:element name="string" type="xs:string" />
+  <xs:element name="token" type="xs:token" />
+</xs:schema>

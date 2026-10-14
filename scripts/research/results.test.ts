@@ -17,16 +17,18 @@ import {
   stringifyStable,
 } from "./results.ts";
 
-const column = (overrides: Partial<AdapterColumn>): AdapterColumn => ({
-  call: "f(value)",
-  function: "f",
-  locale: "C.UTF-8",
-  name: "tool",
-  outcomes: [{ kind: "value", value: true }],
-  tier: 1,
-  version: "1.0.0",
-  ...overrides,
-});
+function column(overrides: Partial<AdapterColumn>): AdapterColumn {
+  return {
+    call: "f(value)",
+    function: "f",
+    locale: "C.UTF-8",
+    name: "tool",
+    outcomes: [{ kind: "value", value: true }],
+    tier: 1,
+    version: "1.0.0",
+    ...overrides,
+  };
+}
 
 describe("parseCaseFile", () => {
   test("keeps args and any expected answer", () => {
@@ -90,6 +92,17 @@ describe("parseAdapterOutput", () => {
     expect(columns).toStrictEqual(json.columns);
   });
 
+  test("keeps a docs-only column's source", () => {
+    // Given - a column transcribed from a cached source
+    const json = { columns: [column({ source: "research/sources/x.md" })] };
+
+    // When - narrowing it
+    const columns = parseAdapterOutput(json);
+
+    // Then - the source survives
+    expect(columns[0]?.source).toBe("research/sources/x.md");
+  });
+
   test.each([
     { description: "no columns array", json: { columns: {} } },
     { description: "a non-object", json: null },
@@ -113,6 +126,10 @@ describe("parseAdapterOutput", () => {
     {
       description: "an error outcome without a class name",
       json: { columns: [{ ...column({}), outcomes: [{ kind: "error" }] }] },
+    },
+    {
+      description: "a non-string source",
+      json: { columns: [{ ...column({}), source: 1 }] },
     },
     {
       description: "a value outcome without JSON",
@@ -156,6 +173,7 @@ describe("buildResults", () => {
             column({ function: "g" }),
           ],
           image: "img@sha256:1",
+          inputs: "sha256:in",
           service: "node",
         },
       ],
@@ -180,7 +198,32 @@ describe("buildResults", () => {
     expect(results[1]?.columns).toHaveLength(1);
     expect(results[1]?.columns[0]).toMatchObject({
       image: "img@sha256:1",
+      inputs: "sha256:in",
       service: "node",
+    });
+  });
+
+  test("carries a docs-only column's source into the result", () => {
+    // Given - one case file and a column transcribed from a cached source
+    const caseFiles: CaseFile[] = [{ cases: [{ args: ["a"] }], function: "f" }];
+
+    // When - building the results
+    const [result] = buildResults({
+      caseFiles,
+      serviceColumns: [
+        {
+          columns: [column({ source: "research/sources/x.md" })],
+          image: "img@sha256:1",
+          inputs: "sha256:in",
+          service: "sources",
+        },
+      ],
+    });
+
+    // Then - the column keeps its source beside its image
+    expect(result?.columns[0]).toMatchObject({
+      image: "img@sha256:1",
+      source: "research/sources/x.md",
     });
   });
 
@@ -199,6 +242,7 @@ describe("buildResults", () => {
             column({ call: "f(value)", name: "tool" }),
           ],
           image: "i",
+          inputs: "sha256:in",
           service: "s",
         },
       ],
@@ -220,7 +264,9 @@ describe("buildResults", () => {
     const build = (): FunctionResult[] =>
       buildResults({
         caseFiles,
-        serviceColumns: [{ columns: [column({})], image: "i", service: "s" }],
+        serviceColumns: [
+          { columns: [column({})], image: "i", inputs: "x", service: "s" },
+        ],
       });
 
     // Then - it throws, naming both counts
@@ -271,17 +317,19 @@ describe("findCodecMismatches", () => {
   });
 });
 
-const resultColumn = (overrides: Partial<ResultColumn>): ResultColumn => ({
-  call: "f(value)",
-  image: "i",
-  locale: "C.UTF-8",
-  name: "tool",
-  outcomes: [{ kind: "value", value: true }],
-  service: "node",
-  tier: 1,
-  version: "1.0.0",
-  ...overrides,
-});
+function resultColumn(overrides: Partial<ResultColumn>): ResultColumn {
+  return {
+    call: "f(value)",
+    image: "i",
+    locale: "C.UTF-8",
+    name: "tool",
+    outcomes: [{ kind: "value", value: true }],
+    service: "node",
+    tier: 1,
+    version: "1.0.0",
+    ...overrides,
+  };
+}
 
 describe("mergeWithPrevious", () => {
   const next: FunctionResult = {
@@ -345,11 +393,14 @@ describe("mergeWithPrevious", () => {
 });
 
 describe("parseFunctionResult", () => {
-  test("keeps a committed result", () => {
+  test.each([
+    { description: "without inputs", inputs: {} },
+    { description: "with inputs", inputs: { inputs: "sha256:in" } },
+  ])("keeps a committed result $description", ({ inputs }) => {
     // Given - a committed result
     const json: FunctionResult = {
       cases: [["a", { $undefined: true }]],
-      columns: [resultColumn({})],
+      columns: [{ ...resultColumn({}), ...inputs }],
       function: "f",
     };
 
@@ -372,6 +423,14 @@ describe("parseFunctionResult", () => {
       json: {
         cases: [],
         columns: [{ ...resultColumn({}), service: 1 }],
+        function: "f",
+      },
+    },
+    {
+      description: "a column whose inputs aren't a string",
+      json: {
+        cases: [],
+        columns: [{ ...resultColumn({}), inputs: 1 }],
         function: "f",
       },
     },

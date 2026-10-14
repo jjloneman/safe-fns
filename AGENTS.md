@@ -46,12 +46,12 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Readability beats a few ops/second here: nothing in `scripts/` is public API or a hot path, so `map` / `filter` / `reduce` are fine even where a plain loop would be faster.
   - An error message says only what the error shows — read its `code` or `stderr` rather than guessing a cause.
   - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/**/*.test.ts` runs in the `node` project.
-  - `scripts/research/` is the comparison harness's host side: `run.ts` (`pnpm research`) orchestrates the containers, and `codec.ts`, `results.ts`, and `tables.ts` are the pure, tested parts.
+  - `scripts/research/` is the comparison harness's host side: `run.ts` (`pnpm research`) orchestrates the containers, and `codec.ts`, `images.ts`, `inputs.ts`, `results.ts`, `sources.ts`, and `tables.ts` are the pure, tested parts.
 - `research/` — the cross-language comparison harness (see [Research harness](#-research-harness)), outside `files`, so never published.
 - `dist/` — build output (gitignored), the only directory published.
 - `README.md` — the public face: why the package exists, install and usage, the API, the support matrix, scripts, and what each label means.
 - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` — the community-health files.
-  - `CONTRIBUTING.md` links to this file's sections rather than repeating them, so conventions change here only.
+  - `CONTRIBUTING.md` links to this file's sections rather than repeating them, so each convention changes in one place only.
   - Security reports go through GitHub private vulnerability reporting.
 - `.githooks/` — the pre-commit and pre-push hooks (see [Pre-commit checks](#-pre-commit-checks)).
 - `.github/workflows/` — CI, CodeQL, release, and the two research workflows (see [CI](#-ci)); `.github/actions/setup/` is the shared pnpm + Node + install prelude.
@@ -100,9 +100,11 @@ The conventions below are written for TypeScript, but they bind code in every la
 
 - **Same shape everywhere:** semantic names, lexicographic ordering, 80-column lines, a doc comment on every function, no nested ternaries, and the blank-line padding described under [Code shape](#-code-shape).
 - **Types as strong as the language allows** wherever they can't be inferred: Python annotations and `TypedDict`s, Groovy's declared types and `@CompileStatic`.
+- **Immutable by default:** a binding that is never reassigned says so — `const` in TypeScript, `val` in Kotlin, and `final` on Java parameters, catch parameters, and locals.
 - **A block for every `if`, `for`, and `while`**, even where the language allows a one-line form; Python's `x if y else z` is the one accepted inline conditional.
+  - Ruby is the exception: syntax_tree, its formatter, rewrites a short block into modifier form (`return x if y`) and has no setting to stop it, so its output stands.
 - **Keyword or named arguments** wherever the language has them, mirroring the single-object rule below: in Python, a function with two or more parameters makes them keyword-only (`def run_probe(*, args, probe)`).
-- **Enforce what a tool can:** each language's formatter and linter is configured to these rules (for Python, `research/ruff.toml`), and the rest is applied by hand.
+- **Enforce what a tool can:** each language's formatter and linter is configured to these rules (for Python, `research/ruff.toml`; for Java, `research/adapters/jvm/checkstyle.xml`), and the rest is applied by hand.
 
 ### 🔷 TypeScript
 
@@ -132,6 +134,18 @@ The conventions below are written for TypeScript, but they bind code in every la
   - A script's entry point (`main`) is the exception: it goes last, just above the call that runs it. `eslint.config.ts` gives `sort-modules` a `main` group after every other function for `scripts/`, so lint enforces it.
   - perfectionist's `sort-modules` enforces the order of module-level functions and types, not of constants; `const` runs are kept sorted by hand.
 - **Module-level constants are `SCREAMING_SNAKE_CASE`** (`BASE_BRANCH`, `RECORD_STATUSES`), including one computed once at startup and never reassigned; locals stay camelCase.
+  - ESLint's `naming-convention` enforces it, exempting destructured bindings, which keep their source key's name.
+  - A boolean constant is the exception: it keeps the question form (`isPlaceholder`), since the boolean-prefix rule outranks this one.
+  - A module-level function is a `function` declaration (see the next bullet), so the rule never reaches it and it keeps its camelCase name.
+  - A name that must shadow a global (`const require = createRequire(…)`) keeps it, with an `eslint-disable-next-line` comment saying why.
+- **Named functions are `function` declarations; arrows are for functions defined inside another.**
+  - A module-level function, exported or not, is `function name(…)`, never `const name = (…) => …`.
+  - Its `.d.ts` reads `declare function`, so editors and documentation tools show a public export as a function, not a variable.
+  - It can take overload signatures, which an arrow bound to a constant can't without a separate call-signature type.
+  - perfectionist's `sort-modules` sorts declarations only, and any `const` splits its sorted runs, so only a declaration gets alphabetized and the `main`-last rule.
+  - Arrows stay the default inside a function: callbacks, closures, a returned function (`return (value) => …` for currying), and `reduce` reducers.
+  - To tie a declaration to an existing function type, derive its parameter types (`file: Parameters<ReadDockerfile>[0]`) rather than binding an arrow to the type.
+  - Stack traces don't decide it: an arrow bound to a `const` is named after it anyway; only an inline or returned function shows as anonymous, whichever syntax it uses.
 - **Build fixed lookup data once, outside the function** — a membership check against a known set of values is a module-level `Set` and `.has(value)`, not an array rebuilt and searched on every call.
 - **Named imports over a namespace import** — `import { confirm, select } from "…"`, not `import * as prompts`.
 - **Give multi-line statements breathing room**: a blank line separates a statement that spans several lines from its neighbors, and a TSDoc'd declaration from the one above it.
@@ -244,6 +258,10 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Subject** is imperative, lowercase, with no trailing period.
 - **Body**, when needed, is `-` bullet points, not prose paragraphs.
 - **Dependency bumps**: `chore(deps): ⬆️ bump <package> from X to Y` (`chore(deps-dev): ⬆️ …` for dev dependencies).
+- **The `research` scope takes 🔬** in place of its type's gitmoji: `chore(research): 🔬 …`, `ci(research): 🔬 …`, `docs(research): 🔬 …`.
+  - The type still decides the release; release-please hides `chore`, `ci`, and `docs`.
+- **A change that adds or updates a development script under `scripts/` takes 🔨**, gitmoji's "add or update development scripts", whatever its type (`chore(okf): 🔨 add an interactive okf:verify script`).
+- Dependabot's own `chore(deps): ⬆️` and `chore(deps-dev): ⬆️` prefixes don't change.
 
 ### 🌿 Branch naming
 
@@ -286,7 +304,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Every export plugs into two harnesses in `test/`:**
   - `cross-env.cases.ts` — a table of calls and expected results, run unchanged by both projects;
   - `hostile-inputs.ts` (plus the Node-only `cross-realm-inputs.ts`) — values that trap on inspection, for proving an export never throws.
-- `scripts/research/*.test.ts` covers the research harness's codec, merging, and tables; it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
+- `scripts/research/*.test.ts` covers the research harness's codec, merging, sources, and tables, and checks its image pins (no pre-release, one shared Python hold in `dependabot.yml`); it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
 - How to write a test is covered by `.claude/rules/testing.md`.
 
 ## 📦 Build & package
@@ -339,17 +357,20 @@ The conventions below are written for TypeScript, but they bind code in every la
   - `report` — PR-only, after the rest; posts both PR comments.
 - **Two sticky PR comments**, each found by its opening heading and edited in place rather than re-posted:
   - `## 📊 Code coverage`, from `scripts/post-coverage-pr-comment.ts`;
-  - `## ⏱️ CI timings`, from `scripts/post-ci-timings.ts`.
+  - `## ⏱️ CI timings`, from `scripts/post-ci-timings.ts`, which covers both `ci.yml` and `research-check.yml` on the PR's commit; each workflow's `report` job re-posts it, so the last to finish leaves the full table.
   - A bug in either script fails `report`; a failure to post it can't fix, such as the read-only token Dependabot and fork PRs get, only warns.
 - `.github/workflows/codeql.yml` scans on PRs, `main`, and weekly.
-- `.github/workflows/research-check.yml` runs only on PRs that touch the harness or what it depends on (its `paths:` list): it installs `research/`, lints and typechecks it, and runs `pnpm research --format --check`.
+- `.github/workflows/research-check.yml` runs only on PRs that touch the harness or what it depends on (its `paths:` list): it installs `research/`, lints and typechecks it, runs `pnpm research --check-inputs` (committed results must match the pinned images and lockfiles) and `pnpm research --format --check`, then a `report` job re-posts the CI timings comment.
 - `.github/workflows/research.yml` is manual (`workflow_dispatch`): it runs `pnpm research` from the same Compose file and uploads `research/results/` as an artifact.
 - `.github/workflows/release.yml` runs on every push to `main` (see [Versioning & releases](#-versioning--releases)):
   - `release-please` — opens or updates the release PR, and tags the release once it is merged;
   - `publish` — only when a release was just created; builds and publishes to npm.
 - **Dependabot** opens weekly grouped patch/minor PRs for npm and Actions, after a 7-day cooldown that matches the [moratorium](#-7-day-dependency-moratorium).
-  - `research/`'s npm libraries, its Compose images, and its Dockerfile get their own entries, each one grouped PR a week, majors included.
+  - `research/`'s npm libraries, its Compose images, its Dockerfiles, the `python311` image, the JVM adapter's Gradle libraries, the database adapters' pip drivers, the XML Schema adapter's pip libraries, and the Firebase emulators' npm root get their own entries, each one grouped PR a week, majors included.
   - Its `ignore` rules hold the pins below: `typescript` and `@types/node` majors, and each `typescript-<version>` alias to its minor.
+  - They also hold the 3.x `python` images off Python's pre-releases, and `python311` on 3.11, the last Python with `distutils`.
+  - An image several research services share (Node, Python, the .NET SDK) is bumped by one group, and research images track their latest stable major.
+  - A research image or library bump fails `research-check.yml` until its results are regenerated by hand on the Dependabot branch (see [research/README.md](research/README.md#️-dependency-bumps)).
 - Every action is pinned to an exact `vX.Y.Z`, and every job declares its own `permissions`.
 - How to change a workflow is covered by `.claude/rules/ci.md`.
 
@@ -358,8 +379,8 @@ The conventions below are written for TypeScript, but they bind code in every la
 No npm dependency may enter the lockfile until it has been published for **at least 7 days** — a supply-chain guard that gives the registry time to yank a compromised release.
 
 - Enforced by `minimumReleaseAge: 10080` (minutes) in [pnpm-workspace.yaml](pnpm-workspace.yaml), checked on every `pnpm install`, including `--frozen-lockfile`.
-  - `research/pnpm-workspace.yaml` repeats the floor for the research package, which is its own pnpm root; keep the two in sync.
-  - The same 7 days applies to a container image: pin a tag whose last push is at least 7 days old.
+  - `research/pnpm-workspace.yaml` and `research/docker/firebase/pnpm-workspace.yaml` repeat the floor for the research harness's own pnpm roots; keep all three in sync.
+  - The same 7 days applies to a container image (pin a tag whose last push is at least 7 days old), to a Python package (`research/docker/db/requirements.txt`, compiled with `--exclude-newer`; `research/docker/xml-schema/requirements.txt`), and to a release download such as the Hermes CLI tarball.
 - A too-new version fails the install with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`.
 - When bumping a dependency by hand, pick the newest version that is already at least 7 days old (exactly 7 days is fine). If the lockfile fails the check, downgrade the offending entry rather than relaxing the floor.
 - Versions are pinned exactly (`saveExact: true` in [pnpm-workspace.yaml](pnpm-workspace.yaml)); the lockfile is the only thing that moves them.
@@ -410,6 +431,19 @@ Semantic and design decisions — what "empty" means, how a function is named, w
 - `pnpm research` runs every adapter service in `research/compose.yaml` in parallel and writes `research/results/`; it needs a Docker-compatible runtime (OrbStack on the owner's Mac mini).
 - The root ESLint config lints `research/**/*.mts` only once `pnpm --dir research install` has run, since its imports resolve nowhere else.
 - How to change it is covered by `.claude/rules/research.md`.
+
+## 📄 Long Markdown files
+
+Every agent session re-reads its instruction files in full, so their size is a recurring cost, and past a certain length rules get skimmed and missed.
+
+- **Past about 500 lines, consider a split.** It's a prompt to weigh, not a hard limit.
+  - It applies to every Markdown file agents or contributors read: this file, `CLAUDE.md`, `README.md`, `CONTRIBUTING.md`, `.claude/rules/*.md`, and everything under `docs/`.
+- **Split along an existing heading**, so the new file has one clear subject, such as code style.
+- **Keep agents finding it** — a split file that agents don't load is worse than a long one:
+  - this file keeps a short summary plus an explicit "read `<file>` before editing `<paths>`" line, since agents other than Claude load only this file;
+  - `CLAUDE.md` `@`-imports the new file when Claude should always have it;
+  - guidance only Claude needs can instead be a path-scoped `.claude/rules/` file, listed in `CLAUDE.md`'s map, as the CI, research, and testing rules already are.
+- **Keep one source of truth.** The moved text leaves this file, and every inbound anchor is updated to the new file — grep for `AGENTS.md#`, since `CONTRIBUTING.md` links several sections.
 
 ## 🛑 Deleting things
 

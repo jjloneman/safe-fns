@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { hostileInputs } from "#test/hostile-inputs";
+import { HOSTILE_INPUTS } from "#test/hostile-inputs";
 
 /**
  * Inspect a value the way an unguarded helper would: list its entries, probe a
@@ -17,7 +17,7 @@ function inspectWithoutGuards(value: unknown): void {
 }
 
 describe("hostile inputs", () => {
-  test.each(hostileInputs)(
+  test.each(HOSTILE_INPUTS)(
     "$description throws when inspected",
     ({ value }) => {
       // When

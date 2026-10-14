@@ -148,6 +148,14 @@ export type ResultColumn = {
   image: string;
 
   /**
+   * The fingerprint of the files its service depended on, from
+   * `toServiceInputs`; absent on the planned column.
+   *
+   * @example `"sha256:3b5d…"`
+   */
+  inputs?: string;
+
+  /**
    * The Compose service that produced the column, or `-` for the planned
    * column; a narrowed run replaces only the columns of the services it ran.
    *
@@ -164,9 +172,15 @@ export type ServiceColumns = {
    * @example `[{ call: "yn(value)", function: "safeParseBoolean", … }]`
    */
   columns: AdapterColumn[];
-} & Pick<ResultColumn, "image" | "service">;
+} & Pick<ResultColumn, "image" | "service"> &
+  Required<Pick<ResultColumn, "inputs">>;
 
-/** A table tier; 0 is safe-fns' own planned column. */
+/**
+ * A table tier; 0 is safe-fns' own planned column.
+ *
+ * - research/README.md's Tiers section defines each one; the summary table
+ *   shows tiers 0–2.
+ */
 export type Tier = (typeof TIERS)[number];
 
 /** The fields every column shares, in adapter output and in results alike. */
@@ -200,6 +214,14 @@ type ColumnCore = {
   outcomes: Outcome[];
 
   /**
+   * The cached excerpt a docs-only column was transcribed from, relative to
+   * the repo root; absent from a column a tool produced by running.
+   *
+   * @example "research/sources/excel.md"
+   */
+  source?: string;
+
+  /**
    * The column's tier, which orders the tables; 0 is safe-fns itself.
    *
    * @example 1
@@ -231,7 +253,7 @@ type ColumnToParse = {
   index: number;
 };
 
-/** An adapter column, and the service and image it ran in. */
+/** An adapter column, and the service, image, and inputs it ran with. */
 type ColumnWithOrigin = {
   /**
    * The column the adapter printed.
@@ -239,7 +261,7 @@ type ColumnWithOrigin = {
    * @example `{ call: "yn(value)", function: "safeParseBoolean", … }`
    */
   column: AdapterColumn;
-} & Pick<ResultColumn, "image" | "service">;
+} & Pick<ServiceColumns, "image" | "inputs" | "service">;
 
 /** The function name of the case file that checks the codec itself. */
 export const CODEC_FUNCTION = "codec";
@@ -271,10 +293,10 @@ export function buildResults({
 }: BuildResultsInput): FunctionResult[] {
   return caseFiles.map((caseFile) => {
     const columns = serviceColumns.flatMap(
-      ({ columns: adapterColumns, image, service }) =>
+      ({ columns: adapterColumns, image, inputs, service }) =>
         adapterColumns
           .filter((column) => column.function === caseFile.function)
-          .map((column) => toResultColumn({ column, image, service }))
+          .map((column) => toResultColumn({ column, image, inputs, service }))
     );
 
     const plannedColumn = toPlannedColumn(caseFile);
@@ -461,9 +483,14 @@ export function parseFunctionResult(json: unknown): FunctionResult {
       throw new Error(`result column ${index} lacks \`image\` or \`service\``);
     }
 
+    if (column.inputs !== undefined && typeof column.inputs !== "string") {
+      throw new Error(`result column ${index} has a non-string \`inputs\``);
+    }
+
     return {
       ...parseColumnCore({ column, index }),
       image: column.image,
+      ...(column.inputs === undefined ? {} : { inputs: column.inputs }),
       service: column.service,
     };
   });
@@ -547,11 +574,16 @@ function parseColumnCore({ column, index }: ColumnToParse): ColumnCore {
     throw new Error(`column ${index} has a bad tier or outcomes`);
   }
 
+  if (column.source !== undefined && typeof column.source !== "string") {
+    throw new Error(`column ${index} has a non-string source`);
+  }
+
   return {
     call: column.call,
     locale: column.locale,
     name: column.name,
     outcomes: column.outcomes.map((outcome: unknown) => parseOutcome(outcome)),
+    ...(column.source === undefined ? {} : { source: column.source }),
     tier: column.tier,
     version: column.version,
   };
@@ -613,19 +645,22 @@ function toPlannedColumn(caseFile: CaseFile): ResultColumn | undefined {
   };
 }
 
-/** Attach the service and image an adapter column ran in. */
+/** Attach the service, image, and inputs an adapter column ran with. */
 function toResultColumn({
   column,
   image,
+  inputs,
   service,
 }: ColumnWithOrigin): ResultColumn {
   return {
     call: column.call,
     image,
+    inputs,
     locale: column.locale,
     name: column.name,
     outcomes: column.outcomes,
     service,
+    ...(column.source === undefined ? {} : { source: column.source }),
     tier: column.tier,
     version: column.version,
   };

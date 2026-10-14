@@ -1,6 +1,6 @@
 import type { Config } from "prettier";
 
-const config: Config = {
+const CONFIG: Config = {
   overrides: [
     /*
      * The git hooks are POSIX shell scripts with no extension, so Prettier
@@ -38,8 +38,15 @@ const config: Config = {
       options: { proseWrap: "always" },
     },
   ],
-  plugins: ["prettier-plugin-packagejson", "prettier-plugin-sh"],
+  plugins: [
+    "@prettier/plugin-php",
+    "@prettier/plugin-xml",
+    "prettier-plugin-java",
+    "prettier-plugin-packagejson",
+    "prettier-plugin-sh",
+    "prettier-plugin-toml",
+  ],
   trailingComma: "es5",
 };
 
-export default config;
+export default CONFIG;

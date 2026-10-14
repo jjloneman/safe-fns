@@ -43,7 +43,7 @@ const BLOCK_DELIMITER_WIDTH = "/*".length;
  *   type is imported, and re-wrapping prose to the print width — three
  *   judgment calls a fixer would get wrong silently.
  */
-export const noDottedJsdocParam: Rule.RuleModule = {
+export const NO_DOTTED_JSDOC_PARAM: Rule.RuleModule = {
   create(context) {
     return {
       // `Program` runs once per linted file, and `sourceCode` is that file

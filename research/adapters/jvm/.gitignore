@@ -1,0 +1,4 @@
+# Gradle's output, if the project is ever built outside its image.
+.gradle/
+.kotlin/
+build/
