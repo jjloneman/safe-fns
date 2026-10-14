@@ -85,6 +85,7 @@
     {
       "call": "is.plainObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "@sindresorhus/is",
       "outcomes": [
@@ -168,6 +169,7 @@
     {
       "call": "isPlainObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -251,6 +253,7 @@
     {
       "call": "isPlainObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "is-plain-obj",
       "outcomes": [
@@ -334,6 +337,7 @@
     {
       "call": "_.isPlainObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -417,6 +421,7 @@
     {
       "call": "isObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "radash",
       "outcomes": [
@@ -500,6 +505,7 @@
     {
       "call": "isPlainObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "remeda",
       "outcomes": [
@@ -583,6 +589,7 @@
     {
       "call": "_, ok := value.(map[string]any)",
       "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "inputs": "sha256:9d7311e1f994672a872ffacbbe9c894234379a07e4cc64f9c466d89f4d471805",
       "locale": "C.UTF-8",
       "name": "Go",
       "outcomes": [
@@ -654,6 +661,7 @@
     {
       "call": "type(value) is dict",
       "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
       "locale": "C.UTF-8",
       "name": "Python",
       "outcomes": [
@@ -725,6 +733,7 @@
     {
       "call": "$value instanceof stdClass",
       "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "locale": "C.UTF-8",
       "name": "PHP",
       "outcomes": [
@@ -796,6 +805,7 @@
     {
       "call": "$value -is [hashtable]",
       "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "inputs": "sha256:88d6f32c732dcf25775811f089cfe58ba9310ccf1f845b2c6cdb26e1bc8d37a2",
       "locale": "invariant",
       "name": "PowerShell",
       "outcomes": [
@@ -867,6 +877,7 @@
     {
       "call": "value.instance_of?(Hash)",
       "image": "ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2",
+      "inputs": "sha256:d90108c2528b65f8e3dd03e6c0c13065f6cd6c2411af0b1dc1e9d772c280da20",
       "locale": "C.UTF-8",
       "name": "Ruby",
       "outcomes": [
@@ -938,6 +949,7 @@
     {
       "call": "value is [String: Any]",
       "image": "swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66",
+      "inputs": "sha256:5b0e84cb182599a8af1ac16988411b10b787bf74f86b63c4fb4087555efb7c5f",
       "locale": "C.UTF-8",
       "name": "Swift",
       "outcomes": [

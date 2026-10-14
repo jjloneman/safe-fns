@@ -140,6 +140,7 @@
     {
       "call": "Schema.decodeUnknownSync(Schema.NumberFromString)(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "Effect",
       "outcomes": [
@@ -337,6 +338,7 @@
     {
       "call": "compat.toNumber(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -544,6 +546,7 @@
     {
       "call": "Number.parseFloat(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:761948ce0352376a9dea504e5c2b6cef0ecbcabc60bb85bd2fa3778a1f5b209e",
       "locale": "-",
       "name": "Hermes",
       "outcomes": [
@@ -755,6 +758,7 @@
     {
       "call": "Number(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:761948ce0352376a9dea504e5c2b6cef0ecbcabc60bb85bd2fa3778a1f5b209e",
       "locale": "-",
       "name": "Hermes",
       "outcomes": [
@@ -962,6 +966,7 @@
     {
       "call": "Number.parseFloat(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -1173,6 +1178,7 @@
     {
       "call": "Number(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -1380,6 +1386,7 @@
     {
       "call": "_.toNumber(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -1587,6 +1594,7 @@
     {
       "call": "toFloat(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "radash",
       "outcomes": [
@@ -1772,6 +1780,7 @@
     {
       "call": "v.parse(v.pipe(v.unknown(), v.toNumber()), value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "valibot",
       "outcomes": [
@@ -1959,6 +1968,7 @@
     {
       "call": "z.coerce.number().parse(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "zod",
       "outcomes": [
@@ -2138,6 +2148,7 @@
     {
       "call": "Convert.ToDouble(value, InvariantCulture)",
       "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "inputs": "sha256:a455a1aecd088e79edecf6165674b790c32330b9d0ecf27ccb10538fc57ec58d",
       "locale": "invariant",
       "name": ".NET",
       "outcomes": [
@@ -2328,6 +2339,7 @@
     {
       "call": "double.Parse(value, \"de-DE\")",
       "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "inputs": "sha256:a455a1aecd088e79edecf6165674b790c32330b9d0ecf27ccb10538fc57ec58d",
       "locale": "de-DE",
       "name": ".NET",
       "outcomes": [
@@ -2496,6 +2508,7 @@
     {
       "call": "double.Parse(value, \"fr-FR\")",
       "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "inputs": "sha256:a455a1aecd088e79edecf6165674b790c32330b9d0ecf27ccb10538fc57ec58d",
       "locale": "fr-FR",
       "name": ".NET",
       "outcomes": [
@@ -2664,6 +2677,7 @@
     {
       "call": "double.Parse(value, InvariantCulture)",
       "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "inputs": "sha256:a455a1aecd088e79edecf6165674b790c32330b9d0ecf27ccb10538fc57ec58d",
       "locale": "invariant",
       "name": ".NET",
       "outcomes": [
@@ -2836,6 +2850,7 @@
     {
       "call": "NumberUtils.createNumber(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
       "locale": "en",
       "name": "Commons Lang",
       "outcomes": [
@@ -3003,6 +3018,7 @@
     {
       "call": "NumberUtils.toDouble(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
       "locale": "en",
       "name": "Commons Lang",
       "outcomes": [
@@ -3176,6 +3192,7 @@
     {
       "call": "strconv.ParseFloat(value, 64)",
       "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "inputs": "sha256:9d7311e1f994672a872ffacbbe9c894234379a07e4cc64f9c466d89f4d471805",
       "locale": "C.UTF-8",
       "name": "Go",
       "outcomes": [
@@ -3348,6 +3365,7 @@
     {
       "call": "value as Double",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -3538,6 +3556,7 @@
     {
       "call": "value.toBigDecimal()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -3750,6 +3769,7 @@
     {
       "call": "value.toDouble()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -3940,6 +3960,7 @@
     {
       "call": "Doubles.tryParse(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
       "locale": "en",
       "name": "Guava",
       "outcomes": [
@@ -4112,6 +4133,7 @@
     {
       "call": "Double.parseDouble(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -4284,6 +4306,7 @@
     {
       "call": "value.toDoubleOrNull()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [
@@ -4456,6 +4479,7 @@
     {
       "call": "float(value)",
       "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
       "locale": "C.UTF-8",
       "name": "Python",
       "outcomes": [
@@ -4648,6 +4672,7 @@
     {
       "call": "value.parse::<f64>()",
       "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
+      "inputs": "sha256:746655cdcacce8cf4b85985d2a9833006fd1bbb749fd8bf989d767274d418adf",
       "locale": "C.UTF-8",
       "name": "Rust",
       "outcomes": [
@@ -4822,6 +4847,7 @@
     {
       "call": "conversionService.convert(value, Double.class)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
       "locale": "en",
       "name": "Spring",
       "outcomes": [
@@ -5012,6 +5038,7 @@
     {
       "call": "parse(value, { cast: true })[0]?.[0]",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "CSV",
       "outcomes": [
@@ -5178,6 +5205,7 @@
     {
       "call": "input.value = value; input.valueAsNumber",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "HTML (jsdom)",
       "outcomes": [
@@ -5380,6 +5408,7 @@
     {
       "call": "parse(`v = ${value}`).v",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "INI",
       "outcomes": [
@@ -5542,6 +5571,7 @@
     {
       "call": "JSON.parse(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "JSON",
       "outcomes": [
@@ -5708,6 +5738,7 @@
     {
       "call": "SELECT CAST(? AS DOUBLE)",
       "image": "mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
       "locale": "utf8mb4_uca1400_ai_ci",
       "name": "MariaDB",
       "outcomes": [
@@ -5875,6 +5906,7 @@
     {
       "call": "{ $toDouble: value }",
       "image": "mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
       "locale": "simple",
       "name": "MongoDB",
       "outcomes": [
@@ -6062,6 +6094,7 @@
     {
       "call": "SELECT CAST(? AS DOUBLE)",
       "image": "mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
       "locale": "utf8mb4_0900_ai_ci",
       "name": "MySQL",
       "outcomes": [
@@ -6233,6 +6266,7 @@
     {
       "call": "SELECT CAST(? AS double precision)",
       "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
       "locale": "C.UTF-8",
       "name": "PostgreSQL",
       "outcomes": [
@@ -6420,6 +6454,7 @@
     {
       "call": "SELECT CAST(? AS float)",
       "image": "mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
       "locale": "SQL_Latin1_General_CP1_CI_AS",
       "name": "SQL Server",
       "outcomes": [
@@ -6591,6 +6626,7 @@
     {
       "call": "SELECT CAST(? AS REAL)",
       "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
       "locale": "C.UTF-8",
       "name": "SQLite",
       "outcomes": [
@@ -6770,6 +6806,7 @@
     {
       "call": "parse(`v = ${value}`).v",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "TOML",
       "outcomes": [
@@ -6936,6 +6973,7 @@
     {
       "call": "decode(<double>value</double>)",
       "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:a8a3e9ce51165e63dfd632a196ed157c66afbaef67eacdbaa2617ec3c6791d1a",
       "locale": "C.UTF-8",
       "name": "XML Schema 1.0",
       "outcomes": [
@@ -7104,6 +7142,7 @@
     {
       "call": "parse(value, { version: \"1.1\" })",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "YAML 1.1",
       "outcomes": [
@@ -7270,6 +7309,7 @@
     {
       "call": "parse(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "YAML 1.2 core",
       "outcomes": [
@@ -7436,6 +7476,7 @@
     {
       "call": "coerce({ type: \"number\" }, value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "Ajv",
       "outcomes": [
@@ -7623,6 +7664,7 @@
     {
       "call": "atof(value)",
       "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
+      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
       "locale": "C.UTF-8",
       "name": "C (glibc)",
       "outcomes": [
@@ -7797,6 +7839,7 @@
     {
       "call": "strtod(value, NULL)",
       "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
+      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
       "locale": "C.UTF-8",
       "name": "C (glibc)",
       "outcomes": [
@@ -7971,6 +8014,7 @@
     {
       "call": "std::from_chars(first, last, double&)",
       "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
+      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
       "locale": "C.UTF-8",
       "name": "C++ (libstdc++)",
       "outcomes": [
@@ -8143,6 +8187,7 @@
     {
       "call": "std::stod(value)",
       "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
+      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
       "locale": "C.UTF-8",
       "name": "C++ (libstdc++)",
       "outcomes": [
@@ -8315,6 +8360,7 @@
     {
       "call": "math -- $argv[1]",
       "image": "debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f",
+      "inputs": "sha256:e03a7e98b5ea27845fa265c13700e3ea8a933cfb9f4d98ef38f01687b8fd9bc1",
       "locale": "C.UTF-8",
       "name": "fish",
       "outcomes": [
@@ -8477,6 +8523,7 @@
     {
       "call": "filter_var($value, FILTER_VALIDATE_FLOAT)",
       "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "locale": "C.UTF-8",
       "name": "PHP",
       "outcomes": [
@@ -8651,6 +8698,7 @@
     {
       "call": "floatval($value)",
       "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "locale": "C.UTF-8",
       "name": "PHP",
       "outcomes": [
@@ -8835,6 +8883,7 @@
     {
       "call": "[double]::Parse($value, [cultureinfo]'de-DE')",
       "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "inputs": "sha256:88d6f32c732dcf25775811f089cfe58ba9310ccf1f845b2c6cdb26e1bc8d37a2",
       "locale": "de-DE",
       "name": "PowerShell",
       "outcomes": [
@@ -9019,6 +9068,7 @@
     {
       "call": "[double]::Parse($value, [cultureinfo]'fr-FR')",
       "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "inputs": "sha256:88d6f32c732dcf25775811f089cfe58ba9310ccf1f845b2c6cdb26e1bc8d37a2",
       "locale": "fr-FR",
       "name": "PowerShell",
       "outcomes": [
@@ -9203,6 +9253,7 @@
     {
       "call": "[double]::Parse($value)",
       "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "inputs": "sha256:88d6f32c732dcf25775811f089cfe58ba9310ccf1f845b2c6cdb26e1bc8d37a2",
       "locale": "invariant",
       "name": "PowerShell",
       "outcomes": [
@@ -9393,6 +9444,7 @@
     {
       "call": "[double]$value",
       "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "inputs": "sha256:88d6f32c732dcf25775811f089cfe58ba9310ccf1f845b2c6cdb26e1bc8d37a2",
       "locale": "invariant",
       "name": "PowerShell",
       "outcomes": [
@@ -9581,6 +9633,7 @@
     {
       "call": "$value -as [double]",
       "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "inputs": "sha256:88d6f32c732dcf25775811f089cfe58ba9310ccf1f845b2c6cdb26e1bc8d37a2",
       "locale": "invariant",
       "name": "PowerShell",
       "outcomes": [
@@ -9769,6 +9822,7 @@
     {
       "call": "ActiveModel::Type::Float.new.cast(value)",
       "image": "ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2",
+      "inputs": "sha256:d90108c2528b65f8e3dd03e6c0c13065f6cd6c2411af0b1dc1e9d772c280da20",
       "locale": "C.UTF-8",
       "name": "Rails (ActiveModel)",
       "outcomes": [
@@ -9959,6 +10013,7 @@
     {
       "call": "Float(value)",
       "image": "ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2",
+      "inputs": "sha256:d90108c2528b65f8e3dd03e6c0c13065f6cd6c2411af0b1dc1e9d772c280da20",
       "locale": "C.UTF-8",
       "name": "Ruby",
       "outcomes": [
@@ -10143,6 +10198,7 @@
     {
       "call": "value.to_f",
       "image": "ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2",
+      "inputs": "sha256:d90108c2528b65f8e3dd03e6c0c13065f6cd6c2411af0b1dc1e9d772c280da20",
       "locale": "C.UTF-8",
       "name": "Ruby",
       "outcomes": [
@@ -10327,6 +10383,7 @@
     {
       "call": "Double(value)",
       "image": "swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66",
+      "inputs": "sha256:5b0e84cb182599a8af1ac16988411b10b787bf74f86b63c4fb4087555efb7c5f",
       "locale": "C.UTF-8",
       "name": "Swift",
       "outcomes": [
@@ -10501,6 +10558,7 @@
     {
       "call": "validator.toFloat(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
       "locale": "en-US",
       "name": "validator.js",
       "outcomes": [
@@ -10699,6 +10757,7 @@
     {
       "call": "printf '%s' \"$(( $1 ))\"",
       "image": "debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f",
+      "inputs": "sha256:e03a7e98b5ea27845fa265c13700e3ea8a933cfb9f4d98ef38f01687b8fd9bc1",
       "locale": "C.UTF-8",
       "name": "zsh",
       "outcomes": [

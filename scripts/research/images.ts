@@ -2,7 +2,7 @@
  * Names the image each Compose service reports, and finds committed results
  * that no longer match it.
  *
- * - The runner and `pnpm research --check-images` share these functions, so
+ * - The runner and `pnpm research --check-inputs` share these functions, so
  *   the check can never disagree with what a run would record.
  *
  * - Dockerfiles are read through a caller-supplied function, which keeps
@@ -104,7 +104,7 @@ type DockerfileImageInput = {
 type ImageInput = Pick<ReportedImageInput, "readDockerfile" | "service">;
 
 /** The column `image` of the planned and docs-only columns, never checked. */
-const NO_IMAGE = "-";
+export const NO_IMAGE = "-";
 
 /** The label saying whether a service is an adapter, database, or formatter. */
 export const ROLE_LABEL = "dev.safe-fns.research.role";
@@ -156,12 +156,25 @@ export function findStaleImages({
 
   const staleByKey = new Map(
     staleImages.map((stale) => [
-      `${stale.function}\n${stale.service}\n${stale.recorded}`,
+      `${toStaleKey(stale)}\n${stale.recorded}`,
       stale,
     ])
   );
 
   return [...staleByKey.values()];
+}
+
+/**
+ * Resolve where a built service's Dockerfile lives.
+ *
+ * @returns the path, resolved against the build context.
+ */
+export function toDockerfilePath(build: Record<string, unknown>): string {
+  const context = typeof build.context === "string" ? build.context : ".";
+  const dockerfile =
+    typeof build.dockerfile === "string" ? build.dockerfile : "Dockerfile";
+
+  return path.resolve(context, dockerfile);
 }
 
 /**
@@ -194,6 +207,19 @@ export function toReportedImage({
 }
 
 /**
+ * Key a stale finding by its function and service, so each pair is reported
+ * once and an image finding can stand in for an inputs finding.
+ *
+ * @returns the key.
+ */
+export function toStaleKey({
+  function: functionName,
+  service,
+}: Pick<StaleImage, "function" | "service">): string {
+  return `${functionName}\n${service}`;
+}
+
+/**
  * Read the base image a built service's Dockerfile pins.
  *
  * @returns the first `FROM` reference, or `unknown` when there is none.
@@ -202,11 +228,7 @@ function imageFromDockerfile({
   build,
   readDockerfile,
 }: DockerfileImageInput): string {
-  const context = typeof build.context === "string" ? build.context : ".";
-  const dockerfile =
-    typeof build.dockerfile === "string" ? build.dockerfile : "Dockerfile";
-
-  const text = readDockerfile(path.resolve(context, dockerfile));
+  const text = readDockerfile(toDockerfilePath(build));
   const match = /^FROM\s+(?<image>\S+)/mu.exec(text);
 
   return match?.groups?.image ?? "unknown";
