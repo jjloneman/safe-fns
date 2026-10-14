@@ -16,6 +16,7 @@ the generated tables instead of summarizing other tools' docs.
 - [🗂️ Layout](#️-layout)
 - [📦 The case format](#-the-case-format)
 - [🧩 The adapter contract](#-the-adapter-contract)
+- [🗄️ Databases](#️-databases)
 - [➕ Adding a function or a tool](#-adding-a-function-or-a-tool)
 - [🖌️ Formatters](#️-formatters)
 
@@ -37,7 +38,7 @@ the generated tables instead of summarizing other tools' docs.
 | :-------------------------------- | :------------------------------------------------------------------------------ |
 | `pnpm research`                   | Runs every adapter over every case file                                         |
 | `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats |
-| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (`node`, `python`); repeats                 |
+| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (`db`, `node`, `python`); repeats           |
 | `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                   |
 | `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter             |
 | `pnpm research --format --check`  | Reports formatting drift without writing                                        |
@@ -46,6 +47,9 @@ the generated tables instead of summarizing other tools' docs.
   sorted, keys are sorted, and nothing records a timestamp.
 - The manual **🔬 Research** workflow (`.github/workflows/research.yml`) runs
   the same command on GitHub and uploads the results as an artifact.
+- The `db` profile starts each database before its adapter runs and removes it
+  afterward; SQL Server runs under emulation on Apple Silicon, so it's the
+  slowest to come up.
 - Clean up with `docker compose --file research/compose.yaml down` and
   `docker image prune`.
 
@@ -54,8 +58,11 @@ the generated tables instead of summarizing other tools' docs.
 - `cases/<function>.json` — the inputs, in the portable format below.
   - `codec.json` isn't a function: every language adapter must return its values
     unchanged, which proves the codec twins agree.
-- `adapters/` — one adapter per language: `node.mts`, `python.py`, `sqlite.py`,
-  and `research_codec.py`, the Python codec.
+- `adapters/` — one adapter per language or database: `node.mts`, `python.py`,
+  `sqlite.py`, `postgres.py`, `mysql.py` (MySQL and MariaDB), `mssql.py`,
+  `mongo.py`, and `firebase.py`.
+  - `research_codec.py` is the Python codec, and `database_probe.py` builds the
+    probes the database adapters share.
 - `results/<function>.json` and `.md` — generated; never edit them by hand.
   - The Markdown has a tiers 0–2 summary for decision records, a by-outcome
     table for functions with few distinct results, the full table, and every
@@ -64,6 +71,11 @@ the generated tables instead of summarizing other tools' docs.
   with its URL, version or commit, and fetch date.
 - `compose.yaml` — every service; `docker/` holds Dockerfiles for images that
   need a build step.
+  - `docker/db/` — Python plus the database drivers, hash-pinned in
+    `requirements.txt`.
+  - `docker/firebase/` — the Firebase emulators: Node, a JRE, and
+    `firebase-tools` from its own pnpm root, with the emulator jars fetched at
+    build time.
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` — the Node adapter's
   libraries, a separate pnpm root with the repo's 7-day moratorium.
 - `tsconfig.json` — a nested config, so the editor and ESLint resolve the Node
@@ -132,6 +144,34 @@ to stdout:
 - Write nothing to disk: the repo is mounted read-only under `/work`, mirroring
   its layout.
 
+## 🗄️ Databases
+
+A database is a long-running Compose service labeled
+`dev.safe-fns.research.role: database`, beside a one-shot adapter that queries
+it.
+
+| Database                   | Probes                                                  | Service            |
+| :------------------------- | :------------------------------------------------------ | :----------------- |
+| PostgreSQL                 | `CAST(? AS …)`, `trim(?)`                               | `postgres`         |
+| MySQL, MariaDB             | `? IS TRUE`, `CAST(? AS …)`, `TRIM(?)`                  | `mysql`, `mariadb` |
+| SQL Server                 | `CAST(? AS …)`, `TRIM(?)`                               | `mssql`            |
+| MongoDB                    | `$toBool`, `$toLong`, `$toDouble`, `$toString`, `$trim` | `mongo`            |
+| Firebase Realtime Database | `isSafeEmpty`: does a written value survive?            | `firebase`         |
+| Cloud Firestore            | `isSafeEmpty`: does a written field survive?            | `firebase`         |
+
+- The runner starts the active profiles' databases with
+  `docker compose up --wait`, gated on each one's healthcheck, and removes them
+  by name when the adapters finish, whether or not they succeeded.
+- An adapter shares an `internal` network with its database and nothing else, so
+  neither can reach the internet; no database publishes a host port.
+- Each database keeps its data in `tmpfs`, except SQL Server, which can't run on
+  it.
+- An adapter binds the case's value as a query parameter, and reports `n/a` for
+  a value its driver would change on the way in: a bool where the database has
+  no boolean type, an integer outside 64 bits, a string that isn't valid UTF-8.
+- A column's version is the server's own, its locale is the database's collation
+  or `ctype`, and its image is the database's, not the adapter's.
+
 ## ➕ Adding a function or a tool
 
 - **A function:** add `cases/<kebab-name>.json`, add probes for it to each
@@ -148,6 +188,10 @@ to stdout:
      and `check-args` labels (see `ruff`), or a Prettier plugin in
      `package.json`.
   4. Add a Dependabot entry if the image comes from a Dockerfile.
+- **A database:** add it as a `database`-role service with a healthcheck, on an
+  `internal` network of its own, and an adapter on that network whose
+  `depends_on` names it; the runner reports the database's image for the
+  adapter's columns.
 
 ## 🖌️ Formatters
 

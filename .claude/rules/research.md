@@ -19,12 +19,16 @@ paths:
 - **Pin every image by version and digest**, and pick a tag last pushed at least 7 days ago; Docker Hub's `tag_last_pushed` is the date that counts, since tags get re-pushed.
 - **No host ports**, no named volumes, and read-only repo mounts for adapters; only a formatter service mounts `research/adapters` writable.
 - **Set the locale explicitly** (`LANG` / `LC_ALL` = `C.UTF-8`); a function that depends on locale gets explicit extra-locale cases rather than the host's.
+- **A database is started and removed by the runner**, not by `depends_on`: adapters run with `--no-deps`. Give it a `database` role label, a healthcheck that only passes once the real server is up (the Postgres and MySQL entrypoints run a socket-only setup server first, so probe over TCP), and an `internal` network shared only with its adapter.
+- **SQL Server can't run on `tmpfs`**, and Microsoft publishes it for amd64 only; it runs under emulation on Apple Silicon.
+- **Pin each pnpm root's install scripts.** pnpm refuses an unapproved build script; `research/docker/firebase/pnpm-workspace.yaml` denies the two `firebase-tools` pulls in through `allowBuilds`.
 - **Watch for distro-patched tools.** Python 3.11's image injects setuptools' `distutils` unless `SETUPTOOLS_USE_DISTUTILS=stdlib`; Debian's SQLite is older than upstream. The version column must name what really ran.
 
 ## 🔷 Code
 
 - `scripts/research/*.ts` follows the `scripts/` conventions; the Node adapter (`research/adapters/node.mts`) follows the TypeScript ones and is checked through `research/tsconfig.json`.
 - **The two codecs are twins.** A change to `scripts/research/codec.ts` needs the same change in `research/adapters/research_codec.py`, and a `codec.json` case proving it.
+- **A database adapter reports the server's own version and collation**, read with a query (PostgreSQL 16 dropped the `lc_ctype` setting; read `pg_database.datctype`), never the driver's.
 - **Non-TS adapters follow the same conventions** ([AGENTS.md → Every language](../../AGENTS.md#-every-language)): Python is fully annotated and documented, keyword-only past one parameter, and checked by `ruff-check`.
 - **Parse JSON only through `scripts/research/json.ts`** (`parseJson`, `readJsonFile`), whose errors name the file or process; ESLint's `no-restricted-properties` rejects a bare `JSON.parse` in research code. `JSON.stringify` needs no wrapper: it only ever sees encoded values, which hold nothing it throws on.
 - **Name every parameter object type and document every property**, with an `@example`, as AGENTS.md asks of all code.
