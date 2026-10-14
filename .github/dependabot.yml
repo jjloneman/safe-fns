@@ -149,33 +149,25 @@ updates:
         patterns:
           - "*"
 
-    # Python's pre-releases (`aN`, `bN`, `rcN`) can get past Dependabot's own
-    # pre-release filter, and the research harness never pins one.
-    #
-    # - Docker `versions` are RubyGems ranges, so each `>= X.Y.0.a, < X.Y.0`
-    #   holds that minor's alphas, betas, and release candidates while its
-    #   final release still flows.
-    #
-    # - Add the next minor before its first alpha; the same rule is repeated in
-    #   every entry that bumps a `python` image, since this file can't share it.
-    ignore:
-      - dependency-name: "python"
-        versions:
-          - ">= 3.15.0.a, < 3.15.0"
-          - ">= 3.16.0.a, < 3.16.0"
-          - ">= 3.17.0.a, < 3.17.0"
     labels:
       - "📦 dependencies"
 
   # Each research Dockerfile's `FROM`; the Hermes CLI tarball its Dockerfile
   # downloads can't be tracked, so that one is bumped by hand.
+  #
+  # - An image that several adapters share moves in this one PR, so their
+  #   results are regenerated together: Node (`firebase`, `hermes`, `node`,
+  #   and `sources`) and every 3.x Python (`db`, `python`, `sqlite`, and
+  #   `xml-schema`).
   - package-ecosystem: "docker"
     directories:
       - "/research/docker/c"
+      - "/research/docker/db"
       - "/research/docker/debian"
+      - "/research/docker/firebase"
       - "/research/docker/hermes"
       - "/research/docker/node"
-      - "/research/docker/powershell"
+      - "/research/docker/python"
       - "/research/docker/ruby"
       - "/research/docker/swift"
       - "/research/docker/xml-schema"
@@ -197,7 +189,16 @@ updates:
         patterns:
           - "*"
 
-    # Python's pre-releases; see the `docker-compose` entry.
+    # Python's pre-releases (`aN`, `bN`, `rcN`) can get past Dependabot's own
+    # pre-release filter, and the research harness never pins one.
+    #
+    # - Docker `versions` are RubyGems ranges, so each `>= X.Y.0.a, < X.Y.0`
+    #   holds that minor's alphas, betas, and release candidates while its
+    #   final release still flows.
+    #
+    # - Add the next minor before its first alpha. Compose pins no `python:`
+    #   image, so this is the only entry that needs the rule; `python311`'s own
+    #   entry holds every 3.12 and later.
     ignore:
       - dependency-name: "python"
         versions:
@@ -306,11 +307,13 @@ updates:
     labels:
       - "📦 dependencies"
 
-  # The .NET, Go, and Rust adapters' images, each with its adapter compiled in.
+  # The .NET, Go, and Rust adapters' images, each with its adapter compiled in,
+  # plus PowerShell's, which shares the .NET SDK image so the two move together.
   - package-ecosystem: "docker"
     directories:
       - "/research/docker/dotnet"
       - "/research/docker/go"
+      - "/research/docker/powershell"
       - "/research/docker/rust"
     schedule:
       interval: "weekly"
@@ -366,37 +369,6 @@ updates:
       research-crates:
         patterns:
           - "*"
-    labels:
-      - "📦 dependencies"
-
-  # The database adapters' image and the Firebase emulators' image.
-  - package-ecosystem: "docker"
-    directories:
-      - "/research/docker/db"
-      - "/research/docker/firebase"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "America/New_York"
-    assignees:
-      - jjloneman
-    commit-message:
-      prefix: "chore(deps-dev): ⬆️"
-    cooldown:
-      default-days: 7
-    groups:
-      research-database-images:
-        patterns:
-          - "*"
-
-    # Python's pre-releases; see the `docker-compose` entry.
-    ignore:
-      - dependency-name: "python"
-        versions:
-          - ">= 3.15.0.a, < 3.15.0"
-          - ">= 3.16.0.a, < 3.16.0"
-          - ">= 3.17.0.a, < 3.17.0"
     labels:
       - "📦 dependencies"
 

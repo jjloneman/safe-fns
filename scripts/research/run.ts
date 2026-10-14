@@ -12,6 +12,9 @@
  * - `--format` formats every adapter (Prettier on the host, each other
  *   language's formatter in its container); `--format --check` only reports
  *   drift.
+ *
+ * - `--check-images` fails when a committed column records a different image
+ *   than its service pins now, without building or running anything.
  */
 import type { ChildProcess } from "node:child_process";
 
@@ -29,6 +32,13 @@ import { parseArgs } from "node:util";
 import type { CaseFile, FunctionResult, ServiceColumns } from "./results.ts";
 
 import { isRecord } from "./codec.ts";
+import {
+  describeStaleImage,
+  findStaleImages,
+  ROLE_LABEL,
+  ROLES,
+  toReportedImage,
+} from "./images.ts";
 import { parseJson, readJsonFile } from "./json.ts";
 import {
   buildResults,
@@ -183,23 +193,6 @@ type PoolInput<T> = {
   tasks: readonly (() => Promise<T>)[];
 };
 
-/** A raw Compose service, and every service beside it. */
-type ReportedImageInput = {
-  /**
-   * The service, as `docker compose config` prints it.
-   *
-   * @example `{ depends_on: { postgres: { … } }, image: "…" }`
-   */
-  service: Record<string, unknown>;
-
-  /**
-   * Every service in the config, keyed by name, for its dependencies.
-   *
-   * @example `{ postgres: { image: "postgres:18.6-bookworm@sha256:…" } }`
-   */
-  services: Record<string, unknown>;
-};
-
 /** One run of one Compose service. */
 type ServiceRunInput = {
   /**
@@ -290,15 +283,61 @@ const REPO_ROOT = path.resolve(import.meta.dirname, "../..");
 /** Where results are written. */
 const RESULTS_DIR = path.resolve(import.meta.dirname, "../../research/results");
 
-/** The label saying whether a service is an adapter, database, or formatter. */
-const ROLE_LABEL = "dev.safe-fns.research.role";
+/**
+ * Compare every committed column's image with what its service reports now.
+ *
+ * - Reads only Compose's config and the Dockerfiles, so it builds and pulls
+ *   nothing, which keeps it cheap enough for every PR.
+ *
+ * @returns whether every committed result still matches its image.
+ */
+function checkImages(services: readonly ComposeService[]): boolean {
+  const results = readdirSync(RESULTS_DIR)
+    .filter((file) => file.endsWith(".json"))
+    .sort()
+    .map((file) =>
+      parseFunctionResult(readJsonFile(path.join(RESULTS_DIR, file)))
+    );
 
-/** The roles a Compose service can carry in `ROLE_LABEL`. */
-const ROLES = {
-  adapter: "adapter",
-  database: "database",
-  formatter: "formatter",
-} as const;
+  const staleImages = findStaleImages({
+    reportedImages: new Map(services.map(({ image, name }) => [name, image])),
+    results,
+  });
+
+  if (staleImages.length === 0) {
+    log(`every column in ${results.length} results matches its image`);
+
+    return true;
+  }
+
+  const staleServices = new Set(staleImages.map(({ service }) => service));
+
+  // A narrowed run keeps the columns of services it didn't run, so only a full
+  // run drops a removed service's.
+  const hasRemovedService = staleImages.some(
+    ({ reported }) => reported === undefined
+  );
+
+  const profiles = hasRemovedService
+    ? []
+    : [
+        ...new Set(
+          services
+            .filter(({ name }) => staleServices.has(name))
+            .flatMap((service) => service.profiles)
+        ),
+      ].sort();
+
+  logError(
+    [
+      "results no longer match their images:",
+      ...staleImages.map((staleImage) => `  ${describeStaleImage(staleImage)}`),
+      `regenerate them: ${["pnpm research", ...profileArgs(profiles)].join(" ")}`,
+    ].join("\n")
+  );
+
+  return false;
+}
 
 /**
  * Run Compose against the research file.
@@ -399,22 +438,6 @@ async function formatAdapters({
 }
 
 /**
- * Read the base image a built service's Dockerfile pins.
- *
- * @returns the first `FROM` reference.
- */
-function imageFromDockerfile(build: Record<string, unknown>): string {
-  const context = typeof build.context === "string" ? build.context : ".";
-  const dockerfile =
-    typeof build.dockerfile === "string" ? build.dockerfile : "Dockerfile";
-
-  const text = readFileSync(path.resolve(context, dockerfile), "utf8");
-  const match = /^FROM\s+(?<image>\S+)/mu.exec(text);
-
-  return match?.groups?.image ?? "unknown";
-}
-
-/**
  * Read and narrow the case files, keeping `codec` and the requested functions.
  *
  * @throws Error when a requested function matches no case file, so a typo
@@ -481,7 +504,11 @@ async function loadServices(): Promise<ComposeService[]> {
 
     return [
       {
-        image: toReportedImage({ service, services }),
+        image: toReportedImage({
+          readDockerfile: (file) => readFileSync(file, "utf8"),
+          service,
+          services,
+        }),
         labels: toStringRecord(service.labels),
         name,
         profiles: Array.isArray(service.profiles)
@@ -715,38 +742,6 @@ async function runService({
   return result;
 }
 
-/** Name the image a service runs: its pinned `image`, or a build's base. */
-function toImage(service: Record<string, unknown>): string {
-  if (isRecord(service.build)) {
-    return imageFromDockerfile(service.build);
-  }
-
-  return typeof service.image === "string" ? service.image : "unknown";
-}
-
-/**
- * Name the image whose answers a service reports.
- *
- * - A database adapter only relays what its database returns, so the
- *   database's image is the one a reader needs to reproduce its column.
- *
- * @returns the image of the database it depends on, or else its own.
- */
-function toReportedImage({ service, services }: ReportedImageInput): string {
-  const dependencies = isRecord(service.depends_on) ? service.depends_on : {};
-
-  const database = Object.keys(dependencies)
-    .map((name) => services[name])
-    .find(
-      (dependency) =>
-        isRecord(dependency) &&
-        isRecord(dependency.labels) &&
-        dependency.labels[ROLE_LABEL] === ROLES.database
-    );
-
-  return isRecord(database) ? toImage(database) : toImage(service);
-}
-
 /** Keep only the string values of an object. */
 function toStringRecord(value: unknown): Record<string, string> {
   if (!isRecord(value)) {
@@ -879,6 +874,7 @@ async function main(): Promise<void> {
   const { values } = parseArgs({
     options: {
       check: { type: "boolean" },
+      "check-images": { type: "boolean" },
       concurrency: { type: "string" },
       format: { type: "boolean" },
       function: { multiple: true, type: "string" },
@@ -887,6 +883,22 @@ async function main(): Promise<void> {
   });
 
   const services = await loadServices();
+
+  if (values["check-images"] === true) {
+    const otherFlags = Object.keys(values).filter(
+      (flag) => flag !== "check-images"
+    );
+
+    if (otherFlags.length > 0) {
+      throw new Error(
+        `--check-images takes no other flags, got --${otherFlags.join(", --")}`
+      );
+    }
+
+    process.exitCode = checkImages(services) ? 0 : 1;
+
+    return;
+  }
 
   if (values.format === true) {
     const isClean = await formatAdapters({

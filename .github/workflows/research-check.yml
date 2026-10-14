@@ -48,6 +48,10 @@ jobs:
       - run: pnpm exec eslint research scripts/research
       - run: pnpm exec tsc --project research
 
+      # Committed results must match the pinned images; reads Compose's config
+      # and the Dockerfiles, so it builds and pulls nothing.
+      - run: pnpm research --check-images
+
       # Prettier plus each language's formatter, in its pinned container.
       - run: pnpm research --format --check
 
