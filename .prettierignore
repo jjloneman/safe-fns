@@ -5,3 +5,6 @@ pnpm-lock.yaml
 
 # Rewritten by `pnpm research` on every run.
 research/results/
+
+# Exported brand art: the XML plugin (for research's `.xsd`) would reflow it.
+assets/*.svg

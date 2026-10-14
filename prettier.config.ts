@@ -38,7 +38,12 @@ const config: Config = {
       options: { proseWrap: "always" },
     },
   ],
-  plugins: ["prettier-plugin-packagejson", "prettier-plugin-sh"],
+  plugins: [
+    "@prettier/plugin-xml",
+    "prettier-plugin-packagejson",
+    "prettier-plugin-sh",
+    "prettier-plugin-toml",
+  ],
   trailingComma: "es5",
 };
 
