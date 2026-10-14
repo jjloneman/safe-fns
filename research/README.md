@@ -13,6 +13,7 @@ the generated tables instead of summarizing other tools' docs.
 
 - [📚 Table of Contents](#-table-of-contents)
 - [🚀 Running it](#-running-it)
+- [⬆️ Image bumps](#️-image-bumps)
 - [🧰 Profiles](#-profiles)
 - [🗂️ Layout](#️-layout)
 - [📦 The case format](#-the-case-format)
@@ -36,14 +37,15 @@ the generated tables instead of summarizing other tools' docs.
    - The first run pulls and builds ~4 GB of images (the .NET, Go, and Rust
      toolchains are most of it); later runs take seconds.
 
-| Command                           | What it does                                                                    |
-| :-------------------------------- | :------------------------------------------------------------------------------ |
-| `pnpm research`                   | Runs every adapter over every case file                                         |
-| `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats |
-| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (see [Profiles](#-profiles)); repeats       |
-| `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                   |
-| `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter             |
-| `pnpm research --format --check`  | Reports formatting drift without writing                                        |
+| Command                           | What it does                                                                                  |
+| :-------------------------------- | :-------------------------------------------------------------------------------------------- |
+| `pnpm research`                   | Runs every adapter over every case file                                                       |
+| `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats               |
+| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (see [Profiles](#-profiles)); repeats                     |
+| `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                                 |
+| `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter                           |
+| `pnpm research --format --check`  | Reports formatting drift without writing                                                      |
+| `pnpm research --check-images`    | Fails when a committed column records a different image than its service pins; builds nothing |
 
 - Results are byte-identical across runs and concurrency levels: columns are
   sorted, keys are sorted, and nothing records a timestamp.
@@ -54,6 +56,47 @@ the generated tables instead of summarizing other tools' docs.
   slowest to come up.
 - Clean up with `docker compose --file research/compose.yaml down` and
   `docker image prune`.
+
+## ⬆️ Image bumps
+
+Dependabot bumps the image pins weekly but never regenerates
+`research/results/`, so `research-check.yml` runs `pnpm research --check-images`
+on every PR that touches the harness.
+
+- **The check compares, it doesn't run.** It reads `docker compose config` and
+  each Dockerfile's first `FROM`, reports each service's image exactly as the
+  runner would (a database adapter reports its database's), and fails on any
+  committed column that records something else.
+  - It names the function, the service, and both images, then prints the
+    `pnpm research --profile …` command that regenerates them.
+  - The planned and docs-only columns record `-` and are never checked.
+- **Regenerate a bump's results by hand**, on the Dependabot branch:
+  1. `gh pr checkout <n>`, and set your own `COMPOSE_PROJECT_NAME`.
+  2. Run the command the check printed, then run it again; the second run must
+     leave `git status` clean.
+  3. Commit the results as `chore(research): 🔬 regenerate results for <bump>`
+     and push.
+  - Dependabot stops rebasing a PR once someone else has pushed to it;
+    `@dependabot recreate` would drop the results commit, so regenerate again
+    after one.
+- **An image several adapters share moves in one PR**, so its results are
+  regenerated together; `scripts/research/image-pins.test.ts` fails if a shared
+  image is split across Dependabot groups. `python311` is the one deliberate
+  exception: its own entry holds it on 3.11.
+
+  | Image                          | Services                                | Group                      |
+  | :----------------------------- | :-------------------------------------- | :------------------------- |
+  | `node`                         | `firebase`, `hermes`, `node`, `sources` | `research-dockerfiles`     |
+  | `python` (3.x)                 | `db`, `python`, `sqlite`, `xml-schema`  | `research-dockerfiles`     |
+  | `mcr.microsoft.com/dotnet/sdk` | `dotnet`, `powershell`                  | `research-compiled-images` |
+  - `db` and `sources` share an image without recording it: a database column
+    records its database's image, and a docs-only column records `-`. The check
+    can't see a bump to `docker/db/`, so rerun `--profile db` by hand when its
+    Dockerfile changes.
+
+- **Every image tracks its latest stable major.** A new major is a result to
+  record, not a break to avoid, so Dependabot proposes majors and they merge
+  once their results are regenerated; pre-releases are never pinned.
 
 ## 🧰 Profiles
 
@@ -70,11 +113,11 @@ Each adapter service sits in one profile, named for its image.
 | `node`       | `node`, plus `package.json`'s libraries                            | JS built-ins; lodash, es-toolkit, remeda, Underscore, Ramda, radash, Effect, `@sindresorhus/is`, is-plain-obj; zod, valibot, joi, yup, envalid, yn, validator.js, Ajv; JSON, YAML, TOML, CSV, INI, and the HTML spec (jsdom) |
 | `php`        | `php` (CLI)                                                        | PHP                                                                                                                                                                                                                          |
 | `powershell` | .NET SDK, which ships PowerShell                                   | PowerShell                                                                                                                                                                                                                   |
-| `python`     | `python`, plus `docker/python311`                                  | Python 3.14 and 3.11, SQLite                                                                                                                                                                                                 |
+| `python`     | `docker/python/` and `docker/python311/`: `python`                 | Python 3.14 and 3.11, SQLite                                                                                                                                                                                                 |
 | `ruby`       | `ruby`, plus `docker/ruby/Gemfile.lock`                            | Ruby, Rails' ActiveModel                                                                                                                                                                                                     |
 | `rust`       | `rust`, plus `adapters/rust/Cargo.lock`                            | Rust                                                                                                                                                                                                                         |
 | `shell`      | `debian`, plus Debian's packages                                   | bash, dash (POSIX sh), fish, zsh, git, systemd                                                                                                                                                                               |
-| `sources`    | `node` (no libraries)                                              | Docs-only columns from `sources/`; Excel and Google Sheets are cached, but settle no current case                                                                                                                            |
+| `sources`    | `docker/node/`'s `base` stage: `node`, without the libraries       | Docs-only columns from `sources/`; Excel and Google Sheets are cached, but settle no current case                                                                                                                            |
 | `swift`      | `swift`, with the adapter compiled in                              | Swift on Linux (swift-corelibs-foundation, not Darwin's)                                                                                                                                                                     |
 | `xml`        | `docker/xml-schema/`: `python`, plus hash-pinned `xmlschema`       | XML Schema 1.0's built-in types                                                                                                                                                                                              |
 
@@ -130,7 +173,7 @@ Each adapter service sits in one profile, named for its image.
 - `compose.yaml` — every service; `docker/` holds Dockerfiles for images that
   need a build step: one per compiled adapter (`c`, `dotnet`, `go`, `jvm`,
   `rust`, `swift`), which also carries that language's formatter and linter,
-  plus `node`, `hermes`, `xml-schema`, and the JVM formatters' own;
+  plus `node`, `hermes`, `python`, `xml-schema`, and the JVM formatters' own;
   `docker/ruby/` also holds the Ruby gems' `Gemfile.lock`.
 - `.swift-format` — swift-format's settings: 80 columns, 2-space indents.
   - `docker/db/` — Python plus the database drivers, hash-pinned in
@@ -138,6 +181,9 @@ Each adapter service sits in one profile, named for its image.
   - `docker/firebase/` — the Firebase emulators: Node, a JRE, and
     `firebase-tools` from its own pnpm root, with the emulator jars fetched at
     build time.
+  - `docker/python/` — only a `FROM`: `python` and `sqlite` build from it,
+    rather than pinning Python in `compose.yaml`, so Dependabot bumps it in the
+    same PR as every other 3.x Python.
   - `docker/python311/` — only a `FROM`, with no build step: a separate
     Dockerfile gives Dependabot a separate dependency, so it can hold
     `python311` on 3.11 without holding the other `python` pins.
