@@ -10,10 +10,12 @@ import { createRequire } from "node:module";
 
 type PackageJson = { exports: Record<string, unknown>; name: string };
 
+// Named `require` on purpose, so the CommonJS loads read as they would in CJS.
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const require = createRequire(import.meta.url);
-const packageJson = require("safe-fns/package.json") as PackageJson;
+const PACKAGE_JSON = require("safe-fns/package.json") as PackageJson;
 
-const loadExportNames = async (specifier: string): Promise<string[]> => {
+async function loadExportNames(specifier: string): Promise<string[]> {
   const esmModule = (await import(specifier)) as Record<string, unknown>;
   const cjsModule = require(specifier) as Record<string, unknown>;
   const esmNames = Object.keys(esmModule).sort();
@@ -26,18 +28,18 @@ const loadExportNames = async (specifier: string): Promise<string[]> => {
   }
 
   return esmNames;
-};
+}
 
-const rootNames = new Set(await loadExportNames(packageJson.name));
+const ROOT_NAMES = new Set(await loadExportNames(PACKAGE_JSON.name));
 
-const subpaths = Object.keys(packageJson.exports).filter(
+const SUBPATHS = Object.keys(PACKAGE_JSON.exports).filter(
   (subpath) => subpath !== "." && subpath !== "./package.json"
 );
 
-for (const subpath of subpaths) {
-  const specifier = `${packageJson.name}/${subpath.slice(2)}`;
+for (const subpath of SUBPATHS) {
+  const specifier = `${PACKAGE_JSON.name}/${subpath.slice(2)}`;
   const missingFromRoot = (await loadExportNames(specifier)).filter(
-    (name) => !rootNames.has(name)
+    (name) => !ROOT_NAMES.has(name)
   );
 
   if (missingFromRoot.length > 0) {
@@ -48,5 +50,5 @@ for (const subpath of subpaths) {
 }
 
 console.log(
-  `[smoke] Loaded ${subpaths.length + 1} entries via import and require.`
+  `[smoke] Loaded ${SUBPATHS.length + 1} entries via import and require.`
 );

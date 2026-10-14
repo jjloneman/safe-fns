@@ -134,6 +134,10 @@ The conventions below are written for TypeScript, but they bind code in every la
   - A script's entry point (`main`) is the exception: it goes last, just above the call that runs it. `eslint.config.ts` gives `sort-modules` a `main` group after every other function for `scripts/`, so lint enforces it.
   - perfectionist's `sort-modules` enforces the order of module-level functions and types, not of constants; `const` runs are kept sorted by hand.
 - **Module-level constants are `SCREAMING_SNAKE_CASE`** (`BASE_BRANCH`, `RECORD_STATUSES`), including one computed once at startup and never reassigned; locals stay camelCase.
+  - ESLint's `naming-convention` enforces it, exempting destructured bindings, which keep their source key's name.
+  - A boolean constant is the exception: it keeps the question form (`isPlaceholder`), since the boolean-prefix rule outranks this one.
+  - A module-level function is a `function` declaration, not an arrow bound to a constant, so it keeps its camelCase name.
+  - A name that must shadow a global (`const require = createRequire(…)`) keeps it, with an `eslint-disable-next-line` comment saying why.
 - **Build fixed lookup data once, outside the function** — a membership check against a known set of values is a module-level `Set` and `.has(value)`, not an array rebuilt and searched on every call.
 - **Named imports over a namespace import** — `import { confirm, select } from "…"`, not `import * as prompts`.
 - **Give multi-line statements breathing room**: a blank line separates a statement that spans several lines from its neighbors, and a TSDoc'd declaration from the one above it.
