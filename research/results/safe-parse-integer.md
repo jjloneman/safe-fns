@@ -4,61 +4,61 @@
 
 ## Tiers 0–2
 
-| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
-| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` |
-| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `ValueError` |
-| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `ValueError` |
-| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` |
-| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` |
-| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` |
-| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` |
-| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` |
-| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` |
-| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `ValueError` |
-| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | `1000` |
-| `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` |
-| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` |
-| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowError` |
-| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` |
-| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | `9007199254740993n` |
-| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` |
-| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` |
-| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — |
+| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Commons Lang<br>`NumberUtils.createInteger(value)` | Commons Lang<br>`NumberUtils.toInt(value)` | Groovy<br>`value as Integer` | Groovy<br>`value.toInteger()` | Guava<br>`Ints.tryParse(value)` | Guava<br>`Longs.tryParse(value)` | Java<br>`Integer.parseInt(value)` | Java<br>`Long.parseLong(value)` | Kotlin<br>`value.toIntOrNull()` | Kotlin<br>`value.toLongOrNull()` | Python<br>`int(value)` | Spring<br>`conversionService.convert(value, Integer.class)` | Spring<br>`NumberUtils.parseNumber(value, Integer.class)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
+| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `null` | `null` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"042"` | `42` | `42` | `42` | `42` | `42` | `34` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` |
+| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` |
+| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` |
+| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | `26` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | `26` | `26` |
+| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `9007199254740993n` | 💥 `NumberFormatException` | `9007199254740993n` | `null` | `9007199254740993n` | `9007199254740993n` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` |
+| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` |
+| `" 7 "` | `7` | `7` | `7` | `7` | `7` | 💥 `NumberFormatException` | `0` | `7` | `7` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | `7` | `7` | `7` |
+| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | `null` | 💥 `NumberFormatException` |
+| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` | `42` | `42` | `42` | `null` | `null` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` |
+| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | `1000` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` |
+| `42` | `42` | `42` | `42` | `42` | `42` | — | — | `42` | `42` | — | — | — | — | — | — | `42` | `42` | — |
+| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | — | — | `42` | `42` | — | — | — | — | — | — | `42` | `42` | — |
+| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | — | — | `0` | `0` | — | — | — | — | — | — | `0` | `0` | — |
+| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | — | — | `2147483647` | `2147483647` | — | — | — | — | — | — | 💥 `OverflowError` | 💥 `ConversionFailedException` | — |
+| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | — | — | `42` | `42` | — | — | — | — | — | — | `42` | `42` | — |
+| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | — | — | `1` | `1` | — | — | — | — | — | — | `9007199254740993n` | 💥 `ConversionFailedException` | — |
+| `true` | `1` | `NaN` | `1` | `1` | `1` | — | — | 💥 `GroovyCastException` | 💥 `MissingMethodException` | — | — | — | — | — | — | `1` | 💥 `ConverterNotFoundException` | — |
+| `null` | `0` | `NaN` | `0` | `0` | `0` | `null` | `0` | `null` | 💥 `NullPointerException` | — | — | — | — | — | — | 💥 `TypeError` | `null` | — |
+| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | — | — |
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` | SQLite<br>`SELECT CAST(? AS INTEGER)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
-| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `34` | `42` |
-| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` | `42` | `42` | `42` |
-| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `ValueError` | `42` | `42.5` | `42.5` |
-| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `ValueError` | `1` | `1000` | `1000` |
-| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` | `0` | `26` | `26` |
-| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | `9007199254740992` | `9007199254740992` |
-| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `-0` | `-0` |
-| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` |
-| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` |
-| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` | `0` | `"٤٢"` | `"٤٢"` |
-| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `ValueError` | `12` | `"12px"` | `"12px"` |
-| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | `1000` | `1` | `1000` | `"1_000"` |
-| `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — |
-| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` | `42` | — | — |
-| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` | `0` | — | — |
-| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowError` | `9223372036854775807n` | — | — |
-| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` | `42` | — | — |
-| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | — | — |
-| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | — | — |
-| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | `null` | — | — |
-| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — | — | — | — |
+| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Commons Lang<br>`NumberUtils.createInteger(value)` | Commons Lang<br>`NumberUtils.toInt(value)` | Groovy<br>`value as Integer` | Groovy<br>`value.toInteger()` | Guava<br>`Ints.tryParse(value)` | Guava<br>`Longs.tryParse(value)` | Java<br>`Integer.parseInt(value)` | Java<br>`Long.parseLong(value)` | Kotlin<br>`value.toIntOrNull()` | Kotlin<br>`value.toLongOrNull()` | Python<br>`int(value)` | Spring<br>`conversionService.convert(value, Integer.class)` | Spring<br>`NumberUtils.parseNumber(value, Integer.class)` | SQLite<br>`SELECT CAST(? AS INTEGER)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
+| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `null` | `null` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"042"` | `42` | `42` | `42` | `42` | `42` | `34` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `34` | `42` |
+| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` | `42` | `42` | `42` |
+| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` | `42` | `42.5` | `42.5` |
+| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` | `1` | `1000` | `1000` |
+| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | `26` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | `26` | `26` | `0` | `26` | `26` |
+| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `9007199254740993n` | 💥 `NumberFormatException` | `9007199254740993n` | `null` | `9007199254740993n` | `9007199254740993n` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` | `9007199254740993n` | `9007199254740992` | `9007199254740992` |
+| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `-0` | `-0` |
+| `" 7 "` | `7` | `7` | `7` | `7` | `7` | 💥 `NumberFormatException` | `0` | `7` | `7` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | `7` | `7` | `7` | `7` | `7` | `7` |
+| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | `null` | 💥 `NumberFormatException` | `0` | `null` | `null` |
+| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` | `42` | `42` | `42` | `null` | `null` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `0` | `"٤٢"` | `"٤٢"` |
+| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` | `12` | `"12px"` | `"12px"` |
+| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | 💥 `NumberFormatException` | `0` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | `null` | `1000` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` | `1` | `1000` | `"1_000"` |
+| `42` | `42` | `42` | `42` | `42` | `42` | — | — | `42` | `42` | — | — | — | — | — | — | `42` | `42` | — | `42` | — | — |
+| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | — | — | `42` | `42` | — | — | — | — | — | — | `42` | `42` | — | `42` | — | — |
+| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | — | — | `0` | `0` | — | — | — | — | — | — | `0` | `0` | — | `0` | — | — |
+| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | — | — | `2147483647` | `2147483647` | — | — | — | — | — | — | 💥 `OverflowError` | 💥 `ConversionFailedException` | — | `9223372036854775807n` | — | — |
+| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | — | — | `42` | `42` | — | — | — | — | — | — | `42` | `42` | — | `42` | — | — |
+| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | — | — | `1` | `1` | — | — | — | — | — | — | `9007199254740993n` | 💥 `ConversionFailedException` | — | `9007199254740993n` | — | — |
+| `true` | `1` | `NaN` | `1` | `1` | `1` | — | — | 💥 `GroovyCastException` | 💥 `MissingMethodException` | — | — | — | — | — | — | `1` | 💥 `ConverterNotFoundException` | — | — | — | — |
+| `null` | `0` | `NaN` | `0` | `0` | `0` | `null` | `0` | `null` | 💥 `NullPointerException` | — | — | — | — | — | — | 💥 `TypeError` | `null` | — | `null` | — | — |
+| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
 
 ## Versions
 
@@ -69,7 +69,19 @@
 | lodash<br>`_.toInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | lodash<br>`_.toSafeInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | zod<br>`z.coerce.number().int().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| Commons Lang<br>`NumberUtils.createInteger(value)` | 2 | `3.21.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Commons Lang<br>`NumberUtils.toInt(value)` | 2 | `3.21.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Groovy<br>`value as Integer` | 2 | `6.0.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Groovy<br>`value.toInteger()` | 2 | `6.0.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Guava<br>`Ints.tryParse(value)` | 2 | `33.7.2-jre` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Guava<br>`Longs.tryParse(value)` | 2 | `33.7.2-jre` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Java<br>`Integer.parseInt(value)` | 2 | `25.0.4.1+1-LTS` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Java<br>`Long.parseLong(value)` | 2 | `25.0.4.1+1-LTS` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`value.toIntOrNull()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`value.toLongOrNull()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Python<br>`int(value)` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
+| Spring<br>`conversionService.convert(value, Integer.class)` | 2 | `7.0.9` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Spring<br>`NumberUtils.parseNumber(value, Integer.class)` | 2 | `7.0.9` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | SQLite<br>`SELECT CAST(? AS INTEGER)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
 | YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
