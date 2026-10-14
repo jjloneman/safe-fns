@@ -5,6 +5,9 @@
 #   builds alone (`target: base`), so the two can't pin different Node images.
 FROM node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3 AS base
 
+# The Node adapter's own stage, and the default target: `base` plus the
+# libraries, which the `node` service gets and `sources` doesn't. Either way the
+# runner reports the first `FROM`, the pinned image, as the column's image.
 FROM base
 
 # Where the Compose mounts put `research/` (the repo is mirrored under
