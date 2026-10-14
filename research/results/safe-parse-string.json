@@ -3253,7 +3253,7 @@
     },
     {
       "call": "SELECT CAST(? AS CHAR)",
-      "image": "mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15",
+      "image": "mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4",
       "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
       "locale": "utf8mb4_uca1400_ai_ci",
       "name": "MariaDB",
@@ -3366,11 +3366,11 @@
       ],
       "service": "mariadb-adapter",
       "tier": 3,
-      "version": "11.8.9"
+      "version": "12.3.3"
     },
     {
       "call": "SELECT TRIM(?)",
-      "image": "mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15",
+      "image": "mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4",
       "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
       "locale": "utf8mb4_uca1400_ai_ci",
       "name": "MariaDB",
@@ -3483,11 +3483,11 @@
       ],
       "service": "mariadb-adapter",
       "tier": 3,
-      "version": "11.8.9"
+      "version": "12.3.3"
     },
     {
       "call": "{ $toString: value }",
-      "image": "mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2",
+      "image": "mongo:9.0.2-noble@sha256:61dd87ff554dc20386c63ebe1f7ede27314370ad5a7bf357c685fab424672158",
       "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
       "locale": "simple",
       "name": "MongoDB",
@@ -3604,11 +3604,11 @@
       ],
       "service": "mongo-adapter",
       "tier": 3,
-      "version": "8.3.11"
+      "version": "9.0.2"
     },
     {
       "call": "{ $trim: { input: value } }",
-      "image": "mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2",
+      "image": "mongo:9.0.2-noble@sha256:61dd87ff554dc20386c63ebe1f7ede27314370ad5a7bf357c685fab424672158",
       "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
       "locale": "simple",
       "name": "MongoDB",
@@ -3725,7 +3725,7 @@
       ],
       "service": "mongo-adapter",
       "tier": 3,
-      "version": "8.3.11"
+      "version": "9.0.2"
     },
     {
       "call": "SELECT CAST(? AS CHAR)",

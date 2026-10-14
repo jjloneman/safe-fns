@@ -128,8 +128,8 @@
 | HTML (jsdom)<br>`input.value = value; input.valueAsNumber` | 3 | `jsdom 30.1.2` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | INI<br>`` parse(`v = ${value}`).v `` | 3 | `ini 7.0.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | JSON<br>`JSON.parse(value)` | 3 | `RFC 8259` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| MariaDB<br>`SELECT CAST(? AS DOUBLE)` | 3 | `11.8.9` | `utf8mb4_uca1400_ai_ci` | `mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15` |
-| MongoDB<br>`{ $toDouble: value }` | 3 | `8.3.11` | `simple` | `mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2` |
+| MariaDB<br>`SELECT CAST(? AS DOUBLE)` | 3 | `12.3.3` | `utf8mb4_uca1400_ai_ci` | `mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4` |
+| MongoDB<br>`{ $toDouble: value }` | 3 | `9.0.2` | `simple` | `mongo:9.0.2-noble@sha256:61dd87ff554dc20386c63ebe1f7ede27314370ad5a7bf357c685fab424672158` |
 | MySQL<br>`SELECT CAST(? AS DOUBLE)` | 3 | `9.7.1` | `utf8mb4_0900_ai_ci` | `mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d` |
 | PostgreSQL<br>`SELECT CAST(? AS double precision)` | 3 | `18.6` | `C.UTF-8` | `postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c` |
 | SQL Server<br>`SELECT CAST(? AS float)` | 3 | `17.0.5005.3` | `SQL_Latin1_General_CP1_CI_AS` | `mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726` |
