@@ -45,9 +45,22 @@ def cast(sql: str) -> Probe:
     return select(
         accepts=ACCEPTS,
         connection=CONNECTION,
+        error_name=error_name,
         prepare=as_literal_type,
         sql=sql,
     )
+
+
+def error_name(error: Exception) -> str | None:
+    """Name a server error by its SQLSTATE (`22P02`), as PostgreSQL reports it.
+
+    psycopg's class names (`InvalidTextRepresentation`) are its own spelling
+    of the condition; the SQLSTATE is the server's.
+    """
+    if isinstance(error, psycopg.Error) and error.sqlstate is not None:
+        return error.sqlstate
+
+    return None
 
 
 def query_text(sql: str) -> str:
