@@ -103,7 +103,8 @@ type CommandResult = {
 /** One service from `research/compose.yaml`, as the runner needs it. */
 type ComposeService = {
   /**
-   * The pinned image it runs, or a built image's pinned base.
+   * The pinned image whose answers it reports: its own, or a built image's
+   * pinned base, or for a database adapter its database's.
    *
    * @example `"python:3.14.7-slim-bookworm@sha256:…"`
    */
@@ -182,6 +183,23 @@ type PoolInput<T> = {
   tasks: readonly (() => Promise<T>)[];
 };
 
+/** A raw Compose service, and every service beside it. */
+type ReportedImageInput = {
+  /**
+   * The service, as `docker compose config` prints it.
+   *
+   * @example `{ depends_on: { postgres: { … } }, image: "…" }`
+   */
+  service: Record<string, unknown>;
+
+  /**
+   * Every service in the config, keyed by name, for its dependencies.
+   *
+   * @example `{ postgres: { image: "postgres:18.6-bookworm@sha256:…" } }`
+   */
+  services: Record<string, unknown>;
+};
+
 /** One run of one Compose service. */
 type ServiceRunInput = {
   /**
@@ -197,6 +215,23 @@ type ServiceRunInput = {
    * @example `{ name: "ruff", profiles: ["format"], … }`
    */
   service: ComposeService;
+};
+
+/** A task to run while the databases it queries are up. */
+type WithDatabasesInput<T> = {
+  /**
+   * The database services to start first and remove afterward.
+   *
+   * @example `[{ name: "postgres", profiles: ["db"], … }]`
+   */
+  databases: readonly ComposeService[];
+
+  /**
+   * The work that needs them.
+   *
+   * @example `() => runPool({ concurrency, tasks })`
+   */
+  task: () => Promise<T>;
 };
 
 /** The results to write, and what a narrowed run should keep. */
@@ -255,11 +290,15 @@ const REPO_ROOT = path.resolve(import.meta.dirname, "../..");
 /** Where results are written. */
 const RESULTS_DIR = path.resolve(import.meta.dirname, "../../research/results");
 
-/** The label saying whether a service is an adapter or a formatter. */
+/** The label saying whether a service is an adapter, database, or formatter. */
 const ROLE_LABEL = "dev.safe-fns.research.role";
 
 /** The roles a Compose service can carry in `ROLE_LABEL`. */
-const ROLES = { adapter: "adapter", formatter: "formatter" } as const;
+const ROLES = {
+  adapter: "adapter",
+  database: "database",
+  formatter: "formatter",
+} as const;
 
 /**
  * Run Compose against the research file.
@@ -442,7 +481,7 @@ async function loadServices(): Promise<ComposeService[]> {
 
     return [
       {
-        image: toImage(service),
+        image: toReportedImage({ service, services }),
         labels: toStringRecord(service.labels),
         name,
         profiles: Array.isArray(service.profiles)
@@ -479,6 +518,27 @@ function readPreviousResult(stem: string): FunctionResult | undefined {
   const file = path.join(RESULTS_DIR, `${stem}.json`);
 
   return existsSync(file) ? parseFunctionResult(readJsonFile(file)) : undefined;
+}
+
+/** Stop and remove database services by name, logging any failure. */
+async function removeDatabases(
+  databases: readonly ComposeService[]
+): Promise<void> {
+  const names = databases.map(({ name }) => name);
+  const profiles = [...new Set(databases.flatMap(({ profiles }) => profiles))];
+
+  const removed = await compose([
+    ...profileArgs(profiles),
+    "rm",
+    "--force",
+    "--stop",
+    "--volumes",
+    ...names,
+  ]);
+
+  if (removed.exitCode !== 0) {
+    logError(`couldn't remove ${names.join(", ")}:\n${removed.stderr}`);
+  }
 }
 
 /** Read `--concurrency`, or default to the Docker VM's CPU count. */
@@ -664,6 +724,29 @@ function toImage(service: Record<string, unknown>): string {
   return typeof service.image === "string" ? service.image : "unknown";
 }
 
+/**
+ * Name the image whose answers a service reports.
+ *
+ * - A database adapter only relays what its database returns, so the
+ *   database's image is the one a reader needs to reproduce its column.
+ *
+ * @returns the image of the database it depends on, or else its own.
+ */
+function toReportedImage({ service, services }: ReportedImageInput): string {
+  const dependencies = isRecord(service.depends_on) ? service.depends_on : {};
+
+  const database = Object.keys(dependencies)
+    .map((name) => services[name])
+    .find(
+      (dependency) =>
+        isRecord(dependency) &&
+        isRecord(dependency.labels) &&
+        dependency.labels[ROLE_LABEL] === ROLES.database
+    );
+
+  return isRecord(database) ? toImage(database) : toImage(service);
+}
+
 /** Keep only the string values of an object. */
 function toStringRecord(value: unknown): Record<string, string> {
   if (!isRecord(value)) {
@@ -675,6 +758,71 @@ function toStringRecord(value: unknown): Record<string, string> {
       typeof item === "string" ? [[key, item]] : []
     )
   );
+}
+
+/**
+ * Run a task while the databases it queries are up.
+ *
+ * - Adapters run with `--no-deps`, so their `depends_on` never starts a
+ *   database; this starts each once, waiting on its healthcheck.
+ *
+ * - The databases are removed whether the task succeeds or not, by name, so
+ *   nothing else in the Compose project is touched.
+ *
+ * - An interrupt (Ctrl+C) or a `SIGTERM` skips `finally`, so either one
+ *   removes them first and then re-raises, rather than leaving them running.
+ *
+ * @returns what the task returns.
+ */
+async function withDatabases<T>({
+  databases,
+  task,
+}: WithDatabasesInput<T>): Promise<T> {
+  if (databases.length === 0) {
+    return task();
+  }
+
+  const names = databases.map(({ name }) => name);
+  const profiles = [...new Set(databases.flatMap(({ profiles }) => profiles))];
+  let removal: Promise<void> | undefined;
+
+  // Once only: a signal and the `finally` it unwinds can both ask.
+  const removeOnce = (): Promise<void> => {
+    removal ??= removeDatabases(databases);
+
+    return removal;
+  };
+
+  const onSignal = (signal: NodeJS.Signals): void => {
+    void removeOnce().finally(() => {
+      process.kill(process.pid, signal);
+    });
+  };
+
+  process.once("SIGINT", onSignal);
+  process.once("SIGTERM", onSignal);
+
+  try {
+    log(`starting ${names.join(", ")}`);
+
+    const started = await compose([
+      ...profileArgs(profiles),
+      "up",
+      "--detach",
+      "--wait",
+      ...names,
+    ]);
+
+    if (started.exitCode !== 0) {
+      throw new Error(`docker compose up failed:\n${started.stderr}`);
+    }
+
+    return await task();
+  } finally {
+    process.off("SIGINT", onSignal);
+    process.off("SIGTERM", onSignal);
+    await removeOnce();
+  }
 }
 
 /**
@@ -787,9 +935,21 @@ async function main(): Promise<void> {
     }
   }
 
-  const serviceColumns = await runPool({
-    concurrency,
-    tasks: adapters.map((service) => () => runAdapter({ caseFiles, service })),
+  const databases = services.filter(
+    (service) =>
+      service.labels[ROLE_LABEL] === ROLES.database &&
+      service.profiles.some((profile) => activeProfiles.includes(profile))
+  );
+
+  const serviceColumns = await withDatabases({
+    databases,
+    task: () =>
+      runPool({
+        concurrency,
+        tasks: adapters.map(
+          (service) => () => runAdapter({ caseFiles, service })
+        ),
+      }),
   });
 
   const results = buildResults({ caseFiles, serviceColumns });

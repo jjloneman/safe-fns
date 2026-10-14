@@ -27,10 +27,13 @@ paths:
 - **.NET's culture needs ICU and an explicit choice.** `C.UTF-8` maps to the invariant culture, so the adapter sets `InvariantCulture` itself and names each extra culture in its own column.
 - **Cargo has no release-age floor.** Pick each locked crate by its crates.io publish date and pin a too-new one back with `cargo update -p <crate> --precise <version>`; Dependabot's cooldown covers later bumps.
 - **A formatter must exit non-zero on drift.** `gofmt -l` lists unformatted files but exits 0, so its service wraps it in `sh -c` and fails on any output; `cargo clippy --fix` likewise passes with a denied lint left, so a fixing run then checks.
+- **A database is started and removed by the runner**, not by `depends_on`: adapters run with `--no-deps`. Give it a `database` role label, a healthcheck that only passes once the real server is up (the Postgres and MySQL entrypoints run a socket-only setup server first, so probe over TCP), and an `internal` network shared only with its adapter.
+- **SQL Server can't run on `tmpfs`**, and Microsoft publishes it for amd64 only; it runs under emulation on Apple Silicon.
 - **Watch for distro-patched tools.** Python 3.11's image injects setuptools' `distutils` unless `SETUPTOOLS_USE_DISTUTILS=stdlib`; Debian's SQLite is older than upstream. The version column must name what really ran.
   - A tool from a Debian package reports its package version (`5.2.37-2+b10`), which names any Debian patch.
 - **Install Debian packages from the base image's snapshot**, as `docker/debian/Dockerfile` does, so a rebuild can't pick up a newer package than the results were made with.
 - **Pin every gem, PSGallery module, and other build-time download exactly**, at least 7 days old; a lockfile's transitive versions count too, so check each one's release date.
+- **Pin each pnpm root's install scripts.** pnpm refuses an unapproved build script; `research/docker/firebase/pnpm-workspace.yaml` denies the two `firebase-tools` pulls in through `allowBuilds`.
 
 ## 🔷 Code
 
@@ -39,6 +42,7 @@ paths:
 - **A driven adapter hands the tool a string, never a script.** Pass the value as a positional parameter or environment variable, so no quoting can change what runs; NUL can't travel that way, so it's `n/a`.
 - **Check what a CLI probe really evaluated.** systemd strips leading whitespace and treats an empty assignment as a reset, so a blank value never reaches `parse_boolean`; such an input is `n/a`, not a guess.
 - **PowerShell unrolls arrays on the pipeline.** Return one with the unary comma (`return , $array`); `Write-Output -NoEnumerate` hands a captured caller a `List` instead.
+- **A database adapter reports the server's own version, collation, and error codes**, never the driver's: version and collation by a query (PostgreSQL 16 dropped the `lc_ctype` setting; read `pg_database.datctype`), and an error by its SQLSTATE (`22P02`), MySQL error number (`Error 1292`), SQL Server message number (`Msg 245`), or MongoDB `codeName` (`ConversionFailure`), through `select`'s `error_name`.
 - **Non-TS adapters follow the same conventions** ([AGENTS.md → Every language](../../AGENTS.md#-every-language)): Python is fully annotated and documented, keyword-only past one parameter, and checked by `ruff-check`; Java declares every parameter and local it never reassigns `final`, checked by the `checkstyle` service; C# makes every field it never reassigns `readonly`, checked by `dotnet-build`; Rust's `clippy` rejects a needless `mut`; Swift compiles with `-warnings-as-errors`, so a `var` never mutated fails the build. C++ (`const`), Ruby (`frozen_string_literal`, frozen constants), PHP (`readonly` properties), and PowerShell are kept immutable by hand, since their formatters only format.
 - **Parse JSON only through `scripts/research/json.ts`** (`parseJson`, `readJsonFile`), whose errors name the file or process; ESLint's `no-restricted-properties` rejects a bare `JSON.parse` in research code. `JSON.stringify` needs no wrapper: it only ever sees encoded values, which hold nothing it throws on.
 - **In the JVM adapter, Groovy compiles last**, so only Groovy sees every language's classes: `Main.groovy` is the entry point, and `build.gradle.kts` adds Kotlin's output to `compileGroovy`'s classpath.
