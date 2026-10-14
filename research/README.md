@@ -13,7 +13,7 @@ the generated tables instead of summarizing other tools' docs.
 
 - [📚 Table of Contents](#-table-of-contents)
 - [🚀 Running it](#-running-it)
-- [⬆️ Image bumps](#️-image-bumps)
+- [⬆️ Dependency bumps](#️-dependency-bumps)
 - [🧰 Profiles](#-profiles)
 - [🗂️ Layout](#️-layout)
 - [📦 The case format](#-the-case-format)
@@ -38,15 +38,15 @@ the generated tables instead of summarizing other tools' docs.
    - The first run pulls and builds ~4 GB of images (the .NET, Go, and Rust
      toolchains are most of it); later runs take seconds.
 
-| Command                           | What it does                                                                                  |
-| :-------------------------------- | :-------------------------------------------------------------------------------------------- |
-| `pnpm research`                   | Runs every adapter over every case file                                                       |
-| `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats               |
-| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (see [Profiles](#-profiles)); repeats                     |
-| `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                                 |
-| `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter                           |
-| `pnpm research --format --check`  | Reports formatting drift without writing                                                      |
-| `pnpm research --check-images`    | Fails when a committed column records a different image than its service pins; builds nothing |
+| Command                           | What it does                                                                                           |
+| :-------------------------------- | :----------------------------------------------------------------------------------------------------- |
+| `pnpm research`                   | Runs every adapter over every case file                                                                |
+| `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats                        |
+| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (see [Profiles](#-profiles)); repeats                              |
+| `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                                          |
+| `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter                                    |
+| `pnpm research --format --check`  | Reports formatting drift without writing                                                               |
+| `pnpm research --check-inputs`    | Fails when a committed column records a different image or inputs than its service has; builds nothing |
 
 - Results are byte-identical across runs and concurrency levels: columns are
   sorted, keys are sorted, and nothing records a timestamp.
@@ -82,19 +82,36 @@ the generated tables instead of summarizing other tools' docs.
     `docker builder prune` are the owner's housekeeping, run only once no
     session is in flight.
 
-## ⬆️ Image bumps
+## ⬆️ Dependency bumps
 
-Dependabot bumps the image pins weekly but never regenerates
-`research/results/`, so `research-check.yml` runs `pnpm research --check-images`
-on every PR that touches the harness.
+Dependabot bumps the image pins and the libraries' lockfiles weekly but never
+regenerates `research/results/`, so `research-check.yml` runs
+`pnpm research --check-inputs` on every PR that touches the harness.
 
-- **The check compares, it doesn't run.** It reads `docker compose config` and
-  each Dockerfile's first `FROM`, reports each service's image exactly as the
-  runner would (a database adapter reports its database's), and fails on any
-  committed column that records something else.
-  - It names the function, the service, and both images, then prints the
-    `pnpm research --profile …` command that regenerates them.
+- **Every column records two pins:** its service's `image`, and an `inputs`
+  fingerprint, a SHA-256 of the files that decide what the service runs.
+  - A built service's Dockerfile is always an input.
+  - Every other input is listed in the service's `dev.safe-fns.research.inputs`
+    label, whitespace-separated and relative to `research/`: the lockfiles and
+    manifests it installs from (`pnpm-lock.yaml`, `docker/ruby/Gemfile.lock`,
+    `adapters/rust/Cargo.lock`).
+  - Adapter source and case files stay out: a change to them shows up as a
+    result diff once regenerated, and including them would fail the check on
+    edits that can't change a result.
+- **The check compares, it doesn't run.** It reads `docker compose config`, each
+  Dockerfile's first `FROM`, and every input, computes each service's image and
+  fingerprint exactly as the runner would (a database adapter reports its
+  database's image), and fails on any committed column that records something
+  else.
+  - It names the function and the service, with both images or the service's
+    inputs, then prints the `pnpm research --profile …` command that regenerates
+    them.
+  - A column without a fingerprint is stale.
   - The planned and docs-only columns record `-` and are never checked.
+  - An input that can't be read fails the check, so a renamed lockfile can't
+    silently drop out of its service's fingerprint.
+  - The JVM adapter pins only its direct dependencies in `build.gradle.kts`, so
+    a transitive change without an edit there goes unseen.
 - **Regenerate a bump's results by hand**, on the Dependabot branch:
   1. `gh pr checkout <n>`, and set your own `COMPOSE_PROJECT_NAME`.
   2. Run the command the check printed, then run it again; the second run must
@@ -115,9 +132,9 @@ on every PR that touches the harness.
   | `python` (3.x)                 | `db`, `python`, `sqlite`, `xml-schema`  | `research-dockerfiles`     |
   | `mcr.microsoft.com/dotnet/sdk` | `dotnet`, `powershell`                  | `research-compiled-images` |
   - `db` and `sources` share an image without recording it: a database column
-    records its database's image, and a docs-only column records `-`. The check
-    can't see a bump to `docker/db/`, so rerun `--profile db` by hand when its
-    Dockerfile changes.
+    records its database's image, and a docs-only column records `-`. A bump to
+    `docker/db/Dockerfile` still fails the check, through the database columns'
+    `inputs`.
 
 - **Every image tracks its latest stable major.** A new major is a result to
   record, not a break to avoid, so Dependabot proposes majors and they merge
@@ -361,6 +378,8 @@ it.
   1. Add a service to `compose.yaml` with a pinned `image: name:X.Y.Z@sha256:…`
      whose tag was last pushed at least 7 days ago, the `adapter` role label, a
      profile, `LANG`/`LC_ALL` set to `C.UTF-8`, and read-only mounts.
+     - List the lockfiles and manifests it installs from in its `inputs` label
+       (see [Dependency bumps](#️-dependency-bumps)).
      - A compiled language builds its adapter into a one-stage image instead
        (see `docker/go/Dockerfile`), and mounts only `cases/`.
   2. Write the adapter and its codec twin; the `codec` case file must
