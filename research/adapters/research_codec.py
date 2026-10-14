@@ -75,6 +75,9 @@ class Tool(TypedDict):
     functions: dict[str, list[Probe]]
     """Probes keyed by the function name in a case file."""
 
+    locale: NotRequired[str]
+    """The locale or collation it ran under, when not the container's own."""
+
     name: str
     """The display name."""
 
@@ -83,6 +86,19 @@ class Tool(TypedDict):
 
     version: str
     """The version that actually ran."""
+
+
+class ToolError(Exception):
+    """A failure a tool reports by name, such as a CLI's exit status.
+
+    A driven tool (a shell, a C library) raises nothing Python can name, so
+    its probe raises this, and the outcome's `error` is the name given.
+    """
+
+    def __init__(self, name: str) -> None:
+        """Keep the name the outcome reports."""
+        super().__init__(name)
+        self.outcome_name = name
 
 
 class Unrepresentable:
@@ -268,7 +284,7 @@ def run_adapter(*, tools: list[Tool]) -> None:
                     {
                         "call": probe["call"],
                         "function": function,
-                        "locale": locale_name,
+                        "locale": tool.get("locale", locale_name),
                         "name": tool["name"],
                         "outcomes": outcomes,
                         "tier": tool["tier"],
@@ -294,5 +310,7 @@ def run_probe(*, args: list[JsonValue], probe: Probe) -> Outcome:
 
     try:
         return {"kind": "value", "value": encode(probe["run"](*decoded))}
+    except ToolError as error:
+        return {"error": error.outcome_name, "kind": "error"}
     except Exception as error:  # every failure is a result, never a crash
         return {"error": type(error).__name__, "kind": "error"}

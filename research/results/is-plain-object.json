@@ -83,91 +83,8 @@
   ],
   "columns": [
     {
-      "call": "is.plainObject(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "locale": "en-US",
-      "name": "@sindresorhus/is",
-      "outcomes": [
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "error": "TypeError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": false
-        }
-      ],
-      "service": "node",
-      "tier": 1,
-      "version": "8.1.0"
-    },
-    {
       "call": "isPlainObject(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -250,7 +167,7 @@
     },
     {
       "call": "isPlainObject(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
       "locale": "en-US",
       "name": "is-plain-obj",
       "outcomes": [
@@ -333,7 +250,7 @@
     },
     {
       "call": "_.isPlainObject(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -415,91 +332,8 @@
       "version": "4.18.1"
     },
     {
-      "call": "isObject(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "locale": "en-US",
-      "name": "radash",
-      "outcomes": [
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "error": "TypeError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": false
-        }
-      ],
-      "service": "node",
-      "tier": 1,
-      "version": "12.1.1"
-    },
-    {
       "call": "isPlainObject(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
       "locale": "en-US",
       "name": "remeda",
       "outcomes": [
@@ -581,8 +415,79 @@
       "version": "2.51.0"
     },
     {
+      "call": "_, ok := value.(map[string]any)",
+      "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.1"
+    },
+    {
       "call": "type(value) is dict",
-      "image": "python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2",
+      "image": "python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56",
       "locale": "C.UTF-8",
       "name": "Python",
       "outcomes": [
@@ -649,13 +554,13 @@
       ],
       "service": "python",
       "tier": 2,
-      "version": "3.15.0rc3"
+      "version": "3.14.7"
     },
     {
-      "call": "type(value) is dict",
-      "image": "python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2",
+      "call": "$value instanceof stdClass",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
       "locale": "C.UTF-8",
-      "name": "Python",
+      "name": "PHP",
       "outcomes": [
         {
           "kind": "value",
@@ -718,9 +623,222 @@
           "kind": "n/a"
         }
       ],
-      "service": "python311",
-      "tier": 2,
-      "version": "3.15.0rc3"
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    },
+    {
+      "call": "$value -is [hashtable]",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "locale": "invariant",
+      "name": "PowerShell",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "powershell",
+      "tier": 4,
+      "version": "7.6.6"
+    },
+    {
+      "call": "value.instance_of?(Hash)",
+      "image": "ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2",
+      "locale": "C.UTF-8",
+      "name": "Ruby",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "3.4.11"
+    },
+    {
+      "call": "value is [String: Any]",
+      "image": "swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66",
+      "locale": "C.UTF-8",
+      "name": "Swift",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "swift",
+      "tier": 4,
+      "version": "6.4"
     }
   ],
   "function": "isPlainObject"

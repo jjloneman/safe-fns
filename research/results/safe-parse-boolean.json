@@ -468,9 +468,9 @@
     },
     {
       "call": "JSON.parse(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "locale": "-",
-      "name": "Hermes",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "JS built-ins",
       "outcomes": [
         {
           "kind": "value",
@@ -688,252 +688,13 @@
           "kind": "n/a"
         }
       ],
-      "service": "hermes",
-      "tier": 1,
-      "version": "0.12.0"
-    },
-    {
-      "call": "v.parse(v.pipe(v.unknown(), v.parseBoolean()), value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "locale": "en-US",
-      "name": "valibot",
-      "outcomes": [
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        },
-        {
-          "error": "ValiError",
-          "kind": "error"
-        }
-      ],
       "service": "node",
       "tier": 1,
-      "version": "1.5.0"
+      "version": "v26.9.0"
     },
     {
       "call": "yn(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
       "locale": "en-US",
       "name": "yn",
       "outcomes": [
@@ -1216,7 +977,7 @@
     },
     {
       "call": "z.stringbool().parse(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
       "locale": "en-US",
       "name": "zod",
       "outcomes": [
@@ -1454,8 +1215,2518 @@
       "version": "4.6.5"
     },
     {
+      "call": "bool.Parse(value)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.12"
+    },
+    {
+      "call": "Convert.ToBoolean(value, InvariantCulture)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.12"
+    },
+    {
+      "call": "BooleanUtils.toBoolean(value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Commons Lang",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "3.21.0"
+    },
+    {
+      "call": "BooleanUtils.toBooleanObject(value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Commons Lang",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "3.21.0"
+    },
+    {
+      "call": "strconv.ParseBool(value)",
+      "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.1"
+    },
+    {
+      "call": "value as boolean",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Groovy",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "6.0.0"
+    },
+    {
+      "call": "value.toBoolean()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Groovy",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "NullPointerException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingMethodException",
+          "kind": "error"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "6.0.0"
+    },
+    {
+      "call": "Boolean.parseBoolean(value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "value.toBoolean()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Kotlin",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "2.4.20"
+    },
+    {
+      "call": "value.toBooleanStrict()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Kotlin",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "2.4.20"
+    },
+    {
+      "call": "value.toBooleanStrictOrNull()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Kotlin",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "2.4.20"
+    },
+    {
       "call": "ConfigParser().getboolean(…)",
-      "image": "python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2",
+      "image": "python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56",
       "locale": "C.UTF-8",
       "name": "Python",
       "outcomes": [
@@ -1675,113 +3946,113 @@
       ],
       "service": "python",
       "tier": 2,
-      "version": "3.15.0rc3"
+      "version": "3.14.7"
     },
     {
-      "call": "ConfigParser().getboolean(…)",
-      "image": "python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2",
+      "call": "distutils.util.strtobool(value)",
+      "image": "python:3.11.16-slim-bookworm@sha256:a36c24f9cbdf4fd0f52d67f0823eeac19c2028c637cecc392d97f980d4fec56b",
       "locale": "C.UTF-8",
       "name": "Python",
       "outcomes": [
         {
           "kind": "value",
-          "value": true
+          "value": 1
         },
         {
           "kind": "value",
-          "value": true
+          "value": 1
         },
         {
           "kind": "value",
-          "value": true
-        },
-        {
-          "error": "ValueError",
-          "kind": "error"
-        },
-        {
-          "error": "ValueError",
-          "kind": "error"
+          "value": 1
         },
         {
           "kind": "value",
-          "value": true
+          "value": 1
         },
         {
           "kind": "value",
-          "value": true
+          "value": 1
         },
         {
           "kind": "value",
-          "value": true
-        },
-        {
-          "error": "ValueError",
-          "kind": "error"
-        },
-        {
-          "error": "ValueError",
-          "kind": "error"
+          "value": 1
         },
         {
           "kind": "value",
-          "value": true
+          "value": 1
         },
         {
           "kind": "value",
-          "value": true
+          "value": 1
         },
         {
           "kind": "value",
-          "value": true
+          "value": 1
         },
         {
           "kind": "value",
-          "value": false
+          "value": 1
         },
         {
           "kind": "value",
-          "value": false
+          "value": 1
         },
         {
           "kind": "value",
-          "value": false
-        },
-        {
-          "error": "ValueError",
-          "kind": "error"
-        },
-        {
-          "error": "ValueError",
-          "kind": "error"
+          "value": 1
         },
         {
           "kind": "value",
-          "value": false
+          "value": 1
         },
         {
           "kind": "value",
-          "value": false
-        },
-        {
-          "error": "ValueError",
-          "kind": "error"
-        },
-        {
-          "error": "ValueError",
-          "kind": "error"
+          "value": 0
         },
         {
           "kind": "value",
-          "value": false
+          "value": 0
         },
         {
           "kind": "value",
-          "value": false
+          "value": 0
         },
         {
           "kind": "value",
-          "value": false
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
         },
         {
           "error": "ValueError",
@@ -1899,185 +4170,181 @@
       ],
       "service": "python311",
       "tier": 2,
-      "version": "3.15.0rc3"
+      "version": "3.11.16"
     },
     {
-      "call": "parse(value, { cast: true })[0]?.[0]",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "locale": "en-US",
-      "name": "CSV",
+      "call": "value.parse::<bool>()",
+      "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
+      "locale": "C.UTF-8",
+      "name": "Rust",
       "outcomes": [
         {
           "kind": "value",
-          "value": "true"
+          "value": true
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
           "kind": "value",
-          "value": "TRUE"
+          "value": false
         },
         {
-          "kind": "value",
-          "value": "True"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "t"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "T"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "yes"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "YES"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "Yes"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "y"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "Y"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "on"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "ON"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": 1
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "false"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "FALSE"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "False"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "f"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "F"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "no"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "NO"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "n"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "N"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "off"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "OFF"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": 0
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": " yes "
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "\tno"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": " true "
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "true​"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
-          "kind": "value",
-          "value": "enabled"
-        },
-        {
-          "kind": "value",
-          "value": "disabled"
-        },
-        {
-          "kind": "value",
-          "value": "tru"
-        },
-        {
-          "kind": "value",
-          "value": 2
-        },
-        {
-          "kind": "value",
-          "value": -1
-        },
-        {
-          "kind": "value",
-          "value": 1
-        },
-        {
-          "kind": "value",
-          "value": {
-            "$number": "-0"
-          }
-        },
-        {
-          "kind": "value",
-          "value": 1
-        },
-        {
-          "kind": "value",
-          "value": 0
-        },
-        {
-          "kind": "value",
-          "value": {
-            "$undefined": true
-          }
-        },
-        {
-          "kind": "value",
-          "value": "   "
-        },
-        {
-          "kind": "value",
-          "value": "yes please"
-        },
-        {
-          "kind": "value",
-          "value": "ｔｒｕｅ"
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
           "kind": "n/a"
@@ -2125,15 +4392,15 @@
           "kind": "n/a"
         }
       ],
-      "service": "node",
-      "tier": 3,
-      "version": "csv-parse 7.0.3"
+      "service": "rust",
+      "tier": 2,
+      "version": "1.99.0"
     },
     {
-      "call": "div.setAttribute(\"hidden\", value); div.hidden",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "locale": "en-US",
-      "name": "HTML (jsdom)",
+      "call": "conversionService.convert(value, Boolean.class)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "locale": "en",
+      "name": "Spring",
       "outcomes": [
         {
           "kind": "value",
@@ -2148,8 +4415,12 @@
           "value": true
         },
         {
-          "kind": "value",
-          "value": true
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
         },
         {
           "kind": "value",
@@ -2164,8 +4435,12 @@
           "value": true
         },
         {
-          "kind": "value",
-          "value": true
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
         },
         {
           "kind": "value",
@@ -2178,238 +4453,6 @@
         {
           "kind": "value",
           "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        }
-      ],
-      "service": "node",
-      "tier": 3,
-      "version": "jsdom 30.1.2"
-    },
-    {
-      "call": "parse(`v = ${value}`).v",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "locale": "en-US",
-      "name": "INI",
-      "outcomes": [
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": "TRUE"
-        },
-        {
-          "kind": "value",
-          "value": "True"
-        },
-        {
-          "kind": "value",
-          "value": "t"
-        },
-        {
-          "kind": "value",
-          "value": "T"
-        },
-        {
-          "kind": "value",
-          "value": "yes"
-        },
-        {
-          "kind": "value",
-          "value": "YES"
-        },
-        {
-          "kind": "value",
-          "value": "Yes"
-        },
-        {
-          "kind": "value",
-          "value": "y"
-        },
-        {
-          "kind": "value",
-          "value": "Y"
-        },
-        {
-          "kind": "value",
-          "value": "on"
-        },
-        {
-          "kind": "value",
-          "value": "ON"
-        },
-        {
-          "kind": "value",
-          "value": "1"
         },
         {
           "kind": "value",
@@ -2417,395 +4460,1354 @@
         },
         {
           "kind": "value",
-          "value": "FALSE"
-        },
-        {
-          "kind": "value",
-          "value": "False"
-        },
-        {
-          "kind": "value",
-          "value": "f"
-        },
-        {
-          "kind": "value",
-          "value": "F"
-        },
-        {
-          "kind": "value",
-          "value": "no"
-        },
-        {
-          "kind": "value",
-          "value": "NO"
-        },
-        {
-          "kind": "value",
-          "value": "n"
-        },
-        {
-          "kind": "value",
-          "value": "N"
-        },
-        {
-          "kind": "value",
-          "value": "off"
-        },
-        {
-          "kind": "value",
-          "value": "OFF"
-        },
-        {
-          "kind": "value",
-          "value": "0"
-        },
-        {
-          "kind": "value",
-          "value": "yes"
-        },
-        {
-          "kind": "value",
-          "value": "no"
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": "true​"
-        },
-        {
-          "kind": "value",
-          "value": "enabled"
-        },
-        {
-          "kind": "value",
-          "value": "disabled"
-        },
-        {
-          "kind": "value",
-          "value": "tru"
-        },
-        {
-          "kind": "value",
-          "value": "2"
-        },
-        {
-          "kind": "value",
-          "value": "-1"
-        },
-        {
-          "kind": "value",
-          "value": "1.0"
-        },
-        {
-          "kind": "value",
-          "value": "-0"
-        },
-        {
-          "kind": "value",
-          "value": "01"
-        },
-        {
-          "kind": "value",
-          "value": "0x1"
-        },
-        {
-          "kind": "value",
-          "value": ""
-        },
-        {
-          "kind": "value",
-          "value": ""
-        },
-        {
-          "kind": "value",
-          "value": "yes please"
-        },
-        {
-          "kind": "value",
-          "value": "ｔｒｕｅ"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        }
-      ],
-      "service": "node",
-      "tier": 3,
-      "version": "ini 7.0.0"
-    },
-    {
-      "call": "JSON.parse(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "locale": "en-US",
-      "name": "JSON",
-      "outcomes": [
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": 1
+          "value": false
         },
         {
           "kind": "value",
           "value": false
         },
         {
-          "error": "SyntaxError",
+          "error": "ConversionFailedException",
           "kind": "error"
         },
         {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
+          "error": "ConversionFailedException",
           "kind": "error"
         },
         {
           "kind": "value",
-          "value": 0
+          "value": false
         },
         {
-          "error": "SyntaxError",
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "ConversionFailedException",
           "kind": "error"
         },
         {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
-          "kind": "error"
-        },
-        {
-          "error": "SyntaxError",
+          "error": "ConversionFailedException",
           "kind": "error"
         },
         {
           "kind": "value",
-          "value": 2
+          "value": false
         },
         {
           "kind": "value",
-          "value": -1
+          "value": false
         },
         {
           "kind": "value",
-          "value": 1
+          "value": false
         },
         {
           "kind": "value",
-          "value": {
-            "$number": "-0"
-          }
+          "value": true
         },
         {
-          "error": "SyntaxError",
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "ConversionFailedException",
           "kind": "error"
         },
         {
-          "error": "SyntaxError",
+          "error": "ConversionFailedException",
           "kind": "error"
         },
         {
-          "error": "SyntaxError",
+          "error": "ConversionFailedException",
           "kind": "error"
         },
         {
-          "error": "SyntaxError",
+          "error": "ConversionFailedException",
           "kind": "error"
         },
         {
-          "error": "SyntaxError",
+          "error": "ConversionFailedException",
           "kind": "error"
         },
         {
-          "error": "SyntaxError",
+          "error": "ConversionFailedException",
           "kind": "error"
         },
         {
-          "kind": "n/a"
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        },
+        {
+          "error": "ConverterNotFoundException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
         },
         {
           "kind": "n/a"
         },
         {
-          "kind": "n/a"
+          "kind": "value",
+          "value": null
         },
         {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
+          "error": "ConverterNotFoundException",
+          "kind": "error"
         }
       ],
-      "service": "node",
-      "tier": 3,
-      "version": "RFC 8259"
+      "service": "jvm",
+      "tier": 2,
+      "version": "7.0.9"
     },
     {
       "call": "SELECT ? IS TRUE",
-      "image": "python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2",
+      "image": "mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15",
+      "locale": "utf8mb4_uca1400_ai_ci",
+      "name": "MariaDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mariadb-adapter",
+      "tier": 3,
+      "version": "11.8.9"
+    },
+    {
+      "call": "{ $toBool: value }",
+      "image": "mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2",
+      "locale": "simple",
+      "name": "MongoDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mongo-adapter",
+      "tier": 3,
+      "version": "8.3.11"
+    },
+    {
+      "call": "SELECT ? IS TRUE",
+      "image": "mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d",
+      "locale": "utf8mb4_0900_ai_ci",
+      "name": "MySQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mysql-adapter",
+      "tier": 3,
+      "version": "9.7.1"
+    },
+    {
+      "call": "SELECT CAST(? AS boolean)",
+      "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
+      "locale": "C.UTF-8",
+      "name": "PostgreSQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "42846",
+          "kind": "error"
+        },
+        {
+          "error": "42846",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "42846",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "postgres-adapter",
+      "tier": 3,
+      "version": "18.6"
+    },
+    {
+      "call": "SELECT CAST(? AS bit)",
+      "image": "mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726",
+      "locale": "SQL_Latin1_General_CP1_CI_AS",
+      "name": "SQL Server",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 245",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mssql-adapter",
+      "tier": 3,
+      "version": "17.0.5005.3"
+    },
+    {
+      "call": "SELECT ? IS TRUE",
+      "image": "python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56",
       "locale": "C.UTF-8",
       "name": "SQLite",
       "outcomes": [
@@ -3038,456 +6040,8 @@
       "version": "3.40.1"
     },
     {
-      "call": "parse(`v = ${value}`).v",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "locale": "en-US",
-      "name": "TOML",
-      "outcomes": [
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": 1
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": 0
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": 2
-        },
-        {
-          "kind": "value",
-          "value": -1
-        },
-        {
-          "kind": "value",
-          "value": 1
-        },
-        {
-          "kind": "value",
-          "value": 0
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": 1
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "error": "Error",
-          "kind": "error"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        }
-      ],
-      "service": "node",
-      "tier": 3,
-      "version": "smol-toml 1.9.0"
-    },
-    {
-      "call": "decode(<boolean>value</boolean>)",
-      "image": "python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2",
-      "locale": "C.UTF-8",
-      "name": "XML Schema 1.0",
-      "outcomes": [
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "error": "XMLSchemaDecodeError",
-          "kind": "error"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        },
-        {
-          "kind": "n/a"
-        }
-      ],
-      "service": "xml-schema",
-      "tier": 3,
-      "version": "xmlschema 4.3.2"
-    },
-    {
       "call": "parse(value, { version: \"1.1\" })",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
       "locale": "en-US",
       "name": "YAML 1.1",
       "outcomes": [
@@ -3713,7 +6267,7 @@
     },
     {
       "call": "parse(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
       "locale": "en-US",
       "name": "YAML 1.2 core",
       "outcomes": [
@@ -3938,249 +6492,8 @@
       "version": "2.9.1"
     },
     {
-      "call": "coerce({ type: \"boolean\" }, value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "locale": "en-US",
-      "name": "Ajv",
-      "outcomes": [
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": true
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "kind": "value",
-          "value": false
-        },
-        {
-          "kind": "value",
-          "value": {
-            "$undefined": true
-          }
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        },
-        {
-          "error": "ValidationError",
-          "kind": "error"
-        }
-      ],
-      "service": "node",
-      "tier": 4,
-      "version": "8.20.0"
-    },
-    {
       "call": "bool()._parse(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
       "locale": "en-US",
       "name": "envalid",
       "outcomes": [
@@ -4403,8 +6716,232 @@
       "version": "8.2.0"
     },
     {
+      "call": "git config --type=bool",
+      "image": "debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f",
+      "locale": "C.UTF-8",
+      "name": "git",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "shell",
+      "tier": 4,
+      "version": "1:2.47.3-0+deb13u1"
+    },
+    {
       "call": "Joi.attempt(value, Joi.boolean())",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
       "locale": "en-US",
       "name": "joi",
       "outcomes": [
@@ -4644,10 +7181,10 @@
       "version": "18.2.9"
     },
     {
-      "call": "validator.toBoolean(value, true)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "locale": "en-US",
-      "name": "validator.js",
+      "call": "(bool) $value",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "locale": "C.UTF-8",
+      "name": "PHP",
       "outcomes": [
         {
           "kind": "value",
@@ -4663,7 +7200,281 @@
         },
         {
           "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
           "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        }
+      ],
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    },
+    {
+      "call": "filter_var($value, FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE)",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "locale": "C.UTF-8",
+      "name": "PHP",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
         },
         {
           "kind": "value",
@@ -4679,11 +7490,27 @@
         },
         {
           "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
           "value": false
         },
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
         },
         {
           "kind": "value",
@@ -4707,7 +7534,935 @@
         },
         {
           "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
           "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        }
+      ],
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    },
+    {
+      "call": "[bool]::Parse($value)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "locale": "invariant",
+      "name": "PowerShell",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        }
+      ],
+      "service": "powershell",
+      "tier": 4,
+      "version": "7.6.6"
+    },
+    {
+      "call": "[bool]$value",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "locale": "invariant",
+      "name": "PowerShell",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        }
+      ],
+      "service": "powershell",
+      "tier": 4,
+      "version": "7.6.6"
+    },
+    {
+      "call": "[System.Convert]::ToBoolean($value)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
+      "locale": "invariant",
+      "name": "PowerShell",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCastException",
+          "kind": "error"
+        }
+      ],
+      "service": "powershell",
+      "tier": 4,
+      "version": "7.6.6"
+    },
+    {
+      "call": "ActiveModel::Type::Boolean.new.cast(value)",
+      "image": "ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2",
+      "locale": "C.UTF-8",
+      "name": "Rails (ActiveModel)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
         },
         {
           "kind": "value",
@@ -4723,7 +8478,75 @@
         },
         {
           "kind": "value",
-          "value": false
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
         },
         {
           "kind": "value",
@@ -4731,7 +8554,7 @@
         },
         {
           "kind": "value",
-          "value": false
+          "value": true
         },
         {
           "kind": "value",
@@ -4739,7 +8562,23 @@
         },
         {
           "kind": "value",
-          "value": false
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
         },
         {
           "kind": "value",
@@ -4747,7 +8586,85 @@
         },
         {
           "kind": "value",
-          "value": false
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "8.1.4"
+    },
+    {
+      "call": "Bool(value)",
+      "image": "swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66",
+      "locale": "C.UTF-8",
+      "name": "Swift",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
         },
         {
           "kind": "value",
@@ -4755,67 +8672,115 @@
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
         },
         {
           "kind": "value",
-          "value": false
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
         },
         {
           "kind": "n/a"
@@ -4863,13 +8828,235 @@
           "kind": "n/a"
         }
       ],
-      "service": "node",
+      "service": "swift",
       "tier": 4,
-      "version": "13.15.35"
+      "version": "6.4"
+    },
+    {
+      "call": "systemd-analyze condition \"ConditionFirstBoot=…\"",
+      "image": "debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f",
+      "locale": "C.UTF-8",
+      "name": "systemd",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "shell",
+      "tier": 4,
+      "version": "257.13-1~deb13u1"
     },
     {
       "call": "boolean().validateSync(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
       "locale": "en-US",
       "name": "yup",
       "outcomes": [

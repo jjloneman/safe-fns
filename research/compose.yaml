@@ -17,9 +17,28 @@
 # - No service has a network (`network_mode: none`): everything is installed
 #   at build time, so a run is hermetic, and parallel runs never race to create
 #   a shared one. A service that needs another (a database) joins a network
-#   of its own.
+#   of its own, shared only with that database and cut off from the internet.
+#
+# - A database (role `database`) is long-running: the runner starts the active
+#   profiles' databases with `up --wait` before any adapter runs, and removes
+#   them afterward. Each publishes no ports, and keeps its data in `tmpfs`
+#   wherever the engine can run on it.
 
 name: safe-fns-research
+
+networks:
+  firebase:
+    internal: true
+  mariadb:
+    internal: true
+  mongo:
+    internal: true
+  mssql:
+    internal: true
+  mysql:
+    internal: true
+  postgres:
+    internal: true
 
 x-adapter-environment: &adapter-environment
   LANG: C.UTF-8
@@ -27,11 +46,288 @@ x-adapter-environment: &adapter-environment
   PYTHONDONTWRITEBYTECODE: "1"
   TZ: UTC
 
+x-adapter-volumes: &adapter-volumes
+  - ./adapters:/work/research/adapters:ro
+  - ./cases:/work/research/cases:ro
+
+# The C / C++ adapter, with its C++ probes compiled into the image.
+x-c-build: &c-build
+  context: adapters
+  dockerfile: ../docker/c/Dockerfile
+
+# A database adapter: Python plus the drivers in `docker/db/requirements.txt`.
+x-database-adapter: &database-adapter
+  build:
+    context: .
+    dockerfile: docker/db/Dockerfile
+  environment: *adapter-environment
+  labels:
+    dev.safe-fns.research.role: adapter
+  profiles: ["db"]
+  volumes: *adapter-volumes
+
+# How often Compose probes a database while `up --wait` waits for it.
+x-database-healthcheck: &database-healthcheck
+  interval: 2s
+  retries: 90
+  timeout: 5s
+
+x-database-labels: &database-labels
+  dev.safe-fns.research.role: database
+
+# Debian's shells, git, systemd, and clang-format, from one image.
+x-debian-build: &debian-build
+  context: .
+  dockerfile: docker/debian/Dockerfile
+
+# A compiled adapter's image: its build context is its own directory, so the
+# image copies only that adapter, and `.dockerignore` (the Node image's) never
+# applies. The language's formatter and linter run on the same image.
+x-dotnet-build: &dotnet-build
+  context: adapters/dotnet
+  dockerfile: ../../docker/dotnet/Dockerfile
+
+x-go-build: &go-build
+  context: adapters/go
+  dockerfile: ../../docker/go/Dockerfile
+
+# Read by both the `mssql` service and its adapter. A throwaway password for a
+# server that only its adapter's internal network can reach.
+x-mssql-environment: &mssql-environment
+  MSSQL_SA_PASSWORD: Research-only-Passw0rd
+
+# PowerShell, plus PSScriptAnalyzer for its formatter.
+x-powershell-build: &powershell-build
+  context: docker/powershell
+
 x-python-volumes: &python-volumes
   - ./adapters:/work/research/adapters:ro
   - ./cases:/work/research/cases:ro
 
+# Ruby, plus Rails' ActiveModel and syntax_tree from `Gemfile.lock`.
+x-ruby-build: &ruby-build
+  context: docker/ruby
+
+x-rust-build: &rust-build
+  context: adapters/rust
+  dockerfile: ../../docker/rust/Dockerfile
+
+# The Swift adapter, compiled into the image; swift-format runs on it too.
+x-swift-build: &swift-build
+  context: adapters
+  dockerfile: ../docker/swift/Dockerfile
+
 services:
+  # glibc through `ctypes`, and libstdc++ through probes compiled into the
+  # image.
+  c:
+    build: *c-build
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["c"]
+    volumes:
+      - ./cases:/work/research/cases:ro
+
+  checkstyle:
+    build:
+      context: docker/checkstyle
+    labels:
+      dev.safe-fns.research.check-args: >-
+        -c adapters/jvm/checkstyle.xml adapters/jvm/src
+      dev.safe-fns.research.format-args: >-
+        -c adapters/jvm/checkstyle.xml adapters/jvm/src
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters:/work/research/adapters:ro
+    working_dir: /work/research
+
+  clang-format:
+    build: *debian-build
+    entrypoint: ["clang-format", "--style=LLVM"]
+    labels:
+      dev.safe-fns.research.check-args: --dry-run --Werror adapters/cxx_probes.cpp
+      dev.safe-fns.research.format-args: -i adapters/cxx_probes.cpp
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters:/work/research/adapters
+    working_dir: /work/research
+
+  # Rust's linter, beside rustfmt. `--fix` exits 0 even when a denied lint
+  # remains, so a fixing run (`--fix`) then checks like any other.
+  #
+  # - `pull_policy: build`, like every formatter built from a Dockerfile, so a
+  #   version bump is never masked by a cached image.
+  clippy:
+    build: *rust-build
+    entrypoint:
+      - sh
+      - -c
+      - >-
+        [ "$$1" != --fix ]
+        || cargo clippy --locked --offline --quiet --fix --allow-no-vcs;
+        exec cargo clippy --locked --offline --quiet -- --deny warnings
+      - clippy
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.check-args: --check
+      dev.safe-fns.research.format-args: --fix
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters/rust:/work/research/adapters/rust
+
+  csharpier:
+    build: *dotnet-build
+    entrypoint: ["dotnet", "csharpier"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.check-args: check .
+      dev.safe-fns.research.format-args: format .
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters/dotnet:/work/research/adapters/dotnet
+
+  # The .NET base class library, under the invariant culture plus a column per
+  # extra culture; the adapter is compiled into the image, not mounted.
+  dotnet:
+    build: *dotnet-build
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["dotnet"]
+    volumes:
+      - ./cases:/work/research/cases:ro
+
+  # The .NET analyzers (`AnalysisLevel` in the project), which fail this build
+  # on any warning; the build lands under `/tmp`, beside nothing it could
+  # shadow.
+  dotnet-build:
+    build: *dotnet-build
+    entrypoint:
+      ["dotnet", "build", "--artifacts-path", "/tmp/research-artifacts"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.check-args: --verbosity quiet
+      dev.safe-fns.research.format-args: --verbosity quiet
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters/dotnet:/work/research/adapters/dotnet
+
+  firebase:
+    build: &firebase-build
+      context: .
+      dockerfile: docker/firebase/Dockerfile
+    environment:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+    healthcheck:
+      <<: *database-healthcheck
+      test:
+        - CMD
+        - node
+        - --eval
+        - >-
+          Promise.all([8080, 9000].map((port) =>
+          fetch(`http://127.0.0.1:$${port}`))).then(() => process.exit(0), () =>
+          process.exit(1))
+    labels: *database-labels
+    networks: [firebase]
+    profiles: ["db"]
+
+  # Python from the emulators' own image, so it can read their version.
+  firebase-adapter:
+    build: *firebase-build
+    depends_on:
+      firebase:
+        condition: service_healthy
+    entrypoint: ["python3", "/work/research/adapters/firebase.py"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    networks: [firebase]
+    profiles: ["db"]
+    volumes: *adapter-volumes
+
+  # Go's standard library; the adapter is compiled into the image, not
+  # mounted.
+  go:
+    build: *go-build
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["go"]
+    volumes:
+      - ./cases:/work/research/cases:ro
+
+  go-vet:
+    build: *go-build
+    entrypoint: ["go", "vet"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.check-args: .
+      dev.safe-fns.research.format-args: .
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters/go:/work/research/adapters/go
+
+  # `gofmt -l` lists unformatted files but still exits 0, so any output fails.
+  gofmt:
+    build: *go-build
+    entrypoint:
+      - sh
+      - -c
+      - >-
+        output=$$(gofmt "$$@") || exit;
+        [ -z "$$output" ] || { echo "$$output"; exit 1; }
+      - gofmt
+    labels:
+      dev.safe-fns.research.check-args: -l .
+      dev.safe-fns.research.format-args: -w .
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters/go:/work/research/adapters/go
+
+  # CodeNarc's recommended rules through npm-groovy-lint, which formats too.
+  # `--no-parse` skips its standalone compile, which can't see the Java and
+  # Kotlin classes the Groovy files use.
+  groovy-lint:
+    image: nvuillam/npm-groovy-lint:v18.0.0@sha256:317deacf076dddf4329ac28cc73033aa137c781bfb035b2fb606edce8106836d
+    labels:
+      dev.safe-fns.research.check-args: >-
+        --noserver --no-parse --failon info adapters/jvm
+      dev.safe-fns.research.format-args: >-
+        --noserver --no-parse --format --failon info adapters/jvm
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    volumes:
+      - ./adapters:/work/research/adapters
+    working_dir: /work/research
+
   hermes:
     build:
       context: docker/hermes
@@ -48,6 +344,142 @@ services:
       - ./cases:/work/research/cases:ro
       - ../scripts/research:/work/scripts/research:ro
 
+  # Java, Commons Lang, Guava, Spring, Kotlin, and Groovy in one JVM, so it
+  # starts once per run; the adapter is compiled into the image, not mounted.
+  jvm:
+    build:
+      context: adapters/jvm
+      dockerfile: ../../docker/jvm/Dockerfile
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["jvm"]
+    volumes:
+      - ./cases:/work/research/cases:ro
+
+  # ktfmt's Kotlin-lang style, at the 80 columns `.editorconfig` sets.
+  #
+  # - `pull_policy: build`, since `--format` runs it without the build step
+  #   adapters get; a cached image would otherwise outlive a version bump.
+  ktfmt:
+    build:
+      context: docker/ktfmt
+    labels:
+      dev.safe-fns.research.check-args: >-
+        --kotlinlang-style --enable-editorconfig --dry-run --set-exit-if-changed
+        adapters/jvm
+      dev.safe-fns.research.format-args: >-
+        --kotlinlang-style --enable-editorconfig adapters/jvm
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters:/work/research/adapters
+    working_dir: /work/research
+
+  mariadb:
+    environment:
+      LANG: C.UTF-8
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "1"
+    healthcheck:
+      <<: *database-healthcheck
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+    image: mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15
+    labels: *database-labels
+    networks: [mariadb]
+    profiles: ["db"]
+    tmpfs: [/var/lib/mysql]
+
+  mariadb-adapter:
+    <<: *database-adapter
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    entrypoint: ["python", "/work/research/adapters/mysql.py"]
+    environment:
+      <<: *adapter-environment
+      RESEARCH_DATABASE_HOST: mariadb
+    networks: [mariadb]
+
+  mongo:
+    environment:
+      LANG: C.UTF-8
+    healthcheck:
+      <<: *database-healthcheck
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+    image: mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2
+    labels: *database-labels
+    networks: [mongo]
+    profiles: ["db"]
+    tmpfs: [/data/configdb, /data/db]
+
+  mongo-adapter:
+    <<: *database-adapter
+    depends_on:
+      mongo:
+        condition: service_healthy
+    entrypoint: ["python", "/work/research/adapters/mongo.py"]
+    networks: [mongo]
+
+  # Microsoft publishes SQL Server for amd64 only: Apple Silicon runs it under
+  # Rosetta, slowly, and CI's runners natively. Its data stays in the
+  # container's own layer, since SQL Server can't run on `tmpfs`.
+  mssql:
+    environment:
+      <<: *mssql-environment
+      ACCEPT_EULA: "Y"
+      LANG: C.UTF-8
+      MSSQL_PID: Developer
+    healthcheck:
+      <<: *database-healthcheck
+      retries: 150
+      test:
+        - CMD-SHELL
+        - >-
+          /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa
+          -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1"
+    image: mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726
+    labels: *database-labels
+    networks: [mssql]
+    platform: linux/amd64
+    profiles: ["db"]
+
+  mssql-adapter:
+    <<: *database-adapter
+    depends_on:
+      mssql:
+        condition: service_healthy
+    entrypoint: ["python", "/work/research/adapters/mssql.py"]
+    environment:
+      <<: [*adapter-environment, *mssql-environment]
+    networks: [mssql]
+
+  mysql:
+    environment:
+      LANG: C.UTF-8
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    healthcheck:
+      <<: *database-healthcheck
+      test: ["CMD", "mysqladmin", "ping", "--host", "127.0.0.1"]
+    image: mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d
+    labels: *database-labels
+    networks: [mysql]
+    profiles: ["db"]
+    tmpfs: [/var/lib/mysql]
+
+  mysql-adapter:
+    <<: *database-adapter
+    depends_on:
+      mysql:
+        condition: service_healthy
+    entrypoint: ["python", "/work/research/adapters/mysql.py"]
+    environment:
+      <<: *adapter-environment
+      RESEARCH_DATABASE_HOST: mysql
+    networks: [mysql]
+
   node:
     build:
       context: .
@@ -63,6 +495,80 @@ services:
       - ./cases:/work/research/cases:ro
       - ../scripts/research:/work/scripts/research:ro
       - ../test:/work/test:ro
+
+  php:
+    entrypoint: ["php", "/work/research/adapters/php.php"]
+    environment: *adapter-environment
+    image: php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["php"]
+    volumes: *adapter-volumes
+
+  # The cluster runs in `C.UTF-8`, so a cast never depends on the host locale.
+  postgres:
+    environment:
+      LANG: C.UTF-8
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_INITDB_ARGS: --locale=C.UTF-8 --encoding=UTF8
+    # TCP, not the socket: the entrypoint's setup server listens only on the
+    # socket, so this stays unhealthy until the real server is up.
+    healthcheck:
+      <<: *database-healthcheck
+      test:
+        ["CMD", "pg_isready", "--host", "127.0.0.1", "--username", "postgres"]
+    image: postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c
+    labels: *database-labels
+    networks: [postgres]
+    profiles: ["db"]
+    tmpfs: [/var/lib/postgresql]
+
+  postgres-adapter:
+    <<: *database-adapter
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: ["python", "/work/research/adapters/postgres.py"]
+    networks: [postgres]
+
+  # The .NET SDK image ships PowerShell; Microsoft no longer publishes
+  # PowerShell's own image.
+  powershell:
+    build: *powershell-build
+    entrypoint:
+      - pwsh
+      - -NoLogo
+      - -NoProfile
+      - -NonInteractive
+      - -File
+      - /work/research/adapters/powershell.ps1
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["powershell"]
+    volumes: *adapter-volumes
+
+  psscriptanalyzer:
+    build: *powershell-build
+    entrypoint:
+      - pwsh
+      - -NoLogo
+      - -NoProfile
+      - -NonInteractive
+      - -File
+      - /opt/research/format.ps1
+    labels:
+      dev.safe-fns.research.check-args: -Check adapters
+      dev.safe-fns.research.format-args: adapters
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters:/work/research/adapters
+    working_dir: /work/research
 
   python:
     entrypoint: ["python", "/work/research/adapters/python.py"]
@@ -87,6 +593,16 @@ services:
     network_mode: none
     profiles: ["python"]
     volumes: *python-volumes
+
+  ruby:
+    build: *ruby-build
+    entrypoint: ["ruby", "/work/research/adapters/ruby.rb"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["ruby"]
+    volumes: *adapter-volumes
 
   ruff:
     image: ghcr.io/astral-sh/ruff:0.17.0@sha256:0f9316141d252f8c4de3fb672e8433c1afbf9adb24b877ae887cffa4012d850c
@@ -116,6 +632,43 @@ services:
       - ./ruff.toml:/work/research/ruff.toml:ro
     working_dir: /work/research
 
+  # Rust's standard library, decoding through `serde_json`; the adapter is
+  # compiled into the image, not mounted.
+  rust:
+    build: *rust-build
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["rust"]
+    volumes:
+      - ./cases:/work/research/cases:ro
+
+  rustfmt:
+    build: *rust-build
+    entrypoint: ["cargo", "fmt"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.check-args: --all -- --check
+      dev.safe-fns.research.format-args: --all
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters/rust:/work/research/adapters/rust
+
+  # bash, dash, fish, and zsh, plus git and systemd, driven from Python.
+  shell:
+    build: *debian-build
+    entrypoint: ["python3", "/work/research/adapters/shell.py"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["shell"]
+    volumes: *adapter-volumes
+
   # Columns transcribed from `sources/` for tools that can't run here; it
   # needs no npm libraries, so it runs on the plain Node image.
   sources:
@@ -142,6 +695,47 @@ services:
     profiles: ["python"]
     volumes: *python-volumes
 
+  # Swift on Linux, whose Foundation is swift-corelibs-foundation rather than
+  # Darwin's; the adapter is compiled into the image, not mounted.
+  swift:
+    build: *swift-build
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["swift"]
+    volumes:
+      - ./cases:/work/research/cases:ro
+
+  swift-format:
+    build: *swift-build
+    entrypoint: ["swift", "format"]
+    labels:
+      dev.safe-fns.research.check-args: lint --strict --recursive adapters
+      dev.safe-fns.research.format-args: format --in-place --recursive adapters
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./.swift-format:/work/research/.swift-format:ro
+      - ./adapters:/work/research/adapters
+    working_dir: /work/research
+
+  syntax-tree:
+    build: *ruby-build
+    entrypoint: ["stree"]
+    labels:
+      dev.safe-fns.research.check-args: check adapters/*.rb
+      dev.safe-fns.research.format-args: write adapters/*.rb
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters:/work/research/adapters
+    working_dir: /work/research
+
   xml-schema:
     build:
       context: docker/xml-schema
@@ -151,4 +745,4 @@ services:
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["xml"]
-    volumes: *python-volumes
+    volumes: *adapter-volumes

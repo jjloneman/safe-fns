@@ -8,3 +8,12 @@ research/results/
 
 # Exported brand art: the XML plugin (for research's `.xsd`) would reflow it.
 assets/*.svg
+
+# Owned by their own toolchain. `@prettier/plugin-xml` and
+# `prettier-plugin-toml` claim these by extension or name (`.rs` and `.mod`
+# are XML extensions in GitHub's language list), and two formatters on one
+# file make `--format --check` flap.
+research/adapters/dotnet/*.csproj
+research/adapters/go/go.mod
+research/adapters/rust/**/*.rs
+research/adapters/rust/Cargo.lock
