@@ -233,6 +233,8 @@ it.
 - An adapter binds the case's value as a query parameter, and reports `n/a` for
   a value its driver would change on the way in: a bool where the database has
   no boolean type, an integer outside 64 bits, a string that isn't valid UTF-8.
+- An error is the server's own code: a SQLSTATE, `Error 1292`, `Msg 245`, or a
+  MongoDB `codeName`.
 - A column's version is the server's own, its locale is the database's collation
   or `ctype`, and its image is the database's, not the adapter's.
 

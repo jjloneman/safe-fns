@@ -350,7 +350,7 @@ The conventions below are written for TypeScript, but they bind code in every la
   - `release-please` — opens or updates the release PR, and tags the release once it is merged;
   - `publish` — only when a release was just created; builds and publishes to npm.
 - **Dependabot** opens weekly grouped patch/minor PRs for npm and Actions, after a 7-day cooldown that matches the [moratorium](#-7-day-dependency-moratorium).
-  - `research/`'s npm libraries, its Compose images, its Dockerfiles, and the JVM adapter's Gradle libraries get their own entries, each one grouped PR a week, majors included.
+  - `research/`'s npm libraries, its Compose images, its Dockerfiles, the JVM adapter's Gradle libraries, the database adapters' pip drivers, and the Firebase emulators' npm root get their own entries, each one grouped PR a week, majors included.
   - Its `ignore` rules hold the pins below: `typescript` and `@types/node` majors, and each `typescript-<version>` alias to its minor.
 - Every action is pinned to an exact `vX.Y.Z`, and every job declares its own `permissions`.
 - How to change a workflow is covered by `.claude/rules/ci.md`.
