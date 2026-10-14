@@ -166,7 +166,12 @@ export type ServiceColumns = {
   columns: AdapterColumn[];
 } & Pick<ResultColumn, "image" | "service">;
 
-/** A table tier; 0 is safe-fns' own planned column. */
+/**
+ * A table tier; 0 is safe-fns' own planned column.
+ *
+ * - research/README.md's Tiers section defines each one; the summary table
+ *   shows tiers 0–2.
+ */
 export type Tier = (typeof TIERS)[number];
 
 /** The fields every column shares, in adapter output and in results alike. */

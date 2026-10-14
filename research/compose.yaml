@@ -46,6 +46,8 @@ x-adapter-environment: &adapter-environment
   PYTHONDONTWRITEBYTECODE: "1"
   TZ: UTC
 
+# The read-only adapter and case mounts for an adapter that runs from source;
+# a compiled adapter mounts only `cases/`.
 x-adapter-volumes: &adapter-volumes
   - ./adapters:/work/research/adapters:ro
   - ./cases:/work/research/cases:ro
@@ -99,10 +101,6 @@ x-mssql-environment: &mssql-environment
 # PowerShell, plus PSScriptAnalyzer for its formatter.
 x-powershell-build: &powershell-build
   context: docker/powershell
-
-x-python-volumes: &python-volumes
-  - ./adapters:/work/research/adapters:ro
-  - ./cases:/work/research/cases:ro
 
 # Ruby, plus Rails' ActiveModel and syntax_tree from `Gemfile.lock`.
 x-ruby-build: &ruby-build
@@ -579,7 +577,7 @@ services:
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["python"]
-    volumes: *python-volumes
+    volumes: *adapter-volumes
 
   # The last Python with `distutils`, for `strtobool`; the setting makes it
   # the standard library's copy rather than the one setuptools injects.
@@ -594,7 +592,7 @@ services:
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["python"]
-    volumes: *python-volumes
+    volumes: *adapter-volumes
 
   ruby:
     build: *ruby-build
@@ -700,7 +698,7 @@ services:
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["python"]
-    volumes: *python-volumes
+    volumes: *adapter-volumes
 
   # Swift on Linux, whose Foundation is swift-corelibs-foundation rather than
   # Darwin's; the adapter is compiled into the image, not mounted.
