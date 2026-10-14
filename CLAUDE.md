@@ -17,4 +17,5 @@ Claude loads path-scoped rules by itself when it reads a matching file; this map
 - [docs/decisions/](docs/decisions/index.md) — the design-decision bundle.
 - `.claude/rules/` — path-scoped rules, each with a `paths:` frontmatter glob; list each one here as it is added.
   - [ci.md](.claude/rules/ci.md) — how to change a workflow: job layout, caches, permissions, and the sticky comments.
+  - [research.md](.claude/rules/research.md) — how to change the research harness: reproducible results, pinned containers, the twin codecs.
   - [testing.md](.claude/rules/testing.md) — how to write a test: file placement, test shape, hostile values, type tests.

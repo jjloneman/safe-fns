@@ -6,6 +6,7 @@ import perfectionistPlugin from "eslint-plugin-perfectionist";
 import tsdocPlugin from "eslint-plugin-tsdoc";
 import ymlPlugin from "eslint-plugin-yml";
 import { defineConfig, globalIgnores, includeIgnoreFile } from "eslint/config";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import { configs as tsConfigs } from "typescript-eslint";
 
@@ -49,8 +50,26 @@ const config: Linter.Config[] = defineConfig(
    */
   includeIgnoreFile(path.resolve(import.meta.dirname, ".gitignore")),
 
-  // Tracked, but generated: pnpm rewrites the lockfile on every install.
-  globalIgnores(["pnpm-lock.yaml"]),
+  /*
+   * Tracked, but generated.
+   *
+   * - pnpm rewrites a lockfile on every install; `research/` has its own.
+   *
+   * - `pnpm research` rewrites `research/results/` on every run.
+   */
+  globalIgnores(["**/pnpm-lock.yaml", "research/results/"]),
+
+  /*
+   * The research adapters import `research/`'s own libraries, which only
+   * `pnpm --dir research install` provides.
+   *
+   * - Without that install every import is unresolved, so typed rules would
+   *   fail; they're skipped instead, and `research-check.yml` installs and
+   *   lints them whenever `research/` changes.
+   */
+  ...(existsSync(path.resolve(import.meta.dirname, "research/node_modules"))
+    ? []
+    : [globalIgnores(["research/**/*.mts"])]),
 
   /*
    * TypeScript, with the full typed presets.
@@ -75,7 +94,7 @@ const config: Linter.Config[] = defineConfig(
       tsConfigs.stylisticTypeChecked,
       perfectionistPlugin.configs["recommended-alphabetical"],
     ],
-    files: ["**/*.ts"],
+    files: ["**/*.mts", "**/*.ts"],
     languageOptions: {
       parserOptions: {
         projectService: true,
@@ -172,6 +191,28 @@ const config: Linter.Config[] = defineConfig(
   },
 
   /*
+   * The research harness parses JSON only through `scripts/research/json.ts`,
+   * whose errors name the file or process the text came from.
+   *
+   * - A bare `JSON.parse` throws a `SyntaxError` that says neither, so a broken
+   *   case file or adapter output would be hard to trace.
+   */
+  {
+    files: ["research/**/*.mts", "scripts/research/**/*.ts"],
+    rules: {
+      "no-restricted-properties": [
+        "error",
+        {
+          message:
+            "Use parseJson or readJsonFile from scripts/research/json.ts, whose errors name their source.",
+          object: "JSON",
+          property: "parse",
+        },
+      ],
+    },
+  },
+
+  /*
    * A script's entry point reads last, just above the call that runs it.
    *
    * - `sort-modules` takes the whole `groups` list, so this repeats the
@@ -216,17 +257,17 @@ const config: Linter.Config[] = defineConfig(
    * - `package.json` is excluded: it keeps the conventional `sort-package-json`
    *   order, which `prettier-plugin-packagejson` enforces instead.
    *
-   * - `tsconfig.json` is JSONC — TypeScript reads comments in it — so it gets
-   *   the JSONC preset, which allows them.
+   * - `tsconfig.json` and VS Code's `.vscode/*.json` are JSONC — their tools
+   *   read comments in them — so they get the JSONC preset, which allows them.
    */
   {
     extends: [jsoncPlugin.configs["flat/recommended-with-json"]],
     files: ["**/*.json"],
-    ignores: ["**/package.json", "**/tsconfig.json"],
+    ignores: ["**/package.json", "**/tsconfig.json", ".vscode/*.json"],
   },
   {
     extends: [jsoncPlugin.configs["flat/recommended-with-jsonc"]],
-    files: ["**/*.jsonc", "**/tsconfig.json"],
+    files: ["**/*.jsonc", "**/tsconfig.json", ".vscode/*.json"],
   },
   {
     extends: [jsoncPlugin.configs["flat/prettier"]],

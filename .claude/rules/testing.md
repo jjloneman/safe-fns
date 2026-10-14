@@ -27,6 +27,7 @@ The scripts, projects, and coverage gate are described in [AGENTS.md](../../AGEN
 - **`describe("<unit>")` → `test("<scenario>")`.** Use `test`, never the `it` alias.
 - **Import from `vitest` explicitly** — no globals.
 - **Body sections** follow AGENTS.md's `// Given` / `// When` / `// Then` convention, with these refinements:
+  - Each phase comment names what that phase holds, after a hyphen: `// Given - a draft record without a verified entry`, `// When - verifying it`, `// Then - stable status and a verified line`.
   - Use only the phases that carry meaning; a pure value check with no action is `// Given` + `// Then`.
   - A combined label (`// Given/When/Then`) is fine when one line genuinely spans the phases.
   - `// When` marks the single action that triggers the asserted outcome.

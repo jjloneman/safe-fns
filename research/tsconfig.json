@@ -1,0 +1,17 @@
+{
+  /*
+   * `research/` is its own installed package, so its TypeScript resolves
+   * imports from `research/node_modules` through this nested config.
+   *
+   * - Named exactly `tsconfig.json`, so an editor and ESLint's project service
+   *   find it by walking up from an adapter, as they find the root's.
+   *
+   * - The root config doesn't include `research/`; this one checks it, in
+   *   `research-check.yml`, after `pnpm --dir research install`.
+   */
+  "extends": "../tsconfig.json",
+  "include": [
+    // The Node adapter, plus whatever it imports from `scripts/` and `test/`.
+    "adapters"
+  ]
+}

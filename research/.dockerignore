@@ -1,0 +1,6 @@
+# The Node image copies only the manifest and lockfile; everything else is
+# mounted at run time.
+*
+!package.json
+!pnpm-lock.yaml
+!pnpm-workspace.yaml

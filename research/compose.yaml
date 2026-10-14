@@ -1,0 +1,111 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/main/schema/compose-spec.json
+
+# Every tool the comparison harness runs, driven by `pnpm research`
+# (`scripts/research/run.ts`).
+#
+# - Adapters run once and exit (`docker compose run --rm`); each prints its
+#   columns as JSON on stdout and writes nothing.
+#
+# - Each service sits in a profile per batch, so a run pulls only what it
+#   needs; the `role` label tells the runner an adapter from a formatter.
+#
+# - Every image is pinned by version and digest, and bumped by Dependabot.
+#
+# - The repo is mounted read-only under `/work`, mirroring its layout, so an
+#   adapter's relative imports resolve.
+#
+# - No service has a network (`network_mode: none`): everything is installed
+#   at build time, so a run is hermetic, and parallel runs never race to create
+#   a shared one. A service that needs another (a database) joins a network
+#   of its own.
+
+name: safe-fns-research
+
+x-adapter-environment: &adapter-environment
+  LANG: C.UTF-8
+  LC_ALL: C.UTF-8
+  PYTHONDONTWRITEBYTECODE: "1"
+  TZ: UTC
+
+x-python-volumes: &python-volumes
+  - ./adapters:/work/research/adapters:ro
+  - ./cases:/work/research/cases:ro
+
+services:
+  node:
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile
+    entrypoint: ["node", "/work/research/adapters/node.mts"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["node"]
+    volumes:
+      - ./adapters:/work/research/adapters:ro
+      - ./cases:/work/research/cases:ro
+      - ../scripts/research:/work/scripts/research:ro
+      - ../test:/work/test:ro
+
+  python:
+    entrypoint: ["python", "/work/research/adapters/python.py"]
+    environment: *adapter-environment
+    image: python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["python"]
+    volumes: *python-volumes
+
+  # The last Python with `distutils`, for `strtobool`; the setting makes it
+  # the standard library's copy rather than the one setuptools injects.
+  python311:
+    entrypoint: ["python", "/work/research/adapters/python.py"]
+    environment:
+      <<: *adapter-environment
+      SETUPTOOLS_USE_DISTUTILS: stdlib
+    image: python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["python"]
+    volumes: *python-volumes
+
+  ruff:
+    image: ghcr.io/astral-sh/ruff:0.17.0@sha256:0f9316141d252f8c4de3fb672e8433c1afbf9adb24b877ae887cffa4012d850c
+    labels:
+      dev.safe-fns.research.check-args: format --check adapters
+      dev.safe-fns.research.format-args: format adapters
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    volumes:
+      - ./adapters:/work/research/adapters
+      - ./ruff.toml:/work/research/ruff.toml:ro
+    working_dir: /work/research
+
+  # Ruff's linter, beside its formatter: annotations, docstrings, and the
+  # rest of `ruff.toml`'s rules.
+  ruff-check:
+    image: ghcr.io/astral-sh/ruff:0.17.0@sha256:0f9316141d252f8c4de3fb672e8433c1afbf9adb24b877ae887cffa4012d850c
+    labels:
+      dev.safe-fns.research.check-args: check adapters
+      dev.safe-fns.research.format-args: check --fix adapters
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    volumes:
+      - ./adapters:/work/research/adapters
+      - ./ruff.toml:/work/research/ruff.toml:ro
+    working_dir: /work/research
+
+  sqlite:
+    entrypoint: ["python", "/work/research/adapters/sqlite.py"]
+    environment: *adapter-environment
+    image: python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["python"]
+    volumes: *python-volumes

@@ -46,17 +46,20 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Readability beats a few ops/second here: nothing in `scripts/` is public API or a hot path, so `map` / `filter` / `reduce` are fine even where a plain loop would be faster.
   - An error message says only what the error shows — read its `code` or `stderr` rather than guessing a cause.
   - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/**/*.test.ts` runs in the `node` project.
+  - `scripts/research/` is the comparison harness's host side: `run.ts` (`pnpm research`) orchestrates the containers, and `codec.ts`, `results.ts`, and `tables.ts` are the pure, tested parts.
+- `research/` — the cross-language comparison harness (see [Research harness](#-research-harness)), outside `files`, so never published.
 - `dist/` — build output (gitignored), the only directory published.
 - `README.md` — the public face: why the package exists, install and usage, the API, the support matrix, scripts, and what each label means.
 - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` — the community-health files.
   - `CONTRIBUTING.md` links to this file's sections rather than repeating them, so conventions change here only.
   - Security reports go through GitHub private vulnerability reporting.
 - `.githooks/` — the pre-commit and pre-push hooks (see [Pre-commit checks](#-pre-commit-checks)).
-- `.github/workflows/` — CI, CodeQL, and release (see [CI](#-ci)); `.github/actions/setup/` is the shared pnpm + Node + install prelude.
-- `.github/dependabot.yml` — weekly npm and GitHub Actions updates (see [CI](#-ci)).
+- `.github/workflows/` — CI, CodeQL, release, and the two research workflows (see [CI](#-ci)); `.github/actions/setup/` is the shared pnpm + Node + install prelude.
+- `.github/dependabot.yml` — weekly npm, GitHub Actions, and research-image updates (see [CI](#-ci)).
 - `.github/ISSUE_TEMPLATE/` — YAML issue forms (🐞 bug, ✨ feature, 🤔 semantics question, 🤝 conduct report), each labeled `📥 needs-triage`, plus `config.yml`, which disables blank issues.
 - `.github/PULL_REQUEST_TEMPLATE.md` — summary, `Closes #`, verification, and a checklist.
 - `.github/rulesets/` — the repository rulesets that protect `main` (see [Issues & PRs](#️-issues--prs)).
+- `.vscode/extensions.json` — the editor extensions VS Code offers to install, one per tool or file type the repo uses, each with a comment saying why; `.vscode/settings.json` stays per-user and gitignored.
 - `assets/` — the brand files, outside `files`, so never published.
   - The mark (`logo-light.svg`, `logo-dark.svg`) and the mark-plus-name lockup (`logo-wordmark-light.svg`, `logo-wordmark-dark.svg`), each cropped tight to its shapes.
   - The lockup's lettering is Inter Bold, outlined to paths so it renders without the font.
@@ -77,6 +80,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - `paths` maps `safe-fns` and `safe-fns/*` to `src/`, so `test/consumer/` typechecks and lints before any build.
   - An editor and ESLint's project service both resolve a file by walking up to the nearest config named exactly `tsconfig.json`, so every TypeScript file must fall inside this root's `include`.
   - Don't add a differently named config (`tsconfig.eslint.json`, …) to cover a directory; it typechecks in CI while leaving the editor and the linter blind.
+  - The one exception is a separately installed package with its own `node_modules`: it gets a nested config, still named exactly `tsconfig.json`, that extends the root's — today only `research/tsconfig.json`.
 - `vitest.config.ts` — the `node` and `jsdom` test projects and the coverage gate.
 
 ## 🎨 Code style guidelines
@@ -89,6 +93,16 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - **Semantic naming everywhere.** Files, types, functions, and params say what the thing is or does. Avoid vague names (`data`, `tmp`, `obj`) except where scope is trivial.
 - **American English in all prose** — comments, TSDoc, test names, docs, commit messages, and issue/PR bodies (`color`, `behavior`, `-ize`).
   - Identifiers and third-party APIs keep whatever spelling they already have.
+
+### 🌐 Every language
+
+The conventions below are written for TypeScript, but they bind code in every language — Python, shell, SQL, Groovy, and whatever comes next.
+
+- **Same shape everywhere:** semantic names, lexicographic ordering, 80-column lines, a doc comment on every function, no nested ternaries, and the blank-line padding described under [Code shape](#-code-shape).
+- **Types as strong as the language allows** wherever they can't be inferred: Python annotations and `TypedDict`s, Groovy's declared types and `@CompileStatic`.
+- **A block for every `if`, `for`, and `while`**, even where the language allows a one-line form; Python's `x if y else z` is the one accepted inline conditional.
+- **Keyword or named arguments** wherever the language has them, mirroring the single-object rule below: in Python, a function with two or more parameters makes them keyword-only (`def run_probe(*, args, probe)`).
+- **Enforce what a tool can:** each language's formatter and linter is configured to these rules (for Python, `research/ruff.toml`), and the rest is applied by hand.
 
 ### 🔷 TypeScript
 
@@ -158,7 +172,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 ### 💬 Comments and TSDoc
 
 - **Comment only _why_** — non-obvious constraints, workarounds, invariants. Never restate what the code does, and never reference current tasks, PRs, or callers; those rot.
-  - Tests are the exception: each test body uses `// Given` / `// When` / `// Then` section comments, with `// And` to continue the previous phase.
+  - Tests are the exception: each test body uses `// Given` / `// When` / `// Then` section comments, with `// And` to continue the previous phase, each followed by a hyphen and a short description (`// When - verifying it`).
   - `// Setup` and `// Cleanup` mark setup or teardown that belongs to one specific test rather than a shared hook.
 - **Comment shape: lead sentence, then bullets.**
   - A comment of three lines or more uses the block form (`/* … */`, or `/** … */` for TSDoc), not stacked `//` lines.
@@ -272,6 +286,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - **Every export plugs into two harnesses in `test/`:**
   - `cross-env.cases.ts` — a table of calls and expected results, run unchanged by both projects;
   - `hostile-inputs.ts` (plus the Node-only `cross-realm-inputs.ts`) — values that trap on inspection, for proving an export never throws.
+- `scripts/research/*.test.ts` covers the research harness's codec, merging, and tables; it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
 - How to write a test is covered by `.claude/rules/testing.md`.
 
 ## 📦 Build & package
@@ -327,10 +342,13 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - `## ⏱️ CI timings`, from `scripts/post-ci-timings.ts`.
   - A bug in either script fails `report`; a failure to post it can't fix, such as the read-only token Dependabot and fork PRs get, only warns.
 - `.github/workflows/codeql.yml` scans on PRs, `main`, and weekly.
+- `.github/workflows/research-check.yml` runs only on PRs that touch the harness or what it depends on (its `paths:` list): it installs `research/`, lints and typechecks it, and runs `pnpm research --format --check`.
+- `.github/workflows/research.yml` is manual (`workflow_dispatch`): it runs `pnpm research` from the same Compose file and uploads `research/results/` as an artifact.
 - `.github/workflows/release.yml` runs on every push to `main` (see [Versioning & releases](#-versioning--releases)):
   - `release-please` — opens or updates the release PR, and tags the release once it is merged;
   - `publish` — only when a release was just created; builds and publishes to npm.
 - **Dependabot** opens weekly grouped patch/minor PRs for npm and Actions, after a 7-day cooldown that matches the [moratorium](#-7-day-dependency-moratorium).
+  - `research/`'s npm libraries, its Compose images, and its Dockerfile get their own entries, each one grouped PR a week, majors included.
   - Its `ignore` rules hold the pins below: `typescript` and `@types/node` majors, and each `typescript-<version>` alias to its minor.
 - Every action is pinned to an exact `vX.Y.Z`, and every job declares its own `permissions`.
 - How to change a workflow is covered by `.claude/rules/ci.md`.
@@ -340,6 +358,8 @@ These bind every exported function. A change that breaks one is a bug, even if i
 No npm dependency may enter the lockfile until it has been published for **at least 7 days** — a supply-chain guard that gives the registry time to yank a compromised release.
 
 - Enforced by `minimumReleaseAge: 10080` (minutes) in [pnpm-workspace.yaml](pnpm-workspace.yaml), checked on every `pnpm install`, including `--frozen-lockfile`.
+  - `research/pnpm-workspace.yaml` repeats the floor for the research package, which is its own pnpm root; keep the two in sync.
+  - The same 7 days applies to a container image: pin a tag whose last push is at least 7 days old.
 - A too-new version fails the install with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`.
 - When bumping a dependency by hand, pick the newest version that is already at least 7 days old (exactly 7 days is fine). If the lockfile fails the check, downgrade the offending entry rather than relaxing the floor.
 - Versions are pinned exactly (`saveExact: true` in [pnpm-workspace.yaml](pnpm-workspace.yaml)); the lockfile is the only thing that moves them.
@@ -373,6 +393,7 @@ No npm dependency may enter the lockfile until it has been published for **at le
 Semantic and design decisions — what "empty" means, how a function is named, why an edge case resolves the way it does — are recorded in [docs/decisions/](docs/decisions/index.md), a small [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) v0.2 bundle.
 
 - One Markdown file per decision, listed in [docs/decisions/index.md](docs/decisions/index.md).
+- A comparison table in a decision comes from `research/results/<function>.md`, generated by `pnpm research`, never built by hand.
 - Check a decision's `verified` field before changing the behavior it describes:
   - `verified` by `human:jjloneman` means the repo owner reviewed it — change it only with their agreement.
   - No `verified` means it is an unreviewed draft.
@@ -380,6 +401,15 @@ Semantic and design decisions — what "empty" means, how a function is named, w
 - **To verify records, run `pnpm okf:verify`** (or edit the two frontmatter lines by hand):
   - it lists the records changed on the branch, marks the ones you pick `status: stable` with a `verified` entry, and commits just those files;
   - it refuses to run without an interactive terminal and has no flag to skip its prompts, which is what keeps `verified` a human act.
+
+## 🔬 Research harness
+
+`research/` runs each planned function's cases through other languages, libraries, databases, and formats, in pinned containers, so a decision's comparison is measured rather than read from docs. [research/README.md](research/README.md) covers running it and adding a tool.
+
+- It's a separately installed pnpm package (`research/package.json`, its own lockfile and `pnpm-workspace.yaml`), so its libraries never reach the published package or the root lockfile.
+- `pnpm research` runs every adapter service in `research/compose.yaml` in parallel and writes `research/results/`; it needs a Docker-compatible runtime (OrbStack on the owner's Mac mini).
+- The root ESLint config lints `research/**/*.mts` only once `pnpm --dir research install` has run, since its imports resolve nowhere else.
+- How to change it is covered by `.claude/rules/research.md`.
 
 ## 🛑 Deleting things
 

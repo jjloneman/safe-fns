@@ -1,0 +1,46 @@
+name: 🔬 Research
+
+# Manual only: regenerates `research/results/` from the same Compose file a
+# local `pnpm research` runs, without a local container runtime.
+on:
+  workflow_dispatch:
+    inputs:
+      function:
+        description: Run only this function's cases (e.g. safeParseBoolean); blank runs them all.
+        required: false
+        type: string
+      profile:
+        description: Run only this Compose profile (e.g. python); blank runs them all.
+        required: false
+        type: string
+
+# Nothing by default; each job grants only what it uses.
+permissions: {}
+
+jobs:
+  run:
+    name: 🔬 Run the harness
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+
+      # Inputs reach the shell through `env`, never interpolated into the
+      # script, so a crafted input can't inject a command.
+      - env:
+          FUNCTION: ${{ inputs.function }}
+          PROFILE: ${{ inputs.profile }}
+        run: |
+          args=()
+          if [ -n "$FUNCTION" ]; then args+=(--function "$FUNCTION"); fi
+          if [ -n "$PROFILE" ]; then args+=(--profile "$PROFILE"); fi
+          pnpm research "${args[@]}"
+
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: research-results
+          path: research/results/

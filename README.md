@@ -217,20 +217,21 @@ safe-fns replaces helpers that were copy-pasted between projects and had drifted
 
 ## 📋 Scripts
 
-| Script               | What it does                                                         |
-| :------------------- | :------------------------------------------------------------------- |
-| `pnpm build`         | Builds ESM and CJS output, with types, into `dist/`                  |
-| `pnpm check`         | Fixes lint, formats, then typechecks — run it before committing      |
-| `pnpm lint`          | ESLint, read-only                                                    |
-| `pnpm format:check`  | Prettier, read-only                                                  |
-| `pnpm typecheck`     | `tsc` over the whole project                                         |
-| `pnpm test`          | Runs the suite once, in the `node` and `jsdom` projects              |
-| `pnpm test:watch`    | Reruns the suite on change                                           |
-| `pnpm test:coverage` | Runs the suite and fails below 100% coverage                         |
-| `pnpm lint:package`  | Builds, then checks the package with publint and Are the Types Wrong |
-| `pnpm size`          | Builds, then checks every entry against its size budget              |
-| `pnpm test:consumer` | Packs the tarball and typechecks and loads it as a consumer would    |
-| `pnpm okf:verify`    | Interactively signs off decision records and commits them            |
+| Script               | What it does                                                                               |
+| :------------------- | :----------------------------------------------------------------------------------------- |
+| `pnpm build`         | Builds ESM and CJS output, with types, into `dist/`                                        |
+| `pnpm check`         | Fixes lint, formats, then typechecks — run it before committing                            |
+| `pnpm lint`          | ESLint, read-only                                                                          |
+| `pnpm format:check`  | Prettier, read-only                                                                        |
+| `pnpm typecheck`     | `tsc` over the whole project                                                               |
+| `pnpm test`          | Runs the suite once, in the `node` and `jsdom` projects                                    |
+| `pnpm test:watch`    | Reruns the suite on change                                                                 |
+| `pnpm test:coverage` | Runs the suite and fails below 100% coverage                                               |
+| `pnpm lint:package`  | Builds, then checks the package with publint and Are the Types Wrong                       |
+| `pnpm size`          | Builds, then checks every entry against its size budget                                    |
+| `pnpm test:consumer` | Packs the tarball and typechecks and loads it as a consumer would                          |
+| `pnpm okf:verify`    | Interactively signs off decision records and commits them                                  |
+| `pnpm research`      | Runs the cross-language comparison harness in containers ([research/](research/README.md)) |
 
 ---
 
