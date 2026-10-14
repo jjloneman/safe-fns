@@ -4,36 +4,36 @@
 
 ## Tiers 0–2
 
-| Case | es-toolkit<br>`compat.isEmpty(value)` | lodash<br>`_.isEmpty(value)` | remeda<br>`isEmpty(value)` | remeda<br>`isEmptyish(value)` | Python<br>`not value` |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `null` | `true` | `true` | 💥 `TypeError` | `true` | `true` |
-| `undefined` | `true` | `true` | `true` | `true` | — |
-| `""` | `true` | `true` | `true` | `true` | `true` |
-| `" "` | `false` | `false` | `false` | `false` | `false` |
-| `"\u{A0}"` | `false` | `false` | `false` | `false` | `false` |
-| `"\u{2800}"` | `false` | `false` | `false` | `false` | `false` |
-| `"a"` | `false` | `false` | `false` | `false` | `false` |
-| `0` | `true` | `true` | `true` | `false` | `true` |
-| `false` | `true` | `true` | `true` | `false` | `true` |
-| `NaN` | `true` | `true` | `true` | `false` | `false` |
-| `[]` | `true` | `true` | `true` | `true` | `true` |
-| `[0]` | `false` | `false` | `false` | `false` | `false` |
-| `[null]` | `false` | `false` | `false` | `false` | `false` |
-| `{}` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }` | `false` | `false` | `false` | `false` | `false` |
-| `{ "length": 0 }` | `false` | `false` | `false` | `true` | `false` |
-| `{ "size": 0 }` | `false` | `false` | `false` | `true` | `false` |
-| `‹an empty Map›` | `true` | `true` | `true` | `true` | — |
-| `‹a Map with an entry›` | `false` | `false` | `true` | `false` | — |
-| `‹an empty Set›` | `true` | `true` | `true` | `true` | — |
-| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — |
-| `‹an empty URLSearchParams›` | `true` | `true` | `true` | `true` | — |
-| `‹a URLSearchParams with an entry›` | `true` | `true` | `true` | `false` | — |
-| `‹a Date›` | `true` | `true` | `true` | `true` | — |
-| `‹a function›` | `true` | `true` | `true` | `false` | — |
-| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — |
-| `‹a proxy whose ownKeys trap throws›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | — |
-| `‹a cross-realm Map›` | `true` | `true` | `true` | `true` | — |
+| Case | es-toolkit<br>`compat.isEmpty(value)` | lodash<br>`_.isEmpty(value)` | remeda<br>`isEmpty(value)` | remeda<br>`isEmptyish(value)` | Commons Lang<br>`ObjectUtils.isEmpty(value)` | Commons Lang<br>`StringUtils.isBlank(value)` | Groovy<br>`!value` | Guava<br>`Strings.isNullOrEmpty(value)` | Java<br>`collection.isEmpty()` | Java<br>`map.isEmpty()` | Java<br>`string.isBlank()` | Java<br>`string.isEmpty()` | Kotlin<br>`collection.isNullOrEmpty()` | Kotlin<br>`map.isNullOrEmpty()` | Kotlin<br>`string.isNullOrBlank()` | Kotlin<br>`string.isNullOrEmpty()` | Python<br>`not value` | Spring<br>`!StringUtils.hasText(value)` | Spring<br>`ObjectUtils.isEmpty(value)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `null` | `true` | `true` | 💥 `TypeError` | `true` | `true` | `true` | `true` | `true` | — | — | — | — | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `undefined` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `""` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — | `true` | `true` | — | — | `true` | `true` | `true` | `true` | `true` |
+| `" "` | `false` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | — | — | `true` | `false` | — | — | `true` | `false` | `false` | `true` | `false` |
+| `"\u{A0}"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | `false` | `false` | — | — | `true` | `false` | `false` | `false` | `false` |
+| `"\u{2800}"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | `false` | `false` | — | — | `false` | `false` | `false` | `false` | `false` |
+| `"a"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | `false` | `false` | — | — | `false` | `false` | `false` | `false` | `false` |
+| `0` | `true` | `true` | `true` | `false` | `false` | — | `true` | — | — | — | — | — | — | — | — | — | `true` | — | `false` |
+| `false` | `true` | `true` | `true` | `false` | `false` | — | `true` | — | — | — | — | — | — | — | — | — | `true` | — | `false` |
+| `NaN` | `true` | `true` | `true` | `false` | `false` | — | `true` | — | — | — | — | — | — | — | — | — | `false` | — | `false` |
+| `[]` | `true` | `true` | `true` | `true` | `true` | — | `true` | — | `true` | — | — | — | `true` | — | — | — | `true` | — | `true` |
+| `[0]` | `false` | `false` | `false` | `false` | `false` | — | `false` | — | `false` | — | — | — | `false` | — | — | — | `false` | — | `false` |
+| `[null]` | `false` | `false` | `false` | `false` | `false` | — | `false` | — | `false` | — | — | — | `false` | — | — | — | `false` | — | `false` |
+| `{}` | `true` | `true` | `true` | `true` | `true` | — | `true` | — | — | `true` | — | — | — | `true` | — | — | `true` | — | `true` |
+| `{ "a": 1 }` | `false` | `false` | `false` | `false` | `false` | — | `false` | — | — | `false` | — | — | — | `false` | — | — | `false` | — | `false` |
+| `{ "length": 0 }` | `false` | `false` | `false` | `true` | `false` | — | `false` | — | — | `false` | — | — | — | `false` | — | — | `false` | — | `false` |
+| `{ "size": 0 }` | `false` | `false` | `false` | `true` | `false` | — | `false` | — | — | `false` | — | — | — | `false` | — | — | `false` | — | `false` |
+| `‹an empty Map›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a Map with an entry›` | `false` | `false` | `true` | `false` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹an empty Set›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹an empty URLSearchParams›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a URLSearchParams with an entry›` | `true` | `true` | `true` | `false` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a Date›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a function›` | `true` | `true` | `true` | `false` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a proxy whose ownKeys trap throws›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a cross-realm Map›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
 
 ## By outcome
 
@@ -43,40 +43,54 @@
 | lodash<br>`_.isEmpty(value)` | `null` `undefined` `""` `0` `false` `NaN` `[]` `{}` `‹an empty Map›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a cross-realm Map›` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` `‹a Map with an entry›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
 | remeda<br>`isEmpty(value)` | `undefined` `""` `0` `false` `NaN` `[]` `{}` `‹an empty Map›` `‹a Map with an entry›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a cross-realm Map›` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  | `null` `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
 | remeda<br>`isEmptyish(value)` | `null` `undefined` `""` `[]` `{}` `{ "length": 0 }` `{ "size": 0 }` `‹an empty Map›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a Date›` `‹a cross-realm Map›` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `0` `false` `NaN` `[0]` `[null]` `{ "a": 1 }` `‹a Map with an entry›` `‹a URLSearchParams with an entry›` `‹a function›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
+| Commons Lang<br>`ObjectUtils.isEmpty(value)` | `null` `""` `[]` `{}` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `0` `false` `NaN` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
+| Commons Lang<br>`StringUtils.isBlank(value)` | `null` `""` `" "` | `"\u{A0}"` `"\u{2800}"` `"a"` |  |  |
+| Groovy<br>`!value` | `null` `""` `0` `false` `NaN` `[]` `{}` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
+| Guava<br>`Strings.isNullOrEmpty(value)` | `null` `""` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` |  |  |
+| Java<br>`collection.isEmpty()` | `[]` | `[0]` `[null]` |  |  |
+| Java<br>`map.isEmpty()` | `{}` | `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
+| Java<br>`string.isBlank()` | `""` `" "` | `"\u{A0}"` `"\u{2800}"` `"a"` |  |  |
+| Java<br>`string.isEmpty()` | `""` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` |  |  |
+| Kotlin<br>`collection.isNullOrEmpty()` | `null` `[]` | `[0]` `[null]` |  |  |
+| Kotlin<br>`map.isNullOrEmpty()` | `null` `{}` | `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
+| Kotlin<br>`string.isNullOrBlank()` | `null` `""` `" "` `"\u{A0}"` | `"\u{2800}"` `"a"` |  |  |
+| Kotlin<br>`string.isNullOrEmpty()` | `null` `""` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` |  |  |
 | Python<br>`not value` | `null` `""` `0` `false` `[]` `{}` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `NaN` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
+| Spring<br>`!StringUtils.hasText(value)` | `null` `""` `" "` | `"\u{A0}"` `"\u{2800}"` `"a"` |  |  |
+| Spring<br>`ObjectUtils.isEmpty(value)` | `null` `""` `[]` `{}` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `0` `false` `NaN` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.isEmpty(value)` | lodash<br>`_.isEmpty(value)` | remeda<br>`isEmpty(value)` | remeda<br>`isEmptyish(value)` | Python<br>`not value` |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `null` | `true` | `true` | 💥 `TypeError` | `true` | `true` |
-| `undefined` | `true` | `true` | `true` | `true` | — |
-| `""` | `true` | `true` | `true` | `true` | `true` |
-| `" "` | `false` | `false` | `false` | `false` | `false` |
-| `"\u{A0}"` | `false` | `false` | `false` | `false` | `false` |
-| `"\u{2800}"` | `false` | `false` | `false` | `false` | `false` |
-| `"a"` | `false` | `false` | `false` | `false` | `false` |
-| `0` | `true` | `true` | `true` | `false` | `true` |
-| `false` | `true` | `true` | `true` | `false` | `true` |
-| `NaN` | `true` | `true` | `true` | `false` | `false` |
-| `[]` | `true` | `true` | `true` | `true` | `true` |
-| `[0]` | `false` | `false` | `false` | `false` | `false` |
-| `[null]` | `false` | `false` | `false` | `false` | `false` |
-| `{}` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }` | `false` | `false` | `false` | `false` | `false` |
-| `{ "length": 0 }` | `false` | `false` | `false` | `true` | `false` |
-| `{ "size": 0 }` | `false` | `false` | `false` | `true` | `false` |
-| `‹an empty Map›` | `true` | `true` | `true` | `true` | — |
-| `‹a Map with an entry›` | `false` | `false` | `true` | `false` | — |
-| `‹an empty Set›` | `true` | `true` | `true` | `true` | — |
-| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — |
-| `‹an empty URLSearchParams›` | `true` | `true` | `true` | `true` | — |
-| `‹a URLSearchParams with an entry›` | `true` | `true` | `true` | `false` | — |
-| `‹a Date›` | `true` | `true` | `true` | `true` | — |
-| `‹a function›` | `true` | `true` | `true` | `false` | — |
-| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — |
-| `‹a proxy whose ownKeys trap throws›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | — |
-| `‹a cross-realm Map›` | `true` | `true` | `true` | `true` | — |
+| Case | es-toolkit<br>`compat.isEmpty(value)` | lodash<br>`_.isEmpty(value)` | remeda<br>`isEmpty(value)` | remeda<br>`isEmptyish(value)` | Commons Lang<br>`ObjectUtils.isEmpty(value)` | Commons Lang<br>`StringUtils.isBlank(value)` | Groovy<br>`!value` | Guava<br>`Strings.isNullOrEmpty(value)` | Java<br>`collection.isEmpty()` | Java<br>`map.isEmpty()` | Java<br>`string.isBlank()` | Java<br>`string.isEmpty()` | Kotlin<br>`collection.isNullOrEmpty()` | Kotlin<br>`map.isNullOrEmpty()` | Kotlin<br>`string.isNullOrBlank()` | Kotlin<br>`string.isNullOrEmpty()` | Python<br>`not value` | Spring<br>`!StringUtils.hasText(value)` | Spring<br>`ObjectUtils.isEmpty(value)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `null` | `true` | `true` | 💥 `TypeError` | `true` | `true` | `true` | `true` | `true` | — | — | — | — | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `undefined` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `""` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — | `true` | `true` | — | — | `true` | `true` | `true` | `true` | `true` |
+| `" "` | `false` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | — | — | `true` | `false` | — | — | `true` | `false` | `false` | `true` | `false` |
+| `"\u{A0}"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | `false` | `false` | — | — | `true` | `false` | `false` | `false` | `false` |
+| `"\u{2800}"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | `false` | `false` | — | — | `false` | `false` | `false` | `false` | `false` |
+| `"a"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | `false` | `false` | — | — | `false` | `false` | `false` | `false` | `false` |
+| `0` | `true` | `true` | `true` | `false` | `false` | — | `true` | — | — | — | — | — | — | — | — | — | `true` | — | `false` |
+| `false` | `true` | `true` | `true` | `false` | `false` | — | `true` | — | — | — | — | — | — | — | — | — | `true` | — | `false` |
+| `NaN` | `true` | `true` | `true` | `false` | `false` | — | `true` | — | — | — | — | — | — | — | — | — | `false` | — | `false` |
+| `[]` | `true` | `true` | `true` | `true` | `true` | — | `true` | — | `true` | — | — | — | `true` | — | — | — | `true` | — | `true` |
+| `[0]` | `false` | `false` | `false` | `false` | `false` | — | `false` | — | `false` | — | — | — | `false` | — | — | — | `false` | — | `false` |
+| `[null]` | `false` | `false` | `false` | `false` | `false` | — | `false` | — | `false` | — | — | — | `false` | — | — | — | `false` | — | `false` |
+| `{}` | `true` | `true` | `true` | `true` | `true` | — | `true` | — | — | `true` | — | — | — | `true` | — | — | `true` | — | `true` |
+| `{ "a": 1 }` | `false` | `false` | `false` | `false` | `false` | — | `false` | — | — | `false` | — | — | — | `false` | — | — | `false` | — | `false` |
+| `{ "length": 0 }` | `false` | `false` | `false` | `true` | `false` | — | `false` | — | — | `false` | — | — | — | `false` | — | — | `false` | — | `false` |
+| `{ "size": 0 }` | `false` | `false` | `false` | `true` | `false` | — | `false` | — | — | `false` | — | — | — | `false` | — | — | `false` | — | `false` |
+| `‹an empty Map›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a Map with an entry›` | `false` | `false` | `true` | `false` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹an empty Set›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹an empty URLSearchParams›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a URLSearchParams with an entry›` | `true` | `true` | `true` | `false` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a Date›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a function›` | `true` | `true` | `true` | `false` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a proxy whose ownKeys trap throws›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a cross-realm Map›` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
 
 ## Versions
 
@@ -86,4 +100,18 @@
 | lodash<br>`_.isEmpty(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | remeda<br>`isEmpty(value)` | 1 | `2.51.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | remeda<br>`isEmptyish(value)` | 1 | `2.51.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| Commons Lang<br>`ObjectUtils.isEmpty(value)` | 2 | `3.21.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Commons Lang<br>`StringUtils.isBlank(value)` | 2 | `3.21.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Groovy<br>`!value` | 2 | `6.0.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Guava<br>`Strings.isNullOrEmpty(value)` | 2 | `33.7.2-jre` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Java<br>`collection.isEmpty()` | 2 | `25.0.4.1+1-LTS` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Java<br>`map.isEmpty()` | 2 | `25.0.4.1+1-LTS` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Java<br>`string.isBlank()` | 2 | `25.0.4.1+1-LTS` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Java<br>`string.isEmpty()` | 2 | `25.0.4.1+1-LTS` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`collection.isNullOrEmpty()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`map.isNullOrEmpty()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`string.isNullOrBlank()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`string.isNullOrEmpty()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Python<br>`not value` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
+| Spring<br>`!StringUtils.hasText(value)` | 2 | `7.0.9` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Spring<br>`ObjectUtils.isEmpty(value)` | 2 | `7.0.9` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |

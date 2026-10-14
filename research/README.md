@@ -37,7 +37,7 @@ the generated tables instead of summarizing other tools' docs.
 | :-------------------------------- | :------------------------------------------------------------------------------ |
 | `pnpm research`                   | Runs every adapter over every case file                                         |
 | `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats |
-| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (`node`, `python`); repeats                 |
+| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (`jvm`, `node`, `python`); repeats          |
 | `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                   |
 | `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter             |
 | `pnpm research --format --check`  | Reports formatting drift without writing                                        |
@@ -56,6 +56,13 @@ the generated tables instead of summarizing other tools' docs.
     unchanged, which proves the codec twins agree.
 - `adapters/` — one adapter per language: `node.mts`, `python.py`, `sqlite.py`,
   and `research_codec.py`, the Python codec.
+  - `jvm/` is a Gradle project, compiled into the `jvm` image rather than
+    mounted: Java's standard library, Commons Lang, Guava, and Spring in Java,
+    Kotlin in `.kt`, Groovy in `.groovy`, and `ResearchCodec.java`, the JVM
+    codec.
+  - The runner's `docker compose build` step recompiles it after an edit; its
+    library versions are exact, and Dependabot's cooldown holds them 7 days
+    back, since Maven has no release-age floor.
 - `results/<function>.json` and `.md` — generated; never edit them by hand.
   - The Markdown has a tiers 0–2 summary for decision records, a by-outcome
     table for functions with few distinct results, the full table, and every
@@ -151,14 +158,19 @@ to stdout:
 
 ## 🖌️ Formatters
 
-| Language               | Formatter                                                                                                                                                |
-| :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TypeScript, JSON, YAML | Prettier, through the repo's root config                                                                                                                 |
-| Python                 | [Ruff](https://docs.astral.sh/ruff/) (`ruff.toml`): `ruff format` in the `ruff` service, `ruff check` (annotations, docstrings, imports) in `ruff-check` |
+| Language               | Formatter                                                                                                                                                                                                                                     |
+| :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TypeScript, JSON, YAML | Prettier, through the repo's root config                                                                                                                                                                                                      |
+| Python                 | [Ruff](https://docs.astral.sh/ruff/) (`ruff.toml`): `ruff format` in the `ruff` service, `ruff check` (annotations, docstrings, imports) in `ruff-check`                                                                                      |
+| Java                   | Prettier, through [`prettier-plugin-java`](https://github.com/jhipster/prettier-java) in the root config; [Checkstyle](https://checkstyle.org) (`adapters/jvm/checkstyle.xml`) in the `checkstyle` service, for `final` parameters and locals |
+| Kotlin                 | [ktfmt](https://github.com/facebook/ktfmt)'s Kotlin-lang style in the `ktfmt` service, at the 80 columns `adapters/jvm/.editorconfig` sets                                                                                                    |
+| Groovy                 | [npm-groovy-lint](https://github.com/nvuillam/npm-groovy-lint) (`adapters/jvm/.groovylintrc.json`): CodeNarc's recommended rules, plus `--format`                                                                                             |
 
 - Every language follows the repo's conventions
   ([AGENTS.md → Every language](../AGENTS.md#-every-language)); each formatter
   and linter is configured to enforce what it can.
+- npm-groovy-lint runs with `--no-parse`: its parse check compiles each file
+  alone, so it can't see the Java and Kotlin classes the Groovy files use.
 - `--format` runs the container formatters one at a time, since `ruff format`
   and `ruff check --fix` can rewrite the same file; `--format --check` runs them
   in parallel.
