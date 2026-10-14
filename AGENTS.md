@@ -100,9 +100,10 @@ The conventions below are written for TypeScript, but they bind code in every la
 
 - **Same shape everywhere:** semantic names, lexicographic ordering, 80-column lines, a doc comment on every function, no nested ternaries, and the blank-line padding described under [Code shape](#-code-shape).
 - **Types as strong as the language allows** wherever they can't be inferred: Python annotations and `TypedDict`s, Groovy's declared types and `@CompileStatic`.
+- **Immutable by default:** a binding that is never reassigned says so — `const` in TypeScript, `val` in Kotlin, and `final` on Java parameters, catch parameters, and locals.
 - **A block for every `if`, `for`, and `while`**, even where the language allows a one-line form; Python's `x if y else z` is the one accepted inline conditional.
 - **Keyword or named arguments** wherever the language has them, mirroring the single-object rule below: in Python, a function with two or more parameters makes them keyword-only (`def run_probe(*, args, probe)`).
-- **Enforce what a tool can:** each language's formatter and linter is configured to these rules (for Python, `research/ruff.toml`), and the rest is applied by hand.
+- **Enforce what a tool can:** each language's formatter and linter is configured to these rules (for Python, `research/ruff.toml`; for Java, `research/adapters/jvm/checkstyle.xml`), and the rest is applied by hand.
 
 ### 🔷 TypeScript
 

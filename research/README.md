@@ -158,13 +158,13 @@ to stdout:
 
 ## 🖌️ Formatters
 
-| Language               | Formatter                                                                                                                                                |
-| :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TypeScript, JSON, YAML | Prettier, through the repo's root config                                                                                                                 |
-| Python                 | [Ruff](https://docs.astral.sh/ruff/) (`ruff.toml`): `ruff format` in the `ruff` service, `ruff check` (annotations, docstrings, imports) in `ruff-check` |
-| Java                   | Prettier, through [`prettier-plugin-java`](https://github.com/jhipster/prettier-java) in the root config                                                 |
-| Kotlin                 | [ktfmt](https://github.com/facebook/ktfmt)'s Kotlin-lang style in the `ktfmt` service, at the 80 columns `adapters/jvm/.editorconfig` sets               |
-| Groovy                 | [npm-groovy-lint](https://github.com/nvuillam/npm-groovy-lint) (`adapters/jvm/.groovylintrc.json`): CodeNarc's recommended rules, plus `--format`        |
+| Language               | Formatter                                                                                                                                                                                                                                     |
+| :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TypeScript, JSON, YAML | Prettier, through the repo's root config                                                                                                                                                                                                      |
+| Python                 | [Ruff](https://docs.astral.sh/ruff/) (`ruff.toml`): `ruff format` in the `ruff` service, `ruff check` (annotations, docstrings, imports) in `ruff-check`                                                                                      |
+| Java                   | Prettier, through [`prettier-plugin-java`](https://github.com/jhipster/prettier-java) in the root config; [Checkstyle](https://checkstyle.org) (`adapters/jvm/checkstyle.xml`) in the `checkstyle` service, for `final` parameters and locals |
+| Kotlin                 | [ktfmt](https://github.com/facebook/ktfmt)'s Kotlin-lang style in the `ktfmt` service, at the 80 columns `adapters/jvm/.editorconfig` sets                                                                                                    |
+| Groovy                 | [npm-groovy-lint](https://github.com/nvuillam/npm-groovy-lint) (`adapters/jvm/.groovylintrc.json`): CodeNarc's recommended rules, plus `--format`                                                                                             |
 
 - Every language follows the repo's conventions
   ([AGENTS.md → Every language](../AGENTS.md#-every-language)); each formatter

@@ -26,8 +26,8 @@ paths:
 ## 🔷 Code
 
 - `scripts/research/*.ts` follows the `scripts/` conventions; the Node adapter (`research/adapters/node.mts`) follows the TypeScript ones and is checked through `research/tsconfig.json`.
-- **The codecs are twins.** A change to `scripts/research/codec.ts` needs the same change in `research/adapters/research_codec.py` and `research/adapters/jvm/src/main/java/dev/safefns/research/ResearchCodec.java`, and a `codec.json` case proving it.
-- **Non-TS adapters follow the same conventions** ([AGENTS.md → Every language](../../AGENTS.md#-every-language)): Python is fully annotated and documented, keyword-only past one parameter, and checked by `ruff-check`.
+- **The codecs are twins.** A change to `scripts/research/codec.ts` needs the same change in `research/adapters/research_codec.py` and `research/adapters/jvm/src/main/java/com/jjloneman/safefns/research/ResearchCodec.java`, and a `codec.json` case proving it.
+- **Non-TS adapters follow the same conventions** ([AGENTS.md → Every language](../../AGENTS.md#-every-language)): Python is fully annotated and documented, keyword-only past one parameter, and checked by `ruff-check`; Java declares every parameter and local it never reassigns `final`, checked by the `checkstyle` service.
 - **Parse JSON only through `scripts/research/json.ts`** (`parseJson`, `readJsonFile`), whose errors name the file or process; ESLint's `no-restricted-properties` rejects a bare `JSON.parse` in research code. `JSON.stringify` needs no wrapper: it only ever sees encoded values, which hold nothing it throws on.
 - **In the JVM adapter, Groovy compiles last**, so only Groovy sees every language's classes: `Main.groovy` is the entry point, and `build.gradle.kts` adds Kotlin's output to `compileGroovy`'s classpath.
 - **Name every parameter object type and document every property**, with an `@example`, as AGENTS.md asks of all code.
