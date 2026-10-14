@@ -59,6 +59,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - `.github/ISSUE_TEMPLATE/` — YAML issue forms (🐞 bug, ✨ feature, 🤔 semantics question, 🤝 conduct report), each labeled `📥 needs-triage`, plus `config.yml`, which disables blank issues.
 - `.github/PULL_REQUEST_TEMPLATE.md` — summary, `Closes #`, verification, and a checklist.
 - `.github/rulesets/` — the repository rulesets that protect `main` (see [Issues & PRs](#️-issues--prs)).
+- `.vscode/extensions.json` — the editor extensions VS Code offers to install, one per tool or file type the repo uses, each with a comment saying why; `.vscode/settings.json` stays per-user and gitignored.
 - `assets/` — the brand files, outside `files`, so never published.
   - The mark (`logo-light.svg`, `logo-dark.svg`) and the mark-plus-name lockup (`logo-wordmark-light.svg`, `logo-wordmark-dark.svg`), each cropped tight to its shapes.
   - The lockup's lettering is Inter Bold, outlined to paths so it renders without the font.

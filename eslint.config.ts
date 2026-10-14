@@ -235,17 +235,17 @@ const config: Linter.Config[] = defineConfig(
    * - `package.json` is excluded: it keeps the conventional `sort-package-json`
    *   order, which `prettier-plugin-packagejson` enforces instead.
    *
-   * - `tsconfig.json` is JSONC — TypeScript reads comments in it — so it gets
-   *   the JSONC preset, which allows them.
+   * - `tsconfig.json` and VS Code's `.vscode/*.json` are JSONC — their tools
+   *   read comments in them — so they get the JSONC preset, which allows them.
    */
   {
     extends: [jsoncPlugin.configs["flat/recommended-with-json"]],
     files: ["**/*.json"],
-    ignores: ["**/package.json", "**/tsconfig.json"],
+    ignores: ["**/package.json", "**/tsconfig.json", ".vscode/*.json"],
   },
   {
     extends: [jsoncPlugin.configs["flat/recommended-with-jsonc"]],
-    files: ["**/*.jsonc", "**/tsconfig.json"],
+    files: ["**/*.jsonc", "**/tsconfig.json", ".vscode/*.json"],
   },
   {
     extends: [jsoncPlugin.configs["flat/prettier"]],
