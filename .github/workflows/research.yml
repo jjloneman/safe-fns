@@ -40,7 +40,7 @@ jobs:
           if [ -n "$PROFILE" ]; then args+=(--profile "$PROFILE"); fi
           pnpm research "${args[@]}"
 
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: research-results
           path: research/results/
