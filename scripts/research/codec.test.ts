@@ -46,7 +46,9 @@ type RenderRow = {
 } & Omit<DecodeRow, "expected">;
 
 /** Stands in for the Node adapter's `$js` factories. */
-const resolveJs = (name: string): unknown => `built ${name}`;
+function resolveJs(name: string): unknown {
+  return `built ${name}`;
+}
 
 describe("decodeValue", () => {
   test.each<DecodeRow>([

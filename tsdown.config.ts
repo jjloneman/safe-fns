@@ -5,7 +5,7 @@ import { defineConfig } from "tsdown";
 
 type EntryExport = Partial<Record<"import" | "require", string>>;
 
-const declarationExtensions = { ".cjs": ".d.cts", ".js": ".d.ts" };
+const DECLARATION_EXTENSIONS = { ".cjs": ".d.cts", ".js": ".d.ts" };
 
 /**
  * Nest each `import`/`require` target under its own `types` condition.
@@ -38,7 +38,7 @@ function addTypesConditions(
 
 function toDeclarationPath(file: string): string {
   const [extension, declarationExtension] =
-    Object.entries(declarationExtensions).find(([candidate]) =>
+    Object.entries(DECLARATION_EXTENSIONS).find(([candidate]) =>
       file.endsWith(candidate)
     ) ?? [];
 
@@ -49,7 +49,7 @@ function toDeclarationPath(file: string): string {
   return `${file.slice(0, -extension.length)}${declarationExtension}`;
 }
 
-const config: UserConfig = defineConfig({
+const CONFIG: UserConfig = defineConfig({
   clean: true,
 
   /*
@@ -107,4 +107,4 @@ const config: UserConfig = defineConfig({
   unbundle: true,
 });
 
-export default config;
+export default CONFIG;

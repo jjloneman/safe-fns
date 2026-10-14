@@ -10,21 +10,21 @@ import { readFileSync } from "node:fs";
  * - An entry missing from this table fails `pnpm size`, so a new function
  *   can't ship without a budget.
  */
-const limitsBySubpath: Record<string, string> = {
+const LIMITS_BY_SUBPATH: Record<string, string> = {
   ".": "100 B",
   "./is-placeholder": "100 B",
 };
 
 type EntryExports = Record<string, { import: { default: string } } | string>;
 
-const packageJson = JSON.parse(
+const PACKAGE_JSON = JSON.parse(
   readFileSync(new URL("package.json", import.meta.url), "utf8")
 ) as { exports: EntryExports };
 
-const config: SizeLimitConfig = Object.entries(packageJson.exports)
+const CONFIG: SizeLimitConfig = Object.entries(PACKAGE_JSON.exports)
   .filter(([subpath]) => subpath !== "./package.json")
   .map(([subpath, target]) => {
-    const limit = limitsBySubpath[subpath];
+    const limit = LIMITS_BY_SUBPATH[subpath];
 
     if (limit === undefined || typeof target === "string") {
       throw new Error(
@@ -35,4 +35,4 @@ const config: SizeLimitConfig = Object.entries(packageJson.exports)
     return { limit, name: subpath, path: target.import.default };
   });
 
-export default config;
+export default CONFIG;

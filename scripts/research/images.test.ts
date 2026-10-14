@@ -18,43 +18,53 @@ const NODE_IMAGE = "node:26.10.0-bookworm-slim@sha256:node";
 
 const POSTGRES_IMAGE = "postgres:18.6-bookworm@sha256:pg";
 
+function column({
+  image,
+  service,
+}: Pick<ResultColumn, "image" | "service">): ResultColumn {
+  return {
+    call: "f(value)",
+    image,
+    locale: "-",
+    name: "Tool",
+    outcomes: [],
+    service,
+    tier: 2,
+    version: "1",
+  };
+}
+
 /** A Dockerfile reader that serves one file and fails on any other path. */
-const dockerfileAt =
-  ({ file, text }: { file: string; text: string }): ReadDockerfile =>
-  (requested) => {
+function dockerfileAt({
+  file,
+  text,
+}: {
+  file: string;
+  text: string;
+}): ReadDockerfile {
+  return (requested) => {
     if (requested !== file) {
       throw new Error(`unexpected read of ${requested}`);
     }
 
     return text;
   };
+}
 
-const column = ({
-  image,
-  service,
-}: Pick<ResultColumn, "image" | "service">): ResultColumn => ({
-  call: "f(value)",
-  image,
-  locale: "-",
-  name: "Tool",
-  outcomes: [],
-  service,
-  tier: 2,
-  version: "1",
-});
-
-const result = ({
+function result({
   columns,
   function: functionName,
-}: Pick<FunctionResult, "columns" | "function">): FunctionResult => ({
-  cases: [],
-  columns,
-  function: functionName,
-});
+}: Pick<FunctionResult, "columns" | "function">): FunctionResult {
+  return {
+    cases: [],
+    columns,
+    function: functionName,
+  };
+}
 
-const unreadable: ReadDockerfile = (file) => {
+function unreadable(file: Parameters<ReadDockerfile>[0]): never {
   throw new Error(`unexpected read of ${file}`);
-};
+}
 
 describe("toReportedImage", () => {
   test("reports a pulled service's own image", () => {

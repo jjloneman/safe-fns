@@ -1,9 +1,9 @@
 import { describe, expect, test } from "vitest";
 
-import { crossEnvCases } from "#test/cross-env.cases";
+import { CROSS_ENV_CASES } from "#test/cross-env.cases";
 
 describe("cross-environment table", () => {
-  test.each(crossEnvCases)("$description", ({ expected, run }) => {
+  test.each(CROSS_ENV_CASES)("$description", ({ expected, run }) => {
     // When
     const actual = run();
 

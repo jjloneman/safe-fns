@@ -2,12 +2,12 @@ import type { ViteUserConfig } from "vitest/config";
 
 import { defineConfig } from "vitest/config";
 
-const testFiles = ["{src,test}/**/*.test.ts"];
+const TEST_FILES = ["{src,test}/**/*.test.ts"];
 
 // Repo scripts are Node-only, so only the `node` project runs their tests.
-const scriptTestFiles = ["scripts/**/*.test.ts"];
+const SCRIPT_TEST_FILES = ["scripts/**/*.test.ts"];
 
-const config: ViteUserConfig = defineConfig({
+const CONFIG: ViteUserConfig = defineConfig({
   test: {
     /*
      * Coverage is configured once at the root, so one report aggregates both
@@ -41,7 +41,7 @@ const config: ViteUserConfig = defineConfig({
         extends: true,
         test: {
           environment: "node",
-          include: [...testFiles, ...scriptTestFiles],
+          include: [...TEST_FILES, ...SCRIPT_TEST_FILES],
           name: "node",
 
           // Type tests run once; they don't depend on the runtime environment.
@@ -58,7 +58,7 @@ const config: ViteUserConfig = defineConfig({
 
           // `*.node.test.ts` files need Node built-ins that no browser has.
           exclude: ["**/*.node.test.ts"],
-          include: testFiles,
+          include: TEST_FILES,
           name: "jsdom",
         },
       },
@@ -66,4 +66,4 @@ const config: ViteUserConfig = defineConfig({
   },
 });
 
-export default config;
+export default CONFIG;

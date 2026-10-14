@@ -4,17 +4,19 @@ import type { FunctionResult, ResultColumn } from "./results.ts";
 
 import { renderResultMarkdown } from "./tables.ts";
 
-const column = (overrides: Partial<ResultColumn>): ResultColumn => ({
-  call: "f(value)",
-  image: "img@sha256:1",
-  locale: "C.UTF-8",
-  name: "tool",
-  outcomes: [],
-  service: "node",
-  tier: 1,
-  version: "1.0.0",
-  ...overrides,
-});
+function column(overrides: Partial<ResultColumn>): ResultColumn {
+  return {
+    call: "f(value)",
+    image: "img@sha256:1",
+    locale: "C.UTF-8",
+    name: "tool",
+    outcomes: [],
+    service: "node",
+    tier: 1,
+    version: "1.0.0",
+    ...overrides,
+  };
+}
 
 describe("renderResultMarkdown", () => {
   test("groups cases by the planned column's values, then other values, then throws", () => {

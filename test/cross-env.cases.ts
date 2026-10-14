@@ -51,7 +51,9 @@ export function defineCrossEnvCase<Input, Output>({
   return { description, expected, run: () => fn(input) };
 }
 
-const describeType = (value: unknown): string => typeof value;
+function describeType(value: unknown): string {
+  return typeof value;
+}
 
 /**
  * Every row here runs unchanged in each test project, so a function's
@@ -63,7 +65,7 @@ const describeType = (value: unknown): string => typeof value;
  * - Seeded with rows for the built-in `typeof` until the first real function
  *   lands, so the harness is proven before anything depends on it.
  */
-export const crossEnvCases: readonly CrossEnvCase[] = [
+export const CROSS_ENV_CASES: readonly CrossEnvCase[] = [
   defineCrossEnvCase({
     description: "typeof 1n is bigint",
     expected: "bigint",
