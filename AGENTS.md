@@ -46,7 +46,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Readability beats a few ops/second here: nothing in `scripts/` is public API or a hot path, so `map` / `filter` / `reduce` are fine even where a plain loop would be faster.
   - An error message says only what the error shows — read its `code` or `stderr` rather than guessing a cause.
   - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/**/*.test.ts` runs in the `node` project.
-  - `scripts/research/` is the comparison harness's host side: `run.ts` (`pnpm research`) orchestrates the containers, and `codec.ts`, `results.ts`, and `tables.ts` are the pure, tested parts.
+  - `scripts/research/` is the comparison harness's host side: `run.ts` (`pnpm research`) orchestrates the containers, and `codec.ts`, `results.ts`, `sources.ts`, and `tables.ts` are the pure, tested parts.
 - `research/` — the cross-language comparison harness (see [Research harness](#-research-harness)), outside `files`, so never published.
 - `dist/` — build output (gitignored), the only directory published.
 - `README.md` — the public face: why the package exists, install and usage, the API, the support matrix, scripts, and what each label means.
@@ -288,7 +288,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Every export plugs into two harnesses in `test/`:**
   - `cross-env.cases.ts` — a table of calls and expected results, run unchanged by both projects;
   - `hostile-inputs.ts` (plus the Node-only `cross-realm-inputs.ts`) — values that trap on inspection, for proving an export never throws.
-- `scripts/research/*.test.ts` covers the research harness's codec, merging, and tables; it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
+- `scripts/research/*.test.ts` covers the research harness's codec, merging, sources, and tables; it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
 - How to write a test is covered by `.claude/rules/testing.md`.
 
 ## 📦 Build & package
@@ -341,16 +341,16 @@ The conventions below are written for TypeScript, but they bind code in every la
   - `report` — PR-only, after the rest; posts both PR comments.
 - **Two sticky PR comments**, each found by its opening heading and edited in place rather than re-posted:
   - `## 📊 Code coverage`, from `scripts/post-coverage-pr-comment.ts`;
-  - `## ⏱️ CI timings`, from `scripts/post-ci-timings.ts`.
+  - `## ⏱️ CI timings`, from `scripts/post-ci-timings.ts`, which covers both `ci.yml` and `research-check.yml` on the PR's commit; each workflow's `report` job re-posts it, so the last to finish leaves the full table.
   - A bug in either script fails `report`; a failure to post it can't fix, such as the read-only token Dependabot and fork PRs get, only warns.
 - `.github/workflows/codeql.yml` scans on PRs, `main`, and weekly.
-- `.github/workflows/research-check.yml` runs only on PRs that touch the harness or what it depends on (its `paths:` list): it installs `research/`, lints and typechecks it, and runs `pnpm research --format --check`.
+- `.github/workflows/research-check.yml` runs only on PRs that touch the harness or what it depends on (its `paths:` list): it installs `research/`, lints and typechecks it, and runs `pnpm research --format --check`, then a `report` job re-posts the CI timings comment.
 - `.github/workflows/research.yml` is manual (`workflow_dispatch`): it runs `pnpm research` from the same Compose file and uploads `research/results/` as an artifact.
 - `.github/workflows/release.yml` runs on every push to `main` (see [Versioning & releases](#-versioning--releases)):
   - `release-please` — opens or updates the release PR, and tags the release once it is merged;
   - `publish` — only when a release was just created; builds and publishes to npm.
 - **Dependabot** opens weekly grouped patch/minor PRs for npm and Actions, after a 7-day cooldown that matches the [moratorium](#-7-day-dependency-moratorium).
-  - `research/`'s npm libraries, its Compose images, its Dockerfiles, the JVM adapter's Gradle libraries, the database adapters' pip drivers, and the Firebase emulators' npm root get their own entries, each one grouped PR a week, majors included.
+  - `research/`'s npm libraries, its Compose images, its Dockerfiles, the JVM adapter's Gradle libraries, the database adapters' pip drivers, the XML Schema adapter's pip libraries, and the Firebase emulators' npm root get their own entries, each one grouped PR a week, majors included.
   - Its `ignore` rules hold the pins below: `typescript` and `@types/node` majors, and each `typescript-<version>` alias to its minor.
 - Every action is pinned to an exact `vX.Y.Z`, and every job declares its own `permissions`.
 - How to change a workflow is covered by `.claude/rules/ci.md`.
@@ -361,7 +361,7 @@ No npm dependency may enter the lockfile until it has been published for **at le
 
 - Enforced by `minimumReleaseAge: 10080` (minutes) in [pnpm-workspace.yaml](pnpm-workspace.yaml), checked on every `pnpm install`, including `--frozen-lockfile`.
   - `research/pnpm-workspace.yaml` and `research/docker/firebase/pnpm-workspace.yaml` repeat the floor for the research harness's own pnpm roots; keep all three in sync.
-  - The same 7 days applies to a container image (pin a tag whose last push is at least 7 days old) and to a Python package (`research/docker/db/requirements.txt`, compiled with `--exclude-newer`).
+  - The same 7 days applies to a container image (pin a tag whose last push is at least 7 days old), to a Python package (`research/docker/db/requirements.txt`, compiled with `--exclude-newer`; `research/docker/xml-schema/requirements.txt`), and to a release download such as the Hermes CLI tarball.
 - A too-new version fails the install with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`.
 - When bumping a dependency by hand, pick the newest version that is already at least 7 days old (exactly 7 days is fine). If the lockfile fails the check, downgrade the offending entry rather than relaxing the floor.
 - Versions are pinned exactly (`saveExact: true` in [pnpm-workspace.yaml](pnpm-workspace.yaml)); the lockfile is the only thing that moves them.

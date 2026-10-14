@@ -22,6 +22,9 @@ What to know before editing a workflow. AGENTS.md's CI section lists what runs; 
   - That means the report scripts and anything they import may use only Node built-ins — never a package from `node_modules`.
   - Posting from `report`, not from the job a report describes, is what keeps a broken report from turning `Tests` red.
 - **`report` lists every other job in `needs:`.** Add a new job there too, or its steps are missing from the timings table.
+- **The timings table spans workflows.** `post-ci-timings.ts` reads the newest run of each workflow in its `TIMED_WORKFLOWS` on the PR's commit, and every one of them runs it from its own `report` job, so whichever finishes last posts the complete table.
+  - A new workflow whose timings matter needs both: a line in `TIMED_WORKFLOWS`, and a `report` job that `needs:` its other jobs.
+  - A workflow without a `report` job (CodeQL) stays out, since nothing would re-post the table once it finishes.
 - **`concurrency` cancels superseded PR runs only.** A `main` push is that commit's record, so its group is keyed by sha and never cancelled.
 
 ## 💾 Caches
@@ -34,7 +37,7 @@ What to know before editing a workflow. AGENTS.md's CI section lists what runs; 
 ## 🔐 Permissions
 
 - The workflow sets `permissions: {}`, and each job grants only what it uses.
-  - Only `report` gets `pull-requests: write` (to comment) and `actions: read` (to list the run's jobs and download the coverage artifact).
+  - Only a `report` job gets `pull-requests: write` (to comment) and `actions: read` (to list the runs' jobs and download the coverage artifact): `ci.yml`'s, and `research-check.yml`'s.
   - In `release.yml`, `release-please` gets `contents`, `issues`, and `pull-requests: write` to manage the release PR, tags, and labels.
   - Only `publish` gets `id-token: write`, which npm trusted publishing exchanges for a one-off publish token.
 - `actions/checkout` sets `persist-credentials: false`; the comment scripts authenticate `gh` through `GH_TOKEN`, not the git credential.
@@ -59,8 +62,9 @@ What to know before editing a workflow. AGENTS.md's CI section lists what runs; 
   - Its own workflow, not a job in `ci.yml`: a job-level path filter would need a third-party action, and a skipped job would still show up in every PR's checks.
 - **`research.yml` is `workflow_dispatch` only**: its results are reviewed and committed by hand, so a run on every push would only produce artifacts nobody reads.
   - Its inputs reach the shell through `env`, never `${{ }}` inside `run:`, so a crafted input can't inject a command.
-- **Neither is in `report`'s `needs:`**; they are separate workflows, like `release.yml`.
-- Both grant only `contents: read`.
+- **Neither is in `ci.yml`'s `report` `needs:`**; they are separate workflows, like `release.yml`.
+  - `research-check.yml` has a `report` job of its own instead, which re-posts the shared CI timings comment once its check ends.
+- Every job that runs the harness grants only `contents: read`; only `research-check.yml`'s `report` job gets more (see Permissions).
 
 ## 💬 Sticky comments
 

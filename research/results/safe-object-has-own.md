@@ -4,33 +4,38 @@
 
 ## Tiers 0–2
 
-| Case | JS built-ins<br>`key in object` | JS built-ins<br>`Object.hasOwn(object, key)` | lodash<br>`_.has(object, key)` | .NET<br>`dictionary.ContainsKey(key)` | Go<br>`_, ok := obj[key]` | Groovy<br>`key in obj` | Java<br>`map.containsKey(key)` | Kotlin<br>`key in map` | Python<br>`key in obj` | Rust<br>`map.contains_key(key)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `{ "a": 1 }, "a"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }, "b"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `{ "a": 1 }, "toString"` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `{ "a": null }, "a"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a.b": 1 }, "a.b"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": { "b": 1 } }, "a.b"` | `false` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `‹a null-prototype object with a›, "a"` | `true` | `true` | `true` | — | — | — | — | — | — | — |
-| `["x"], "0"` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — |
-| `["x"], "length"` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — |
-| `"abc", "0"` | 💥 `TypeError` | `true` | `true` | — | — | `false` | — | — | `false` | — |
-| `"abc", "length"` | 💥 `TypeError` | `true` | `true` | — | — | `false` | — | — | `false` | — |
-| `42, "toFixed"` | 💥 `TypeError` | `false` | `false` | — | — | `false` | — | — | 💥 `TypeError` | — |
-| `null, "a"` | 💥 `TypeError` | 💥 `TypeError` | `false` | — | — | `false` | — | — | 💥 `TypeError` | — |
-| `undefined, "a"` | 💥 `TypeError` | 💥 `TypeError` | `false` | — | — | — | — | — | — | — |
-| `‹a revoked proxy›, "a"` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — | — |
-| `‹a proxy of a plain object›, "a"` | `true` | `true` | `true` | — | — | — | — | — | — | — |
-| `‹a cross-realm object›, "a"` | `true` | `true` | `true` | — | — | — | — | — | — | — |
+| Case | Effect<br>`Predicate.hasProperty(object, key)` | Hermes<br>`key in object` | Hermes<br>`Object.hasOwn(object, key)` | JS built-ins<br>`key in object` | JS built-ins<br>`Object.hasOwn(object, key)` | lodash<br>`_.has(object, key)` | Ramda<br>`R.has(key, object)` | Underscore<br>`_.has(object, key)` | .NET<br>`dictionary.ContainsKey(key)` | Go<br>`_, ok := obj[key]` | Groovy<br>`key in obj` | Java<br>`map.containsKey(key)` | Kotlin<br>`key in map` | Python<br>`key in obj` | Rust<br>`map.contains_key(key)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `{ "a": 1 }, "a"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a": 1 }, "b"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `{ "a": 1 }, "toString"` | `true` | `true` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `{ "a": null }, "a"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a.b": 1 }, "a.b"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a": { "b": 1 } }, "a.b"` | `false` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `‹a null-prototype object with a›, "a"` | `true` | — | — | `true` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — |
+| `["x"], "0"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — |
+| `["x"], "length"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — |
+| `"abc", "0"` | `false` | 💥 `TypeError` | `true` | 💥 `TypeError` | `true` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — |
+| `"abc", "length"` | `false` | 💥 `TypeError` | `true` | 💥 `TypeError` | `true` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — |
+| `42, "toFixed"` | `false` | 💥 `TypeError` | `false` | 💥 `TypeError` | `false` | `false` | `false` | `false` | — | — | `false` | — | — | 💥 `TypeError` | — |
+| `null, "a"` | `false` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | `false` | `false` | `false` | — | — | `false` | — | — | 💥 `TypeError` | — |
+| `undefined, "a"` | `false` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | `false` | `false` | `false` | — | — | — | — | — | — | — |
+| `‹a revoked proxy›, "a"` | 💥 `TypeError` | — | — | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — | — |
+| `‹a proxy of a plain object›, "a"` | `true` | — | — | `true` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — |
+| `‹a cross-realm object›, "a"` | `true` | — | — | `true` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — |
 
 ## By outcome
 
 | Tool | `true` | `false` | Other | Throws |
 | :--- | :--- | :--- | :--- | :--- |
+| Effect<br>`Predicate.hasProperty(object, key)` | `{ "a": 1 }, "a"` `{ "a": 1 }, "toString"` `{ "a": null }, "a"` `{ "a.b": 1 }, "a.b"` `‹a null-prototype object with a›, "a"` `["x"], "0"` `["x"], "length"` `‹a proxy of a plain object›, "a"` `‹a cross-realm object›, "a"` | `{ "a": 1 }, "b"` `{ "a": { "b": 1 } }, "a.b"` `"abc", "0"` `"abc", "length"` `42, "toFixed"` `null, "a"` `undefined, "a"` |  | `‹a revoked proxy›, "a"` |
+| Hermes<br>`key in object` | `{ "a": 1 }, "a"` `{ "a": 1 }, "toString"` `{ "a": null }, "a"` `{ "a.b": 1 }, "a.b"` `["x"], "0"` `["x"], "length"` | `{ "a": 1 }, "b"` `{ "a": { "b": 1 } }, "a.b"` |  | `"abc", "0"` `"abc", "length"` `42, "toFixed"` `null, "a"` `undefined, "a"` |
+| Hermes<br>`Object.hasOwn(object, key)` | `{ "a": 1 }, "a"` `{ "a": null }, "a"` `{ "a.b": 1 }, "a.b"` `["x"], "0"` `["x"], "length"` `"abc", "0"` `"abc", "length"` | `{ "a": 1 }, "b"` `{ "a": 1 }, "toString"` `{ "a": { "b": 1 } }, "a.b"` `42, "toFixed"` |  | `null, "a"` `undefined, "a"` |
 | JS built-ins<br>`key in object` | `{ "a": 1 }, "a"` `{ "a": 1 }, "toString"` `{ "a": null }, "a"` `{ "a.b": 1 }, "a.b"` `‹a null-prototype object with a›, "a"` `["x"], "0"` `["x"], "length"` `‹a proxy of a plain object›, "a"` `‹a cross-realm object›, "a"` | `{ "a": 1 }, "b"` `{ "a": { "b": 1 } }, "a.b"` |  | `"abc", "0"` `"abc", "length"` `42, "toFixed"` `null, "a"` `undefined, "a"` `‹a revoked proxy›, "a"` |
 | JS built-ins<br>`Object.hasOwn(object, key)` | `{ "a": 1 }, "a"` `{ "a": null }, "a"` `{ "a.b": 1 }, "a.b"` `‹a null-prototype object with a›, "a"` `["x"], "0"` `["x"], "length"` `"abc", "0"` `"abc", "length"` `‹a proxy of a plain object›, "a"` `‹a cross-realm object›, "a"` | `{ "a": 1 }, "b"` `{ "a": 1 }, "toString"` `{ "a": { "b": 1 } }, "a.b"` `42, "toFixed"` |  | `null, "a"` `undefined, "a"` `‹a revoked proxy›, "a"` |
 | lodash<br>`_.has(object, key)` | `{ "a": 1 }, "a"` `{ "a": null }, "a"` `{ "a.b": 1 }, "a.b"` `{ "a": { "b": 1 } }, "a.b"` `‹a null-prototype object with a›, "a"` `["x"], "0"` `["x"], "length"` `"abc", "0"` `"abc", "length"` `‹a proxy of a plain object›, "a"` `‹a cross-realm object›, "a"` | `{ "a": 1 }, "b"` `{ "a": 1 }, "toString"` `42, "toFixed"` `null, "a"` `undefined, "a"` |  | `‹a revoked proxy›, "a"` |
+| Ramda<br>`R.has(key, object)` | `{ "a": 1 }, "a"` `{ "a": null }, "a"` `{ "a.b": 1 }, "a.b"` `‹a null-prototype object with a›, "a"` `["x"], "0"` `["x"], "length"` `"abc", "0"` `"abc", "length"` `‹a proxy of a plain object›, "a"` `‹a cross-realm object›, "a"` | `{ "a": 1 }, "b"` `{ "a": 1 }, "toString"` `{ "a": { "b": 1 } }, "a.b"` `42, "toFixed"` `null, "a"` `undefined, "a"` |  | `‹a revoked proxy›, "a"` |
+| Underscore<br>`_.has(object, key)` | `{ "a": 1 }, "a"` `{ "a": null }, "a"` `{ "a.b": 1 }, "a.b"` `‹a null-prototype object with a›, "a"` `["x"], "0"` `["x"], "length"` `"abc", "0"` `"abc", "length"` `‹a proxy of a plain object›, "a"` `‹a cross-realm object›, "a"` | `{ "a": 1 }, "b"` `{ "a": 1 }, "toString"` `{ "a": { "b": 1 } }, "a.b"` `42, "toFixed"` `null, "a"` `undefined, "a"` |  | `‹a revoked proxy›, "a"` |
 | .NET<br>`dictionary.ContainsKey(key)` | `{ "a": 1 }, "a"` `{ "a": null }, "a"` `{ "a.b": 1 }, "a.b"` | `{ "a": 1 }, "b"` `{ "a": 1 }, "toString"` `{ "a": { "b": 1 } }, "a.b"` |  |  |
 | Go<br>`_, ok := obj[key]` | `{ "a": 1 }, "a"` `{ "a": null }, "a"` `{ "a.b": 1 }, "a.b"` | `{ "a": 1 }, "b"` `{ "a": 1 }, "toString"` `{ "a": { "b": 1 } }, "a.b"` |  |  |
 | Groovy<br>`key in obj` | `{ "a": 1 }, "a"` `{ "a": null }, "a"` `{ "a.b": 1 }, "a.b"` | `{ "a": 1 }, "b"` `{ "a": 1 }, "toString"` `{ "a": { "b": 1 } }, "a.b"` `["x"], "0"` `["x"], "length"` `"abc", "0"` `"abc", "length"` `42, "toFixed"` `null, "a"` |  |  |
@@ -45,33 +50,38 @@
 
 ## Every tool
 
-| Case | JS built-ins<br>`key in object` | JS built-ins<br>`Object.hasOwn(object, key)` | lodash<br>`_.has(object, key)` | .NET<br>`dictionary.ContainsKey(key)` | Go<br>`_, ok := obj[key]` | Groovy<br>`key in obj` | Java<br>`map.containsKey(key)` | Kotlin<br>`key in map` | Python<br>`key in obj` | Rust<br>`map.contains_key(key)` | PHP<br>`property_exists($object, $key)` | PowerShell<br>`$object.ContainsKey($key)` | Ruby<br>`object.key?(key)` | Swift<br>`object.keys.contains(key)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `{ "a": 1 }, "a"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }, "b"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `{ "a": 1 }, "toString"` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `{ "a": null }, "a"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a.b": 1 }, "a.b"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": { "b": 1 } }, "a.b"` | `false` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `‹a null-prototype object with a›, "a"` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — |
-| `["x"], "0"` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — | 💥 `TypeError` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
-| `["x"], "length"` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — | 💥 `TypeError` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
-| `"abc", "0"` | 💥 `TypeError` | `true` | `true` | — | — | `false` | — | — | `false` | — | `false` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
-| `"abc", "length"` | 💥 `TypeError` | `true` | `true` | — | — | `false` | — | — | `false` | — | `false` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
-| `42, "toFixed"` | 💥 `TypeError` | `false` | `false` | — | — | `false` | — | — | 💥 `TypeError` | — | 💥 `TypeError` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
-| `null, "a"` | 💥 `TypeError` | 💥 `TypeError` | `false` | — | — | `false` | — | — | 💥 `TypeError` | — | 💥 `TypeError` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
-| `undefined, "a"` | 💥 `TypeError` | 💥 `TypeError` | `false` | — | — | — | — | — | — | — | — | — | — | — |
-| `‹a revoked proxy›, "a"` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — | — | — | — | — | — |
-| `‹a proxy of a plain object›, "a"` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — |
-| `‹a cross-realm object›, "a"` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — |
+| Case | Effect<br>`Predicate.hasProperty(object, key)` | Hermes<br>`key in object` | Hermes<br>`Object.hasOwn(object, key)` | JS built-ins<br>`key in object` | JS built-ins<br>`Object.hasOwn(object, key)` | lodash<br>`_.has(object, key)` | Ramda<br>`R.has(key, object)` | Underscore<br>`_.has(object, key)` | .NET<br>`dictionary.ContainsKey(key)` | Go<br>`_, ok := obj[key]` | Groovy<br>`key in obj` | Java<br>`map.containsKey(key)` | Kotlin<br>`key in map` | Python<br>`key in obj` | Rust<br>`map.contains_key(key)` | PHP<br>`property_exists($object, $key)` | PowerShell<br>`$object.ContainsKey($key)` | Ruby<br>`object.key?(key)` | Swift<br>`object.keys.contains(key)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `{ "a": 1 }, "a"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a": 1 }, "b"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `{ "a": 1 }, "toString"` | `true` | `true` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `{ "a": null }, "a"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a.b": 1 }, "a.b"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a": { "b": 1 } }, "a.b"` | `false` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `‹a null-prototype object with a›, "a"` | `true` | — | — | `true` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — |
+| `["x"], "0"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — | 💥 `TypeError` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
+| `["x"], "length"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — | 💥 `TypeError` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
+| `"abc", "0"` | `false` | 💥 `TypeError` | `true` | 💥 `TypeError` | `true` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — | `false` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
+| `"abc", "length"` | `false` | 💥 `TypeError` | `true` | 💥 `TypeError` | `true` | `true` | `true` | `true` | — | — | `false` | — | — | `false` | — | `false` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
+| `42, "toFixed"` | `false` | 💥 `TypeError` | `false` | 💥 `TypeError` | `false` | `false` | `false` | `false` | — | — | `false` | — | — | 💥 `TypeError` | — | 💥 `TypeError` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
+| `null, "a"` | `false` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | `false` | `false` | `false` | — | — | `false` | — | — | 💥 `TypeError` | — | 💥 `TypeError` | 💥 `RuntimeException` | 💥 `NoMethodError` | — |
+| `undefined, "a"` | `false` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | `false` | `false` | `false` | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a revoked proxy›, "a"` | 💥 `TypeError` | — | — | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a proxy of a plain object›, "a"` | `true` | — | — | `true` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a cross-realm object›, "a"` | `true` | — | — | `true` | `true` | `true` | `true` | `true` | — | — | — | — | — | — | — | — | — | — | — |
 
 ## Versions
 
-| Tool | Tier | Version | Locale | Image |
+| Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
-| JS built-ins<br>`key in object` | 1 | `v26.9.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| JS built-ins<br>`Object.hasOwn(object, key)` | 1 | `v26.9.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| lodash<br>`_.has(object, key)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| Effect<br>`Predicate.hasProperty(object, key)` | 1 | `4.0.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Hermes<br>`key in object` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Hermes<br>`Object.hasOwn(object, key)` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| JS built-ins<br>`key in object` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| JS built-ins<br>`Object.hasOwn(object, key)` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| lodash<br>`_.has(object, key)` | 1 | `4.18.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Ramda<br>`R.has(key, object)` | 1 | `0.32.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Underscore<br>`_.has(object, key)` | 1 | `1.13.8` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | .NET<br>`dictionary.ContainsKey(key)` | 2 | `10.0.12` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
 | Go<br>`_, ok := obj[key]` | 2 | `1.27.1` | `C.UTF-8` | `golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66` |
 | Groovy<br>`key in obj` | 2 | `6.0.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |

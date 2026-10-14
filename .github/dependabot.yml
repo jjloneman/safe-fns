@@ -151,14 +151,18 @@ updates:
     labels:
       - "📦 dependencies"
 
+  # Each research Dockerfile's `FROM`; the Hermes CLI tarball its Dockerfile
+  # downloads can't be tracked, so that one is bumped by hand.
   - package-ecosystem: "docker"
     directories:
       - "/research/docker/c"
       - "/research/docker/debian"
+      - "/research/docker/hermes"
       - "/research/docker/node"
       - "/research/docker/powershell"
       - "/research/docker/ruby"
       - "/research/docker/swift"
+      - "/research/docker/xml-schema"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -356,6 +360,31 @@ updates:
 
     groups:
       research-drivers:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"
+
+  # The XML Schema adapter's libraries, pinned with hashes in
+  # `research/docker/xml-schema/requirements.txt`.
+  - package-ecosystem: "pip"
+    directory: "/research/docker/xml-schema"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+
+    # PyPI has no release-age floor of its own; this is the moratorium.
+    cooldown:
+      default-days: 7
+
+    groups:
+      research-xml-schema:
         patterns:
           - "*"
     labels:
