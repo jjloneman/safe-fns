@@ -5,7 +5,7 @@
 #
 # - Dependabot bumps the `FROM` line only; bump `KTFMT_VERSION` and the
 #   checksum by hand, to a release at least 7 days old.
-FROM eclipse-temurin:25.0.4.1_1-jdk-noble@sha256:589ff4cc3f71aab462e7048a47a0d10edf57fbccde3fceea2281e610bf5880b4
+FROM eclipse-temurin:26.0.2.1_1-jdk-noble@sha256:3c5ccd0bde683b3d760127a75189c0d9ad7b80de53ebb184ef3e525dd44c2c94
 
 ARG KTFMT_VERSION=0.64
 
