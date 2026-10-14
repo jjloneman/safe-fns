@@ -13,8 +13,9 @@
  *   language's formatter in its container); `--format --check` only reports
  *   drift.
  *
- * - `--check-images` fails when a committed column records a different image
- *   than its service pins now, without building or running anything.
+ * - `--check-inputs` fails when a committed column records a different image,
+ *   or a different fingerprint of its service's Dockerfile and lockfiles,
+ *   than its service has now, without building or running anything.
  */
 import type { ChildProcess } from "node:child_process";
 
@@ -29,6 +30,7 @@ import {
 import path from "node:path";
 import { parseArgs } from "node:util";
 
+import type { ServiceInputs } from "./inputs.ts";
 import type { CaseFile, FunctionResult, ServiceColumns } from "./results.ts";
 
 import { isRecord } from "./codec.ts";
@@ -38,7 +40,13 @@ import {
   ROLE_LABEL,
   ROLES,
   toReportedImage,
+  toStaleKey,
 } from "./images.ts";
+import {
+  describeStaleInputs,
+  findStaleInputs,
+  toServiceInputs,
+} from "./inputs.ts";
 import { parseJson, readJsonFile } from "./json.ts";
 import {
   buildResults,
@@ -119,6 +127,16 @@ type ComposeService = {
    * @example `"python:3.14.7-slim-bookworm@sha256:…"`
    */
   image: string;
+
+  /**
+   * Fingerprints the files its results depend on.
+   *
+   * - Called only by a run or check that needs it, so a bad input on one
+   *   service can't fail a command that never touches it.
+   *
+   * @example `() => ({ files: ["docker/python/Dockerfile"], fingerprint: "sha256:…" })`
+   */
+  inputs: () => ServiceInputs;
 
   /**
    * The labels it carries, such as its role and formatter arguments.
@@ -280,18 +298,24 @@ const LOG_PREFIX = "[research]";
 /** The repo root, where every command runs. */
 const REPO_ROOT = path.resolve(import.meta.dirname, "../..");
 
+/** The harness's root, which input paths are relative to. */
+const RESEARCH_DIR = path.resolve(import.meta.dirname, "../../research");
+
 /** Where results are written. */
-const RESULTS_DIR = path.resolve(import.meta.dirname, "../../research/results");
+const RESULTS_DIR = path.join(RESEARCH_DIR, "results");
 
 /**
- * Compare every committed column's image with what its service reports now.
+ * Compare every committed column's image and inputs with its service's now.
  *
- * - Reads only Compose's config and the Dockerfiles, so it builds and pulls
- *   nothing, which keeps it cheap enough for every PR.
+ * - Reads only Compose's config, the Dockerfiles, and the declared inputs, so
+ *   it builds and pulls nothing, which keeps it cheap enough for every PR.
  *
- * @returns whether every committed result still matches its image.
+ * - A service whose image moved is reported for its image alone, since the
+ *   Dockerfile that pins it is one of its inputs too.
+ *
+ * @returns whether every committed result still matches its pins.
  */
-function checkImages(services: readonly ComposeService[]): boolean {
+function checkInputs(services: readonly ComposeService[]): boolean {
   const results = readdirSync(RESULTS_DIR)
     .filter((file) => file.endsWith(".json"))
     .sort()
@@ -304,13 +328,24 @@ function checkImages(services: readonly ComposeService[]): boolean {
     results,
   });
 
-  if (staleImages.length === 0) {
-    log(`every column in ${results.length} results matches its image`);
+  const staleImageKeys = new Set(staleImages.map((stale) => toStaleKey(stale)));
+
+  const staleInputs = findStaleInputs({
+    results,
+    serviceInputs: new Map(
+      services.map(({ inputs, name }) => [name, inputs()])
+    ),
+  }).filter((stale) => !staleImageKeys.has(toStaleKey(stale)));
+
+  if (staleImages.length === 0 && staleInputs.length === 0) {
+    log(`every column in ${results.length} results matches its pins`);
 
     return true;
   }
 
-  const staleServices = new Set(staleImages.map(({ service }) => service));
+  const staleServices = new Set(
+    [...staleImages, ...staleInputs].map(({ service }) => service)
+  );
 
   // A narrowed run keeps the columns of services it didn't run, so only a full
   // run drops a removed service's.
@@ -330,8 +365,9 @@ function checkImages(services: readonly ComposeService[]): boolean {
 
   logError(
     [
-      "results no longer match their images:",
+      "results no longer match their pins:",
       ...staleImages.map((staleImage) => `  ${describeStaleImage(staleImage)}`),
+      ...staleInputs.map((stale) => `  ${describeStaleInputs(stale)}`),
       `regenerate them: ${["pnpm research", ...profileArgs(profiles)].join(" ")}`,
     ].join("\n")
   );
@@ -497,6 +533,22 @@ async function loadServices(): Promise<ComposeService[]> {
     throw new Error("docker compose config printed no services");
   }
 
+  // Services share Dockerfiles and lockfiles, so each file is read once.
+  const filesByPath = new Map<string, Buffer>();
+
+  const readCached = (file: string): Buffer => {
+    const cached = filesByPath.get(file);
+
+    if (cached !== undefined) {
+      return cached;
+    }
+
+    const content = readFileSync(file);
+    filesByPath.set(file, content);
+
+    return content;
+  };
+
   return Object.entries(services).flatMap(([name, service]) => {
     if (!isRecord(service)) {
       return [];
@@ -505,10 +557,17 @@ async function loadServices(): Promise<ComposeService[]> {
     return [
       {
         image: toReportedImage({
-          readDockerfile: (file) => readFileSync(file, "utf8"),
+          readDockerfile: (file) => readCached(file).toString("utf8"),
           service,
           services,
         }),
+        inputs: () =>
+          toServiceInputs({
+            name,
+            readInput: readCached,
+            researchDir: RESEARCH_DIR,
+            service,
+          }),
         labels: toStringRecord(service.labels),
         name,
         profiles: Array.isArray(service.profiles)
@@ -617,7 +676,12 @@ async function runAdapter({
 
   log(`${service.name}: ${columns.length} columns in ${seconds}s`);
 
-  return { columns, image: service.image, service: service.name };
+  return {
+    columns,
+    image: service.image,
+    inputs: service.inputs().fingerprint,
+    service: service.name,
+  };
 }
 
 /** Run a command from the repo root, collecting its output. */
@@ -874,7 +938,7 @@ async function main(): Promise<void> {
   const { values } = parseArgs({
     options: {
       check: { type: "boolean" },
-      "check-images": { type: "boolean" },
+      "check-inputs": { type: "boolean" },
       concurrency: { type: "string" },
       format: { type: "boolean" },
       function: { multiple: true, type: "string" },
@@ -884,18 +948,18 @@ async function main(): Promise<void> {
 
   const services = await loadServices();
 
-  if (values["check-images"] === true) {
+  if (values["check-inputs"] === true) {
     const otherFlags = Object.keys(values).filter(
-      (flag) => flag !== "check-images"
+      (flag) => flag !== "check-inputs"
     );
 
     if (otherFlags.length > 0) {
       throw new Error(
-        `--check-images takes no other flags, got --${otherFlags.join(", --")}`
+        `--check-inputs takes no other flags, got --${otherFlags.join(", --")}`
       );
     }
 
-    process.exitCode = checkImages(services) ? 0 : 1;
+    process.exitCode = checkInputs(services) ? 0 : 1;
 
     return;
   }

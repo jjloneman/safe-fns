@@ -64,6 +64,7 @@ x-database-adapter: &database-adapter
     dockerfile: docker/db/Dockerfile
   environment: *adapter-environment
   labels:
+    dev.safe-fns.research.inputs: docker/db/requirements.txt
     dev.safe-fns.research.role: adapter
   profiles: ["db"]
   volumes: *adapter-volumes
@@ -204,6 +205,7 @@ services:
     build: *dotnet-build
     environment: *adapter-environment
     labels:
+      dev.safe-fns.research.inputs: adapters/dotnet/ResearchAdapter.csproj
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["dotnet"]
@@ -258,6 +260,9 @@ services:
     entrypoint: ["python3", "/work/research/adapters/firebase.py"]
     environment: *adapter-environment
     labels:
+      dev.safe-fns.research.inputs: >-
+        docker/firebase/firebase.json docker/firebase/package.json
+        docker/firebase/pnpm-lock.yaml docker/firebase/pnpm-workspace.yaml
       dev.safe-fns.research.role: adapter
     networks: [firebase]
     profiles: ["db"]
@@ -269,6 +274,7 @@ services:
     build: *go-build
     environment: *adapter-environment
     labels:
+      dev.safe-fns.research.inputs: adapters/go/go.mod
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["go"]
@@ -350,6 +356,7 @@ services:
       dockerfile: ../../docker/jvm/Dockerfile
     environment: *adapter-environment
     labels:
+      dev.safe-fns.research.inputs: adapters/jvm/build.gradle.kts
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["jvm"]
@@ -485,6 +492,7 @@ services:
     entrypoint: ["node", "/work/research/adapters/node.mts"]
     environment: *adapter-environment
     labels:
+      dev.safe-fns.research.inputs: package.json pnpm-lock.yaml pnpm-workspace.yaml
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["node"]
@@ -599,6 +607,7 @@ services:
     entrypoint: ["ruby", "/work/research/adapters/ruby.rb"]
     environment: *adapter-environment
     labels:
+      dev.safe-fns.research.inputs: docker/ruby/Gemfile.lock
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["ruby"]
@@ -638,6 +647,7 @@ services:
     build: *rust-build
     environment: *adapter-environment
     labels:
+      dev.safe-fns.research.inputs: adapters/rust/Cargo.lock adapters/rust/Cargo.toml
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["rust"]
@@ -747,6 +757,7 @@ services:
     entrypoint: ["python", "/work/research/adapters/xml_schema.py"]
     environment: *adapter-environment
     labels:
+      dev.safe-fns.research.inputs: docker/xml-schema/requirements.txt
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["xml"]

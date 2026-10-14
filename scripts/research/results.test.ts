@@ -173,6 +173,7 @@ describe("buildResults", () => {
             column({ function: "g" }),
           ],
           image: "img@sha256:1",
+          inputs: "sha256:in",
           service: "node",
         },
       ],
@@ -197,6 +198,7 @@ describe("buildResults", () => {
     expect(results[1]?.columns).toHaveLength(1);
     expect(results[1]?.columns[0]).toMatchObject({
       image: "img@sha256:1",
+      inputs: "sha256:in",
       service: "node",
     });
   });
@@ -212,6 +214,7 @@ describe("buildResults", () => {
         {
           columns: [column({ source: "research/sources/x.md" })],
           image: "img@sha256:1",
+          inputs: "sha256:in",
           service: "sources",
         },
       ],
@@ -239,6 +242,7 @@ describe("buildResults", () => {
             column({ call: "f(value)", name: "tool" }),
           ],
           image: "i",
+          inputs: "sha256:in",
           service: "s",
         },
       ],
@@ -260,7 +264,9 @@ describe("buildResults", () => {
     const build = (): FunctionResult[] =>
       buildResults({
         caseFiles,
-        serviceColumns: [{ columns: [column({})], image: "i", service: "s" }],
+        serviceColumns: [
+          { columns: [column({})], image: "i", inputs: "x", service: "s" },
+        ],
       });
 
     // Then - it throws, naming both counts
@@ -387,11 +393,14 @@ describe("mergeWithPrevious", () => {
 });
 
 describe("parseFunctionResult", () => {
-  test("keeps a committed result", () => {
+  test.each([
+    { description: "without inputs", inputs: {} },
+    { description: "with inputs", inputs: { inputs: "sha256:in" } },
+  ])("keeps a committed result $description", ({ inputs }) => {
     // Given - a committed result
     const json: FunctionResult = {
       cases: [["a", { $undefined: true }]],
-      columns: [resultColumn({})],
+      columns: [{ ...resultColumn({}), ...inputs }],
       function: "f",
     };
 
@@ -414,6 +423,14 @@ describe("parseFunctionResult", () => {
       json: {
         cases: [],
         columns: [{ ...resultColumn({}), service: 1 }],
+        function: "f",
+      },
+    },
+    {
+      description: "a column whose inputs aren't a string",
+      json: {
+        cases: [],
+        columns: [{ ...resultColumn({}), inputs: 1 }],
         function: "f",
       },
     },
