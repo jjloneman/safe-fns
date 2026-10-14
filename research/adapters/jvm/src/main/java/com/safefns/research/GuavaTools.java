@@ -1,4 +1,4 @@
-package com.jjloneman.safefns.research;
+package com.safefns.research;
 
 import com.google.common.base.Strings;
 import com.google.common.primitives.Doubles;

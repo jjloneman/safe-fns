@@ -20,4 +20,4 @@ RUN gradle --no-daemon --offline --quiet installDist
 
 # `java` expands the classpath wildcard itself, so no shell or start script
 # stands between the runner and the JVM.
-ENTRYPOINT ["java", "-cp", "/opt/jvm-adapter/build/install/jvm-adapter/lib/*", "com.jjloneman.safefns.research.Main"]
+ENTRYPOINT ["java", "-cp", "/opt/jvm-adapter/build/install/jvm-adapter/lib/*", "com.safefns.research.Main"]

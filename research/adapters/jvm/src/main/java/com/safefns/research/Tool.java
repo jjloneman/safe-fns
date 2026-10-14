@@ -1,4 +1,4 @@
-package com.jjloneman.safefns.research;
+package com.safefns.research;
 
 import java.util.List;
 import java.util.Map;

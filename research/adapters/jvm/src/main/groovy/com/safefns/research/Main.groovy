@@ -1,4 +1,4 @@
-package com.jjloneman.safefns.research
+package com.safefns.research
 
 import groovy.transform.CompileStatic
 
