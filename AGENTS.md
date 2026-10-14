@@ -136,8 +136,16 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Module-level constants are `SCREAMING_SNAKE_CASE`** (`BASE_BRANCH`, `RECORD_STATUSES`), including one computed once at startup and never reassigned; locals stay camelCase.
   - ESLint's `naming-convention` enforces it, exempting destructured bindings, which keep their source key's name.
   - A boolean constant is the exception: it keeps the question form (`isPlaceholder`), since the boolean-prefix rule outranks this one.
-  - A module-level function is a `function` declaration, not an arrow bound to a constant, so it keeps its camelCase name.
+  - A module-level function is a `function` declaration (see the next bullet), so the rule never reaches it and it keeps its camelCase name.
   - A name that must shadow a global (`const require = createRequire(…)`) keeps it, with an `eslint-disable-next-line` comment saying why.
+- **Named functions are `function` declarations; arrows are for functions defined inside another.**
+  - A module-level function, exported or not, is `function name(…)`, never `const name = (…) => …`.
+  - Its `.d.ts` reads `declare function`, so editors and documentation tools show a public export as a function, not a variable.
+  - It can take overload signatures, which an arrow bound to a constant can't without a separate call-signature type.
+  - perfectionist's `sort-modules` sorts declarations only, and any `const` splits its sorted runs, so only a declaration gets alphabetized and the `main`-last rule.
+  - Arrows stay the default inside a function: callbacks, closures, a returned function (`return (value) => …` for currying), and `reduce` reducers.
+  - To tie a declaration to an existing function type, derive its parameter types (`file: Parameters<ReadDockerfile>[0]`) rather than binding an arrow to the type.
+  - Stack traces don't decide it: an arrow bound to a `const` is named after it anyway; only an inline or returned function shows as anonymous, whichever syntax it uses.
 - **Build fixed lookup data once, outside the function** — a membership check against a known set of values is a module-level `Set` and `.has(value)`, not an array rebuilt and searched on every call.
 - **Named imports over a namespace import** — `import { confirm, select } from "…"`, not `import * as prompts`.
 - **Give multi-line statements breathing room**: a blank line separates a statement that spans several lines from its neighbors, and a TSDoc'd declaration from the one above it.
