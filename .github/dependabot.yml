@@ -148,6 +148,22 @@ updates:
       research-images:
         patterns:
           - "*"
+
+    # Python's pre-releases (`aN`, `bN`, `rcN`) can get past Dependabot's own
+    # pre-release filter, and the research harness never pins one.
+    #
+    # - Docker `versions` are RubyGems ranges, so each `>= X.Y.0.a, < X.Y.0`
+    #   holds that minor's alphas, betas, and release candidates while its
+    #   final release still flows.
+    #
+    # - Add the next minor before its first alpha; the same rule is repeated in
+    #   every entry that bumps a `python` image, since this file can't share it.
+    ignore:
+      - dependency-name: "python"
+        versions:
+          - ">= 3.15.0.a, < 3.15.0"
+          - ">= 3.16.0.a, < 3.16.0"
+          - ">= 3.17.0.a, < 3.17.0"
     labels:
       - "📦 dependencies"
 
@@ -180,6 +196,42 @@ updates:
       research-dockerfiles:
         patterns:
           - "*"
+
+    # Python's pre-releases; see the `docker-compose` entry.
+    ignore:
+      - dependency-name: "python"
+        versions:
+          - ">= 3.15.0.a, < 3.15.0"
+          - ">= 3.16.0.a, < 3.16.0"
+          - ">= 3.17.0.a, < 3.17.0"
+    labels:
+      - "📦 dependencies"
+
+  # The `python311` adapter's image, apart from the `python:` pins above so it
+  # can be held on 3.11, the last Python with `distutils`.
+  - package-ecosystem: "docker"
+    directory: "/research/docker/python311"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    groups:
+      research-python311:
+        patterns:
+          - "*"
+
+    # Every 3.12 and later, pre-releases included (`3.12.0.a` sorts first).
+    ignore:
+      - dependency-name: "python"
+        versions:
+          - ">= 3.12.0.a"
     labels:
       - "📦 dependencies"
 
@@ -337,6 +389,14 @@ updates:
       research-database-images:
         patterns:
           - "*"
+
+    # Python's pre-releases; see the `docker-compose` entry.
+    ignore:
+      - dependency-name: "python"
+        versions:
+          - ">= 3.15.0.a, < 3.15.0"
+          - ">= 3.16.0.a, < 3.16.0"
+          - ">= 3.17.0.a, < 3.17.0"
     labels:
       - "📦 dependencies"
 

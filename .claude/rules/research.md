@@ -17,6 +17,10 @@ paths:
 ## 🐳 Containers
 
 - **Pin every image by version and digest**, and pick a tag last pushed at least 7 days ago; Docker Hub's `tag_last_pushed` is the date that counts, since tags get re-pushed.
+- **Never pin a pre-release** (`rc3`, `-beta`, `-preview`), even when Dependabot proposes one; its own pre-release filter has let Python's through.
+  - `dependabot.yml` ignores Python's alphas, betas, and release candidates in every entry that bumps a `python` image; add the next minor's range before its first alpha, in every copy.
+  - `scripts/research/image-pins.test.ts` fails on any pre-release `image:` or `FROM`, and on copies of the Python hold that differ, so a miss shows up in CI.
+- **Give an image its own Dockerfile when it must be held apart.** Dependabot treats every `python:` pin in `compose.yaml` as one dependency, so `python311` is built from `docker/python311/Dockerfile`, whose own entry ignores 3.12 and later.
 - **No host ports**, no named volumes, and read-only repo mounts for adapters; only a formatter service mounts `research/adapters` writable.
 - **Set the locale explicitly** (`LANG` / `LC_ALL` = `C.UTF-8`); a function that depends on locale gets explicit extra-locale cases rather than the host's.
 - **A compiled adapter is built into its image, not mounted** (`c`, `dotnet`, `go`, `jvm`, `rust`, `swift`): the runner's `docker compose build` recompiles it, and its image is the one stage that runs, since the runner reports a Dockerfile's first `FROM` as the column's image.
