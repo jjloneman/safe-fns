@@ -990,6 +990,1182 @@
       "version": "3.14.7"
     },
     {
+      "call": "SELECT CAST(? AS CHAR)",
+      "image": "mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15",
+      "locale": "utf8mb4_uca1400_ai_ci",
+      "name": "MariaDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "  hi  "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
+          "value": "\t\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "﻿"
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "1e21"
+        },
+        {
+          "kind": "value",
+          "value": "0.0000001"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "100"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mariadb-adapter",
+      "tier": 3,
+      "version": "11.8.9"
+    },
+    {
+      "call": "SELECT TRIM(?)",
+      "image": "mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15",
+      "locale": "utf8mb4_uca1400_ai_ci",
+      "name": "MariaDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "\t\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "﻿"
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "1e21"
+        },
+        {
+          "kind": "value",
+          "value": "0.0000001"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "100"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mariadb-adapter",
+      "tier": 3,
+      "version": "11.8.9"
+    },
+    {
+      "call": "{ $toString: value }",
+      "image": "mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2",
+      "locale": "simple",
+      "name": "MongoDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "  hi  "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
+          "value": "\t\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "﻿"
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "-0"
+        },
+        {
+          "kind": "value",
+          "value": "1e+21"
+        },
+        {
+          "kind": "value",
+          "value": "1e-07"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "100"
+        },
+        {
+          "kind": "value",
+          "value": "NaN"
+        },
+        {
+          "kind": "value",
+          "value": "Infinity"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "false"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mongo-adapter",
+      "tier": 3,
+      "version": "8.3.11"
+    },
+    {
+      "call": "{ $trim: { input: value } }",
+      "image": "mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2",
+      "locale": "simple",
+      "name": "MongoDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "﻿"
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "error": "Location50699",
+          "kind": "error"
+        },
+        {
+          "error": "Location50699",
+          "kind": "error"
+        },
+        {
+          "error": "Location50699",
+          "kind": "error"
+        },
+        {
+          "error": "Location50699",
+          "kind": "error"
+        },
+        {
+          "error": "Location50699",
+          "kind": "error"
+        },
+        {
+          "error": "Location50699",
+          "kind": "error"
+        },
+        {
+          "error": "Location50699",
+          "kind": "error"
+        },
+        {
+          "error": "Location50699",
+          "kind": "error"
+        },
+        {
+          "error": "Location50699",
+          "kind": "error"
+        },
+        {
+          "error": "Location50699",
+          "kind": "error"
+        },
+        {
+          "error": "Location50699",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mongo-adapter",
+      "tier": 3,
+      "version": "8.3.11"
+    },
+    {
+      "call": "SELECT CAST(? AS CHAR)",
+      "image": "mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d",
+      "locale": "utf8mb4_0900_ai_ci",
+      "name": "MySQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "  hi  "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
+          "value": "\t\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "﻿"
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "-0"
+        },
+        {
+          "kind": "value",
+          "value": "1e21"
+        },
+        {
+          "kind": "value",
+          "value": "0.0000001"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "100"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mysql-adapter",
+      "tier": 3,
+      "version": "9.7.1"
+    },
+    {
+      "call": "SELECT TRIM(?)",
+      "image": "mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d",
+      "locale": "utf8mb4_0900_ai_ci",
+      "name": "MySQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "\t\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "﻿"
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "-0"
+        },
+        {
+          "kind": "value",
+          "value": "1e21"
+        },
+        {
+          "kind": "value",
+          "value": "0.0000001"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "100"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mysql-adapter",
+      "tier": 3,
+      "version": "9.7.1"
+    },
+    {
+      "call": "SELECT CAST(? AS text)",
+      "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
+      "locale": "C.UTF-8",
+      "name": "PostgreSQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "  hi  "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
+          "value": "\t\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "﻿"
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "-0"
+        },
+        {
+          "kind": "value",
+          "value": "1e+21"
+        },
+        {
+          "kind": "value",
+          "value": "1e-07"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "100"
+        },
+        {
+          "kind": "value",
+          "value": "NaN"
+        },
+        {
+          "kind": "value",
+          "value": "Infinity"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "false"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "postgres-adapter",
+      "tier": 3,
+      "version": "18.6"
+    },
+    {
+      "call": "SELECT trim(?)",
+      "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
+      "locale": "C.UTF-8",
+      "name": "PostgreSQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "\t\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "﻿"
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "error": "UndefinedFunction",
+          "kind": "error"
+        },
+        {
+          "error": "UndefinedFunction",
+          "kind": "error"
+        },
+        {
+          "error": "UndefinedFunction",
+          "kind": "error"
+        },
+        {
+          "error": "UndefinedFunction",
+          "kind": "error"
+        },
+        {
+          "error": "UndefinedFunction",
+          "kind": "error"
+        },
+        {
+          "error": "UndefinedFunction",
+          "kind": "error"
+        },
+        {
+          "error": "UndefinedFunction",
+          "kind": "error"
+        },
+        {
+          "error": "UndefinedFunction",
+          "kind": "error"
+        },
+        {
+          "error": "UndefinedFunction",
+          "kind": "error"
+        },
+        {
+          "error": "UndefinedFunction",
+          "kind": "error"
+        },
+        {
+          "error": "UndefinedFunction",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "postgres-adapter",
+      "tier": 3,
+      "version": "18.6"
+    },
+    {
+      "call": "SELECT CAST(? AS nvarchar(max))",
+      "image": "mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726",
+      "locale": "SQL_Latin1_General_CP1_CI_AS",
+      "name": "SQL Server",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "  hi  "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
+          "value": "\t\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "﻿"
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "-0"
+        },
+        {
+          "kind": "value",
+          "value": "1e+021"
+        },
+        {
+          "kind": "value",
+          "value": "1e-007"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "100"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mssql-adapter",
+      "tier": 3,
+      "version": "17.0.5005.3"
+    },
+    {
+      "call": "SELECT TRIM(?)",
+      "image": "mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726",
+      "locale": "SQL_Latin1_General_CP1_CI_AS",
+      "name": "SQL Server",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "\t\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "﻿"
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "error": "Msg 8116",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8116",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8116",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8116",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8116",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8116",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "Msg 8116",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mssql-adapter",
+      "tier": 3,
+      "version": "17.0.5005.3"
+    },
+    {
       "call": "SELECT CAST(? AS TEXT)",
       "image": "python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56",
       "locale": "C.UTF-8",

@@ -1341,6 +1341,889 @@
       "version": "3.14.7"
     },
     {
+      "call": "SELECT CAST(? AS DOUBLE)",
+      "image": "mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15",
+      "locale": "utf8mb4_uca1400_ai_ci",
+      "name": "MariaDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1.7976931348623157e+308
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mariadb-adapter",
+      "tier": 3,
+      "version": "11.8.9"
+    },
+    {
+      "call": "{ $toDouble: value }",
+      "image": "mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2",
+      "locale": "simple",
+      "name": "MongoDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mongo-adapter",
+      "tier": 3,
+      "version": "8.3.11"
+    },
+    {
+      "call": "SELECT CAST(? AS DOUBLE)",
+      "image": "mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d",
+      "locale": "utf8mb4_0900_ai_ci",
+      "name": "MySQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1.7976931348623157e+308
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mysql-adapter",
+      "tier": 3,
+      "version": "9.7.1"
+    },
+    {
+      "call": "SELECT CAST(? AS double precision)",
+      "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
+      "locale": "C.UTF-8",
+      "name": "PostgreSQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "InvalidTextRepresentation",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "error": "NumericValueOutOfRange",
+          "kind": "error"
+        },
+        {
+          "error": "NumericValueOutOfRange",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "error": "InvalidTextRepresentation",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidTextRepresentation",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidTextRepresentation",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidTextRepresentation",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "InvalidTextRepresentation",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidTextRepresentation",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidTextRepresentation",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidTextRepresentation",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidTextRepresentation",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "CannotCoerce",
+          "kind": "error"
+        },
+        {
+          "error": "CannotCoerce",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "postgres-adapter",
+      "tier": 3,
+      "version": "18.6"
+    },
+    {
+      "call": "SELECT CAST(? AS float)",
+      "image": "mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726",
+      "locale": "SQL_Latin1_General_CP1_CI_AS",
+      "name": "SQL Server",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "Msg 8115",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mssql-adapter",
+      "tier": 3,
+      "version": "17.0.5005.3"
+    },
+    {
       "call": "SELECT CAST(? AS REAL)",
       "image": "python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56",
       "locale": "C.UTF-8",

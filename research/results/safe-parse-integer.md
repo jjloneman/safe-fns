@@ -33,32 +33,32 @@
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` | SQLite<br>`SELECT CAST(? AS INTEGER)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
-| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `34` | `42` |
-| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` | `42` | `42` | `42` |
-| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `ValueError` | `42` | `42.5` | `42.5` |
-| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `ValueError` | `1` | `1000` | `1000` |
-| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` | `0` | `26` | `26` |
-| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | `9007199254740992` | `9007199254740992` |
-| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `-0` | `-0` |
-| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` |
-| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` |
-| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` | `0` | `"٤٢"` | `"٤٢"` |
-| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `ValueError` | `12` | `"12px"` | `"12px"` |
-| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | `1000` | `1` | `1000` | `"1_000"` |
-| `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — |
-| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` | `42` | — | — |
-| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` | `0` | — | — |
-| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowError` | `9223372036854775807n` | — | — |
-| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` | `42` | — | — |
-| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | — | — |
-| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | — | — |
-| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | `null` | — | — |
-| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — | — | — | — |
+| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` | MariaDB<br>`SELECT CAST(? AS SIGNED)` | MongoDB<br>`{ $toLong: value }` | MySQL<br>`SELECT CAST(? AS SIGNED)` | PostgreSQL<br>`SELECT CAST(? AS bigint)` | SQL Server<br>`SELECT CAST(? AS bigint)` | SQLite<br>`SELECT CAST(? AS INTEGER)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
+| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `34` | `42` |
+| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` | `42` | 💥 `ConversionFailure` | `42` | 💥 `InvalidTextRepresentation` | 💥 `Msg 8114` | `42` | `42` | `42` |
+| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `ValueError` | `42` | 💥 `ConversionFailure` | `42` | 💥 `InvalidTextRepresentation` | 💥 `Msg 8114` | `42` | `42.5` | `42.5` |
+| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `ValueError` | `1` | 💥 `ConversionFailure` | `1` | 💥 `InvalidTextRepresentation` | 💥 `Msg 8114` | `1` | `1000` | `1000` |
+| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` | `0` | 💥 `ConversionFailure` | `0` | `26` | 💥 `Msg 8114` | `0` | `26` | `26` |
+| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740992` | `9007199254740992` |
+| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `-0` | `-0` |
+| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | 💥 `ConversionFailure` | `7` | `7` | `7` | `7` | `7` | `7` |
+| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | 💥 `ConversionFailure` | `0` | 💥 `InvalidTextRepresentation` | `0` | `0` | `null` | `null` |
+| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` | `0` | 💥 `ConversionFailure` | `0` | 💥 `InvalidTextRepresentation` | 💥 `Msg 8114` | `0` | `"٤٢"` | `"٤٢"` |
+| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `ValueError` | `12` | 💥 `ConversionFailure` | `12` | 💥 `InvalidTextRepresentation` | 💥 `Msg 8114` | `12` | `"12px"` | `"12px"` |
+| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | `1000` | `1` | 💥 `ConversionFailure` | `1` | `1000` | 💥 `Msg 8114` | `1` | `1000` | `"1_000"` |
+| `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — |
+| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — |
+| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | — | — |
+| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowError` | — | 💥 `ConversionFailure` | — | 💥 `NumericValueOutOfRange` | — | `9223372036854775807n` | — | — |
+| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — |
+| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | `9007199254740993n` | — | — |
+| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | `1` | — | 💥 `CannotCoerce` | — | — | — | — |
+| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | `null` | `null` | `null` | `null` | `null` | `null` | — | — |
+| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — |
 
 ## Versions
 
@@ -70,6 +70,11 @@
 | lodash<br>`_.toSafeInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | zod<br>`z.coerce.number().int().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | Python<br>`int(value)` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
+| MariaDB<br>`SELECT CAST(? AS SIGNED)` | 3 | `11.8.9` | `utf8mb4_uca1400_ai_ci` | `mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15` |
+| MongoDB<br>`{ $toLong: value }` | 3 | `8.3.11` | `simple` | `mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2` |
+| MySQL<br>`SELECT CAST(? AS SIGNED)` | 3 | `9.7.1` | `utf8mb4_0900_ai_ci` | `mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d` |
+| PostgreSQL<br>`SELECT CAST(? AS bigint)` | 3 | `18.6` | `C.UTF-8` | `postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c` |
+| SQL Server<br>`SELECT CAST(? AS bigint)` | 3 | `17.0.5005.3` | `SQL_Latin1_General_CP1_CI_AS` | `mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726` |
 | SQLite<br>`SELECT CAST(? AS INTEGER)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
 | YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |

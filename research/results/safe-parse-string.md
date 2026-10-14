@@ -38,37 +38,37 @@
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.toString(value)` | JS built-ins<br>`String(value)` | JS built-ins<br>`String(value).trim()` | lodash<br>`_.toString(value)` | zod<br>`z.coerce.string().parse(value)` | Python<br>`str(value)` | Python<br>`str(value).strip()` | SQLite<br>`SELECT CAST(? AS TEXT)` | SQLite<br>`SELECT trim(?)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` |
-| `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` |
-| `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` |
-| `"   "` | `"   "` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `""` | `"   "` | `""` |
-| `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` |
-| `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` |
-| `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `""` | `"\u{85}"` | `"\u{85}"` |
-| `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` |
-| `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` |
-| `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` |
-| `42` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` |
-| `-0` | `"-0"` | `"0"` | `"0"` | `"-0"` | `"0"` | `"-0.0"` | `"-0.0"` | `"0.0"` | `"0.0"` |
-| `1e+21` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1.0e+21"` | `"1.0e+21"` |
-| `1e-7` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-07"` | `"1e-07"` | `"1.0e-07"` | `"1.0e-07"` |
-| `0.1` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` |
-| `100` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` |
-| `NaN` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"nan"` | `"nan"` | `null` | `null` |
-| `Infinity` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"inf"` | `"inf"` | `"Inf"` | `"Inf"` |
-| `9007199254740993n` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` |
-| `true` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"True"` | `"True"` | — | — |
-| `false` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"False"` | `"False"` | — | — |
-| `null` | `""` | `"null"` | `"null"` | `""` | `"null"` | `"None"` | `"None"` | `null` | `null` |
-| `undefined` | `""` | `"undefined"` | `"undefined"` | `""` | `"undefined"` | — | — | — | — |
-| `[]` | `""` | `""` | `""` | `""` | `""` | `"[]"` | `"[]"` | — | — |
-| `["a", "b"]` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"['a', 'b']"` | `"['a', 'b']"` | — | — |
-| `{}` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"{}"` | `"{}"` | — | — |
-| `‹a symbol›` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | — | — | — | — |
-| `‹a Date›` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — | — | — |
-| `‹an object with a throwing toString›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `ZodError` | — | — | — | — |
+| Case | es-toolkit<br>`compat.toString(value)` | JS built-ins<br>`String(value)` | JS built-ins<br>`String(value).trim()` | lodash<br>`_.toString(value)` | zod<br>`z.coerce.string().parse(value)` | Python<br>`str(value)` | Python<br>`str(value).strip()` | MariaDB<br>`SELECT CAST(? AS CHAR)` | MariaDB<br>`SELECT TRIM(?)` | MongoDB<br>`{ $toString: value }` | MongoDB<br>`{ $trim: { input: value } }` | MySQL<br>`SELECT CAST(? AS CHAR)` | MySQL<br>`SELECT TRIM(?)` | PostgreSQL<br>`SELECT CAST(? AS text)` | PostgreSQL<br>`SELECT trim(?)` | SQL Server<br>`SELECT CAST(? AS nvarchar(max))` | SQL Server<br>`SELECT TRIM(?)` | SQLite<br>`SELECT CAST(? AS TEXT)` | SQLite<br>`SELECT trim(?)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` |
+| `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` |
+| `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` |
+| `"   "` | `"   "` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` |
+| `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` |
+| `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` |
+| `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `""` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` |
+| `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` |
+| `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` |
+| `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` |
+| `42` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | 💥 `Location50699` | `"42"` | `"42"` | `"42"` | 💥 `UndefinedFunction` | `"42"` | 💥 `Msg 8116` | `"42"` | `"42"` |
+| `-0` | `"-0"` | `"0"` | `"0"` | `"-0"` | `"0"` | `"-0.0"` | `"-0.0"` | `"0"` | `"0"` | `"-0"` | 💥 `Location50699` | `"-0"` | `"-0"` | `"-0"` | 💥 `UndefinedFunction` | `"-0"` | 💥 `Msg 8116` | `"0.0"` | `"0.0"` |
+| `1e+21` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e21"` | `"1e21"` | `"1e+21"` | 💥 `Location50699` | `"1e21"` | `"1e21"` | `"1e+21"` | 💥 `UndefinedFunction` | `"1e+021"` | 💥 `Msg 8116` | `"1.0e+21"` | `"1.0e+21"` |
+| `1e-7` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-07"` | `"1e-07"` | `"0.0000001"` | `"0.0000001"` | `"1e-07"` | 💥 `Location50699` | `"0.0000001"` | `"0.0000001"` | `"1e-07"` | 💥 `UndefinedFunction` | `"1e-007"` | 💥 `Msg 8116` | `"1.0e-07"` | `"1.0e-07"` |
+| `0.1` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | 💥 `Location50699` | `"0.1"` | `"0.1"` | `"0.1"` | 💥 `UndefinedFunction` | `"0.1"` | 💥 `Msg 8116` | `"0.1"` | `"0.1"` |
+| `100` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | 💥 `Location50699` | `"100"` | `"100"` | `"100"` | 💥 `UndefinedFunction` | `"100"` | 💥 `Msg 8116` | `"100"` | `"100"` |
+| `NaN` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"nan"` | `"nan"` | — | — | `"NaN"` | 💥 `Location50699` | — | — | `"NaN"` | 💥 `UndefinedFunction` | — | — | `null` | `null` |
+| `Infinity` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"inf"` | `"inf"` | — | — | `"Infinity"` | 💥 `Location50699` | — | — | `"Infinity"` | 💥 `UndefinedFunction` | — | — | `"Inf"` | `"Inf"` |
+| `9007199254740993n` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | 💥 `Location50699` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | 💥 `UndefinedFunction` | `"9007199254740993"` | 💥 `Msg 8116` | `"9007199254740993"` | `"9007199254740993"` |
+| `true` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"True"` | `"True"` | — | — | `"true"` | 💥 `Location50699` | — | — | `"true"` | 💥 `UndefinedFunction` | — | — | — | — |
+| `false` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"False"` | `"False"` | — | — | `"false"` | 💥 `Location50699` | — | — | `"false"` | 💥 `UndefinedFunction` | — | — | — | — |
+| `null` | `""` | `"null"` | `"null"` | `""` | `"null"` | `"None"` | `"None"` | `null` | `null` | `null` | `null` | `null` | `null` | `null` | `null` | `null` | `null` | `null` | `null` |
+| `undefined` | `""` | `"undefined"` | `"undefined"` | `""` | `"undefined"` | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `[]` | `""` | `""` | `""` | `""` | `""` | `"[]"` | `"[]"` | — | — | — | — | — | — | — | — | — | — | — | — |
+| `["a", "b"]` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"['a', 'b']"` | `"['a', 'b']"` | — | — | — | — | — | — | — | — | — | — | — | — |
+| `{}` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"{}"` | `"{}"` | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a symbol›` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a Date›` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹an object with a throwing toString›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
 
 ## Versions
 
@@ -81,5 +81,15 @@
 | zod<br>`z.coerce.string().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | Python<br>`str(value)` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
 | Python<br>`str(value).strip()` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
+| MariaDB<br>`SELECT CAST(? AS CHAR)` | 3 | `11.8.9` | `utf8mb4_uca1400_ai_ci` | `mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15` |
+| MariaDB<br>`SELECT TRIM(?)` | 3 | `11.8.9` | `utf8mb4_uca1400_ai_ci` | `mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15` |
+| MongoDB<br>`{ $toString: value }` | 3 | `8.3.11` | `simple` | `mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2` |
+| MongoDB<br>`{ $trim: { input: value } }` | 3 | `8.3.11` | `simple` | `mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2` |
+| MySQL<br>`SELECT CAST(? AS CHAR)` | 3 | `9.7.1` | `utf8mb4_0900_ai_ci` | `mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d` |
+| MySQL<br>`SELECT TRIM(?)` | 3 | `9.7.1` | `utf8mb4_0900_ai_ci` | `mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d` |
+| PostgreSQL<br>`SELECT CAST(? AS text)` | 3 | `18.6` | `C.UTF-8` | `postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c` |
+| PostgreSQL<br>`SELECT trim(?)` | 3 | `18.6` | `C.UTF-8` | `postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c` |
+| SQL Server<br>`SELECT CAST(? AS nvarchar(max))` | 3 | `17.0.5005.3` | `SQL_Latin1_General_CP1_CI_AS` | `mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726` |
+| SQL Server<br>`SELECT TRIM(?)` | 3 | `17.0.5005.3` | `SQL_Latin1_General_CP1_CI_AS` | `mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726` |
 | SQLite<br>`SELECT CAST(? AS TEXT)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
 | SQLite<br>`SELECT trim(?)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
