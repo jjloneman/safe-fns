@@ -8,8 +8,9 @@
  * - A data object with a `$` key is wrapped in `$object`, so data can never
  *   pass for a tag.
  *
- * - The Python twin lives in `research/adapters/research_codec.py`; the
- *   `codec` case file checks that both decode and re-encode identically.
+ * - Its twins live in `research/adapters/research_codec.*` (Python, Ruby,
+ *   PHP, Swift, PowerShell); the `codec` case file checks that every one
+ *   decodes and re-encodes identically.
  */
 
 /** How to decode a value, and what to call for the values only JS can build. */

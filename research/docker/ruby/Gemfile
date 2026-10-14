@@ -1,0 +1,6 @@
+# The Ruby adapter's libraries, and the formatter for its source. Every
+# version is exact and at least 7 days old, per the repo's moratorium.
+source "https://rubygems.org"
+
+gem "activemodel", "8.1.4"
+gem "syntax_tree", "6.3.0"
