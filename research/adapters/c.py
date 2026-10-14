@@ -4,8 +4,8 @@ Usage: `python3 c.py <case-file>...`, inside the `c` Compose service.
 
 - glibc's functions are called directly through `ctypes`.
 
-- libstdc++'s are called through `cxx_probes.cpp`, compiled at startup with
-  the image's own g++, so they run against the libstdc++ it ships.
+- libstdc++'s are called through `cxx_probes.cpp`, compiled into the `c`
+  image with its own g++, so they run against the libstdc++ it ships.
 
 - Only a string without NUL reaches C, encoded as UTF-8; anything else is
   `n/a`.
@@ -23,11 +23,8 @@ from pathlib import Path
 
 from research_codec import Probe, Tool, ToolError, run_adapter
 
-CXX_LIBRARY_PATH = Path("/tmp/cxx_probes.so")
-"""Where the C++ probes are compiled; the repo is mounted read-only."""
-
-CXX_SOURCE_PATH = Path(__file__).with_name("cxx_probes.cpp")
-"""The C++ probes' source, beside this adapter."""
+CXX_LIBRARY_PATH = Path("/opt/cxx_probes.so")
+"""Where `research/docker/c/Dockerfile` compiles the C++ probes."""
 
 ERROR_SIZE = 64
 """The room each C++ probe has to name its failure."""
@@ -57,31 +54,6 @@ def c_function(
         return function(value.encode(), *extra_args)
 
     return {"accepts": accepts_c_string, "call": call, "run": run}
-
-
-def compile_cxx_probes() -> ctypes.CDLL:
-    """Compile the C++ probes and load them.
-
-    Raises:
-        subprocess.CalledProcessError: when g++ fails, with its diagnostics
-            on stderr.
-    """
-    subprocess.run(
-        [
-            "g++",
-            "-std=c++20",
-            "-O2",
-            "-shared",
-            "-fPIC",
-            "-o",
-            str(CXX_LIBRARY_PATH),
-            str(CXX_SOURCE_PATH),
-        ],
-        check=True,
-        stdout=subprocess.DEVNULL,
-    )
-
-    return ctypes.CDLL(str(CXX_LIBRARY_PATH))
 
 
 def configure_libc() -> None:
@@ -139,9 +111,9 @@ def gxx_version() -> str:
 
 
 def tools() -> list[Tool]:
-    """Compile the C++ probes, then list glibc's and libstdc++'s probes."""
+    """Load the C++ probes, then list glibc's and libstdc++'s probes."""
     configure_libc()
-    cxx = compile_cxx_probes()
+    cxx = ctypes.CDLL(str(CXX_LIBRARY_PATH))
 
     return [
         {
