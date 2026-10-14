@@ -1,5 +1,9 @@
 # The XML Schema adapter's libraries, installed with `--require-hashes`, so a
 # re-uploaded file can't change what runs; Dependabot bumps both together.
+#
+# - Every transitive dependency is listed (`elementpath` has none of its own),
+#   so the image installs with `--no-deps`.
+# - Each version was the newest on PyPI at least 7 days old when pinned.
 elementpath==5.1.4 \
     --hash=sha256:3c912a9c41311ac5244c038867670d7c0b0fec0e444813608e5b846dbb3428ac \
     --hash=sha256:5ec8d7bb44b16c98414a6a95e20cb150f3cbfc3cac65edc14773288c7a937376
