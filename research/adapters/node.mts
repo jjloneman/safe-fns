@@ -13,13 +13,27 @@ import { readJsonFile } from "../../scripts/research/json.ts";
 import { parseCaseFile } from "../../scripts/research/results.ts";
 import { crossRealmInputs } from "../../test/cross-realm-inputs.ts";
 import { hostileInputs } from "../../test/hostile-inputs.ts";
+import { AJV_COERCE } from "./node/ajv.mts";
+import { CSV } from "./node/csv.mts";
+import { EFFECT } from "./node/effect.mts";
 import { ENVALID } from "./node/envalid.mts";
 import { ES_TOOLKIT } from "./node/es-toolkit.mts";
+import { HTML } from "./node/html.mts";
+import { INI } from "./node/ini.mts";
 import { IS_PLAIN_OBJ } from "./node/is-plain-obj.mts";
 import { JOI } from "./node/joi.mts";
 import { JS_BUILT_INS } from "./node/js-built-ins.mts";
+import { JSON_FORMAT } from "./node/json.mts";
 import { LODASH } from "./node/lodash.mts";
+import { RADASH } from "./node/radash.mts";
+import { RAMDA } from "./node/ramda.mts";
 import { REMEDA } from "./node/remeda.mts";
+import { SINDRESORHUS_IS } from "./node/sindresorhus-is.mts";
+import { TOML } from "./node/toml.mts";
+import { errorName } from "./node/tool.mts";
+import { UNDERSCORE } from "./node/underscore.mts";
+import { VALIBOT } from "./node/valibot.mts";
+import { VALIDATOR } from "./node/validator.mts";
 import { YAML_1_1, YAML_1_2_CORE } from "./node/yaml.mts";
 import { YN } from "./node/yn.mts";
 import { YUP } from "./node/yup.mts";
@@ -111,21 +125,20 @@ const TOOLS: readonly Tool[] = [
   ENVALID,
   JOI,
   YUP,
+  UNDERSCORE,
+  RAMDA,
+  RADASH,
+  EFFECT,
+  SINDRESORHUS_IS,
+  VALIBOT,
+  VALIDATOR,
+  JSON_FORMAT,
+  TOML,
+  CSV,
+  INI,
+  AJV_COERCE,
+  HTML,
 ];
-
-/** Name a thrown value's class, without trusting it to be inspectable. */
-function errorName(error: unknown): string {
-  try {
-    if (!(error instanceof Error)) {
-      return typeof error;
-    }
-
-    // Prefer `name`: some libraries throw instances of anonymous classes.
-    return error.name || error.constructor.name;
-  } catch {
-    return "an uninspectable error";
-  }
-}
 
 /** Build the value a `$js` tag names. */
 function resolveJs(name: string): unknown {

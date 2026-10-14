@@ -1,18 +1,9 @@
 import type { Tool } from "./tool.mts";
 
-import { isString } from "./tool.mts";
-
-/*
- * The JS built-ins column's `JSON.parse`, typed `unknown`.
- *
- * - Called bare on purpose: it's the function under test, so its throw is the
- *   outcome to record, not an error to wrap.
+/**
+ * The runtime's own globals, versioned by the Node release; `JSON.parse` is
+ * the JSON column's.
  */
-const callJsonParse = (text: string): unknown =>
-  // eslint-disable-next-line no-restricted-properties -- the function under test
-  JSON.parse(text);
-
-/** The runtime's own globals, versioned by the Node release. */
 export const JS_BUILT_INS: Tool = {
   functions: {
     codec: [{ call: "value", run: ([value]) => value }],
@@ -24,13 +15,6 @@ export const JS_BUILT_INS: Tool = {
       {
         call: "key in object",
         run: ([object, key]) => (key as string) in (object as object),
-      },
-    ],
-    safeParseBoolean: [
-      {
-        accepts: isString,
-        call: "JSON.parse(value)",
-        run: ([value]) => callJsonParse(value as string),
       },
     ],
     safeParseInteger: [

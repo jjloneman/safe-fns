@@ -63,6 +63,25 @@ export type Tool = {
 export const isString = ([value]: readonly unknown[]): boolean =>
   typeof value === "string";
 
+/**
+ * Name a thrown value's class, without trusting it to be inspectable.
+ *
+ * - Plain JavaScript once its types are stripped, so the Hermes adapter embeds
+ *   its source too; keep it free of imports and module-level names.
+ */
+export function errorName(error: unknown): string {
+  try {
+    if (!(error instanceof Error)) {
+      return typeof error;
+    }
+
+    // Prefer `name`: some libraries throw instances of anonymous classes.
+    return error.name || error.constructor.name;
+  } catch {
+    return "an uninspectable error";
+  }
+}
+
 /** Read an installed library's version. */
 export function packageVersion(name: string): string {
   // Read from disk: some packages leave `package.json` out of `exports`.
