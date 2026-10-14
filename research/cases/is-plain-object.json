@@ -1,0 +1,111 @@
+{
+  "cases": [
+    {
+      "args": [{}]
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        }
+      ]
+    },
+    {
+      "args": [[]]
+    },
+    {
+      "args": [null]
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ]
+    },
+    {
+      "args": ["x"]
+    },
+    {
+      "args": [1]
+    },
+    {
+      "args": [
+        {
+          "$js": "a null-prototype object"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm object"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "an empty cross-realm object"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a class instance"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with Symbol.toStringTag"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a Date"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "an empty Map"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm Map"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy of a plain object"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a function"
+        }
+      ]
+    }
+  ],
+  "function": "isPlainObject"
+}

@@ -26,6 +26,7 @@ Thanks for helping out! This guide covers the dev loop and how to add a function
   - The package supports Node 22 and newer, but the dev tools need a recent patch release.
 - **pnpm**, installed once globally.
   - `package.json`'s `packageManager` field decides the version that actually runs.
+- **A Docker-compatible runtime**, only for `pnpm research` (OrbStack, Colima, or Docker Desktop); see [research/README.md](research/README.md).
 
 ---
 
@@ -71,6 +72,7 @@ Every export is **total**: it never throws, and bad input returns a fallback the
 6. **Give it a size budget** in `size-limit.config.ts`.
 7. **Import it** in `test/consumer/types.ts`, so the consumer typecheck covers it.
 8. **Record any non-obvious semantic choice** in [docs/decisions/](docs/decisions/index.md).
+   - First add `research/cases/<kebab-name>.json` and run `pnpm research --function <name>`, so the record quotes measured comparisons; see [research/README.md](research/README.md).
 9. **Document it** in the README's [API section](README.md#-api).
 
 ---

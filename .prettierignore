@@ -2,3 +2,6 @@
 # so gitignored paths need no entry here.
 CHANGELOG.md
 pnpm-lock.yaml
+
+# Rewritten by `pnpm research` on every run.
+research/results/

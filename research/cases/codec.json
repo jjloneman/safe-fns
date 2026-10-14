@@ -1,0 +1,118 @@
+{
+  "cases": [
+    {
+      "args": ["x"]
+    },
+    {
+      "args": ["\u00a0"]
+    },
+    {
+      "args": [""]
+    },
+    {
+      "args": [0]
+    },
+    {
+      "args": [1.5]
+    },
+    {
+      "args": [-7]
+    },
+    {
+      "args": [
+        {
+          "$number": "-0"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$number": "Infinity"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$number": "-Infinity"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$bigint": "9007199254740993"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$bigint": "-1"
+        }
+      ]
+    },
+    {
+      "args": [true]
+    },
+    {
+      "args": [false]
+    },
+    {
+      "args": [null]
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ]
+    },
+    {
+      "args": [[]]
+    },
+    {
+      "args": [[1, "a", null]]
+    },
+    {
+      "args": [{}]
+    },
+    {
+      "args": [
+        {
+          "a": [
+            1,
+            {
+              "b": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$object": {
+            "$tag": "data"
+          }
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a symbol"
+        }
+      ]
+    }
+  ],
+  "function": "codec"
+}

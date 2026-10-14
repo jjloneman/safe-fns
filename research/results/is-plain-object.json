@@ -1,0 +1,490 @@
+{
+  "cases": [
+    [
+      {}
+    ],
+    [
+      {
+        "a": 1
+      }
+    ],
+    [
+      []
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      "x"
+    ],
+    [
+      1
+    ],
+    [
+      {
+        "$js": "a null-prototype object"
+      }
+    ],
+    [
+      {
+        "$js": "a cross-realm object"
+      }
+    ],
+    [
+      {
+        "$js": "an empty cross-realm object"
+      }
+    ],
+    [
+      {
+        "$js": "a class instance"
+      }
+    ],
+    [
+      {
+        "$js": "an object with Symbol.toStringTag"
+      }
+    ],
+    [
+      {
+        "$js": "a Date"
+      }
+    ],
+    [
+      {
+        "$js": "an empty Map"
+      }
+    ],
+    [
+      {
+        "$js": "a cross-realm Map"
+      }
+    ],
+    [
+      {
+        "$js": "a proxy of a plain object"
+      }
+    ],
+    [
+      {
+        "$js": "a revoked proxy"
+      }
+    ],
+    [
+      {
+        "$js": "a function"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "isPlainObject(value)",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "es-toolkit",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.52.0"
+    },
+    {
+      "call": "isPlainObject(value)",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "is-plain-obj",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.1.0"
+    },
+    {
+      "call": "_.isPlainObject(value)",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "lodash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.18.1"
+    },
+    {
+      "call": "isPlainObject(value)",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "remeda",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.51.0"
+    },
+    {
+      "call": "type(value) is dict",
+      "image": "python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.7"
+    }
+  ],
+  "function": "isPlainObject"
+}
