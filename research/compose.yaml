@@ -32,6 +32,27 @@ x-python-volumes: &python-volumes
   - ./cases:/work/research/cases:ro
 
 services:
+  # Checkstyle's `final` rules for the Java adapter (`adapters/jvm/
+  # checkstyle.xml`); it only reports, so both modes check.
+  #
+  # - `pull_policy: build`, like `ktfmt`, so a version bump is never masked by
+  #   a cached image.
+  checkstyle:
+    build:
+      context: docker/checkstyle
+    labels:
+      dev.safe-fns.research.check-args: >-
+        -c adapters/jvm/checkstyle.xml adapters/jvm/src
+      dev.safe-fns.research.format-args: >-
+        -c adapters/jvm/checkstyle.xml adapters/jvm/src
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters:/work/research/adapters:ro
+    working_dir: /work/research
+
   # CodeNarc's recommended rules through npm-groovy-lint, which formats too.
   # `--no-parse` skips its standalone compile, which can't see the Java and
   # Kotlin classes the Groovy files use.
