@@ -94,3 +94,71 @@ updates:
       - "📦 dependencies"
     open-pull-requests-limit: 10
     versioning-strategy: "increase"
+
+  # The research harness's own libraries (`research/`), a separate pnpm root.
+  - package-ecosystem: "npm"
+    directory: "/research"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+
+    # Past `research/pnpm-workspace.yaml`'s `minimumReleaseAge` floor.
+    cooldown:
+      default-days: 7
+
+    # One PR per week for every research bump, majors included: a library's
+    # new major is a result to record, not a breaking change to the package.
+    groups:
+      research:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"
+
+  # The research harness's pinned images: `image:` lines in
+  # `research/compose.yaml` here, and the Node Dockerfile's `FROM` below.
+  - package-ecosystem: "docker-compose"
+    directory: "/research"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+
+    # A tag can be re-pushed with new contents; waiting 7 days matches the npm
+    # moratorium.
+    cooldown:
+      default-days: 7
+
+    groups:
+      research-images:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"
+
+  - package-ecosystem: "docker"
+    directory: "/research/docker/node"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    labels:
+      - "📦 dependencies"
