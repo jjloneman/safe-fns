@@ -19,11 +19,15 @@ paths:
 - **Pin every image by version and digest**, and pick a tag last pushed at least 7 days ago; Docker Hub's `tag_last_pushed` is the date that counts, since tags get re-pushed.
 - **No host ports**, no named volumes, and read-only repo mounts for adapters; only a formatter service mounts `research/adapters` writable.
 - **Set the locale explicitly** (`LANG` / `LC_ALL` = `C.UTF-8`); a function that depends on locale gets explicit extra-locale cases rather than the host's.
+- **Set a service's `platform` in Compose, never on `FROM`.** The runner reads a built image's name from the Dockerfile's first `FROM`, so `FROM --platform=…` would be recorded as the image.
+- **Report the version a binary prints, not the one its download claims.** The Hermes v0.13.0 CLI tarball reports 0.12.0.
 - **Watch for distro-patched tools.** Python 3.11's image injects setuptools' `distutils` unless `SETUPTOOLS_USE_DISTUTILS=stdlib`; Debian's SQLite is older than upstream. The version column must name what really ran.
 
 ## 🔷 Code
 
-- `scripts/research/*.ts` follows the `scripts/` conventions; the Node adapter (`research/adapters/node.mts`) follows the TypeScript ones and is checked through `research/tsconfig.json`.
+- `scripts/research/*.ts` follows the `scripts/` conventions; the Node adapters (`research/adapters/*.mts` and `node/*.mts`) follow the TypeScript ones and are checked through `research/tsconfig.json`.
+- **One module per Node tool.** A library joins as `research/adapters/node/<tool>.mts`, exporting its `Tool`, and is listed in `node.mts`; don't grow the entry file.
+- **Hermes runs the TS encoder's own source.** `ENCODER_SOURCE` (in `codec.ts`) and `errorName` (in `node/tool.mts`) are embedded as text in the program Hermes runs, so keep them free of imports and module-level names, and of syntax Hermes lacks, such as classes.
 - **The two codecs are twins.** A change to `scripts/research/codec.ts` needs the same change in `research/adapters/research_codec.py`, and a `codec.json` case proving it.
 - **Non-TS adapters follow the same conventions** ([AGENTS.md → Every language](../../AGENTS.md#-every-language)): Python is fully annotated and documented, keyword-only past one parameter, and checked by `ruff-check`.
 - **Parse JSON only through `scripts/research/json.ts`** (`parseJson`, `readJsonFile`), whose errors name the file or process; ESLint's `no-restricted-properties` rejects a bare `JSON.parse` in research code. `JSON.stringify` needs no wrapper: it only ever sees encoded values, which hold nothing it throws on.

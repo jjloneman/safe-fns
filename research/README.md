@@ -14,6 +14,7 @@ the generated tables instead of summarizing other tools' docs.
 - [📚 Table of Contents](#-table-of-contents)
 - [🚀 Running it](#-running-it)
 - [🗂️ Layout](#️-layout)
+- [🧭 Profiles](#-profiles)
 - [📦 The case format](#-the-case-format)
 - [🧩 The adapter contract](#-the-adapter-contract)
 - [➕ Adding a function or a tool](#-adding-a-function-or-a-tool)
@@ -37,7 +38,7 @@ the generated tables instead of summarizing other tools' docs.
 | :-------------------------------- | :------------------------------------------------------------------------------ |
 | `pnpm research`                   | Runs every adapter over every case file                                         |
 | `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats |
-| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (`node`, `python`); repeats                 |
+| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (see [Profiles](#-profiles)); repeats       |
 | `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                   |
 | `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter             |
 | `pnpm research --format --check`  | Reports formatting drift without writing                                        |
@@ -54,22 +55,44 @@ the generated tables instead of summarizing other tools' docs.
 - `cases/<function>.json` — the inputs, in the portable format below.
   - `codec.json` isn't a function: every language adapter must return its values
     unchanged, which proves the codec twins agree.
-- `adapters/` — one adapter per language: `node.mts`, `python.py`, `sqlite.py`,
-  and `research_codec.py`, the Python codec.
+- `adapters/` — one adapter per language or runtime, plus the codec it needs:
+  - `node.mts`, the Node entry, with one module per tool under `node/`
+    (`node/<tool>.mts`) and their shared types in `node/tool.mts`;
+  - `hermes.mts`, which runs the JS built-ins' calls in Hermes;
+  - `python.py`, `sqlite.py`, and `research_codec.py`, the Python codec;
+  - `xml_schema.py` and its schema, `xml-schema.xsd`;
+  - `sources.mts`, which prints the docs-only columns from `sources/`.
 - `results/<function>.json` and `.md` — generated; never edit them by hand.
   - The Markdown has a tiers 0–2 summary for decision records, a by-outcome
     table for functions with few distinct results, the full table, and every
     column's version, locale, and image.
 - `sources/` — cached excerpts for tools that can't run in a container, each
-  with its URL, version or commit, and fetch date.
+  with its URL, version or commit, and fetch date, plus a `.json` of the
+  outcomes an excerpt settles (see [sources/README.md](sources/README.md)).
 - `compose.yaml` — every service; `docker/` holds Dockerfiles for images that
-  need a build step.
+  need a build step (`node`, `hermes`, `xml-schema`).
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` — the Node adapter's
   libraries, a separate pnpm root with the repo's 7-day moratorium.
 - `tsconfig.json` — a nested config, so the editor and ESLint resolve the Node
   adapter's imports from `research/node_modules`.
 - The host-side TypeScript lives in [scripts/research/](../scripts/research/):
   the runner, the codec, result merging, and the table generator.
+
+## 🧭 Profiles
+
+| Profile   | Services                        | Tools                                                                                                                                                                                                                        |
+| :-------- | :------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `node`    | `node`                          | JS built-ins; lodash, es-toolkit, remeda, Underscore, Ramda, radash, Effect, `@sindresorhus/is`, is-plain-obj; zod, valibot, joi, yup, envalid, yn, validator.js, Ajv; JSON, YAML, TOML, CSV, INI, and the HTML spec (jsdom) |
+| `hermes`  | `hermes`                        | Hermes, React Native's engine, running the JS built-ins' calls                                                                                                                                                               |
+| `python`  | `python`, `python311`, `sqlite` | Python's standard library, and SQLite                                                                                                                                                                                        |
+| `xml`     | `xml-schema`                    | XML Schema 1.0's built-in types, through `xmlschema`                                                                                                                                                                         |
+| `sources` | `sources`                       | Docs-only columns from `sources/` (Excel and Google Sheets are cached, but settle no current case)                                                                                                                           |
+| `format`  | `ruff`, `ruff-check`            | The container formatters (see [Formatters](#️-formatters))                                                                                                                                                                    |
+
+- The Hermes CLI release is x86_64-only, so `hermes` runs as `linux/amd64`
+  (emulated on an arm64 host), and its Dockerfile downloads a checksummed
+  release tarball that Dependabot can't track: bump it by hand from
+  [the releases page](https://github.com/facebook/hermes/releases).
 
 ## 📦 The case format
 
@@ -137,7 +160,10 @@ to stdout:
 - **A function:** add `cases/<kebab-name>.json`, add probes for it to each
   adapter that has an opinion, and run `pnpm research --function <name>`.
 - **A tool in an existing language:** add its library to `package.json` (a
-  version at least 7 days old) or its probes to the Python adapter, then rerun.
+  version at least 7 days old) and a `node/<tool>.mts` module listed in
+  `node.mts`, or its probes to the Python adapter, then rerun.
+- **A docs-only tool:** cache its excerpt as `sources/<tool>.md`, and once it
+  settles a case, transcribe the outcomes into `sources/<tool>.json`.
 - **A new language:**
   1. Add a service to `compose.yaml` with a pinned `image: name:X.Y.Z@sha256:…`
      whose tag was last pushed at least 7 days ago, the `adapter` role label, a
@@ -154,6 +180,7 @@ to stdout:
 | Language               | Formatter                                                                                                                                                |
 | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TypeScript, JSON, YAML | Prettier, through the repo's root config                                                                                                                 |
+| TOML, XML (`.xsd`)     | Prettier, through `prettier-plugin-toml` and `@prettier/plugin-xml` in the root config                                                                   |
 | Python                 | [Ruff](https://docs.astral.sh/ruff/) (`ruff.toml`): `ruff format` in the `ruff` service, `ruff check` (annotations, docstrings, imports) in `ruff-check` |
 
 - Every language follows the repo's conventions
