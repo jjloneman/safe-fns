@@ -1,7 +1,7 @@
 /*
 The Go adapter: runs each case file through the standard library.
 
-Usage: `go run . <case-file>...`, inside the `go` Compose service.
+Usage: `/opt/go-adapter <case-file>...`, the `go` Compose service.
 
   - A case decodes into the types `encoding/json` would give it (`string`,
     `bool`, `nil`, `[]any`, `map[string]any`), with integers as `int64` and

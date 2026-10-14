@@ -1,7 +1,7 @@
 /*
  * The .NET adapter: runs each case file through the base class library.
  *
- * - Usage: `dotnet run -- <case-file>...`, inside the `dotnet` Compose
+ * - Usage: `dotnet ResearchAdapter.dll <case-file>...`, the `dotnet` Compose
  *   service.
  *
  * - Every call runs under `InvariantCulture`; `double.Parse` also gets a

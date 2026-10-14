@@ -27,15 +27,15 @@ x-adapter-environment: &adapter-environment
   PYTHONDONTWRITEBYTECODE: "1"
   TZ: UTC
 
-# A compiled adapter's build context is its own directory, so its image copies
-# only that adapter's manifests, and `.dockerignore` (the Node image's) never
-# applies.
+# A compiled adapter's image: its build context is its own directory, so the
+# image copies only that adapter, and `.dockerignore` (the Node image's) never
+# applies. The language's formatter and linter run on the same image.
 x-dotnet-build: &dotnet-build
-  context: ./adapters/dotnet
+  context: adapters/dotnet
   dockerfile: ../../docker/dotnet/Dockerfile
 
 x-go-build: &go-build
-  context: ./adapters/go
+  context: adapters/go
   dockerfile: ../../docker/go/Dockerfile
 
 x-python-volumes: &python-volumes
@@ -43,12 +43,36 @@ x-python-volumes: &python-volumes
   - ./cases:/work/research/cases:ro
 
 x-rust-build: &rust-build
-  context: ./adapters/rust
+  context: adapters/rust
   dockerfile: ../../docker/rust/Dockerfile
 
 services:
+  # Checkstyle's `final` rules for the Java adapter (`adapters/jvm/
+  # checkstyle.xml`); it only reports, so both modes check.
+  #
+  # - `pull_policy: build`, like `ktfmt`, so a version bump is never masked by
+  #   a cached image.
+  checkstyle:
+    build:
+      context: docker/checkstyle
+    labels:
+      dev.safe-fns.research.check-args: >-
+        -c adapters/jvm/checkstyle.xml adapters/jvm/src
+      dev.safe-fns.research.format-args: >-
+        -c adapters/jvm/checkstyle.xml adapters/jvm/src
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters:/work/research/adapters:ro
+    working_dir: /work/research
+
   # Rust's linter, beside rustfmt. `--fix` exits 0 even when a denied lint
   # remains, so a fixing run (`--fix`) then checks like any other.
+  #
+  # - `pull_policy: build`, like every formatter built from a Dockerfile, so a
+  #   version bump is never masked by a cached image.
   clippy:
     build: *rust-build
     entrypoint:
@@ -66,9 +90,9 @@ services:
       dev.safe-fns.research.role: formatter
     network_mode: none
     profiles: ["format"]
+    pull_policy: build
     volumes:
       - ./adapters/rust:/work/research/adapters/rust
-    working_dir: /work/research/adapters/rust
 
   csharpier:
     build: *dotnet-build
@@ -80,40 +104,29 @@ services:
       dev.safe-fns.research.role: formatter
     network_mode: none
     profiles: ["format"]
+    pull_policy: build
     volumes:
       - ./adapters/dotnet:/work/research/adapters/dotnet
-    working_dir: /work/research/adapters/dotnet
 
-  # Builds, then runs. The build's messages go to stderr, which the runner
-  # reports on failure, and warnings never fail it: the analyzers are the
-  # `dotnet-build` lint's job.
+  # The .NET base class library, under the invariant culture plus a column per
+  # extra culture; the adapter is compiled into the image, not mounted.
   dotnet:
     build: *dotnet-build
-    entrypoint:
-      - sh
-      - -c
-      - >-
-        dotnet build --artifacts-path "$$RESEARCH_ARTIFACTS" --verbosity quiet
-        -p:TreatWarningsAsErrors=false 1>&2
-        && exec dotnet run --no-build --artifacts-path "$$RESEARCH_ARTIFACTS"
-        -- "$$@"
-      - dotnet
     environment: *adapter-environment
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["dotnet"]
     volumes:
-      - ./adapters/dotnet:/work/research/adapters/dotnet:ro
       - ./cases:/work/research/cases:ro
-    working_dir: /work/research/adapters/dotnet
 
-  # The .NET analyzers (`AnalysisLevel` in the project), which fail the build
-  # on any warning.
+  # The .NET analyzers (`AnalysisLevel` in the project), which fail this build
+  # on any warning; the build lands under `/tmp`, beside nothing it could
+  # shadow.
   dotnet-build:
     build: *dotnet-build
     entrypoint:
-      ["dotnet", "build", "--artifacts-path", "/opt/research-artifacts"]
+      ["dotnet", "build", "--artifacts-path", "/tmp/research-artifacts"]
     environment: *adapter-environment
     labels:
       dev.safe-fns.research.check-args: --verbosity quiet
@@ -121,22 +134,21 @@ services:
       dev.safe-fns.research.role: formatter
     network_mode: none
     profiles: ["format"]
+    pull_policy: build
     volumes:
       - ./adapters/dotnet:/work/research/adapters/dotnet
-    working_dir: /work/research/adapters/dotnet
 
+  # Go's standard library; the adapter is compiled into the image, not
+  # mounted.
   go:
     build: *go-build
-    entrypoint: ["go", "run", "."]
     environment: *adapter-environment
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["go"]
     volumes:
-      - ./adapters/go:/work/research/adapters/go:ro
       - ./cases:/work/research/cases:ro
-    working_dir: /work/research/adapters/go
 
   go-vet:
     build: *go-build
@@ -148,9 +160,9 @@ services:
       dev.safe-fns.research.role: formatter
     network_mode: none
     profiles: ["format"]
+    pull_policy: build
     volumes:
       - ./adapters/go:/work/research/adapters/go
-    working_dir: /work/research/adapters/go
 
   # `gofmt -l` lists unformatted files but still exits 0, so any output fails.
   gofmt:
@@ -168,9 +180,61 @@ services:
       dev.safe-fns.research.role: formatter
     network_mode: none
     profiles: ["format"]
+    pull_policy: build
     volumes:
       - ./adapters/go:/work/research/adapters/go
-    working_dir: /work/research/adapters/go
+
+  # CodeNarc's recommended rules through npm-groovy-lint, which formats too.
+  # `--no-parse` skips its standalone compile, which can't see the Java and
+  # Kotlin classes the Groovy files use.
+  groovy-lint:
+    image: nvuillam/npm-groovy-lint:v18.0.0@sha256:317deacf076dddf4329ac28cc73033aa137c781bfb035b2fb606edce8106836d
+    labels:
+      dev.safe-fns.research.check-args: >-
+        --noserver --no-parse --failon info adapters/jvm
+      dev.safe-fns.research.format-args: >-
+        --noserver --no-parse --format --failon info adapters/jvm
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    volumes:
+      - ./adapters:/work/research/adapters
+    working_dir: /work/research
+
+  # Java, Commons Lang, Guava, Spring, Kotlin, and Groovy in one JVM, so it
+  # starts once per run; the adapter is compiled into the image, not mounted.
+  jvm:
+    build:
+      context: adapters/jvm
+      dockerfile: ../../docker/jvm/Dockerfile
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["jvm"]
+    volumes:
+      - ./cases:/work/research/cases:ro
+
+  # ktfmt's Kotlin-lang style, at the 80 columns `.editorconfig` sets.
+  #
+  # - `pull_policy: build`, since `--format` runs it without the build step
+  #   adapters get; a cached image would otherwise outlive a version bump.
+  ktfmt:
+    build:
+      context: docker/ktfmt
+    labels:
+      dev.safe-fns.research.check-args: >-
+        --kotlinlang-style --enable-editorconfig --dry-run --set-exit-if-changed
+        adapters/jvm
+      dev.safe-fns.research.format-args: >-
+        --kotlinlang-style --enable-editorconfig adapters/jvm
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters:/work/research/adapters
+    working_dir: /work/research
 
   node:
     build:
@@ -240,26 +304,16 @@ services:
       - ./ruff.toml:/work/research/ruff.toml:ro
     working_dir: /work/research
 
-  # Builds once, then runs; dependencies were compiled into the image, so only
-  # the adapter itself compiles.
+  # Rust's standard library, decoding through `serde_json`; the adapter is
+  # compiled into the image, not mounted.
   rust:
     build: *rust-build
-    entrypoint:
-      - cargo
-      - run
-      - --quiet
-      - --locked
-      - --offline
-      - --manifest-path
-      - /work/research/adapters/rust/Cargo.toml
-      - --
     environment: *adapter-environment
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none
     profiles: ["rust"]
     volumes:
-      - ./adapters/rust:/work/research/adapters/rust:ro
       - ./cases:/work/research/cases:ro
 
   rustfmt:
@@ -272,9 +326,9 @@ services:
       dev.safe-fns.research.role: formatter
     network_mode: none
     profiles: ["format"]
+    pull_policy: build
     volumes:
       - ./adapters/rust:/work/research/adapters/rust
-    working_dir: /work/research/adapters/rust
 
   sqlite:
     entrypoint: ["python", "/work/research/adapters/sqlite.py"]

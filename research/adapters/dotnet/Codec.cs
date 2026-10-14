@@ -89,49 +89,11 @@ internal static partial class Codec
         IReadOnlyList<Tool> tools
     )
     {
-        var columns = new JsonArray();
-
-        foreach (var path in paths)
-        {
-            var caseFile = ReadCaseFile(path);
-            var function = caseFile["function"]!.GetValue<string>();
-            var cases = caseFile["cases"]!.AsArray();
-
-            foreach (var tool in tools)
-            {
-                if (!tool.Functions.TryGetValue(function, out var probes))
-                {
-                    continue;
-                }
-
-                foreach (var probe in probes)
-                {
-                    var outcomes = new JsonArray(
-                        cases
-                            .Select(testCase =>
-                                RunProbe(
-                                    args: testCase!["args"]!.AsArray(),
-                                    probe: probe
-                                )
-                            )
-                            .ToArray()
-                    );
-
-                    columns.Add(
-                        new JsonObject
-                        {
-                            ["call"] = probe.Call,
-                            ["function"] = function,
-                            ["locale"] = tool.Locale,
-                            ["name"] = tool.Name,
-                            ["outcomes"] = outcomes,
-                            ["tier"] = tool.Tier,
-                            ["version"] = tool.Version,
-                        }
-                    );
-                }
-            }
-        }
+        var columns = new JsonArray(
+            paths
+                .SelectMany(path => RunCaseFile(path: path, tools: tools))
+                .ToArray()
+        );
 
         Console.Out.Write(
             new JsonObject { ["columns"] = columns }.ToJsonString()
@@ -366,6 +328,40 @@ internal static partial class Codec
         {
             throw new InvalidDataException($"{path} isn't valid JSON", error);
         }
+    }
+
+    /// <summary>Run every tool's probes over one case file.</summary>
+    private static IEnumerable<JsonNode> RunCaseFile(
+        string path,
+        IReadOnlyList<Tool> tools
+    )
+    {
+        var caseFile = ReadCaseFile(path);
+        var function = caseFile["function"]!.GetValue<string>();
+        var cases = caseFile["cases"]!.AsArray();
+
+        return tools.SelectMany(tool =>
+            tool.Functions.GetValueOrDefault(function, [])
+                .Select(probe => new JsonObject
+                {
+                    ["call"] = probe.Call,
+                    ["function"] = function,
+                    ["locale"] = tool.Locale,
+                    ["name"] = tool.Name,
+                    ["outcomes"] = new JsonArray(
+                        cases
+                            .Select(testCase =>
+                                RunProbe(
+                                    args: testCase!["args"]!.AsArray(),
+                                    probe: probe
+                                )
+                            )
+                            .ToArray()
+                    ),
+                    ["tier"] = tool.Tier,
+                    ["version"] = tool.Version,
+                })
+        );
     }
 
     /// <summary>Run one probe on one case's encoded arguments.</summary>

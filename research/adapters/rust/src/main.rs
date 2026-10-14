@@ -1,6 +1,6 @@
 //! The Rust adapter: runs each case file through the standard library.
 //!
-//! Usage: `cargo run -- <case-file>...`, inside the `rust` Compose service.
+//! Usage: `research-adapter <case-file>...`, the `rust` Compose service.
 //!
 //! - A case decodes into the closest Rust type (`codec::Value`); a call that
 //!   can't take that type reports `n/a` rather than converting it first.

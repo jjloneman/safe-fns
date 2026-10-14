@@ -277,15 +277,28 @@ fn read_case_file(path: &str) -> (String, Vec<Vec<Json>>) {
 
 /// Run the case files named on the command line and print the columns.
 pub fn run_adapter(tools: &[Tool]) {
-    let mut columns = Vec::new();
+    let columns: Vec<Json> = env::args()
+        .skip(1)
+        .flat_map(|path| run_case_file(&path, tools))
+        .collect();
+    let output = json!({ "columns": columns });
 
-    for path in env::args().skip(1) {
-        let (function, cases) = read_case_file(&path);
+    // Every outcome is already encoded, so only a closed stdout can fail.
+    if writeln!(io::stdout(), "{output}").is_err() {
+        fail("couldn't write the columns to stdout");
+    }
+}
 
-        for tool in tools {
+/// Run every tool's probes over one case file.
+fn run_case_file(path: &str, tools: &[Tool]) -> Vec<Json> {
+    let (function, cases) = read_case_file(path);
+
+    tools
+        .iter()
+        .flat_map(|tool| {
             let probes = tool.functions.get(function.as_str());
 
-            for probe in probes.into_iter().flatten() {
+            probes.into_iter().flatten().map(|probe| {
                 let outcomes: Vec<Json> = cases
                     .iter()
                     .map(|args| {
@@ -295,7 +308,7 @@ pub fn run_adapter(tools: &[Tool]) {
                     })
                     .collect();
 
-                columns.push(json!({
+                json!({
                     "call": probe.call,
                     "function": function,
                     "locale": tool.locale,
@@ -303,17 +316,10 @@ pub fn run_adapter(tools: &[Tool]) {
                     "outcomes": outcomes,
                     "tier": tool.tier,
                     "version": tool.version,
-                }));
-            }
-        }
-    }
-
-    let output = json!({ "columns": columns });
-
-    // Every outcome is already encoded, so only a closed stdout can fail.
-    if writeln!(io::stdout(), "{output}").is_err() {
-        fail("couldn't write the columns to stdout");
-    }
+                })
+            })
+        })
+        .collect()
 }
 
 /// Run one probe on one case's encoded arguments.
