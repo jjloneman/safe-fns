@@ -19,12 +19,19 @@ paths:
 - **Pin every image by version and digest**, and pick a tag last pushed at least 7 days ago; Docker Hub's `tag_last_pushed` is the date that counts, since tags get re-pushed.
 - **No host ports**, no named volumes, and read-only repo mounts for adapters; only a formatter service mounts `research/adapters` writable.
 - **Set the locale explicitly** (`LANG` / `LC_ALL` = `C.UTF-8`); a function that depends on locale gets explicit extra-locale cases rather than the host's.
+- **A compiled adapter builds offline.** Nothing it compiles may need the network at run time:
+  - Go sets `GOTOOLCHAIN=local`, or it tries to download the toolchain `go.mod` names;
+  - .NET uses only the BCL, so restore needs no NuGet feed;
+  - Rust's crates are fetched and compiled into its image from the committed `Cargo.lock`, and run with `--locked --offline`.
+- **Cargo has no release-age floor.** Pick each locked crate by its crates.io publish date and pin a too-new one back with `cargo update -p <crate> --precise <version>`; Dependabot's cooldown covers later bumps.
+- **.NET's culture needs ICU and an explicit choice.** `C.UTF-8` maps to the invariant culture, so the adapter sets `InvariantCulture` itself and names each extra culture in its own column.
+- **A formatter must exit non-zero on drift.** `gofmt -l` lists unformatted files but exits 0, so its service wraps it in `sh -c` and fails on any output.
 - **Watch for distro-patched tools.** Python 3.11's image injects setuptools' `distutils` unless `SETUPTOOLS_USE_DISTUTILS=stdlib`; Debian's SQLite is older than upstream. The version column must name what really ran.
 
 ## 🔷 Code
 
 - `scripts/research/*.ts` follows the `scripts/` conventions; the Node adapter (`research/adapters/node.mts`) follows the TypeScript ones and is checked through `research/tsconfig.json`.
-- **The two codecs are twins.** A change to `scripts/research/codec.ts` needs the same change in `research/adapters/research_codec.py`, and a `codec.json` case proving it.
+- **The codecs are twins.** A change to `scripts/research/codec.ts` needs the same change in every adapter's codec — `research_codec.py`, `go/codec.go`, `rust/src/codec.rs`, and `dotnet/Codec.cs` under `research/adapters/` — and a `codec.json` case proving it.
 - **Non-TS adapters follow the same conventions** ([AGENTS.md → Every language](../../AGENTS.md#-every-language)): Python is fully annotated and documented, keyword-only past one parameter, and checked by `ruff-check`.
 - **Parse JSON only through `scripts/research/json.ts`** (`parseJson`, `readJsonFile`), whose errors name the file or process; ESLint's `no-restricted-properties` rejects a bare `JSON.parse` in research code. `JSON.stringify` needs no wrapper: it only ever sees encoded values, which hold nothing it throws on.
 - **Name every parameter object type and document every property**, with an `@example`, as AGENTS.md asks of all code.

@@ -31,16 +31,17 @@ the generated tables instead of summarizing other tools' docs.
 2. Run `pnpm research` from the repo root.
    - It builds and pulls the images it needs, runs every adapter in parallel,
      and rewrites `research/results/`.
-   - The first run pulls ~1–2 GB of images; later runs take seconds.
+   - The first run pulls and builds ~4 GB of images (the .NET, Go, and Rust
+     toolchains are most of it); later runs take seconds.
 
-| Command                           | What it does                                                                    |
-| :-------------------------------- | :------------------------------------------------------------------------------ |
-| `pnpm research`                   | Runs every adapter over every case file                                         |
-| `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats |
-| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (`node`, `python`); repeats                 |
-| `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                   |
-| `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter             |
-| `pnpm research --format --check`  | Reports formatting drift without writing                                        |
+| Command                           | What it does                                                                            |
+| :-------------------------------- | :-------------------------------------------------------------------------------------- |
+| `pnpm research`                   | Runs every adapter over every case file                                                 |
+| `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats         |
+| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (`dotnet`, `go`, `node`, `python`, `rust`); repeats |
+| `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                           |
+| `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter                     |
+| `pnpm research --format --check`  | Reports formatting drift without writing                                                |
 
 - Results are byte-identical across runs and concurrency levels: columns are
   sorted, keys are sorted, and nothing records a timestamp.
@@ -56,6 +57,11 @@ the generated tables instead of summarizing other tools' docs.
     unchanged, which proves the codec twins agree.
 - `adapters/` — one adapter per language: `node.mts`, `python.py`, `sqlite.py`,
   and `research_codec.py`, the Python codec.
+  - A compiled language gets a directory holding its project and its codec twin:
+    `dotnet/` (`Codec.cs`), `go/` (`codec.go`), and `rust/` (`src/codec.rs`).
+  - Each one builds inside its container at run time, outside the read-only
+    mount, with nothing fetched: Go and .NET use only their standard libraries,
+    and Rust's locked crates are compiled into its image.
 - `results/<function>.json` and `.md` — generated; never edit them by hand.
   - The Markdown has a tiers 0–2 summary for decision records, a by-outcome
     table for functions with few distinct results, the full table, and every
@@ -63,7 +69,8 @@ the generated tables instead of summarizing other tools' docs.
 - `sources/` — cached excerpts for tools that can't run in a container, each
   with its URL, version or commit, and fetch date.
 - `compose.yaml` — every service; `docker/` holds Dockerfiles for images that
-  need a build step.
+  need a build step (`node`, `dotnet` for CSharpier and the restore, `go` for
+  the prebuilt standard library, `rust` for rustfmt, Clippy, and the crates).
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` — the Node adapter's
   libraries, a separate pnpm root with the repo's 7-day moratorium.
 - `tsconfig.json` — a nested config, so the editor and ESLint resolve the Node
@@ -147,7 +154,9 @@ to stdout:
   3. Add the language's formatter as a `formatter` service with `format-args`
      and `check-args` labels (see `ruff`), or a Prettier plugin in
      `package.json`.
-  4. Add a Dependabot entry if the image comes from a Dockerfile.
+  4. Add a Dependabot entry if the image comes from a Dockerfile, and one for
+     any manifest the adapter or its formatter installs from (`Cargo.lock`,
+     `dotnet-tools.json`), each with the 7-day cooldown.
 
 ## 🖌️ Formatters
 
@@ -155,10 +164,15 @@ to stdout:
 | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TypeScript, JSON, YAML | Prettier, through the repo's root config                                                                                                                 |
 | Python                 | [Ruff](https://docs.astral.sh/ruff/) (`ruff.toml`): `ruff format` in the `ruff` service, `ruff check` (annotations, docstrings, imports) in `ruff-check` |
+| C#                     | [CSharpier](https://csharpier.com) (`.csharpierrc.json`) in `csharpier`; the .NET analyzers (`AnalysisLevel`, warnings as errors) in `dotnet-build`      |
+| Go                     | `gofmt` in `gofmt`, `go vet` in `go-vet`                                                                                                                 |
+| Rust                   | rustfmt (`rustfmt.toml`) in `rustfmt`; [Clippy](https://doc.rust-lang.org/clippy/) (`pedantic`, warnings denied) in `clippy`                             |
 
 - Every language follows the repo's conventions
   ([AGENTS.md → Every language](../AGENTS.md#-every-language)); each formatter
   and linter is configured to enforce what it can.
+- Neither `gofmt` nor any Go tool wraps lines, so Go's 80 columns are kept by
+  hand.
 - `--format` runs the container formatters one at a time, since `ruff format`
   and `ruff check --fix` can rewrite the same file; `--format --check` runs them
   in parallel.
