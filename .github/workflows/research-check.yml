@@ -1,0 +1,52 @@
+name: 🔬 Research check
+
+# Only when the harness or something it depends on changes: `research/` is its
+# own installed package, so checking it costs an extra install that other PRs
+# have no reason to pay.
+#
+# - The Node adapter imports the hostile and cross-realm test inputs, and
+#   `research/tsconfig.json` extends the root config.
+#
+# - The root manifest, lockfile, and lint and format configs decide which
+#   ESLint, TypeScript, and Prettier check `research/`, and how.
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/research-check.yml"
+      - "eslint.config.ts"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "prettier.config.ts"
+      - "research/**"
+      - "scripts/research/**"
+      - "test/cross-realm-inputs.ts"
+      - "test/hostile-inputs.ts"
+      - "tsconfig.json"
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+# Nothing by default; each job grants only what it uses.
+permissions: {}
+
+jobs:
+  check:
+    name: 🔬 Lint, typecheck & format research
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+
+      # With `research/node_modules` present, the root ESLint config lints the
+      # adapters too, and the nested tsconfig resolves their imports.
+      - run: pnpm --dir research install --frozen-lockfile
+      - run: pnpm exec eslint research scripts/research
+      - run: pnpm exec tsc --project research
+
+      # Prettier plus each language's formatter, in its pinned container.
+      - run: pnpm research --format --check

@@ -1,0 +1,18 @@
+# Ruff formats and lints the Python adapters to the repo's conventions, through
+# `pnpm research --format` (the `ruff` and `ruff-check` Compose services).
+
+# 80 columns, like Prettier.
+line-length = 80
+
+# The oldest Python an adapter runs on (`python311`).
+target-version = "py311"
+
+[lint]
+# - `ANN`: annotations wherever a type can't be inferred.
+# - `B`, `E`, `F`, `UP`: likely bugs, style, unused names, modern syntax.
+# - `D`: a docstring on every module, class, and function.
+# - `I`: sorted imports.
+select = ["ANN", "B", "D", "E", "F", "I", "UP"]
+
+[lint.pydocstyle]
+convention = "google"

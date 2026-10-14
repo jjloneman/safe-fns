@@ -1,0 +1,153 @@
+{
+  "cases": [
+    {
+      "args": [null]
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ]
+    },
+    {
+      "args": [""]
+    },
+    {
+      "args": [" "]
+    },
+    {
+      "args": ["\u00a0"]
+    },
+    {
+      "args": ["\u2800"]
+    },
+    {
+      "args": ["a"]
+    },
+    {
+      "args": [0]
+    },
+    {
+      "args": [false]
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        }
+      ]
+    },
+    {
+      "args": [[]]
+    },
+    {
+      "args": [[0]]
+    },
+    {
+      "args": [[null]]
+    },
+    {
+      "args": [{}]
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "length": 0
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "size": 0
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "an empty Map"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a Map with an entry"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "an empty Set"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a null-prototype object"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "an empty URLSearchParams"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a URLSearchParams with an entry"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a Date"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a function"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy whose ownKeys trap throws"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm Map"
+        }
+      ]
+    }
+  ],
+  "function": "isSafeEmpty"
+}

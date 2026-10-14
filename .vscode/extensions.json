@@ -1,0 +1,35 @@
+{
+  // VS Code offers to install these when the repo is opened; each one serves a
+  // tool or file type the repo already uses. Sorted by extension ID.
+  "recommendations": [
+    // Ruff - formats and lints the Python adapters with research/ruff.toml
+    "charliermarsh.ruff",
+
+    // ESLint - inline errors and fix-on-save from eslint.config.ts
+    "dbaeumer.vscode-eslint",
+
+    // Docker DX - Dockerfile and Compose completion, hover, and build checks
+    "docker.docker",
+
+    // Prettier - format-on-save with prettier.config.ts and its plugins
+    "esbenp.prettier-vscode",
+
+    // GitHub Actions - validates and completes the workflow files
+    "github.vscode-github-actions",
+
+    // Container Tools - container and image explorer, logs, Compose commands
+    "ms-azuretools.vscode-containers",
+
+    // Python - Python language support; Pylance types the adapters' annotations
+    "ms-python.python",
+
+    // YAML - schema validation for compose.yaml, dependabot.yml, issue forms
+    "redhat.vscode-yaml",
+
+    // Even Better TOML - syntax and validation for research/ruff.toml
+    "tamasfe.even-better-toml",
+
+    // Vitest - run and debug tests from the gutter, in both test projects
+    "vitest.explorer"
+  ]
+}

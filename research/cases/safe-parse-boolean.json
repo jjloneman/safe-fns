@@ -1,0 +1,299 @@
+{
+  "cases": [
+    {
+      "args": ["true"],
+      "expected": true
+    },
+    {
+      "args": ["TRUE"],
+      "expected": true
+    },
+    {
+      "args": ["True"],
+      "expected": true
+    },
+    {
+      "args": ["t"],
+      "expected": true
+    },
+    {
+      "args": ["T"],
+      "expected": true
+    },
+    {
+      "args": ["yes"],
+      "expected": true
+    },
+    {
+      "args": ["YES"],
+      "expected": true
+    },
+    {
+      "args": ["Yes"],
+      "expected": true
+    },
+    {
+      "args": ["y"],
+      "expected": true
+    },
+    {
+      "args": ["Y"],
+      "expected": true
+    },
+    {
+      "args": ["on"],
+      "expected": true
+    },
+    {
+      "args": ["ON"],
+      "expected": true
+    },
+    {
+      "args": ["1"],
+      "expected": true
+    },
+    {
+      "args": ["false"],
+      "expected": false
+    },
+    {
+      "args": ["FALSE"],
+      "expected": false
+    },
+    {
+      "args": ["False"],
+      "expected": false
+    },
+    {
+      "args": ["f"],
+      "expected": false
+    },
+    {
+      "args": ["F"],
+      "expected": false
+    },
+    {
+      "args": ["no"],
+      "expected": false
+    },
+    {
+      "args": ["NO"],
+      "expected": false
+    },
+    {
+      "args": ["n"],
+      "expected": false
+    },
+    {
+      "args": ["N"],
+      "expected": false
+    },
+    {
+      "args": ["off"],
+      "expected": false
+    },
+    {
+      "args": ["OFF"],
+      "expected": false
+    },
+    {
+      "args": ["0"],
+      "expected": false
+    },
+    {
+      "args": [" yes "],
+      "expected": true
+    },
+    {
+      "args": ["\tno\n"],
+      "expected": false
+    },
+    {
+      "args": ["\u00a0true\u00a0"],
+      "expected": true
+    },
+    {
+      "args": ["true\u200b"],
+      "expected": true
+    },
+    {
+      "args": ["enabled"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["disabled"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["tru"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["2"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["-1"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["1.0"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["-0"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["01"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["0x1"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [""],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["   "],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["yes please"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["\uff54\uff52\uff55\uff45"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [true],
+      "expected": true
+    },
+    {
+      "args": [false],
+      "expected": false
+    },
+    {
+      "args": [1],
+      "expected": true
+    },
+    {
+      "args": [0],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$number": "-0"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [1.5],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [2],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$bigint": "1"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$bigint": "0"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$bigint": "2"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [[]],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [{}],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "safeParseBoolean"
+}

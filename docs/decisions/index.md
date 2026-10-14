@@ -41,3 +41,5 @@ verified: { by: human:jjloneman, at: 2026-09-28T09:00:00Z }
   - Absent means unreviewed.
   - `human:jjloneman` means the repo owner signed off — treat it as settled, and change it only with their agreement.
   - Agents never add a `verified` entry.
+
+A decision that compares other tools quotes the generated `research/results/<function>.md` from `pnpm research` ([research/README.md](../../research/README.md)), rather than a hand-built table.

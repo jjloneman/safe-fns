@@ -81,6 +81,7 @@
     "okf:verify": "node scripts/okf-verify.ts",
     "prepare": "git config core.hooksPath .githooks || true",
     "prune-branches": "git fetch --prune && git-removed-branches --force --prune",
+    "research": "node scripts/research/run.ts",
     "size": "pnpm build && size-limit --config size-limit.config.ts",
     "test": "vitest run",
     "test:consumer": "pnpm build && node scripts/test-consumer.ts",

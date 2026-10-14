@@ -1,0 +1,1856 @@
+{
+  "cases": [
+    [
+      "42"
+    ],
+    [
+      "-42"
+    ],
+    [
+      "+42"
+    ],
+    [
+      "0"
+    ],
+    [
+      "-0"
+    ],
+    [
+      "1.5"
+    ],
+    [
+      " 1.5 "
+    ],
+    [
+      " 42 "
+    ],
+    [
+      ".5"
+    ],
+    [
+      "5."
+    ],
+    [
+      "1e3"
+    ],
+    [
+      "1E3"
+    ],
+    [
+      "1e-400"
+    ],
+    [
+      "1e400"
+    ],
+    [
+      "0x1A"
+    ],
+    [
+      "0b11"
+    ],
+    [
+      "0o17"
+    ],
+    [
+      "1_000"
+    ],
+    [
+      "1,000"
+    ],
+    [
+      "Infinity"
+    ],
+    [
+      "-Infinity"
+    ],
+    [
+      "NaN"
+    ],
+    [
+      "inf"
+    ],
+    [
+      ""
+    ],
+    [
+      "   "
+    ],
+    [
+      "12px"
+    ],
+    [
+      "٤٢"
+    ],
+    [
+      "１２"
+    ],
+    [
+      42
+    ],
+    [
+      1.5
+    ],
+    [
+      {
+        "$number": "-0"
+      }
+    ],
+    [
+      {
+        "$number": "NaN"
+      }
+    ],
+    [
+      {
+        "$number": "Infinity"
+      }
+    ],
+    [
+      true
+    ],
+    [
+      false
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      {
+        "$bigint": "10"
+      }
+    ],
+    [
+      []
+    ],
+    [
+      [
+        "7"
+      ]
+    ],
+    [
+      {}
+    ]
+  ],
+  "columns": [
+    {
+      "call": "compat.toNumber(value)",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "es-toolkit",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.52.0"
+    },
+    {
+      "call": "Number.parseFloat(value)",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.9.0"
+    },
+    {
+      "call": "Number(value)",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.9.0"
+    },
+    {
+      "call": "_.toNumber(value)",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "lodash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.18.1"
+    },
+    {
+      "call": "z.coerce.number().parse(value)",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "zod",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.6.5"
+    },
+    {
+      "call": "float(value)",
+      "image": "python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.7"
+    },
+    {
+      "call": "SELECT CAST(? AS REAL)",
+      "image": "python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56",
+      "locale": "C.UTF-8",
+      "name": "SQLite",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 12
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "sqlite",
+      "tier": 3,
+      "version": "3.40.1"
+    },
+    {
+      "call": "parse(value, { version: \"1.1\" })",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "YAML 1.1",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": " 42 "
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "value",
+          "value": "0o17"
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": "1,000"
+        },
+        {
+          "kind": "value",
+          "value": "Infinity"
+        },
+        {
+          "kind": "value",
+          "value": "-Infinity"
+        },
+        {
+          "kind": "value",
+          "value": "NaN"
+        },
+        {
+          "kind": "value",
+          "value": "inf"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "12px"
+        },
+        {
+          "kind": "value",
+          "value": "٤٢"
+        },
+        {
+          "kind": "value",
+          "value": "１２"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 3,
+      "version": "2.9.1"
+    },
+    {
+      "call": "parse(value)",
+      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "locale": "en-US",
+      "name": "YAML 1.2 core",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": " 42 "
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 26
+        },
+        {
+          "kind": "value",
+          "value": "0b11"
+        },
+        {
+          "kind": "value",
+          "value": 15
+        },
+        {
+          "kind": "value",
+          "value": "1_000"
+        },
+        {
+          "kind": "value",
+          "value": "1,000"
+        },
+        {
+          "kind": "value",
+          "value": "Infinity"
+        },
+        {
+          "kind": "value",
+          "value": "-Infinity"
+        },
+        {
+          "kind": "value",
+          "value": "NaN"
+        },
+        {
+          "kind": "value",
+          "value": "inf"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "12px"
+        },
+        {
+          "kind": "value",
+          "value": "٤٢"
+        },
+        {
+          "kind": "value",
+          "value": "１２"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 3,
+      "version": "2.9.1"
+    }
+  ],
+  "function": "safeParseNumber"
+}

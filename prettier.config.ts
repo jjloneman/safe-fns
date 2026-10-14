@@ -26,6 +26,17 @@ const config: Config = {
       files: ["*.jsonc", "tsconfig.json"],
       options: { trailingComma: "none" },
     },
+
+    /*
+     * The research docs wrap prose at 80 columns, like the code beside them.
+     *
+     * - Markdown joins wrapped lines back into one paragraph, so the rendered
+     *   page is unchanged; tables and code blocks never wrap.
+     */
+    {
+      files: "research/**/*.md",
+      options: { proseWrap: "always" },
+    },
   ],
   plugins: ["prettier-plugin-packagejson", "prettier-plugin-sh"],
   trailingComma: "es5",

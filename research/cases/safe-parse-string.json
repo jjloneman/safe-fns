@@ -1,0 +1,124 @@
+{
+  "cases": [
+    {
+      "args": ["hello"]
+    },
+    {
+      "args": ["  hi  "]
+    },
+    {
+      "args": [""]
+    },
+    {
+      "args": ["   "]
+    },
+    {
+      "args": ["\t\n"]
+    },
+    {
+      "args": ["\u00a0"]
+    },
+    {
+      "args": ["\u0085"]
+    },
+    {
+      "args": ["\ufeff"]
+    },
+    {
+      "args": ["\u200b"]
+    },
+    {
+      "args": ["\u2800"]
+    },
+    {
+      "args": [42]
+    },
+    {
+      "args": [
+        {
+          "$number": "-0"
+        }
+      ]
+    },
+    {
+      "args": [1e21]
+    },
+    {
+      "args": [1e-7]
+    },
+    {
+      "args": [0.1]
+    },
+    {
+      "args": [100]
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$number": "Infinity"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$bigint": "9007199254740993"
+        }
+      ]
+    },
+    {
+      "args": [true]
+    },
+    {
+      "args": [false]
+    },
+    {
+      "args": [null]
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ]
+    },
+    {
+      "args": [[]]
+    },
+    {
+      "args": [["a", "b"]]
+    },
+    {
+      "args": [{}]
+    },
+    {
+      "args": [
+        {
+          "$js": "a symbol"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a Date"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing toString"
+        }
+      ]
+    }
+  ],
+  "function": "safeParseString"
+}
