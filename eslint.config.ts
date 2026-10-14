@@ -6,6 +6,7 @@ import perfectionistPlugin from "eslint-plugin-perfectionist";
 import tsdocPlugin from "eslint-plugin-tsdoc";
 import ymlPlugin from "eslint-plugin-yml";
 import { defineConfig, globalIgnores, includeIgnoreFile } from "eslint/config";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import { configs as tsConfigs } from "typescript-eslint";
 
@@ -49,8 +50,26 @@ const config: Linter.Config[] = defineConfig(
    */
   includeIgnoreFile(path.resolve(import.meta.dirname, ".gitignore")),
 
-  // Tracked, but generated: pnpm rewrites the lockfile on every install.
-  globalIgnores(["pnpm-lock.yaml"]),
+  /*
+   * Tracked, but generated.
+   *
+   * - pnpm rewrites a lockfile on every install; `research/` has its own.
+   *
+   * - `pnpm research` rewrites `research/results/` on every run.
+   */
+  globalIgnores(["**/pnpm-lock.yaml", "research/results/"]),
+
+  /*
+   * The research adapters import `research/`'s own libraries, which only
+   * `pnpm --dir research install` provides.
+   *
+   * - Without that install every import is unresolved, so typed rules would
+   *   fail; they're skipped instead, and `research-check.yml` installs and
+   *   lints them whenever `research/` changes.
+   */
+  ...(existsSync(path.resolve(import.meta.dirname, "research/node_modules"))
+    ? []
+    : [globalIgnores(["research/**/*.mts"])]),
 
   /*
    * TypeScript, with the full typed presets.
@@ -75,7 +94,7 @@ const config: Linter.Config[] = defineConfig(
       tsConfigs.stylisticTypeChecked,
       perfectionistPlugin.configs["recommended-alphabetical"],
     ],
-    files: ["**/*.ts"],
+    files: ["**/*.mts", "**/*.ts"],
     languageOptions: {
       parserOptions: {
         projectService: true,
