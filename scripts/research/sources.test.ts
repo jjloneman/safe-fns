@@ -9,15 +9,17 @@ const CASE_FILE: CaseFile = {
   function: "safeParseNumber",
 };
 
-const cachedColumn = (cases: unknown[]): Record<string, unknown> => ({
-  call: "VALUE(value)",
-  cases,
-  function: "safeParseNumber",
-  locale: "en-US",
-  name: "Excel",
-  tier: 3,
-  version: "Microsoft 365",
-});
+function cachedColumn(cases: unknown[]): Record<string, unknown> {
+  return {
+    call: "VALUE(value)",
+    cases,
+    function: "safeParseNumber",
+    locale: "en-US",
+    name: "Excel",
+    tier: 3,
+    version: "Microsoft 365",
+  };
+}
 
 describe("checkSourceFunctions", () => {
   test("accepts columns whose functions have case files", () => {

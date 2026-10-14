@@ -5,9 +5,12 @@ import type { Tool } from "./tool.mts";
 import { isString, packageVersion } from "./tool.mts";
 
 // Typed wrappers: the yaml library returns `any`.
-const parseYaml11 = (text: string): unknown =>
-  parseYaml(text, { version: "1.1" });
-const parseYaml12 = (text: string): unknown => parseYaml(text);
+function parseYaml11(text: string): unknown {
+  return parseYaml(text, { version: "1.1" });
+}
+function parseYaml12(text: string): unknown {
+  return parseYaml(text);
+}
 
 /** YAML 1.1's scalars, with its wide boolean set (`yes`, `on`, `y`). */
 export const YAML_1_1: Tool = {

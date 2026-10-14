@@ -5,7 +5,9 @@ import type { Probe, Tool } from "./tool.mts";
 import { isString, packageVersion } from "./tool.mts";
 
 // Typed wrapper: ini returns a loosely typed record.
-const parseIniValue = (text: string): unknown => parse(`v = ${text}`).v;
+function parseIniValue(text: string): unknown {
+  return parse(`v = ${text}`).v;
+}
 
 /** A case as the value of a one-key INI document. */
 const INI_VALUE: Probe = {

@@ -24,7 +24,7 @@ import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
-type ResolutionMode = (typeof resolutionModes)[keyof typeof resolutionModes];
+type ResolutionMode = (typeof RESOLUTION_MODES)[keyof typeof RESOLUTION_MODES];
 
 type TypeScriptVersion = {
   /** The dev-dependency alias the compiler is installed under. */
@@ -34,8 +34,8 @@ type TypeScriptVersion = {
   resolutionModes: readonly ResolutionMode[];
 };
 
-const repoRoot = path.resolve(import.meta.dirname, "..");
-const fixtureDir = path.join(repoRoot, "test/consumer");
+const REPO_ROOT = path.resolve(import.meta.dirname, "..");
+const FIXTURE_DIR = path.join(REPO_ROOT, "test/consumer");
 
 /*
  * Each mode compiles the fixture under the file extensions that mode treats
@@ -44,7 +44,7 @@ const fixtureDir = path.join(repoRoot, "test/consumer");
  * - `node16` checks both a CommonJS (`.cts`) and an ES module (`.mts`)
  *   importer, since each resolves a different `exports` condition.
  */
-const resolutionModes = {
+const RESOLUTION_MODES = {
   bundler: {
     files: ["types.ts"],
     flags: ["--module", "esnext", "--moduleResolution", "bundler"],
@@ -62,7 +62,7 @@ const resolutionModes = {
   },
 } as const;
 
-const { bundler, node10, node16 } = resolutionModes;
+const { bundler, node10, node16 } = RESOLUTION_MODES;
 
 /*
  * The consumer TypeScript support matrix.
@@ -71,7 +71,7 @@ const { bundler, node10, node16 } = resolutionModes;
  *
  * - `node10` resolution is deprecated in 6.0 and removed in 7.0.
  */
-const typeScriptVersions: TypeScriptVersion[] = [
+const TYPESCRIPT_VERSIONS: TypeScriptVersion[] = [
   { packageName: "typescript-4.9", resolutionModes: [node10, node16] },
   { packageName: "typescript-5.0", resolutionModes: [bundler, node10, node16] },
   { packageName: "typescript-5.4", resolutionModes: [bundler, node10, node16] },
@@ -80,7 +80,7 @@ const typeScriptVersions: TypeScriptVersion[] = [
   { packageName: "typescript-7.0", resolutionModes: [bundler, node16] },
 ];
 
-const sharedCompilerFlags = [
+const SHARED_COMPILER_FLAGS = [
   "--noEmit",
   "--strict",
   "--target",
@@ -89,17 +89,17 @@ const sharedCompilerFlags = [
   "es2022",
 ];
 
-const repoRequire = createRequire(import.meta.url);
+const REPO_REQUIRE = createRequire(import.meta.url);
 
 function copyFixtures(consumerDir: string): void {
-  const typesFixture = path.join(fixtureDir, "types.ts");
+  const typesFixture = path.join(FIXTURE_DIR, "types.ts");
 
   for (const file of ["types.ts", "types.cts", "types.mts"]) {
     copyFileSync(typesFixture, path.join(consumerDir, file));
   }
 
   copyFileSync(
-    path.join(fixtureDir, "smoke.ts"),
+    path.join(FIXTURE_DIR, "smoke.ts"),
     path.join(consumerDir, "smoke.ts")
   );
 
@@ -115,7 +115,7 @@ function packInto(consumerDir: string): void {
   const installDir = path.join(consumerDir, "node_modules/safe-fns");
 
   mkdirSync(installDir, { recursive: true });
-  run("pnpm", ["pack", "--pack-destination", packDir], repoRoot);
+  run("pnpm", ["pack", "--pack-destination", packDir], REPO_ROOT);
 
   const [tarball] = readdirSync(packDir);
 
@@ -150,12 +150,12 @@ function run(command: string, args: string[], cwd: string): void {
 }
 
 function typecheck(consumerDir: string): void {
-  for (const { packageName, resolutionModes: modes } of typeScriptVersions) {
+  for (const { packageName, resolutionModes: modes } of TYPESCRIPT_VERSIONS) {
     const compilerPath = path.join(
-      path.dirname(repoRequire.resolve(`${packageName}/package.json`)),
+      path.dirname(REPO_REQUIRE.resolve(`${packageName}/package.json`)),
       "bin/tsc"
     );
-    const { version } = repoRequire(`${packageName}/package.json`) as {
+    const { version } = REPO_REQUIRE(`${packageName}/package.json`) as {
       version: string;
     };
 
@@ -170,7 +170,7 @@ function typecheck(consumerDir: string): void {
         process.execPath,
         [
           compilerPath,
-          ...sharedCompilerFlags,
+          ...SHARED_COMPILER_FLAGS,
           ...flags,
           ...deprecationFlags,
           ...files,
@@ -181,14 +181,14 @@ function typecheck(consumerDir: string): void {
   }
 }
 
-const consumerDir = mkdtempSync(path.join(tmpdir(), "safe-fns-consumer-"));
+const CONSUMER_DIR = mkdtempSync(path.join(tmpdir(), "safe-fns-consumer-"));
 
 try {
-  packInto(consumerDir);
-  copyFixtures(consumerDir);
-  typecheck(consumerDir);
-  run(process.execPath, ["smoke.ts"], consumerDir);
+  packInto(CONSUMER_DIR);
+  copyFixtures(CONSUMER_DIR);
+  typecheck(CONSUMER_DIR);
+  run(process.execPath, ["smoke.ts"], CONSUMER_DIR);
   // No `catch`: a failure should propagate and exit non-zero, after cleanup.
 } finally {
-  rmSync(consumerDir, { force: true, recursive: true });
+  rmSync(CONSUMER_DIR, { force: true, recursive: true });
 }

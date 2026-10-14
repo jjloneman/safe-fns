@@ -8,9 +8,10 @@ import { isString } from "./tool.mts";
  * - Called bare on purpose: it's the function under test, so its throw is the
  *   outcome to record, not an error to wrap.
  */
-const callJsonParse = (text: string): unknown =>
+function callJsonParse(text: string): unknown {
   // eslint-disable-next-line no-restricted-properties -- the function under test
-  JSON.parse(text);
+  return JSON.parse(text);
+}
 
 /** The one call JSON offers for every scalar. */
 const JSON_PARSE: Probe = {

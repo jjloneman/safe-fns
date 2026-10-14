@@ -11,8 +11,8 @@ import type { Probe, Tool } from "./node/tool.mts";
 import { decodeValue, encodeValue } from "../../scripts/research/codec.ts";
 import { readJsonFile } from "../../scripts/research/json.ts";
 import { parseCaseFile } from "../../scripts/research/results.ts";
-import { crossRealmInputs } from "../../test/cross-realm-inputs.ts";
-import { hostileInputs } from "../../test/hostile-inputs.ts";
+import { CROSS_REALM_INPUTS } from "../../test/cross-realm-inputs.ts";
+import { HOSTILE_INPUTS } from "../../test/hostile-inputs.ts";
 import { AJV_COERCE } from "./node/ajv.mts";
 import { CSV } from "./node/csv.mts";
 import { EFFECT } from "./node/effect.mts";
@@ -79,7 +79,7 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   string,
   () => unknown
 >([
-  ...[...hostileInputs, ...crossRealmInputs].map(
+  ...[...HOSTILE_INPUTS, ...CROSS_REALM_INPUTS].map(
     ({ description, value }) => [description, () => value] as const
   ),
   [

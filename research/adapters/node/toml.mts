@@ -5,7 +5,9 @@ import type { Probe, Tool } from "./tool.mts";
 import { isString, packageVersion } from "./tool.mts";
 
 // TOML has no bare scalars, so each case becomes the value of a one-key table.
-const parseTomlValue = (text: string): unknown => parse(`v = ${text}`).v;
+function parseTomlValue(text: string): unknown {
+  return parse(`v = ${text}`).v;
+}
 
 /** The one document TOML reads every scalar through. */
 const TOML_VALUE: Probe = {

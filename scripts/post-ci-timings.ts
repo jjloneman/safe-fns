@@ -106,57 +106,65 @@ const TIMED_WORKFLOWS: ReadonlySet<string> = new Set([
 ]);
 
 /**
- * Human-readable duration, matching how the Actions UI renders one.
+ * Render the report body.
  *
- * @param seconds - elapsed whole seconds.
- * @returns e.g. `"6s"` or `"2m28s"`.
+ * @returns the full Markdown, opening with {@link MARKER}.
  */
-const formatDuration = (seconds: number): string =>
-  seconds < 60 ? `${seconds}s` : `${Math.floor(seconds / 60)}m${seconds % 60}s`;
+function buildMarkdown({
+  repo,
+  workflows,
+}: {
+  /** The `owner/name` repository slug. */
+  repo: string;
+
+  /** Every timed workflow's latest run on the commit. */
+  workflows: readonly TimedWorkflow[];
+}): string {
+  // Workflows run concurrently too, so the slowest job anywhere sets the pace.
+  const criticalPath = findCriticalPath(
+    workflows.flatMap((workflow) =>
+      workflow.jobs.map((job) => ({
+        ...job,
+        name:
+          workflows.length > 1 ? `${workflow.name} › ${job.name}` : job.name,
+      }))
+    )
+  );
+
+  return [
+    MARKER,
+    "",
+    criticalPath
+      ? `**Critical path: ${criticalPath.name} — ${formatDuration(criticalPath.seconds)}.** Jobs and workflows run concurrently, so CI is only as fast as its slowest job.`
+      : "No completed jobs to time yet.",
+    "",
+    ...workflows.flatMap((workflow) => renderWorkflow({ repo, workflow })),
+    "<sub>Measured from the Actions API · whole-second resolution · runner speed varies between runs, so read these as a trend, not a benchmark.</sub>",
+  ].join("\n");
+}
 
 /**
  * Elapsed whole seconds between two ISO timestamps.
  *
  * @returns the duration, or `null` when the span never finished.
  */
-const elapsedSeconds = ({
+function elapsedSeconds({
   completed_at: completedAt,
   started_at: startedAt,
-}: TimedSpan): null | number => {
+}: TimedSpan): null | number {
   if (startedAt === null || completedAt === null) {
     return null;
   }
 
   return Math.round((Date.parse(completedAt) - Date.parse(startedAt)) / 1000);
-};
-
-/**
- * The Duration cell for one step.
- *
- * - A skipped step reports equal start and end instants, so it would read as a
- *   genuine 0s.
- *
- * - A `null` elapsed time is a step that never finished, which is a different
- *   thing from one that took no time.
- *
- * @returns the cell's text.
- */
-const stepDuration = (step: TimedSpan): string => {
-  if (step.conclusion === "skipped") {
-    return "skipped";
-  }
-
-  const seconds = elapsedSeconds(step);
-
-  return seconds === null ? "—" : formatDuration(seconds);
-};
+}
 
 /**
  * Fetch every job in a run, following pagination.
  *
  * @returns the parsed jobs.
  */
-const fetchJobs = ({
+function fetchJobs({
   repo,
   runId,
 }: {
@@ -165,7 +173,7 @@ const fetchJobs = ({
 
   /** The Actions run to time. */
   runId: string;
-}): ActionsJob[] => {
+}): ActionsJob[] {
   const raw = execFileSync(
     "gh",
     [
@@ -182,7 +190,7 @@ const fetchJobs = ({
     .split("\n")
     .filter((line) => line.trim() !== "")
     .map((line) => JSON.parse(line) as ActionsJob);
-};
+}
 
 /**
  * Fetch the latest run of every timed workflow on the same commit and event as
@@ -193,7 +201,7 @@ const fetchJobs = ({
  *
  * @returns the workflows, in `TIMED_WORKFLOWS` order.
  */
-const fetchTimedWorkflows = ({
+function fetchTimedWorkflows({
   repo,
   runId,
 }: {
@@ -202,7 +210,7 @@ const fetchTimedWorkflows = ({
 
   /** The Actions run this script is reporting from. */
   runId: string;
-}): TimedWorkflow[] => {
+}): TimedWorkflow[] {
   const current = JSON.parse(
     execFileSync("gh", ["api", `repos/${repo}/actions/runs/${runId}`], {
       encoding: "utf8",
@@ -245,17 +253,17 @@ const fetchTimedWorkflows = ({
           },
         ];
   });
-};
+}
 
 /**
  * The slowest finished job — the run's wall time, since jobs run concurrently.
  *
  * @returns the job and its duration, or `undefined` when none has finished.
  */
-const findCriticalPath = (
+function findCriticalPath(
   jobs: readonly ActionsJob[]
-): { name: string; seconds: number } | undefined =>
-  jobs.reduce<{ name: string; seconds: number } | undefined>(
+): { name: string; seconds: number } | undefined {
+  return jobs.reduce<{ name: string; seconds: number } | undefined>(
     (slowestJob, job) => {
       const seconds = elapsedSeconds(job);
 
@@ -265,13 +273,26 @@ const findCriticalPath = (
     },
     undefined
   );
+}
+
+/**
+ * Human-readable duration, matching how the Actions UI renders one.
+ *
+ * @param seconds - elapsed whole seconds.
+ * @returns e.g. `"6s"` or `"2m28s"`.
+ */
+function formatDuration(seconds: number): string {
+  return seconds < 60
+    ? `${seconds}s`
+    : `${Math.floor(seconds / 60)}m${seconds % 60}s`;
+}
 
 /**
  * Render one workflow's section: its step table, then its whole-job totals.
  *
  * @returns the section's Markdown lines.
  */
-const renderWorkflow = ({
+function renderWorkflow({
   repo,
   workflow,
 }: {
@@ -280,7 +301,7 @@ const renderWorkflow = ({
 
   /** The workflow run to render. */
   workflow: TimedWorkflow;
-}): string[] => {
+}): string[] {
   const stepRows = workflow.jobs.flatMap((job) =>
     (job.steps ?? [])
       .filter((step) => !UNTIMED_STEP.test(step.name))
@@ -312,47 +333,30 @@ const renderWorkflow = ({
     "</details>",
     "",
   ];
-};
+}
 
 /**
- * Render the report body.
+ * The Duration cell for one step.
  *
- * @returns the full Markdown, opening with {@link MARKER}.
+ * - A skipped step reports equal start and end instants, so it would read as a
+ *   genuine 0s.
+ *
+ * - A `null` elapsed time is a step that never finished, which is a different
+ *   thing from one that took no time.
+ *
+ * @returns the cell's text.
  */
-const buildMarkdown = ({
-  repo,
-  workflows,
-}: {
-  /** The `owner/name` repository slug. */
-  repo: string;
+function stepDuration(step: TimedSpan): string {
+  if (step.conclusion === "skipped") {
+    return "skipped";
+  }
 
-  /** Every timed workflow's latest run on the commit. */
-  workflows: readonly TimedWorkflow[];
-}): string => {
-  // Workflows run concurrently too, so the slowest job anywhere sets the pace.
-  const criticalPath = findCriticalPath(
-    workflows.flatMap((workflow) =>
-      workflow.jobs.map((job) => ({
-        ...job,
-        name:
-          workflows.length > 1 ? `${workflow.name} › ${job.name}` : job.name,
-      }))
-    )
-  );
+  const seconds = elapsedSeconds(step);
 
-  return [
-    MARKER,
-    "",
-    criticalPath
-      ? `**Critical path: ${criticalPath.name} — ${formatDuration(criticalPath.seconds)}.** Jobs and workflows run concurrently, so CI is only as fast as its slowest job.`
-      : "No completed jobs to time yet.",
-    "",
-    ...workflows.flatMap((workflow) => renderWorkflow({ repo, workflow })),
-    "<sub>Measured from the Actions API · whole-second resolution · runner speed varies between runs, so read these as a trend, not a benchmark.</sub>",
-  ].join("\n");
-};
+  return seconds === null ? "—" : formatDuration(seconds);
+}
 
-const main = (): void => {
+function main(): void {
   const repo = process.env.GITHUB_REPOSITORY ?? "jjloneman/safe-fns";
 
   // A run id argument is the local path: print the table, comment on nothing.
@@ -372,7 +376,7 @@ const main = (): void => {
   });
 
   publishCiReport({ localConsole: markdown, markdown, marker: MARKER });
-};
+}
 
 try {
   main();

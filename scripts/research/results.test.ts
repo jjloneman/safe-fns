@@ -17,16 +17,18 @@ import {
   stringifyStable,
 } from "./results.ts";
 
-const column = (overrides: Partial<AdapterColumn>): AdapterColumn => ({
-  call: "f(value)",
-  function: "f",
-  locale: "C.UTF-8",
-  name: "tool",
-  outcomes: [{ kind: "value", value: true }],
-  tier: 1,
-  version: "1.0.0",
-  ...overrides,
-});
+function column(overrides: Partial<AdapterColumn>): AdapterColumn {
+  return {
+    call: "f(value)",
+    function: "f",
+    locale: "C.UTF-8",
+    name: "tool",
+    outcomes: [{ kind: "value", value: true }],
+    tier: 1,
+    version: "1.0.0",
+    ...overrides,
+  };
+}
 
 describe("parseCaseFile", () => {
   test("keeps args and any expected answer", () => {
@@ -309,17 +311,19 @@ describe("findCodecMismatches", () => {
   });
 });
 
-const resultColumn = (overrides: Partial<ResultColumn>): ResultColumn => ({
-  call: "f(value)",
-  image: "i",
-  locale: "C.UTF-8",
-  name: "tool",
-  outcomes: [{ kind: "value", value: true }],
-  service: "node",
-  tier: 1,
-  version: "1.0.0",
-  ...overrides,
-});
+function resultColumn(overrides: Partial<ResultColumn>): ResultColumn {
+  return {
+    call: "f(value)",
+    image: "i",
+    locale: "C.UTF-8",
+    name: "tool",
+    outcomes: [{ kind: "value", value: true }],
+    service: "node",
+    tier: 1,
+    version: "1.0.0",
+    ...overrides,
+  };
+}
 
 describe("mergeWithPrevious", () => {
   const next: FunctionResult = {

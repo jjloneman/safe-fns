@@ -18,11 +18,11 @@ export type HostileInput = {
   value: unknown;
 };
 
-const throwTrap = (): never => {
+function throwTrap(): never {
   throw new Error("hostile input trap");
-};
+}
 
-const { proxy: revokedProxy, revoke } = Proxy.revocable({}, {});
+const { proxy: REVOKED_PROXY, revoke } = Proxy.revocable({}, {});
 revoke();
 
 /**
@@ -35,7 +35,7 @@ revoke();
  * - Environment-neutral, so it runs in every test project; cross-realm values
  *   live in `cross-realm-inputs.ts` because they need `node:vm`.
  */
-export const hostileInputs: readonly HostileInput[] = [
+export const HOSTILE_INPUTS: readonly HostileInput[] = [
   {
     description: "a null-prototype object",
     value: Object.create(null),
@@ -54,7 +54,7 @@ export const hostileInputs: readonly HostileInput[] = [
   },
   {
     description: "a revoked proxy",
-    value: revokedProxy,
+    value: REVOKED_PROXY,
   },
   {
     description: "a symbol",

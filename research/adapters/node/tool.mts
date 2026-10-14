@@ -59,10 +59,6 @@ export type Tool = {
   version: string;
 };
 
-/** Accept only a string first argument; other cases are `n/a`. */
-export const isString = ([value]: readonly unknown[]): boolean =>
-  typeof value === "string";
-
 /**
  * Name a thrown value's class, without trusting it to be inspectable.
  *
@@ -92,6 +88,11 @@ export function errorName(error: unknown): string {
   } catch {
     return "an uninspectable error";
   }
+}
+
+/** Accept only a string first argument; other cases are `n/a`. */
+export function isString([value]: readonly unknown[]): boolean {
+  return typeof value === "string";
 }
 
 /** Read an installed library's version. */

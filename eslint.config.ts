@@ -10,7 +10,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { configs as tsConfigs } from "typescript-eslint";
 
-import { noDottedJsdocParam } from "./eslint-rules/no-dotted-jsdoc-param";
+import { NO_DOTTED_JSDOC_PARAM } from "./eslint-rules/no-dotted-jsdoc-param";
 
 /**
  * One `yml/sort-keys` option: the mappings whose path matches `pathPattern`
@@ -40,7 +40,7 @@ function documentedOrder({
   };
 }
 
-const config: Linter.Config[] = defineConfig(
+const CONFIG: Linter.Config[] = defineConfig(
   /*
    * ESLint doesn't read `.gitignore` on its own, so load it — one list of
    * ignored paths, which can't drift from git's.
@@ -102,7 +102,7 @@ const config: Linter.Config[] = defineConfig(
       },
     },
     plugins: {
-      local: { rules: { "no-dotted-jsdoc-param": noDottedJsdocParam } },
+      local: { rules: { "no-dotted-jsdoc-param": NO_DOTTED_JSDOC_PARAM } },
       tsdoc: tsdocPlugin,
     },
     rules: {
@@ -116,10 +116,19 @@ const config: Linter.Config[] = defineConfig(
 
       /*
        * A boolean variable or parameter reads as a question: `isEmpty`,
-       * `hasKey`, `shouldTrim`.
+       * `hasKey`, `shouldTrim`, and a module-level constant is
+       * `SCREAMING_SNAKE_CASE`.
        *
        * - Destructured bindings are exempt, since their name is the source
        *   object's key and renaming it at the binding site only hides that.
+       *
+       * - An entry with `types` outranks one without, and among the rest the
+       *   one with the most modifiers wins: so a boolean constant keeps the
+       *   `isX` form, and the destructured exemption repeats `const` and
+       *   `global` to outrank the constant entry.
+       *
+       * - A module-level function is a `function` declaration, which this rule
+       *   doesn't reach, rather than an arrow bound to a constant.
        */
       "@typescript-eslint/naming-convention": [
         "error",
@@ -133,6 +142,16 @@ const config: Linter.Config[] = defineConfig(
           format: null,
           modifiers: ["destructured"],
           selector: ["parameter", "variable"],
+        },
+        {
+          format: null,
+          modifiers: ["const", "destructured", "global"],
+          selector: "variable",
+        },
+        {
+          format: ["UPPER_CASE"],
+          modifiers: ["const", "global"],
+          selector: "variable",
         },
       ],
 
@@ -365,4 +384,4 @@ const config: Linter.Config[] = defineConfig(
   }
 );
 
-export default config;
+export default CONFIG;

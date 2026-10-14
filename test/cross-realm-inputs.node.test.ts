@@ -1,9 +1,9 @@
 import { describe, expect, test } from "vitest";
 
-import { crossRealmInputs } from "#test/cross-realm-inputs";
+import { CROSS_REALM_INPUTS } from "#test/cross-realm-inputs";
 
 describe("cross-realm inputs", () => {
-  test.each(crossRealmInputs)(
+  test.each(CROSS_REALM_INPUTS)(
     "$description is not an instance of this realm's Object",
     ({ value }) => {
       // Given/When/Then

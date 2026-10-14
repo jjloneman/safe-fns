@@ -1,6 +1,6 @@
 import type { Config } from "prettier";
 
-const config: Config = {
+const CONFIG: Config = {
   overrides: [
     /*
      * The git hooks are POSIX shell scripts with no extension, so Prettier
@@ -49,4 +49,4 @@ const config: Config = {
   trailingComma: "es5",
 };
 
-export default config;
+export default CONFIG;

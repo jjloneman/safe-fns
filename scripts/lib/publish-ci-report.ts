@@ -28,113 +28,10 @@ type IssueCommentSlice = {
 };
 
 /**
- * Find the PR comment whose body starts with `marker`.
- *
- * @returns the matching comment's id, or `undefined` when none exists yet.
- */
-const findStickyComment = ({
-  marker,
-  prNumber,
-  repo,
-}: {
-  /** The report heading the comment body must start with. */
-  marker: string;
-
-  /** The pull request whose comments to search. */
-  prNumber: number;
-
-  /** The `owner/name` repository slug. */
-  repo: string;
-}): IssueCommentSlice["id"] | undefined => {
-  /*
-   * --jq flattens paginated pages into one JSON object per line; only a body
-   * prefix is fetched since the marker is the report's first line.
-   *
-   * - Only the bot's own comments match: a person's comment that happens to
-   *   open with the marker can't be edited by the CI token.
-   */
-  const lines = execFileSync(
-    "gh",
-    [
-      "api",
-      `repos/${repo}/issues/${prNumber}/comments`,
-      "--paginate",
-      "--jq",
-      '.[] | select(.user.login == "github-actions[bot]") | {body: .body[0:200], id: .id}',
-    ],
-    { encoding: "utf8" }
-  );
-
-  return lines
-    .split("\n")
-    .filter((line) => line.trim() !== "")
-    .map((line) => JSON.parse(line) as IssueCommentSlice)
-    .find((comment) => comment.body.startsWith(marker))?.id;
-};
-
-/**
- * Post (or update in place) the sticky PR comment identified by `marker`.
- *
- * Never throws — a `gh`/network failure is logged and swallowed so the report
- * stays report-only.
- */
-const upsertStickyPrComment = ({
-  body,
-  marker,
-  prNumber,
-  repo,
-}: {
-  /** The full Markdown comment body to post. */
-  body: string;
-
-  /** The report heading identifying which comment to edit. */
-  marker: string;
-
-  /** The pull request to comment on. */
-  prNumber: number;
-
-  /** The `owner/name` repository slug. */
-  repo: string;
-}): void => {
-  try {
-    const commentId = findStickyComment({ marker, prNumber, repo });
-
-    if (commentId === undefined) {
-      execFileSync(
-        "gh",
-        ["pr", "comment", String(prNumber), "--body-file", "-", "--repo", repo],
-        { input: body, stdio: ["pipe", "inherit", "inherit"] }
-      );
-      return;
-    }
-
-    // Body goes through stdin JSON (`--input -`), not an argv `-f` flag, so a
-    // large report can't hit the argv size limit.
-    execFileSync(
-      "gh",
-      [
-        "api",
-        "--method",
-        "PATCH",
-        `repos/${repo}/issues/comments/${commentId}`,
-        "--input",
-        "-",
-      ],
-      { input: JSON.stringify({ body }), stdio: ["pipe", "ignore", "inherit"] }
-    );
-  } catch (error: unknown) {
-    console.warn(
-      "[publish-ci-report] Failed to upsert the sticky PR comment:",
-      error
-    );
-  }
-};
-
-/**
  * Publish a CI report: append it to the Actions job summary and, on a
  * `pull_request` event, upsert it as a sticky PR comment.
  */
-export const publishCiReport = ({
+export function publishCiReport({
   localConsole,
   markdown,
   marker,
@@ -155,7 +52,7 @@ export const publishCiReport = ({
    * find this report's existing comment among others.
    */
   marker: string;
-}): void => {
+}): void {
   const {
     GITHUB_EVENT_NAME,
     GITHUB_EVENT_PATH,
@@ -198,4 +95,107 @@ export const publishCiReport = ({
     prNumber,
     repo: GITHUB_REPOSITORY,
   });
-};
+}
+
+/**
+ * Find the PR comment whose body starts with `marker`.
+ *
+ * @returns the matching comment's id, or `undefined` when none exists yet.
+ */
+function findStickyComment({
+  marker,
+  prNumber,
+  repo,
+}: {
+  /** The report heading the comment body must start with. */
+  marker: string;
+
+  /** The pull request whose comments to search. */
+  prNumber: number;
+
+  /** The `owner/name` repository slug. */
+  repo: string;
+}): IssueCommentSlice["id"] | undefined {
+  /*
+   * --jq flattens paginated pages into one JSON object per line; only a body
+   * prefix is fetched since the marker is the report's first line.
+   *
+   * - Only the bot's own comments match: a person's comment that happens to
+   *   open with the marker can't be edited by the CI token.
+   */
+  const lines = execFileSync(
+    "gh",
+    [
+      "api",
+      `repos/${repo}/issues/${prNumber}/comments`,
+      "--paginate",
+      "--jq",
+      '.[] | select(.user.login == "github-actions[bot]") | {body: .body[0:200], id: .id}',
+    ],
+    { encoding: "utf8" }
+  );
+
+  return lines
+    .split("\n")
+    .filter((line) => line.trim() !== "")
+    .map((line) => JSON.parse(line) as IssueCommentSlice)
+    .find((comment) => comment.body.startsWith(marker))?.id;
+}
+
+/**
+ * Post (or update in place) the sticky PR comment identified by `marker`.
+ *
+ * Never throws — a `gh`/network failure is logged and swallowed so the report
+ * stays report-only.
+ */
+function upsertStickyPrComment({
+  body,
+  marker,
+  prNumber,
+  repo,
+}: {
+  /** The full Markdown comment body to post. */
+  body: string;
+
+  /** The report heading identifying which comment to edit. */
+  marker: string;
+
+  /** The pull request to comment on. */
+  prNumber: number;
+
+  /** The `owner/name` repository slug. */
+  repo: string;
+}): void {
+  try {
+    const commentId = findStickyComment({ marker, prNumber, repo });
+
+    if (commentId === undefined) {
+      execFileSync(
+        "gh",
+        ["pr", "comment", String(prNumber), "--body-file", "-", "--repo", repo],
+        { input: body, stdio: ["pipe", "inherit", "inherit"] }
+      );
+      return;
+    }
+
+    // Body goes through stdin JSON (`--input -`), not an argv `-f` flag, so a
+    // large report can't hit the argv size limit.
+    execFileSync(
+      "gh",
+      [
+        "api",
+        "--method",
+        "PATCH",
+        `repos/${repo}/issues/comments/${commentId}`,
+        "--input",
+        "-",
+      ],
+      { input: JSON.stringify({ body }), stdio: ["pipe", "ignore", "inherit"] }
+    );
+  } catch (error: unknown) {
+    console.warn(
+      "[publish-ci-report] Failed to upsert the sticky PR comment:",
+      error
+    );
+  }
+}
