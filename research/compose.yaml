@@ -571,9 +571,10 @@ services:
     working_dir: /work/research
 
   python:
+    build:
+      context: docker/python
     entrypoint: ["python", "/work/research/adapters/python.py"]
     environment: *adapter-environment
-    image: python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none
@@ -670,15 +671,16 @@ services:
     profiles: ["shell"]
     volumes: *adapter-volumes
 
-  # Columns transcribed from `sources/` for tools that can't run here; it
-  # needs no npm libraries, so it runs on the plain Node image.
-  #
-  # - Keep this pin equal to `docker/node/Dockerfile`'s `FROM`: Dependabot
-  #   bumps the two in separate PRs (`research-images`, `research-dockerfiles`).
+  # Columns transcribed from `sources/` for tools that can't run here. It
+  # needs no npm libraries, so it builds only the Node adapter Dockerfile's
+  # `base` stage, which keeps the two on one Node pin.
   sources:
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile
+      target: base
     entrypoint: ["node", "/work/research/adapters/sources.mts"]
     environment: *adapter-environment
-    image: node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none
@@ -690,9 +692,10 @@ services:
       - ../scripts/research:/work/scripts/research:ro
 
   sqlite:
+    build:
+      context: docker/python
     entrypoint: ["python", "/work/research/adapters/sqlite.py"]
     environment: *adapter-environment
-    image: python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none

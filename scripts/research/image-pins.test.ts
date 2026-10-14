@@ -5,11 +5,24 @@ import { describe, expect, test } from "vitest";
 /** The research harness's directory, which holds `compose.yaml`. */
 const RESEARCH_ROOT = path.resolve(import.meta.dirname, "../../research");
 
+/** Matches a `research/` directory an `updates` entry lists. */
+const DEPENDABOT_DIRECTORY =
+  /^\s+(?:- |directory: )"\/research(?<directory>[^"]*)"$/gmu;
+
+/** Matches the first group an `updates` entry names. */
+const DEPENDABOT_GROUP = /^ {4}groups:\n\s+(?<group>[\w-]+):$/mu;
+
+/** Where each `updates` entry in `dependabot.yml` starts. */
+const DEPENDABOT_ENTRY_START = /^ {2}- package-ecosystem: /mu;
+
 /** Matches a Compose service's `image:` reference. */
 const COMPOSE_IMAGE = /^\s*image:\s*(?<reference>\S+)\s*$/gmu;
 
 /** Matches a Dockerfile's `FROM` reference, past any `--flag=…`. */
 const DOCKERFILE_FROM = /^FROM\s+(?:--\S+\s+)*(?<reference>\S+)/gmu;
+
+/** Matches a Dockerfile stage's name, from `FROM … AS <stage>`. */
+const DOCKERFILE_STAGE = /^FROM\s.*\sAS\s+(?<stage>\S+)\s*$/gimu;
 
 /**
  * Matches a pre-release tag.
@@ -76,30 +89,92 @@ const TAG_CASES = [
   },
 ];
 
-/** Every image the harness pins: Compose's `image:` lines and each `FROM`. */
-function readImagePins(): string[] {
+/** Compose's `image:` references. */
+function readComposePins(): string[] {
   const compose = readFileSync(
     path.join(RESEARCH_ROOT, "compose.yaml"),
     "utf8"
   );
 
-  const dockerfiles = readdirSync(path.join(RESEARCH_ROOT, "docker"), {
+  return [...compose.matchAll(COMPOSE_IMAGE)].flatMap(
+    (match) => match.groups?.reference ?? []
+  );
+}
+
+/** Every `FROM` reference in one directory's Dockerfile, bar its own stages. */
+function readDockerfilePins(directory: string): string[] {
+  const dockerfile = readFileSync(path.join(directory, "Dockerfile"), "utf8");
+
+  const stages = new Set(
+    [...dockerfile.matchAll(DOCKERFILE_STAGE)].flatMap(
+      (match) => match.groups?.stage ?? []
+    )
+  );
+
+  return [...dockerfile.matchAll(DOCKERFILE_FROM)]
+    .flatMap((match) => match.groups?.reference ?? [])
+    .filter((reference) => !stages.has(reference));
+}
+
+/** The images one Dependabot `updates` entry bumps; none for other ecosystems. */
+function readEntryPins(entry: string): string[] {
+  if (entry.startsWith('"docker-compose"')) {
+    return readComposePins();
+  }
+
+  if (!entry.startsWith('"docker"')) {
+    return [];
+  }
+
+  return [...entry.matchAll(DEPENDABOT_DIRECTORY)].flatMap((match) =>
+    readDockerfilePins(path.join(RESEARCH_ROOT, match.groups?.directory ?? ""))
+  );
+}
+
+/**
+ * The Dependabot group that bumps each research image, by image name.
+ *
+ * - The `docker-compose` entry bumps `compose.yaml`'s `image:` lines, and each
+ *   `docker` entry its directories' `FROM`s.
+ *
+ * @returns every group that bumps an image, keyed by its name without a tag.
+ */
+function readGroupsByImage(): Map<string, Set<string>> {
+  const dependabot = readFileSync(
+    path.join(RESEARCH_ROOT, "../.github/dependabot.yml"),
+    "utf8"
+  );
+
+  return dependabot
+    .split(DEPENDABOT_ENTRY_START)
+    .flatMap((entry, index) => {
+      // An ungrouped entry opens its own PRs, so it counts as its own group.
+      const group =
+        DEPENDABOT_GROUP.exec(entry)?.groups?.group ?? `entry ${index}`;
+
+      return readEntryPins(entry).map((pin) => ({ group, name: toName(pin) }));
+    })
+    .reduce((groupsByImage, { group, name }) => {
+      groupsByImage.set(
+        name,
+        (groupsByImage.get(name) ?? new Set<string>()).add(group)
+      );
+
+      return groupsByImage;
+    }, new Map<string, Set<string>>());
+}
+
+/** Every image the harness pins: Compose's `image:` lines and each `FROM`. */
+function readImagePins(): string[] {
+  const dockerfilePins = readdirSync(path.join(RESEARCH_ROOT, "docker"), {
     withFileTypes: true,
   })
     .filter((entry) => entry.isDirectory())
-    .map((entry) =>
-      readFileSync(
-        path.join(RESEARCH_ROOT, "docker", entry.name, "Dockerfile"),
-        "utf8"
-      )
+    .flatMap((entry) =>
+      readDockerfilePins(path.join(RESEARCH_ROOT, "docker", entry.name))
     );
 
-  return [
-    ...[...compose.matchAll(COMPOSE_IMAGE)],
-    ...dockerfiles.flatMap((dockerfile) => [
-      ...dockerfile.matchAll(DOCKERFILE_FROM),
-    ]),
-  ].flatMap((match) => match.groups?.reference ?? []);
+  return [...readComposePins(), ...dockerfilePins];
 }
 
 /** The `versions` of every `ignore` rule on `python` in `dependabot.yml`. */
@@ -112,6 +187,16 @@ function readPythonHolds(): string[] {
   return [...dependabot.matchAll(PYTHON_HOLD)].flatMap(
     (match) => match.groups?.versions?.replaceAll(/\s+/gu, " ").trim() ?? []
   );
+}
+
+/** The name of an image reference, without its tag or digest. */
+function toName(reference: string): string {
+  const [nameAndTag = ""] = reference.split("@");
+  const tagStart = nameAndTag.lastIndexOf(":");
+
+  return tagStart > nameAndTag.lastIndexOf("/")
+    ? nameAndTag.slice(0, tagStart)
+    : nameAndTag;
 }
 
 /** The tag of an image reference, between its name and its digest. */
@@ -149,17 +234,38 @@ describe("research image pins", () => {
     expect(preReleases).toEqual([]);
   });
 
-  test("repeats one Python pre-release hold in every entry that needs it", () => {
+  test("holds Python's pre-releases in the one entry that bumps 3.x", () => {
     // Given - every `ignore` on `python`, minus `python311`'s 3.11 hold
     const holds = readPythonHolds().filter(
       (versions) => versions !== '- ">= 3.12.0.a"'
     );
 
-    // When - collapsing the copies
-    const distinctHolds = new Set(holds);
+    // When - finding the groups that bump `python`
+    const pythonGroups = readGroupsByImage().get("python");
 
-    // Then - the Compose, Dockerfile, and database entries share one hold
-    expect(holds).toHaveLength(3);
-    expect(distinctHolds.size).toBe(1);
+    // Then - one hold, in the group beside `python311`'s own
+    expect(holds).toHaveLength(1);
+    expect(pythonGroups).toEqual(
+      new Set(["research-dockerfiles", "research-python311"])
+    );
+  });
+
+  test("bumps each shared image in one Dependabot group", () => {
+    // Given - the groups that bump each image
+    const groupsByImage = readGroupsByImage();
+
+    // When - keeping images split across groups, bar `python311`'s hold
+    const splitImages = [...groupsByImage]
+      .filter(
+        ([name, groups]) =>
+          [...groups].filter(
+            (group) => !(name === "python" && group === "research-python311")
+          ).length > 1
+      )
+      .map(([name, groups]) => `${name}: ${[...groups].join(", ")}`);
+
+    // Then - every shared image moves in one PR, so its results do too
+    expect(groupsByImage.size).toBeGreaterThan(10);
+    expect(splitImages).toEqual([]);
   });
 });
