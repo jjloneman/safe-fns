@@ -52,6 +52,16 @@ What to know before editing a workflow. AGENTS.md's CI section lists what runs; 
 - **A step's `env` is evaluated even when its `if` skips the step.** Guard any expression that can fail on a missing output, such as `fromJSON(steps.release.outputs.pr || '{}')`.
 - `release.yml` is not in `report`'s `needs:`: it is a separate workflow that runs only on `main`.
 
+## 🔬 Research workflows
+
+- **`research-check.yml` is path-filtered** to the harness and what it depends on: `research/**`, `scripts/research/**`, the test inputs the Node adapter imports, and the root configs and lockfile that decide how it's linted, typechecked, and formatted; the workflow's own comment lists the paths.
+  - Checking `research/` costs a second install (`pnpm --dir research install`) plus container pulls for the formatters, which no other PR should pay.
+  - Its own workflow, not a job in `ci.yml`: a job-level path filter would need a third-party action, and a skipped job would still show up in every PR's checks.
+- **`research.yml` is `workflow_dispatch` only**: its results are reviewed and committed by hand, so a run on every push would only produce artifacts nobody reads.
+  - Its inputs reach the shell through `env`, never `${{ }}` inside `run:`, so a crafted input can't inject a command.
+- **Neither is in `report`'s `needs:`**; they are separate workflows, like `release.yml`.
+- Both grant only `contents: read`.
+
 ## 💬 Sticky comments
 
 - Each report upserts its comment through [scripts/lib/publish-ci-report.ts](../../scripts/lib/publish-ci-report.ts), found by the report's opening `## …` heading.
