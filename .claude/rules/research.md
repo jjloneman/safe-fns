@@ -24,6 +24,9 @@ paths:
 - **Never pin a pre-release** (`rc3`, `-beta`, `-preview`), even when Dependabot proposes one; its own pre-release filter has let Python's through.
   - `dependabot.yml` ignores Python's alphas, betas, and release candidates in `research-dockerfiles`, the one entry that bumps 3.x Python; add the next minor's range before its first alpha.
   - `scripts/research/image-pins.test.ts` fails on any pre-release `image:` or `FROM`, and on a second copy of the Python hold, so a miss shows up in CI.
+- **One Compose project per session.** Set `COMPOSE_PROJECT_NAME` (`safe-fns-research-gh-<issue>`) before any `docker compose` or `pnpm research` command, since parallel sessions share one Docker engine and the `db` profile runs `compose up` and `compose rm`.
+- **After your PR merges, remove only your own project's images**, with the two commands in [research/README.md → Running it](../../research/README.md#-running-it). They match the label Compose stamps on what it builds, never a name prefix, and fail on an unset project name instead of matching every project.
+- **Never run `docker compose down`, an unscoped `docker image prune`, `docker system prune`, or `docker builder prune`** while another session may be running. The pulled base images and the build cache are kept on purpose; pruning them is the owner's housekeeping.
 - **Track each image's latest stable major.** A new major is a result to record, not a break to avoid; merge it once its results are regenerated.
 - **An image that several services share is bumped by one Dependabot group**, so its results are regenerated in one PR: Node, 3.x Python, and the .NET SDK today.
   - Pin it in one place where you can: `sources` builds from `docker/node/Dockerfile`, and `python` and `sqlite` from `docker/python/Dockerfile`, rather than repeating the pin in `compose.yaml`.

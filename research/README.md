@@ -55,8 +55,32 @@ the generated tables instead of summarizing other tools' docs.
 - The `db` profile starts each database before its adapter runs and removes it
   afterward; SQL Server runs under emulation on Apple Silicon, so it's the
   slowest to come up.
-- Clean up with `docker compose --file research/compose.yaml down` and
-  `docker image prune`.
+- Several sessions can share one Docker engine, so give each its own Compose
+  project before any `docker compose` or `pnpm research` command:
+
+  ```sh
+  export COMPOSE_PROJECT_NAME=safe-fns-research-gh-<issue>
+  ```
+
+- Once your PR merges, remove only the images your project built. Compose labels
+  every image it builds with its project, and `:?` makes each command fail
+  rather than match every project's images when the name is unset. The first
+  removes the tagged images; the second, the untagged ones a rebuild left
+  behind:
+
+  ```sh
+  docker images --filter "label=com.docker.compose.project=${COMPOSE_PROJECT_NAME:?}" --format '{{.Repository}}:{{.Tag}}' | xargs -r docker image rm
+  docker image prune --force --filter "label=com.docker.compose.project=${COMPOSE_PROJECT_NAME:?}"
+  ```
+
+  - Match by that label, not by a `${COMPOSE_PROJECT_NAME}-` name prefix, which
+    would also catch a project whose name extends yours.
+
+  - Leave the pulled base images and the build cache: another session may be
+    building from them, and they make the next build fast.
+  - `docker compose down`, an unscoped `docker image prune`, and
+    `docker builder prune` are the owner's housekeeping, run only once no
+    session is in flight.
 
 ## ⬆️ Image bumps
 
