@@ -27,11 +27,151 @@ x-adapter-environment: &adapter-environment
   PYTHONDONTWRITEBYTECODE: "1"
   TZ: UTC
 
+# A compiled adapter's build context is its own directory, so its image copies
+# only that adapter's manifests, and `.dockerignore` (the Node image's) never
+# applies.
+x-dotnet-build: &dotnet-build
+  context: ./adapters/dotnet
+  dockerfile: ../../docker/dotnet/Dockerfile
+
+x-go-build: &go-build
+  context: ./adapters/go
+  dockerfile: ../../docker/go/Dockerfile
+
 x-python-volumes: &python-volumes
   - ./adapters:/work/research/adapters:ro
   - ./cases:/work/research/cases:ro
 
+x-rust-build: &rust-build
+  context: ./adapters/rust
+  dockerfile: ../../docker/rust/Dockerfile
+
 services:
+  # Rust's linter, beside rustfmt. `--fix` exits 0 even when a denied lint
+  # remains, so a fixing run (`--fix`) then checks like any other.
+  clippy:
+    build: *rust-build
+    entrypoint:
+      - sh
+      - -c
+      - >-
+        [ "$$1" != --fix ]
+        || cargo clippy --locked --offline --quiet --fix --allow-no-vcs;
+        exec cargo clippy --locked --offline --quiet -- --deny warnings
+      - clippy
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.check-args: --check
+      dev.safe-fns.research.format-args: --fix
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    volumes:
+      - ./adapters/rust:/work/research/adapters/rust
+    working_dir: /work/research/adapters/rust
+
+  csharpier:
+    build: *dotnet-build
+    entrypoint: ["dotnet", "csharpier"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.check-args: check .
+      dev.safe-fns.research.format-args: format .
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    volumes:
+      - ./adapters/dotnet:/work/research/adapters/dotnet
+    working_dir: /work/research/adapters/dotnet
+
+  # Builds, then runs. The build's messages go to stderr, which the runner
+  # reports on failure, and warnings never fail it: the analyzers are the
+  # `dotnet-build` lint's job.
+  dotnet:
+    build: *dotnet-build
+    entrypoint:
+      - sh
+      - -c
+      - >-
+        dotnet build --artifacts-path "$$RESEARCH_ARTIFACTS" --verbosity quiet
+        -p:TreatWarningsAsErrors=false 1>&2
+        && exec dotnet run --no-build --artifacts-path "$$RESEARCH_ARTIFACTS"
+        -- "$$@"
+      - dotnet
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["dotnet"]
+    volumes:
+      - ./adapters/dotnet:/work/research/adapters/dotnet:ro
+      - ./cases:/work/research/cases:ro
+    working_dir: /work/research/adapters/dotnet
+
+  # The .NET analyzers (`AnalysisLevel` in the project), which fail the build
+  # on any warning.
+  dotnet-build:
+    build: *dotnet-build
+    entrypoint:
+      ["dotnet", "build", "--artifacts-path", "/opt/research-artifacts"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.check-args: --verbosity quiet
+      dev.safe-fns.research.format-args: --verbosity quiet
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    volumes:
+      - ./adapters/dotnet:/work/research/adapters/dotnet
+    working_dir: /work/research/adapters/dotnet
+
+  go:
+    build: *go-build
+    entrypoint: ["go", "run", "."]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["go"]
+    volumes:
+      - ./adapters/go:/work/research/adapters/go:ro
+      - ./cases:/work/research/cases:ro
+    working_dir: /work/research/adapters/go
+
+  go-vet:
+    build: *go-build
+    entrypoint: ["go", "vet"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.check-args: .
+      dev.safe-fns.research.format-args: .
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    volumes:
+      - ./adapters/go:/work/research/adapters/go
+    working_dir: /work/research/adapters/go
+
+  # `gofmt -l` lists unformatted files but still exits 0, so any output fails.
+  gofmt:
+    build: *go-build
+    entrypoint:
+      - sh
+      - -c
+      - >-
+        output=$$(gofmt "$$@") || exit;
+        [ -z "$$output" ] || { echo "$$output"; exit 1; }
+      - gofmt
+    labels:
+      dev.safe-fns.research.check-args: -l .
+      dev.safe-fns.research.format-args: -w .
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    volumes:
+      - ./adapters/go:/work/research/adapters/go
+    working_dir: /work/research/adapters/go
+
   node:
     build:
       context: .
@@ -99,6 +239,42 @@ services:
       - ./adapters:/work/research/adapters
       - ./ruff.toml:/work/research/ruff.toml:ro
     working_dir: /work/research
+
+  # Builds once, then runs; dependencies were compiled into the image, so only
+  # the adapter itself compiles.
+  rust:
+    build: *rust-build
+    entrypoint:
+      - cargo
+      - run
+      - --quiet
+      - --locked
+      - --offline
+      - --manifest-path
+      - /work/research/adapters/rust/Cargo.toml
+      - --
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["rust"]
+    volumes:
+      - ./adapters/rust:/work/research/adapters/rust:ro
+      - ./cases:/work/research/cases:ro
+
+  rustfmt:
+    build: *rust-build
+    entrypoint: ["cargo", "fmt"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.check-args: --all -- --check
+      dev.safe-fns.research.format-args: --all
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    volumes:
+      - ./adapters/rust:/work/research/adapters/rust
+    working_dir: /work/research/adapters/rust
 
   sqlite:
     entrypoint: ["python", "/work/research/adapters/sqlite.py"]

@@ -126,7 +126,7 @@ updates:
       - "📦 dependencies"
 
   # The research harness's pinned images: `image:` lines in
-  # `research/compose.yaml` here, and the Node Dockerfile's `FROM` below.
+  # `research/compose.yaml` here, and each Dockerfile's `FROM` below.
   - package-ecosystem: "docker-compose"
     directory: "/research"
     schedule:
@@ -164,5 +164,94 @@ updates:
       prefix: "chore(deps-dev): ⬆️"
     cooldown:
       default-days: 7
+    labels:
+      - "📦 dependencies"
+
+  - package-ecosystem: "docker"
+    directory: "/research/docker/dotnet"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    labels:
+      - "📦 dependencies"
+
+  - package-ecosystem: "docker"
+    directory: "/research/docker/go"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    labels:
+      - "📦 dependencies"
+
+  - package-ecosystem: "docker"
+    directory: "/research/docker/rust"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    labels:
+      - "📦 dependencies"
+
+  # The .NET adapter's tool manifest (`.config/dotnet-tools.json`): CSharpier.
+  - package-ecosystem: "nuget"
+    directory: "/research/adapters/dotnet"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    labels:
+      - "📦 dependencies"
+
+  # The Rust adapter's crates: `serde_json` and what it locks.
+  - package-ecosystem: "cargo"
+    directory: "/research/adapters/rust"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+
+    # Cargo has no release-age floor of its own, so this is the moratorium.
+    cooldown:
+      default-days: 7
+
+    groups:
+      research-crates:
+        patterns:
+          - "*"
     labels:
       - "📦 dependencies"
