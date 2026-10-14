@@ -152,7 +152,13 @@ updates:
       - "📦 dependencies"
 
   - package-ecosystem: "docker"
-    directory: "/research/docker/node"
+    directories:
+      - "/research/docker/c"
+      - "/research/docker/debian"
+      - "/research/docker/node"
+      - "/research/docker/powershell"
+      - "/research/docker/ruby"
+      - "/research/docker/swift"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -164,6 +170,33 @@ updates:
       prefix: "chore(deps-dev): ⬆️"
     cooldown:
       default-days: 7
+
+    # One PR per week for every Dockerfile's base image.
+    groups:
+      research-dockerfiles:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"
+
+  # The Ruby adapter's gems, locked in `research/docker/ruby/Gemfile.lock`.
+  - package-ecosystem: "bundler"
+    directory: "/research/docker/ruby"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    groups:
+      research-gems:
+        patterns:
+          - "*"
     labels:
       - "📦 dependencies"
 

@@ -27,6 +27,20 @@ x-adapter-environment: &adapter-environment
   PYTHONDONTWRITEBYTECODE: "1"
   TZ: UTC
 
+x-adapter-volumes: &adapter-volumes
+  - ./adapters:/work/research/adapters:ro
+  - ./cases:/work/research/cases:ro
+
+# The C / C++ adapter, with its C++ probes compiled into the image.
+x-c-build: &c-build
+  context: adapters
+  dockerfile: ../docker/c/Dockerfile
+
+# Debian's shells, git, systemd, and clang-format, from one image.
+x-debian-build: &debian-build
+  context: .
+  dockerfile: docker/debian/Dockerfile
+
 # A compiled adapter's image: its build context is its own directory, so the
 # image copies only that adapter, and `.dockerignore` (the Node image's) never
 # applies. The language's formatter and linter run on the same image.
@@ -38,20 +52,40 @@ x-go-build: &go-build
   context: adapters/go
   dockerfile: ../../docker/go/Dockerfile
 
+# PowerShell, plus PSScriptAnalyzer for its formatter.
+x-powershell-build: &powershell-build
+  context: docker/powershell
+
 x-python-volumes: &python-volumes
   - ./adapters:/work/research/adapters:ro
   - ./cases:/work/research/cases:ro
+
+# Ruby, plus Rails' ActiveModel and syntax_tree from `Gemfile.lock`.
+x-ruby-build: &ruby-build
+  context: docker/ruby
 
 x-rust-build: &rust-build
   context: adapters/rust
   dockerfile: ../../docker/rust/Dockerfile
 
+# The Swift adapter, compiled into the image; swift-format runs on it too.
+x-swift-build: &swift-build
+  context: adapters
+  dockerfile: ../docker/swift/Dockerfile
+
 services:
-  # Checkstyle's `final` rules for the Java adapter (`adapters/jvm/
-  # checkstyle.xml`); it only reports, so both modes check.
-  #
-  # - `pull_policy: build`, like `ktfmt`, so a version bump is never masked by
-  #   a cached image.
+  # glibc through `ctypes`, and libstdc++ through probes compiled into the
+  # image.
+  c:
+    build: *c-build
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["c"]
+    volumes:
+      - ./cases:/work/research/cases:ro
+
   checkstyle:
     build:
       context: docker/checkstyle
@@ -66,6 +100,20 @@ services:
     pull_policy: build
     volumes:
       - ./adapters:/work/research/adapters:ro
+    working_dir: /work/research
+
+  clang-format:
+    build: *debian-build
+    entrypoint: ["clang-format", "--style=LLVM"]
+    labels:
+      dev.safe-fns.research.check-args: --dry-run --Werror adapters/cxx_probes.cpp
+      dev.safe-fns.research.format-args: -i adapters/cxx_probes.cpp
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters:/work/research/adapters
     working_dir: /work/research
 
   # Rust's linter, beside rustfmt. `--fix` exits 0 even when a denied lint
@@ -252,6 +300,54 @@ services:
       - ../scripts/research:/work/scripts/research:ro
       - ../test:/work/test:ro
 
+  php:
+    entrypoint: ["php", "/work/research/adapters/php.php"]
+    environment: *adapter-environment
+    image: php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["php"]
+    volumes: *adapter-volumes
+
+  # The .NET SDK image ships PowerShell; Microsoft no longer publishes
+  # PowerShell's own image.
+  powershell:
+    build: *powershell-build
+    entrypoint:
+      - pwsh
+      - -NoLogo
+      - -NoProfile
+      - -NonInteractive
+      - -File
+      - /work/research/adapters/powershell.ps1
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["powershell"]
+    volumes: *adapter-volumes
+
+  psscriptanalyzer:
+    build: *powershell-build
+    entrypoint:
+      - pwsh
+      - -NoLogo
+      - -NoProfile
+      - -NonInteractive
+      - -File
+      - /opt/research/format.ps1
+    labels:
+      dev.safe-fns.research.check-args: -Check adapters
+      dev.safe-fns.research.format-args: adapters
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters:/work/research/adapters
+    working_dir: /work/research
+
   python:
     entrypoint: ["python", "/work/research/adapters/python.py"]
     environment: *adapter-environment
@@ -275,6 +371,16 @@ services:
     network_mode: none
     profiles: ["python"]
     volumes: *python-volumes
+
+  ruby:
+    build: *ruby-build
+    entrypoint: ["ruby", "/work/research/adapters/ruby.rb"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["ruby"]
+    volumes: *adapter-volumes
 
   ruff:
     image: ghcr.io/astral-sh/ruff:0.17.0@sha256:0f9316141d252f8c4de3fb672e8433c1afbf9adb24b877ae887cffa4012d850c
@@ -330,6 +436,17 @@ services:
     volumes:
       - ./adapters/rust:/work/research/adapters/rust
 
+  # bash, dash, fish, and zsh, plus git and systemd, driven from Python.
+  shell:
+    build: *debian-build
+    entrypoint: ["python3", "/work/research/adapters/shell.py"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["shell"]
+    volumes: *adapter-volumes
+
   sqlite:
     entrypoint: ["python", "/work/research/adapters/sqlite.py"]
     environment: *adapter-environment
@@ -339,3 +456,44 @@ services:
     network_mode: none
     profiles: ["python"]
     volumes: *python-volumes
+
+  # Swift on Linux, whose Foundation is swift-corelibs-foundation rather than
+  # Darwin's; the adapter is compiled into the image, not mounted.
+  swift:
+    build: *swift-build
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["swift"]
+    volumes:
+      - ./cases:/work/research/cases:ro
+
+  swift-format:
+    build: *swift-build
+    entrypoint: ["swift", "format"]
+    labels:
+      dev.safe-fns.research.check-args: lint --strict --recursive adapters
+      dev.safe-fns.research.format-args: format --in-place --recursive adapters
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./.swift-format:/work/research/.swift-format:ro
+      - ./adapters:/work/research/adapters
+    working_dir: /work/research
+
+  syntax-tree:
+    build: *ruby-build
+    entrypoint: ["stree"]
+    labels:
+      dev.safe-fns.research.check-args: check adapters/*.rb
+      dev.safe-fns.research.format-args: write adapters/*.rb
+      dev.safe-fns.research.role: formatter
+    network_mode: none
+    profiles: ["format"]
+    pull_policy: build
+    volumes:
+      - ./adapters:/work/research/adapters
+    working_dir: /work/research

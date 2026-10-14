@@ -1,0 +1,9 @@
+# The `c` and `swift` images build from `research/adapters`, so this keeps
+# their context to the files they copy; every other adapter has its own
+# directory and context.
+*
+!c.py
+!cxx_probes.cpp
+!research_codec.py
+!research_codec.swift
+!swift.swift
