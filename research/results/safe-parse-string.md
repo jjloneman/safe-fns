@@ -120,8 +120,8 @@
 | PHP<br>`trim(strval($value))` | 4 | `8.5.11` | `C.UTF-8` | `php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7` |
 | PowerShell<br>`([string]$value).Trim()` | 4 | `7.6.7` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | PowerShell<br>`[string]$value` | 4 | `7.6.7` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
-| Rails (ActiveModel)<br>`ActiveModel::Type::String.new.cast(value)` | 4 | `8.1.4` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
-| Ruby<br>`value.to_s` | 4 | `3.4.11` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
-| Ruby<br>`value.to_s.strip` | 4 | `3.4.11` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
+| Rails (ActiveModel)<br>`ActiveModel::Type::String.new.cast(value)` | 4 | `8.1.4` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
+| Ruby<br>`value.to_s` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
+| Ruby<br>`value.to_s.strip` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
 | Swift<br>`String(describing: value)` | 4 | `6.4` | `C.UTF-8` | `swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66` |
 | Swift<br>`value.trimmingCharacters(in: .whitespacesAndNewlines)` | 4 | `6.4` | `C.UTF-8` | `swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66` |

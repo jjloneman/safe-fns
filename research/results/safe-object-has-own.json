@@ -1377,8 +1377,8 @@
     },
     {
       "call": "object.key?(key)",
-      "image": "ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2",
-      "inputs": "sha256:d90108c2528b65f8e3dd03e6c0c13065f6cd6c2411af0b1dc1e9d772c280da20",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
       "locale": "C.UTF-8",
       "name": "Ruby",
       "outcomes": [
@@ -1448,7 +1448,7 @@
       ],
       "service": "ruby",
       "tier": 4,
-      "version": "3.4.11"
+      "version": "4.0.7"
     },
     {
       "call": "object.keys.contains(key)",

@@ -151,9 +151,9 @@
 | PowerShell<br>`[double]::Parse($value)` | 4 | `7.6.7` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | PowerShell<br>`[double]$value` | 4 | `7.6.7` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | PowerShell<br>`$value -as [double]` | 4 | `7.6.7` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
-| Rails (ActiveModel)<br>`ActiveModel::Type::Float.new.cast(value)` | 4 | `8.1.4` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
-| Ruby<br>`Float(value)` | 4 | `3.4.11` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
-| Ruby<br>`value.to_f` | 4 | `3.4.11` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
+| Rails (ActiveModel)<br>`ActiveModel::Type::Float.new.cast(value)` | 4 | `8.1.4` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
+| Ruby<br>`Float(value)` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
+| Ruby<br>`value.to_f` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
 | Swift<br>`Double(value)` | 4 | `6.4` | `C.UTF-8` | `swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66` |
 | validator.js<br>`validator.toFloat(value)` | 4 | `13.15.35` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | zsh<br>`printf '%s' "$(( $1 ))"` | 4 | `5.9-8+b24` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
