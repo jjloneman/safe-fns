@@ -1,6 +1,6 @@
 # The Node adapter's image: the pinned official Node image plus the libraries
 # in `research/package.json`, installed at build time so a run needs no network.
-FROM node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212
+FROM node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3
 
 # Where the Compose mounts put `research/` (the repo is mirrored under
 # `/work`), so the adapter's imports find `node_modules` beside it.
