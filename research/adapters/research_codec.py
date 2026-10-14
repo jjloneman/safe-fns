@@ -88,6 +88,19 @@ class Tool(TypedDict):
     """The version that actually ran."""
 
 
+class ToolError(Exception):
+    """A failure a tool reports by name, such as a CLI's exit status.
+
+    A driven tool (a shell, a C library) raises nothing Python can name, so
+    its probe raises this, and the outcome's `error` is the name given.
+    """
+
+    def __init__(self, name: str) -> None:
+        """Keep the name the outcome reports."""
+        super().__init__(name)
+        self.outcome_name = name
+
+
 class Unrepresentable:
     """A value Python has no type for: `undefined`, or a `$js` value."""
 
@@ -297,5 +310,7 @@ def run_probe(*, args: list[JsonValue], probe: Probe) -> Outcome:
 
     try:
         return {"kind": "value", "value": encode(probe["run"](*decoded))}
+    except ToolError as error:
+        return {"error": error.outcome_name, "kind": "error"}
     except Exception as error:  # every failure is a result, never a crash
         return {"error": type(error).__name__, "kind": "error"}

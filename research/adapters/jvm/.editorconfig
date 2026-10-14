@@ -1,0 +1,6 @@
+# ktfmt reads only `max_line_length` from here (`--enable-editorconfig`); the
+# repo wraps every language at 80 columns.
+root = true
+
+[*.{kt,kts}]
+max_line_length = 80
