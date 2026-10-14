@@ -4,26 +4,26 @@
 
 ## Tiers 0–2
 
-| Case | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | remeda<br>`isPlainObject(value)` | Python<br>`type(value) is dict` |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `{}` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` |
-| `[]` | `false` | `false` | `false` | `false` | `false` |
-| `null` | `false` | `false` | `false` | `false` | `false` |
-| `undefined` | `false` | `false` | `false` | `false` | — |
-| `"x"` | `false` | `false` | `false` | `false` | `false` |
-| `1` | `false` | `false` | `false` | `false` | `false` |
-| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — |
-| `‹a cross-realm object›` | `true` | `true` | `true` | `false` | — |
-| `‹an empty cross-realm object›` | `true` | `true` | `true` | `false` | — |
-| `‹a class instance›` | `false` | `false` | `false` | `false` | — |
-| `‹an object with Symbol.toStringTag›` | `false` | `false` | `true` | `true` | — |
-| `‹a Date›` | `false` | `false` | `false` | `false` | — |
-| `‹an empty Map›` | `false` | `false` | `false` | `false` | — |
-| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | — |
-| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | — |
-| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — |
-| `‹a function›` | `false` | `false` | `false` | `false` | — |
+| Case | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | remeda<br>`isPlainObject(value)` | Go<br>`_, ok := value.(map[string]any)` | Python<br>`type(value) is dict` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `{}` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `[]` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `null` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `undefined` | `false` | `false` | `false` | `false` | — | — |
+| `"x"` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `1` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — | — |
+| `‹a cross-realm object›` | `true` | `true` | `true` | `false` | — | — |
+| `‹an empty cross-realm object›` | `true` | `true` | `true` | `false` | — | — |
+| `‹a class instance›` | `false` | `false` | `false` | `false` | — | — |
+| `‹an object with Symbol.toStringTag›` | `false` | `false` | `true` | `true` | — | — |
+| `‹a Date›` | `false` | `false` | `false` | `false` | — | — |
+| `‹an empty Map›` | `false` | `false` | `false` | `false` | — | — |
+| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | — | — |
+| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | — | — |
+| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — |
+| `‹a function›` | `false` | `false` | `false` | `false` | — | — |
 
 ## By outcome
 
@@ -33,30 +33,31 @@
 | is-plain-obj<br>`isPlainObject(value)` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a class instance›` `‹an object with Symbol.toStringTag›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
 | lodash<br>`_.isPlainObject(value)` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹an object with Symbol.toStringTag›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a class instance›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
 | remeda<br>`isPlainObject(value)` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹an object with Symbol.toStringTag›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹a class instance›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
+| Go<br>`_, ok := value.(map[string]any)` | `{}` `{ "a": 1 }` | `[]` `null` `"x"` `1` |  |  |
 | Python<br>`type(value) is dict` | `{}` `{ "a": 1 }` | `[]` `null` `"x"` `1` |  |  |
 
 ## Every tool
 
-| Case | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | remeda<br>`isPlainObject(value)` | Python<br>`type(value) is dict` |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `{}` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` |
-| `[]` | `false` | `false` | `false` | `false` | `false` |
-| `null` | `false` | `false` | `false` | `false` | `false` |
-| `undefined` | `false` | `false` | `false` | `false` | — |
-| `"x"` | `false` | `false` | `false` | `false` | `false` |
-| `1` | `false` | `false` | `false` | `false` | `false` |
-| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — |
-| `‹a cross-realm object›` | `true` | `true` | `true` | `false` | — |
-| `‹an empty cross-realm object›` | `true` | `true` | `true` | `false` | — |
-| `‹a class instance›` | `false` | `false` | `false` | `false` | — |
-| `‹an object with Symbol.toStringTag›` | `false` | `false` | `true` | `true` | — |
-| `‹a Date›` | `false` | `false` | `false` | `false` | — |
-| `‹an empty Map›` | `false` | `false` | `false` | `false` | — |
-| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | — |
-| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | — |
-| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — |
-| `‹a function›` | `false` | `false` | `false` | `false` | — |
+| Case | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | remeda<br>`isPlainObject(value)` | Go<br>`_, ok := value.(map[string]any)` | Python<br>`type(value) is dict` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `{}` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `[]` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `null` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `undefined` | `false` | `false` | `false` | `false` | — | — |
+| `"x"` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `1` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — | — |
+| `‹a cross-realm object›` | `true` | `true` | `true` | `false` | — | — |
+| `‹an empty cross-realm object›` | `true` | `true` | `true` | `false` | — | — |
+| `‹a class instance›` | `false` | `false` | `false` | `false` | — | — |
+| `‹an object with Symbol.toStringTag›` | `false` | `false` | `true` | `true` | — | — |
+| `‹a Date›` | `false` | `false` | `false` | `false` | — | — |
+| `‹an empty Map›` | `false` | `false` | `false` | `false` | — | — |
+| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | — | — |
+| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | — | — |
+| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — |
+| `‹a function›` | `false` | `false` | `false` | `false` | — | — |
 
 ## Versions
 
@@ -66,4 +67,5 @@
 | is-plain-obj<br>`isPlainObject(value)` | 1 | `4.1.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | lodash<br>`_.isPlainObject(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
 | remeda<br>`isPlainObject(value)` | 1 | `2.51.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| Go<br>`_, ok := value.(map[string]any)` | 2 | `1.27.1` | `C.UTF-8` | `golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66` |
 | Python<br>`type(value) is dict` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |

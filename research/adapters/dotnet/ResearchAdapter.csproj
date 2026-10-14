@@ -1,0 +1,22 @@
+<!--
+  The .NET adapter, run by the `dotnet` Compose service. It uses only the base
+  class library, so a build restores nothing from NuGet and needs no network.
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!--
+      Pinned rather than `latest`, so an SDK bump can't add rules that fail
+      the build; the adapter run also builds with warnings allowed, leaving
+      them to the `dotnet-build` lint.
+    -->
+    <AnalysisLevel>10-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <!-- Real cultures from ICU, for the extra-locale columns. -->
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+</Project>

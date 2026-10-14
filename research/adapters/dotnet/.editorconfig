@@ -1,0 +1,8 @@
+# The .NET analyzers' settings beyond `AnalysisLevel`; the `dotnet-build`
+# service fails on any warning they raise.
+root = true
+
+[*.cs]
+# Immutable by default (AGENTS.md → Every language): a field never reassigned
+# is `readonly`.
+dotnet_diagnostic.IDE0044.severity = warning

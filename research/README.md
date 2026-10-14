@@ -31,16 +31,17 @@ the generated tables instead of summarizing other tools' docs.
 2. Run `pnpm research` from the repo root.
    - It builds and pulls the images it needs, runs every adapter in parallel,
      and rewrites `research/results/`.
-   - The first run pulls ~1–2 GB of images; later runs take seconds.
+   - The first run pulls and builds ~4 GB of images (the .NET, Go, and Rust
+     toolchains are most of it); later runs take seconds.
 
-| Command                           | What it does                                                                    |
-| :-------------------------------- | :------------------------------------------------------------------------------ |
-| `pnpm research`                   | Runs every adapter over every case file                                         |
-| `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats |
-| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (`jvm`, `node`, `python`); repeats          |
-| `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                   |
-| `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter             |
-| `pnpm research --format --check`  | Reports formatting drift without writing                                        |
+| Command                           | What it does                                                                                   |
+| :-------------------------------- | :--------------------------------------------------------------------------------------------- |
+| `pnpm research`                   | Runs every adapter over every case file                                                        |
+| `pnpm research --function <name>` | Runs one function's cases (`safeParseBoolean` or `safe-parse-boolean`); repeats                |
+| `pnpm research --profile <name>`  | Runs one Compose profile's adapters (`dotnet`, `go`, `jvm`, `node`, `python`, `rust`); repeats |
+| `pnpm research --concurrency <n>` | Caps parallel containers (default: the Docker VM's CPU count)                                  |
+| `pnpm research --format`          | Formats every adapter: Prettier, then each language's own formatter                            |
+| `pnpm research --format --check`  | Reports formatting drift without writing                                                       |
 
 - Results are byte-identical across runs and concurrency levels: columns are
   sorted, keys are sorted, and nothing records a timestamp.
@@ -63,6 +64,10 @@ the generated tables instead of summarizing other tools' docs.
   - The runner's `docker compose build` step recompiles it after an edit; its
     library versions are exact, and Dependabot's cooldown holds them 7 days
     back, since Maven has no release-age floor.
+  - `dotnet/`, `go/`, and `rust/` are each a project compiled into its own image
+    the same way, each with its codec twin: `Codec.cs`, `codec.go`, and
+    `src/codec.rs`. Go and .NET use only their standard libraries; Rust's crates
+    come from the committed `Cargo.lock`.
 - `results/<function>.json` and `.md` — generated; never edit them by hand.
   - The Markdown has a tiers 0–2 summary for decision records, a by-outcome
     table for functions with few distinct results, the full table, and every
@@ -70,7 +75,9 @@ the generated tables instead of summarizing other tools' docs.
 - `sources/` — cached excerpts for tools that can't run in a container, each
   with its URL, version or commit, and fetch date.
 - `compose.yaml` — every service; `docker/` holds Dockerfiles for images that
-  need a build step.
+  need a build step: one per compiled adapter (`dotnet`, `go`, `jvm`, `rust`),
+  which also carries that language's formatter and linter, plus `node` and the
+  JVM formatters' own.
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` — the Node adapter's
   libraries, a separate pnpm root with the repo's 7-day moratorium.
 - `tsconfig.json` — a nested config, so the editor and ESLint resolve the Node
@@ -149,12 +156,16 @@ to stdout:
   1. Add a service to `compose.yaml` with a pinned `image: name:X.Y.Z@sha256:…`
      whose tag was last pushed at least 7 days ago, the `adapter` role label, a
      profile, `LANG`/`LC_ALL` set to `C.UTF-8`, and read-only mounts.
+     - A compiled language builds its adapter into a one-stage image instead
+       (see `docker/go/Dockerfile`), and mounts only `cases/`.
   2. Write the adapter and its codec twin; the `codec` case file must
      round-trip.
   3. Add the language's formatter as a `formatter` service with `format-args`
      and `check-args` labels (see `ruff`), or a Prettier plugin in
      `package.json`.
-  4. Add a Dependabot entry if the image comes from a Dockerfile.
+  4. Add a Dependabot entry if the image comes from a Dockerfile, and one for
+     any manifest the adapter or its formatter installs from (`Cargo.lock`,
+     `dotnet-tools.json`), each with the 7-day cooldown.
 
 ## 🖌️ Formatters
 
@@ -165,12 +176,17 @@ to stdout:
 | Java                   | Prettier, through [`prettier-plugin-java`](https://github.com/jhipster/prettier-java) in the root config; [Checkstyle](https://checkstyle.org) (`adapters/jvm/checkstyle.xml`) in the `checkstyle` service, for `final` parameters and locals |
 | Kotlin                 | [ktfmt](https://github.com/facebook/ktfmt)'s Kotlin-lang style in the `ktfmt` service, at the 80 columns `adapters/jvm/.editorconfig` sets                                                                                                    |
 | Groovy                 | [npm-groovy-lint](https://github.com/nvuillam/npm-groovy-lint) (`adapters/jvm/.groovylintrc.json`): CodeNarc's recommended rules, plus `--format`                                                                                             |
+| C#                     | [CSharpier](https://csharpier.com) (`.csharpierrc.json`) in `csharpier`; the .NET analyzers (`AnalysisLevel`, warnings as errors) in `dotnet-build`                                                                                           |
+| Go                     | `gofmt` in `gofmt`, `go vet` in `go-vet`                                                                                                                                                                                                      |
+| Rust                   | rustfmt (`rustfmt.toml`) in `rustfmt`; [Clippy](https://doc.rust-lang.org/clippy/) (`pedantic`, warnings denied) in `clippy`                                                                                                                  |
 
 - Every language follows the repo's conventions
   ([AGENTS.md → Every language](../AGENTS.md#-every-language)); each formatter
   and linter is configured to enforce what it can.
 - npm-groovy-lint runs with `--no-parse`: its parse check compiles each file
   alone, so it can't see the Java and Kotlin classes the Groovy files use.
+- Neither `gofmt` nor any Go tool wraps lines, so Go's 80 columns are kept by
+  hand.
 - `--format` runs the container formatters one at a time, since `ruff format`
   and `ruff check --fix` can rewrite the same file; `--format --check` runs them
   in parallel.
