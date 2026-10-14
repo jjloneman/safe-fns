@@ -51,7 +51,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
 - `dist/` — build output (gitignored), the only directory published.
 - `README.md` — the public face: why the package exists, install and usage, the API, the support matrix, scripts, and what each label means.
 - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` — the community-health files.
-  - `CONTRIBUTING.md` links to this file's sections rather than repeating them, so conventions change here only.
+  - `CONTRIBUTING.md` links to this file's sections rather than repeating them, so each convention changes in one place only.
   - Security reports go through GitHub private vulnerability reporting.
 - `.githooks/` — the pre-commit and pre-push hooks (see [Pre-commit checks](#-pre-commit-checks)).
 - `.github/workflows/` — CI, CodeQL, release, and the two research workflows (see [CI](#-ci)); `.github/actions/setup/` is the shared pnpm + Node + install prelude.
@@ -431,6 +431,19 @@ Semantic and design decisions — what "empty" means, how a function is named, w
 - `pnpm research` runs every adapter service in `research/compose.yaml` in parallel and writes `research/results/`; it needs a Docker-compatible runtime (OrbStack on the owner's Mac mini).
 - The root ESLint config lints `research/**/*.mts` only once `pnpm --dir research install` has run, since its imports resolve nowhere else.
 - How to change it is covered by `.claude/rules/research.md`.
+
+## 📄 Long Markdown files
+
+Every agent session re-reads its instruction files in full, so their size is a recurring cost, and past a certain length rules get skimmed and missed.
+
+- **Past about 500 lines, consider a split.** It's a prompt to weigh, not a hard limit.
+  - It applies to every Markdown file agents or contributors read: this file, `CLAUDE.md`, `README.md`, `CONTRIBUTING.md`, `.claude/rules/*.md`, and everything under `docs/`.
+- **Split along an existing heading**, so the new file has one clear subject, such as code style.
+- **Keep agents finding it** — a split file that agents don't load is worse than a long one:
+  - this file keeps a short summary plus an explicit "read `<file>` before editing `<paths>`" line, since agents other than Claude load only this file;
+  - `CLAUDE.md` `@`-imports the new file when Claude should always have it;
+  - guidance only Claude needs can instead be a path-scoped `.claude/rules/` file, listed in `CLAUDE.md`'s map, as the CI, research, and testing rules already are.
+- **Keep one source of truth.** The moved text leaves this file, and every inbound anchor is updated to the new file — grep for `AGENTS.md#`, since `CONTRIBUTING.md` links several sections.
 
 ## 🛑 Deleting things
 
