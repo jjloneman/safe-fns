@@ -4,82 +4,90 @@
 
 ## Tiers 0–2
 
-| Case | es-toolkit<br>`compat.toString(value)` | JS built-ins<br>`String(value)` | JS built-ins<br>`String(value).trim()` | lodash<br>`_.toString(value)` | zod<br>`z.coerce.string().parse(value)` | Python<br>`str(value)` | Python<br>`str(value).strip()` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` |
-| `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` |
-| `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` |
-| `"   "` | `"   "` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `""` |
-| `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` |
-| `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` |
-| `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `""` |
-| `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` |
-| `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` |
-| `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` |
-| `42` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` |
-| `-0` | `"-0"` | `"0"` | `"0"` | `"-0"` | `"0"` | `"-0.0"` | `"-0.0"` |
-| `1e+21` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` |
-| `1e-7` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-07"` | `"1e-07"` |
-| `0.1` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` |
-| `100` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` |
-| `NaN` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"nan"` | `"nan"` |
-| `Infinity` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"inf"` | `"inf"` |
-| `9007199254740993n` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` |
-| `true` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"True"` | `"True"` |
-| `false` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"False"` | `"False"` |
-| `null` | `""` | `"null"` | `"null"` | `""` | `"null"` | `"None"` | `"None"` |
-| `undefined` | `""` | `"undefined"` | `"undefined"` | `""` | `"undefined"` | — | — |
-| `[]` | `""` | `""` | `""` | `""` | `""` | `"[]"` | `"[]"` |
-| `["a", "b"]` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"['a', 'b']"` | `"['a', 'b']"` |
-| `{}` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"{}"` | `"{}"` |
-| `‹a symbol›` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | — | — |
-| `‹a Date›` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — |
-| `‹an object with a throwing toString›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `ZodError` | — | — |
+| Case | es-toolkit<br>`compat.toString(value)` | Hermes<br>`String(value)` | Hermes<br>`String(value).trim()` | JS built-ins<br>`String(value)` | JS built-ins<br>`String(value).trim()` | lodash<br>`_.toString(value)` | valibot<br>`v.parse(v.pipe(v.unknown(), v.toString()), value)` | zod<br>`z.coerce.string().parse(value)` | Python<br>`str(value)` | Python<br>`str(value)` | Python<br>`str(value).strip()` | Python<br>`str(value).strip()` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` |
+| `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"hi"` |
+| `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` |
+| `"   "` | `"   "` | `"   "` | `""` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `"   "` | `"   "` | `""` | `""` |
+| `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `""` |
+| `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `""` |
+| `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `""` | `""` |
+| `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` |
+| `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` |
+| `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` |
+| `42` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` |
+| `-0` | `"-0"` | `"0"` | `"0"` | `"0"` | `"0"` | `"-0"` | `"0"` | `"0"` | `"-0.0"` | `"-0.0"` | `"-0.0"` | `"-0.0"` |
+| `1e+21` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` |
+| `1e-7` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-07"` | `"1e-07"` | `"1e-07"` | `"1e-07"` |
+| `0.1` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` |
+| `100` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` |
+| `NaN` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"nan"` | `"nan"` | `"nan"` | `"nan"` |
+| `Infinity` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"inf"` | `"inf"` | `"inf"` | `"inf"` |
+| `9007199254740993n` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` |
+| `true` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"True"` | `"True"` | `"True"` | `"True"` |
+| `false` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"False"` | `"False"` | `"False"` | `"False"` |
+| `null` | `""` | `"null"` | `"null"` | `"null"` | `"null"` | `""` | `"null"` | `"null"` | `"None"` | `"None"` | `"None"` | `"None"` |
+| `undefined` | `""` | `"undefined"` | `"undefined"` | `"undefined"` | `"undefined"` | `""` | `"undefined"` | `"undefined"` | — | — | — | — |
+| `[]` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `"[]"` | `"[]"` | `"[]"` | `"[]"` |
+| `["a", "b"]` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"['a', 'b']"` | `"['a', 'b']"` | `"['a', 'b']"` | `"['a', 'b']"` |
+| `{}` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"{}"` | `"{}"` | `"{}"` | `"{}"` |
+| `‹a symbol›` | `"Symbol(hostile)"` | — | — | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | — | — | — | — |
+| `‹a Date›` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — | — | — |
+| `‹an object with a throwing toString›` | 💥 `Error` | — | — | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `ValiError` | 💥 `ZodError` | — | — | — | — |
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.toString(value)` | JS built-ins<br>`String(value)` | JS built-ins<br>`String(value).trim()` | lodash<br>`_.toString(value)` | zod<br>`z.coerce.string().parse(value)` | Python<br>`str(value)` | Python<br>`str(value).strip()` | SQLite<br>`SELECT CAST(? AS TEXT)` | SQLite<br>`SELECT trim(?)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` |
-| `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` |
-| `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` |
-| `"   "` | `"   "` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `""` | `"   "` | `""` |
-| `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` |
-| `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` |
-| `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `""` | `"\u{85}"` | `"\u{85}"` |
-| `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` |
-| `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` |
-| `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` |
-| `42` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` |
-| `-0` | `"-0"` | `"0"` | `"0"` | `"-0"` | `"0"` | `"-0.0"` | `"-0.0"` | `"0.0"` | `"0.0"` |
-| `1e+21` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1.0e+21"` | `"1.0e+21"` |
-| `1e-7` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-07"` | `"1e-07"` | `"1.0e-07"` | `"1.0e-07"` |
-| `0.1` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` |
-| `100` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` |
-| `NaN` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"nan"` | `"nan"` | `null` | `null` |
-| `Infinity` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"inf"` | `"inf"` | `"Inf"` | `"Inf"` |
-| `9007199254740993n` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` |
-| `true` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"True"` | `"True"` | — | — |
-| `false` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"False"` | `"False"` | — | — |
-| `null` | `""` | `"null"` | `"null"` | `""` | `"null"` | `"None"` | `"None"` | `null` | `null` |
-| `undefined` | `""` | `"undefined"` | `"undefined"` | `""` | `"undefined"` | — | — | — | — |
-| `[]` | `""` | `""` | `""` | `""` | `""` | `"[]"` | `"[]"` | — | — |
-| `["a", "b"]` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"['a', 'b']"` | `"['a', 'b']"` | — | — |
-| `{}` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"{}"` | `"{}"` | — | — |
-| `‹a symbol›` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | — | — | — | — |
-| `‹a Date›` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — | — | — |
-| `‹an object with a throwing toString›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `ZodError` | — | — | — | — |
+| Case | es-toolkit<br>`compat.toString(value)` | Hermes<br>`String(value)` | Hermes<br>`String(value).trim()` | JS built-ins<br>`String(value)` | JS built-ins<br>`String(value).trim()` | lodash<br>`_.toString(value)` | valibot<br>`v.parse(v.pipe(v.unknown(), v.toString()), value)` | zod<br>`z.coerce.string().parse(value)` | Python<br>`str(value)` | Python<br>`str(value)` | Python<br>`str(value).strip()` | Python<br>`str(value).strip()` | SQLite<br>`SELECT CAST(? AS TEXT)` | SQLite<br>`SELECT trim(?)` | XML Schema 1.0<br>`decode(<string>value</string>)` | XML Schema 1.0<br>`decode(<token>value</token>)` | Ajv<br>`coerce({ type: "string" }, value)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` |
+| `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` |
+| `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `null` | `null` | `""` |
+| `"   "` | `"   "` | `"   "` | `""` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `"   "` | `"   "` | `""` | `""` | `"   "` | `""` | `"   "` | `""` | `"   "` |
+| `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` |
+| `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `""` | `"\u{A0}"` | `"\u{A0}"` | `"\u{A0}"` | `""` | `"\u{A0}"` |
+| `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `""` | `""` | `"\u{85}"` | `"\u{85}"` | `"\u{85}"` | `""` | `"\u{85}"` |
+| `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `""` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` | `"\u{FEFF}"` |
+| `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` | `"\u{200B}"` |
+| `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` | `"\u{2800}"` |
+| `42` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | `"42"` | — | — | `"42"` |
+| `-0` | `"-0"` | `"0"` | `"0"` | `"0"` | `"0"` | `"-0"` | `"0"` | `"0"` | `"-0.0"` | `"-0.0"` | `"-0.0"` | `"-0.0"` | `"0.0"` | `"0.0"` | — | — | `"0"` |
+| `1e+21` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1e+21"` | `"1.0e+21"` | `"1.0e+21"` | — | — | `"1e+21"` |
+| `1e-7` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-7"` | `"1e-07"` | `"1e-07"` | `"1e-07"` | `"1e-07"` | `"1.0e-07"` | `"1.0e-07"` | — | — | `"1e-7"` |
+| `0.1` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | `"0.1"` | — | — | `"0.1"` |
+| `100` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | `"100"` | — | — | `"100"` |
+| `NaN` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"NaN"` | `"nan"` | `"nan"` | `"nan"` | `"nan"` | `null` | `null` | — | — | `"NaN"` |
+| `Infinity` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"Infinity"` | `"inf"` | `"inf"` | `"inf"` | `"inf"` | `"Inf"` | `"Inf"` | — | — | `"Infinity"` |
+| `9007199254740993n` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | `"9007199254740993"` | — | — | 💥 `ValidationError` |
+| `true` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"true"` | `"True"` | `"True"` | `"True"` | `"True"` | — | — | — | — | `"true"` |
+| `false` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"false"` | `"False"` | `"False"` | `"False"` | `"False"` | — | — | — | — | `"false"` |
+| `null` | `""` | `"null"` | `"null"` | `"null"` | `"null"` | `""` | `"null"` | `"null"` | `"None"` | `"None"` | `"None"` | `"None"` | `null` | `null` | — | — | `""` |
+| `undefined` | `""` | `"undefined"` | `"undefined"` | `"undefined"` | `"undefined"` | `""` | `"undefined"` | `"undefined"` | — | — | — | — | — | — | — | — | `undefined` |
+| `[]` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `"[]"` | `"[]"` | `"[]"` | `"[]"` | — | — | — | — | 💥 `ValidationError` |
+| `["a", "b"]` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"a,b"` | `"['a', 'b']"` | `"['a', 'b']"` | `"['a', 'b']"` | `"['a', 'b']"` | — | — | — | — | 💥 `ValidationError` |
+| `{}` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"[object Object]"` | `"{}"` | `"{}"` | `"{}"` | `"{}"` | — | — | — | — | 💥 `ValidationError` |
+| `‹a symbol›` | `"Symbol(hostile)"` | — | — | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | `"Symbol(hostile)"` | — | — | — | — | — | — | — | — | 💥 `ValidationError` |
+| `‹a Date›` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | `"Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"` | — | — | — | — | — | — | — | — | 💥 `ValidationError` |
+| `‹an object with a throwing toString›` | 💥 `Error` | — | — | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `ValiError` | 💥 `ZodError` | — | — | — | — | — | — | — | — | 💥 `ValidationError` |
 
 ## Versions
 
-| Tool | Tier | Version | Locale | Image |
+| Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
-| es-toolkit<br>`compat.toString(value)` | 1 | `1.52.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| JS built-ins<br>`String(value)` | 1 | `v26.9.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| JS built-ins<br>`String(value).trim()` | 1 | `v26.9.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| lodash<br>`_.toString(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| zod<br>`z.coerce.string().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| Python<br>`str(value)` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
-| Python<br>`str(value).strip()` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
-| SQLite<br>`SELECT CAST(? AS TEXT)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
-| SQLite<br>`SELECT trim(?)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
+| es-toolkit<br>`compat.toString(value)` | 1 | `1.52.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Hermes<br>`String(value)` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Hermes<br>`String(value).trim()` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| JS built-ins<br>`String(value)` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| JS built-ins<br>`String(value).trim()` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| lodash<br>`_.toString(value)` | 1 | `4.18.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| valibot<br>`v.parse(v.pipe(v.unknown(), v.toString()), value)` | 1 | `1.5.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| zod<br>`z.coerce.string().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Python<br>`str(value)` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| Python<br>`str(value)` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| Python<br>`str(value).strip()` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| Python<br>`str(value).strip()` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| SQLite<br>`SELECT CAST(? AS TEXT)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| SQLite<br>`SELECT trim(?)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| XML Schema 1.0<br>`decode(<string>value</string>)` | 3 | `xmlschema 4.3.2` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| XML Schema 1.0<br>`decode(<token>value</token>)` | 3 | `xmlschema 4.3.2` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| Ajv<br>`coerce({ type: "string" }, value)` | 4 | `8.20.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |

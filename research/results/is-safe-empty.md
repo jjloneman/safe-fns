@@ -4,86 +4,100 @@
 
 ## Tiers 0–2
 
-| Case | es-toolkit<br>`compat.isEmpty(value)` | lodash<br>`_.isEmpty(value)` | remeda<br>`isEmpty(value)` | remeda<br>`isEmptyish(value)` | Python<br>`not value` |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `null` | `true` | `true` | 💥 `TypeError` | `true` | `true` |
-| `undefined` | `true` | `true` | `true` | `true` | — |
-| `""` | `true` | `true` | `true` | `true` | `true` |
-| `" "` | `false` | `false` | `false` | `false` | `false` |
-| `"\u{A0}"` | `false` | `false` | `false` | `false` | `false` |
-| `"\u{2800}"` | `false` | `false` | `false` | `false` | `false` |
-| `"a"` | `false` | `false` | `false` | `false` | `false` |
-| `0` | `true` | `true` | `true` | `false` | `true` |
-| `false` | `true` | `true` | `true` | `false` | `true` |
-| `NaN` | `true` | `true` | `true` | `false` | `false` |
-| `[]` | `true` | `true` | `true` | `true` | `true` |
-| `[0]` | `false` | `false` | `false` | `false` | `false` |
-| `[null]` | `false` | `false` | `false` | `false` | `false` |
-| `{}` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }` | `false` | `false` | `false` | `false` | `false` |
-| `{ "length": 0 }` | `false` | `false` | `false` | `true` | `false` |
-| `{ "size": 0 }` | `false` | `false` | `false` | `true` | `false` |
-| `‹an empty Map›` | `true` | `true` | `true` | `true` | — |
-| `‹a Map with an entry›` | `false` | `false` | `true` | `false` | — |
-| `‹an empty Set›` | `true` | `true` | `true` | `true` | — |
-| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — |
-| `‹an empty URLSearchParams›` | `true` | `true` | `true` | `true` | — |
-| `‹a URLSearchParams with an entry›` | `true` | `true` | `true` | `false` | — |
-| `‹a Date›` | `true` | `true` | `true` | `true` | — |
-| `‹a function›` | `true` | `true` | `true` | `false` | — |
-| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — |
-| `‹a proxy whose ownKeys trap throws›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | — |
-| `‹a cross-realm Map›` | `true` | `true` | `true` | `true` | — |
+| Case | @sindresorhus/is<br>`is.emptyObject(value)` | @sindresorhus/is<br>`is.emptyStringOrWhitespace(value)` | es-toolkit<br>`compat.isEmpty(value)` | lodash<br>`_.isEmpty(value)` | radash<br>`isEmpty(value)` | Ramda<br>`R.isEmpty(value)` | remeda<br>`isEmpty(value)` | remeda<br>`isEmptyish(value)` | Underscore<br>`_.isEmpty(value)` | Python<br>`not value` | Python<br>`not value` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `null` | `false` | `false` | `true` | `true` | `true` | `false` | 💥 `TypeError` | `true` | `true` | `true` | `true` |
+| `undefined` | `false` | `false` | `true` | `true` | `true` | `false` | `true` | `true` | `true` | — | — |
+| `""` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `" "` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `"\u{A0}"` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `"\u{2800}"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `"a"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `0` | `false` | `false` | `true` | `true` | `true` | `false` | `true` | `false` | `true` | `true` | `true` |
+| `false` | `false` | `false` | `true` | `true` | `true` | `false` | `true` | `false` | `true` | `true` | `true` |
+| `NaN` | `false` | `false` | `true` | `true` | `true` | `false` | `true` | `false` | `true` | `false` | `false` |
+| `[]` | `false` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `[0]` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `[null]` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `{}` | `true` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a": 1 }` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `{ "length": 0 }` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `true` | `false` | `false` | `false` |
+| `{ "size": 0 }` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `true` | `false` | `false` | `false` |
+| `‹an empty Map›` | `false` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — |
+| `‹a Map with an entry›` | `false` | `false` | `false` | `false` | `false` | `false` | `true` | `false` | `true` | — | — |
+| `‹an empty Set›` | `false` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — |
+| `‹a null-prototype object›` | `true` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — |
+| `‹an empty URLSearchParams›` | `true` | `false` | `true` | `true` | `true` | `false` | `true` | `true` | `true` | — | — |
+| `‹a URLSearchParams with an entry›` | `true` | `false` | `true` | `true` | `false` | `false` | `true` | `false` | `true` | — | — |
+| `‹a Date›` | `true` | `false` | `true` | `true` | `false` | `false` | `true` | `true` | `true` | — | — |
+| `‹a function›` | `false` | `false` | `true` | `true` | `false` | `false` | `true` | `false` | `true` | — | — |
+| `‹a revoked proxy›` | 💥 `TypeError` | `false` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — |
+| `‹a proxy whose ownKeys trap throws›` | 💥 `Error` | `false` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | — | — |
+| `‹a cross-realm Map›` | `false` | `false` | `true` | `true` | `true` | `false` | `true` | `true` | `true` | — | — |
 
 ## By outcome
 
-| Tool | `true` | `false` | Other | Throws |
+| Tool | `false` | `true` | Other | Throws |
 | :--- | :--- | :--- | :--- | :--- |
-| es-toolkit<br>`compat.isEmpty(value)` | `null` `undefined` `""` `0` `false` `NaN` `[]` `{}` `‹an empty Map›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a cross-realm Map›` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` `‹a Map with an entry›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
-| lodash<br>`_.isEmpty(value)` | `null` `undefined` `""` `0` `false` `NaN` `[]` `{}` `‹an empty Map›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a cross-realm Map›` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` `‹a Map with an entry›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
-| remeda<br>`isEmpty(value)` | `undefined` `""` `0` `false` `NaN` `[]` `{}` `‹an empty Map›` `‹a Map with an entry›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a cross-realm Map›` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  | `null` `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
-| remeda<br>`isEmptyish(value)` | `null` `undefined` `""` `[]` `{}` `{ "length": 0 }` `{ "size": 0 }` `‹an empty Map›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a Date›` `‹a cross-realm Map›` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `0` `false` `NaN` `[0]` `[null]` `{ "a": 1 }` `‹a Map with an entry›` `‹a URLSearchParams with an entry›` `‹a function›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
-| Python<br>`not value` | `null` `""` `0` `false` `[]` `{}` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `NaN` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` |  |  |
+| @sindresorhus/is<br>`is.emptyObject(value)` | `null` `undefined` `""` `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `0` `false` `NaN` `[]` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` `‹an empty Map›` `‹a Map with an entry›` `‹an empty Set›` `‹a function›` `‹a cross-realm Map›` | `{}` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
+| @sindresorhus/is<br>`is.emptyStringOrWhitespace(value)` | `null` `undefined` `"\u{2800}"` `"a"` `0` `false` `NaN` `[]` `[0]` `[null]` `{}` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` `‹an empty Map›` `‹a Map with an entry›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` `‹a cross-realm Map›` | `""` `" "` `"\u{A0}"` |  |  |
+| es-toolkit<br>`compat.isEmpty(value)` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` `‹a Map with an entry›` | `null` `undefined` `""` `0` `false` `NaN` `[]` `{}` `‹an empty Map›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a cross-realm Map›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
+| lodash<br>`_.isEmpty(value)` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` `‹a Map with an entry›` | `null` `undefined` `""` `0` `false` `NaN` `[]` `{}` `‹an empty Map›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a cross-realm Map›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
+| radash<br>`isEmpty(value)` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `‹a Map with an entry›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` | `null` `undefined` `""` `0` `false` `NaN` `[]` `{}` `{ "length": 0 }` `{ "size": 0 }` `‹an empty Map›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a cross-realm Map›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
+| Ramda<br>`R.isEmpty(value)` | `null` `undefined` `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `0` `false` `NaN` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` `‹a Map with an entry›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a cross-realm Map›` | `""` `[]` `{}` `‹an empty Map›` `‹an empty Set›` `‹a null-prototype object›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
+| remeda<br>`isEmpty(value)` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` | `undefined` `""` `0` `false` `NaN` `[]` `{}` `‹an empty Map›` `‹a Map with an entry›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a cross-realm Map›` |  | `null` `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
+| remeda<br>`isEmptyish(value)` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `0` `false` `NaN` `[0]` `[null]` `{ "a": 1 }` `‹a Map with an entry›` `‹a URLSearchParams with an entry›` `‹a function›` | `null` `undefined` `""` `[]` `{}` `{ "length": 0 }` `{ "size": 0 }` `‹an empty Map›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a Date›` `‹a cross-realm Map›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
+| Underscore<br>`_.isEmpty(value)` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` | `null` `undefined` `""` `0` `false` `NaN` `[]` `{}` `‹an empty Map›` `‹a Map with an entry›` `‹an empty Set›` `‹a null-prototype object›` `‹an empty URLSearchParams›` `‹a URLSearchParams with an entry›` `‹a Date›` `‹a function›` `‹a cross-realm Map›` |  | `‹a revoked proxy›` `‹a proxy whose ownKeys trap throws›` |
+| Python<br>`not value` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `NaN` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` | `null` `""` `0` `false` `[]` `{}` |  |  |
+| Python<br>`not value` | `" "` `"\u{A0}"` `"\u{2800}"` `"a"` `NaN` `[0]` `[null]` `{ "a": 1 }` `{ "length": 0 }` `{ "size": 0 }` | `null` `""` `0` `false` `[]` `{}` |  |  |
+| validator.js<br>`validator.isEmpty(value, { ignore_whitespace: true })` | `"\u{2800}"` `"a"` | `""` `" "` `"\u{A0}"` |  |  |
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.isEmpty(value)` | lodash<br>`_.isEmpty(value)` | remeda<br>`isEmpty(value)` | remeda<br>`isEmptyish(value)` | Python<br>`not value` |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `null` | `true` | `true` | 💥 `TypeError` | `true` | `true` |
-| `undefined` | `true` | `true` | `true` | `true` | — |
-| `""` | `true` | `true` | `true` | `true` | `true` |
-| `" "` | `false` | `false` | `false` | `false` | `false` |
-| `"\u{A0}"` | `false` | `false` | `false` | `false` | `false` |
-| `"\u{2800}"` | `false` | `false` | `false` | `false` | `false` |
-| `"a"` | `false` | `false` | `false` | `false` | `false` |
-| `0` | `true` | `true` | `true` | `false` | `true` |
-| `false` | `true` | `true` | `true` | `false` | `true` |
-| `NaN` | `true` | `true` | `true` | `false` | `false` |
-| `[]` | `true` | `true` | `true` | `true` | `true` |
-| `[0]` | `false` | `false` | `false` | `false` | `false` |
-| `[null]` | `false` | `false` | `false` | `false` | `false` |
-| `{}` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }` | `false` | `false` | `false` | `false` | `false` |
-| `{ "length": 0 }` | `false` | `false` | `false` | `true` | `false` |
-| `{ "size": 0 }` | `false` | `false` | `false` | `true` | `false` |
-| `‹an empty Map›` | `true` | `true` | `true` | `true` | — |
-| `‹a Map with an entry›` | `false` | `false` | `true` | `false` | — |
-| `‹an empty Set›` | `true` | `true` | `true` | `true` | — |
-| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — |
-| `‹an empty URLSearchParams›` | `true` | `true` | `true` | `true` | — |
-| `‹a URLSearchParams with an entry›` | `true` | `true` | `true` | `false` | — |
-| `‹a Date›` | `true` | `true` | `true` | `true` | — |
-| `‹a function›` | `true` | `true` | `true` | `false` | — |
-| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — |
-| `‹a proxy whose ownKeys trap throws›` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | — |
-| `‹a cross-realm Map›` | `true` | `true` | `true` | `true` | — |
+| Case | @sindresorhus/is<br>`is.emptyObject(value)` | @sindresorhus/is<br>`is.emptyStringOrWhitespace(value)` | es-toolkit<br>`compat.isEmpty(value)` | lodash<br>`_.isEmpty(value)` | radash<br>`isEmpty(value)` | Ramda<br>`R.isEmpty(value)` | remeda<br>`isEmpty(value)` | remeda<br>`isEmptyish(value)` | Underscore<br>`_.isEmpty(value)` | Python<br>`not value` | Python<br>`not value` | validator.js<br>`validator.isEmpty(value, { ignore_whitespace: true })` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `null` | `false` | `false` | `true` | `true` | `true` | `false` | 💥 `TypeError` | `true` | `true` | `true` | `true` | — |
+| `undefined` | `false` | `false` | `true` | `true` | `true` | `false` | `true` | `true` | `true` | — | — | — |
+| `""` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `" "` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `true` |
+| `"\u{A0}"` | `false` | `true` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `true` |
+| `"\u{2800}"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `"a"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `0` | `false` | `false` | `true` | `true` | `true` | `false` | `true` | `false` | `true` | `true` | `true` | — |
+| `false` | `false` | `false` | `true` | `true` | `true` | `false` | `true` | `false` | `true` | `true` | `true` | — |
+| `NaN` | `false` | `false` | `true` | `true` | `true` | `false` | `true` | `false` | `true` | `false` | `false` | — |
+| `[]` | `false` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — |
+| `[0]` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — |
+| `[null]` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — |
+| `{}` | `true` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — |
+| `{ "a": 1 }` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — |
+| `{ "length": 0 }` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `true` | `false` | `false` | `false` | — |
+| `{ "size": 0 }` | `false` | `false` | `false` | `false` | `true` | `false` | `false` | `true` | `false` | `false` | `false` | — |
+| `‹an empty Map›` | `false` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — | — |
+| `‹a Map with an entry›` | `false` | `false` | `false` | `false` | `false` | `false` | `true` | `false` | `true` | — | — | — |
+| `‹an empty Set›` | `false` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — | — |
+| `‹a null-prototype object›` | `true` | `false` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — | — |
+| `‹an empty URLSearchParams›` | `true` | `false` | `true` | `true` | `true` | `false` | `true` | `true` | `true` | — | — | — |
+| `‹a URLSearchParams with an entry›` | `true` | `false` | `true` | `true` | `false` | `false` | `true` | `false` | `true` | — | — | — |
+| `‹a Date›` | `true` | `false` | `true` | `true` | `false` | `false` | `true` | `true` | `true` | — | — | — |
+| `‹a function›` | `false` | `false` | `true` | `true` | `false` | `false` | `true` | `false` | `true` | — | — | — |
+| `‹a revoked proxy›` | 💥 `TypeError` | `false` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — | — |
+| `‹a proxy whose ownKeys trap throws›` | 💥 `Error` | `false` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | 💥 `Error` | — | — | — |
+| `‹a cross-realm Map›` | `false` | `false` | `true` | `true` | `true` | `false` | `true` | `true` | `true` | — | — | — |
 
 ## Versions
 
-| Tool | Tier | Version | Locale | Image |
+| Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
-| es-toolkit<br>`compat.isEmpty(value)` | 1 | `1.52.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| lodash<br>`_.isEmpty(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| remeda<br>`isEmpty(value)` | 1 | `2.51.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| remeda<br>`isEmptyish(value)` | 1 | `2.51.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| Python<br>`not value` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
+| @sindresorhus/is<br>`is.emptyObject(value)` | 1 | `8.1.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| @sindresorhus/is<br>`is.emptyStringOrWhitespace(value)` | 1 | `8.1.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| es-toolkit<br>`compat.isEmpty(value)` | 1 | `1.52.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| lodash<br>`_.isEmpty(value)` | 1 | `4.18.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| radash<br>`isEmpty(value)` | 1 | `12.1.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Ramda<br>`R.isEmpty(value)` | 1 | `0.32.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| remeda<br>`isEmpty(value)` | 1 | `2.51.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| remeda<br>`isEmptyish(value)` | 1 | `2.51.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Underscore<br>`_.isEmpty(value)` | 1 | `1.13.8` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Python<br>`not value` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| Python<br>`not value` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| validator.js<br>`validator.isEmpty(value, { ignore_whitespace: true })` | 4 | `13.15.35` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |

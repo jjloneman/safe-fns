@@ -4,72 +4,85 @@
 
 ## Tiers 0–2
 
-| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
-| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` |
-| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `ValueError` |
-| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `ValueError` |
-| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` |
-| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` |
-| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` |
-| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` |
-| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` |
-| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` |
-| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `ValueError` |
-| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | `1000` |
-| `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` |
-| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` |
-| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowError` |
-| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` |
-| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | `9007199254740993n` |
-| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` |
-| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` |
-| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — |
+| Case | Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString.check(Schema.isInt()))(value)` | es-toolkit<br>`compat.toInteger(value)` | Hermes<br>`Number.parseInt(value, 10)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | radash<br>`toInt(value)` | valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber(), v.integer()), value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` | Python<br>`int(value)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
+| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"42.0"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` | 💥 `ValueError` |
+| `"42.5"` | 💥 `SchemaError` | `42` | `42` | `42` | `42` | `42` | `42` | 💥 `ValiError` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"1e3"` | `1000` | `1000` | `1` | `1` | `1000` | `1000` | `1` | `1000` | `1000` | 💥 `ValueError` | 💥 `ValueError` |
+| `"0x1A"` | `26` | `26` | `0` | `0` | `26` | `26` | `26` | `26` | `26` | 💥 `ValueError` | 💥 `ValueError` |
+| `"9007199254740993"` | 💥 `SchemaError` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | `9007199254740992` | `9007199254740992` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` |
+| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` |
+| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` |
+| `""` | `0` | `0` | `NaN` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `ValueError` | 💥 `ValueError` |
+| `"٤٢"` | 💥 `SchemaError` | `0` | `NaN` | `NaN` | `0` | `0` | `0` | 💥 `ValiError` | 💥 `ZodError` | `42` | `42` |
+| `"12px"` | 💥 `SchemaError` | `0` | `12` | `12` | `0` | `0` | `12` | 💥 `ValiError` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"1_000"` | 💥 `SchemaError` | `0` | `1` | `1` | `0` | `0` | `1` | 💥 `ValiError` | 💥 `ZodError` | `1000` | `1000` |
+| `42` | 💥 `SchemaError` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `42.5` | 💥 `SchemaError` | `42` | `42` | `42` | `42` | `42` | `42` | 💥 `ValiError` | 💥 `ZodError` | `42` | `42` |
+| `-0` | 💥 `SchemaError` | `-0` | `0` | `0` | `-0` | `-0` | `0` | `-0` | `-0` | `0` | `0` |
+| `Infinity` | 💥 `SchemaError` | `1.7976931348623157e+308` | `NaN` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | `0` | 💥 `ValiError` | 💥 `ZodError` | 💥 `OverflowError` | 💥 `OverflowError` |
+| `42n` | 💥 `SchemaError` | `42` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` | `42` | `42` | `42` |
+| `9007199254740993n` | 💥 `SchemaError` | `9007199254740992` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | `9007199254740992` | `9007199254740992` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` |
+| `true` | 💥 `SchemaError` | `1` | `NaN` | `NaN` | `1` | `1` | `0` | `1` | `1` | `1` | `1` |
+| `null` | 💥 `SchemaError` | `0` | `NaN` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `TypeError` | 💥 `TypeError` |
+| `undefined` | 💥 `SchemaError` | `0` | `NaN` | `NaN` | `0` | `0` | `0` | 💥 `ValiError` | 💥 `ZodError` | — | — |
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.toInteger(value)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` | SQLite<br>`SELECT CAST(? AS INTEGER)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
-| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `34` | `42` |
-| `"42.0"` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` | `42` | `42` | `42` |
-| `"42.5"` | `42` | `42` | `42` | `42` | 💥 `ZodError` | 💥 `ValueError` | `42` | `42.5` | `42.5` |
-| `"1e3"` | `1000` | `1` | `1000` | `1000` | `1000` | 💥 `ValueError` | `1` | `1000` | `1000` |
-| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` | `0` | `26` | `26` |
-| `"9007199254740993"` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | `9007199254740992` | `9007199254740992` |
-| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `-0` | `-0` |
-| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` |
-| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` |
-| `"٤٢"` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | `42` | `0` | `"٤٢"` | `"٤٢"` |
-| `"12px"` | `0` | `12` | `0` | `0` | 💥 `ZodError` | 💥 `ValueError` | `12` | `"12px"` | `"12px"` |
-| `"1_000"` | `0` | `1` | `0` | `0` | 💥 `ZodError` | `1000` | `1` | `1000` | `"1_000"` |
-| `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — |
-| `42.5` | `42` | `42` | `42` | `42` | 💥 `ZodError` | `42` | `42` | — | — |
-| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `0` | `0` | — | — |
-| `Infinity` | `1.7976931348623157e+308` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | 💥 `ZodError` | 💥 `OverflowError` | `9223372036854775807n` | — | — |
-| `42n` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` | `42` | — | — |
-| `9007199254740993n` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | — | — |
-| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | — | — |
-| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | `null` | — | — |
-| `undefined` | `0` | `NaN` | `0` | `0` | 💥 `ZodError` | — | — | — | — |
+| Case | Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString.check(Schema.isInt()))(value)` | es-toolkit<br>`compat.toInteger(value)` | Hermes<br>`Number.parseInt(value, 10)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | radash<br>`toInt(value)` | valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber(), v.integer()), value)` | zod<br>`z.coerce.number().int().parse(value)` | Python<br>`int(value)` | Python<br>`int(value)` | CSV<br>`parse(value, { cast: true })[0]?.[0]` | HTML (jsdom)<br>`parseInteger(value)` | INI<br>`` parse(`v = ${value}`).v `` | JSON<br>`JSON.parse(value)` | SQLite<br>`SELECT CAST(? AS INTEGER)` | TOML<br>`` parse(`v = ${value}`).v `` | XML Schema 1.0<br>`decode(<integer>value</integer>)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` | Ajv<br>`coerce({ type: "integer" }, value)` | validator.js<br>`validator.toInt(value, 10)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
+| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `"+42"` | 💥 `SyntaxError` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"042"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `"042"` | 💥 `SyntaxError` | `42` | 💥 `Error` | `42` | `34` | `42` | `42` | `42` |
+| `"42.0"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | 💥 `ValueError` | 💥 `ValueError` | `42` | `42` | `"42.0"` | `42` | `42` | `42` | 💥 `XMLSchemaDecodeError` | `42` | `42` | `42` | `42` |
+| `"42.5"` | 💥 `SchemaError` | `42` | `42` | `42` | `42` | `42` | `42` | 💥 `ValiError` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `42.5` | `42` | `"42.5"` | `42.5` | `42` | `42.5` | 💥 `XMLSchemaDecodeError` | `42.5` | `42.5` | 💥 `ValidationError` | `42` |
+| `"1e3"` | `1000` | `1000` | `1` | `1` | `1000` | `1000` | `1` | `1000` | `1000` | 💥 `ValueError` | 💥 `ValueError` | `1000` | `1` | `"1e3"` | `1000` | `1` | `1000` | 💥 `XMLSchemaDecodeError` | `1000` | `1000` | `1000` | `1` |
+| `"0x1A"` | `26` | `26` | `0` | `0` | `26` | `26` | `26` | `26` | `26` | 💥 `ValueError` | 💥 `ValueError` | `0` | `0` | `"0x1A"` | 💥 `SyntaxError` | `0` | `26` | 💥 `XMLSchemaDecodeError` | `26` | `26` | `26` | `0` |
+| `"9007199254740993"` | 💥 `SchemaError` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740991` | `9007199254740992` | `9007199254740992` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | `9007199254740992` | `9007199254740992` | `"9007199254740993"` | `9007199254740992` | `9007199254740993n` | 💥 `Error` | `9007199254740993n` | `9007199254740992` | `9007199254740992` | `9007199254740992` | `9007199254740992` |
+| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `0` | `0` | `-0` | `0` | `"-0"` | `-0` | `0` | `0` | `0` | `-0` | `-0` | `-0` | `-0` |
+| `" 7 "` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `"7"` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` |
+| `""` | `0` | `0` | `NaN` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `ValueError` | 💥 `ValueError` | `undefined` | `null` | `""` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `null` | `null` | 💥 `ValidationError` | `NaN` |
+| `"٤٢"` | 💥 `SchemaError` | `0` | `NaN` | `NaN` | `0` | `0` | `0` | 💥 `ValiError` | 💥 `ZodError` | `42` | `42` | `"٤٢"` | `null` | `"٤٢"` | 💥 `SyntaxError` | `0` | 💥 `Error` | `42` | `"٤٢"` | `"٤٢"` | 💥 `ValidationError` | `NaN` |
+| `"12px"` | 💥 `SchemaError` | `0` | `12` | `12` | `0` | `0` | `12` | 💥 `ValiError` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"12px"` | `12` | `"12px"` | 💥 `SyntaxError` | `12` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `"12px"` | `"12px"` | 💥 `ValidationError` | `12` |
+| `"1_000"` | 💥 `SchemaError` | `0` | `1` | `1` | `0` | `0` | `1` | 💥 `ValiError` | 💥 `ZodError` | `1000` | `1000` | `"1_000"` | `1` | `"1_000"` | 💥 `SyntaxError` | `1` | `1000` | `1000` | `1000` | `"1_000"` | 💥 `ValidationError` | `1` |
+| `42` | 💥 `SchemaError` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — | — | — | `42` | — | — | — | — | `42` | — |
+| `42.5` | 💥 `SchemaError` | `42` | `42` | `42` | `42` | `42` | `42` | 💥 `ValiError` | 💥 `ZodError` | `42` | `42` | — | — | — | — | `42` | — | — | — | — | 💥 `ValidationError` | — |
+| `-0` | 💥 `SchemaError` | `-0` | `0` | `0` | `-0` | `-0` | `0` | `-0` | `-0` | `0` | `0` | — | — | — | — | `0` | — | — | — | — | `-0` | — |
+| `Infinity` | 💥 `SchemaError` | `1.7976931348623157e+308` | `NaN` | `NaN` | `1.7976931348623157e+308` | `9007199254740991` | `0` | 💥 `ValiError` | 💥 `ZodError` | 💥 `OverflowError` | 💥 `OverflowError` | — | — | — | — | `9223372036854775807n` | — | — | — | — | 💥 `ValidationError` | — |
+| `42n` | 💥 `SchemaError` | `42` | `42` | `42` | 💥 `TypeError` | 💥 `TypeError` | `42` | `42` | `42` | `42` | `42` | — | — | — | — | `42` | — | — | — | — | 💥 `ValidationError` | — |
+| `9007199254740993n` | 💥 `SchemaError` | `9007199254740992` | `9007199254740992` | `9007199254740992` | 💥 `TypeError` | 💥 `TypeError` | `9007199254740992` | `9007199254740992` | 💥 `ZodError` | `9007199254740993n` | `9007199254740993n` | — | — | — | — | `9007199254740993n` | — | — | — | — | 💥 `ValidationError` | — |
+| `true` | 💥 `SchemaError` | `1` | `NaN` | `NaN` | `1` | `1` | `0` | `1` | `1` | `1` | `1` | — | — | — | — | — | — | — | — | — | `1` | — |
+| `null` | 💥 `SchemaError` | `0` | `NaN` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | `null` | — | — | — | — | `0` | — |
+| `undefined` | 💥 `SchemaError` | `0` | `NaN` | `NaN` | `0` | `0` | `0` | 💥 `ValiError` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | `undefined` | — |
 
 ## Versions
 
-| Tool | Tier | Version | Locale | Image |
+| Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
-| es-toolkit<br>`compat.toInteger(value)` | 1 | `1.52.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| JS built-ins<br>`Number.parseInt(value, 10)` | 1 | `v26.9.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| lodash<br>`_.toInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| lodash<br>`_.toSafeInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| zod<br>`z.coerce.number().int().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| Python<br>`int(value)` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
-| SQLite<br>`SELECT CAST(? AS INTEGER)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
-| YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString.check(Schema.isInt()))(value)` | 1 | `4.0.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| es-toolkit<br>`compat.toInteger(value)` | 1 | `1.52.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Hermes<br>`Number.parseInt(value, 10)` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| JS built-ins<br>`Number.parseInt(value, 10)` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| lodash<br>`_.toInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| lodash<br>`_.toSafeInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| radash<br>`toInt(value)` | 1 | `12.1.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber(), v.integer()), value)` | 1 | `1.5.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| zod<br>`z.coerce.number().int().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Python<br>`int(value)` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| Python<br>`int(value)` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| CSV<br>`parse(value, { cast: true })[0]?.[0]` | 3 | `csv-parse 7.0.3` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| HTML (jsdom)<br>`parseInteger(value)` | 3 | `jsdom 30.1.2` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| INI<br>`` parse(`v = ${value}`).v `` | 3 | `ini 7.0.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| JSON<br>`JSON.parse(value)` | 3 | `RFC 8259` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| SQLite<br>`SELECT CAST(? AS INTEGER)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| TOML<br>`` parse(`v = ${value}`).v `` | 3 | `smol-toml 1.9.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| XML Schema 1.0<br>`decode(<integer>value</integer>)` | 3 | `xmlschema 4.3.2` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Ajv<br>`coerce({ type: "integer" }, value)` | 4 | `8.20.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| validator.js<br>`validator.toInt(value, 10)` | 4 | `13.15.35` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |

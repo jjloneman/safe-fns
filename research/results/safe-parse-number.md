@@ -4,106 +4,120 @@
 
 ## Tiers 0–2
 
-| Case | es-toolkit<br>`compat.toNumber(value)` | JS built-ins<br>`Number.parseFloat(value)` | JS built-ins<br>`Number(value)` | lodash<br>`_.toNumber(value)` | zod<br>`z.coerce.number().parse(value)` | Python<br>`float(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
-| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"0"` | `0` | `0` | `0` | `0` | `0` | `0` |
-| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` |
-| `"1.5"` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
-| `" 1.5 "` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
-| `"\u{A0}42\u{A0}"` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `".5"` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` |
-| `"5."` | `5` | `5` | `5` | `5` | `5` | `5` |
-| `"1e3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` |
-| `"1E3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` |
-| `"1e-400"` | `0` | `0` | `0` | `0` | `0` | `0` |
-| `"1e400"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` |
-| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` |
-| `"0b11"` | `3` | `0` | `3` | `3` | `3` | 💥 `ValueError` |
-| `"0o17"` | `15` | `0` | `15` | `15` | `15` | 💥 `ValueError` |
-| `"1_000"` | `NaN` | `1` | `NaN` | `NaN` | 💥 `ZodError` | `1000` |
-| `"1,000"` | `NaN` | `1` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `ValueError` |
-| `"Infinity"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` |
-| `"-Infinity"` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | 💥 `ZodError` | `-Infinity` |
-| `"NaN"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `NaN` |
-| `"inf"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `Infinity` |
-| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` |
-| `"   "` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` |
-| `"12px"` | `NaN` | `12` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `ValueError` |
-| `"٤٢"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `42` |
-| `"１２"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `12` |
-| `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
-| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `-0` |
-| `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `NaN` |
-| `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` |
-| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` |
-| `false` | `0` | `NaN` | `0` | `0` | `0` | `0` |
-| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` |
-| `undefined` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | — |
-| `10n` | `10` | `10` | `10` | 💥 `TypeError` | `10` | `10` |
-| `[]` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` |
-| `["7"]` | `7` | `7` | `7` | `7` | `7` | 💥 `TypeError` |
-| `{}` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `TypeError` |
+| Case | Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString)(value)` | es-toolkit<br>`compat.toNumber(value)` | Hermes<br>`Number.parseFloat(value)` | Hermes<br>`Number(value)` | JS built-ins<br>`Number.parseFloat(value)` | JS built-ins<br>`Number(value)` | lodash<br>`_.toNumber(value)` | radash<br>`toFloat(value)` | valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber()), value)` | zod<br>`z.coerce.number().parse(value)` | Python<br>`float(value)` | Python<br>`float(value)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
+| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"0"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` |
+| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` |
+| `"1.5"` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
+| `" 1.5 "` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
+| `"\u{A0}42\u{A0}"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `".5"` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` |
+| `"5."` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` |
+| `"1e3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` |
+| `"1E3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` |
+| `"1e-400"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` |
+| `"1e400"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` |
+| `"0x1A"` | `26` | `26` | `0` | `26` | `0` | `26` | `26` | `0` | `26` | `26` | 💥 `ValueError` | 💥 `ValueError` |
+| `"0b11"` | `3` | `3` | `0` | `3` | `0` | `3` | `3` | `0` | `3` | `3` | 💥 `ValueError` | 💥 `ValueError` |
+| `"0o17"` | `15` | `15` | `0` | `15` | `0` | `15` | `15` | `0` | `15` | `15` | 💥 `ValueError` | 💥 `ValueError` |
+| `"1_000"` | `NaN` | `NaN` | `1` | `NaN` | `1` | `NaN` | `NaN` | `1` | 💥 `ValiError` | 💥 `ZodError` | `1000` | `1000` |
+| `"1,000"` | `NaN` | `NaN` | `1` | `NaN` | `1` | `NaN` | `NaN` | `1` | 💥 `ValiError` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"Infinity"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` |
+| `"-Infinity"` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | 💥 `ZodError` | `-Infinity` | `-Infinity` |
+| `"NaN"` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | `NaN` | `NaN` |
+| `"inf"` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | `Infinity` | `Infinity` |
+| `""` | `0` | `0` | `NaN` | `0` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `ValueError` | 💥 `ValueError` |
+| `"   "` | `0` | `0` | `NaN` | `0` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `ValueError` | 💥 `ValueError` |
+| `"12px"` | `NaN` | `NaN` | `12` | `NaN` | `12` | `NaN` | `NaN` | `12` | 💥 `ValiError` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"٤٢"` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | `42` | `42` |
+| `"１２"` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | `12` | `12` |
+| `42` | 💥 `SchemaError` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `1.5` | 💥 `SchemaError` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
+| `-0` | 💥 `SchemaError` | `-0` | `0` | `-0` | `0` | `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `-0` |
+| `NaN` | 💥 `SchemaError` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | `NaN` | `NaN` |
+| `Infinity` | 💥 `SchemaError` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` |
+| `true` | 💥 `SchemaError` | `1` | `NaN` | `1` | `NaN` | `1` | `1` | `0` | `1` | `1` | `1` | `1` |
+| `false` | 💥 `SchemaError` | `0` | `NaN` | `0` | `NaN` | `0` | `0` | `0` | `0` | `0` | `0` | `0` |
+| `null` | 💥 `SchemaError` | `0` | `NaN` | `0` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `TypeError` | 💥 `TypeError` |
+| `undefined` | 💥 `SchemaError` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | — | — |
+| `10n` | 💥 `SchemaError` | `10` | `10` | `10` | `10` | `10` | 💥 `TypeError` | `10` | `10` | `10` | `10` | `10` |
+| `[]` | 💥 `SchemaError` | `0` | `NaN` | `0` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `TypeError` | 💥 `TypeError` |
+| `["7"]` | 💥 `SchemaError` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | 💥 `TypeError` | 💥 `TypeError` |
+| `{}` | 💥 `SchemaError` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | 💥 `TypeError` | 💥 `TypeError` |
 
 ## Every tool
 
-| Case | es-toolkit<br>`compat.toNumber(value)` | JS built-ins<br>`Number.parseFloat(value)` | JS built-ins<br>`Number(value)` | lodash<br>`_.toNumber(value)` | zod<br>`z.coerce.number().parse(value)` | Python<br>`float(value)` | SQLite<br>`SELECT CAST(? AS REAL)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
-| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
-| `"0"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` |
-| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` |
-| `"1.5"` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
-| `" 1.5 "` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
-| `"\u{A0}42\u{A0}"` | `42` | `42` | `42` | `42` | `42` | `42` | `0` | `"\u{A0}42\u{A0}"` | `"\u{A0}42\u{A0}"` |
-| `".5"` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` |
-| `"5."` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` |
-| `"1e3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` |
-| `"1E3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` |
-| `"1e-400"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` |
-| `"1e400"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` | `Infinity` | `Infinity` |
-| `"0x1A"` | `26` | `0` | `26` | `26` | `26` | 💥 `ValueError` | `0` | `26` | `26` |
-| `"0b11"` | `3` | `0` | `3` | `3` | `3` | 💥 `ValueError` | `0` | `3` | `"0b11"` |
-| `"0o17"` | `15` | `0` | `15` | `15` | `15` | 💥 `ValueError` | `0` | `"0o17"` | `15` |
-| `"1_000"` | `NaN` | `1` | `NaN` | `NaN` | 💥 `ZodError` | `1000` | `1` | `1000` | `"1_000"` |
-| `"1,000"` | `NaN` | `1` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `ValueError` | `1` | `"1,000"` | `"1,000"` |
-| `"Infinity"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `0` | `"Infinity"` | `"Infinity"` |
-| `"-Infinity"` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | 💥 `ZodError` | `-Infinity` | `-0` | `"-Infinity"` | `"-Infinity"` |
-| `"NaN"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `NaN` | `0` | `"NaN"` | `"NaN"` |
-| `"inf"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `Infinity` | `0` | `"inf"` | `"inf"` |
-| `""` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` |
-| `"   "` | `0` | `NaN` | `0` | `0` | `0` | 💥 `ValueError` | `0` | `null` | `null` |
-| `"12px"` | `NaN` | `12` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `ValueError` | `12` | `"12px"` | `"12px"` |
-| `"٤٢"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `42` | `0` | `"٤٢"` | `"٤٢"` |
-| `"１２"` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `12` | `0` | `"１２"` | `"１２"` |
-| `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — |
-| `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | — | — |
-| `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `-0` | `-0` | — | — |
-| `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | `NaN` | `null` | — | — |
-| `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` | — | — |
-| `true` | `1` | `NaN` | `1` | `1` | `1` | `1` | — | — | — |
-| `false` | `0` | `NaN` | `0` | `0` | `0` | `0` | — | — | — |
-| `null` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | `null` | — | — |
-| `undefined` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | — | — | — | — |
-| `10n` | `10` | `10` | `10` | 💥 `TypeError` | `10` | `10` | `10` | — | — |
-| `[]` | `0` | `NaN` | `0` | `0` | `0` | 💥 `TypeError` | — | — | — |
-| `["7"]` | `7` | `7` | `7` | `7` | `7` | 💥 `TypeError` | — | — | — |
-| `{}` | `NaN` | `NaN` | `NaN` | `NaN` | 💥 `ZodError` | 💥 `TypeError` | — | — | — |
+| Case | Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString)(value)` | es-toolkit<br>`compat.toNumber(value)` | Hermes<br>`Number.parseFloat(value)` | Hermes<br>`Number(value)` | JS built-ins<br>`Number.parseFloat(value)` | JS built-ins<br>`Number(value)` | lodash<br>`_.toNumber(value)` | radash<br>`toFloat(value)` | valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber()), value)` | zod<br>`z.coerce.number().parse(value)` | Python<br>`float(value)` | Python<br>`float(value)` | CSV<br>`parse(value, { cast: true })[0]?.[0]` | HTML (jsdom)<br>`input.value = value; input.valueAsNumber` | INI<br>`` parse(`v = ${value}`).v `` | JSON<br>`JSON.parse(value)` | SQLite<br>`SELECT CAST(? AS REAL)` | TOML<br>`` parse(`v = ${value}`).v `` | XML Schema 1.0<br>`decode(<double>value</double>)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` | Ajv<br>`coerce({ type: "number" }, value)` | validator.js<br>`validator.toFloat(value)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |
+| `"+42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `NaN` | `"+42"` | 💥 `SyntaxError` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
+| `"0"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `"0"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` |
+| `"-0"` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `-0` | `"-0"` | `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `-0` | `-0` |
+| `"1.5"` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `"1.5"` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
+| `" 1.5 "` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `NaN` | `"1.5"` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `NaN` |
+| `"\u{A0}42\u{A0}"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `NaN` | `"42"` | 💥 `SyntaxError` | `0` | 💥 `Error` | `42` | `"\u{A0}42\u{A0}"` | `"\u{A0}42\u{A0}"` | `42` | `NaN` |
+| `".5"` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `".5"` | 💥 `SyntaxError` | `0.5` | 💥 `Error` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` |
+| `"5."` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `NaN` | `"5."` | 💥 `SyntaxError` | `5` | 💥 `Error` | `5` | `5` | `5` | `5` | `5` |
+| `"1e3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `"1e3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` |
+| `"1E3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `"1E3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` |
+| `"1e-400"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `"1e-400"` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | `0` |
+| `"1e400"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` | `"1e400"` | `NaN` | `"1e400"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` |
+| `"0x1A"` | `26` | `26` | `0` | `26` | `0` | `26` | `26` | `0` | `26` | `26` | 💥 `ValueError` | 💥 `ValueError` | `0` | `NaN` | `"0x1A"` | 💥 `SyntaxError` | `0` | `26` | 💥 `XMLSchemaValidationError` | `26` | `26` | `26` | `NaN` |
+| `"0b11"` | `3` | `3` | `0` | `3` | `0` | `3` | `3` | `0` | `3` | `3` | 💥 `ValueError` | 💥 `ValueError` | `0` | `NaN` | `"0b11"` | 💥 `SyntaxError` | `0` | `3` | 💥 `XMLSchemaValidationError` | `3` | `"0b11"` | `3` | `NaN` |
+| `"0o17"` | `15` | `15` | `0` | `15` | `0` | `15` | `15` | `0` | `15` | `15` | 💥 `ValueError` | 💥 `ValueError` | `0` | `NaN` | `"0o17"` | 💥 `SyntaxError` | `0` | `15` | 💥 `XMLSchemaValidationError` | `"0o17"` | `15` | `15` | `NaN` |
+| `"1_000"` | `NaN` | `NaN` | `1` | `NaN` | `1` | `NaN` | `NaN` | `1` | 💥 `ValiError` | 💥 `ZodError` | `1000` | `1000` | `"1_000"` | `NaN` | `"1_000"` | 💥 `SyntaxError` | `1` | `1000` | 💥 `XMLSchemaValidationError` | `1000` | `"1_000"` | 💥 `ValidationError` | `NaN` |
+| `"1,000"` | `NaN` | `NaN` | `1` | `NaN` | `1` | `NaN` | `NaN` | `1` | 💥 `ValiError` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `1` | `NaN` | `"1,000"` | 💥 `SyntaxError` | `1` | 💥 `Error` | 💥 `XMLSchemaValidationError` | `"1,000"` | `"1,000"` | 💥 `ValidationError` | `NaN` |
+| `"Infinity"` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` | `"Infinity"` | `NaN` | `"Infinity"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaValidationError` | `"Infinity"` | `"Infinity"` | `Infinity` | `NaN` |
+| `"-Infinity"` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | `-Infinity` | 💥 `ZodError` | `-Infinity` | `-Infinity` | `"-Infinity"` | `NaN` | `"-Infinity"` | 💥 `SyntaxError` | `-0` | 💥 `Error` | 💥 `XMLSchemaValidationError` | `"-Infinity"` | `"-Infinity"` | `-Infinity` | `NaN` |
+| `"NaN"` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | `NaN` | `NaN` | `"NaN"` | `NaN` | `"NaN"` | 💥 `SyntaxError` | `0` | 💥 `Error` | `NaN` | `"NaN"` | `"NaN"` | 💥 `ValidationError` | `NaN` |
+| `"inf"` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | `Infinity` | `Infinity` | `"inf"` | `NaN` | `"inf"` | 💥 `SyntaxError` | `0` | `Infinity` | 💥 `XMLSchemaValidationError` | `"inf"` | `"inf"` | 💥 `ValidationError` | `NaN` |
+| `""` | `0` | `0` | `NaN` | `0` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `ValueError` | 💥 `ValueError` | `undefined` | `NaN` | `""` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaValidationError` | `null` | `null` | 💥 `ValidationError` | `NaN` |
+| `"   "` | `0` | `0` | `NaN` | `0` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `ValueError` | 💥 `ValueError` | `"   "` | `NaN` | `""` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaValidationError` | `null` | `null` | `0` | `NaN` |
+| `"12px"` | `NaN` | `NaN` | `12` | `NaN` | `12` | `NaN` | `NaN` | `12` | 💥 `ValiError` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"12px"` | `NaN` | `"12px"` | 💥 `SyntaxError` | `12` | 💥 `Error` | 💥 `XMLSchemaValidationError` | `"12px"` | `"12px"` | 💥 `ValidationError` | `NaN` |
+| `"٤٢"` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | `42` | `42` | `"٤٢"` | `NaN` | `"٤٢"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaValidationError` | `"٤٢"` | `"٤٢"` | 💥 `ValidationError` | `NaN` |
+| `"１２"` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | `12` | `12` | `"１２"` | `NaN` | `"１２"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaValidationError` | `"１２"` | `"１２"` | 💥 `ValidationError` | `NaN` |
+| `42` | 💥 `SchemaError` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | — | — | — | — | `42` | — | — | — | — | `42` | — |
+| `1.5` | 💥 `SchemaError` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | — | — | — | — | `1.5` | — | — | — | — | `1.5` | — |
+| `-0` | 💥 `SchemaError` | `-0` | `0` | `-0` | `0` | `-0` | `-0` | `0` | `-0` | `-0` | `-0` | `-0` | — | — | — | — | `-0` | — | — | — | — | `-0` | — |
+| `NaN` | 💥 `SchemaError` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | `NaN` | `NaN` | — | — | — | — | `null` | — | — | — | — | 💥 `ValidationError` | — |
+| `Infinity` | 💥 `SchemaError` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | `Infinity` | 💥 `ZodError` | `Infinity` | `Infinity` | — | — | — | — | `Infinity` | — | — | — | — | 💥 `ValidationError` | — |
+| `true` | 💥 `SchemaError` | `1` | `NaN` | `1` | `NaN` | `1` | `1` | `0` | `1` | `1` | `1` | `1` | — | — | — | — | — | — | — | — | — | `1` | — |
+| `false` | 💥 `SchemaError` | `0` | `NaN` | `0` | `NaN` | `0` | `0` | `0` | `0` | `0` | `0` | `0` | — | — | — | — | — | — | — | — | — | `0` | — |
+| `null` | 💥 `SchemaError` | `0` | `NaN` | `0` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | `null` | — | — | — | — | `0` | — |
+| `undefined` | 💥 `SchemaError` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | `undefined` | — |
+| `10n` | 💥 `SchemaError` | `10` | `10` | `10` | `10` | `10` | 💥 `TypeError` | `10` | `10` | `10` | `10` | `10` | — | — | — | — | `10` | — | — | — | — | 💥 `ValidationError` | — |
+| `[]` | 💥 `SchemaError` | `0` | `NaN` | `0` | `NaN` | `0` | `0` | `0` | `0` | `0` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — | — | — | — | 💥 `ValidationError` | — |
+| `["7"]` | 💥 `SchemaError` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | `7` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — | — | — | — | 💥 `ValidationError` | — |
+| `{}` | 💥 `SchemaError` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `NaN` | `0` | 💥 `ValiError` | 💥 `ZodError` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — | — | — | — | 💥 `ValidationError` | — |
 
 ## Versions
 
-| Tool | Tier | Version | Locale | Image |
+| Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
-| es-toolkit<br>`compat.toNumber(value)` | 1 | `1.52.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| JS built-ins<br>`Number.parseFloat(value)` | 1 | `v26.9.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| JS built-ins<br>`Number(value)` | 1 | `v26.9.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| lodash<br>`_.toNumber(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| zod<br>`z.coerce.number().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| Python<br>`float(value)` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
-| SQLite<br>`SELECT CAST(? AS REAL)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
-| YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString)(value)` | 1 | `4.0.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| es-toolkit<br>`compat.toNumber(value)` | 1 | `1.52.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Hermes<br>`Number.parseFloat(value)` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Hermes<br>`Number(value)` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| JS built-ins<br>`Number.parseFloat(value)` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| JS built-ins<br>`Number(value)` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| lodash<br>`_.toNumber(value)` | 1 | `4.18.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| radash<br>`toFloat(value)` | 1 | `12.1.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber()), value)` | 1 | `1.5.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| zod<br>`z.coerce.number().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Python<br>`float(value)` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| Python<br>`float(value)` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| CSV<br>`parse(value, { cast: true })[0]?.[0]` | 3 | `csv-parse 7.0.3` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| HTML (jsdom)<br>`input.value = value; input.valueAsNumber` | 3 | `jsdom 30.1.2` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| INI<br>`` parse(`v = ${value}`).v `` | 3 | `ini 7.0.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| JSON<br>`JSON.parse(value)` | 3 | `RFC 8259` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| SQLite<br>`SELECT CAST(? AS REAL)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| TOML<br>`` parse(`v = ${value}`).v `` | 3 | `smol-toml 1.9.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| XML Schema 1.0<br>`decode(<double>value</double>)` | 3 | `xmlschema 4.3.2` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Ajv<br>`coerce({ type: "number" }, value)` | 4 | `8.20.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| validator.js<br>`validator.toFloat(value)` | 4 | `13.15.35` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |

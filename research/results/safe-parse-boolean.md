@@ -4,158 +4,176 @@
 
 ## Tiers 0–2
 
-| Case | safe-fns (planned)<br>`safeParseBoolean` | JS built-ins<br>`JSON.parse(value)` | yn<br>`yn(value)` | zod<br>`z.stringbool().parse(value)` | Python<br>`ConfigParser().getboolean(…)` | Python<br>`distutils.util.strtobool(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"true"` | `true` | `true` | `true` | `true` | `true` | `1` |
-| `"TRUE"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"True"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"t"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | `1` |
-| `"T"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | `1` |
-| `"yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"YES"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"Yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"y"` | `true` | 💥 `SyntaxError` | `true` | `true` | 💥 `ValueError` | `1` |
-| `"Y"` | `true` | 💥 `SyntaxError` | `true` | `true` | 💥 `ValueError` | `1` |
-| `"on"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"ON"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` |
-| `"1"` | `true` | `1` | `true` | `true` | `true` | `1` |
-| `"false"` | `false` | `false` | `false` | `false` | `false` | `0` |
-| `"FALSE"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"False"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"f"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | `0` |
-| `"F"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | `0` |
-| `"no"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"NO"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"n"` | `false` | 💥 `SyntaxError` | `false` | `false` | 💥 `ValueError` | `0` |
-| `"N"` | `false` | 💥 `SyntaxError` | `false` | `false` | 💥 `ValueError` | `0` |
-| `"off"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"OFF"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` |
-| `"0"` | `false` | `0` | `false` | `false` | `false` | `0` |
-| `" yes "` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"\u{9}no\u{A}"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"\u{A0}true\u{A0}"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"true\u{200B}"` | `true` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"enabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `true` | 💥 `ValueError` | 💥 `ValueError` |
-| `"disabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `false` | 💥 `ValueError` | 💥 `ValueError` |
-| `"tru"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"2"` | `undefined` | `2` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"-1"` | `undefined` | `-1` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"1.0"` | `undefined` | `1` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"-0"` | `undefined` | `-0` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"01"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"0x1"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `""` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"   "` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"yes please"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `"ｔｒｕｅ"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
-| `true` | `true` | — | `true` | 💥 `ZodError` | — | — |
-| `false` | `false` | — | `false` | 💥 `ZodError` | — | — |
-| `1` | `true` | — | `true` | 💥 `ZodError` | — | — |
-| `0` | `false` | — | `false` | 💥 `ZodError` | — | — |
-| `-0` | `false` | — | `false` | 💥 `ZodError` | — | — |
-| `1.5` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `2` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `NaN` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `1n` | `true` | — | `true` | 💥 `ZodError` | — | — |
-| `0n` | `false` | — | `false` | 💥 `ZodError` | — | — |
-| `2n` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `null` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `undefined` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `[]` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
-| `{}` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — |
+| Case | safe-fns (planned)<br>`safeParseBoolean` | Hermes<br>`JSON.parse(value)` | valibot<br>`v.parse(v.pipe(v.unknown(), v.parseBoolean()), value)` | yn<br>`yn(value)` | zod<br>`z.stringbool().parse(value)` | Python<br>`ConfigParser().getboolean(…)` | Python<br>`ConfigParser().getboolean(…)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"true"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `"TRUE"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` |
+| `"True"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` |
+| `"t"` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"T"` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` |
+| `"YES"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` |
+| `"Yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` |
+| `"y"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | 💥 `ValueError` | 💥 `ValueError` |
+| `"Y"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | 💥 `ValueError` | 💥 `ValueError` |
+| `"on"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` |
+| `"ON"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` |
+| `"1"` | `true` | `1` | `true` | `true` | `true` | `true` | `true` |
+| `"false"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `"FALSE"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` |
+| `"False"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` |
+| `"f"` | `false` | 💥 `SyntaxError` | 💥 `ValiError` | `false` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"F"` | `false` | 💥 `SyntaxError` | 💥 `ValiError` | `false` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"no"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` |
+| `"NO"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` |
+| `"n"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | 💥 `ValueError` | 💥 `ValueError` |
+| `"N"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | 💥 `ValueError` | 💥 `ValueError` |
+| `"off"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` |
+| `"OFF"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` |
+| `"0"` | `false` | `0` | `false` | `false` | `false` | `false` | `false` |
+| `" yes "` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"\u{9}no\u{A}"` | `false` | 💥 `SyntaxError` | 💥 `ValiError` | `false` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"\u{A0}true\u{A0}"` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"true\u{200B}"` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"enabled"` | `undefined` | 💥 `SyntaxError` | `true` | `undefined` | `true` | 💥 `ValueError` | 💥 `ValueError` |
+| `"disabled"` | `undefined` | 💥 `SyntaxError` | `false` | `undefined` | `false` | 💥 `ValueError` | 💥 `ValueError` |
+| `"tru"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"2"` | `undefined` | `2` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"-1"` | `undefined` | `-1` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"1.0"` | `undefined` | `1` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"-0"` | `undefined` | `-0` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"01"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"0x1"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `""` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"   "` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"yes please"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `"ｔｒｕｅ"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` |
+| `true` | `true` | — | `true` | `true` | 💥 `ZodError` | — | — |
+| `false` | `false` | — | `false` | `false` | 💥 `ZodError` | — | — |
+| `1` | `true` | — | `true` | `true` | 💥 `ZodError` | — | — |
+| `0` | `false` | — | `false` | `false` | 💥 `ZodError` | — | — |
+| `-0` | `false` | — | `false` | `false` | 💥 `ZodError` | — | — |
+| `1.5` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — |
+| `2` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — |
+| `NaN` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — |
+| `1n` | `true` | — | 💥 `ValiError` | `true` | 💥 `ZodError` | — | — |
+| `0n` | `false` | — | 💥 `ValiError` | `false` | 💥 `ZodError` | — | — |
+| `2n` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — |
+| `null` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — |
+| `undefined` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — |
+| `[]` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — |
+| `{}` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — |
 
 ## By outcome
 
 | Tool | `true` | `false` | `undefined` | Other | Throws |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | safe-fns (planned)<br>`safeParseBoolean` | `"true"` `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `" yes "` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `true` `1` `1n` | `"false"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `"\u{9}no\u{A}"` `false` `0` `-0` `0n` | `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `1.5` `2` `NaN` `2n` `null` `undefined` `[]` `{}` |  |  |
-| JS built-ins<br>`JSON.parse(value)` | `"true"` | `"false"` |  | `"1"` → `1` `"0"` → `0` `"2"` → `2` `"-1"` → `-1` `"1.0"` → `1` `"-0"` → `-0` | `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
+| Hermes<br>`JSON.parse(value)` | `"true"` | `"false"` |  | `"1"` → `1` `"0"` → `0` `"2"` → `2` `"-1"` → `-1` `"1.0"` → `1` `"-0"` → `-0` | `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
+| valibot<br>`v.parse(v.pipe(v.unknown(), v.parseBoolean()), value)` | `"true"` `"TRUE"` `"True"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `"enabled"` `true` `1` | `"false"` `"FALSE"` `"False"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `"disabled"` `false` `0` `-0` |  |  | `"t"` `"T"` `"f"` `"F"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `1.5` `2` `NaN` `1n` `0n` `2n` `null` `undefined` `[]` `{}` |
 | yn<br>`yn(value)` | `"true"` `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `" yes "` `"\u{A0}true\u{A0}"` `true` `1` `1n` | `"false"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `"\u{9}no\u{A}"` `false` `0` `-0` `0n` | `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `1.5` `2` `NaN` `2n` `null` `undefined` `[]` `{}` |  |  |
 | zod<br>`z.stringbool().parse(value)` | `"true"` `"TRUE"` `"True"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `"enabled"` | `"false"` `"FALSE"` `"False"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `"disabled"` |  |  | `"t"` `"T"` `"f"` `"F"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `true` `false` `1` `0` `-0` `1.5` `2` `NaN` `1n` `0n` `2n` `null` `undefined` `[]` `{}` |
 | Python<br>`ConfigParser().getboolean(…)` | `"true"` `"TRUE"` `"True"` `"yes"` `"YES"` `"Yes"` `"on"` `"ON"` `"1"` | `"false"` `"FALSE"` `"False"` `"no"` `"NO"` `"off"` `"OFF"` `"0"` |  |  | `"t"` `"T"` `"y"` `"Y"` `"f"` `"F"` `"n"` `"N"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
-| Python<br>`distutils.util.strtobool(value)` |  |  |  | `"true"` → `1` `"TRUE"` → `1` `"True"` → `1` `"t"` → `1` `"T"` → `1` `"yes"` → `1` `"YES"` → `1` `"Yes"` → `1` `"y"` → `1` `"Y"` → `1` `"on"` → `1` `"ON"` → `1` `"1"` → `1` `"false"` → `0` `"FALSE"` → `0` `"False"` → `0` `"f"` → `0` `"F"` → `0` `"no"` → `0` `"NO"` → `0` `"n"` → `0` `"N"` → `0` `"off"` → `0` `"OFF"` → `0` `"0"` → `0` | `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
+| Python<br>`ConfigParser().getboolean(…)` | `"true"` `"TRUE"` `"True"` `"yes"` `"YES"` `"Yes"` `"on"` `"ON"` `"1"` | `"false"` `"FALSE"` `"False"` `"no"` `"NO"` `"off"` `"OFF"` `"0"` |  |  | `"t"` `"T"` `"y"` `"Y"` `"f"` `"F"` `"n"` `"N"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
+| CSV<br>`parse(value, { cast: true })[0]?.[0]` |  |  | `""` | `"true"` → `"true"` `"TRUE"` → `"TRUE"` `"True"` → `"True"` `"t"` → `"t"` `"T"` → `"T"` `"yes"` → `"yes"` `"YES"` → `"YES"` `"Yes"` → `"Yes"` `"y"` → `"y"` `"Y"` → `"Y"` `"on"` → `"on"` `"ON"` → `"ON"` `"1"` → `1` `"false"` → `"false"` `"FALSE"` → `"FALSE"` `"False"` → `"False"` `"f"` → `"f"` `"F"` → `"F"` `"no"` → `"no"` `"NO"` → `"NO"` `"n"` → `"n"` `"N"` → `"N"` `"off"` → `"off"` `"OFF"` → `"OFF"` `"0"` → `0` `" yes "` → `" yes "` `"\u{9}no\u{A}"` → `"\u{9}no"` `"\u{A0}true\u{A0}"` → `"\u{A0}true\u{A0}"` `"true\u{200B}"` → `"true\u{200B}"` `"enabled"` → `"enabled"` `"disabled"` → `"disabled"` `"tru"` → `"tru"` `"2"` → `2` `"-1"` → `-1` `"1.0"` → `1` `"-0"` → `-0` `"01"` → `1` `"0x1"` → `0` `"   "` → `"   "` `"yes please"` → `"yes please"` `"ｔｒｕｅ"` → `"ｔｒｕｅ"` |  |
+| HTML (jsdom)<br>`div.setAttribute("hidden", value); div.hidden` | `"true"` `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `"false"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |  |  |  |  |
+| INI<br>`` parse(`v = ${value}`).v `` | `"true"` `"\u{A0}true\u{A0}"` | `"false"` |  | `"TRUE"` → `"TRUE"` `"True"` → `"True"` `"t"` → `"t"` `"T"` → `"T"` `"yes"` → `"yes"` `"YES"` → `"YES"` `"Yes"` → `"Yes"` `"y"` → `"y"` `"Y"` → `"Y"` `"on"` → `"on"` `"ON"` → `"ON"` `"1"` → `"1"` `"FALSE"` → `"FALSE"` `"False"` → `"False"` `"f"` → `"f"` `"F"` → `"F"` `"no"` → `"no"` `"NO"` → `"NO"` `"n"` → `"n"` `"N"` → `"N"` `"off"` → `"off"` `"OFF"` → `"OFF"` `"0"` → `"0"` `" yes "` → `"yes"` `"\u{9}no\u{A}"` → `"no"` `"true\u{200B}"` → `"true\u{200B}"` `"enabled"` → `"enabled"` `"disabled"` → `"disabled"` `"tru"` → `"tru"` `"2"` → `"2"` `"-1"` → `"-1"` `"1.0"` → `"1.0"` `"-0"` → `"-0"` `"01"` → `"01"` `"0x1"` → `"0x1"` `""` → `""` `"   "` → `""` `"yes please"` → `"yes please"` `"ｔｒｕｅ"` → `"ｔｒｕｅ"` |  |
+| JSON<br>`JSON.parse(value)` | `"true"` | `"false"` |  | `"1"` → `1` `"0"` → `0` `"2"` → `2` `"-1"` → `-1` `"1.0"` → `1` `"-0"` → `-0` | `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
 | SQLite<br>`SELECT ? IS TRUE` |  |  |  | `"true"` → `0` `"TRUE"` → `0` `"True"` → `0` `"t"` → `0` `"T"` → `0` `"yes"` → `0` `"YES"` → `0` `"Yes"` → `0` `"y"` → `0` `"Y"` → `0` `"on"` → `0` `"ON"` → `0` `"1"` → `1` `"false"` → `0` `"FALSE"` → `0` `"False"` → `0` `"f"` → `0` `"F"` → `0` `"no"` → `0` `"NO"` → `0` `"n"` → `0` `"N"` → `0` `"off"` → `0` `"OFF"` → `0` `"0"` → `0` `" yes "` → `0` `"\u{9}no\u{A}"` → `0` `"\u{A0}true\u{A0}"` → `0` `"true\u{200B}"` → `0` `"enabled"` → `0` `"disabled"` → `0` `"tru"` → `0` `"2"` → `1` `"-1"` → `1` `"1.0"` → `1` `"-0"` → `0` `"01"` → `1` `"0x1"` → `0` `""` → `0` `"   "` → `0` `"yes please"` → `0` `"ｔｒｕｅ"` → `0` `1` → `1` `0` → `0` `-0` → `0` `1.5` → `1` `2` → `1` `NaN` → `0` `1n` → `1` `0n` → `0` `2n` → `1` `null` → `0` |  |
+| TOML<br>`` parse(`v = ${value}`).v `` | `"true"` | `"false"` |  | `"1"` → `1` `"0"` → `0` `"2"` → `2` `"-1"` → `-1` `"1.0"` → `1` `"-0"` → `0` `"0x1"` → `1` | `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"01"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
+| XML Schema 1.0<br>`decode(<boolean>value</boolean>)` | `"true"` `"1"` `"\u{A0}true\u{A0}"` | `"false"` `"0"` |  |  | `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `" yes "` `"\u{9}no\u{A}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
 | YAML 1.1<br>`parse(value, { version: "1.1" })` | `"true"` `"TRUE"` `"True"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `" yes "` | `"false"` `"FALSE"` `"False"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` |  | `"t"` → `"t"` `"T"` → `"T"` `"1"` → `1` `"f"` → `"f"` `"F"` → `"F"` `"0"` → `0` `"\u{A0}true\u{A0}"` → `"\u{A0}true\u{A0}"` `"true\u{200B}"` → `"true\u{200B}"` `"enabled"` → `"enabled"` `"disabled"` → `"disabled"` `"tru"` → `"tru"` `"2"` → `2` `"-1"` → `-1` `"1.0"` → `1` `"-0"` → `-0` `"01"` → `1` `"0x1"` → `1` `""` → `null` `"   "` → `null` `"yes please"` → `"yes please"` `"ｔｒｕｅ"` → `"ｔｒｕｅ"` | `"\u{9}no\u{A}"` |
 | YAML 1.2 core<br>`parse(value)` | `"true"` `"TRUE"` `"True"` | `"false"` `"FALSE"` `"False"` |  | `"t"` → `"t"` `"T"` → `"T"` `"yes"` → `"yes"` `"YES"` → `"YES"` `"Yes"` → `"Yes"` `"y"` → `"y"` `"Y"` → `"Y"` `"on"` → `"on"` `"ON"` → `"ON"` `"1"` → `1` `"f"` → `"f"` `"F"` → `"F"` `"no"` → `"no"` `"NO"` → `"NO"` `"n"` → `"n"` `"N"` → `"N"` `"off"` → `"off"` `"OFF"` → `"OFF"` `"0"` → `0` `" yes "` → `"yes"` `"\u{A0}true\u{A0}"` → `"\u{A0}true\u{A0}"` `"true\u{200B}"` → `"true\u{200B}"` `"enabled"` → `"enabled"` `"disabled"` → `"disabled"` `"tru"` → `"tru"` `"2"` → `2` `"-1"` → `-1` `"1.0"` → `1` `"-0"` → `-0` `"01"` → `1` `"0x1"` → `1` `""` → `null` `"   "` → `null` `"yes please"` → `"yes please"` `"ｔｒｕｅ"` → `"ｔｒｕｅ"` | `"\u{9}no\u{A}"` |
+| Ajv<br>`coerce({ type: "boolean" }, value)` | `"true"` `true` `1` | `"false"` `false` `0` `-0` `null` | `undefined` |  | `"TRUE"` `"True"` `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `1.5` `2` `NaN` `1n` `0n` `2n` `[]` `{}` |
 | envalid<br>`bool()._parse(value)` | `"true"` `"t"` `"yes"` `"on"` `"1"` | `"false"` `"f"` `"no"` `"off"` `"0"` |  |  | `"TRUE"` `"True"` `"T"` `"YES"` `"Yes"` `"y"` `"Y"` `"ON"` `"FALSE"` `"False"` `"F"` `"NO"` `"n"` `"N"` `"OFF"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |
 | joi<br>`Joi.attempt(value, Joi.boolean())` | `"true"` `"TRUE"` `"True"` `"\u{A0}true\u{A0}"` `true` | `"false"` `"FALSE"` `"False"` `false` | `undefined` |  | `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"1"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `" yes "` `"\u{9}no\u{A}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `1` `0` `-0` `1.5` `2` `NaN` `1n` `0n` `2n` `null` `[]` `{}` |
+| validator.js<br>`validator.toBoolean(value, true)` | `"true"` `"TRUE"` `"True"` `"1"` | `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"false"` `"FALSE"` `"False"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `"0"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` |  |  |  |
 | yup<br>`boolean().validateSync(value)` | `"true"` `"TRUE"` `"True"` `"1"` `true` `1` `1n` | `"false"` `"FALSE"` `"False"` `"0"` `false` `0` `-0` `0n` | `undefined` |  | `"t"` `"T"` `"yes"` `"YES"` `"Yes"` `"y"` `"Y"` `"on"` `"ON"` `"f"` `"F"` `"no"` `"NO"` `"n"` `"N"` `"off"` `"OFF"` `" yes "` `"\u{9}no\u{A}"` `"\u{A0}true\u{A0}"` `"true\u{200B}"` `"enabled"` `"disabled"` `"tru"` `"2"` `"-1"` `"1.0"` `"-0"` `"01"` `"0x1"` `""` `"   "` `"yes please"` `"ｔｒｕｅ"` `1.5` `2` `NaN` `2n` `null` `[]` `{}` |
 
 ## Every tool
 
-| Case | safe-fns (planned)<br>`safeParseBoolean` | JS built-ins<br>`JSON.parse(value)` | yn<br>`yn(value)` | zod<br>`z.stringbool().parse(value)` | Python<br>`ConfigParser().getboolean(…)` | Python<br>`distutils.util.strtobool(value)` | SQLite<br>`SELECT ? IS TRUE` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` | envalid<br>`bool()._parse(value)` | joi<br>`Joi.attempt(value, Joi.boolean())` | yup<br>`boolean().validateSync(value)` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `"true"` | `true` | `true` | `true` | `true` | `true` | `1` | `0` | `true` | `true` | `true` | `true` | `true` |
-| `"TRUE"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `true` | 💥 `EnvError` | `true` | `true` |
-| `"True"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `true` | 💥 `EnvError` | `true` | `true` |
-| `"t"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | `1` | `0` | `"t"` | `"t"` | `true` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"T"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | `1` | `0` | `"T"` | `"T"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `"yes"` | `true` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"YES"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `"YES"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"Yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `"Yes"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"y"` | `true` | 💥 `SyntaxError` | `true` | `true` | 💥 `ValueError` | `1` | `0` | `true` | `"y"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"Y"` | `true` | 💥 `SyntaxError` | `true` | `true` | 💥 `ValueError` | `1` | `0` | `true` | `"Y"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"on"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `"on"` | `true` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"ON"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `1` | `0` | `true` | `"ON"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"1"` | `true` | `1` | `true` | `true` | `true` | `1` | `1` | `1` | `1` | `true` | 💥 `ValidationError` | `true` |
-| `"false"` | `false` | `false` | `false` | `false` | `false` | `0` | `0` | `false` | `false` | `false` | `false` | `false` |
-| `"FALSE"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `false` | 💥 `EnvError` | `false` | `false` |
-| `"False"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `false` | 💥 `EnvError` | `false` | `false` |
-| `"f"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | `0` | `0` | `"f"` | `"f"` | `false` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"F"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | `0` | `0` | `"F"` | `"F"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"no"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `"no"` | `false` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"NO"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `"NO"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"n"` | `false` | 💥 `SyntaxError` | `false` | `false` | 💥 `ValueError` | `0` | `0` | `false` | `"n"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"N"` | `false` | 💥 `SyntaxError` | `false` | `false` | 💥 `ValueError` | `0` | `0` | `false` | `"N"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"off"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `"off"` | `false` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"OFF"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `0` | `0` | `false` | `"OFF"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"0"` | `false` | `0` | `false` | `false` | `false` | `0` | `0` | `0` | `0` | `false` | 💥 `ValidationError` | `false` |
-| `" yes "` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `true` | `"yes"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"\u{9}no\u{A}"` | `false` | 💥 `SyntaxError` | `false` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | 💥 `YAMLParseError` | 💥 `YAMLParseError` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"\u{A0}true\u{A0}"` | `true` | 💥 `SyntaxError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"\u{A0}true\u{A0}"` | `"\u{A0}true\u{A0}"` | 💥 `EnvError` | `true` | 💥 `ValidationError` |
-| `"true\u{200B}"` | `true` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"true\u{200B}"` | `"true\u{200B}"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"enabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `true` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"enabled"` | `"enabled"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"disabled"` | `undefined` | 💥 `SyntaxError` | `undefined` | `false` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"disabled"` | `"disabled"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"tru"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"tru"` | `"tru"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"2"` | `undefined` | `2` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `1` | `2` | `2` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"-1"` | `undefined` | `-1` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `1` | `-1` | `-1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"1.0"` | `undefined` | `1` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `1` | `1` | `1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"-0"` | `undefined` | `-0` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `-0` | `-0` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"01"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `1` | `1` | `1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"0x1"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `1` | `1` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `""` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `null` | `null` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"   "` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `null` | `null` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"yes please"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"yes please"` | `"yes please"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `"ｔｒｕｅ"` | `undefined` | 💥 `SyntaxError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `"ｔｒｕｅ"` | `"ｔｒｕｅ"` | 💥 `EnvError` | 💥 `ValidationError` | 💥 `ValidationError` |
-| `true` | `true` | — | `true` | 💥 `ZodError` | — | — | — | — | — | — | `true` | `true` |
-| `false` | `false` | — | `false` | 💥 `ZodError` | — | — | — | — | — | — | `false` | `false` |
-| `1` | `true` | — | `true` | 💥 `ZodError` | — | — | `1` | — | — | — | 💥 `ValidationError` | `true` |
-| `0` | `false` | — | `false` | 💥 `ZodError` | — | — | `0` | — | — | — | 💥 `ValidationError` | `false` |
-| `-0` | `false` | — | `false` | 💥 `ZodError` | — | — | `0` | — | — | — | 💥 `ValidationError` | `false` |
-| `1.5` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `1` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
-| `2` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `1` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
-| `NaN` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `0` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
-| `1n` | `true` | — | `true` | 💥 `ZodError` | — | — | `1` | — | — | — | 💥 `ValidationError` | `true` |
-| `0n` | `false` | — | `false` | 💥 `ZodError` | — | — | `0` | — | — | — | 💥 `ValidationError` | `false` |
-| `2n` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `1` | — | — | — | 💥 `ValidationError` | 💥 `TypeError` |
-| `null` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | `0` | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
-| `undefined` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | `undefined` | `undefined` |
-| `[]` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
-| `{}` | `undefined` | — | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | 💥 `ValidationError` | 💥 `ValidationError` |
+| Case | safe-fns (planned)<br>`safeParseBoolean` | Hermes<br>`JSON.parse(value)` | valibot<br>`v.parse(v.pipe(v.unknown(), v.parseBoolean()), value)` | yn<br>`yn(value)` | zod<br>`z.stringbool().parse(value)` | Python<br>`ConfigParser().getboolean(…)` | Python<br>`ConfigParser().getboolean(…)` | CSV<br>`parse(value, { cast: true })[0]?.[0]` | HTML (jsdom)<br>`div.setAttribute("hidden", value); div.hidden` | INI<br>`` parse(`v = ${value}`).v `` | JSON<br>`JSON.parse(value)` | SQLite<br>`SELECT ? IS TRUE` | TOML<br>`` parse(`v = ${value}`).v `` | XML Schema 1.0<br>`decode(<boolean>value</boolean>)` | YAML 1.1<br>`parse(value, { version: "1.1" })` | YAML 1.2 core<br>`parse(value)` | Ajv<br>`coerce({ type: "boolean" }, value)` | envalid<br>`bool()._parse(value)` | joi<br>`Joi.attempt(value, Joi.boolean())` | validator.js<br>`validator.toBoolean(value, true)` | yup<br>`boolean().validateSync(value)` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `"true"` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `"true"` | `true` | `true` | `true` | `0` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `"TRUE"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `"TRUE"` | `true` | `"TRUE"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `true` | `true` | 💥 `ValidationError` | 💥 `EnvError` | `true` | `true` | `true` |
+| `"True"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `"True"` | `true` | `"True"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `true` | `true` | 💥 `ValidationError` | 💥 `EnvError` | `true` | `true` | `true` |
+| `"t"` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"t"` | `true` | `"t"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `"t"` | `"t"` | 💥 `ValidationError` | `true` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"T"` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"T"` | `true` | `"T"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `"T"` | `"T"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `"yes"` | `true` | `"yes"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `true` | `"yes"` | 💥 `ValidationError` | `true` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"YES"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `"YES"` | `true` | `"YES"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `true` | `"YES"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"Yes"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `"Yes"` | `true` | `"Yes"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `true` | `"Yes"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"y"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | 💥 `ValueError` | 💥 `ValueError` | `"y"` | `true` | `"y"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `true` | `"y"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"Y"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | 💥 `ValueError` | 💥 `ValueError` | `"Y"` | `true` | `"Y"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `true` | `"Y"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"on"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `"on"` | `true` | `"on"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `true` | `"on"` | 💥 `ValidationError` | `true` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"ON"` | `true` | 💥 `SyntaxError` | `true` | `true` | `true` | `true` | `true` | `"ON"` | `true` | `"ON"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `true` | `"ON"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"1"` | `true` | `1` | `true` | `true` | `true` | `true` | `true` | `1` | `true` | `"1"` | `1` | `1` | `1` | `true` | `1` | `1` | 💥 `ValidationError` | `true` | 💥 `ValidationError` | `true` | `true` |
+| `"false"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `"false"` | `true` | `false` | `false` | `0` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `"FALSE"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` | `"FALSE"` | `true` | `"FALSE"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `false` | `false` | 💥 `ValidationError` | 💥 `EnvError` | `false` | `false` | `false` |
+| `"False"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` | `"False"` | `true` | `"False"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `false` | `false` | 💥 `ValidationError` | 💥 `EnvError` | `false` | `false` | `false` |
+| `"f"` | `false` | 💥 `SyntaxError` | 💥 `ValiError` | `false` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"f"` | `true` | `"f"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `"f"` | `"f"` | 💥 `ValidationError` | `false` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"F"` | `false` | 💥 `SyntaxError` | 💥 `ValiError` | `false` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"F"` | `true` | `"F"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `"F"` | `"F"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"no"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` | `"no"` | `true` | `"no"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `false` | `"no"` | 💥 `ValidationError` | `false` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"NO"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` | `"NO"` | `true` | `"NO"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `false` | `"NO"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"n"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | 💥 `ValueError` | 💥 `ValueError` | `"n"` | `true` | `"n"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `false` | `"n"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"N"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | 💥 `ValueError` | 💥 `ValueError` | `"N"` | `true` | `"N"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `false` | `"N"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"off"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` | `"off"` | `true` | `"off"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `false` | `"off"` | 💥 `ValidationError` | `false` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"OFF"` | `false` | 💥 `SyntaxError` | `false` | `false` | `false` | `false` | `false` | `"OFF"` | `true` | `"OFF"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `false` | `"OFF"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"0"` | `false` | `0` | `false` | `false` | `false` | `false` | `false` | `0` | `true` | `"0"` | `0` | `0` | `0` | `false` | `0` | `0` | 💥 `ValidationError` | `false` | 💥 `ValidationError` | `false` | `false` |
+| `" yes "` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `" yes "` | `true` | `"yes"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `true` | `"yes"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"\u{9}no\u{A}"` | `false` | 💥 `SyntaxError` | 💥 `ValiError` | `false` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"\u{9}no"` | `true` | `"no"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | 💥 `YAMLParseError` | 💥 `YAMLParseError` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"\u{A0}true\u{A0}"` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `true` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"\u{A0}true\u{A0}"` | `true` | `true` | 💥 `SyntaxError` | `0` | 💥 `Error` | `true` | `"\u{A0}true\u{A0}"` | `"\u{A0}true\u{A0}"` | 💥 `ValidationError` | 💥 `EnvError` | `true` | `false` | 💥 `ValidationError` |
+| `"true\u{200B}"` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"true\u{200B}"` | `true` | `"true\u{200B}"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `"true\u{200B}"` | `"true\u{200B}"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"enabled"` | `undefined` | 💥 `SyntaxError` | `true` | `undefined` | `true` | 💥 `ValueError` | 💥 `ValueError` | `"enabled"` | `true` | `"enabled"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `"enabled"` | `"enabled"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"disabled"` | `undefined` | 💥 `SyntaxError` | `false` | `undefined` | `false` | 💥 `ValueError` | 💥 `ValueError` | `"disabled"` | `true` | `"disabled"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `"disabled"` | `"disabled"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"tru"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"tru"` | `true` | `"tru"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `"tru"` | `"tru"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"2"` | `undefined` | `2` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `2` | `true` | `"2"` | `2` | `1` | `2` | 💥 `XMLSchemaDecodeError` | `2` | `2` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"-1"` | `undefined` | `-1` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `-1` | `true` | `"-1"` | `-1` | `1` | `-1` | 💥 `XMLSchemaDecodeError` | `-1` | `-1` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"1.0"` | `undefined` | `1` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `1` | `true` | `"1.0"` | `1` | `1` | `1` | 💥 `XMLSchemaDecodeError` | `1` | `1` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"-0"` | `undefined` | `-0` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `-0` | `true` | `"-0"` | `-0` | `0` | `0` | 💥 `XMLSchemaDecodeError` | `-0` | `-0` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"01"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `1` | `true` | `"01"` | 💥 `SyntaxError` | `1` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `1` | `1` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"0x1"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `0` | `true` | `"0x1"` | 💥 `SyntaxError` | `0` | `1` | 💥 `XMLSchemaDecodeError` | `1` | `1` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `""` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `undefined` | `true` | `""` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `null` | `null` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"   "` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"   "` | `true` | `""` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `null` | `null` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"yes please"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"yes please"` | `true` | `"yes please"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `"yes please"` | `"yes please"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `"ｔｒｕｅ"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `ValueError` | 💥 `ValueError` | `"ｔｒｕｅ"` | `true` | `"ｔｒｕｅ"` | 💥 `SyntaxError` | `0` | 💥 `Error` | 💥 `XMLSchemaDecodeError` | `"ｔｒｕｅ"` | `"ｔｒｕｅ"` | 💥 `ValidationError` | 💥 `EnvError` | 💥 `ValidationError` | `false` | 💥 `ValidationError` |
+| `true` | `true` | — | `true` | `true` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | `true` | — | `true` | — | `true` |
+| `false` | `false` | — | `false` | `false` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | `false` | — | `false` | — | `false` |
+| `1` | `true` | — | `true` | `true` | 💥 `ZodError` | — | — | — | — | — | — | `1` | — | — | — | — | `true` | — | 💥 `ValidationError` | — | `true` |
+| `0` | `false` | — | `false` | `false` | 💥 `ZodError` | — | — | — | — | — | — | `0` | — | — | — | — | `false` | — | 💥 `ValidationError` | — | `false` |
+| `-0` | `false` | — | `false` | `false` | 💥 `ZodError` | — | — | — | — | — | — | `0` | — | — | — | — | `false` | — | 💥 `ValidationError` | — | `false` |
+| `1.5` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | `1` | — | — | — | — | 💥 `ValidationError` | — | 💥 `ValidationError` | — | 💥 `ValidationError` |
+| `2` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | `1` | — | — | — | — | 💥 `ValidationError` | — | 💥 `ValidationError` | — | 💥 `ValidationError` |
+| `NaN` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | `0` | — | — | — | — | 💥 `ValidationError` | — | 💥 `ValidationError` | — | 💥 `ValidationError` |
+| `1n` | `true` | — | 💥 `ValiError` | `true` | 💥 `ZodError` | — | — | — | — | — | — | `1` | — | — | — | — | 💥 `ValidationError` | — | 💥 `ValidationError` | — | `true` |
+| `0n` | `false` | — | 💥 `ValiError` | `false` | 💥 `ZodError` | — | — | — | — | — | — | `0` | — | — | — | — | 💥 `ValidationError` | — | 💥 `ValidationError` | — | `false` |
+| `2n` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | `1` | — | — | — | — | 💥 `ValidationError` | — | 💥 `ValidationError` | — | 💥 `TypeError` |
+| `null` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | `0` | — | — | — | — | `false` | — | 💥 `ValidationError` | — | 💥 `ValidationError` |
+| `undefined` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | `undefined` | — | `undefined` | — | `undefined` |
+| `[]` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | 💥 `ValidationError` | — | 💥 `ValidationError` | — | 💥 `ValidationError` |
+| `{}` | `undefined` | — | 💥 `ValiError` | `undefined` | 💥 `ZodError` | — | — | — | — | — | — | — | — | — | — | — | 💥 `ValidationError` | — | 💥 `ValidationError` | — | 💥 `ValidationError` |
 
 ## Versions
 
-| Tool | Tier | Version | Locale | Image |
+| Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
 | safe-fns (planned)<br>`safeParseBoolean` | 0 | `-` | `-` | `-` |
-| JS built-ins<br>`JSON.parse(value)` | 1 | `v26.9.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| yn<br>`yn(value)` | 1 | `5.1.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| zod<br>`z.stringbool().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| Python<br>`ConfigParser().getboolean(…)` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
-| Python<br>`distutils.util.strtobool(value)` | 2 | `3.11.16` | `C.UTF-8` | `python:3.11.16-slim-bookworm@sha256:a36c24f9cbdf4fd0f52d67f0823eeac19c2028c637cecc392d97f980d4fec56b` |
-| SQLite<br>`SELECT ? IS TRUE` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
-| YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| envalid<br>`bool()._parse(value)` | 4 | `8.2.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| joi<br>`Joi.attempt(value, Joi.boolean())` | 4 | `18.2.9` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| yup<br>`boolean().validateSync(value)` | 4 | `1.7.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
+| Hermes<br>`JSON.parse(value)` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| valibot<br>`v.parse(v.pipe(v.unknown(), v.parseBoolean()), value)` | 1 | `1.5.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| yn<br>`yn(value)` | 1 | `5.1.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| zod<br>`z.stringbool().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Python<br>`ConfigParser().getboolean(…)` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| Python<br>`ConfigParser().getboolean(…)` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| CSV<br>`parse(value, { cast: true })[0]?.[0]` | 3 | `csv-parse 7.0.3` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| HTML (jsdom)<br>`div.setAttribute("hidden", value); div.hidden` | 3 | `jsdom 30.1.2` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| INI<br>`` parse(`v = ${value}`).v `` | 3 | `ini 7.0.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| JSON<br>`JSON.parse(value)` | 3 | `RFC 8259` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| SQLite<br>`SELECT ? IS TRUE` | 3 | `3.40.1` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| TOML<br>`` parse(`v = ${value}`).v `` | 3 | `smol-toml 1.9.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| XML Schema 1.0<br>`decode(<boolean>value</boolean>)` | 3 | `xmlschema 4.3.2` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Ajv<br>`coerce({ type: "boolean" }, value)` | 4 | `8.20.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| envalid<br>`bool()._parse(value)` | 4 | `8.2.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| joi<br>`Joi.attempt(value, Joi.boolean())` | 4 | `18.2.9` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| validator.js<br>`validator.toBoolean(value, true)` | 4 | `13.15.35` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| yup<br>`boolean().validateSync(value)` | 4 | `1.7.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |

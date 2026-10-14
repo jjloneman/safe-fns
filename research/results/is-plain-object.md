@@ -4,66 +4,72 @@
 
 ## Tiers 0–2
 
-| Case | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | remeda<br>`isPlainObject(value)` | Python<br>`type(value) is dict` |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `{}` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` |
-| `[]` | `false` | `false` | `false` | `false` | `false` |
-| `null` | `false` | `false` | `false` | `false` | `false` |
-| `undefined` | `false` | `false` | `false` | `false` | — |
-| `"x"` | `false` | `false` | `false` | `false` | `false` |
-| `1` | `false` | `false` | `false` | `false` | `false` |
-| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — |
-| `‹a cross-realm object›` | `true` | `true` | `true` | `false` | — |
-| `‹an empty cross-realm object›` | `true` | `true` | `true` | `false` | — |
-| `‹a class instance›` | `false` | `false` | `false` | `false` | — |
-| `‹an object with Symbol.toStringTag›` | `false` | `false` | `true` | `true` | — |
-| `‹a Date›` | `false` | `false` | `false` | `false` | — |
-| `‹an empty Map›` | `false` | `false` | `false` | `false` | — |
-| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | — |
-| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | — |
-| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — |
-| `‹a function›` | `false` | `false` | `false` | `false` | — |
+| Case | @sindresorhus/is<br>`is.plainObject(value)` | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | radash<br>`isObject(value)` | remeda<br>`isPlainObject(value)` | Python<br>`type(value) is dict` | Python<br>`type(value) is dict` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `{}` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `[]` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `null` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `undefined` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `"x"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `1` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | `false` | `true` | — | — |
+| `‹a cross-realm object›` | `true` | `true` | `true` | `true` | `false` | `false` | — | — |
+| `‹an empty cross-realm object›` | `true` | `true` | `true` | `true` | `false` | `false` | — | — |
+| `‹a class instance›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹an object with Symbol.toStringTag›` | `false` | `false` | `false` | `true` | `true` | `true` | — | — |
+| `‹a Date›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹an empty Map›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | `true` | `true` | — | — |
+| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — |
+| `‹a function›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
 
 ## By outcome
 
 | Tool | `true` | `false` | Other | Throws |
 | :--- | :--- | :--- | :--- | :--- |
+| @sindresorhus/is<br>`is.plainObject(value)` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a class instance›` `‹an object with Symbol.toStringTag›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
 | es-toolkit<br>`isPlainObject(value)` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a class instance›` `‹an object with Symbol.toStringTag›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
 | is-plain-obj<br>`isPlainObject(value)` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a class instance›` `‹an object with Symbol.toStringTag›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
 | lodash<br>`_.isPlainObject(value)` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹an object with Symbol.toStringTag›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a class instance›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
+| radash<br>`isObject(value)` | `{}` `{ "a": 1 }` `‹an object with Symbol.toStringTag›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a null-prototype object›` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹a class instance›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
 | remeda<br>`isPlainObject(value)` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹an object with Symbol.toStringTag›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹a class instance›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
+| Python<br>`type(value) is dict` | `{}` `{ "a": 1 }` | `[]` `null` `"x"` `1` |  |  |
 | Python<br>`type(value) is dict` | `{}` `{ "a": 1 }` | `[]` `null` `"x"` `1` |  |  |
 
 ## Every tool
 
-| Case | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | remeda<br>`isPlainObject(value)` | Python<br>`type(value) is dict` |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `{}` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` |
-| `[]` | `false` | `false` | `false` | `false` | `false` |
-| `null` | `false` | `false` | `false` | `false` | `false` |
-| `undefined` | `false` | `false` | `false` | `false` | — |
-| `"x"` | `false` | `false` | `false` | `false` | `false` |
-| `1` | `false` | `false` | `false` | `false` | `false` |
-| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | — |
-| `‹a cross-realm object›` | `true` | `true` | `true` | `false` | — |
-| `‹an empty cross-realm object›` | `true` | `true` | `true` | `false` | — |
-| `‹a class instance›` | `false` | `false` | `false` | `false` | — |
-| `‹an object with Symbol.toStringTag›` | `false` | `false` | `true` | `true` | — |
-| `‹a Date›` | `false` | `false` | `false` | `false` | — |
-| `‹an empty Map›` | `false` | `false` | `false` | `false` | — |
-| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | — |
-| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | — |
-| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — |
-| `‹a function›` | `false` | `false` | `false` | `false` | — |
+| Case | @sindresorhus/is<br>`is.plainObject(value)` | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | radash<br>`isObject(value)` | remeda<br>`isPlainObject(value)` | Python<br>`type(value) is dict` | Python<br>`type(value) is dict` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `{}` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `[]` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `null` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `undefined` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `"x"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `1` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | `false` | `true` | — | — |
+| `‹a cross-realm object›` | `true` | `true` | `true` | `true` | `false` | `false` | — | — |
+| `‹an empty cross-realm object›` | `true` | `true` | `true` | `true` | `false` | `false` | — | — |
+| `‹a class instance›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹an object with Symbol.toStringTag›` | `false` | `false` | `false` | `true` | `true` | `true` | — | — |
+| `‹a Date›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹an empty Map›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | `true` | `true` | — | — |
+| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — |
+| `‹a function›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
 
 ## Versions
 
-| Tool | Tier | Version | Locale | Image |
+| Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
-| es-toolkit<br>`isPlainObject(value)` | 1 | `1.52.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| is-plain-obj<br>`isPlainObject(value)` | 1 | `4.1.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| lodash<br>`_.isPlainObject(value)` | 1 | `4.18.1` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| remeda<br>`isPlainObject(value)` | 1 | `2.51.0` | `en-US` | `node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212` |
-| Python<br>`type(value) is dict` | 2 | `3.14.7` | `C.UTF-8` | `python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56` |
+| @sindresorhus/is<br>`is.plainObject(value)` | 1 | `8.1.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| es-toolkit<br>`isPlainObject(value)` | 1 | `1.52.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| is-plain-obj<br>`isPlainObject(value)` | 1 | `4.1.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| lodash<br>`_.isPlainObject(value)` | 1 | `4.18.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| radash<br>`isObject(value)` | 1 | `12.1.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| remeda<br>`isPlainObject(value)` | 1 | `2.51.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Python<br>`type(value) is dict` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
+| Python<br>`type(value) is dict` | 2 | `3.15.0rc3` | `C.UTF-8` | `python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2` |
