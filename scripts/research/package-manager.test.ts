@@ -1,29 +1,29 @@
-import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
 
-/** Read the `packageManager` field of a `package.json`. */
-function readPackageManager(directory: string): unknown {
-  const manifest: unknown = JSON.parse(
-    readFileSync(path.join(directory, "package.json"), "utf8")
-  );
+import { isRecord } from "./codec.ts";
+import { readJsonFile } from "./json.ts";
 
-  return typeof manifest === "object" &&
-    manifest !== null &&
-    "packageManager" in manifest
-    ? manifest.packageManager
-    : undefined;
+/** The repo root, which holds the root `package.json`. */
+const REPO_ROOT = path.resolve(import.meta.dirname, "../..");
+
+/** Read the `packageManager` field of a directory's `package.json`. */
+function readPackageManager(directory: string): unknown {
+  // No try/catch: a throw fails the test, and readJsonFile names the file.
+  const manifest = readJsonFile(path.join(directory, "package.json"));
+
+  return isRecord(manifest) ? manifest.packageManager : undefined;
 }
 
 describe("research/package.json", () => {
   test("pins the same pnpm as the root, which the Node image installs", () => {
-    // Given
-    const repoRoot = path.resolve(import.meta.dirname, "../..");
+    // Given - the pnpm the root package pins
+    const rootPnpm = readPackageManager(REPO_ROOT);
 
-    // When
-    const researchPnpm = readPackageManager(path.join(repoRoot, "research"));
+    // When - reading the research package's pin
+    const researchPnpm = readPackageManager(path.join(REPO_ROOT, "research"));
 
-    // Then
-    expect(researchPnpm).toBe(readPackageManager(repoRoot));
+    // Then - the two match, so the Node image can't drift from the repo
+    expect(researchPnpm).toBe(rootPnpm);
   });
 });

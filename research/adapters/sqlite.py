@@ -12,10 +12,22 @@ import sqlite3
 from research_codec import Probe, Tool, run_adapter
 
 CONNECTION = sqlite3.connect(":memory:")
+"""An in-memory database: the probes only evaluate expressions."""
 
 SQLITE_MAX_INTEGER = 2**63 - 1
+"""The largest integer SQLite stores: 9223372036854775807.
+
+SQLite's INTEGER is "a signed integer, stored in 0, 1, 2, 3, 4, 6, or 8
+bytes" (https://www.sqlite.org/datatype3.html), so its range is a signed
+64-bit integer's. Python's `sqlite3` raises `OverflowError` for an int
+outside it rather than binding a value.
+"""
 
 SQLITE_MIN_INTEGER = -(2**63)
+"""The smallest integer SQLite stores: -9223372036854775808.
+
+The other end of the signed 64-bit range; see `SQLITE_MAX_INTEGER`.
+"""
 
 
 def bindable(value: object, *_rest: object) -> bool:

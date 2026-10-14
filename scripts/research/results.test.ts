@@ -30,7 +30,7 @@ const column = (overrides: Partial<AdapterColumn>): AdapterColumn => ({
 
 describe("parseCaseFile", () => {
   test("keeps args and any expected answer", () => {
-    // Given
+    // Given - a case file with a plain case and one with a planned answer
     const json = {
       cases: [
         { args: ["a"] },
@@ -39,10 +39,10 @@ describe("parseCaseFile", () => {
       function: "f",
     };
 
-    // When
+    // When - narrowing it
     const caseFile = parseCaseFile(json);
 
-    // Then
+    // Then - it comes back unchanged
     expect(caseFile).toStrictEqual(json);
   });
 
@@ -60,17 +60,17 @@ describe("parseCaseFile", () => {
       json: { cases: [{ args: [], expected: () => 1 }], function: "f" },
     },
   ])("rejects $description", ({ json }) => {
-    // When
+    // When - narrowing a malformed case file
     const parse = (): CaseFile => parseCaseFile(json);
 
-    // Then
+    // Then - it throws, naming the bad field
     expect(parse).toThrow(Error);
   });
 });
 
 describe("parseAdapterOutput", () => {
   test("keeps every kind of outcome", () => {
-    // Given
+    // Given - adapter output with a value, an error, and an n/a outcome
     const json = {
       columns: [
         column({
@@ -83,10 +83,10 @@ describe("parseAdapterOutput", () => {
       ],
     };
 
-    // When
+    // When - narrowing it
     const columns = parseAdapterOutput(json);
 
-    // Then
+    // Then - every outcome survives
     expect(columns).toStrictEqual(json.columns);
   });
 
@@ -119,17 +119,17 @@ describe("parseAdapterOutput", () => {
       json: { columns: [{ ...column({}), outcomes: [{ kind: "value" }] }] },
     },
   ])("rejects $description", ({ json }) => {
-    // When
+    // When - narrowing malformed adapter output
     const parse = (): AdapterColumn[] => parseAdapterOutput(json);
 
-    // Then
+    // Then - it throws, naming the bad field
     expect(parse).toThrow(Error);
   });
 });
 
 describe("buildResults", () => {
   test("merges columns per function, adds the plan, and sorts by tier, name, and call", () => {
-    // Given
+    // Given - two case files, and columns out of order with one planned answer
     const caseFiles: CaseFile[] = [
       {
         cases: [{ args: ["a"], expected: true }, { args: ["b"] }],
@@ -142,7 +142,7 @@ describe("buildResults", () => {
       outcomes: [{ kind: "value", value: true }, { kind: "n/a" }],
     });
 
-    // When
+    // When - building the results
     const results = buildResults({
       caseFiles,
       serviceColumns: [
@@ -161,7 +161,7 @@ describe("buildResults", () => {
       ],
     });
 
-    // Then
+    // Then - one result per case file, the plan first, then sorted columns
     expect(results.map((result) => result.function)).toStrictEqual(["f", "g"]);
     expect(
       results[0]?.columns.map(({ call, name }) => `${name} ${call}`)
@@ -184,20 +184,46 @@ describe("buildResults", () => {
     });
   });
 
+  test("breaks ties that differ only in case, so the order is total", () => {
+    // Given - columns whose names, then calls, differ only in case
+    const caseFiles: CaseFile[] = [{ cases: [{ args: ["a"] }], function: "f" }];
+
+    // When - building the results
+    const [result] = buildResults({
+      caseFiles,
+      serviceColumns: [
+        {
+          columns: [
+            column({ call: "f(value)", name: "Tool" }),
+            column({ call: "F(value)", name: "tool" }),
+            column({ call: "f(value)", name: "tool" }),
+          ],
+          image: "i",
+          service: "s",
+        },
+      ],
+    });
+
+    // Then - lowercase sorts first, by name and then by call
+    expect(
+      result?.columns.map(({ call, name }) => `${name} ${call}`)
+    ).toStrictEqual(["tool f(value)", "tool F(value)", "Tool f(value)"]);
+  });
+
   test("rejects a column whose outcomes don't match the cases", () => {
-    // Given
+    // Given - a case file with two cases
     const caseFiles: CaseFile[] = [
       { cases: [{ args: [] }, { args: [] }], function: "f" },
     ];
 
-    // When
+    // When - building with a column of one outcome
     const build = (): FunctionResult[] =>
       buildResults({
         caseFiles,
         serviceColumns: [{ columns: [column({})], image: "i", service: "s" }],
       });
 
-    // Then
+    // Then - it throws, naming both counts
     expect(build).toThrow(/1 outcomes for 2 f cases/u);
   });
 });
@@ -210,22 +236,22 @@ describe("findCodecMismatches", () => {
   });
 
   test("accepts round-trips, n/a, and any outcome for a named JavaScript value", () => {
-    // Given
+    // Given - a round-trip, a named JavaScript value, and a reordered object
     const outcomes: AdapterColumn["outcomes"] = [
       { kind: "value", value: "x" },
       { kind: "value", value: { $repr: "Symbol()" } },
       { kind: "value", value: { a: 2, b: 1 } },
     ];
 
-    // When
+    // When - checking the codec
     const mismatches = findCodecMismatches(result(outcomes));
 
-    // Then
+    // Then - nothing is reported
     expect(mismatches).toStrictEqual([]);
   });
 
   test("reports a changed value, a throw, and an extra outcome", () => {
-    // Given
+    // Given - a changed value, a throw, and an outcome past the last case
     const outcomes: AdapterColumn["outcomes"] = [
       { kind: "value", value: "y" },
       { kind: "n/a" },
@@ -233,10 +259,10 @@ describe("findCodecMismatches", () => {
       { kind: "value", value: 1 },
     ];
 
-    // When
+    // When - checking the codec
     const mismatches = findCodecMismatches(result(outcomes));
 
-    // Then
+    // Then - each one is reported
     expect(mismatches).toStrictEqual([
       'tool 1.0.0 case 1: expected "x", got {"kind":"value","value":"y"}',
       'tool 1.0.0 case 3: expected {"a":2,"b":1}, got {"error":"TypeError","kind":"error"}',
@@ -268,7 +294,7 @@ describe("mergeWithPrevious", () => {
   };
 
   test("keeps the committed columns of every service that didn't run", () => {
-    // Given
+    // Given - a committed result with an old plan, a skipped service, and a rerun one
     const previous: FunctionResult = {
       ...next,
       columns: [
@@ -278,14 +304,14 @@ describe("mergeWithPrevious", () => {
       ],
     };
 
-    // When
+    // When - merging a python-only run
     const merged = mergeWithPrevious({
       next,
       previous,
       servicesRun: new Set(["python"]),
     });
 
-    // Then
+    // Then - the new plan and python columns, with lodash kept
     expect(merged.columns.map(({ name }) => name)).toStrictEqual([
       "safe-fns (planned)",
       "lodash",
@@ -294,43 +320,43 @@ describe("mergeWithPrevious", () => {
   });
 
   test("returns the new result when nothing was committed", () => {
-    // When
+    // When - merging with nothing committed
     const merged = mergeWithPrevious({
       next,
       previous: undefined,
       servicesRun: new Set(["python"]),
     });
 
-    // Then
+    // Then - the new result is returned as it is
     expect(merged).toBe(next);
   });
 
   test("refuses when the cases changed", () => {
-    // Given
+    // Given - committed results for different cases
     const previous: FunctionResult = { ...next, cases: [["b"]] };
 
-    // When
+    // When - merging
     const merge = (): FunctionResult =>
       mergeWithPrevious({ next, previous, servicesRun: new Set() });
 
-    // Then
+    // Then - it throws, asking for a full run
     expect(merge).toThrow(/rerun every profile/u);
   });
 });
 
 describe("parseFunctionResult", () => {
   test("keeps a committed result", () => {
-    // Given
+    // Given - a committed result
     const json: FunctionResult = {
       cases: [["a", { $undefined: true }]],
       columns: [resultColumn({})],
       function: "f",
     };
 
-    // When
+    // When - narrowing it
     const result = parseFunctionResult(json);
 
-    // Then
+    // Then - it comes back unchanged
     expect(result).toStrictEqual(json);
   });
 
@@ -350,23 +376,23 @@ describe("parseFunctionResult", () => {
       },
     },
   ])("rejects $description", ({ json }) => {
-    // When
+    // When - narrowing a malformed result
     const parse = (): FunctionResult => parseFunctionResult(json);
 
-    // Then
+    // Then - it throws, naming the bad field
     expect(parse).toThrow(Error);
   });
 });
 
 describe("stringifyStable", () => {
   test("sorts nested keys and ends with a newline", () => {
-    // Given
+    // Given - a value with unsorted keys at two depths
     const value = { a: null, b: [{ c: 2, d: 1 }] };
 
-    // When
+    // When - serializing it
     const text = stringifyStable(value);
 
-    // Then
+    // Then - keys are sorted, indented by two, and newline-terminated
     expect(text).toBe(
       '{\n  "a": null,\n  "b": [\n    {\n      "c": 2,\n      "d": 1\n    }\n  ]\n}\n'
     );

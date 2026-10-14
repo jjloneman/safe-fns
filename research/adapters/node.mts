@@ -9,7 +9,7 @@ import { isPlainObject as esToolkitIsPlainObject } from "es-toolkit/predicate";
 import isPlainObj from "is-plain-obj";
 import Joi from "joi";
 import lodash from "lodash";
-import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { runInNewContext } from "node:vm";
 import {
   isEmpty as remedaIsEmpty,
@@ -30,6 +30,7 @@ import type {
 } from "../../scripts/research/results.ts";
 
 import { decodeValue, encodeValue } from "../../scripts/research/codec.ts";
+import { readJsonFile } from "../../scripts/research/json.ts";
 import { parseCaseFile } from "../../scripts/research/results.ts";
 import { crossRealmInputs } from "../../test/cross-realm-inputs.ts";
 import { hostileInputs } from "../../test/hostile-inputs.ts";
@@ -60,13 +61,38 @@ type Probe = {
    */
   call: string;
 
-  /** Runs the expression on one case's arguments. */
+  /**
+   * Runs the expression on one case's decoded arguments.
+   *
+   * @example `([value]) => yn(value)`
+   */
   run: (args: readonly unknown[]) => unknown;
+};
+
+/** One case's encoded arguments, and the probe to run them through. */
+type ProbeRun = {
+  /**
+   * The case's arguments, in the portable format.
+   *
+   * @example `[" yes "]`
+   */
+  args: readonly EncodedValue[];
+
+  /**
+   * The probe to run.
+   *
+   * @example `{ call: "yn(value)", run: ([value]) => yn(value) }`
+   */
+  probe: Probe;
 };
 
 /** A library or runtime, and its probes for each function. */
 type Tool = {
-  /** Probes keyed by the function name in a case file. */
+  /**
+   * Probes keyed by the function name in a case file.
+   *
+   * @example `{ safeParseBoolean: [{ call: "yn(value)", run }] }`
+   */
   functions: Record<string, readonly Probe[]>;
 
   /**
@@ -76,7 +102,11 @@ type Tool = {
    */
   name: string;
 
-  /** The table tier. */
+  /**
+   * The table tier.
+   *
+   * @example 1
+   */
   tier: Tier;
 
   /**
@@ -87,9 +117,26 @@ type Tool = {
   version: string;
 };
 
+/*
+ * The JS built-ins column's `JSON.parse`, typed `unknown`.
+ *
+ * - Called bare on purpose: it's the function under test, so its throw is the
+ *   outcome to record, not an error to wrap.
+ */
+const callJsonParse = (text: string): unknown =>
+  // eslint-disable-next-line no-restricted-properties -- the function under test
+  JSON.parse(text);
+
+/** Accept only a string first argument; other cases are `n/a`. */
 const isString = ([value]: readonly unknown[]): boolean =>
   typeof value === "string";
 
+/**
+ * Builds each value a `$js` case names.
+ *
+ * - The repo's own hostile and cross-realm test inputs come first, keyed by
+ *   their descriptions; the rest are values only this harness needs.
+ */
 const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   string,
   () => unknown
@@ -123,14 +170,15 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ["a URLSearchParams with an entry", () => new URLSearchParams("a=1")],
 ]);
 
+/** The locale the Node runtime resolved, reported with every column. */
 const LOCALE = new Intl.DateTimeFormat().resolvedOptions().locale;
 
-// Typed wrappers: the libraries return `any`.
-const parseJson = (text: string): unknown => JSON.parse(text);
+// Typed wrappers: the yaml library returns `any`.
 const parseYaml11 = (text: string): unknown =>
   parseYaml(text, { version: "1.1" });
 const parseYaml12 = (text: string): unknown => parseYaml(text);
 
+/** Every tool the Node adapter runs, in no particular order. */
 const TOOLS: readonly Tool[] = [
   {
     functions: {
@@ -150,7 +198,7 @@ const TOOLS: readonly Tool[] = [
         {
           accepts: isString,
           call: "JSON.parse(value)",
-          run: ([value]) => parseJson(value as string),
+          run: ([value]) => callJsonParse(value as string),
         },
       ],
       safeParseInteger: [
@@ -440,10 +488,9 @@ function errorName(error: unknown): string {
 /** Read an installed library's version. */
 function packageVersion(name: string): string {
   // Read from disk: some packages leave `package.json` out of `exports`.
-  const manifest: unknown = JSON.parse(
-    readFileSync(
-      new URL(`../node_modules/${name}/package.json`, import.meta.url),
-      "utf8"
+  const manifest = readJsonFile(
+    fileURLToPath(
+      new URL(`../node_modules/${name}/package.json`, import.meta.url)
     )
   );
 
@@ -467,14 +514,8 @@ function resolveJs(name: string): unknown {
 }
 
 /** Run one probe on one case, catching whatever it throws. */
-function runProbe({
-  args,
-  probe,
-}: {
-  args: readonly EncodedValue[];
-  probe: Probe;
-}): Outcome {
-  const decoded = args.map((arg) => decodeValue(arg, { resolveJs }));
+function runProbe({ args, probe }: ProbeRun): Outcome {
+  const decoded = args.map((arg) => decodeValue({ encoded: arg, resolveJs }));
 
   if (probe.accepts && !probe.accepts(decoded)) {
     return { kind: "n/a" };
@@ -502,10 +543,13 @@ function toColumns(caseFile: CaseFile): AdapterColumn[] {
   );
 }
 
+/** The case files named on the command line, read and narrowed. */
 const CASE_FILES = process.argv
   .slice(2)
-  .map((file) => parseCaseFile(JSON.parse(readFileSync(file, "utf8"))));
+  .map((file) => parseCaseFile(readJsonFile(file)));
 
+// `JSON.stringify` can't throw: every outcome is already encoded, so nothing
+// left holds a bigint, a cycle, or a `toJSON`.
 process.stdout.write(
   JSON.stringify({
     columns: CASE_FILES.flatMap((caseFile) => toColumns(caseFile)),

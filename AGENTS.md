@@ -172,7 +172,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 ### 💬 Comments and TSDoc
 
 - **Comment only _why_** — non-obvious constraints, workarounds, invariants. Never restate what the code does, and never reference current tasks, PRs, or callers; those rot.
-  - Tests are the exception: each test body uses `// Given` / `// When` / `// Then` section comments, with `// And` to continue the previous phase.
+  - Tests are the exception: each test body uses `// Given` / `// When` / `// Then` section comments, with `// And` to continue the previous phase, each followed by a hyphen and a short description (`// When - verifying it`).
   - `// Setup` and `// Cleanup` mark setup or teardown that belongs to one specific test rather than a shared hook.
 - **Comment shape: lead sentence, then bullets.**
   - A comment of three lines or more uses the block form (`/* … */`, or `/** … */` for TSDoc), not stacked `//` lines.

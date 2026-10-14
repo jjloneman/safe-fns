@@ -19,8 +19,10 @@ CODEC_PROBE: Probe = {
     "is_codec": True,
     "run": lambda value: value,
 }
+"""Returns each value unchanged, for the `codec` round-trip check."""
 
 VERSION = platform.python_version()
+"""The Python that actually ran, reported with every column."""
 
 
 def config_boolean(value: str) -> bool:

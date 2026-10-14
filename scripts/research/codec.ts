@@ -12,6 +12,16 @@
  *   `codec` case file checks that both decode and re-encode identically.
  */
 
+/** How to decode a value, and what to call for the values only JS can build. */
+export type DecodeInput = {
+  /**
+   * The value to decode.
+   *
+   * @example `{ "$number": "-0" }`
+   */
+  encoded: EncodedValue;
+} & DecodeOptions;
+
 /** Decoding options. */
 export type DecodeOptions = {
   /**
@@ -22,7 +32,15 @@ export type DecodeOptions = {
   resolveJs: (name: string) => unknown;
 };
 
-/** A JSON value, possibly holding tagged objects. */
+/**
+ * A JSON value, possibly holding tagged objects.
+ *
+ * - Never `undefined`: JSON has no such value, so it travels as
+ *   `{ "$undefined": true }`.
+ *
+ * - The object member is an index signature, not `Record<string, …>`:
+ *   TypeScript rejects a type alias that refers to itself through a generic.
+ */
 export type EncodedValue =
   | { [key: string]: EncodedValue }
   | boolean
@@ -31,8 +49,42 @@ export type EncodedValue =
   | number
   | string;
 
+/** An untagged object to decode entry by entry. */
+type EntriesDecodeInput = {
+  /**
+   * The object, whose keys are kept as they are.
+   *
+   * @example `{ "a": { "$bigint": "1" } }`
+   */
+  encoded: Record<string, EncodedValue>;
+} & DecodeOptions;
+
+/** One tagged object, split into its tag and payload. */
+type TaggedValue = {
+  /**
+   * The tag's payload.
+   *
+   * @example "-0"
+   */
+  payload: EncodedValue;
+
+  /**
+   * The tag, with its `$`.
+   *
+   * @example "$number"
+   */
+  tag: string;
+};
+
+/** The digits a `$bigint` payload may hold, with an optional minus sign. */
 const BIGINT_PATTERN = /^-?\d+$/u;
 
+/**
+ * The characters a table cell escapes, so it never hides what it holds.
+ *
+ * - Control characters, default-ignorable ones (zero-width spaces, the BOM),
+ *   every Unicode space, and the braille blank, which renders as a space.
+ */
 const INVISIBLE_PATTERN =
   /[\p{Control}\p{Default_Ignorable_Code_Point}\p{White_Space}\u2800]/gu;
 
@@ -50,30 +102,29 @@ const SPECIAL_NUMBERS: ReadonlyMap<string, number> = new Map([
  * @returns the value the encoding describes.
  * @throws Error for a malformed tag.
  */
-export function decodeValue(
-  encoded: EncodedValue,
-  options: DecodeOptions
-): unknown {
+export function decodeValue({ encoded, resolveJs }: DecodeInput): unknown {
   if (Array.isArray(encoded)) {
-    return encoded.map((item) => decodeValue(item, options));
+    return encoded.map((item) => decodeValue({ encoded: item, resolveJs }));
   }
 
   if (encoded === null || typeof encoded !== "object") {
     return encoded;
   }
 
-  const keys = Object.keys(encoded);
-  const tag = keys.find((key) => key.startsWith("$"));
+  const entries = Object.entries(encoded);
+  const tagged = entries.find(([key]) => key.startsWith("$"));
 
-  if (tag === undefined) {
-    return decodeEntries(encoded, options);
+  if (tagged === undefined) {
+    return decodeEntries({ encoded, resolveJs });
   }
 
-  if (keys.length !== 1) {
+  const [tag, payload] = tagged;
+
+  if (entries.length !== 1) {
     throw new Error(`a tag must be an object's only key: ${tag}`);
   }
 
-  return decodeTag({ options, payload: encoded[tag], tag });
+  return decodeTag({ payload, resolveJs, tag });
 }
 
 /**
@@ -134,45 +185,43 @@ export function renderValue(encoded: EncodedValue): string {
   if (typeof encoded === "string") {
     // Escape `\` and `"` first, so a literal `\u{A0}` can't pass for the
     // escaped character, nor a quote end the string early.
-    return `"${escapeInvisible(encoded.replaceAll(/["\\]/gu, String.raw`\$&`))}"`;
+    const quoted = encoded.replaceAll(/["\\]/gu, String.raw`\$&`);
+
+    return `"${escapeInvisible(quoted)}"`;
   }
 
   if (encoded === null || typeof encoded !== "object") {
     return String(encoded);
   }
 
-  const [tag] = Object.keys(encoded);
+  const [entry] = Object.entries(encoded);
 
-  if (tag?.startsWith("$") === true) {
-    return renderTag({ payload: encoded[tag], tag });
+  if (entry?.[0].startsWith("$") === true) {
+    return renderTag({ payload: entry[1], tag: entry[0] });
   }
 
   return renderEntries(encoded);
 }
 
 /** Decode every value of an untagged object, keeping its keys. */
-function decodeEntries(
-  encoded: Record<string, EncodedValue>,
-  options: DecodeOptions
-): Record<string, unknown> {
+function decodeEntries({
+  encoded,
+  resolveJs,
+}: EntriesDecodeInput): Record<string, unknown> {
   return Object.fromEntries(
     Object.entries(encoded).map(([key, item]) => [
       key,
-      decodeValue(item, options),
+      decodeValue({ encoded: item, resolveJs }),
     ])
   );
 }
 
-/** Decode one tagged object, given its tag and payload. */
+/** Decode one tagged object. */
 function decodeTag({
-  options,
   payload,
+  resolveJs,
   tag,
-}: {
-  options: DecodeOptions;
-  payload: EncodedValue | undefined;
-  tag: string;
-}): unknown {
+}: DecodeOptions & TaggedValue): unknown {
   if (tag === "$bigint" && typeof payload === "string") {
     if (!BIGINT_PATTERN.test(payload)) {
       throw new Error(`not an integer: ${payload}`);
@@ -182,7 +231,7 @@ function decodeTag({
   }
 
   if (tag === "$js" && typeof payload === "string") {
-    return options.resolveJs(payload);
+    return resolveJs(payload);
   }
 
   if (tag === "$number" && typeof payload === "string") {
@@ -196,7 +245,7 @@ function decodeTag({
   }
 
   if (tag === "$object" && isEntries(payload)) {
-    return decodeEntries(payload, options);
+    return decodeEntries({ encoded: payload, resolveJs });
   }
 
   if (tag === "$undefined" && payload === true) {
@@ -274,7 +323,7 @@ function escapeInvisible(text: string): string {
 
 /** Check that a payload is a JSON object, not an array or primitive. */
 function isEntries(
-  payload: EncodedValue | undefined
+  payload: EncodedValue
 ): payload is Record<string, EncodedValue> {
   return isRecord(payload);
 }
@@ -290,8 +339,13 @@ function isPlainRecord(value: unknown): value is Record<string, unknown> {
   return prototype === Object.prototype || prototype === null;
 }
 
-/** Show a tag payload as text: a string as-is, anything else as JSON. */
-function payloadText(payload: EncodedValue | undefined): string {
+/**
+ * Show a tag payload as text: a string as-is, anything else as JSON.
+ *
+ * - `JSON.stringify` can't throw here: an `EncodedValue` holds no bigint, no
+ *   cycle, and no `toJSON`, the only things it throws on.
+ */
+function payloadText(payload: EncodedValue): string {
   return typeof payload === "string" ? payload : JSON.stringify(payload);
 }
 
@@ -305,13 +359,7 @@ function renderEntries(encoded: Record<string, EncodedValue>): string {
 }
 
 /** Render one tagged value as its JavaScript literal or a `‹name›`. */
-function renderTag({
-  payload,
-  tag,
-}: {
-  payload: EncodedValue | undefined;
-  tag: string;
-}): string {
+function renderTag({ payload, tag }: TaggedValue): string {
   if (tag === "$bigint" || tag === "$number") {
     return `${payloadText(payload)}${tag === "$bigint" ? "n" : ""}`;
   }

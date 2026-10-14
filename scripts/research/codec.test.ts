@@ -2,12 +2,47 @@ import { describe, expect, test } from "vitest";
 
 import type { EncodedValue } from "./codec.ts";
 
-import { decodeValue, encodeValue, renderValue } from "./codec.ts";
+import { decodeValue, encodeValue, isRecord, renderValue } from "./codec.ts";
 
+/** A row of a decoding table: an encoding and the value it decodes to. */
+type DecodeRow = {
+  /**
+   * Names the row in the test title.
+   *
+   * @example "negative zero"
+   */
+  description: string;
+
+  /**
+   * The value to decode.
+   *
+   * @example `{ "$number": "-0" }`
+   */
+  encoded: EncodedValue;
+
+  /**
+   * The value it decodes to.
+   *
+   * @example -0
+   */
+  expected: unknown;
+};
+
+/** A row of a rendering table: an encoding and the literal it renders as. */
+type RenderRow = {
+  /**
+   * The literal it renders as.
+   *
+   * @example "5n"
+   */
+  expected: string;
+} & Omit<DecodeRow, "expected">;
+
+/** Stands in for the Node adapter's `$js` factories. */
 const resolveJs = (name: string): unknown => `built ${name}`;
 
 describe("decodeValue", () => {
-  test.each([
+  test.each<DecodeRow>([
     { description: "a string", encoded: "x", expected: "x" },
     { description: "a finite number", encoded: 1.5, expected: 1.5 },
     { description: "a boolean", encoded: true, expected: true },
@@ -44,19 +79,15 @@ describe("decodeValue", () => {
       encoded: { $js: "a symbol" },
       expected: "built a symbol",
     },
-  ] satisfies {
-    description: string;
-    encoded: EncodedValue;
-    expected: unknown;
-  }[])("decodes $description", ({ encoded, expected }) => {
-    // When
-    const decoded = decodeValue(encoded, { resolveJs });
+  ])("decodes $description", ({ encoded, expected }) => {
+    // When - decoding the row's encoding
+    const decoded = decodeValue({ encoded, resolveJs });
 
-    // Then
+    // Then - it is the value the encoding describes
     expect(decoded).toStrictEqual(expected);
   });
 
-  test.each([
+  test.each<Omit<DecodeRow, "expected">>([
     {
       description: "a tag beside another key",
       encoded: { $bigint: "1", a: 1 },
@@ -66,16 +97,13 @@ describe("decodeValue", () => {
     { description: "an unknown tag", encoded: { $date: "2026" } },
     { description: "a bad payload", encoded: { $undefined: false } },
     { description: "an array as an object payload", encoded: { $object: [] } },
-  ] satisfies { description: string; encoded: EncodedValue }[])(
-    "rejects $description",
-    ({ encoded }) => {
-      // When
-      const decode = (): unknown => decodeValue(encoded, { resolveJs });
+  ])("rejects $description", ({ encoded }) => {
+    // When - decoding a malformed tag
+    const decode = (): unknown => decodeValue({ encoded, resolveJs });
 
-      // Then
-      expect(decode).toThrow(Error);
-    }
-  );
+    // Then - it throws instead of guessing
+    expect(decode).toThrow(Error);
+  });
 });
 
 describe("encodeValue", () => {
@@ -141,20 +169,35 @@ describe("encodeValue", () => {
       value: revokedProxy,
     },
   ])("encodes $description", ({ expected, value }) => {
-    // When
+    // When - encoding the row's value
     const encoded = encodeValue(value);
 
-    // Then
+    // Then - it is the expected portable encoding
     expect(encoded).toStrictEqual(expected);
   });
 });
 
-describe("renderValue", () => {
+describe("isRecord", () => {
   test.each([
+    { description: "an object", isExpectedRecord: true, value: { a: 1 } },
+    { description: "an array", isExpectedRecord: false, value: [] },
+    { description: "null", isExpectedRecord: false, value: null },
+    { description: "a string", isExpectedRecord: false, value: "a" },
+  ])("reads $description", ({ isExpectedRecord, value }) => {
+    // When - checking the row's value
+    const isRecordValue = isRecord(value);
+
+    // Then - only a non-null, non-array object counts
+    expect(isRecordValue).toBe(isExpectedRecord);
+  });
+});
+
+describe("renderValue", () => {
+  test.each<RenderRow>([
     { description: "a string", encoded: "a b", expected: '"a b"' },
     {
       description: "invisible characters",
-      encoded: " x​\t",
+      encoded: "\u00A0x\u200B\t",
       expected: String.raw`"\u{A0}x\u{200B}\u{9}"`,
     },
     {
@@ -197,15 +240,11 @@ describe("renderValue", () => {
       encoded: { $repr: 1 },
       expected: "‹1›",
     },
-  ] satisfies {
-    description: string;
-    encoded: EncodedValue;
-    expected: string;
-  }[])("renders $description", ({ encoded, expected }) => {
-    // When
+  ])("renders $description", ({ encoded, expected }) => {
+    // When - rendering the row's encoding for a table cell
     const rendered = renderValue(encoded);
 
-    // Then
+    // Then - it is the expected readable literal
     expect(rendered).toBe(expected);
   });
 });

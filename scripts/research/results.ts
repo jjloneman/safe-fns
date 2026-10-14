@@ -2,10 +2,7 @@ import type { EncodedValue } from "./codec.ts";
 
 import { isRecord } from "./codec.ts";
 
-/**
- * One adapter's answer for one function, before the runner adds its service
- * and image.
- */
+/** One adapter's answer for one function, before the runner adds its origin. */
 export type AdapterColumn = {
   /**
    * The function the column answers for, as named in its case file.
@@ -13,7 +10,24 @@ export type AdapterColumn = {
    * @example "safeParseBoolean"
    */
   function: string;
-} & Omit<ResultColumn, "image" | "service">;
+} & ColumnCore;
+
+/** The input to `buildResults`. */
+export type BuildResultsInput = {
+  /**
+   * The case files the run covered.
+   *
+   * @example `[{ cases: [{ args: ["yes"] }], function: "safeParseBoolean" }]`
+   */
+  caseFiles: readonly CaseFile[];
+
+  /**
+   * What each adapter service printed.
+   *
+   * @example `[{ columns: [], image: "python:3.14.7…", service: "python" }]`
+   */
+  serviceColumns: readonly ServiceColumns[];
+};
 
 /** One case: the arguments to pass, and safe-fns' planned answer. */
 export type CaseEntry = {
@@ -34,7 +48,11 @@ export type CaseEntry = {
 
 /** The parsed contents of `research/cases/<function>.json`. */
 export type CaseFile = {
-  /** The cases, in the order the tables list them. */
+  /**
+   * The cases, in the order the tables list them.
+   *
+   * @example `[{ args: ["yes"], expected: true }]`
+   */
   cases: CaseEntry[];
 
   /**
@@ -47,14 +65,51 @@ export type CaseFile = {
 
 /** Every column for one function, as written to `research/results/`. */
 export type FunctionResult = {
-  /** Each case's arguments, in case-file order. */
+  /**
+   * Each case's arguments, in case-file order.
+   *
+   * @example `[["yes"], [{ "$undefined": true }]]`
+   */
   cases: CaseEntry["args"][];
 
-  /** The columns, ordered by tier, then name, then call. */
+  /**
+   * The columns, ordered by tier, then name, then call.
+   *
+   * @example `[{ call: "yn(value)", name: "yn", tier: 1, … }]`
+   */
   columns: ResultColumn[];
 } & Pick<CaseFile, "function">;
 
-/** What one call did with one case. */
+/** The input to `mergeWithPrevious`. */
+export type MergeInput = {
+  /**
+   * The result the narrowed run just built.
+   *
+   * @example `{ cases: [["yes"]], columns: [], function: "safeParseBoolean" }`
+   */
+  next: FunctionResult;
+
+  /**
+   * The committed result, or `undefined` when there is none yet.
+   *
+   * @example `{ cases: [["yes"]], columns: [], function: "safeParseBoolean" }`
+   */
+  previous: FunctionResult | undefined;
+
+  /**
+   * The services the narrowed run ran, whose columns it replaces.
+   *
+   * @example `new Set(["python", "sqlite"])`
+   */
+  servicesRun: ReadonlySet<string>;
+};
+
+/**
+ * What one call did with one case.
+ *
+ * - Each `kind` documents itself without an `@example`: its only value is
+ *   its type.
+ */
 export type Outcome =
   | {
       /**
@@ -86,18 +141,42 @@ export type Outcome =
 /** One column of a comparison table: one call in one tool. */
 export type ResultColumn = {
   /**
-   * The expression each case ran through.
-   *
-   * @example "z.stringbool().parse(value)"
-   */
-  call: string;
-
-  /**
    * The pinned image the tool ran in, or `-` for the planned column.
    *
    * @example `"node:26.9.0-bookworm-slim@sha256:…"`
    */
   image: string;
+
+  /**
+   * The Compose service that produced the column, or `-` for the planned
+   * column; a narrowed run replaces only the columns of the services it ran.
+   *
+   * @example "node"
+   */
+  service: string;
+} & ColumnCore;
+
+/** The columns one Compose service printed, as the runner collected them. */
+export type ServiceColumns = {
+  /**
+   * The columns the adapter printed.
+   *
+   * @example `[{ call: "yn(value)", function: "safeParseBoolean", … }]`
+   */
+  columns: AdapterColumn[];
+} & Pick<ResultColumn, "image" | "service">;
+
+/** A table tier; 0 is safe-fns' own planned column. */
+export type Tier = (typeof TIERS)[number];
+
+/** The fields every column shares, in adapter output and in results alike. */
+type ColumnCore = {
+  /**
+   * The expression each case ran through.
+   *
+   * @example "z.stringbool().parse(value)"
+   */
+  call: string;
 
   /**
    * The locale the tool reported.
@@ -113,18 +192,18 @@ export type ResultColumn = {
    */
   name: string;
 
-  /** One outcome per case, in case-file order. */
+  /**
+   * One outcome per case, in case-file order.
+   *
+   * @example `[{ kind: "value", value: true }, { kind: "n/a" }]`
+   */
   outcomes: Outcome[];
 
   /**
-   * The Compose service that produced the column, or `-` for the planned
-   * column; a narrowed run replaces only the columns of the services it ran.
+   * The column's tier, which orders the tables; 0 is safe-fns itself.
    *
-   * @example "node"
+   * @example 1
    */
-  service: string;
-
-  /** The column's tier, which orders the tables; 0 is safe-fns itself. */
   tier: Tier;
 
   /**
@@ -135,31 +214,32 @@ export type ResultColumn = {
   version: string;
 };
 
-/** The columns one Compose service printed, as the runner collected them. */
-export type ServiceColumns = {
-  /** The columns the adapter printed. */
-  columns: AdapterColumn[];
+/** A value to narrow into a column, and its position for error messages. */
+type ColumnToParse = {
+  /**
+   * The column, as parsed from JSON.
+   *
+   * @example `{ call: "yn(value)", … }`
+   */
+  column: unknown;
 
   /**
-   * The pinned image the adapter ran in.
+   * The column's position in its list.
    *
-   * @example `"python:3.14.7-slim-bookworm@sha256:…"`
+   * @example 0
    */
-  image: string;
-
-  /**
-   * The Compose service name.
-   *
-   * @example "sqlite"
-   */
-  service: string;
+  index: number;
 };
 
-/** A table tier; 0 is safe-fns' own planned column. */
-export type Tier = (typeof TIERS)[number];
-
-/** The fields every column shares, in adapter output and in results alike. */
-type ColumnCore = Omit<ResultColumn, "image" | "service">;
+/** An adapter column, and the service and image it ran in. */
+type ColumnWithOrigin = {
+  /**
+   * The column the adapter printed.
+   *
+   * @example `{ call: "yn(value)", function: "safeParseBoolean", … }`
+   */
+  column: AdapterColumn;
+} & Pick<ResultColumn, "image" | "service">;
 
 /** The function name of the case file that checks the codec itself. */
 export const CODEC_FUNCTION = "codec";
@@ -167,8 +247,13 @@ export const CODEC_FUNCTION = "codec";
 /** Every tier, in table order. */
 export const TIERS = [0, 1, 2, 3, 4] as const;
 
+/** Compares letters alone: `"beta"` and `"Béta"` sort together. */
+const BASE_SENSITIVITY: Intl.CollatorOptions = { sensitivity: "base" };
+
+/** The `kind`s an outcome may have. */
 const OUTCOME_KINDS: ReadonlySet<unknown> = new Set(["error", "n/a", "value"]);
 
+/** `TIERS` as a set, for narrowing. */
 const TIER_SET: ReadonlySet<unknown> = new Set(TIERS);
 
 /**
@@ -183,10 +268,7 @@ const TIER_SET: ReadonlySet<unknown> = new Set(TIERS);
 export function buildResults({
   caseFiles,
   serviceColumns,
-}: {
-  caseFiles: readonly CaseFile[];
-  serviceColumns: readonly ServiceColumns[];
-}): FunctionResult[] {
+}: BuildResultsInput): FunctionResult[] {
   return caseFiles.map((caseFile) => {
     const columns = serviceColumns.flatMap(
       ({ columns: adapterColumns, image, service }) =>
@@ -222,6 +304,9 @@ export function buildResults({
  *
  * - A `$js` input names a value rather than spelling it, so it can't
  *   round-trip; only the adapters that can't build it are checked (`n/a`).
+ *
+ * - `JSON.stringify` can't throw here: it only sees encoded values and
+ *   outcomes, which hold no bigint, cycle, or `toJSON`.
  *
  * @returns one message per mismatch; empty when every adapter round-trips.
  */
@@ -260,11 +345,7 @@ export function mergeWithPrevious({
   next,
   previous,
   servicesRun,
-}: {
-  next: FunctionResult;
-  previous: FunctionResult | undefined;
-  servicesRun: ReadonlySet<string>;
-}): FunctionResult {
+}: MergeInput): FunctionResult {
   if (previous === undefined) {
     return next;
   }
@@ -348,8 +429,7 @@ export function parseCaseFile(json: unknown): CaseFile {
 }
 
 /**
- * Narrow a committed `research/results/<function>.json`, already parsed as
- * JSON.
+ * Narrow a committed `research/results/<function>.json`, already parsed.
  *
  * @returns the result.
  * @throws Error naming the first field that doesn't fit.
@@ -398,18 +478,28 @@ export function parseFunctionResult(json: unknown): FunctionResult {
  * - Sorted keys keep a rerun byte-identical whatever order an adapter or
  *   language emitted them in.
  *
+ * - Only ever given results and encoded values, which hold nothing
+ *   `JSON.stringify` throws on.
+ *
  * @returns the JSON text.
  */
 export function stringifyStable(value: unknown): string {
   return `${JSON.stringify(value, sortKeysReplacer, 2)}\n`;
 }
 
-/** Order columns by tier, then name, then call. */
+/**
+ * Order columns by tier, then name, then call, ignoring case and accents.
+ *
+ * - Ties then break on case and accents, so the order is total and a rerun
+ *   stays byte-identical.
+ */
 function compareColumns(left: ResultColumn, right: ResultColumn): number {
   return (
     left.tier - right.tier ||
-    left.name.localeCompare(right.name, "en") ||
-    left.call.localeCompare(right.call, "en")
+    left.name.localeCompare(right.name, "en-US", BASE_SENSITIVITY) ||
+    left.call.localeCompare(right.call, "en-US", BASE_SENSITIVITY) ||
+    left.name.localeCompare(right.name, "en-US") ||
+    left.call.localeCompare(right.call, "en-US")
   );
 }
 
@@ -442,13 +532,7 @@ function isTier(value: unknown): value is Tier {
 }
 
 /** Narrow the fields every column shares. */
-function parseColumnCore({
-  column,
-  index,
-}: {
-  column: unknown;
-  index: number;
-}): ColumnCore {
+function parseColumnCore({ column, index }: ColumnToParse): ColumnCore {
   if (
     !isRecord(column) ||
     typeof column.call !== "string" ||
@@ -534,10 +618,7 @@ function toResultColumn({
   column,
   image,
   service,
-}: { column: AdapterColumn } & Pick<
-  ServiceColumns,
-  "image" | "service"
->): ResultColumn {
+}: ColumnWithOrigin): ResultColumn {
   return {
     call: column.call,
     image,

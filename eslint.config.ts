@@ -191,6 +191,28 @@ const config: Linter.Config[] = defineConfig(
   },
 
   /*
+   * The research harness parses JSON only through `scripts/research/json.ts`,
+   * whose errors name the file or process the text came from.
+   *
+   * - A bare `JSON.parse` throws a `SyntaxError` that says neither, so a broken
+   *   case file or adapter output would be hard to trace.
+   */
+  {
+    files: ["research/**/*.mts", "scripts/research/**/*.ts"],
+    rules: {
+      "no-restricted-properties": [
+        "error",
+        {
+          message:
+            "Use parseJson or readJsonFile from scripts/research/json.ts, whose errors name their source.",
+          object: "JSON",
+          property: "parse",
+        },
+      ],
+    },
+  },
+
+  /*
    * A script's entry point reads last, just above the call that runs it.
    *
    * - `sort-modules` takes the whole `groups` list, so this repeats the

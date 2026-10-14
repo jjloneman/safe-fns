@@ -17,12 +17,28 @@ from typing import NotRequired, TypeAlias, TypedDict
 JsonValue: TypeAlias = (
     bool | float | int | str | None | list["JsonValue"] | dict[str, "JsonValue"]
 )
+"""A JSON value, possibly holding tagged objects; `EncodedValue` in TS."""
 
 Outcome: TypeAlias = dict[str, JsonValue]
+"""What one call did with one case: `value`, `error`, or `n/a`."""
 
 BIGINT_PATTERN = re.compile(r"-?\d+", re.ASCII)
+"""The digits a `$bigint` payload may hold, with an optional minus sign.
+
+ASCII only, like the TS twin: Python's `\\d` would otherwise accept other
+scripts' digits, such as Arabic-Indic `٤٢`.
+"""
 
 MAX_SAFE_INTEGER = 2**53 - 1
+"""The largest integer a JavaScript number holds exactly: 9007199254740991.
+
+JavaScript's `Number.MAX_SAFE_INTEGER`, per ECMA-262
+(https://tc39.es/ecma262/#sec-number.max_safe_integer): a number is an IEEE
+754 binary64 double, whose 53-bit significand holds every integer up to
+2**53 - 1 and its successor; past it, neighbors collapse (2**53 + 1 reads as
+2**53). A Python int beyond it is encoded as `$bigint`, so the TS side never
+reads a rounded number.
+"""
 
 SPECIAL_NUMBERS: dict[str, float] = {
     "-0": -0.0,
@@ -30,6 +46,7 @@ SPECIAL_NUMBERS: dict[str, float] = {
     "Infinity": math.inf,
     "NaN": math.nan,
 }
+"""The spellings `$number` accepts, each with its value."""
 
 
 class JsBigInt(int):
@@ -211,15 +228,33 @@ def encode_int(value: int) -> JsonValue:
     return value
 
 
+def read_case_file(path: str) -> dict[str, JsonValue]:
+    """Read and parse one case file.
+
+    An unreadable file isn't wrapped: Python's `OSError` already names it.
+
+    Raises:
+        ValueError: naming the file when it isn't UTF-8 JSON, chained to the
+            decoding error.
+    """
+    with open(path, encoding="utf-8") as file:
+        try:
+            return json.load(file)
+        except (UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise ValueError(f"{path} isn't valid JSON") from error
+
+
 def run_adapter(*, tools: list[Tool]) -> None:
-    """Run the case files named on the command line and print the columns."""
+    """Run the case files named on the command line and print the columns.
+
+    `json.dump` can't fail here: every outcome is already encoded, so nothing
+    left is a value JSON can't hold.
+    """
     columns: list[dict[str, object]] = []
     locale_name = current_locale()
 
     for path in sys.argv[1:]:
-        with open(path, encoding="utf-8") as file:
-            case_file = json.load(file)
-
+        case_file = read_case_file(path)
         function = case_file["function"]
 
         for tool in tools:

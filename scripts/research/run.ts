@@ -29,6 +29,7 @@ import { parseArgs } from "node:util";
 import type { CaseFile, FunctionResult, ServiceColumns } from "./results.ts";
 
 import { isRecord } from "./codec.ts";
+import { parseJson, readJsonFile } from "./json.ts";
 import {
   buildResults,
   CODEC_FUNCTION,
@@ -41,44 +42,191 @@ import {
 } from "./results.ts";
 import { renderResultMarkdown } from "./tables.ts";
 
+/** The case files to run one adapter service over. */
+type AdapterRunInput = {
+  /**
+   * The case files, each with its path inside the container.
+   *
+   * @example `[{ containerPath: "/work/research/cases/codec.json", … }]`
+   */
+  caseFiles: readonly LoadedCaseFile[];
+
+  /**
+   * The adapter service to run.
+   *
+   * @example `{ image: "python:3.14.7…", name: "python", … }`
+   */
+  service: ComposeService;
+};
+
+/** A command to run from the repo root. */
+type CommandInput = {
+  /**
+   * The command's arguments.
+   *
+   * @example `["info", "--format", "{{.NCPU}}"]`
+   */
+  args: readonly string[];
+
+  /**
+   * The executable, found on `PATH`.
+   *
+   * @example "docker"
+   */
+  command: string;
+};
+
 /** What a finished child process printed, and how it exited. */
 type CommandResult = {
-  /** The exit code, or 1 when the process died on a signal. */
+  /**
+   * The exit code, or 1 when the process died on a signal.
+   *
+   * @example 0
+   */
   exitCode: number;
 
-  /** Everything written to stderr. */
+  /**
+   * Everything written to stderr, plus a note when a signal killed it.
+   *
+   * @example "Container safe-fns-research-node-run Created"
+   */
   stderr: string;
 
-  /** Everything written to stdout. */
+  /**
+   * Everything written to stdout.
+   *
+   * @example `{"columns":[]}`
+   */
   stdout: string;
 };
 
 /** One service from `research/compose.yaml`, as the runner needs it. */
 type ComposeService = {
-  /** The pinned image it runs, or a built image's pinned base. */
+  /**
+   * The pinned image it runs, or a built image's pinned base.
+   *
+   * @example `"python:3.14.7-slim-bookworm@sha256:…"`
+   */
   image: string;
 
-  /** The labels it carries, such as its role and formatter arguments. */
+  /**
+   * The labels it carries, such as its role and formatter arguments.
+   *
+   * @example `{ "dev.safe-fns.research.role": "adapter" }`
+   */
   labels: Record<string, string>;
 
-  /** The Compose service name. */
+  /**
+   * The Compose service name.
+   *
+   * @example "python"
+   */
   name: string;
 
-  /** The profiles that enable it. */
+  /**
+   * The profiles that enable it.
+   *
+   * @example `["python"]`
+   */
   profiles: string[];
+};
+
+/** The formatter services, and whether to only check. */
+type FormatInput = {
+  /**
+   * Every service in the Compose file; the formatters are picked out by role.
+   *
+   * @example `[{ name: "ruff", … }]`
+   */
+  services: readonly ComposeService[];
+
+  /**
+   * Whether to report drift instead of rewriting files.
+   *
+   * @example true
+   */
+  shouldCheck: boolean;
 };
 
 /** A case file, with the path an adapter reads it from inside its container. */
 type LoadedCaseFile = {
-  /** The path inside the container, under the `/work` mount. */
+  /**
+   * The path inside the container, under the `/work` mount.
+   *
+   * @example "/work/research/cases/safe-parse-boolean.json"
+   */
   containerPath: string;
 
-  /** The file's name without `.json`, which names its results too. */
+  /**
+   * The file's name without `.json`, which names its results too.
+   *
+   * @example "safe-parse-boolean"
+   */
   stem: string;
 } & CaseFile;
 
+/** Tasks to run with a cap on how many are in flight. */
+type PoolInput<T> = {
+  /**
+   * The most tasks to run at once.
+   *
+   * @example 8
+   */
+  concurrency: number;
+
+  /**
+   * The tasks, each started only when a slot is free.
+   *
+   * @example `[() => runAdapter({ caseFiles, service })]`
+   */
+  tasks: readonly (() => Promise<T>)[];
+};
+
+/** One run of one Compose service. */
+type ServiceRunInput = {
+  /**
+   * The arguments appended to the service's entrypoint.
+   *
+   * @example `["/work/research/cases/codec.json"]`
+   */
+  args: readonly string[];
+
+  /**
+   * The service to run.
+   *
+   * @example `{ name: "ruff", profiles: ["format"], … }`
+   */
+  service: ComposeService;
+};
+
+/** The results to write, and what a narrowed run should keep. */
+type WriteResultsInput = {
+  /**
+   * The case files the results came from, which name their files.
+   *
+   * @example `[{ stem: "safe-parse-boolean", … }]`
+   */
+  caseFiles: readonly LoadedCaseFile[];
+
+  /**
+   * One result per function, codec excluded.
+   *
+   * @example `[{ cases: [["yes"]], columns: [], function: "safeParseBoolean" }]`
+   */
+  results: readonly FunctionResult[];
+
+  /**
+   * The services a narrowed run ran, or `undefined` for a full run.
+   *
+   * @example `new Set(["python"])`
+   */
+  servicesRun: ReadonlySet<string> | undefined;
+};
+
+/** Where the case files live on the host. */
 const CASES_DIR = path.resolve(import.meta.dirname, "../../research/cases");
 
+/** The label holding a formatter's arguments in `--check` mode. */
 const CHECK_ARGS_LABEL = "dev.safe-fns.research.check-args";
 
 /**
@@ -89,15 +237,25 @@ const CHECK_ARGS_LABEL = "dev.safe-fns.research.check-args";
  */
 const COMMAND_TIMEOUT_MS = 15 * 60 * 1000;
 
+/** The Compose file every `docker compose` call reads. */
 const COMPOSE_FILE = path.resolve(
   import.meta.dirname,
   "../../research/compose.yaml"
 );
 
+/** The label holding a formatter's arguments when it rewrites files. */
 const FORMAT_ARGS_LABEL = "dev.safe-fns.research.format-args";
+
+/** Starts every line the runner prints, per the `scripts/` conventions. */
 const LOG_PREFIX = "[research]";
+
+/** The repo root, where every command runs. */
 const REPO_ROOT = path.resolve(import.meta.dirname, "../..");
+
+/** Where results are written. */
 const RESULTS_DIR = path.resolve(import.meta.dirname, "../../research/results");
+
+/** The label saying whether a service is an adapter or a formatter. */
 const ROLE_LABEL = "dev.safe-fns.research.role";
 
 /** The roles a Compose service can carry in `ROLE_LABEL`. */
@@ -116,6 +274,21 @@ function compose(args: readonly string[]): Promise<CommandResult> {
 }
 
 /**
+ * Describe an error and every `cause` behind it, one per line.
+ *
+ * @returns the messages, outermost first.
+ */
+function describeError(error: unknown): string {
+  if (!(error instanceof Error)) {
+    return String(error);
+  }
+
+  return error.cause === undefined
+    ? error.message
+    : `${error.message}\n  caused by: ${describeError(error.cause)}`;
+}
+
+/**
  * Format, or check, every adapter.
  *
  * @returns whether every formatter succeeded.
@@ -123,10 +296,7 @@ function compose(args: readonly string[]): Promise<CommandResult> {
 async function formatAdapters({
   services,
   shouldCheck,
-}: {
-  services: readonly ComposeService[];
-  shouldCheck: boolean;
-}): Promise<boolean> {
+}: FormatInput): Promise<boolean> {
   const formatters = services.filter(
     ({ labels }) => labels[ROLE_LABEL] === ROLES.formatter
   );
@@ -216,9 +386,7 @@ function loadCaseFiles(functionNames: readonly string[]): LoadedCaseFile[] {
     .filter((file) => file.endsWith(".json"))
     .sort()
     .map((file) => ({
-      ...parseCaseFile(
-        JSON.parse(readFileSync(path.join(CASES_DIR, file), "utf8"))
-      ),
+      ...parseCaseFile(readJsonFile(path.join(CASES_DIR, file))),
       containerPath: `/work/research/cases/${file}`,
       stem: file.replace(/\.json$/u, ""),
     }));
@@ -257,7 +425,10 @@ async function loadServices(): Promise<ComposeService[]> {
     throw new Error(`docker compose config failed:\n${result.stderr}`);
   }
 
-  const config: unknown = JSON.parse(result.stdout);
+  const config = parseJson({
+    source: "docker compose config",
+    text: result.stdout,
+  });
   const services = isRecord(config) ? config.services : undefined;
 
   if (!isRecord(services)) {
@@ -307,9 +478,7 @@ function profileArgs(profiles: readonly string[]): string[] {
 function readPreviousResult(stem: string): FunctionResult | undefined {
   const file = path.join(RESULTS_DIR, `${stem}.json`);
 
-  return existsSync(file)
-    ? parseFunctionResult(JSON.parse(readFileSync(file, "utf8")))
-    : undefined;
+  return existsSync(file) ? parseFunctionResult(readJsonFile(file)) : undefined;
 }
 
 /** Read `--concurrency`, or default to the Docker VM's CPU count. */
@@ -340,10 +509,7 @@ async function resolveConcurrency(
 async function runAdapter({
   caseFiles,
   service,
-}: {
-  caseFiles: readonly LoadedCaseFile[];
-  service: ComposeService;
-}): Promise<ServiceColumns> {
+}: AdapterRunInput): Promise<ServiceColumns> {
   const startedAt = performance.now();
 
   const result = await runService({
@@ -357,7 +523,9 @@ async function runAdapter({
     );
   }
 
-  const columns = parseAdapterOutput(JSON.parse(result.stdout));
+  const columns = parseAdapterOutput(
+    parseJson({ source: `the ${service.name} adapter`, text: result.stdout })
+  );
   const seconds = ((performance.now() - startedAt) / 1000).toFixed(1);
 
   log(`${service.name}: ${columns.length} columns in ${seconds}s`);
@@ -366,13 +534,7 @@ async function runAdapter({
 }
 
 /** Run a command from the repo root, collecting its output. */
-function runCommand({
-  args,
-  command,
-}: {
-  args: readonly string[];
-  command: string;
-}): Promise<CommandResult> {
+function runCommand({ args, command }: CommandInput): Promise<CommandResult> {
   return new Promise((resolve, reject) => {
     const child: ChildProcess = spawn(command, args, {
       cwd: REPO_ROOT,
@@ -410,13 +572,7 @@ function runCommand({
  *
  * @returns each task's result, in task order whatever order they finish in.
  */
-async function runPool<T>({
-  concurrency,
-  tasks,
-}: {
-  concurrency: number;
-  tasks: readonly (() => Promise<T>)[];
-}): Promise<T[]> {
+async function runPool<T>({ concurrency, tasks }: PoolInput<T>): Promise<T[]> {
   const results: T[] = [];
   let hasFailed = false;
   let nextIndex = 0;
@@ -474,10 +630,7 @@ async function runSequentially<T>(
 async function runService({
   args,
   service,
-}: {
-  args: readonly string[];
-  service: ComposeService;
-}): Promise<CommandResult> {
+}: ServiceRunInput): Promise<CommandResult> {
   const containerName = `safe-fns-research-${service.name}-${process.pid}`;
 
   const result = await compose([
@@ -535,11 +688,7 @@ function writeResults({
   caseFiles,
   results,
   servicesRun,
-}: {
-  caseFiles: readonly LoadedCaseFile[];
-  results: readonly FunctionResult[];
-  servicesRun: ReadonlySet<string> | undefined;
-}): void {
+}: WriteResultsInput): void {
   mkdirSync(RESULTS_DIR, { recursive: true });
 
   const stemsByFunction = new Map(
@@ -669,6 +818,6 @@ async function main(): Promise<void> {
 try {
   await main();
 } catch (error) {
-  logError(error instanceof Error ? error.message : String(error));
+  logError(describeError(error));
   process.exitCode = 1;
 }

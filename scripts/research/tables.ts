@@ -3,6 +3,23 @@ import type { FunctionResult, Outcome, ResultColumn } from "./results.ts";
 
 import { renderValue } from "./codec.ts";
 
+/** One case's outcome, and the value columns of the grouped table. */
+type GroupedCellInput = {
+  /**
+   * The case's outcome in one column, if it has one.
+   *
+   * @example `{ kind: "value", value: true }`
+   */
+  outcome: Outcome | undefined;
+
+  /**
+   * The rendered values that get a column of their own.
+   *
+   * @example `["true", "false", "undefined"]`
+   */
+  values: readonly string[];
+};
+
 /** The most distinct return values a function can have for the grouped table. */
 const GROUPED_MAX_VALUES = 4;
 
@@ -60,10 +77,7 @@ function codeSpan(text: string): string {
 function groupedCellIndex({
   outcome,
   values,
-}: {
-  outcome: Outcome | undefined;
-  values: readonly string[];
-}): number | undefined {
+}: GroupedCellInput): number | undefined {
   if (outcome === undefined || outcome.kind === "n/a") {
     return undefined;
   }
