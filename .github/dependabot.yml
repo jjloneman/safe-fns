@@ -153,10 +153,12 @@ updates:
 
   - package-ecosystem: "docker"
     directories:
+      - "/research/docker/c"
       - "/research/docker/debian"
       - "/research/docker/node"
       - "/research/docker/powershell"
       - "/research/docker/ruby"
+      - "/research/docker/swift"
     schedule:
       interval: "weekly"
       day: "monday"
