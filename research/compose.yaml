@@ -671,6 +671,9 @@ services:
 
   # Columns transcribed from `sources/` for tools that can't run here; it
   # needs no npm libraries, so it runs on the plain Node image.
+  #
+  # - Keep this pin equal to `docker/node/Dockerfile`'s `FROM`: Dependabot
+  #   bumps the two in separate PRs (`research-images`, `research-dockerfiles`).
   sources:
     entrypoint: ["node", "/work/research/adapters/sources.mts"]
     environment: *adapter-environment

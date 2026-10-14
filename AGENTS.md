@@ -350,7 +350,7 @@ The conventions below are written for TypeScript, but they bind code in every la
   - `release-please` — opens or updates the release PR, and tags the release once it is merged;
   - `publish` — only when a release was just created; builds and publishes to npm.
 - **Dependabot** opens weekly grouped patch/minor PRs for npm and Actions, after a 7-day cooldown that matches the [moratorium](#-7-day-dependency-moratorium).
-  - `research/`'s npm libraries, its Compose images, its Dockerfiles, the JVM adapter's Gradle libraries, the database adapters' pip drivers, and the Firebase emulators' npm root get their own entries, each one grouped PR a week, majors included.
+  - `research/`'s npm libraries, its Compose images, its Dockerfiles, the JVM adapter's Gradle libraries, the database adapters' pip drivers, the XML Schema adapter's pip libraries, and the Firebase emulators' npm root get their own entries, each one grouped PR a week, majors included.
   - Its `ignore` rules hold the pins below: `typescript` and `@types/node` majors, and each `typescript-<version>` alias to its minor.
 - Every action is pinned to an exact `vX.Y.Z`, and every job declares its own `permissions`.
 - How to change a workflow is covered by `.claude/rules/ci.md`.
@@ -361,7 +361,7 @@ No npm dependency may enter the lockfile until it has been published for **at le
 
 - Enforced by `minimumReleaseAge: 10080` (minutes) in [pnpm-workspace.yaml](pnpm-workspace.yaml), checked on every `pnpm install`, including `--frozen-lockfile`.
   - `research/pnpm-workspace.yaml` and `research/docker/firebase/pnpm-workspace.yaml` repeat the floor for the research harness's own pnpm roots; keep all three in sync.
-  - The same 7 days applies to a container image (pin a tag whose last push is at least 7 days old) and to a Python package (`research/docker/db/requirements.txt`, compiled with `--exclude-newer`).
+  - The same 7 days applies to a container image (pin a tag whose last push is at least 7 days old), to a Python package (`research/docker/db/requirements.txt`, compiled with `--exclude-newer`; `research/docker/xml-schema/requirements.txt`), and to a release download such as the Hermes CLI tarball.
 - A too-new version fails the install with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`.
 - When bumping a dependency by hand, pick the newest version that is already at least 7 days old (exactly 7 days is fine). If the lockfile fails the check, downgrade the offending entry rather than relaxing the floor.
 - Versions are pinned exactly (`saveExact: true` in [pnpm-workspace.yaml](pnpm-workspace.yaml)); the lockfile is the only thing that moves them.

@@ -8,9 +8,14 @@
  * - A data object with a `$` key is wrapped in `$object`, so data can never
  *   pass for a tag.
  *
- * - Its twins live in `research/adapters/research_codec.*` (Python, Ruby,
- *   PHP, Swift, PowerShell); the `codec` case file checks that every one
- *   decodes and re-encodes identically.
+ * - Its nine twins live under `research/adapters/`: `research_codec.*`
+ *   (Python, Ruby, PHP, Swift, PowerShell), `dotnet/Codec.cs`,
+ *   `go/codec.go`, the JVM's `ResearchCodec.java`, and `rust/src/codec.rs`;
+ *   the `codec` case file checks that every one decodes and re-encodes
+ *   identically.
+ *
+ * - Hermes needs no twin: its adapter embeds `ENCODER_SOURCE`, this file's
+ *   own encoder.
  */
 
 /** How to decode a value, and what to call for the values only JS can build. */
