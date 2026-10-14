@@ -12,9 +12,12 @@ WORKDIR /opt/jvm-adapter
 COPY build.gradle.kts settings.gradle.kts ./
 RUN gradle --no-daemon --quiet resolveDependencies
 
+# Then the sources, compiled offline against the jars cached above, so an edit
+# rebuilds only from here; `installDist` lays the classes and every jar out
+# under `build/install`, the classpath the entrypoint runs.
 COPY src ./src
 RUN gradle --no-daemon --offline --quiet installDist
 
 # `java` expands the classpath wildcard itself, so no shell or start script
 # stands between the runner and the JVM.
-ENTRYPOINT ["java", "-cp", "/opt/jvm-adapter/build/install/jvm-adapter/lib/*", "dev.safefns.research.Main"]
+ENTRYPOINT ["java", "-cp", "/opt/jvm-adapter/build/install/jvm-adapter/lib/*", "com.jjloneman.safefns.research.Main"]

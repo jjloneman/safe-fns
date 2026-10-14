@@ -1,4 +1,4 @@
-package dev.safefns.research;
+package com.jjloneman.safefns.research;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -7,17 +7,16 @@ import java.math.BigInteger;
 import java.nio.charset.CharacterCodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.json.JsonMapper;
-import tools.jackson.databind.node.ArrayNode;
 import tools.jackson.databind.node.JsonNodeFactory;
 import tools.jackson.databind.node.ObjectNode;
 
@@ -71,7 +70,7 @@ public final class ResearchCodec {
    * @param value a decoded value
    * @return whether it, or anything inside it, is unrepresentable
    */
-  static boolean containsUnrepresentable(Object value) {
+  static boolean containsUnrepresentable(final Object value) {
     if (value instanceof Unrepresentable) {
       return true;
     }
@@ -98,19 +97,17 @@ public final class ResearchCodec {
    * @throws IllegalArgumentException for a malformed tag, exactly where
    *     `decodeValue` throws
    */
-  static Object decode(JsonNode encoded) {
+  static Object decode(final JsonNode encoded) {
     if (encoded.isArray()) {
-      List<Object> items = new ArrayList<>();
-      encoded.values().forEach(item -> items.add(decode(item)));
-
-      return items;
+      // `toList`, not `Collectors.toList`: it keeps `null` items too.
+      return encoded.valueStream().map(ResearchCodec::decode).toList();
     }
 
     if (!encoded.isObject()) {
       return decodeScalar(encoded);
     }
 
-    List<String> tags = encoded
+    final List<String> tags = encoded
       .propertyNames()
       .stream()
       .filter(key -> key.startsWith("$"))
@@ -135,14 +132,16 @@ public final class ResearchCodec {
    * @param encoded an encoded object
    * @return a map of its decoded entries, in their original order
    */
-  private static Map<String, Object> decodeEntries(JsonNode encoded) {
-    Map<String, Object> entries = new LinkedHashMap<>();
-
-    for (Map.Entry<String, JsonNode> entry : encoded.properties()) {
-      entries.put(entry.getKey(), decode(entry.getValue()));
-    }
-
-    return entries;
+  private static Map<String, Object> decodeEntries(final JsonNode encoded) {
+    // Not `Collectors.toMap`, which rejects the `null` a JSON value can be.
+    return encoded
+      .propertyStream()
+      .collect(
+        LinkedHashMap::new,
+        (entries, entry) ->
+          entries.put(entry.getKey(), decode(entry.getValue())),
+        Map::putAll
+      );
   }
 
   /**
@@ -151,7 +150,7 @@ public final class ResearchCodec {
    * @param encoded the scalar
    * @return its Java value
    */
-  private static Object decodeScalar(JsonNode encoded) {
+  private static Object decodeScalar(final JsonNode encoded) {
     if (encoded.isString()) {
       return encoded.stringValue();
     }
@@ -180,7 +179,7 @@ public final class ResearchCodec {
    * @return the double it names
    * @throws IllegalArgumentException for any other spelling
    */
-  private static Double decodeSpecialNumber(String spelling) {
+  private static Double decodeSpecialNumber(final String spelling) {
     return switch (spelling) {
       case "-0" -> -0.0;
       case "-Infinity" -> Double.NEGATIVE_INFINITY;
@@ -201,7 +200,7 @@ public final class ResearchCodec {
    * @throws IllegalArgumentException for an unknown tag or a payload the tag
    *     doesn't accept
    */
-  private static Object decodeTag(JsonNode payload, String tag) {
+  private static Object decodeTag(final JsonNode payload, final String tag) {
     if (tag.equals("$bigint") && payload.isString()) {
       if (!BIGINT_PATTERN.matcher(payload.stringValue()).matches()) {
         throw new IllegalArgumentException(
@@ -245,7 +244,7 @@ public final class ResearchCodec {
    * @param value the value
    * @return its description
    */
-  private static String describe(Object value) {
+  private static String describe(final Object value) {
     if (value instanceof BigDecimal decimal) {
       return "BigDecimal(" + decimal.toPlainString() + ")";
     }
@@ -262,7 +261,7 @@ public final class ResearchCodec {
    * @param value any value a call returned
    * @return its encoding
    */
-  static JsonNode encode(Object value) {
+  static JsonNode encode(final Object value) {
     return switch (value) {
       case null -> FACTORY.nullNode();
       case Unrepresentable unrepresentable -> tagged(
@@ -294,7 +293,7 @@ public final class ResearchCodec {
    * @param value the number
    * @return its encoding
    */
-  private static JsonNode encodeDouble(double value) {
+  private static JsonNode encodeDouble(final double value) {
     if (Double.isNaN(value)) {
       return tagged("$number", FACTORY.stringNode("NaN"));
     }
@@ -319,13 +318,20 @@ public final class ResearchCodec {
    * @param entries the map; a non-string key is described by `$repr`
    * @return its encoding
    */
-  private static JsonNode encodeEntries(Map<?, ?> entries) {
+  private static JsonNode encodeEntries(final Map<?, ?> entries) {
     if (!entries.keySet().stream().allMatch(String.class::isInstance)) {
       return tagged("$repr", FACTORY.stringNode(describe(entries)));
     }
 
-    ObjectNode encoded = FACTORY.objectNode();
-    entries.forEach((key, item) -> encoded.set((String) key, encode(item)));
+    final ObjectNode encoded = entries
+      .entrySet()
+      .stream()
+      .collect(
+        FACTORY::objectNode,
+        (node, entry) ->
+          node.set((String) entry.getKey(), encode(entry.getValue())),
+        ObjectNode::setAll
+      );
 
     if (
       encoded
@@ -345,11 +351,10 @@ public final class ResearchCodec {
    * @param items the collection
    * @return its encoding
    */
-  private static JsonNode encodeItems(Collection<?> items) {
-    ArrayNode encoded = FACTORY.arrayNode();
-    items.forEach(item -> encoded.add(encode(item)));
-
-    return encoded;
+  private static JsonNode encodeItems(final Collection<?> items) {
+    return FACTORY.arrayNode().addAll(
+      items.stream().map(ResearchCodec::encode).toList()
+    );
   }
 
   /**
@@ -358,7 +363,7 @@ public final class ResearchCodec {
    * @param value the number
    * @return its encoding
    */
-  private static JsonNode encodeLong(long value) {
+  private static JsonNode encodeLong(final long value) {
     // Not `Math.abs`, which overflows for `Long.MIN_VALUE`.
     if (value > MAX_SAFE_INTEGER || value < -MAX_SAFE_INTEGER) {
       return tagged("$bigint", FACTORY.stringNode(Long.toString(value)));
@@ -378,20 +383,20 @@ public final class ResearchCodec {
    * @throws IllegalArgumentException naming the file when it isn't UTF-8 JSON
    * @throws UncheckedIOException when the file can't be read
    */
-  private static JsonNode readCaseFile(String path) {
-    String text;
+  private static JsonNode readCaseFile(final String path) {
+    final String text;
 
     try {
       text = Files.readString(Path.of(path));
-    } catch (CharacterCodingException error) {
+    } catch (final CharacterCodingException error) {
       throw new IllegalArgumentException(path + " isn't valid JSON", error);
-    } catch (IOException error) {
+    } catch (final IOException error) {
       throw new UncheckedIOException(error);
     }
 
     try {
       return MAPPER.readTree(text);
-    } catch (JacksonException error) {
+    } catch (final JacksonException error) {
       throw new IllegalArgumentException(path + " isn't valid JSON", error);
     }
   }
@@ -402,40 +407,63 @@ public final class ResearchCodec {
    * @param paths the case files' paths
    * @param tools every tool this adapter runs
    */
-  public static void runAdapter(List<String> paths, List<Tool> tools) {
-    ArrayNode columns = FACTORY.arrayNode();
-    String locale = Locale.getDefault().toLanguageTag();
+  public static void runAdapter(
+    final List<String> paths,
+    final List<Tool> tools
+  ) {
+    final String locale = Locale.getDefault().toLanguageTag();
 
-    for (String path : paths) {
-      JsonNode caseFile = readCaseFile(path);
-      String function = caseFile.get("function").stringValue();
+    final List<ObjectNode> columns = paths
+      .stream()
+      .map(ResearchCodec::readCaseFile)
+      .flatMap(caseFile -> runCaseFile(caseFile, tools, locale))
+      .toList();
 
-      for (Tool tool : tools) {
-        for (Probe probe : tool.functions().getOrDefault(function, List.of())) {
-          ArrayNode outcomes = FACTORY.arrayNode();
-          caseFile
-            .get("cases")
-            .values()
-            .forEach(testCase ->
-              outcomes.add(runProbe(testCase.get("args"), probe))
-            );
-
-          ObjectNode column = FACTORY.objectNode();
-          column.put("call", probe.call());
-          column.put("function", function);
-          column.put("locale", locale);
-          column.put("name", tool.name());
-          column.set("outcomes", outcomes);
-          column.put("tier", tool.tier());
-          column.put("version", tool.version());
-          columns.add(column);
-        }
-      }
-    }
-
-    ObjectNode output = FACTORY.objectNode();
-    output.set("columns", columns);
+    final ObjectNode output = FACTORY.objectNode();
+    output.set("columns", FACTORY.arrayNode().addAll(columns));
     System.out.print(MAPPER.writeValueAsString(output));
+  }
+
+  /**
+   * Run every probe the tools offer for one case file's function.
+   *
+   * @param caseFile the parsed case file
+   * @param tools every tool this adapter runs
+   * @param locale the locale the JVM runs under, reported with each column
+   * @return one column per probe
+   */
+  private static Stream<ObjectNode> runCaseFile(
+    final JsonNode caseFile,
+    final List<Tool> tools,
+    final String locale
+  ) {
+    final String function = caseFile.get("function").stringValue();
+
+    return tools.stream().flatMap(tool ->
+      tool
+        .functions()
+        .getOrDefault(function, List.of())
+        .stream()
+        .map(probe -> {
+          final List<ObjectNode> outcomes = caseFile
+            .get("cases")
+            .valueStream()
+            .map(testCase -> runProbe(testCase.get("args"), probe))
+            .toList();
+
+          final ObjectNode column = FACTORY.objectNode()
+            .put("call", probe.call())
+            .put("function", function)
+            .put("locale", locale)
+            .put("name", tool.name())
+            .put("tier", tool.tier())
+            .put("version", tool.version());
+
+          column.set("outcomes", FACTORY.arrayNode().addAll(outcomes));
+
+          return column;
+        })
+    );
   }
 
   /**
@@ -445,11 +473,13 @@ public final class ResearchCodec {
    * @param probe the probe
    * @return the outcome: `value`, `error`, or `n/a`
    */
-  private static ObjectNode runProbe(JsonNode args, Probe probe) {
-    List<Object> decoded = new ArrayList<>();
-    args.values().forEach(arg -> decoded.add(decode(arg)));
+  private static ObjectNode runProbe(final JsonNode args, final Probe probe) {
+    final List<Object> decoded = args
+      .valueStream()
+      .map(ResearchCodec::decode)
+      .toList();
 
-    ObjectNode outcome = FACTORY.objectNode();
+    final ObjectNode outcome = FACTORY.objectNode();
 
     if (
       (!probe.isCodec() &&
@@ -460,10 +490,10 @@ public final class ResearchCodec {
     }
 
     try {
-      Object value = probe.run().run(decoded);
+      final Object value = probe.run().run(decoded);
 
       return outcome.put("kind", "value").set("value", encode(value));
-    } catch (Exception error) {
+    } catch (final Exception error) {
       // Every failure is a result, never a crash.
       return outcome
         .put("error", error.getClass().getSimpleName())
@@ -478,8 +508,8 @@ public final class ResearchCodec {
    * @param payload its payload
    * @return the tagged object
    */
-  private static ObjectNode tagged(String tag, JsonNode payload) {
-    ObjectNode node = FACTORY.objectNode();
+  private static ObjectNode tagged(final String tag, final JsonNode payload) {
+    final ObjectNode node = FACTORY.objectNode();
     node.set(tag, payload);
 
     return node;

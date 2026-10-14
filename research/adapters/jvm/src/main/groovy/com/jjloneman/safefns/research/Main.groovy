@@ -1,4 +1,4 @@
-package dev.safefns.research
+package com.jjloneman.safefns.research
 
 import groovy.transform.CompileStatic
 
@@ -18,7 +18,7 @@ final class Main {
      *
      * @param args the case files' paths
      */
-    static void main(String[] args) {
+    static void main(final String[] args) {
         ResearchCodec.runAdapter(
             args.toList(),
             [

@@ -21,7 +21,7 @@ dependencies {
     implementation("tools.jackson.core:jackson-databind:3.2.3")
 }
 
-application { mainClass = "dev.safefns.research.Main" }
+application { mainClass = "com.jjloneman.safefns.research.Main" }
 
 java { toolchain { languageVersion = JavaLanguageVersion.of(25) } }
 

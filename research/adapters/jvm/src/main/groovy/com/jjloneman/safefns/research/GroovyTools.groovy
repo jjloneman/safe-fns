@@ -1,4 +1,4 @@
-package dev.safefns.research
+package com.jjloneman.safefns.research
 
 import groovy.transform.CompileDynamic
 

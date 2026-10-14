@@ -1,4 +1,4 @@
-package dev.safefns.research;
+package com.jjloneman.safefns.research;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,8 +16,8 @@ final class Versions {
    * @param artifact the Maven artifact id
    * @return the version, or `unknown` when the jar doesn't carry one
    */
-  static String fromPom(String group, String artifact) {
-    String resource =
+  static String fromPom(final String group, final String artifact) {
+    final String resource =
       "/META-INF/maven/" + group + "/" + artifact + "/pom.properties";
 
     try (InputStream stream = Versions.class.getResourceAsStream(resource)) {
@@ -25,11 +25,11 @@ final class Versions {
         return "unknown";
       }
 
-      Properties properties = new Properties();
+      final Properties properties = new Properties();
       properties.load(stream);
 
       return properties.getProperty("version", "unknown");
-    } catch (IOException error) {
+    } catch (final IOException error) {
       return "unknown";
     }
   }

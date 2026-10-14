@@ -1,4 +1,4 @@
-package dev.safefns.research;
+package com.jjloneman.safefns.research;
 
 import java.util.List;
 
@@ -71,7 +71,7 @@ public record Probe(Accepts accepts, String call, boolean isCodec, Call run) {
    * @param run runs the expression
    * @return the probe
    */
-  public static Probe any(String call, UnaryCall<Object> run) {
+  public static Probe any(final String call, final UnaryCall<Object> run) {
     return new Probe(args -> true, call, false, args -> run.run(args.get(0)));
   }
 
@@ -82,7 +82,10 @@ public record Probe(Accepts accepts, String call, boolean isCodec, Call run) {
    * @param run runs the expression
    * @return the probe
    */
-  public static Probe anyBinary(String call, BinaryCall<Object> run) {
+  public static Probe anyBinary(
+    final String call,
+    final BinaryCall<Object> run
+  ) {
     return new Probe(args -> true, call, false, args ->
       run.run(args.get(0), args.get(1))
     );
@@ -98,9 +101,9 @@ public record Probe(Accepts accepts, String call, boolean isCodec, Call run) {
    * @return the probe
    */
   public static <T> Probe binary(
-    String call,
-    Class<T> type,
-    BinaryCall<T> run
+    final String call,
+    final Class<T> type,
+    final BinaryCall<T> run
   ) {
     return new Probe(args -> type.isInstance(args.get(0)), call, false, args ->
       run.run(type.cast(args.get(0)), args.get(1))
@@ -127,9 +130,9 @@ public record Probe(Accepts accepts, String call, boolean isCodec, Call run) {
    * @return the probe
    */
   public static <T> Probe nullable(
-    String call,
-    Class<T> type,
-    UnaryCall<T> run
+    final String call,
+    final Class<T> type,
+    final UnaryCall<T> run
   ) {
     return new Probe(
       args -> args.get(0) == null || type.isInstance(args.get(0)),
@@ -148,7 +151,11 @@ public record Probe(Accepts accepts, String call, boolean isCodec, Call run) {
    * @param <T> the argument's type
    * @return the probe
    */
-  public static <T> Probe typed(String call, Class<T> type, UnaryCall<T> run) {
+  public static <T> Probe typed(
+    final String call,
+    final Class<T> type,
+    final UnaryCall<T> run
+  ) {
     return new Probe(args -> type.isInstance(args.get(0)), call, false, args ->
       run.run(type.cast(args.get(0)))
     );
