@@ -312,3 +312,76 @@ updates:
           - "*"
     labels:
       - "📦 dependencies"
+
+  # The database adapters' image and the Firebase emulators' image.
+  - package-ecosystem: "docker"
+    directories:
+      - "/research/docker/db"
+      - "/research/docker/firebase"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    groups:
+      research-database-images:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"
+
+  # The database adapters' drivers, pinned with hashes in
+  # `research/docker/db/requirements.txt`.
+  - package-ecosystem: "pip"
+    directory: "/research/docker/db"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+
+    # PyPI has no release-age floor of its own; this is the moratorium.
+    cooldown:
+      default-days: 7
+
+    groups:
+      research-drivers:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"
+
+  # The Firebase emulators' CLI (`research/docker/firebase/`), its own pnpm
+  # root.
+  - package-ecosystem: "npm"
+    directory: "/research/docker/firebase"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+
+    # Past its `pnpm-workspace.yaml`'s `minimumReleaseAge` floor.
+    cooldown:
+      default-days: 7
+
+    groups:
+      research-firebase:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"

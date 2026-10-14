@@ -17,6 +17,7 @@ the generated tables instead of summarizing other tools' docs.
 - [🗂️ Layout](#️-layout)
 - [📦 The case format](#-the-case-format)
 - [🧩 The adapter contract](#-the-adapter-contract)
+- [🗄️ Databases](#️-databases)
 - [➕ Adding a function or a tool](#-adding-a-function-or-a-tool)
 - [🖌️ Formatters](#️-formatters)
 
@@ -48,6 +49,9 @@ the generated tables instead of summarizing other tools' docs.
   sorted, keys are sorted, and nothing records a timestamp.
 - The manual **🔬 Research** workflow (`.github/workflows/research.yml`) runs
   the same command on GitHub and uploads the results as an artifact.
+- The `db` profile starts each database before its adapter runs and removes it
+  afterward; SQL Server runs under emulation on Apple Silicon, so it's the
+  slowest to come up.
 - Clean up with `docker compose --file research/compose.yaml down` and
   `docker image prune`.
 
@@ -55,20 +59,21 @@ the generated tables instead of summarizing other tools' docs.
 
 Each adapter service sits in one profile, named for its image.
 
-| Profile      | Image                                   | Tools                                                    |
-| :----------- | :-------------------------------------- | :------------------------------------------------------- |
-| `c`          | `gcc`, with the C++ probes compiled in  | glibc (`ctypes`), libstdc++                              |
-| `dotnet`     | .NET SDK                                | C# / .NET                                                |
-| `go`         | `golang`                                | Go                                                       |
-| `jvm`        | `gradle` (JDK 25)                       | Java, Commons Lang, Guava, Spring, Kotlin, Groovy        |
-| `node`       | `node`, plus `package.json`'s libraries | JS built-ins and libraries                               |
-| `php`        | `php` (CLI)                             | PHP                                                      |
-| `powershell` | .NET SDK, which ships PowerShell        | PowerShell                                               |
-| `python`     | `python`                                | Python 3.15 and 3.11, SQLite                             |
-| `ruby`       | `ruby`, plus `docker/ruby/Gemfile.lock` | Ruby, Rails' ActiveModel                                 |
-| `rust`       | `rust`, plus `adapters/rust/Cargo.lock` | Rust                                                     |
-| `shell`      | `debian`, plus Debian's packages        | bash, dash (POSIX sh), fish, zsh, git, systemd           |
-| `swift`      | `swift`, with the adapter compiled in   | Swift on Linux (swift-corelibs-foundation, not Darwin's) |
+| Profile      | Image                                                              | Tools                                                                                                   |
+| :----------- | :----------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |
+| `c`          | `gcc`, with the C++ probes compiled in                             | glibc (`ctypes`), libstdc++                                                                             |
+| `db`         | `docker/db/`, beside each database's own image; `docker/firebase/` | PostgreSQL, MySQL, MariaDB, SQL Server, MongoDB, the Firebase Realtime Database and Firestore emulators |
+| `dotnet`     | .NET SDK                                                           | C# / .NET                                                                                               |
+| `go`         | `golang`                                                           | Go                                                                                                      |
+| `jvm`        | `gradle` (JDK 25)                                                  | Java, Commons Lang, Guava, Spring, Kotlin, Groovy                                                       |
+| `node`       | `node`, plus `package.json`'s libraries                            | JS built-ins and libraries                                                                              |
+| `php`        | `php` (CLI)                                                        | PHP                                                                                                     |
+| `powershell` | .NET SDK, which ships PowerShell                                   | PowerShell                                                                                              |
+| `python`     | `python`                                                           | Python 3.15 and 3.11, SQLite                                                                            |
+| `ruby`       | `ruby`, plus `docker/ruby/Gemfile.lock`                            | Ruby, Rails' ActiveModel                                                                                |
+| `rust`       | `rust`, plus `adapters/rust/Cargo.lock`                            | Rust                                                                                                    |
+| `shell`      | `debian`, plus Debian's packages                                   | bash, dash (POSIX sh), fish, zsh, git, systemd                                                          |
+| `swift`      | `swift`, with the adapter compiled in                              | Swift on Linux (swift-corelibs-foundation, not Darwin's)                                                |
 
 - Microsoft no longer publishes PowerShell's own image, so PowerShell comes from
   the .NET SDK image.
@@ -84,6 +89,9 @@ Each adapter service sits in one profile, named for its image.
   - `node.mts`;
   - `python.py`, `sqlite.py`, `shell.py`, and `c.py` (with `cxx_probes.cpp`), on
     `research_codec.py`;
+  - `postgres.py`, `mysql.py` (MySQL and MariaDB), `mssql.py`, `mongo.py`, and
+    `firebase.py`, also on `research_codec.py`, with `database_probe.py`
+    building the probes they share;
   - `ruby.rb` on `research_codec.rb`, `php.php` on `research_codec.php`,
     `swift.swift` on `research_codec.swift`, and `powershell.ps1` on
     `research_codec.psm1`.
@@ -110,6 +118,11 @@ Each adapter service sits in one profile, named for its image.
   plus `node` and the JVM formatters' own; `docker/ruby/` also holds the Ruby
   gems' `Gemfile.lock`.
 - `.swift-format` — swift-format's settings: 80 columns, 2-space indents.
+  - `docker/db/` — Python plus the database drivers, hash-pinned in
+    `requirements.txt`.
+  - `docker/firebase/` — the Firebase emulators: Node, a JRE, and
+    `firebase-tools` from its own pnpm root, with the emulator jars fetched at
+    build time.
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` — the Node adapter's
   libraries, a separate pnpm root with the repo's 7-day moratorium.
 - `tsconfig.json` — a nested config, so the editor and ESLint resolve the Node
@@ -195,6 +208,36 @@ to stdout:
   - A nonzero exit status is the error `exit <status>`; a C++ exception or
     `std::errc` is reported by name.
 
+## 🗄️ Databases
+
+A database is a long-running Compose service labeled
+`dev.safe-fns.research.role: database`, beside a one-shot adapter that queries
+it.
+
+| Database                   | Probes                                                  | Service            |
+| :------------------------- | :------------------------------------------------------ | :----------------- |
+| PostgreSQL                 | `CAST(? AS …)`, `trim(?)`                               | `postgres`         |
+| MySQL, MariaDB             | `? IS TRUE`, `CAST(? AS …)`, `TRIM(?)`                  | `mysql`, `mariadb` |
+| SQL Server                 | `CAST(? AS …)`, `TRIM(?)`                               | `mssql`            |
+| MongoDB                    | `$toBool`, `$toLong`, `$toDouble`, `$toString`, `$trim` | `mongo`            |
+| Firebase Realtime Database | `isSafeEmpty`: does a written value survive?            | `firebase`         |
+| Cloud Firestore            | `isSafeEmpty`: does a written field survive?            | `firebase`         |
+
+- The runner starts the active profiles' databases with
+  `docker compose up --wait`, gated on each one's healthcheck, and removes them
+  by name when the adapters finish, whether or not they succeeded.
+- An adapter shares an `internal` network with its database and nothing else, so
+  neither can reach the internet; no database publishes a host port.
+- Each database keeps its data in `tmpfs`, except SQL Server, which can't run on
+  it.
+- An adapter binds the case's value as a query parameter, and reports `n/a` for
+  a value its driver would change on the way in: a bool where the database has
+  no boolean type, an integer outside 64 bits, a string that isn't valid UTF-8.
+- An error is the server's own code: a SQLSTATE, `Error 1292`, `Msg 245`, or a
+  MongoDB `codeName`.
+- A column's version is the server's own, its locale is the database's collation
+  or `ctype`, and its image is the database's, not the adapter's.
+
 ## ➕ Adding a function or a tool
 
 - **A function:** add `cases/<kebab-name>.json`, add probes for it to each
@@ -215,6 +258,10 @@ to stdout:
   4. Add a Dependabot entry if the image comes from a Dockerfile, and one for
      any manifest the adapter or its formatter installs from (`Cargo.lock`,
      `dotnet-tools.json`), each with the 7-day cooldown.
+- **A database:** add it as a `database`-role service with a healthcheck, on an
+  `internal` network of its own, and an adapter on that network whose
+  `depends_on` names it; the runner reports the database's image for the
+  adapter's columns.
 
 ## 🖌️ Formatters
 
