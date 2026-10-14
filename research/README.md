@@ -57,7 +57,7 @@ Each adapter service sits in one profile, named for its image.
 
 | Profile      | Image                                   | Tools                                                    |
 | :----------- | :-------------------------------------- | :------------------------------------------------------- |
-| `c`          | `gcc`                                   | glibc (`ctypes`), libstdc++ (probes compiled at startup) |
+| `c`          | `gcc`, with the C++ probes compiled in  | glibc (`ctypes`), libstdc++                              |
 | `dotnet`     | .NET SDK                                | C# / .NET                                                |
 | `go`         | `golang`                                | Go                                                       |
 | `jvm`        | `gradle` (JDK 25)                       | Java, Commons Lang, Guava, Spring, Kotlin, Groovy        |
@@ -68,7 +68,7 @@ Each adapter service sits in one profile, named for its image.
 | `ruby`       | `ruby`, plus `docker/ruby/Gemfile.lock` | Ruby, Rails' ActiveModel                                 |
 | `rust`       | `rust`, plus `adapters/rust/Cargo.lock` | Rust                                                     |
 | `shell`      | `debian`, plus Debian's packages        | bash, dash (POSIX sh), fish, zsh, git, systemd           |
-| `swift`      | `swift`                                 | Swift on Linux (swift-corelibs-foundation, not Darwin's) |
+| `swift`      | `swift`, with the adapter compiled in   | Swift on Linux (swift-corelibs-foundation, not Darwin's) |
 
 - Microsoft no longer publishes PowerShell's own image, so PowerShell comes from
   the .NET SDK image.
@@ -105,9 +105,10 @@ Each adapter service sits in one profile, named for its image.
 - `sources/` — cached excerpts for tools that can't run in a container, each
   with its URL, version or commit, and fetch date.
 - `compose.yaml` — every service; `docker/` holds Dockerfiles for images that
-  need a build step: one per compiled adapter (`dotnet`, `go`, `jvm`, `rust`),
-  which also carries that language's formatter and linter, plus `node` and the
-  JVM formatters' own; `docker/ruby/` also holds the Ruby gems' `Gemfile.lock`.
+  need a build step: one per compiled adapter (`c`, `dotnet`, `go`, `jvm`,
+  `rust`, `swift`), which also carries that language's formatter and linter,
+  plus `node` and the JVM formatters' own; `docker/ruby/` also holds the Ruby
+  gems' `Gemfile.lock`.
 - `.swift-format` — swift-format's settings: 80 columns, 2-space indents.
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` — the Node adapter's
   libraries, a separate pnpm root with the repo's 7-day moratorium.
@@ -175,8 +176,9 @@ to stdout:
 - Report the tool's real version and the locale it actually ran under; the
   runner adds the pinned image.
 - Write nothing to disk: the repo is mounted read-only under `/work`, mirroring
-  its layout. A compiled adapter (Swift, the C++ probes) builds into `/tmp`
-  inside its container.
+  its layout. A compiled adapter (`c`'s C++ probes, `dotnet`, `go`, `jvm`,
+  `rust`, `swift`) is built into its image instead, so its service mounts only
+  `cases/`.
 
 ### 🔌 Two adapter shapes
 
