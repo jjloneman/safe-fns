@@ -2147,8 +2147,8 @@
     },
     {
       "call": "Convert.ToDouble(value, InvariantCulture)",
-      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
-      "inputs": "sha256:a455a1aecd088e79edecf6165674b790c32330b9d0ecf27ccb10538fc57ec58d",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
       "locale": "invariant",
       "name": ".NET",
       "outcomes": [
@@ -2334,12 +2334,12 @@
       ],
       "service": "dotnet",
       "tier": 2,
-      "version": "10.0.12"
+      "version": "10.0.13"
     },
     {
       "call": "double.Parse(value, \"de-DE\")",
-      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
-      "inputs": "sha256:a455a1aecd088e79edecf6165674b790c32330b9d0ecf27ccb10538fc57ec58d",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
       "locale": "de-DE",
       "name": ".NET",
       "outcomes": [
@@ -2503,12 +2503,12 @@
       ],
       "service": "dotnet",
       "tier": 2,
-      "version": "10.0.12"
+      "version": "10.0.13"
     },
     {
       "call": "double.Parse(value, \"fr-FR\")",
-      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
-      "inputs": "sha256:a455a1aecd088e79edecf6165674b790c32330b9d0ecf27ccb10538fc57ec58d",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
       "locale": "fr-FR",
       "name": ".NET",
       "outcomes": [
@@ -2672,12 +2672,12 @@
       ],
       "service": "dotnet",
       "tier": 2,
-      "version": "10.0.12"
+      "version": "10.0.13"
     },
     {
       "call": "double.Parse(value, InvariantCulture)",
-      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
-      "inputs": "sha256:a455a1aecd088e79edecf6165674b790c32330b9d0ecf27ccb10538fc57ec58d",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
       "locale": "invariant",
       "name": ".NET",
       "outcomes": [
@@ -2845,7 +2845,7 @@
       ],
       "service": "dotnet",
       "tier": 2,
-      "version": "10.0.12"
+      "version": "10.0.13"
     },
     {
       "call": "NumberUtils.createNumber(value)",
@@ -8882,8 +8882,8 @@
     },
     {
       "call": "[double]::Parse($value, [cultureinfo]'de-DE')",
-      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
-      "inputs": "sha256:88d6f32c732dcf25775811f089cfe58ba9310ccf1f845b2c6cdb26e1bc8d37a2",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:c3c552d76dc2aa7d044e622792b0422c03ba4feb3adf3a7d13e8f80bb8a24d95",
       "locale": "de-DE",
       "name": "PowerShell",
       "outcomes": [
@@ -9063,12 +9063,12 @@
       ],
       "service": "powershell",
       "tier": 4,
-      "version": "7.6.6"
+      "version": "7.6.7"
     },
     {
       "call": "[double]::Parse($value, [cultureinfo]'fr-FR')",
-      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
-      "inputs": "sha256:88d6f32c732dcf25775811f089cfe58ba9310ccf1f845b2c6cdb26e1bc8d37a2",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:c3c552d76dc2aa7d044e622792b0422c03ba4feb3adf3a7d13e8f80bb8a24d95",
       "locale": "fr-FR",
       "name": "PowerShell",
       "outcomes": [
@@ -9248,12 +9248,12 @@
       ],
       "service": "powershell",
       "tier": 4,
-      "version": "7.6.6"
+      "version": "7.6.7"
     },
     {
       "call": "[double]::Parse($value)",
-      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
-      "inputs": "sha256:88d6f32c732dcf25775811f089cfe58ba9310ccf1f845b2c6cdb26e1bc8d37a2",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:c3c552d76dc2aa7d044e622792b0422c03ba4feb3adf3a7d13e8f80bb8a24d95",
       "locale": "invariant",
       "name": "PowerShell",
       "outcomes": [
@@ -9439,12 +9439,12 @@
       ],
       "service": "powershell",
       "tier": 4,
-      "version": "7.6.6"
+      "version": "7.6.7"
     },
     {
       "call": "[double]$value",
-      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
-      "inputs": "sha256:88d6f32c732dcf25775811f089cfe58ba9310ccf1f845b2c6cdb26e1bc8d37a2",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:c3c552d76dc2aa7d044e622792b0422c03ba4feb3adf3a7d13e8f80bb8a24d95",
       "locale": "invariant",
       "name": "PowerShell",
       "outcomes": [
@@ -9628,12 +9628,12 @@
       ],
       "service": "powershell",
       "tier": 4,
-      "version": "7.6.6"
+      "version": "7.6.7"
     },
     {
       "call": "$value -as [double]",
-      "image": "mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317",
-      "inputs": "sha256:88d6f32c732dcf25775811f089cfe58ba9310ccf1f845b2c6cdb26e1bc8d37a2",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:c3c552d76dc2aa7d044e622792b0422c03ba4feb3adf3a7d13e8f80bb8a24d95",
       "locale": "invariant",
       "name": "PowerShell",
       "outcomes": [
@@ -9817,7 +9817,7 @@
       ],
       "service": "powershell",
       "tier": 4,
-      "version": "7.6.6"
+      "version": "7.6.7"
     },
     {
       "call": "ActiveModel::Type::Float.new.cast(value)",

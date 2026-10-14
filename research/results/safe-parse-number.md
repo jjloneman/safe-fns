@@ -108,10 +108,10 @@
 | radash<br>`toFloat(value)` | 1 | `12.1.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber()), value)` | 1 | `1.5.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | zod<br>`z.coerce.number().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| .NET<br>`Convert.ToDouble(value, InvariantCulture)` | 2 | `10.0.12` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
-| .NET<br>`double.Parse(value, "de-DE")` | 2 | `10.0.12` | `de-DE` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
-| .NET<br>`double.Parse(value, "fr-FR")` | 2 | `10.0.12` | `fr-FR` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
-| .NET<br>`double.Parse(value, InvariantCulture)` | 2 | `10.0.12` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| .NET<br>`Convert.ToDouble(value, InvariantCulture)` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
+| .NET<br>`double.Parse(value, "de-DE")` | 2 | `10.0.13` | `de-DE` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
+| .NET<br>`double.Parse(value, "fr-FR")` | 2 | `10.0.13` | `fr-FR` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
+| .NET<br>`double.Parse(value, InvariantCulture)` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | Commons Lang<br>`NumberUtils.createNumber(value)` | 2 | `3.21.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Commons Lang<br>`NumberUtils.toDouble(value)` | 2 | `3.21.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Go<br>`strconv.ParseFloat(value, 64)` | 2 | `1.27.1` | `C.UTF-8` | `golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66` |
@@ -146,11 +146,11 @@
 | fish<br>`math -- $argv[1]` | 4 | `4.0.2-1` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
 | PHP<br>`filter_var($value, FILTER_VALIDATE_FLOAT)` | 4 | `8.5.11` | `C.UTF-8` | `php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7` |
 | PHP<br>`floatval($value)` | 4 | `8.5.11` | `C.UTF-8` | `php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7` |
-| PowerShell<br>`[double]::Parse($value, [cultureinfo]'de-DE')` | 4 | `7.6.6` | `de-DE` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
-| PowerShell<br>`[double]::Parse($value, [cultureinfo]'fr-FR')` | 4 | `7.6.6` | `fr-FR` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
-| PowerShell<br>`[double]::Parse($value)` | 4 | `7.6.6` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
-| PowerShell<br>`[double]$value` | 4 | `7.6.6` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
-| PowerShell<br>`$value -as [double]` | 4 | `7.6.6` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.401-noble@sha256:e70cdb7f80b0348f5cb85f19a8f670fca061f033d57eed12fa003d58b0e06317` |
+| PowerShell<br>`[double]::Parse($value, [cultureinfo]'de-DE')` | 4 | `7.6.7` | `de-DE` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
+| PowerShell<br>`[double]::Parse($value, [cultureinfo]'fr-FR')` | 4 | `7.6.7` | `fr-FR` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
+| PowerShell<br>`[double]::Parse($value)` | 4 | `7.6.7` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
+| PowerShell<br>`[double]$value` | 4 | `7.6.7` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
+| PowerShell<br>`$value -as [double]` | 4 | `7.6.7` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | Rails (ActiveModel)<br>`ActiveModel::Type::Float.new.cast(value)` | 4 | `8.1.4` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
 | Ruby<br>`Float(value)` | 4 | `3.4.11` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
 | Ruby<br>`value.to_f` | 4 | `3.4.11` | `C.UTF-8` | `ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2` |
