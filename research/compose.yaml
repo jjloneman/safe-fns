@@ -17,9 +17,28 @@
 # - No service has a network (`network_mode: none`): everything is installed
 #   at build time, so a run is hermetic, and parallel runs never race to create
 #   a shared one. A service that needs another (a database) joins a network
-#   of its own.
+#   of its own, shared only with that database and cut off from the internet.
+#
+# - A database (role `database`) is long-running: the runner starts the active
+#   profiles' databases with `up --wait` before any adapter runs, and removes
+#   them afterward. Each publishes no ports, and keeps its data in `tmpfs`
+#   wherever the engine can run on it.
 
 name: safe-fns-research
+
+networks:
+  firebase:
+    internal: true
+  mariadb:
+    internal: true
+  mongo:
+    internal: true
+  mssql:
+    internal: true
+  mysql:
+    internal: true
+  postgres:
+    internal: true
 
 x-adapter-environment: &adapter-environment
   LANG: C.UTF-8
@@ -31,7 +50,168 @@ x-python-volumes: &python-volumes
   - ./adapters:/work/research/adapters:ro
   - ./cases:/work/research/cases:ro
 
+# A database adapter: Python plus the drivers in `docker/db/requirements.txt`.
+x-database-adapter: &database-adapter
+  build:
+    context: .
+    dockerfile: docker/db/Dockerfile
+  environment: *adapter-environment
+  labels:
+    dev.safe-fns.research.role: adapter
+  profiles: ["db"]
+  volumes: *python-volumes
+
+# How often Compose probes a database while `up --wait` waits for it.
+x-database-healthcheck: &database-healthcheck
+  interval: 2s
+  retries: 90
+  timeout: 5s
+
+x-database-labels: &database-labels
+  dev.safe-fns.research.role: database
+
+# Read by both the `mssql` service and its adapter. A throwaway password for a
+# server that only its adapter's internal network can reach.
+x-mssql-environment: &mssql-environment
+  MSSQL_SA_PASSWORD: Research-only-Passw0rd
+
 services:
+  firebase:
+    build: &firebase-build
+      context: .
+      dockerfile: docker/firebase/Dockerfile
+    environment:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+    healthcheck:
+      <<: *database-healthcheck
+      test:
+        - CMD
+        - node
+        - --eval
+        - >-
+          Promise.all([8080, 9000].map((port) =>
+          fetch(`http://127.0.0.1:$${port}`))).then(() => process.exit(0), () =>
+          process.exit(1))
+    labels: *database-labels
+    networks: [firebase]
+    profiles: ["db"]
+
+  # Python from the emulators' own image, so it can read their version.
+  firebase-adapter:
+    build: *firebase-build
+    depends_on:
+      firebase:
+        condition: service_healthy
+    entrypoint: ["python3", "/work/research/adapters/firebase.py"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    networks: [firebase]
+    profiles: ["db"]
+    volumes: *python-volumes
+
+  mariadb:
+    environment:
+      LANG: C.UTF-8
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "1"
+    healthcheck:
+      <<: *database-healthcheck
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+    image: mariadb:11.8.9-noble@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15
+    labels: *database-labels
+    networks: [mariadb]
+    profiles: ["db"]
+    tmpfs: [/var/lib/mysql]
+
+  mariadb-adapter:
+    <<: *database-adapter
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    entrypoint: ["python", "/work/research/adapters/mysql.py"]
+    environment:
+      <<: *adapter-environment
+      RESEARCH_DATABASE_HOST: mariadb
+    networks: [mariadb]
+
+  mongo:
+    environment:
+      LANG: C.UTF-8
+    healthcheck:
+      <<: *database-healthcheck
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+    image: mongo:8.3.11-noble@sha256:d1b11412fcace9886472ff9c9bfb2e702e08688b2f645b4df5b7ee8ff5b4b4a2
+    labels: *database-labels
+    networks: [mongo]
+    profiles: ["db"]
+    tmpfs: [/data/configdb, /data/db]
+
+  mongo-adapter:
+    <<: *database-adapter
+    depends_on:
+      mongo:
+        condition: service_healthy
+    entrypoint: ["python", "/work/research/adapters/mongo.py"]
+    networks: [mongo]
+
+  # Microsoft publishes SQL Server for amd64 only: Apple Silicon runs it under
+  # Rosetta, slowly, and CI's runners natively. Its data stays in the
+  # container's own layer, since SQL Server can't run on `tmpfs`.
+  mssql:
+    environment:
+      <<: *mssql-environment
+      ACCEPT_EULA: "Y"
+      LANG: C.UTF-8
+      MSSQL_PID: Developer
+    healthcheck:
+      <<: *database-healthcheck
+      retries: 150
+      test:
+        - CMD-SHELL
+        - >-
+          /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa
+          -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1"
+    image: mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726
+    labels: *database-labels
+    networks: [mssql]
+    platform: linux/amd64
+    profiles: ["db"]
+
+  mssql-adapter:
+    <<: *database-adapter
+    depends_on:
+      mssql:
+        condition: service_healthy
+    entrypoint: ["python", "/work/research/adapters/mssql.py"]
+    environment:
+      <<: [*adapter-environment, *mssql-environment]
+    networks: [mssql]
+
+  mysql:
+    environment:
+      LANG: C.UTF-8
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    healthcheck:
+      <<: *database-healthcheck
+      test: ["CMD", "mysqladmin", "ping", "--host", "127.0.0.1"]
+    image: mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d
+    labels: *database-labels
+    networks: [mysql]
+    profiles: ["db"]
+    tmpfs: [/var/lib/mysql]
+
+  mysql-adapter:
+    <<: *database-adapter
+    depends_on:
+      mysql:
+        condition: service_healthy
+    entrypoint: ["python", "/work/research/adapters/mysql.py"]
+    environment:
+      <<: *adapter-environment
+      RESEARCH_DATABASE_HOST: mysql
+    networks: [mysql]
+
   node:
     build:
       context: .
@@ -47,6 +227,32 @@ services:
       - ./cases:/work/research/cases:ro
       - ../scripts/research:/work/scripts/research:ro
       - ../test:/work/test:ro
+
+  # The cluster runs in `C.UTF-8`, so a cast never depends on the host locale.
+  postgres:
+    environment:
+      LANG: C.UTF-8
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_INITDB_ARGS: --locale=C.UTF-8 --encoding=UTF8
+    # TCP, not the socket: the entrypoint's setup server listens only on the
+    # socket, so this stays unhealthy until the real server is up.
+    healthcheck:
+      <<: *database-healthcheck
+      test:
+        ["CMD", "pg_isready", "--host", "127.0.0.1", "--username", "postgres"]
+    image: postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c
+    labels: *database-labels
+    networks: [postgres]
+    profiles: ["db"]
+    tmpfs: [/var/lib/postgresql]
+
+  postgres-adapter:
+    <<: *database-adapter
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: ["python", "/work/research/adapters/postgres.py"]
+    networks: [postgres]
 
   python:
     entrypoint: ["python", "/work/research/adapters/python.py"]

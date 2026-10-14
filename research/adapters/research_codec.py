@@ -75,6 +75,9 @@ class Tool(TypedDict):
     functions: dict[str, list[Probe]]
     """Probes keyed by the function name in a case file."""
 
+    locale: NotRequired[str]
+    """The locale or collation it ran under, when not the container's own."""
+
     name: str
     """The display name."""
 
@@ -268,7 +271,7 @@ def run_adapter(*, tools: list[Tool]) -> None:
                     {
                         "call": probe["call"],
                         "function": function,
-                        "locale": locale_name,
+                        "locale": tool.get("locale", locale_name),
                         "name": tool["name"],
                         "outcomes": outcomes,
                         "tier": tool["tier"],

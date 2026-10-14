@@ -1,0 +1,19 @@
+# Makes `research/docker/firebase/` its own pnpm root, apart from the repo's
+# and `research/`'s, so the emulators' CLI enters only the Firebase image.
+#
+# - `minimumReleaseAge` and `saveExact` mirror the root `pnpm-workspace.yaml`;
+#   keep them in sync.
+
+# No install scripts run: `re2` would compile an optional native regex engine
+# that `firebase-tools` falls back from, and `protobufjs` only checks its own
+# version.
+allowBuilds:
+  protobufjs: false
+  re2: false
+
+# Supply-chain floor: refuse any version younger than 7 days (in minutes).
+minimumReleaseAge: 10080
+
+# Write exact versions on `pnpm add`, so the lockfile is the only thing that
+# moves a dependency.
+saveExact: true
