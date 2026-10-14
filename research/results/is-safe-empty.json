@@ -123,8 +123,254 @@
   ],
   "columns": [
     {
+      "call": "is.emptyObject(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "locale": "en-US",
+      "name": "@sindresorhus/is",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "8.1.0"
+    },
+    {
+      "call": "is.emptyStringOrWhitespace(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "locale": "en-US",
+      "name": "@sindresorhus/is",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "8.1.0"
+    },
+    {
       "call": "compat.isEmpty(value)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -247,7 +493,7 @@
     },
     {
       "call": "_.isEmpty(value)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -370,7 +616,253 @@
     },
     {
       "call": "isEmpty(value)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "locale": "en-US",
+      "name": "radash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "12.1.1"
+    },
+    {
+      "call": "R.isEmpty(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "locale": "en-US",
+      "name": "Ramda",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": false
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "0.32.0"
+    },
+    {
+      "call": "isEmpty(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
       "locale": "en-US",
       "name": "remeda",
       "outcomes": [
@@ -493,7 +985,7 @@
     },
     {
       "call": "isEmptyish(value)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
       "locale": "en-US",
       "name": "remeda",
       "outcomes": [
@@ -613,6 +1105,129 @@
       "service": "node",
       "tier": 1,
       "version": "2.51.0"
+    },
+    {
+      "call": "_.isEmpty(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "locale": "en-US",
+      "name": "Underscore",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.13.8"
     },
     {
       "call": "string.IsNullOrEmpty(value)",
@@ -3757,6 +4372,106 @@
       "service": "swift",
       "tier": 4,
       "version": "6.4"
+    },
+    {
+      "call": "validator.isEmpty(value, { ignore_whitespace: true })",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "locale": "en-US",
+      "name": "validator.js",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 4,
+      "version": "13.15.35"
     },
     {
       "call": "[ -z \"$1\" ]",

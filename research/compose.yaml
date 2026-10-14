@@ -328,6 +328,22 @@ services:
       - ./adapters:/work/research/adapters
     working_dir: /work/research
 
+  hermes:
+    build:
+      context: docker/hermes
+    entrypoint: ["node", "/work/research/adapters/hermes.mts"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    # The Hermes CLI release is x86_64-only.
+    platform: linux/amd64
+    profiles: ["hermes"]
+    volumes:
+      - ./adapters:/work/research/adapters:ro
+      - ./cases:/work/research/cases:ro
+      - ../scripts/research:/work/scripts/research:ro
+
   # Java, Commons Lang, Guava, Spring, Kotlin, and Groovy in one JVM, so it
   # starts once per run; the adapter is compiled into the image, not mounted.
   jvm:
@@ -653,6 +669,25 @@ services:
     profiles: ["shell"]
     volumes: *adapter-volumes
 
+  # Columns transcribed from `sources/` for tools that can't run here; it
+  # needs no npm libraries, so it runs on the plain Node image.
+  #
+  # - Keep this pin equal to `docker/node/Dockerfile`'s `FROM`: Dependabot
+  #   bumps the two in separate PRs (`research-images`, `research-dockerfiles`).
+  sources:
+    entrypoint: ["node", "/work/research/adapters/sources.mts"]
+    environment: *adapter-environment
+    image: node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["sources"]
+    volumes:
+      - ./adapters:/work/research/adapters:ro
+      - ./cases:/work/research/cases:ro
+      - ./sources:/work/research/sources:ro
+      - ../scripts/research:/work/scripts/research:ro
+
   sqlite:
     entrypoint: ["python", "/work/research/adapters/sqlite.py"]
     environment: *adapter-environment
@@ -703,3 +738,14 @@ services:
     volumes:
       - ./adapters:/work/research/adapters
     working_dir: /work/research
+
+  xml-schema:
+    build:
+      context: docker/xml-schema
+    entrypoint: ["python", "/work/research/adapters/xml_schema.py"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["xml"]
+    volumes: *adapter-volumes

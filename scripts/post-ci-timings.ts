@@ -1,10 +1,15 @@
 /**
- * Publish this CI run's per-step durations as a sticky PR comment.
+ * Publish the per-step durations of every timed workflow on this commit as one
+ * sticky PR comment.
  *
  * - The timings are GitHub's own: `GET /actions/runs/{id}/jobs` carries a
  *   `steps[]` array with `started_at`/`completed_at` for every step. Nothing
  *   here instruments the `pnpm` scripts, because wrapping them would duplicate
  *   a measurement Actions already takes and add noise to local runs.
+ *
+ * - Each workflow in `TIMED_WORKFLOWS` runs this script from its own `report`
+ *   job, and each run reads every timed workflow's latest run for the same
+ *   commit; whichever finishes last posts the complete table.
  *
  * - Needs no installed package, only Node's built-ins and a sibling script, so
  *   the `report` job runs it with Node's type stripping and skips
@@ -15,7 +20,8 @@
  *   bug in the script itself fails the step.
  *
  * - Run locally against any finished run to print the table instead of
- *   commenting: `node scripts/post-ci-timings.ts <run-id>`.
+ *   commenting: `node scripts/post-ci-timings.ts <run-id>`; the table covers
+ *   every timed workflow on that run's commit.
  */
 import { execFileSync } from "node:child_process";
 
@@ -29,6 +35,27 @@ type ActionsJob = {
   /** The job's steps; absent for a job that never started. */
   steps?: ActionsStep[];
 } & TimedSpan;
+
+/** The slice of an Actions workflow run the report reads. */
+type ActionsRun = {
+  /** When the run was created, as an ISO timestamp; the latest one wins. */
+  created_at: string;
+
+  /** The event that started it, e.g. `pull_request`. */
+  event: string;
+
+  /** The commit it ran on. */
+  head_sha: string;
+
+  /** The run's id. */
+  id: number;
+
+  /** The workflow's display name, e.g. `☁️ CI`. */
+  name: string;
+
+  /** The workflow file, e.g. `.github/workflows/ci.yml`. */
+  path: string;
+};
 
 /** The slice of an Actions step the report reads. */
 type ActionsStep = {
@@ -48,6 +75,12 @@ type TimedSpan = {
   started_at: null | string;
 };
 
+/** One timed workflow's latest run on the commit, with its jobs. */
+type TimedWorkflow = {
+  /** Every job in the run. */
+  jobs: ActionsJob[];
+} & Pick<ActionsRun, "id" | "name">;
+
 /** This report's stable opening heading, used to find its own comment. */
 const MARKER = "## ⏱️ CI timings";
 
@@ -60,6 +93,17 @@ const MARKER = "## ⏱️ CI timings";
  *   bothered to name, which are the ones worth watching.
  */
 const UNTIMED_STEP = /^(?:Set up job|Complete job|Run actions\/|Post Run )/u;
+
+/**
+ * The workflows the table covers, by file.
+ *
+ * - Each one runs this script from a `report` job that `needs:` all its other
+ *   jobs; a workflow without one (CodeQL) would show as permanently running.
+ */
+const TIMED_WORKFLOWS: ReadonlySet<string> = new Set([
+  ".github/workflows/ci.yml",
+  ".github/workflows/research-check.yml",
+]);
 
 /**
  * Human-readable duration, matching how the Actions UI renders one.
@@ -141,6 +185,69 @@ const fetchJobs = ({
 };
 
 /**
+ * Fetch the latest run of every timed workflow on the same commit and event as
+ * `runId`, with their jobs.
+ *
+ * - A re-run or a newer push to the same commit supersedes an older run of the
+ *   same workflow, so only each workflow's newest run counts.
+ *
+ * @returns the workflows, in `TIMED_WORKFLOWS` order.
+ */
+const fetchTimedWorkflows = ({
+  repo,
+  runId,
+}: {
+  /** The `owner/name` repository slug. */
+  repo: string;
+
+  /** The Actions run this script is reporting from. */
+  runId: string;
+}): TimedWorkflow[] => {
+  const current = JSON.parse(
+    execFileSync("gh", ["api", `repos/${repo}/actions/runs/${runId}`], {
+      encoding: "utf8",
+    })
+  ) as ActionsRun;
+
+  const runs = execFileSync(
+    "gh",
+    [
+      "api",
+      `repos/${repo}/actions/runs?head_sha=${current.head_sha}&event=${current.event}&per_page=100`,
+      "--paginate",
+      "--jq",
+      ".workflow_runs[] | {created_at, event, head_sha, id, name, path}",
+    ],
+    { encoding: "utf8", maxBuffer: 10 * 1024 * 1024 }
+  )
+    .split("\n")
+    .filter((line) => line.trim() !== "")
+    .map((line) => JSON.parse(line) as ActionsRun);
+
+  return [...TIMED_WORKFLOWS].flatMap((workflowPath) => {
+    const latest = runs
+      .filter((run) => run.path === workflowPath)
+      .reduce<ActionsRun | undefined>(
+        (newestRun, run) =>
+          newestRun === undefined || run.created_at > newestRun.created_at
+            ? run
+            : newestRun,
+        undefined
+      );
+
+    return latest === undefined
+      ? []
+      : [
+          {
+            id: latest.id,
+            jobs: fetchJobs({ repo, runId: String(latest.id) }),
+            name: latest.name,
+          },
+        ];
+  });
+};
+
+/**
  * The slowest finished job — the run's wall time, since jobs run concurrently.
  *
  * @returns the job and its duration, or `undefined` when none has finished.
@@ -160,25 +267,21 @@ const findCriticalPath = (
   );
 
 /**
- * Render the report body.
+ * Render one workflow's section: its step table, then its whole-job totals.
  *
- * @returns the full Markdown, opening with {@link MARKER}.
+ * @returns the section's Markdown lines.
  */
-const buildMarkdown = ({
-  jobs,
+const renderWorkflow = ({
   repo,
-  runId,
+  workflow,
 }: {
-  /** Every job in the run. */
-  jobs: readonly ActionsJob[];
-
   /** The `owner/name` repository slug. */
   repo: string;
 
-  /** The Actions run being reported. */
-  runId: string;
-}): string => {
-  const stepRows = jobs.flatMap((job) =>
+  /** The workflow run to render. */
+  workflow: TimedWorkflow;
+}): string[] => {
+  const stepRows = workflow.jobs.flatMap((job) =>
     (job.steps ?? [])
       .filter((step) => !UNTIMED_STEP.test(step.name))
       .map(
@@ -187,20 +290,14 @@ const buildMarkdown = ({
       )
   );
 
-  const jobRows = jobs.map((job) => {
+  const jobRows = workflow.jobs.map((job) => {
     const seconds = elapsedSeconds(job);
 
     return `| ${job.name} | ${job.conclusion ?? "running"} | ${seconds === null ? "—" : formatDuration(seconds)} |`;
   });
 
-  const criticalPath = findCriticalPath(jobs);
-
   return [
-    MARKER,
-    "",
-    criticalPath
-      ? `**Critical path: ${criticalPath.name} — ${formatDuration(criticalPath.seconds)}.** Jobs run concurrently, so the run is only as fast as its slowest job.`
-      : "No completed jobs to time yet.",
+    `### ${workflow.name} · [run ${workflow.id}](https://github.com/${repo}/actions/runs/${workflow.id})`,
     "",
     "| Job | Step | Duration |",
     "| :--- | :--- | ---: |",
@@ -214,7 +311,44 @@ const buildMarkdown = ({
     "",
     "</details>",
     "",
-    `<sub>Measured from the Actions API for [run ${runId}](https://github.com/${repo}/actions/runs/${runId}) · whole-second resolution · runner speed varies between runs, so read these as a trend, not a benchmark.</sub>`,
+  ];
+};
+
+/**
+ * Render the report body.
+ *
+ * @returns the full Markdown, opening with {@link MARKER}.
+ */
+const buildMarkdown = ({
+  repo,
+  workflows,
+}: {
+  /** The `owner/name` repository slug. */
+  repo: string;
+
+  /** Every timed workflow's latest run on the commit. */
+  workflows: readonly TimedWorkflow[];
+}): string => {
+  // Workflows run concurrently too, so the slowest job anywhere sets the pace.
+  const criticalPath = findCriticalPath(
+    workflows.flatMap((workflow) =>
+      workflow.jobs.map((job) => ({
+        ...job,
+        name:
+          workflows.length > 1 ? `${workflow.name} › ${job.name}` : job.name,
+      }))
+    )
+  );
+
+  return [
+    MARKER,
+    "",
+    criticalPath
+      ? `**Critical path: ${criticalPath.name} — ${formatDuration(criticalPath.seconds)}.** Jobs and workflows run concurrently, so CI is only as fast as its slowest job.`
+      : "No completed jobs to time yet.",
+    "",
+    ...workflows.flatMap((workflow) => renderWorkflow({ repo, workflow })),
+    "<sub>Measured from the Actions API · whole-second resolution · runner speed varies between runs, so read these as a trend, not a benchmark.</sub>",
   ].join("\n");
 };
 
@@ -233,9 +367,8 @@ const main = (): void => {
   }
 
   const markdown = buildMarkdown({
-    jobs: fetchJobs({ repo, runId }),
     repo,
-    runId,
+    workflows: fetchTimedWorkflows({ repo, runId }),
   });
 
   publishCiReport({ localConsole: markdown, markdown, marker: MARKER });

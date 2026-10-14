@@ -59,39 +59,53 @@ the generated tables instead of summarizing other tools' docs.
 
 Each adapter service sits in one profile, named for its image.
 
-| Profile      | Image                                                              | Tools                                                                                                   |
-| :----------- | :----------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |
-| `c`          | `gcc`, with the C++ probes compiled in                             | glibc (`ctypes`), libstdc++                                                                             |
-| `db`         | `docker/db/`, beside each database's own image; `docker/firebase/` | PostgreSQL, MySQL, MariaDB, SQL Server, MongoDB, the Firebase Realtime Database and Firestore emulators |
-| `dotnet`     | .NET SDK                                                           | C# / .NET                                                                                               |
-| `go`         | `golang`                                                           | Go                                                                                                      |
-| `jvm`        | `gradle` (JDK 25)                                                  | Java, Commons Lang, Guava, Spring, Kotlin, Groovy                                                       |
-| `node`       | `node`, plus `package.json`'s libraries                            | JS built-ins and libraries                                                                              |
-| `php`        | `php` (CLI)                                                        | PHP                                                                                                     |
-| `powershell` | .NET SDK, which ships PowerShell                                   | PowerShell                                                                                              |
-| `python`     | `python`                                                           | Python 3.15 and 3.11, SQLite                                                                            |
-| `ruby`       | `ruby`, plus `docker/ruby/Gemfile.lock`                            | Ruby, Rails' ActiveModel                                                                                |
-| `rust`       | `rust`, plus `adapters/rust/Cargo.lock`                            | Rust                                                                                                    |
-| `shell`      | `debian`, plus Debian's packages                                   | bash, dash (POSIX sh), fish, zsh, git, systemd                                                          |
-| `swift`      | `swift`, with the adapter compiled in                              | Swift on Linux (swift-corelibs-foundation, not Darwin's)                                                |
+| Profile      | Image                                                              | Tools                                                                                                                                                                                                                        |
+| :----------- | :----------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `c`          | `gcc`, with the C++ probes compiled in                             | glibc (`ctypes`), libstdc++                                                                                                                                                                                                  |
+| `db`         | `docker/db/`, beside each database's own image; `docker/firebase/` | PostgreSQL, MySQL, MariaDB, SQL Server, MongoDB, the Firebase Realtime Database and Firestore emulators                                                                                                                      |
+| `dotnet`     | .NET SDK                                                           | C# / .NET                                                                                                                                                                                                                    |
+| `go`         | `golang`                                                           | Go                                                                                                                                                                                                                           |
+| `hermes`     | `docker/hermes/`: `node`, plus the Hermes CLI release (amd64)      | Hermes, React Native's engine, running the JS built-ins' calls                                                                                                                                                               |
+| `jvm`        | `gradle` (JDK 25)                                                  | Java, Commons Lang, Guava, Spring, Kotlin, Groovy                                                                                                                                                                            |
+| `node`       | `node`, plus `package.json`'s libraries                            | JS built-ins; lodash, es-toolkit, remeda, Underscore, Ramda, radash, Effect, `@sindresorhus/is`, is-plain-obj; zod, valibot, joi, yup, envalid, yn, validator.js, Ajv; JSON, YAML, TOML, CSV, INI, and the HTML spec (jsdom) |
+| `php`        | `php` (CLI)                                                        | PHP                                                                                                                                                                                                                          |
+| `powershell` | .NET SDK, which ships PowerShell                                   | PowerShell                                                                                                                                                                                                                   |
+| `python`     | `python`                                                           | Python 3.15 and 3.11, SQLite                                                                                                                                                                                                 |
+| `ruby`       | `ruby`, plus `docker/ruby/Gemfile.lock`                            | Ruby, Rails' ActiveModel                                                                                                                                                                                                     |
+| `rust`       | `rust`, plus `adapters/rust/Cargo.lock`                            | Rust                                                                                                                                                                                                                         |
+| `shell`      | `debian`, plus Debian's packages                                   | bash, dash (POSIX sh), fish, zsh, git, systemd                                                                                                                                                                               |
+| `sources`    | `node` (no libraries)                                              | Docs-only columns from `sources/`; Excel and Google Sheets are cached, but settle no current case                                                                                                                            |
+| `swift`      | `swift`, with the adapter compiled in                              | Swift on Linux (swift-corelibs-foundation, not Darwin's)                                                                                                                                                                     |
+| `xml`        | `docker/xml-schema/`: `python`, plus hash-pinned `xmlschema`       | XML Schema 1.0's built-in types                                                                                                                                                                                              |
 
 - Microsoft no longer publishes PowerShell's own image, so PowerShell comes from
   the .NET SDK image.
 - The `shell` image installs from the Debian snapshot its base image was built
   from, so a rebuild gets the same package versions.
+- The Hermes CLI release is x86_64-only, so `hermes` runs as `linux/amd64`
+  (emulated on an arm64 host), and its Dockerfile downloads a checksummed
+  release tarball that Dependabot can't track: bump it by hand from
+  [the releases page](https://github.com/facebook/hermes/releases). Its image
+  column names the Node base; its version column is Hermes's own.
 
 ## 🗂️ Layout
 
 - `cases/<function>.json` — the inputs, in the portable format below.
   - `codec.json` isn't a function: every language adapter must return its values
     unchanged, which proves the codec twins agree.
-- `adapters/` — one adapter per language, beside its codec twin:
-  - `node.mts`;
+- `adapters/` — one adapter per language or runtime, beside its codec twin:
+  - `node.mts`, the Node entry, with one module per tool under `node/`
+    (`node/<tool>.mts`) and their shared types in `node/tool.mts`;
+  - `hermes.mts`, which runs the JS built-ins' calls in Hermes, embedding
+    `codec.ts`'s own encoder rather than keeping a twin;
+  - `sources.mts`, which prints the docs-only columns from `sources/`;
   - `python.py`, `sqlite.py`, `shell.py`, and `c.py` (with `cxx_probes.cpp`), on
     `research_codec.py`;
   - `postgres.py`, `mysql.py` (MySQL and MariaDB), `mssql.py`, `mongo.py`, and
     `firebase.py`, also on `research_codec.py`, with `database_probe.py`
     building the probes they share;
+  - `xml_schema.py` and its schema, `xml-schema.xsd`, also on
+    `research_codec.py`;
   - `ruby.rb` on `research_codec.rb`, `php.php` on `research_codec.php`,
     `swift.swift` on `research_codec.swift`, and `powershell.ps1` on
     `research_codec.psm1`.
@@ -111,12 +125,13 @@ Each adapter service sits in one profile, named for its image.
     table for functions with few distinct results, the full table, and every
     column's version, locale, and image.
 - `sources/` — cached excerpts for tools that can't run in a container, each
-  with its URL, version or commit, and fetch date.
+  with its URL, version or commit, and fetch date, plus a `.json` of the
+  outcomes an excerpt settles (see [sources/README.md](sources/README.md)).
 - `compose.yaml` — every service; `docker/` holds Dockerfiles for images that
   need a build step: one per compiled adapter (`c`, `dotnet`, `go`, `jvm`,
   `rust`, `swift`), which also carries that language's formatter and linter,
-  plus `node` and the JVM formatters' own; `docker/ruby/` also holds the Ruby
-  gems' `Gemfile.lock`.
+  plus `node`, `hermes`, `xml-schema`, and the JVM formatters' own;
+  `docker/ruby/` also holds the Ruby gems' `Gemfile.lock`.
 - `.swift-format` — swift-format's settings: 80 columns, 2-space indents.
   - `docker/db/` — Python plus the database drivers, hash-pinned in
     `requirements.txt`.
@@ -243,7 +258,10 @@ it.
 - **A function:** add `cases/<kebab-name>.json`, add probes for it to each
   adapter that has an opinion, and run `pnpm research --function <name>`.
 - **A tool in an existing language:** add its library to `package.json` (a
-  version at least 7 days old) or its probes to the Python adapter, then rerun.
+  version at least 7 days old) and a `node/<tool>.mts` module listed in
+  `node.mts`, or its probes to the Python adapter, then rerun.
+- **A docs-only tool:** cache its excerpt as `sources/<tool>.md`, and once it
+  settles a case, transcribe the outcomes into `sources/<tool>.json`.
 - **A new language:**
   1. Add a service to `compose.yaml` with a pinned `image: name:X.Y.Z@sha256:…`
      whose tag was last pushed at least 7 days ago, the `adapter` role label, a
@@ -268,6 +286,7 @@ it.
 | Language               | Formatter                                                                                                                                                                                                                                     |
 | :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TypeScript, JSON, YAML | Prettier, through the repo's root config                                                                                                                                                                                                      |
+| TOML, XML (`.xsd`)     | Prettier, through `prettier-plugin-toml` and `@prettier/plugin-xml` in the root config                                                                                                                                                        |
 | Python                 | [Ruff](https://docs.astral.sh/ruff/) (`ruff.toml`): `ruff format` in the `ruff` service, `ruff check` (annotations, docstrings, imports) in `ruff-check`                                                                                      |
 | Java                   | Prettier, through [`prettier-plugin-java`](https://github.com/jhipster/prettier-java) in the root config; [Checkstyle](https://checkstyle.org) (`adapters/jvm/checkstyle.xml`) in the `checkstyle` service, for `final` parameters and locals |
 | Kotlin                 | [ktfmt](https://github.com/facebook/ktfmt)'s Kotlin-lang style in the `ktfmt` service, at the 80 columns `adapters/jvm/.editorconfig` sets                                                                                                    |

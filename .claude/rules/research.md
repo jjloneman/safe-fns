@@ -29,6 +29,8 @@ paths:
 - **A formatter must exit non-zero on drift.** `gofmt -l` lists unformatted files but exits 0, so its service wraps it in `sh -c` and fails on any output; `cargo clippy --fix` likewise passes with a denied lint left, so a fixing run then checks.
 - **A database is started and removed by the runner**, not by `depends_on`: adapters run with `--no-deps`. Give it a `database` role label, a healthcheck that only passes once the real server is up (the Postgres and MySQL entrypoints run a socket-only setup server first, so probe over TCP), and an `internal` network shared only with its adapter.
 - **SQL Server can't run on `tmpfs`**, and Microsoft publishes it for amd64 only; it runs under emulation on Apple Silicon.
+- **Set a service's `platform` in Compose, never on `FROM`.** The runner reads a built image's name from the Dockerfile's first `FROM`, so `FROM --platform=…` would be recorded as the image.
+- **Report the version a binary prints, not the one its download claims.** The Hermes v0.13.0 CLI tarball reports 0.12.0.
 - **Watch for distro-patched tools.** Python 3.11's image injects setuptools' `distutils` unless `SETUPTOOLS_USE_DISTUTILS=stdlib`; Debian's SQLite is older than upstream. The version column must name what really ran.
   - A tool from a Debian package reports its package version (`5.2.37-2+b10`), which names any Debian patch.
 - **Install Debian packages from the base image's snapshot**, as `docker/debian/Dockerfile` does, so a rebuild can't pick up a newer package than the results were made with.
@@ -37,8 +39,10 @@ paths:
 
 ## 🔷 Code
 
-- `scripts/research/*.ts` follows the `scripts/` conventions; the Node adapter (`research/adapters/node.mts`) follows the TypeScript ones and is checked through `research/tsconfig.json`.
-- **The codecs are twins.** A change to `scripts/research/codec.ts` needs the same change in every adapter's codec under `research/adapters/`: `research_codec.py`, `research_codec.php`, `research_codec.psm1`, `research_codec.rb`, `research_codec.swift`, `dotnet/Codec.cs`, `go/codec.go`, `jvm/src/main/java/com/safefns/research/ResearchCodec.java`, and `rust/src/codec.rs`. A `codec.json` case proves it.
+- `scripts/research/*.ts` follows the `scripts/` conventions; the Node adapters (`research/adapters/*.mts` and `node/*.mts`) follow the TypeScript ones and are checked through `research/tsconfig.json`.
+- **One module per Node tool.** A library joins as `research/adapters/node/<tool>.mts`, exporting its `Tool`, and is listed in `node.mts`; don't grow the entry file.
+- **Hermes runs the TS encoder's own source.** `ENCODER_SOURCE` (in `codec.ts`) and `errorName` (in `node/tool.mts`) are embedded as text in the program Hermes runs, so keep them free of imports and module-level names, and of syntax Hermes lacks, such as classes.
+- **The codecs are twins.** A change to `scripts/research/codec.ts` needs the same change in every adapter's codec under `research/adapters/`: `research_codec.py`, `research_codec.php`, `research_codec.psm1`, `research_codec.rb`, `research_codec.swift`, `dotnet/Codec.cs`, `go/codec.go`, `jvm/src/main/java/com/safefns/research/ResearchCodec.java`, and `rust/src/codec.rs`. A `codec.json` case proves it. Hermes needs no twin: it runs `ENCODER_SOURCE`, the encoder's own source.
 - **A driven adapter hands the tool a string, never a script.** Pass the value as a positional parameter or environment variable, so no quoting can change what runs; NUL can't travel that way, so it's `n/a`.
 - **Check what a CLI probe really evaluated.** systemd strips leading whitespace and treats an empty assignment as a reset, so a blank value never reaches `parse_boolean`; such an input is `n/a`, not a guess.
 - **PowerShell unrolls arrays on the pipeline.** Return one with the unary comma (`return , $array`); `Write-Output -NoEnumerate` hands a captured caller a `List` instead.

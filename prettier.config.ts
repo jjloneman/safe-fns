@@ -40,9 +40,11 @@ const config: Config = {
   ],
   plugins: [
     "@prettier/plugin-php",
+    "@prettier/plugin-xml",
     "prettier-plugin-java",
     "prettier-plugin-packagejson",
     "prettier-plugin-sh",
+    "prettier-plugin-toml",
   ],
   trailingComma: "es5",
 };

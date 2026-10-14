@@ -90,6 +90,17 @@ describe("parseAdapterOutput", () => {
     expect(columns).toStrictEqual(json.columns);
   });
 
+  test("keeps a docs-only column's source", () => {
+    // Given - a column transcribed from a cached source
+    const json = { columns: [column({ source: "research/sources/x.md" })] };
+
+    // When - narrowing it
+    const columns = parseAdapterOutput(json);
+
+    // Then - the source survives
+    expect(columns[0]?.source).toBe("research/sources/x.md");
+  });
+
   test.each([
     { description: "no columns array", json: { columns: {} } },
     { description: "a non-object", json: null },
@@ -113,6 +124,10 @@ describe("parseAdapterOutput", () => {
     {
       description: "an error outcome without a class name",
       json: { columns: [{ ...column({}), outcomes: [{ kind: "error" }] }] },
+    },
+    {
+      description: "a non-string source",
+      json: { columns: [{ ...column({}), source: 1 }] },
     },
     {
       description: "a value outcome without JSON",
@@ -181,6 +196,29 @@ describe("buildResults", () => {
     expect(results[1]?.columns[0]).toMatchObject({
       image: "img@sha256:1",
       service: "node",
+    });
+  });
+
+  test("carries a docs-only column's source into the result", () => {
+    // Given - one case file and a column transcribed from a cached source
+    const caseFiles: CaseFile[] = [{ cases: [{ args: ["a"] }], function: "f" }];
+
+    // When - building the results
+    const [result] = buildResults({
+      caseFiles,
+      serviceColumns: [
+        {
+          columns: [column({ source: "research/sources/x.md" })],
+          image: "img@sha256:1",
+          service: "sources",
+        },
+      ],
+    });
+
+    // Then - the column keeps its source beside its image
+    expect(result?.columns[0]).toMatchObject({
+      image: "img@sha256:1",
+      source: "research/sources/x.md",
     });
   });
 

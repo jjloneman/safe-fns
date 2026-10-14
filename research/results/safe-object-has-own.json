@@ -99,10 +99,10 @@
   ],
   "columns": [
     {
-      "call": "key in object",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "call": "Predicate.hasProperty(object, key)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
       "locale": "en-US",
-      "name": "JS built-ins",
+      "name": "Effect",
       "outcomes": [
         {
           "kind": "value",
@@ -141,24 +141,24 @@
           "value": true
         },
         {
-          "error": "TypeError",
-          "kind": "error"
+          "kind": "value",
+          "value": false
         },
         {
-          "error": "TypeError",
-          "kind": "error"
+          "kind": "value",
+          "value": false
         },
         {
-          "error": "TypeError",
-          "kind": "error"
+          "kind": "value",
+          "value": false
         },
         {
-          "error": "TypeError",
-          "kind": "error"
+          "kind": "value",
+          "value": false
         },
         {
-          "error": "TypeError",
-          "kind": "error"
+          "kind": "value",
+          "value": false
         },
         {
           "error": "TypeError",
@@ -175,11 +175,240 @@
       ],
       "service": "node",
       "tier": 1,
-      "version": "v26.9.0"
+      "version": "4.0.1"
+    },
+    {
+      "call": "key in object",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
     },
     {
       "call": "Object.hasOwn(object, key)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "key in object",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.10.0"
+    },
+    {
+      "call": "Object.hasOwn(object, key)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -254,11 +483,11 @@
       ],
       "service": "node",
       "tier": 1,
-      "version": "v26.9.0"
+      "version": "v26.10.0"
     },
     {
       "call": "_.has(object, key)",
-      "image": "node:26.9.0-bookworm-slim@sha256:582460f614631b59b824ac6020533b9bf339c7fdf3a6d7db31abb6b4065f0212",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -334,6 +563,164 @@
       "service": "node",
       "tier": 1,
       "version": "4.18.1"
+    },
+    {
+      "call": "R.has(key, object)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "locale": "en-US",
+      "name": "Ramda",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "0.32.0"
+    },
+    {
+      "call": "_.has(object, key)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "locale": "en-US",
+      "name": "Underscore",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.13.8"
     },
     {
       "call": "dictionary.ContainsKey(key)",
