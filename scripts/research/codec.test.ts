@@ -1,8 +1,15 @@
+import { runInNewContext } from "node:vm";
 import { describe, expect, test } from "vitest";
 
 import type { EncodedValue } from "./codec.ts";
 
-import { decodeValue, encodeValue, isRecord, renderValue } from "./codec.ts";
+import {
+  decodeValue,
+  ENCODER_SOURCE,
+  encodeValue,
+  isRecord,
+  renderValue,
+} from "./codec.ts";
 
 /** A row of a decoding table: an encoding and the value it decodes to. */
 type DecodeRow = {
@@ -174,6 +181,32 @@ describe("encodeValue", () => {
 
     // Then - it is the expected portable encoding
     expect(encoded).toStrictEqual(expected);
+  });
+});
+
+describe("ENCODER_SOURCE", () => {
+  test("encodes like encodeValue when evaluated in another realm", () => {
+    // Given - a value that exercises every encoder branch
+    const source = `[1n, -0, NaN, undefined, null, { $tag: [new Map()] }]`;
+
+    // When - evaluating the embedded source in a fresh context, as JSON
+    const encoded: unknown = runInNewContext(
+      `${ENCODER_SOURCE}\nJSON.stringify(encodeValue(${source}));`
+    );
+
+    // Then - it prints the module's own encoding of the same value
+    expect(encoded).toBe(
+      JSON.stringify(
+        encodeValue([
+          1n,
+          -0,
+          Number.NaN,
+          undefined,
+          null,
+          { $tag: [new Map()] },
+        ])
+      )
+    );
   });
 });
 

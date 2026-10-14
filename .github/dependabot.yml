@@ -151,8 +151,13 @@ updates:
     labels:
       - "📦 dependencies"
 
+  # Each research Dockerfile's `FROM`; the Hermes CLI tarball it downloads
+  # can't be tracked, so that one is bumped by hand.
   - package-ecosystem: "docker"
-    directory: "/research/docker/node"
+    directories:
+      - "/research/docker/hermes"
+      - "/research/docker/node"
+      - "/research/docker/xml-schema"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -164,5 +169,26 @@ updates:
       prefix: "chore(deps-dev): ⬆️"
     cooldown:
       default-days: 7
+    labels:
+      - "📦 dependencies"
+
+  # The XML Schema image's hash-pinned Python libraries.
+  - package-ecosystem: "pip"
+    directory: "/research/docker/xml-schema"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    groups:
+      research-python:
+        patterns:
+          - "*"
     labels:
       - "📦 dependencies"

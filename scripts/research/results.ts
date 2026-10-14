@@ -200,6 +200,14 @@ type ColumnCore = {
   outcomes: Outcome[];
 
   /**
+   * The cached excerpt a docs-only column was transcribed from, relative to
+   * the repo root; absent from a column a tool produced by running.
+   *
+   * @example "research/sources/excel.md"
+   */
+  source?: string;
+
+  /**
    * The column's tier, which orders the tables; 0 is safe-fns itself.
    *
    * @example 1
@@ -547,11 +555,16 @@ function parseColumnCore({ column, index }: ColumnToParse): ColumnCore {
     throw new Error(`column ${index} has a bad tier or outcomes`);
   }
 
+  if (column.source !== undefined && typeof column.source !== "string") {
+    throw new Error(`column ${index} has a non-string source`);
+  }
+
   return {
     call: column.call,
     locale: column.locale,
     name: column.name,
     outcomes: column.outcomes.map((outcome: unknown) => parseOutcome(outcome)),
+    ...(column.source === undefined ? {} : { source: column.source }),
     tier: column.tier,
     version: column.version,
   };
@@ -626,6 +639,7 @@ function toResultColumn({
     name: column.name,
     outcomes: column.outcomes,
     service,
+    ...(column.source === undefined ? {} : { source: column.source }),
     tier: column.tier,
     version: column.version,
   };

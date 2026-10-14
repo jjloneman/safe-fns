@@ -76,6 +76,30 @@ type TaggedValue = {
   tag: string;
 };
 
+/**
+ * The source of `encodeValue` and every function it calls, for a runtime that
+ * can't import this module.
+ *
+ * - The Hermes adapter embeds it in the program Hermes runs, so Hermes encodes
+ *   outcomes with this exact code rather than a hand-kept copy.
+ *
+ * - Node strips this file's types to whitespace before compiling it, so each
+ *   function's source text is plain JavaScript; a loader that rewrites code
+ *   instead (a bundler, istanbul instrumentation) would break that, and the
+ *   `ENCODER_SOURCE` test evaluates the text in a fresh realm to catch it.
+ *
+ * - Every listed function may call only the others and globals.
+ */
+export const ENCODER_SOURCE: string = [
+  describe,
+  encodeNumber,
+  encodeObject,
+  encodeValue,
+  isPlainRecord,
+]
+  .map(String)
+  .join("\n\n");
+
 /** The digits a `$bigint` payload may hold, with an optional minus sign. */
 const BIGINT_PATTERN = /^-?\d+$/u;
 
