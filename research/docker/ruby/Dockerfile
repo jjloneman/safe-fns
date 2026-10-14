@@ -1,7 +1,7 @@
 # The Ruby adapter's image: the pinned official Ruby image plus the gems in
 # `Gemfile.lock` (Rails' ActiveModel, and syntax_tree for formatting),
 # installed at build time so a run needs no network.
-FROM ruby:3.4.11-slim-bookworm@sha256:22165c5f904d76a8a02fbdd419d0269481369523fd66978232d16c88099730e2
+FROM ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4
 
 WORKDIR /gems
 
