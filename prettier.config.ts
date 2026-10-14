@@ -39,6 +39,7 @@ const config: Config = {
     },
   ],
   plugins: [
+    "@prettier/plugin-php",
     "prettier-plugin-java",
     "prettier-plugin-packagejson",
     "prettier-plugin-sh",
