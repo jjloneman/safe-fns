@@ -126,7 +126,7 @@ updates:
       - "📦 dependencies"
 
   # The research harness's pinned images: `image:` lines in
-  # `research/compose.yaml` here, and the Node Dockerfile's `FROM` below.
+  # `research/compose.yaml` here, and each Dockerfile's `FROM` below.
   - package-ecosystem: "docker-compose"
     directory: "/research"
     schedule:
@@ -152,7 +152,11 @@ updates:
       - "📦 dependencies"
 
   - package-ecosystem: "docker"
-    directory: "/research/docker/node"
+    directories:
+      - "/research/docker/debian"
+      - "/research/docker/node"
+      - "/research/docker/powershell"
+      - "/research/docker/ruby"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -164,5 +168,32 @@ updates:
       prefix: "chore(deps-dev): ⬆️"
     cooldown:
       default-days: 7
+
+    # One PR per week for every Dockerfile's base image.
+    groups:
+      research-dockerfiles:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"
+
+  # The Ruby adapter's gems, locked in `research/docker/ruby/Gemfile.lock`.
+  - package-ecosystem: "bundler"
+    directory: "/research/docker/ruby"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+    cooldown:
+      default-days: 7
+    groups:
+      research-gems:
+        patterns:
+          - "*"
     labels:
       - "📦 dependencies"
