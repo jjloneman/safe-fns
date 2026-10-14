@@ -51,7 +51,7 @@ services:
   python:
     entrypoint: ["python", "/work/research/adapters/python.py"]
     environment: *adapter-environment
-    image: python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56
+    image: python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none
@@ -65,7 +65,7 @@ services:
     environment:
       <<: *adapter-environment
       SETUPTOOLS_USE_DISTUTILS: stdlib
-    image: python:3.11.16-slim-bookworm@sha256:a36c24f9cbdf4fd0f52d67f0823eeac19c2028c637cecc392d97f980d4fec56b
+    image: python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none
@@ -73,7 +73,7 @@ services:
     volumes: *python-volumes
 
   ruff:
-    image: ghcr.io/astral-sh/ruff:0.16.10@sha256:e1675e92fe4d38ce10ab6cabaf4ab20f209b84433b789cfd1b683c028aa391e2
+    image: ghcr.io/astral-sh/ruff:0.17.0@sha256:0f9316141d252f8c4de3fb672e8433c1afbf9adb24b877ae887cffa4012d850c
     labels:
       dev.safe-fns.research.check-args: format --check adapters
       dev.safe-fns.research.format-args: format adapters
@@ -88,7 +88,7 @@ services:
   # Ruff's linter, beside its formatter: annotations, docstrings, and the
   # rest of `ruff.toml`'s rules.
   ruff-check:
-    image: ghcr.io/astral-sh/ruff:0.16.10@sha256:e1675e92fe4d38ce10ab6cabaf4ab20f209b84433b789cfd1b683c028aa391e2
+    image: ghcr.io/astral-sh/ruff:0.17.0@sha256:0f9316141d252f8c4de3fb672e8433c1afbf9adb24b877ae887cffa4012d850c
     labels:
       dev.safe-fns.research.check-args: check adapters
       dev.safe-fns.research.format-args: check --fix adapters
@@ -103,7 +103,7 @@ services:
   sqlite:
     entrypoint: ["python", "/work/research/adapters/sqlite.py"]
     environment: *adapter-environment
-    image: python:3.14.7-slim-bookworm@sha256:82bc3c539b8813ada9d68c63b40158fa002f7f33de9bf3312a3dfdc0620dff56
+    image: python:3.15.0rc3-slim-bookworm@sha256:ea93de1a70a03fffd10ad8cfde8f4ba969fe2658f0578af02855d1d32f49e6c2
     labels:
       dev.safe-fns.research.role: adapter
     network_mode: none
