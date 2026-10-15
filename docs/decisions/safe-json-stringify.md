@@ -1,7 +1,7 @@
 ---
 type: Decision
 title: How safeJsonStringify handles what JSON.stringify throws on
-description: Circular references and BigInts are repaired by default, as "[Circular]" and decimal strings; options change either repair or turn it into the fallback, and anything else JSON.stringify can't serialize returns the fallback.
+description: Circular references and BigInts are repaired by default, as "[Circular]" and decimal strings; options change either repair or turn it into the fallback, anything else JSON.stringify can't serialize returns the fallback, and replacer and space are options rather than positional parameters.
 status: draft
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:54:16Z }
 ---

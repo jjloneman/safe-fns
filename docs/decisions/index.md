@@ -23,7 +23,7 @@ okf_version: "0.2"
 - [What safeParseString accepts and returns](safe-parse-string.md) - Strings, finite numbers, bigints, and booleans become trimmed, non-blank text; everything else returns the fallback.
 - [What safeParseUrl accepts](safe-parse-url.md) - A string or `URL`, trimmed of blank characters and parsed by the native URL parser against an optional `base`, returning a new `URL` or the fallback; an opt-in `protocols` list rejects any other scheme.
 - [What safeStructuredClone returns when cloning fails](safe-structured-clone.md) - The native clone, with a `functions` option to keep or omit functions and symbols; otherwise the fallback when `structuredClone` throws or is missing.
-- [What the package leaves to native APIs and other libraries](native-first-scope.md) - Excludes what native JavaScript already does and wrappers around native one-liners; parks newer native APIs, date and currency-amount parsing, and duration and byte formatting as future candidates; leaves validation to dedicated libraries.
+- [What the package leaves to native APIs and other libraries](native-first-scope.md) - Excludes what native JavaScript already does and wrappers around native one-liners; parks newer native APIs, date and currency-amount parsing, and duration and byte formatting as future candidates; leaves validation, IndexedDB, and exact decimals to dedicated libraries.
 - [When a name starts with `safe`](safe-prefix-naming.md) - `safeParse` + what it reads for every parser, `safe` + the native API's path for any other wrapper of one native API, `isSafe*` against a same-named unsafe helper, and plain names otherwise.
 
 # About this bundle

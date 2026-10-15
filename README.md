@@ -204,14 +204,22 @@ safe-fns replaces helpers that were copy-pasted between projects and had drifted
 | Copy-pasted pattern                                         | safe-fns                                     |
 | :---------------------------------------------------------- | :------------------------------------------- |
 | `error instanceof Error ? error.message : String(error)`    | `getErrorMessage(error)`                     |
+| `error instanceof Error ? error : new Error(String(error))` | `toError(error)`                             |
 | `value.trim() !== ""` on a string                           | `isSafePopulated(value)`                     |
 | Hand-rolled number parsing that returns `null` on bad input | `safeParseNumber(value, { fallback: null })` |
+| `try { return JSON.parse(text); } catch { return null; }`   | `safeParseJson(text, { fallback: null })`    |
+| `JSON.stringify(value, null, 2)`                            | `safeJsonStringify(value, { space: 2 })`     |
 | A local `sortKeysRecursively`                               | `deepSortObject(value)`                      |
+| `localStorage.getItem(key)` inside a `try`                  | `safeLocalStorageGetItem(key)`               |
 
 - Check each old helper's edge cases against the new function's docs before you swap.
   - Copies that drifted may disagree on details such as case-sensitive key sorting.
   - `isSafePopulated` treats a string of invisible characters, such as a zero-width space, as blank, where `value.trim() !== ""` doesn't.
   - `safeParseBoolean` accepts `yes`, `on`, `t`, `y`, and `1` as `true` (and their opposites as `false`), where `value === "true"` accepts only `"true"`.
+  - `getErrorMessage` returns the message alone, where `String(error)` prefixes the error's name (`"TypeError: boom"`).
+  - `safeJsonStringify` takes `replacer` and `space` in its options object, not as positional arguments, and writes a cycle as `"[Circular]"` and a BigInt as a string where `JSON.stringify` throws.
+  - `deepSortObject` sorts keys only; arrays keep their order unless `sortArrays` picks them.
+  - `safeLocalStorageGetItem` still returns `null` for a missing key; only storage that can't be reached returns the fallback.
 
 ---
 
