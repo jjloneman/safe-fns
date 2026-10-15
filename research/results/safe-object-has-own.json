@@ -871,7 +871,7 @@
     {
       "call": "key in obj",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -946,7 +946,7 @@
     {
       "call": "map.containsKey(key)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -1015,7 +1015,7 @@
     {
       "call": "key in map",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [

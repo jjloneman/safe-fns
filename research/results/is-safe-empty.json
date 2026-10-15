@@ -1445,7 +1445,7 @@
     {
       "call": "ObjectUtils.isEmpty(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Commons Lang",
       "outcomes": [
@@ -1557,7 +1557,7 @@
     {
       "call": "StringUtils.isBlank(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Commons Lang",
       "outcomes": [
@@ -1879,7 +1879,7 @@
     {
       "call": "!value",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -1991,7 +1991,7 @@
     {
       "call": "Strings.isNullOrEmpty(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Guava",
       "outcomes": [
@@ -2093,7 +2093,7 @@
     {
       "call": "collection.isEmpty()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -2192,7 +2192,7 @@
     {
       "call": "map.isEmpty()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -2292,7 +2292,7 @@
     {
       "call": "string.isBlank()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -2393,7 +2393,7 @@
     {
       "call": "string.isEmpty()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -2494,7 +2494,7 @@
     {
       "call": "collection.isNullOrEmpty()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [
@@ -2594,7 +2594,7 @@
     {
       "call": "map.isNullOrEmpty()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [
@@ -2695,7 +2695,7 @@
     {
       "call": "string.isNullOrBlank()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [
@@ -2797,7 +2797,7 @@
     {
       "call": "string.isNullOrEmpty()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [
@@ -3119,7 +3119,7 @@
     {
       "call": "!StringUtils.hasText(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Spring",
       "outcomes": [
@@ -3221,7 +3221,7 @@
     {
       "call": "ObjectUtils.isEmpty(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Spring",
       "outcomes": [
