@@ -5,7 +5,7 @@ okf_version: "0.2"
 # Decisions
 
 - [How a function takes its parameters](function-parameters.md) - Up to two positional parameters for the values a function works on, configuration in a trailing options object, and nothing variadic.
-- [How deepSortObject orders keys and arrays](deep-sort-object.md) - UTF-16 code-unit key order by default with an optional `compareKeys`; arrays keep their order unless `sortArrays` picks them; cycles are kept, and a failure returns the input unchanged.
+- [How deepSortObject orders keys and arrays](deep-sort-object.md) - UTF-16 code-unit key order by default, with `ignoreCase` or a `compareKeys`; arrays keep their order unless `sortArrays` picks them by typed key path, each with its own comparator; cycles are kept, and a failure returns the input unchanged.
 - [How exports share code](internal-dependencies.md) - Shared logic lives in non-public modules under `src/internal/`; imports stay shallow, and each entry's size budget catches bloat.
 - [How fast an export must be](performance.md) - The common case runs cheap checks first and allocates nothing; each export is benchmarked against the fastest competitor, and robustness beats speed.
 - [How getErrorMessage and toError read a thrown value](error-helpers.md) - A message comes from an Error, a thrown string, or an object's own `message`; `getErrorMessage` always returns a string, and `toError` leaves an existing Error untouched.
