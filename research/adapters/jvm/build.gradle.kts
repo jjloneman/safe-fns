@@ -1,7 +1,7 @@
 /*
- * The JVM adapter: Java's standard library, Commons Lang, Guava, Spring,
- * Kotlin, Groovy, and Xerces-J, compiled into one image so the JVM starts once
- * per run.
+ * The JVM adapter: Java's standard library, Commons Lang, Gson, Guava, Jackson,
+ * Spring, Kotlin, Groovy, and Xerces-J, compiled into one image so the JVM
+ * starts once per run.
  *
  * - Every version is exact and at least 7 days old; Dependabot's cooldown
  *   keeps the bumps there, since Maven has no `minimumReleaseAge`.
@@ -15,6 +15,7 @@ plugins {
 repositories { mavenCentral() }
 
 dependencies {
+    implementation("com.google.code.gson:gson:2.14.0")
     implementation("com.google.guava:guava:33.7.2-jre")
     implementation("org.apache.commons:commons-lang3:3.21.0")
     implementation("org.apache.groovy:groovy:6.0.0")

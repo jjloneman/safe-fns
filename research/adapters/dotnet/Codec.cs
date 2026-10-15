@@ -169,7 +169,7 @@ internal static partial class Codec
     /// An integer past `long` becomes a `BigInteger`, which re-encodes as
     /// `$bigint`, as a Python int that large does.
     /// </remarks>
-    private static object? DecodeScalar(JsonElement element)
+    internal static object? DecodeScalar(JsonElement element)
     {
         if (element.ValueKind != JsonValueKind.Number)
         {

@@ -1,0 +1,2947 @@
+{
+  "cases": [
+    [
+      "https://example.com"
+    ],
+    [
+      "HTTPS://EXAMPLE.COM/A"
+    ],
+    [
+      "  https://example.com/  "
+    ],
+    [
+      " https://example.com/"
+    ],
+    [
+      "https://example.com/a b"
+    ],
+    [
+      "https://exa mple.com/"
+    ],
+    [
+      "https://example.com/?q=a b#f g"
+    ],
+    [
+      "https://example.com/%7Euser"
+    ],
+    [
+      "https://example.com/ü"
+    ],
+    [
+      "https://münchen.example/"
+    ],
+    [
+      "https://user:pass@example.com/"
+    ],
+    [
+      "http://example.com:80/"
+    ],
+    [
+      "http://example.com:99999/"
+    ],
+    [
+      "http://[::1]:8080/"
+    ],
+    [
+      "http://[::1/"
+    ],
+    [
+      "http://1.2.3/"
+    ],
+    [
+      "https:\\\\example.com\\a"
+    ],
+    [
+      "https:example.com"
+    ],
+    [
+      "example.com"
+    ],
+    [
+      "/path"
+    ],
+    [
+      "mailto:a@example.com"
+    ],
+    [
+      "file:///C:/x"
+    ],
+    [
+      "javascript:alert(1)"
+    ],
+    [
+      "data:text/plain,hi"
+    ],
+    [
+      ""
+    ],
+    [
+      "/path",
+      "https://example.com/a/b"
+    ],
+    [
+      "c",
+      "https://example.com/a/b"
+    ],
+    [
+      "?q=1",
+      "https://example.com/a/b"
+    ],
+    [
+      "//other.example/x",
+      "https://example.com/"
+    ],
+    [
+      "../../../x",
+      "https://example.com/a/b"
+    ],
+    [
+      "https://other.example/",
+      "https://example.com/"
+    ],
+    [
+      "/path",
+      "not a url"
+    ],
+    [
+      "https://other.example/",
+      "not a url"
+    ],
+    [
+      42
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      {
+        "$js": "a URL"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a throwing toString"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "safeParseUrl",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/A"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a%20b"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?q=a%20b#f%20g"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%7Euser"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%C3%BC"
+        },
+        {
+          "kind": "value",
+          "value": "https://xn--mnchen-3ya.example/"
+        },
+        {
+          "kind": "value",
+          "value": "https://user:pass@example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "http://[::1]:8080/"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "http://1.2.0.3/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "mailto:a@example.com"
+        },
+        {
+          "kind": "value",
+          "value": "file:///C:/x"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/c"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/b?q=1"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "new URL(value, base).href",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:761948ce0352376a9dea504e5c2b6cef0ecbcabc60bb85bd2fa3778a1f5b209e",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "new URL(value, base).href",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/A"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a%20b"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?q=a%20b#f%20g"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%7Euser"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%C3%BC"
+        },
+        {
+          "kind": "value",
+          "value": "https://xn--mnchen-3ya.example/"
+        },
+        {
+          "kind": "value",
+          "value": "https://user:pass@example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com/"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "http://[::1]:8080/"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "http://1.2.0.3/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "mailto:a@example.com"
+        },
+        {
+          "kind": "value",
+          "value": "file:///C:/x"
+        },
+        {
+          "kind": "value",
+          "value": "javascript:alert(1)"
+        },
+        {
+          "kind": "value",
+          "value": "data:text/plain,hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/c"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/b?q=1"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.10.0"
+    },
+    {
+      "call": "URL.parse(value, base)?.href",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/A"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a%20b"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?q=a%20b#f%20g"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%7Euser"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%C3%BC"
+        },
+        {
+          "kind": "value",
+          "value": "https://xn--mnchen-3ya.example/"
+        },
+        {
+          "kind": "value",
+          "value": "https://user:pass@example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "http://[::1]:8080/"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "http://1.2.0.3/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "mailto:a@example.com"
+        },
+        {
+          "kind": "value",
+          "value": "file:///C:/x"
+        },
+        {
+          "kind": "value",
+          "value": "javascript:alert(1)"
+        },
+        {
+          "kind": "value",
+          "value": "data:text/plain,hi"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/c"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/b?q=1"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.10.0"
+    },
+    {
+      "call": "Uri.TryCreate(new Uri(base), value, out var uri) ? uri.AbsoluteUri : null",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/c"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/b?q=1"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "error": "UriFormatException",
+          "kind": "error"
+        },
+        {
+          "error": "UriFormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "Uri.TryCreate(value, UriKind.Absolute, out var uri) ? uri.AbsoluteUri : null",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/A"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a%20b"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?q=a%20b#f%20g"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/~user"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%C3%BC"
+        },
+        {
+          "kind": "value",
+          "value": "https://münchen.example/"
+        },
+        {
+          "kind": "value",
+          "value": "https://user:pass@example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "http://[::1]:8080/"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "http://1.2.0.3/"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "file:///path"
+        },
+        {
+          "kind": "value",
+          "value": "mailto:a@example.com"
+        },
+        {
+          "kind": "value",
+          "value": "file:///C:/x"
+        },
+        {
+          "kind": "value",
+          "value": "javascript:alert(1)"
+        },
+        {
+          "kind": "value",
+          "value": "data:text/plain,hi"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "url.Parse(base) then base.Parse(value)",
+      "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "inputs": "sha256:9d7311e1f994672a872ffacbbe9c894234379a07e4cc64f9c466d89f4d471805",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/c"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/b?q=1"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "kind": "value",
+          "value": "/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.1"
+    },
+    {
+      "call": "url.Parse(value)",
+      "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "inputs": "sha256:9d7311e1f994672a872ffacbbe9c894234379a07e4cc64f9c466d89f4d471805",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "https://example.com"
+        },
+        {
+          "kind": "value",
+          "value": "https://EXAMPLE.COM/A"
+        },
+        {
+          "error": "*url.Error",
+          "kind": "error"
+        },
+        {
+          "error": "*url.Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a%20b"
+        },
+        {
+          "error": "*url.Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?q=a b#f%20g"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%7Euser"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%C3%BC"
+        },
+        {
+          "kind": "value",
+          "value": "https://m%C3%BCnchen.example/"
+        },
+        {
+          "kind": "value",
+          "value": "https://user:pass@example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com:80/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com:99999/"
+        },
+        {
+          "kind": "value",
+          "value": "http://[::1]:8080/"
+        },
+        {
+          "error": "*url.Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "http://1.2.3/"
+        },
+        {
+          "kind": "value",
+          "value": "https:\\\\example.com\\a"
+        },
+        {
+          "kind": "value",
+          "value": "https:example.com"
+        },
+        {
+          "kind": "value",
+          "value": "example.com"
+        },
+        {
+          "kind": "value",
+          "value": "/path"
+        },
+        {
+          "kind": "value",
+          "value": "mailto:a@example.com"
+        },
+        {
+          "kind": "value",
+          "value": "file:///C:/x"
+        },
+        {
+          "kind": "value",
+          "value": "javascript:alert(1)"
+        },
+        {
+          "kind": "value",
+          "value": "data:text/plain,hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.1"
+    },
+    {
+      "call": "new URI(base).resolve(value).toString()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/c"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/?q=1"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/../../x"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "error": "URISyntaxException",
+          "kind": "error"
+        },
+        {
+          "error": "URISyntaxException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "new URI(value).toString()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "https://example.com"
+        },
+        {
+          "kind": "value",
+          "value": "HTTPS://EXAMPLE.COM/A"
+        },
+        {
+          "error": "URISyntaxException",
+          "kind": "error"
+        },
+        {
+          "error": "URISyntaxException",
+          "kind": "error"
+        },
+        {
+          "error": "URISyntaxException",
+          "kind": "error"
+        },
+        {
+          "error": "URISyntaxException",
+          "kind": "error"
+        },
+        {
+          "error": "URISyntaxException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%7Euser"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/ü"
+        },
+        {
+          "kind": "value",
+          "value": "https://münchen.example/"
+        },
+        {
+          "kind": "value",
+          "value": "https://user:pass@example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com:80/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com:99999/"
+        },
+        {
+          "kind": "value",
+          "value": "http://[::1]:8080/"
+        },
+        {
+          "error": "URISyntaxException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "http://1.2.3/"
+        },
+        {
+          "error": "URISyntaxException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https:example.com"
+        },
+        {
+          "kind": "value",
+          "value": "example.com"
+        },
+        {
+          "kind": "value",
+          "value": "/path"
+        },
+        {
+          "kind": "value",
+          "value": "mailto:a@example.com"
+        },
+        {
+          "kind": "value",
+          "value": "file:///C:/x"
+        },
+        {
+          "kind": "value",
+          "value": "javascript:alert(1)"
+        },
+        {
+          "kind": "value",
+          "value": "data:text/plain,hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "urljoin(base, value)",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/c"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/b?q=1"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "kind": "value",
+          "value": "/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "urlsplit(value).geturl()",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "https://example.com"
+        },
+        {
+          "kind": "value",
+          "value": "https://EXAMPLE.COM/A"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/  "
+        },
+        {
+          "kind": "value",
+          "value": " https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a b"
+        },
+        {
+          "kind": "value",
+          "value": "https://exa mple.com/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?q=a b#f g"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%7Euser"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/ü"
+        },
+        {
+          "kind": "value",
+          "value": "https://münchen.example/"
+        },
+        {
+          "kind": "value",
+          "value": "https://user:pass@example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com:80/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com:99999/"
+        },
+        {
+          "kind": "value",
+          "value": "http://[::1]:8080/"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "http://1.2.3/"
+        },
+        {
+          "kind": "value",
+          "value": "https:\\\\example.com\\a"
+        },
+        {
+          "kind": "value",
+          "value": "https:example.com"
+        },
+        {
+          "kind": "value",
+          "value": "example.com"
+        },
+        {
+          "kind": "value",
+          "value": "/path"
+        },
+        {
+          "kind": "value",
+          "value": "mailto:a@example.com"
+        },
+        {
+          "kind": "value",
+          "value": "file:///C:/x"
+        },
+        {
+          "kind": "value",
+          "value": "javascript:alert(1)"
+        },
+        {
+          "kind": "value",
+          "value": "data:text/plain,hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "Url::parse(base)?.join(value)",
+      "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
+      "inputs": "sha256:ddb1e2ed335640c1d7d7b888941e9ed51ccc574b2fed1c4635f0a3078575f67b",
+      "locale": "C.UTF-8",
+      "name": "Rust",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/c"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/b?q=1"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "error": "ParseError::RelativeUrlWithoutBase",
+          "kind": "error"
+        },
+        {
+          "error": "ParseError::RelativeUrlWithoutBase",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "rust",
+      "tier": 2,
+      "version": "1.99.0"
+    },
+    {
+      "call": "Url::parse(value)",
+      "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
+      "inputs": "sha256:ddb1e2ed335640c1d7d7b888941e9ed51ccc574b2fed1c4635f0a3078575f67b",
+      "locale": "C.UTF-8",
+      "name": "Rust",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/A"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "error": "ParseError::RelativeUrlWithoutBase",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a%20b"
+        },
+        {
+          "error": "ParseError::IdnaError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?q=a%20b#f%20g"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%7Euser"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%C3%BC"
+        },
+        {
+          "kind": "value",
+          "value": "https://xn--mnchen-3ya.example/"
+        },
+        {
+          "kind": "value",
+          "value": "https://user:pass@example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com/"
+        },
+        {
+          "error": "ParseError::InvalidPort",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "http://[::1]:8080/"
+        },
+        {
+          "error": "ParseError::InvalidIpv6Address",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "http://1.2.0.3/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "error": "ParseError::RelativeUrlWithoutBase",
+          "kind": "error"
+        },
+        {
+          "error": "ParseError::RelativeUrlWithoutBase",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "mailto:a@example.com"
+        },
+        {
+          "kind": "value",
+          "value": "file:///C:/x"
+        },
+        {
+          "kind": "value",
+          "value": "javascript:alert(1)"
+        },
+        {
+          "kind": "value",
+          "value": "data:text/plain,hi"
+        },
+        {
+          "error": "ParseError::RelativeUrlWithoutBase",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "rust",
+      "tier": 2,
+      "version": "1.99.0"
+    },
+    {
+      "call": "new URL(value, base).href",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "HTML (jsdom)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/A"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a%20b"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?q=a%20b#f%20g"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%7Euser"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%C3%BC"
+        },
+        {
+          "kind": "value",
+          "value": "https://xn--mnchen-3ya.example/"
+        },
+        {
+          "kind": "value",
+          "value": "https://user:pass@example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com/"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "http://[::1]:8080/"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "http://1.2.0.3/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "mailto:a@example.com"
+        },
+        {
+          "kind": "value",
+          "value": "file:///C:/x"
+        },
+        {
+          "kind": "value",
+          "value": "javascript:alert(1)"
+        },
+        {
+          "kind": "value",
+          "value": "data:text/plain,hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/c"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/b?q=1"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 3,
+      "version": "jsdom 30.1.2"
+    },
+    {
+      "call": "parse_url($value)",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locale": "C.UTF-8",
+      "name": "PHP",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "host": "example.com",
+            "scheme": "https"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "EXAMPLE.COM",
+            "path": "/A",
+            "scheme": "HTTPS"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": "  https://example.com/  "
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": " https://example.com/"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "example.com",
+            "path": "/a b",
+            "scheme": "https"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "exa mple.com",
+            "path": "/",
+            "scheme": "https"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fragment": "f g",
+            "host": "example.com",
+            "path": "/",
+            "query": "q=a b",
+            "scheme": "https"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "example.com",
+            "path": "/%7Euser",
+            "scheme": "https"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "example.com",
+            "path": "/ü",
+            "scheme": "https"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "münchen.example",
+            "path": "/",
+            "scheme": "https"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "example.com",
+            "pass": "pass",
+            "path": "/",
+            "scheme": "https",
+            "user": "user"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "example.com",
+            "path": "/",
+            "port": 80,
+            "scheme": "http"
+          }
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "[::1]",
+            "path": "/",
+            "port": 8080,
+            "scheme": "http"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "[:",
+            "path": "/",
+            "port": 1,
+            "scheme": "http"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "1.2.3",
+            "path": "/",
+            "scheme": "http"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": "\\\\example.com\\a",
+            "scheme": "https"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": "example.com",
+            "scheme": "https"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": "example.com"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": "/path"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": "a@example.com",
+            "scheme": "mailto"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": "C:/x",
+            "scheme": "file"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": "alert(1)",
+            "scheme": "javascript"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": "text/plain,hi",
+            "scheme": "data"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": ""
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    },
+    {
+      "call": "URI.join(base, value).to_s",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Ruby",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/path"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/c"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/a/b?q=1"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/x"
+        },
+        {
+          "kind": "value",
+          "value": "https://other.example/"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "4.0.7"
+    },
+    {
+      "call": "URI.parse(value).to_s",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Ruby",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "https://example.com"
+        },
+        {
+          "kind": "value",
+          "value": "https://EXAMPLE.COM/A"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/%7Euser"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://user:pass@example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "http://example.com:99999/"
+        },
+        {
+          "kind": "value",
+          "value": "http://[::1]:8080/"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "http://1.2.3/"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https:example.com"
+        },
+        {
+          "kind": "value",
+          "value": "example.com"
+        },
+        {
+          "kind": "value",
+          "value": "/path"
+        },
+        {
+          "kind": "value",
+          "value": "mailto:a@example.com"
+        },
+        {
+          "kind": "value",
+          "value": "file:///C:/x"
+        },
+        {
+          "kind": "value",
+          "value": "javascript:alert(1)"
+        },
+        {
+          "kind": "value",
+          "value": "data:text/plain,hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "4.0.7"
+    }
+  ],
+  "function": "safeParseUrl"
+}

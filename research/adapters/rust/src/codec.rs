@@ -132,7 +132,7 @@ fn decode_entries(entries: &Map<String, Json>) -> Result<Value, String> {
 ///
 /// An integer past `i64` keeps its digits as a `BigInt`, which re-encodes as
 /// `$bigint`, as a Python int that large does.
-fn decode_number(number: &Number) -> Value {
+pub fn decode_number(number: &Number) -> Value {
     let digits = number.to_string();
 
     if digits.contains(['.', 'e', 'E']) {

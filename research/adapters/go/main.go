@@ -13,8 +13,10 @@ Usage: `/opt/go-adapter <case-file>...`, the `go` Compose service.
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
+	"net/url"
 	"os"
 	"reflect"
 	"runtime"
@@ -43,6 +45,17 @@ var SENTINEL_ERRORS = []sentinelError{
 	{err: strconv.ErrSyntax, name: "strconv.ErrSyntax"},
 }
 
+// areTwoStrings accepts exactly two string arguments: a value and a base.
+func areTwoStrings(args []any) bool {
+	if len(args) != 2 {
+		return false
+	}
+
+	_, isBaseText := args[1].(string)
+
+	return isString(args) && isBaseText
+}
+
 /*
 errorName names a failure the way the tables show a thrown class.
 
@@ -64,6 +77,11 @@ func hasLength(args []any) bool {
 	_, isMeasurable := lengthOf(args[0])
 
 	return isMeasurable
+}
+
+// isLoneString accepts exactly one argument, a string.
+func isLoneString(args []any) bool {
+	return len(args) == 1 && isString(args)
 }
 
 // isMapAndString accepts a map first argument and a string second argument.
@@ -96,12 +114,38 @@ func lengthOf(value any) (int, bool) {
 	return 0, false
 }
 
+// marshalText runs `json.Marshal` and returns its output as a string.
+func marshalText(value any) (any, error) {
+	text, err := json.Marshal(value)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return string(text), nil
+}
+
 // tools lists the probes the Go standard library offers.
 func tools() []Tool {
 	return []Tool{
 		{
 			Functions: map[string][]Probe{
 				"codec": {CODEC_PROBE},
+				"deepSortObject": {
+					{
+						Accepts: isString,
+						Call:    "json.Unmarshal(value, &v); json.Marshal(v)",
+						Run: func(args []any) (any, error) {
+							value, err := unmarshalText(args[0].(string))
+
+							if err != nil {
+								return nil, err
+							}
+
+							return marshalText(value)
+						},
+					},
+				},
 				"isPlainObject": {
 					{
 						Call: "_, ok := value.(map[string]any)",
@@ -126,6 +170,14 @@ func tools() []Tool {
 						Call: "reflect.ValueOf(value).IsZero()",
 						Run: func(args []any) (any, error) {
 							return reflect.ValueOf(args[0]).IsZero(), nil
+						},
+					},
+				},
+				"safeJsonStringify": {
+					{
+						Call: "json.Marshal(value)",
+						Run: func(args []any) (any, error) {
+							return marshalText(args[0])
 						},
 					},
 				},
@@ -166,6 +218,15 @@ func tools() []Tool {
 						},
 					},
 				},
+				"safeParseJson": {
+					{
+						Accepts: isString,
+						Call:    "json.Unmarshal(value, &v)",
+						Run: func(args []any) (any, error) {
+							return unmarshalText(args[0].(string))
+						},
+					},
+				},
 				"safeParseNumber": {
 					{
 						Accepts: isString,
@@ -190,6 +251,40 @@ func tools() []Tool {
 						},
 					},
 				},
+				"safeParseUrl": {
+					{
+						Accepts: isLoneString,
+						Call:    "url.Parse(value)",
+						Run: func(args []any) (any, error) {
+							parsed, err := url.Parse(args[0].(string))
+
+							if err != nil {
+								return nil, err
+							}
+
+							return parsed.String(), nil
+						},
+					},
+					{
+						Accepts: areTwoStrings,
+						Call:    "url.Parse(base) then base.Parse(value)",
+						Run: func(args []any) (any, error) {
+							base, err := url.Parse(args[1].(string))
+
+							if err != nil {
+								return nil, err
+							}
+
+							parsed, err := base.Parse(args[0].(string))
+
+							if err != nil {
+								return nil, err
+							}
+
+							return parsed.String(), nil
+						},
+					},
+				},
 			},
 			Locale:  os.Getenv("LC_ALL"),
 			Name:    "Go",
@@ -197,6 +292,16 @@ func tools() []Tool {
 			Version: strings.TrimPrefix(runtime.Version(), "go"),
 		},
 	}
+}
+
+// unmarshalText runs `json.Unmarshal` into an `any`, the way a caller with no
+// struct to fill reads JSON.
+func unmarshalText(text string) (any, error) {
+	var value any
+
+	err := json.Unmarshal([]byte(text), &value)
+
+	return value, err
 }
 
 // main runs the case files named on the command line.

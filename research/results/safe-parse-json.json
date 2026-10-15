@@ -1,0 +1,3828 @@
+{
+  "cases": [
+    [
+      "{\"a\":1}"
+    ],
+    [
+      "[1,2]"
+    ],
+    [
+      "\"text\""
+    ],
+    [
+      "42"
+    ],
+    [
+      "-0"
+    ],
+    [
+      "1.0"
+    ],
+    [
+      "1E2"
+    ],
+    [
+      "true"
+    ],
+    [
+      "null"
+    ],
+    [
+      " \t\n{\"a\":1}\n"
+    ],
+    [
+      ""
+    ],
+    [
+      "   "
+    ],
+    [
+      "{a:1}"
+    ],
+    [
+      "{'a':1}"
+    ],
+    [
+      "[1,2,]"
+    ],
+    [
+      "{\"a\":1,}"
+    ],
+    [
+      "// comment\n1"
+    ],
+    [
+      "/* comment */ 1"
+    ],
+    [
+      "NaN"
+    ],
+    [
+      "Infinity"
+    ],
+    [
+      "01"
+    ],
+    [
+      "+1"
+    ],
+    [
+      ".5"
+    ],
+    [
+      "0x10"
+    ],
+    [
+      "\"a\tb\""
+    ],
+    [
+      "[1] [2]"
+    ],
+    [
+      " {}"
+    ],
+    [
+      "﻿{}"
+    ],
+    [
+      "{\"a\":1,\"a\":2}"
+    ],
+    [
+      "{\"__proto__\":{\"x\":1}}"
+    ],
+    [
+      "9007199254740993"
+    ],
+    [
+      "12345678901234567890"
+    ],
+    [
+      "0.1"
+    ],
+    [
+      "1e400"
+    ],
+    [
+      "\"\\ud800\""
+    ],
+    [
+      "\"\\u0000\""
+    ],
+    [
+      "\" \""
+    ],
+    [
+      42
+    ],
+    [
+      true
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      {
+        "a": 1
+      }
+    ],
+    [
+      {
+        "$js": "an object with a throwing toString"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "safeParseJson",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": 9007199254740992
+        },
+        {
+          "kind": "value",
+          "value": 12345678901234567000
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "JSON.parse(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:761948ce0352376a9dea504e5c2b6cef0ecbcabc60bb85bd2fa3778a1f5b209e",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": 9007199254740992
+        },
+        {
+          "kind": "value",
+          "value": 12345678901234567000
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "JSON.parse(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": 9007199254740992
+        },
+        {
+          "kind": "value",
+          "value": 12345678901234567000
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.10.0"
+    },
+    {
+      "call": "v.parse(v.pipe(v.string(), v.parseJson()), value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "valibot",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": 9007199254740992
+        },
+        {
+          "kind": "value",
+          "value": 12345678901234567000
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.5.0"
+    },
+    {
+      "call": "JsonDocument.Parse(value)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonReaderException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "9007199254740993"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "12345678901234567890"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "InvalidOperationException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "json.Unmarshal(value, &v)",
+      "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "inputs": "sha256:9d7311e1f994672a872ffacbbe9c894234379a07e4cc64f9c466d89f4d471805",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "*json.SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": 9007199254740992
+        },
+        {
+          "kind": "value",
+          "value": 12345678901234567000
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "error": "*json.UnmarshalTypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.1"
+    },
+    {
+      "call": "gson.fromJson(value, Object.class)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "locale": "en",
+      "name": "Gson",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            null
+          ]
+        },
+        {
+          "error": "JsonSyntaxException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": "NaN"
+        },
+        {
+          "kind": "value",
+          "value": "Infinity"
+        },
+        {
+          "kind": "value",
+          "value": "01"
+        },
+        {
+          "kind": "value",
+          "value": "+1"
+        },
+        {
+          "kind": "value",
+          "value": ".5"
+        },
+        {
+          "kind": "value",
+          "value": "0x10"
+        },
+        {
+          "kind": "value",
+          "value": "a\tb"
+        },
+        {
+          "error": "JsonSyntaxException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonSyntaxException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": 9007199254740992
+        },
+        {
+          "kind": "value",
+          "value": 12345678901234567000
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "2.14.0"
+    },
+    {
+      "call": "mapper.readValue(value, Object.class)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "locale": "en",
+      "name": "Jackson",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "MismatchedInputException",
+          "kind": "error"
+        },
+        {
+          "error": "MismatchedInputException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "MismatchedInputException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "error": "StreamReadException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "9007199254740993"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "12345678901234567890"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "3.2.3"
+    },
+    {
+      "call": "json.loads(value)",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "JSONDecodeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "9007199254740993"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "12345678901234567890"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "serde_json::from_str::<Value>(value) (arbitrary_precision)",
+      "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
+      "inputs": "sha256:ddb1e2ed335640c1d7d7b888941e9ed51ccc574b2fed1c4635f0a3078575f67b",
+      "locale": "C.UTF-8",
+      "name": "Rust",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "serde_json::Error(Eof)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Eof)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "9007199254740993"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "12345678901234567890"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "unrepresentable"
+          }
+        },
+        {
+          "error": "serde_json::Error(Syntax)",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "rust",
+      "tier": 2,
+      "version": "1.99.0"
+    },
+    {
+      "call": "SELECT JSON_COMPACT(?)",
+      "image": "mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "locale": "utf8mb4_uca1400_ai_ci",
+      "name": "MariaDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "[1,2]"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "-0"
+        },
+        {
+          "kind": "value",
+          "value": "1.0"
+        },
+        {
+          "kind": "value",
+          "value": "1E2"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":1}"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":1,\"a\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\":{\"x\":1}}"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "value",
+          "value": "12345678901234567890"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "1e400"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "\"\\u0000\""
+        },
+        {
+          "kind": "value",
+          "value": "\" \""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mariadb-adapter",
+      "tier": 3,
+      "version": "12.3.3"
+    },
+    {
+      "call": "SELECT JSON_VALID(?)",
+      "image": "mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "locale": "utf8mb4_uca1400_ai_ci",
+      "name": "MariaDB",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mariadb-adapter",
+      "tier": 3,
+      "version": "12.3.3"
+    },
+    {
+      "call": "SELECT CAST(? AS JSON)",
+      "image": "mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "locale": "utf8mb4_0900_ai_ci",
+      "name": "MySQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\": 1}"
+        },
+        {
+          "kind": "value",
+          "value": "[1, 2]"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "1.0"
+        },
+        {
+          "kind": "value",
+          "value": "100.0"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\": 1}"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\": 2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\": {\"x\": 1}}"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "value",
+          "value": "12345678901234567890"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "error": "Error 3141",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "\"\\u0000\""
+        },
+        {
+          "kind": "value",
+          "value": "\" \""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mysql-adapter",
+      "tier": 3,
+      "version": "9.7.1"
+    },
+    {
+      "call": "SELECT CAST(? AS json)::text",
+      "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "locale": "C.UTF-8",
+      "name": "PostgreSQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "[1,2]"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "-0"
+        },
+        {
+          "kind": "value",
+          "value": "1.0"
+        },
+        {
+          "kind": "value",
+          "value": "1E2"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": " \t\n{\"a\":1}\n"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":1,\"a\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\":{\"x\":1}}"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "value",
+          "value": "12345678901234567890"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "1e400"
+        },
+        {
+          "kind": "value",
+          "value": "\"\\ud800\""
+        },
+        {
+          "kind": "value",
+          "value": "\"\\u0000\""
+        },
+        {
+          "kind": "value",
+          "value": "\" \""
+        },
+        {
+          "error": "42846",
+          "kind": "error"
+        },
+        {
+          "error": "42846",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "postgres-adapter",
+      "tier": 3,
+      "version": "18.6"
+    },
+    {
+      "call": "SELECT CAST(? AS jsonb)::text",
+      "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "locale": "C.UTF-8",
+      "name": "PostgreSQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\": 1}"
+        },
+        {
+          "kind": "value",
+          "value": "[1, 2]"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "0"
+        },
+        {
+          "kind": "value",
+          "value": "1.0"
+        },
+        {
+          "kind": "value",
+          "value": "100"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\": 1}"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\": 2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\": {\"x\": 1}}"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "value",
+          "value": "12345678901234567890"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
+        },
+        {
+          "error": "22P05",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "\" \""
+        },
+        {
+          "error": "42846",
+          "kind": "error"
+        },
+        {
+          "error": "42846",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "postgres-adapter",
+      "tier": 3,
+      "version": "18.6"
+    },
+    {
+      "call": "SELECT ISJSON(?)",
+      "image": "mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726",
+      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "locale": "SQL_Latin1_General_CP1_CI_AS",
+      "name": "SQL Server",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "Msg 8116",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "mssql-adapter",
+      "tier": 3,
+      "version": "17.0.5005.3"
+    },
+    {
+      "call": "SELECT json(?)",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "SQLite",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "[1,2]"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "-0"
+        },
+        {
+          "kind": "value",
+          "value": "1.0"
+        },
+        {
+          "kind": "value",
+          "value": "1E2"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":1}"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":1,\"a\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\":{\"x\":1}}"
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "value",
+          "value": "12345678901234567890"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "1e400"
+        },
+        {
+          "kind": "value",
+          "value": "\"\\ud800\""
+        },
+        {
+          "kind": "value",
+          "value": "\"\\u0000\""
+        },
+        {
+          "kind": "value",
+          "value": "\" \""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "sqlite",
+      "tier": 3,
+      "version": "3.40.1"
+    },
+    {
+      "call": "json_decode($value, flags: JSON_THROW_ON_ERROR)",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locale": "C.UTF-8",
+      "name": "PHP",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "9007199254740993"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 12345678901234567000
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "JsonException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    },
+    {
+      "call": "JSON.parse(value)",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Ruby",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 100
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "x": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "9007199254740993"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "12345678901234567890"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0.1
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "JSON::ParserError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "4.0.7"
+    }
+  ],
+  "function": "safeParseJson"
+}

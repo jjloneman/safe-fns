@@ -54,9 +54,29 @@ def query_text(sql: str) -> str:
 VERSION = query_text("SELECT VERSION()")
 """`9.7.1`, or `11.8.9-MariaDB-ubu2404` on MariaDB."""
 
+IS_MARIADB = "MariaDB" in VERSION
+"""MariaDB's `JSON` is an alias of `LONGTEXT`, so its JSON probes differ."""
+
+JSON_FUNCTIONS: dict[str, list[Probe]] = (
+    {
+        "deepSortObject": [cast("SELECT JSON_NORMALIZE(%s)")],
+        "safeParseJson": [
+            cast("SELECT JSON_VALID(%s)"),
+            cast("SELECT JSON_COMPACT(%s)"),
+        ],
+    }
+    if IS_MARIADB
+    else {
+        "deepSortObject": [cast("SELECT CAST(CAST(%s AS JSON) AS CHAR)")],
+        "safeParseJson": [cast("SELECT CAST(%s AS JSON)")],
+    }
+)
+"""The JSON probes: MySQL's native type, or MariaDB's JSON functions."""
+
 TOOLS: list[Tool] = [
     {
         "functions": {
+            **JSON_FUNCTIONS,
             "safeParseBoolean": [cast("SELECT %s IS TRUE")],
             "safeParseInteger": [cast("SELECT CAST(%s AS SIGNED)")],
             "safeParseNumber": [cast("SELECT CAST(%s AS DOUBLE)")],
@@ -66,7 +86,7 @@ TOOLS: list[Tool] = [
             ],
         },
         "locale": query_text("SELECT @@collation_connection"),
-        "name": "MariaDB" if "MariaDB" in VERSION else "MySQL",
+        "name": "MariaDB" if IS_MARIADB else "MySQL",
         "tier": 3,
         "version": VERSION.split("-")[0],
     }

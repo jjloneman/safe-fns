@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.Json;
 
 namespace ResearchAdapter;
 
@@ -31,10 +32,46 @@ internal static class Program
     private static readonly string Version = Environment.Version.ToString();
 
     /// <summary>
+    /// Accept exactly two string arguments: a value and a base.
+    /// </summary>
+    private static bool AreTwoStrings(IReadOnlyList<object?> args) =>
+        args is [string, string];
+
+    /// <summary>
+    /// Convert a parsed JSON element into the codec's BCL types, reading no
+    /// `$` key as a tag; a repeated key keeps its last value.
+    /// </summary>
+    private static object? FromJson(JsonElement element) =>
+        element.ValueKind switch
+        {
+            JsonValueKind.Array => element
+                .EnumerateArray()
+                .Select(FromJson)
+                .ToList(),
+            JsonValueKind.Null => null,
+            JsonValueKind.Object => element
+                .EnumerateObject()
+                .Aggregate(
+                    new Dictionary<string, object?>(),
+                    (entriesByKey, property) =>
+                    {
+                        entriesByKey[property.Name] = FromJson(property.Value);
+
+                        return entriesByKey;
+                    }
+                ),
+            _ => Codec.DecodeScalar(element),
+        };
+
+    /// <summary>
     /// Accept a dictionary first argument and a string second.
     /// </summary>
     private static bool IsDictionaryAndString(IReadOnlyList<object?> args) =>
         args[0] is Dictionary<string, object?> && args[1] is string;
+
+    /// <summary>Accept exactly one argument, a string.</summary>
+    private static bool IsLoneString(IReadOnlyList<object?> args) =>
+        args is [string];
 
     /// <summary>Accept only a string first argument.</summary>
     private static bool IsString(IReadOnlyList<object?> args) =>
@@ -52,6 +89,16 @@ internal static class Program
         CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
 
         Codec.RunAdapter(paths: args, tools: Tools());
+    }
+
+    /// <summary>
+    /// Parse JSON text with `JsonDocument.Parse`, as BCL values.
+    /// </summary>
+    private static object? ParseJson(string text)
+    {
+        using var document = JsonDocument.Parse(text);
+
+        return FromJson(document.RootElement);
     }
 
     /// <summary>
@@ -86,6 +133,14 @@ internal static class Program
                         Accepts: IsStringOrNull,
                         Call: "string.IsNullOrWhiteSpace(value)",
                         Run: args => string.IsNullOrWhiteSpace((string?)args[0])
+                    ),
+                ],
+                ["safeJsonStringify"] =
+                [
+                    new(
+                        Accepts: Codec.AcceptsAny,
+                        Call: "JsonSerializer.Serialize(value)",
+                        Run: args => JsonSerializer.Serialize(args[0])
                     ),
                 ],
                 ["safeObjectHasOwn"] =
@@ -130,6 +185,14 @@ internal static class Program
                         Run: args => Convert.ToInt64(args[0], invariant)
                     ),
                 ],
+                ["safeParseJson"] =
+                [
+                    new(
+                        Accepts: IsString,
+                        Call: "JsonDocument.Parse(value)",
+                        Run: args => ParseJson(Text(args))
+                    ),
+                ],
                 ["safeParseNumber"] =
                 [
                     new(
@@ -154,6 +217,33 @@ internal static class Program
                         Accepts: IsString,
                         Call: "value.Trim()",
                         Run: args => Text(args).Trim()
+                    ),
+                ],
+                ["safeParseUrl"] =
+                [
+                    new(
+                        Accepts: IsLoneString,
+                        Call: "Uri.TryCreate(value, UriKind.Absolute, out var uri) ? uri.AbsoluteUri : null",
+                        Run: args =>
+                            Uri.TryCreate(
+                                Text(args),
+                                UriKind.Absolute,
+                                out var uri
+                            )
+                                ? uri.AbsoluteUri
+                                : null
+                    ),
+                    new(
+                        Accepts: AreTwoStrings,
+                        Call: "Uri.TryCreate(new Uri(base), value, out var uri) ? uri.AbsoluteUri : null",
+                        Run: args =>
+                            Uri.TryCreate(
+                                new Uri((string)args[1]!),
+                                Text(args),
+                                out var uri
+                            )
+                                ? uri.AbsoluteUri
+                                : null
                     ),
                 ],
             },
