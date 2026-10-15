@@ -1,0 +1,951 @@
+{
+  "cases": [
+    [
+      {
+        "a": [
+          1,
+          {
+            "b": "x"
+          }
+        ]
+      }
+    ],
+    [
+      "text"
+    ],
+    [
+      42
+    ],
+    [
+      {
+        "$number": "-0"
+      }
+    ],
+    [
+      {
+        "$number": "NaN"
+      }
+    ],
+    [
+      {
+        "$bigint": "12"
+      }
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      {
+        "$js": "a Date"
+      }
+    ],
+    [
+      {
+        "$js": "a Map with an entry"
+      }
+    ],
+    [
+      {
+        "$js": "a Set with an entry"
+      }
+    ],
+    [
+      {
+        "$js": "a RegExp"
+      }
+    ],
+    [
+      {
+        "$js": "a Uint8Array"
+      }
+    ],
+    [
+      {
+        "$js": "an Error"
+      }
+    ],
+    [
+      {
+        "$js": "a class instance"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a getter"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a cycle"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a shared reference"
+      }
+    ],
+    [
+      {
+        "$js": "a function"
+      }
+    ],
+    [
+      {
+        "$js": "an object holding a function"
+      }
+    ],
+    [
+      {
+        "$js": "a symbol"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a throwing getter"
+      }
+    ],
+    [
+      {
+        "$js": "a revoked proxy"
+      }
+    ],
+    [
+      {
+        "$js": "a proxy whose ownKeys trap throws"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "safeStructuredClone",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              1,
+              {
+                "b": "x"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "12"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Date]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Map]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Set]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object RegExp]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Uint8Array]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Error]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "x": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "name": "a",
+            "self": {
+              "$repr": "Symbol(cycle)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "x": 1
+            },
+            "b": {
+              "$repr": "Symbol(repeat)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "cloneDeep(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "es-toolkit",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              1,
+              {
+                "b": "x"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "12"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Date]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Map]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Set]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object RegExp]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Uint8Array]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Error]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Object]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "name": "a",
+            "self": {
+              "$repr": "Symbol(cycle)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "x": 1
+            },
+            "b": {
+              "$repr": "Symbol(repeat)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "function"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1,
+            "callback": {
+              "$repr": "function"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "Symbol(hostile)"
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.52.0"
+    },
+    {
+      "call": "structuredClone(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:761948ce0352376a9dea504e5c2b6cef0ecbcabc60bb85bd2fa3778a1f5b209e",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "structuredClone(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              1,
+              {
+                "b": "x"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "12"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Date]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Map]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Set]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object RegExp]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Uint8Array]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Error]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "x": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "name": "a",
+            "self": {
+              "$repr": "Symbol(cycle)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "x": 1
+            },
+            "b": {
+              "$repr": "Symbol(repeat)"
+            }
+          }
+        },
+        {
+          "error": "DataCloneError",
+          "kind": "error"
+        },
+        {
+          "error": "DataCloneError",
+          "kind": "error"
+        },
+        {
+          "error": "DataCloneError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "DataCloneError",
+          "kind": "error"
+        },
+        {
+          "error": "DataCloneError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.10.0"
+    },
+    {
+      "call": "_.cloneDeep(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "lodash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              1,
+              {
+                "b": "x"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "12"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Date]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Map]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Set]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object RegExp]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Uint8Array]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Object]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "name": "a",
+            "self": {
+              "$repr": "Symbol(cycle)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "x": 1
+            },
+            "b": {
+              "$repr": "Symbol(repeat)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1,
+            "callback": {
+              "$repr": "function"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "Symbol(hostile)"
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.18.1"
+    },
+    {
+      "call": "copy.deepcopy(value)",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              1,
+              {
+                "b": "x"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "12"
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    }
+  ],
+  "function": "safeStructuredClone"
+}
