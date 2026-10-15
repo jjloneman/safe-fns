@@ -4,31 +4,32 @@
 
 ## Tiers 0–2
 
-| Case | @sindresorhus/is<br>`is.plainObject(value)` | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | radash<br>`isObject(value)` | remeda<br>`isPlainObject(value)` | Go<br>`_, ok := value.(map[string]any)` | Python<br>`type(value) is dict` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `{}` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
-| `[]` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `null` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `undefined` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
-| `"x"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `1` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | `false` | `true` | — | — |
-| `‹a cross-realm object›` | `true` | `true` | `true` | `true` | `false` | `false` | — | — |
-| `‹an empty cross-realm object›` | `true` | `true` | `true` | `true` | `false` | `false` | — | — |
-| `‹a class instance›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
-| `‹an object with Symbol.toStringTag›` | `false` | `false` | `false` | `true` | `true` | `true` | — | — |
-| `‹a Date›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
-| `‹an empty Map›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
-| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
-| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | `true` | `true` | — | — |
-| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — |
-| `‹a function›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| Case | safe-fns (planned)<br>`isPlainObject` | @sindresorhus/is<br>`is.plainObject(value)` | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | radash<br>`isObject(value)` | remeda<br>`isPlainObject(value)` | Go<br>`_, ok := value.(map[string]any)` | Python<br>`type(value) is dict` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `{}` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `[]` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `null` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `undefined` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `"x"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `1` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | `true` | `false` | `true` | — | — |
+| `‹a cross-realm object›` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | — | — |
+| `‹an empty cross-realm object›` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | — | — |
+| `‹a class instance›` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹an object with Symbol.toStringTag›` | `false` | `false` | `false` | `false` | `true` | `true` | `true` | — | — |
+| `‹a Date›` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹an empty Map›` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
+| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — |
+| `‹a revoked proxy›` | `false` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — |
+| `‹a function›` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — |
 
 ## By outcome
 
 | Tool | `true` | `false` | Other | Throws |
 | :--- | :--- | :--- | :--- | :--- |
+| safe-fns (planned)<br>`isPlainObject` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a class instance›` `‹an object with Symbol.toStringTag›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a revoked proxy›` `‹a function›` |  |  |
 | @sindresorhus/is<br>`is.plainObject(value)` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a class instance›` `‹an object with Symbol.toStringTag›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
 | es-toolkit<br>`isPlainObject(value)` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a class instance›` `‹an object with Symbol.toStringTag›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
 | is-plain-obj<br>`isPlainObject(value)` | `{}` `{ "a": 1 }` `‹a null-prototype object›` `‹a cross-realm object›` `‹an empty cross-realm object›` `‹a proxy of a plain object›` | `[]` `null` `undefined` `"x"` `1` `‹a class instance›` `‹an object with Symbol.toStringTag›` `‹a Date›` `‹an empty Map›` `‹a cross-realm Map›` `‹a function›` |  | `‹a revoked proxy›` |
@@ -44,31 +45,32 @@
 
 ## Every tool
 
-| Case | @sindresorhus/is<br>`is.plainObject(value)` | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | radash<br>`isObject(value)` | remeda<br>`isPlainObject(value)` | Go<br>`_, ok := value.(map[string]any)` | Python<br>`type(value) is dict` | PHP<br>`$value instanceof stdClass` | PowerShell<br>`$value -is [hashtable]` | Ruby<br>`value.instance_of?(Hash)` | Swift<br>`value is [String: Any]` |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `{}` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
-| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
-| `[]` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `null` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `undefined` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
-| `"x"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `1` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
-| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | `false` | `true` | — | — | — | — | — | — |
-| `‹a cross-realm object›` | `true` | `true` | `true` | `true` | `false` | `false` | — | — | — | — | — | — |
-| `‹an empty cross-realm object›` | `true` | `true` | `true` | `true` | `false` | `false` | — | — | — | — | — | — |
-| `‹a class instance›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
-| `‹an object with Symbol.toStringTag›` | `false` | `false` | `false` | `true` | `true` | `true` | — | — | — | — | — | — |
-| `‹a Date›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
-| `‹an empty Map›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
-| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
-| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | `true` | `true` | — | — | — | — | — | — |
-| `‹a revoked proxy›` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — |
-| `‹a function›` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
+| Case | safe-fns (planned)<br>`isPlainObject` | @sindresorhus/is<br>`is.plainObject(value)` | es-toolkit<br>`isPlainObject(value)` | is-plain-obj<br>`isPlainObject(value)` | lodash<br>`_.isPlainObject(value)` | radash<br>`isObject(value)` | remeda<br>`isPlainObject(value)` | Go<br>`_, ok := value.(map[string]any)` | Python<br>`type(value) is dict` | PHP<br>`$value instanceof stdClass` | PowerShell<br>`$value -is [hashtable]` | Ruby<br>`value.instance_of?(Hash)` | Swift<br>`value is [String: Any]` |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `{}` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `{ "a": 1 }` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | `true` |
+| `[]` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `null` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `undefined` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
+| `"x"` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `1` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | `false` |
+| `‹a null-prototype object›` | `true` | `true` | `true` | `true` | `true` | `false` | `true` | — | — | — | — | — | — |
+| `‹a cross-realm object›` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | — | — | — | — | — | — |
+| `‹an empty cross-realm object›` | `true` | `true` | `true` | `true` | `true` | `false` | `false` | — | — | — | — | — | — |
+| `‹a class instance›` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
+| `‹an object with Symbol.toStringTag›` | `false` | `false` | `false` | `false` | `true` | `true` | `true` | — | — | — | — | — | — |
+| `‹a Date›` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
+| `‹an empty Map›` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
+| `‹a cross-realm Map›` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
+| `‹a proxy of a plain object›` | `true` | `true` | `true` | `true` | `true` | `true` | `true` | — | — | — | — | — | — |
+| `‹a revoked proxy›` | `false` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | 💥 `TypeError` | — | — | — | — | — | — |
+| `‹a function›` | `false` | `false` | `false` | `false` | `false` | `false` | `false` | — | — | — | — | — | — |
 
 ## Versions
 
 | Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
+| safe-fns (planned)<br>`isPlainObject` | 0 | `-` | `-` | `-` |
 | @sindresorhus/is<br>`is.plainObject(value)` | 1 | `8.1.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | es-toolkit<br>`isPlainObject(value)` | 1 | `1.52.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | is-plain-obj<br>`isPlainObject(value)` | 1 | `4.1.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |

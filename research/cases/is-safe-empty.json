@@ -1,152 +1,180 @@
 {
   "cases": [
     {
-      "args": [null]
+      "args": [null],
+      "expected": true
     },
     {
       "args": [
         {
           "$undefined": true
         }
-      ]
+      ],
+      "expected": true
     },
     {
-      "args": [""]
+      "args": [""],
+      "expected": true
     },
     {
-      "args": [" "]
+      "args": [" "],
+      "expected": true
     },
     {
-      "args": ["\u00a0"]
+      "args": ["\u00a0"],
+      "expected": true
     },
     {
-      "args": ["\u2800"]
+      "args": ["\u2800"],
+      "expected": true
     },
     {
-      "args": ["a"]
+      "args": ["a"],
+      "expected": false
     },
     {
-      "args": [0]
+      "args": [0],
+      "expected": false
     },
     {
-      "args": [false]
+      "args": [false],
+      "expected": false
     },
     {
       "args": [
         {
           "$number": "NaN"
         }
-      ]
+      ],
+      "expected": false
     },
     {
-      "args": [[]]
+      "args": [[]],
+      "expected": true
     },
     {
-      "args": [[0]]
+      "args": [[0]],
+      "expected": false
     },
     {
-      "args": [[null]]
+      "args": [[null]],
+      "expected": false
     },
     {
-      "args": [{}]
+      "args": [{}],
+      "expected": true
     },
     {
       "args": [
         {
           "a": 1
         }
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
         {
           "length": 0
         }
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
         {
           "size": 0
         }
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
         {
           "$js": "an empty Map"
         }
-      ]
+      ],
+      "expected": true
     },
     {
       "args": [
         {
           "$js": "a Map with an entry"
         }
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
         {
           "$js": "an empty Set"
         }
-      ]
+      ],
+      "expected": true
     },
     {
       "args": [
         {
           "$js": "a null-prototype object"
         }
-      ]
+      ],
+      "expected": true
     },
     {
       "args": [
         {
           "$js": "an empty URLSearchParams"
         }
-      ]
+      ],
+      "expected": true
     },
     {
       "args": [
         {
           "$js": "a URLSearchParams with an entry"
         }
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
         {
           "$js": "a Date"
         }
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
         {
           "$js": "a function"
         }
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
         {
           "$js": "a revoked proxy"
         }
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
         {
           "$js": "a proxy whose ownKeys trap throws"
         }
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
         {
           "$js": "a cross-realm Map"
         }
-      ]
+      ],
+      "expected": true
     }
   ],
   "function": "isSafeEmpty"

@@ -7,8 +7,8 @@
 | Case | safe-fns (planned)<br>`toError` | ensure-error<br>`ensureError(value) → { message, unchanged }` | JS built-ins<br>`new Error(value) → { message, unchanged }` |
 | :--- | :--- | :--- | :--- |
 | `"boom"` | `{ "message": "boom", "unchanged": false }` | `{ "message": "'boom'", "unchanged": false }` | `{ "message": "boom", "unchanged": false }` |
-| `""` | `{ "message": "\"\"", "unchanged": false }` | `{ "message": "''", "unchanged": false }` | `{ "message": "", "unchanged": false }` |
-| `"  "` | `{ "message": "\"  \"", "unchanged": false }` | `{ "message": "'  '", "unchanged": false }` | `{ "message": "  ", "unchanged": false }` |
+| `""` | `{ "message": "Unknown error", "unchanged": false }` | `{ "message": "''", "unchanged": false }` | `{ "message": "", "unchanged": false }` |
+| `"  "` | `{ "message": "Unknown error", "unchanged": false }` | `{ "message": "'  '", "unchanged": false }` | `{ "message": "  ", "unchanged": false }` |
 | `‹an Error›` | `{ "message": "boom", "unchanged": true }` | `{ "message": "boom", "unchanged": true }` | `{ "message": "Error: boom", "unchanged": false }` |
 | `‹a TypeError›` | `{ "message": "bad type", "unchanged": true }` | `{ "message": "bad type", "unchanged": true }` | `{ "message": "TypeError: bad type", "unchanged": false }` |
 | `‹an Error with no message›` | `{ "message": "", "unchanged": true }` | `{ "message": "<No error message>", "unchanged": true }` | `{ "message": "Error", "unchanged": false }` |
@@ -41,8 +41,8 @@
 | Case | safe-fns (planned)<br>`toError` | ensure-error<br>`ensureError(value) → { message, unchanged }` | JS built-ins<br>`new Error(value) → { message, unchanged }` |
 | :--- | :--- | :--- | :--- |
 | `"boom"` | `{ "message": "boom", "unchanged": false }` | `{ "message": "'boom'", "unchanged": false }` | `{ "message": "boom", "unchanged": false }` |
-| `""` | `{ "message": "\"\"", "unchanged": false }` | `{ "message": "''", "unchanged": false }` | `{ "message": "", "unchanged": false }` |
-| `"  "` | `{ "message": "\"  \"", "unchanged": false }` | `{ "message": "'  '", "unchanged": false }` | `{ "message": "  ", "unchanged": false }` |
+| `""` | `{ "message": "Unknown error", "unchanged": false }` | `{ "message": "''", "unchanged": false }` | `{ "message": "", "unchanged": false }` |
+| `"  "` | `{ "message": "Unknown error", "unchanged": false }` | `{ "message": "'  '", "unchanged": false }` | `{ "message": "  ", "unchanged": false }` |
 | `‹an Error›` | `{ "message": "boom", "unchanged": true }` | `{ "message": "boom", "unchanged": true }` | `{ "message": "Error: boom", "unchanged": false }` |
 | `‹a TypeError›` | `{ "message": "bad type", "unchanged": true }` | `{ "message": "bad type", "unchanged": true }` | `{ "message": "TypeError: bad type", "unchanged": false }` |
 | `‹an Error with no message›` | `{ "message": "", "unchanged": true }` | `{ "message": "<No error message>", "unchanged": true }` | `{ "message": "Error", "unchanged": false }` |

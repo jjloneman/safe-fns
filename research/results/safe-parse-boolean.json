@@ -182,6 +182,31 @@
     ],
     [
       {}
+    ],
+    [
+      {
+        "$js": "a boxed true"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed false"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed number"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed bigint"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed string"
+      }
     ]
   ],
   "columns": [
@@ -460,6 +485,28 @@
           "value": {
             "$undefined": true
           }
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
         }
       ],
       "service": "-",
@@ -642,6 +689,21 @@
         {
           "error": "SyntaxError",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -887,6 +949,26 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
         },
         {
           "error": "ValiError",
@@ -1211,6 +1293,28 @@
           "value": {
             "$undefined": true
           }
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
         }
       ],
       "service": "node",
@@ -1347,6 +1451,26 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
         },
         {
           "error": "ZodError",
@@ -1676,6 +1800,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "dotnet",
@@ -1915,6 +2054,21 @@
         {
           "error": "InvalidCastException",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "dotnet",
@@ -2132,6 +2286,21 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2367,6 +2536,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -2547,6 +2731,21 @@
         {
           "error": "strconv.ErrSyntax",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2831,6 +3030,21 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -3070,6 +3284,21 @@
         {
           "error": "MissingMethodException",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -3287,6 +3516,21 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3522,6 +3766,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -3702,6 +3961,21 @@
         {
           "error": "IllegalArgumentException",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3972,6 +4246,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -4152,6 +4441,21 @@
         {
           "error": "ValueError",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -4422,6 +4726,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "python311",
@@ -4602,6 +4921,21 @@
         {
           "error": "ParseBoolError",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -4886,6 +5220,21 @@
         {
           "error": "ConverterNotFoundException",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -5070,6 +5419,21 @@
         {
           "kind": "value",
           "value": "ｔｒｕｅ"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5340,6 +5704,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "node",
@@ -5520,6 +5899,21 @@
         {
           "kind": "value",
           "value": "ｔｒｕｅ"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5747,6 +6141,21 @@
         {
           "error": "SyntaxError",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -6026,6 +6435,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "mariadb-adapter",
@@ -6263,6 +6687,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "mongo-adapter",
@@ -6488,6 +6927,21 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -6734,6 +7188,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "postgres-adapter",
@@ -6959,6 +7428,21 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -7203,6 +7687,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "sqlite",
@@ -7428,6 +7927,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "node",
@@ -7608,6 +8122,21 @@
         {
           "error": "SAXParseException",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -7880,6 +8409,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "node",
@@ -8062,6 +8606,21 @@
         {
           "kind": "value",
           "value": "ｔｒｕｅ"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -8349,6 +8908,26 @@
         {
           "error": "ValidationError",
           "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
         }
       ],
       "service": "node",
@@ -8574,6 +9153,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "node",
@@ -8754,6 +9348,21 @@
         {
           "error": "exit 128",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -9041,6 +9650,26 @@
         {
           "error": "ValidationError",
           "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
         }
       ],
       "service": "node",
@@ -9280,6 +9909,21 @@
         {
           "kind": "value",
           "value": true
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "php",
@@ -9519,6 +10163,21 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "php",
@@ -9758,6 +10417,21 @@
         {
           "error": "FormatException",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "powershell",
@@ -9997,6 +10671,21 @@
         {
           "kind": "value",
           "value": true
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "powershell",
@@ -10236,6 +10925,21 @@
         {
           "error": "InvalidCastException",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "powershell",
@@ -10475,6 +11179,21 @@
         {
           "kind": "value",
           "value": true
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "ruby",
@@ -10700,6 +11419,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "swift",
@@ -10878,6 +11612,21 @@
         {
           "error": "EINVAL",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -11148,6 +11897,21 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "node",
@@ -11328,6 +12092,21 @@
         {
           "error": "XMLSchemaDecodeError",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -11611,6 +12390,30 @@
         {
           "error": "ValidationError",
           "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Boolean]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Boolean]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
         },
         {
           "error": "ValidationError",

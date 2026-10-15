@@ -98,6 +98,16 @@
     ],
     [
       {
+        "$js": "a boxed string"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed blank string"
+      }
+    ],
+    [
+      {
         "$js": "a Date"
       }
     ],
@@ -105,9 +115,200 @@
       {
         "$js": "an object with a throwing toString"
       }
+    ],
+    [
+      {
+        "$js": "a boxed number"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed true"
+      }
     ]
   ],
   "columns": [
+    {
+      "call": "safeParseString",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "-0"
+        },
+        {
+          "kind": "value",
+          "value": "1e+21"
+        },
+        {
+          "kind": "value",
+          "value": "1e-7"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "100"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "9007199254740993"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "false"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "1"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
     {
       "call": "compat.toString(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
@@ -225,11 +426,27 @@
         },
         {
           "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
           "value": "Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"
         },
         {
           "error": "Error",
           "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1"
+        },
+        {
+          "kind": "value",
+          "value": "true"
         }
       ],
       "service": "node",
@@ -355,6 +572,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "hermes",
@@ -471,6 +700,18 @@
         {
           "kind": "value",
           "value": "[object Object]"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -603,11 +844,27 @@
         },
         {
           "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
           "value": "Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"
         },
         {
           "error": "Error",
           "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1"
+        },
+        {
+          "kind": "value",
+          "value": "true"
         }
       ],
       "service": "node",
@@ -731,11 +988,27 @@
         },
         {
           "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
           "value": "Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"
         },
         {
           "error": "Error",
           "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1"
+        },
+        {
+          "kind": "value",
+          "value": "true"
         }
       ],
       "service": "node",
@@ -859,11 +1132,27 @@
         },
         {
           "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
           "value": "Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"
         },
         {
           "error": "Error",
           "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1"
+        },
+        {
+          "kind": "value",
+          "value": "true"
         }
       ],
       "service": "node",
@@ -987,11 +1276,27 @@
         },
         {
           "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
           "value": "Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"
         },
         {
           "error": "ValiError",
           "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1"
+        },
+        {
+          "kind": "value",
+          "value": "true"
         }
       ],
       "service": "node",
@@ -1115,11 +1420,27 @@
         },
         {
           "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
           "value": "Thu Jan 01 1970 00:00:00 GMT+0000 (Coordinated Universal Time)"
         },
         {
           "error": "ZodError",
           "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1"
+        },
+        {
+          "kind": "value",
+          "value": "true"
         }
       ],
       "service": "node",
@@ -1244,6 +1565,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "dotnet",
@@ -1296,6 +1629,18 @@
         {
           "kind": "value",
           "value": "⠀"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1463,6 +1808,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -1552,6 +1909,18 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1697,6 +2066,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "go",
@@ -1749,6 +2130,18 @@
         {
           "kind": "value",
           "value": "⠀"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1930,6 +2323,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -2054,6 +2459,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -2143,6 +2560,18 @@
         {
           "kind": "value",
           "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2288,6 +2717,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -2403,6 +2844,18 @@
         {
           "kind": "value",
           "value": "{}"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2536,6 +2989,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -2588,6 +3053,18 @@
         {
           "kind": "value",
           "value": "⠀"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2769,6 +3246,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "python",
@@ -2884,6 +3373,18 @@
         {
           "kind": "value",
           "value": "{}"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3012,6 +3513,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "rust",
@@ -3064,6 +3577,18 @@
         {
           "kind": "value",
           "value": "⠀"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3245,6 +3770,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -3362,6 +3899,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "mariadb-adapter",
@@ -3458,6 +4007,18 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3600,6 +4161,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "mongo-adapter",
@@ -3700,6 +4273,18 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3838,6 +4423,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "mysql-adapter",
@@ -3934,6 +4531,18 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -4076,6 +4685,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "postgres-adapter",
@@ -4176,6 +4797,18 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -4314,6 +4947,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "mssql-adapter",
@@ -4410,6 +5055,18 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -4550,6 +5207,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "sqlite",
@@ -4648,6 +5317,18 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -4778,6 +5459,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -4830,6 +5523,18 @@
         {
           "kind": "value",
           "value": "⠀"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5017,6 +5722,22 @@
         {
           "error": "ValidationError",
           "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
         }
       ],
       "service": "node",
@@ -5069,6 +5790,18 @@
         {
           "kind": "value",
           "value": "⠀"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5250,6 +5983,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "php",
@@ -5365,6 +6110,18 @@
         {
           "error": "Error",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5498,6 +6255,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "powershell",
@@ -5613,6 +6382,18 @@
         {
           "kind": "value",
           "value": "System.Management.Automation.OrderedHashtable"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5746,6 +6527,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "ruby",
@@ -5861,6 +6654,18 @@
         {
           "kind": "value",
           "value": "{}"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5994,6 +6799,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "ruby",
@@ -6118,6 +6935,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "swift",
@@ -6170,6 +6999,18 @@
         {
           "kind": "value",
           "value": "⠀"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -6336,6 +7177,18 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "xml-schema",
@@ -6388,6 +7241,18 @@
         {
           "kind": "value",
           "value": "⠀"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"

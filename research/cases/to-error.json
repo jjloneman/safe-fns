@@ -10,14 +10,14 @@
     {
       "args": [""],
       "expected": {
-        "message": "\"\"",
+        "message": "Unknown error",
         "unchanged": false
       }
     },
     {
       "args": ["  "],
       "expected": {
-        "message": "\"  \"",
+        "message": "Unknown error",
         "unchanged": false
       }
     },
