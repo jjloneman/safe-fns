@@ -3,7 +3,7 @@ type: Decision
 title: What safeParseUrl accepts
 description: A string or URL, trimmed of blank characters and resolved against an optional base with the native URL parser, returning a new URL or the fallback; an opt-in protocols list rejects any other scheme.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:53:58Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T21:12:31Z }
 ---
 
 # What safeParseUrl accepts
@@ -34,10 +34,12 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:53:58Z }
   - the query is kept as written, so a comma-separated list (`?filters=in-progress,to-do,done`) survives; `url.searchParams.get("filters")` returns the whole list as one string, and editing `searchParams` re-serializes the commas as `%2C`;
   - splitting a list is `getSearchParamValues`' job, not an option here, since the result is a native `URL` whose `searchParams` methods can't be changed (see Consequences);
   - a relative URL without a `base` returns the fallback.
-- **`protocols` is an opt-in allow-list,** compared with `url.protocol` (`["http:", "https:"]`).
+- **`protocols` is an opt-in allow-list,** compared with `url.protocol` after normalizing each entry, so case and the trailing colon don't matter: `["https"]` and `["HTTPS:"]` both allow `https:`.
+  - An empty list allows nothing, so every URL returns the fallback.
   - With it, a URL of any other protocol returns the fallback, which makes the result safe to put in an `href`.
   - Without it, every protocol parses as it does natively, including `javascript:` and `data:`; the docs warn about putting such a result in an `href`.
-- **Everything else returns the fallback:** other types, a blank string, an invalid `base`, and a `URL` whose getters throw.
+- **A blank string returns the fallback, even with a `base`,** checked after trimming; the native parser alone resolves `""` to the base itself (`new URL("", "https://example.com/a")` is `https://example.com/a`).
+- **Everything else returns the fallback:** other types, an invalid `base`, and a `URL` whose getters throw.
 - **A runtime with no `URL` global returns the fallback** rather than throwing, since `URL` is looked up inside the `try`; Hermes, React Native's engine, has none, and the docs say it needs a polyfill.
 - **One code path everywhere:** always `new URL` inside a `try`, never a branch on whether `URL.parse` exists.
 
@@ -78,6 +80,8 @@ The tiers 0–2 summary from [research/results/safe-parse-url.md](../../research
 | `"javascript:alert(1)"` | `"javascript:alert(1)"` | 💥 `ReferenceError` | `"javascript:alert(1)"` | `"javascript:alert(1)"` | — | `"javascript:alert(1)"` | — | `"javascript:alert(1)"` | — | `"javascript:alert(1)"` | — | `"javascript:alert(1)"` | — | `"javascript:alert(1)"` |
 | `"data:text/plain,hi"` | `"data:text/plain,hi"` | 💥 `ReferenceError` | `"data:text/plain,hi"` | `"data:text/plain,hi"` | — | `"data:text/plain,hi"` | — | `"data:text/plain,hi"` | — | `"data:text/plain,hi"` | — | `"data:text/plain,hi"` | — | `"data:text/plain,hi"` |
 | `""` | `undefined` | 💥 `ReferenceError` | 💥 `TypeError` | `undefined` | — | `null` | — | `""` | — | `""` | — | `""` | — | 💥 `ParseError::RelativeUrlWithoutBase` |
+| `"", "https://example.com/a/b"` | `undefined` | 💥 `ReferenceError` | `"https://example.com/a/b"` | `"https://example.com/a/b"` | `"https://example.com/a/b"` | — | `"https://example.com/a/b"` | — | `"https://example.com/a/"` | — | `"https://example.com/a/b"` | — | `"https://example.com/a/b"` | — |
+| `"   ", "https://example.com/a/b"` | `undefined` | 💥 `ReferenceError` | `"https://example.com/a/b"` | `"https://example.com/a/b"` | `"https://example.com/a/b"` | — | `"https://example.com/a/%20%20%20"` | — | 💥 `IllegalArgumentException` | — | `"https://example.com/a/b"` | — | `"https://example.com/a/b"` | — |
 | `"/path", "https://example.com/a/b"` | `"https://example.com/path"` | 💥 `ReferenceError` | `"https://example.com/path"` | `"https://example.com/path"` | `"https://example.com/path"` | — | `"https://example.com/path"` | — | `"https://example.com/path"` | — | `"https://example.com/path"` | — | `"https://example.com/path"` | — |
 | `"c", "https://example.com/a/b"` | `"https://example.com/a/c"` | 💥 `ReferenceError` | `"https://example.com/a/c"` | `"https://example.com/a/c"` | `"https://example.com/a/c"` | — | `"https://example.com/a/c"` | — | `"https://example.com/a/c"` | — | `"https://example.com/a/c"` | — | `"https://example.com/a/c"` | — |
 | `"?q=1", "https://example.com/a/b"` | `"https://example.com/a/b?q=1"` | 💥 `ReferenceError` | `"https://example.com/a/b?q=1"` | `"https://example.com/a/b?q=1"` | `"https://example.com/a/b?q=1"` | — | `"https://example.com/a/b?q=1"` | — | `"https://example.com/a/?q=1"` | — | `"https://example.com/a/b?q=1"` | — | `"https://example.com/a/b?q=1"` | — |
@@ -99,6 +103,7 @@ The tiers 0–2 summary from [research/results/safe-parse-url.md](../../research
 - Native [`URL.parse`](https://developer.mozilla.org/en-US/docs/Web/API/URL/parse_static) already returns `null` instead of throwing, but only from Node 22.1 and 2024 browsers, and its types need TypeScript 5.5's `lib`; the owner's Angular apps target older runtimes.
 - It also takes `unknown` and a caller-chosen fallback, matching the other parsers.
 - JavaScript's parsers and Rust's `url` crate follow the same WHATWG standard and agree on every case; Go, Java, and Python follow RFC 3986, which splits text into parts without normalizing it, and either accept text the standard rejects (`example.com` and `""` in all three, port `99999` in Python) or reject text it accepts (spaces and backslashes in Java).
+- Every tool compared resolves a blank string against a `base` to the base itself; `safeParseUrl` returns the fallback instead, since a blank value is no value in every parser in the package.
 - Trimming blank characters matches every other parser in the package; no compared tool trims beyond ASCII whitespace, so this is the one place `safeParseUrl` accepts more than `new URL`.
 - A `protocols` list is the common follow-up check on a parsed URL, and as an option it costs one lookup; leaving it off by default keeps the result the native parser's.
 

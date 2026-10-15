@@ -3,7 +3,7 @@ type: Decision
 title: What safeStructuredClone returns when cloning fails
 description: The native structuredClone result when it succeeds; a functions option keeps or omits functions and symbols instead of failing; otherwise the caller's fallback (undefined by default) when it throws or the runtime has no structuredClone.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T18:38:29Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T21:12:31Z }
 ---
 
 # What safeStructuredClone returns when cloning fails
@@ -30,7 +30,8 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T18:38:29Z }
 - **`functions` decides what happens to functions and symbol values,** which the native clone throws on:
   - `"fallback"`, the default, keeps the native behavior: the whole call returns the fallback;
   - `"keep"` puts the same function or symbol in the clone, shared by reference;
-  - `"omit"` leaves those properties, entries, and items out of the clone.
+  - `"omit"` leaves those properties and `Map` / `Set` entries out of the clone, and puts `undefined` in place of an array item, so later indexes don't shift.
+  - When the value itself is a function or symbol, `"keep"` returns it and `"omit"` returns the fallback, since nothing is left to clone.
 - **How `functions` works without a cloner of its own:**
   1. the native `structuredClone` runs first, so a value with no functions or symbols costs one native call;
   2. only if that throws, the value is walked, copying plain objects, arrays, `Map`s, and `Set`s, with each function or symbol swapped for a marker object whose key is unique to the call;

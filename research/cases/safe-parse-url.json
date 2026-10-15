@@ -121,6 +121,18 @@
       }
     },
     {
+      "args": ["", "https://example.com/a/b"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["   ", "https://example.com/a/b"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
       "args": ["/path", "https://example.com/a/b"],
       "expected": "https://example.com/path"
     },

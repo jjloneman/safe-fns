@@ -343,7 +343,8 @@
           }
         },
         {
-          "kind": "n/a"
+          "kind": "value",
+          "value": "\ud800"
         },
         {
           "kind": "value",
