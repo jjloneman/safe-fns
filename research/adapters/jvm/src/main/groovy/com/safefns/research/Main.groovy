@@ -24,7 +24,9 @@ final class Main {
             [
                 CommonsLangTools.TOOL,
                 GroovyTools.TOOL,
+                GsonTools.TOOL,
                 GuavaTools.TOOL,
+                JacksonTools.TOOL,
                 JavaTools.TOOL,
                 KotlinTools.TOOL,
                 SpringTools.TOOL,

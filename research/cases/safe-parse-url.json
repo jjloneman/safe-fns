@@ -1,0 +1,193 @@
+{
+  "cases": [
+    {
+      "args": ["https://example.com"],
+      "expected": "https://example.com/"
+    },
+    {
+      "args": ["HTTPS://EXAMPLE.COM/A"],
+      "expected": "https://example.com/A"
+    },
+    {
+      "args": ["  https://example.com/  "],
+      "expected": "https://example.com/"
+    },
+    {
+      "args": ["\u00a0https://example.com/"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["https://example.com/a b"],
+      "expected": "https://example.com/a%20b"
+    },
+    {
+      "args": ["https://exa mple.com/"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["https://example.com/?q=a b#f g"],
+      "expected": "https://example.com/?q=a%20b#f%20g"
+    },
+    {
+      "args": ["https://example.com/%7Euser"],
+      "expected": "https://example.com/%7Euser"
+    },
+    {
+      "args": ["https://example.com/\u00fc"],
+      "expected": "https://example.com/%C3%BC"
+    },
+    {
+      "args": ["https://m\u00fcnchen.example/"],
+      "expected": "https://xn--mnchen-3ya.example/"
+    },
+    {
+      "args": ["https://user:pass@example.com/"],
+      "expected": "https://user:pass@example.com/"
+    },
+    {
+      "args": ["http://example.com:80/"],
+      "expected": "http://example.com/"
+    },
+    {
+      "args": ["http://example.com:99999/"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["http://[::1]:8080/"],
+      "expected": "http://[::1]:8080/"
+    },
+    {
+      "args": ["http://[::1/"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["http://1.2.3/"],
+      "expected": "http://1.2.0.3/"
+    },
+    {
+      "args": ["https:\\\\example.com\\a"],
+      "expected": "https://example.com/a"
+    },
+    {
+      "args": ["https:example.com"],
+      "expected": "https://example.com/"
+    },
+    {
+      "args": ["example.com"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["/path"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["mailto:a@example.com"],
+      "expected": "mailto:a@example.com"
+    },
+    {
+      "args": ["file:///C:/x"],
+      "expected": "file:///C:/x"
+    },
+    {
+      "args": ["javascript:alert(1)"]
+    },
+    {
+      "args": ["data:text/plain,hi"]
+    },
+    {
+      "args": [""],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["/path", "https://example.com/a/b"],
+      "expected": "https://example.com/path"
+    },
+    {
+      "args": ["c", "https://example.com/a/b"],
+      "expected": "https://example.com/a/c"
+    },
+    {
+      "args": ["?q=1", "https://example.com/a/b"],
+      "expected": "https://example.com/a/b?q=1"
+    },
+    {
+      "args": ["//other.example/x", "https://example.com/"],
+      "expected": "https://other.example/x"
+    },
+    {
+      "args": ["../../../x", "https://example.com/a/b"],
+      "expected": "https://example.com/x"
+    },
+    {
+      "args": ["https://other.example/", "https://example.com/"],
+      "expected": "https://other.example/"
+    },
+    {
+      "args": ["/path", "not a url"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["https://other.example/", "not a url"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [42],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a URL"
+        }
+      ],
+      "expected": "https://example.com/"
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing toString"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "safeParseUrl"
+}

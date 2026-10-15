@@ -1,0 +1,211 @@
+{
+  "cases": [
+    {
+      "args": ["boom"],
+      "expected": "boom"
+    },
+    {
+      "args": [""],
+      "expected": "Unknown error"
+    },
+    {
+      "args": ["  "],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error"
+        }
+      ],
+      "expected": "boom"
+    },
+    {
+      "args": [
+        {
+          "$js": "a TypeError"
+        }
+      ],
+      "expected": "bad type"
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error with no message"
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error with a blank message"
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error with a cause"
+        }
+      ],
+      "expected": "outer"
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error whose message getter throws"
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$js": "a DOMException"
+        }
+      ],
+      "expected": "aborted"
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm Error"
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm Error with a message"
+        }
+      ],
+      "expected": "boom"
+    },
+    {
+      "args": [
+        {
+          "$js": "an object tagged as an Error"
+        }
+      ],
+      "expected": "spoofed"
+    },
+    {
+      "args": [
+        {
+          "message": "from payload"
+        }
+      ],
+      "expected": "from payload"
+    },
+    {
+      "args": [
+        {
+          "message": ""
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "message": 42
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "code": 42
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "error": {
+            "message": "nested"
+          }
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with an inherited message"
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing getter"
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a cycle"
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [42],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [true],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [null],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$js": "a symbol"
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [
+        {
+          "$js": "a function"
+        }
+      ],
+      "expected": "Unknown error"
+    },
+    {
+      "args": [[1, 2]],
+      "expected": "Unknown error"
+    }
+  ],
+  "function": "getErrorMessage"
+}

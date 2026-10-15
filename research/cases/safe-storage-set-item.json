@@ -1,0 +1,61 @@
+{
+  "cases": [
+    {
+      "args": ["key", "value"],
+      "expected": true
+    },
+    {
+      "args": ["present", ""],
+      "expected": true
+    },
+    {
+      "args": ["key", 42],
+      "expected": false
+    },
+    {
+      "args": ["key", null],
+      "expected": false
+    },
+    {
+      "args": [
+        "key",
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "key",
+        {
+          "a": 1
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [42, "value"],
+      "expected": false
+    },
+    {
+      "args": [
+        "key",
+        {
+          "$js": "an object with a throwing toString"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "key",
+        {
+          "$js": "a 12 MB string"
+        }
+      ],
+      "expected": false
+    }
+  ],
+  "function": "safeStorageSetItem"
+}

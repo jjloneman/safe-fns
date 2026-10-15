@@ -1,0 +1,53 @@
+{
+  "cases": [
+    {
+      "args": ["present"],
+      "expected": "value"
+    },
+    {
+      "args": ["missing"],
+      "expected": null
+    },
+    {
+      "args": [""],
+      "expected": null
+    },
+    {
+      "args": ["__proto__"],
+      "expected": null
+    },
+    {
+      "args": [42],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing toString"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "safeStorageGetItem"
+}

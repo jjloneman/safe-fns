@@ -168,7 +168,7 @@
     {
       "call": "is.plainObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
       "locale": "en-US",
       "name": "@sindresorhus/is",
       "outcomes": [
@@ -252,7 +252,7 @@
     {
       "call": "isPlainObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -336,7 +336,7 @@
     {
       "call": "isPlainObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
       "locale": "en-US",
       "name": "is-plain-obj",
       "outcomes": [
@@ -420,7 +420,7 @@
     {
       "call": "_.isPlainObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -504,7 +504,7 @@
     {
       "call": "isObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
       "locale": "en-US",
       "name": "radash",
       "outcomes": [
@@ -588,7 +588,7 @@
     {
       "call": "isPlainObject(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:0ab9921f31524bd758a13e55365d70b1358473fd6368a7fcee5caa98e608c870",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
       "locale": "en-US",
       "name": "remeda",
       "outcomes": [

@@ -14,20 +14,26 @@ import { parseCaseFile } from "../../scripts/research/results.ts";
 import { CROSS_REALM_INPUTS } from "../../test/cross-realm-inputs.ts";
 import { HOSTILE_INPUTS } from "../../test/hostile-inputs.ts";
 import { AJV_COERCE } from "./node/ajv.mts";
+import { CANONICALIZE } from "./node/canonicalize.mts";
 import { CSV } from "./node/csv.mts";
 import { EFFECT } from "./node/effect.mts";
+import { ENSURE_ERROR } from "./node/ensure-error.mts";
 import { ENVALID } from "./node/envalid.mts";
 import { ES_TOOLKIT } from "./node/es-toolkit.mts";
+import { FAST_JSON_STABLE_STRINGIFY } from "./node/fast-json-stable-stringify.mts";
+import { FAST_SAFE_STRINGIFY } from "./node/fast-safe-stringify.mts";
 import { HTML } from "./node/html.mts";
 import { INI } from "./node/ini.mts";
 import { IS_PLAIN_OBJ } from "./node/is-plain-obj.mts";
 import { JOI } from "./node/joi.mts";
 import { JS_BUILT_INS } from "./node/js-built-ins.mts";
+import { JSON_STRINGIFY_SAFE } from "./node/json-stringify-safe.mts";
 import { JSON_FORMAT } from "./node/json.mts";
 import { LODASH } from "./node/lodash.mts";
 import { RADASH } from "./node/radash.mts";
 import { RAMDA } from "./node/ramda.mts";
 import { REMEDA } from "./node/remeda.mts";
+import { SAFE_STABLE_STRINGIFY } from "./node/safe-stable-stringify.mts";
 import { SINDRESORHUS_IS } from "./node/sindresorhus-is.mts";
 import { TOML } from "./node/toml.mts";
 import { errorName } from "./node/tool.mts";
@@ -82,6 +88,7 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ...[...HOSTILE_INPUTS, ...CROSS_REALM_INPUTS].map(
     ({ description, value }) => [description, () => value] as const
   ),
+  ["a 12 MB string", () => "x".repeat(12 * 1024 * 1024)],
   ["a boxed bigint", (): unknown => Object(1n)],
   ["a boxed blank string", () => new String("   ")],
   ["a boxed false", () => new Boolean(false)],
@@ -96,13 +103,57 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
         readonly x = 1;
       })(),
   ],
+  [
+    "a cross-realm Error with a message",
+    (): unknown => runInNewContext('new Error("boom")'),
+  ],
   ["a Date", () => new Date(0)],
+  ["a DOMException", () => new DOMException("aborted", "AbortError")],
   ["a function", () => () => undefined],
+  ["a lone surrogate", () => "\uD800"],
   ["a Map with an entry", () => new Map([["a", 1]])],
+  ["an array with a cycle", () => arrayWithCycle()],
   ["an empty cross-realm object", (): unknown => runInNewContext("({})")],
   ["an empty Map", () => new Map()],
   ["an empty Set", () => new Set()],
   ["an empty URLSearchParams", () => new URLSearchParams()],
+  ["an Error", () => new Error("boom")],
+  ["an Error whose message getter throws", () => errorWithThrowingMessage()],
+  ["an Error with a blank message", () => new Error(" \n")],
+  [
+    "an Error with a cause",
+    () => new Error("outer", { cause: new Error("inner") }),
+  ],
+  ["an Error with no message", () => new Error()],
+  ["an object holding a function", () => ({ a: 1, callback: () => 1 })],
+  [
+    "an object tagged as an Error",
+    () => ({ message: "spoofed", [Symbol.toStringTag]: "Error" }),
+  ],
+  [
+    "an object whose toJSON throws",
+    () => ({
+      toJSON: (): never => {
+        throw new Error("toJSON trap");
+      },
+    }),
+  ],
+  ["an object with a cycle", () => objectWithCycle()],
+  [
+    "an object with a getter",
+    () => ({
+      get a(): number {
+        return 1;
+      },
+    }),
+  ],
+  ["an object with a nested cycle", () => objectWithNestedCycle()],
+  [
+    "an object with an inherited message",
+    (): unknown => Object.create({ message: "inherited" }),
+  ],
+  ["an object with a shared reference", () => objectWithSharedReference()],
+  ["an object with a toJSON", () => ({ toJSON: () => "custom" })],
   [
     "an object with Symbol.toStringTag",
     () => ({ [Symbol.toStringTag]: "Custom" }),
@@ -112,6 +163,12 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
     () => Object.assign(Object.create(null) as object, { a: 1 }),
   ],
   ["a proxy of a plain object", () => new Proxy({ a: 1 }, {})],
+  ["a RegExp", () => /a/gu],
+  ["a Set with an entry", () => new Set([1])],
+  ["a sparse array", () => sparseArray()],
+  ["a TypeError", () => new TypeError("bad type")],
+  ["a Uint8Array", () => Uint8Array.of(1, 2)],
+  ["a URL", () => new URL("https://example.com/")],
   ["a URLSearchParams with an entry", () => new URLSearchParams("a=1")],
 ]);
 
@@ -145,7 +202,53 @@ const TOOLS: readonly Tool[] = [
   INI,
   AJV_COERCE,
   HTML,
+  SAFE_STABLE_STRINGIFY,
+  FAST_SAFE_STRINGIFY,
+  JSON_STRINGIFY_SAFE,
+  FAST_JSON_STABLE_STRINGIFY,
+  CANONICALIZE,
+  ENSURE_ERROR,
 ];
+
+/** Build an array whose second item is the array itself. */
+function arrayWithCycle(): unknown[] {
+  const array: unknown[] = [1];
+  array.push(array);
+
+  return array;
+}
+
+/** Build an `Error` whose `message` getter throws. */
+function errorWithThrowingMessage(): Error {
+  return Object.defineProperty(new Error("hidden"), "message", {
+    get: (): never => {
+      throw new Error("message trap");
+    },
+  });
+}
+
+/** Build `{ name: "a", self }`, where `self` is the object itself. */
+function objectWithCycle(): Record<string, unknown> {
+  const object: Record<string, unknown> = { name: "a" };
+  object.self = object;
+
+  return object;
+}
+
+/** Build `{ a: { b } }`, where `b` is the outer object. */
+function objectWithNestedCycle(): Record<string, unknown> {
+  const object: Record<string, unknown> = {};
+  object.a = { b: object };
+
+  return object;
+}
+
+/** Build `{ a, b }`, where both keys hold the same, non-cyclic object. */
+function objectWithSharedReference(): Record<string, unknown> {
+  const shared = { x: 1 };
+
+  return { a: shared, b: shared };
+}
 
 /** Build the value a `$js` tag names. */
 function resolveJs(name: string): unknown {
@@ -171,6 +274,15 @@ function runProbe({ args, probe }: ProbeRun): Outcome {
   } catch (error) {
     return { error: errorName(error), kind: "error" };
   }
+}
+
+/** Build `[1, <hole>, 3]`, an array with a missing index. */
+function sparseArray(): unknown[] {
+  const array: unknown[] = [];
+  array[0] = 1;
+  array[2] = 3;
+
+  return array;
 }
 
 /** Run every tool's probes for a case file's function. */

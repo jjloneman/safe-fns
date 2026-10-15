@@ -1,0 +1,29 @@
+{
+  "cases": [
+    {
+      "args": ["present"],
+      "expected": true
+    },
+    {
+      "args": ["missing"],
+      "expected": true
+    },
+    {
+      "args": [42],
+      "expected": false
+    },
+    {
+      "args": [null],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing toString"
+        }
+      ],
+      "expected": false
+    }
+  ],
+  "function": "safeStorageRemoveItem"
+}

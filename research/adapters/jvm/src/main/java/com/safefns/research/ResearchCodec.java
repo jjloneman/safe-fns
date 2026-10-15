@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import tools.jackson.core.JacksonException;
+import tools.jackson.core.json.JsonWriteFeature;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.node.JsonNodeFactory;
@@ -44,7 +45,14 @@ public final class ResearchCodec {
 
   private static final JsonNodeFactory FACTORY = JsonNodeFactory.instance;
 
-  private static final JsonMapper MAPPER = JsonMapper.builder().build();
+  /**
+   * Reads case files and writes the adapter's output; non-ASCII is escaped, so
+   * a lone surrogate survives `System.out`'s UTF-8 encoding as an escape
+   * instead of becoming `?`.
+   */
+  private static final JsonMapper MAPPER = JsonMapper.builder()
+    .enable(JsonWriteFeature.ESCAPE_NON_ASCII)
+    .build();
 
   /**
    * The largest integer a JavaScript number holds exactly: 2^53 - 1.

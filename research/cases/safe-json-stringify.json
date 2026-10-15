@@ -1,0 +1,263 @@
+{
+  "cases": [
+    {
+      "args": [
+        {
+          "a": 1,
+          "b": "x"
+        }
+      ],
+      "expected": "{\"a\":1,\"b\":\"x\"}"
+    },
+    {
+      "args": [[1, "a", null]],
+      "expected": "[1,\"a\",null]"
+    },
+    {
+      "args": ["text"],
+      "expected": "\"text\""
+    },
+    {
+      "args": [42],
+      "expected": "42"
+    },
+    {
+      "args": [
+        {
+          "$number": "-0"
+        }
+      ],
+      "expected": "0"
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        }
+      ],
+      "expected": "null"
+    },
+    {
+      "args": [
+        {
+          "$number": "Infinity"
+        }
+      ],
+      "expected": "null"
+    },
+    {
+      "args": [1e21],
+      "expected": "1e+21"
+    },
+    {
+      "args": [null],
+      "expected": "null"
+    },
+    {
+      "args": [true],
+      "expected": "true"
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "$undefined": true
+          },
+          "b": 1
+        }
+      ],
+      "expected": "{\"b\":1}"
+    },
+    {
+      "args": [
+        [
+          {
+            "$undefined": true
+          }
+        ]
+      ],
+      "expected": "[null]"
+    },
+    {
+      "args": [
+        {
+          "$bigint": "12"
+        }
+      ],
+      "expected": "\"12\""
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "$bigint": "12"
+          }
+        }
+      ],
+      "expected": "{\"a\":\"12\"}"
+    },
+    {
+      "args": [
+        {
+          "$bigint": "12345678901234567890"
+        }
+      ],
+      "expected": "\"12345678901234567890\""
+    },
+    {
+      "args": [
+        {
+          "__proto__": 1
+        }
+      ],
+      "expected": "{\"__proto__\":1}"
+    },
+    {
+      "args": [
+        {
+          "$js": "a lone surrogate"
+        }
+      ],
+      "expected": "\"\\ud800\""
+    },
+    {
+      "args": ["\u2028"],
+      "expected": "\"\u2028\""
+    },
+    {
+      "args": [
+        {
+          "$js": "a function"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a symbol"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a sparse array"
+        }
+      ],
+      "expected": "[1,null,3]"
+    },
+    {
+      "args": [
+        {
+          "$js": "a Date"
+        }
+      ],
+      "expected": "\"1970-01-01T00:00:00.000Z\""
+    },
+    {
+      "args": [
+        {
+          "$js": "a Map with an entry"
+        }
+      ],
+      "expected": "{}"
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a toJSON"
+        }
+      ],
+      "expected": "\"custom\""
+    },
+    {
+      "args": [
+        {
+          "$js": "an object whose toJSON throws"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing getter"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy whose get trap throws"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a cycle"
+        }
+      ],
+      "expected": "{\"name\":\"a\",\"self\":\"[Circular]\"}"
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a nested cycle"
+        }
+      ],
+      "expected": "{\"a\":{\"b\":\"[Circular]\"}}"
+    },
+    {
+      "args": [
+        {
+          "$js": "an array with a cycle"
+        }
+      ],
+      "expected": "[1,\"[Circular]\"]"
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a shared reference"
+        }
+      ],
+      "expected": "{\"a\":{\"x\":1},\"b\":{\"x\":1}}"
+    }
+  ],
+  "function": "safeJsonStringify"
+}

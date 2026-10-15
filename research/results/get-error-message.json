@@ -1,0 +1,526 @@
+{
+  "cases": [
+    [
+      "boom"
+    ],
+    [
+      ""
+    ],
+    [
+      "  "
+    ],
+    [
+      {
+        "$js": "an Error"
+      }
+    ],
+    [
+      {
+        "$js": "a TypeError"
+      }
+    ],
+    [
+      {
+        "$js": "an Error with no message"
+      }
+    ],
+    [
+      {
+        "$js": "an Error with a blank message"
+      }
+    ],
+    [
+      {
+        "$js": "an Error with a cause"
+      }
+    ],
+    [
+      {
+        "$js": "an Error whose message getter throws"
+      }
+    ],
+    [
+      {
+        "$js": "a DOMException"
+      }
+    ],
+    [
+      {
+        "$js": "a cross-realm Error"
+      }
+    ],
+    [
+      {
+        "$js": "a cross-realm Error with a message"
+      }
+    ],
+    [
+      {
+        "$js": "an object tagged as an Error"
+      }
+    ],
+    [
+      {
+        "message": "from payload"
+      }
+    ],
+    [
+      {
+        "message": ""
+      }
+    ],
+    [
+      {
+        "message": 42
+      }
+    ],
+    [
+      {
+        "code": 42
+      }
+    ],
+    [
+      {
+        "error": {
+          "message": "nested"
+        }
+      }
+    ],
+    [
+      {
+        "$js": "an object with an inherited message"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a throwing getter"
+      }
+    ],
+    [
+      {
+        "$js": "a revoked proxy"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a cycle"
+      }
+    ],
+    [
+      42
+    ],
+    [
+      true
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      {
+        "$js": "a symbol"
+      }
+    ],
+    [
+      {
+        "$js": "a function"
+      }
+    ],
+    [
+      [
+        1,
+        2
+      ]
+    ]
+  ],
+  "columns": [
+    {
+      "call": "getErrorMessage",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "boom"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "boom"
+        },
+        {
+          "kind": "value",
+          "value": "bad type"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "outer"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "aborted"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "boom"
+        },
+        {
+          "kind": "value",
+          "value": "spoofed"
+        },
+        {
+          "kind": "value",
+          "value": "from payload"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        },
+        {
+          "kind": "value",
+          "value": "Unknown error"
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "ensureError(value).message",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "ensure-error",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "'boom'"
+        },
+        {
+          "kind": "value",
+          "value": "''"
+        },
+        {
+          "kind": "value",
+          "value": "'  '"
+        },
+        {
+          "kind": "value",
+          "value": "boom"
+        },
+        {
+          "kind": "value",
+          "value": "bad type"
+        },
+        {
+          "kind": "value",
+          "value": "<No error message>"
+        },
+        {
+          "kind": "value",
+          "value": " \n"
+        },
+        {
+          "kind": "value",
+          "value": "outer"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "aborted"
+        },
+        {
+          "kind": "value",
+          "value": "{}"
+        },
+        {
+          "kind": "value",
+          "value": "{}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"message\":\"spoofed\"}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"message\":\"from payload\"}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"message\":\"\"}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"message\":42}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"code\":42}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"error\":{\"message\":\"nested\"}}"
+        },
+        {
+          "kind": "value",
+          "value": "{}"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "undefined"
+        },
+        {
+          "kind": "value",
+          "value": "Symbol(hostile)"
+        },
+        {
+          "kind": "value",
+          "value": "[Function (anonymous)]"
+        },
+        {
+          "kind": "value",
+          "value": "[1,2]"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "5.0.0"
+    },
+    {
+      "call": "String(value)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "boom"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "  "
+        },
+        {
+          "kind": "value",
+          "value": "Error: boom"
+        },
+        {
+          "kind": "value",
+          "value": "TypeError: bad type"
+        },
+        {
+          "kind": "value",
+          "value": "Error"
+        },
+        {
+          "kind": "value",
+          "value": "Error:  \n"
+        },
+        {
+          "kind": "value",
+          "value": "Error: outer"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "AbortError: aborted"
+        },
+        {
+          "kind": "value",
+          "value": "Error"
+        },
+        {
+          "kind": "value",
+          "value": "Error: boom"
+        },
+        {
+          "kind": "value",
+          "value": "[object Error]"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "undefined"
+        },
+        {
+          "kind": "value",
+          "value": "Symbol(hostile)"
+        },
+        {
+          "kind": "value",
+          "value": "() => undefined"
+        },
+        {
+          "kind": "value",
+          "value": "1,2"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.10.0"
+    }
+  ],
+  "function": "getErrorMessage"
+}

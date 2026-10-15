@@ -2,7 +2,7 @@ import lodash from "lodash";
 
 import type { Tool } from "./tool.mts";
 
-import { packageVersion } from "./tool.mts";
+import { markReferences, packageVersion } from "./tool.mts";
 
 /** lodash's checks and coercions. */
 export const LODASH: Tool = {
@@ -37,6 +37,12 @@ export const LODASH: Tool = {
     ],
     safeParseString: [
       { call: "_.toString(value)", run: ([value]) => lodash.toString(value) },
+    ],
+    safeStructuredClone: [
+      {
+        call: "_.cloneDeep(value)",
+        run: ([value]) => markReferences(lodash.cloneDeep(value)),
+      },
     ],
   },
   name: "lodash",

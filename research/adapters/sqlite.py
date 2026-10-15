@@ -62,6 +62,7 @@ TOOLS: list[Tool] = [
         "functions": {
             "safeParseBoolean": [select("SELECT ? IS TRUE")],
             "safeParseInteger": [select("SELECT CAST(? AS INTEGER)")],
+            "safeParseJson": [select("SELECT json(?)")],
             "safeParseNumber": [select("SELECT CAST(? AS REAL)")],
             "safeParseString": [
                 select("SELECT CAST(? AS TEXT)"),

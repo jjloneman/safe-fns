@@ -4,11 +4,12 @@ import {
   toNumber as esToolkitToNumber,
   toString as esToolkitToString,
 } from "es-toolkit/compat";
+import { cloneDeep as esToolkitCloneDeep } from "es-toolkit/object";
 import { isPlainObject as esToolkitIsPlainObject } from "es-toolkit/predicate";
 
 import type { Tool } from "./tool.mts";
 
-import { packageVersion } from "./tool.mts";
+import { markReferences, packageVersion } from "./tool.mts";
 
 /** es-toolkit's own predicate, and its lodash-compatible layer. */
 export const ES_TOOLKIT: Tool = {
@@ -41,6 +42,12 @@ export const ES_TOOLKIT: Tool = {
       {
         call: "compat.toString(value)",
         run: ([value]) => esToolkitToString(value),
+      },
+    ],
+    safeStructuredClone: [
+      {
+        call: "cloneDeep(value)",
+        run: ([value]) => markReferences(esToolkitCloneDeep(value)),
       },
     ],
   },

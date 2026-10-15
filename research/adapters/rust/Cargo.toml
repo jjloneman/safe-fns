@@ -1,5 +1,6 @@
-# The Rust adapter, run by the `rust` Compose service; its only dependency is
-# the JSON codec's, prefetched into the image so a run needs no network.
+# The Rust adapter, run by the `rust` Compose service; its dependencies are the
+# JSON codec's and the WHATWG URL parser's, prefetched into the image so a run
+# needs no network.
 [package]
 edition = "2024"
 name = "research-adapter"
@@ -10,6 +11,7 @@ version = "0.0.0"
 # `arbitrary_precision` keeps a number's digits, so an integer of any size
 # decodes exactly, as it does in Python.
 serde_json = { features = ["arbitrary_precision"], version = "=1.0.151" }
+url = { version = "=2.5.8" }
 
 [lints.clippy]
 pedantic = { level = "warn", priority = -1 }
