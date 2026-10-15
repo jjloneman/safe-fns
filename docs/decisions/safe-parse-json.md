@@ -3,7 +3,7 @@ type: Decision
 title: What safeParseJson returns
 description: Strings, boxed strings, and UTF-8 or BOM-marked UTF-16 bytes parse to a JsonValue by default; an optional guard checks the shape at runtime and returns the fallback when it fails, and an explicit type argument is the caller's own unchecked assertion.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T21:36:20Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T21:43:53Z }
 ---
 
 # What safeParseJson returns
@@ -30,6 +30,7 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T21:36:20Z }
   - A boxed string (`new String('{"a":1}')`) is unwrapped first, identified by brand check, as every parser does.
   - Numbers, booleans, `null`, arrays, and other objects return the fallback, although native `JSON.parse` coerces them to text first (`JSON.parse(42)` is `42`); nothing's `toString` is ever called.
 - **Bytes are decoded to text first:** any typed array, including a Node `Buffer`, a `DataView`, or an `ArrayBuffer`, so `safeParseJson(fs.readFileSync(path))` and `safeParseJson(await response.arrayBuffer())` both work.
+  - Every view is read as the bytes it covers, so a `Uint16Array` or `Float64Array` is raw bytes in the platform's byte order, not code units: `new Uint16Array([0x7b, 0x7d])` decodes to text with NUL characters and returns the fallback.
   - The encoding comes from a leading byte order mark: `EF BB BF` is UTF-8, `FF FE` is UTF-16LE, and `FE FF` is UTF-16BE; without one, the bytes are UTF-8, as [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259#section-8.1) requires of exchanged JSON.
   - The mark itself is dropped, and decoding is strict (`TextDecoder` with `fatal: true`), so invalid bytes return the fallback rather than turning into `�`.
   - UTF-16 without a mark isn't guessed: read as UTF-8 it holds NUL characters, which JSON rejects, so it returns the fallback.
