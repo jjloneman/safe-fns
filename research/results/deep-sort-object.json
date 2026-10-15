@@ -1,0 +1,771 @@
+{
+  "cases": [
+    [
+      "{\"b\":1,\"a\":2}"
+    ],
+    [
+      "{\"b\":1,\"B\":2,\"a\":3,\"A\":4}"
+    ],
+    [
+      "{\"a10\":1,\"a2\":2,\"a1\":3}"
+    ],
+    [
+      "{\"10\":1,\"2\":2,\"a\":3}"
+    ],
+    [
+      "{\"b\":1,\"1\":2,\"-1\":3,\"01\":4,\"1.5\":5,\"4294967295\":6}"
+    ],
+    [
+      "{\"é\":1,\"z\":2,\"e\":3}"
+    ],
+    [
+      "{\"｡\":1,\"😀\":2}"
+    ],
+    [
+      "{\"b\":{\"d\":1,\"c\":2},\"a\":[{\"z\":1,\"y\":2}]}"
+    ],
+    [
+      "{\"a\":[3,1,2],\"b\":[\"b\",\"a\"]}"
+    ],
+    [
+      "{\"b\":1,\"__proto__\":2,\"a\":3}"
+    ],
+    [
+      "[{\"b\":1,\"a\":2},{\"d\":3,\"c\":4}]"
+    ],
+    [
+      "{\"bb\":1,\"a\":2,\"ccc\":3}"
+    ],
+    [
+      "42"
+    ],
+    [
+      "\"text\""
+    ],
+    [
+      "null"
+    ]
+  ],
+  "columns": [
+    {
+      "call": "deepSortObject",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"A\":4,\"B\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a1\":3,\"a10\":1,\"a2\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"2\":2,\"10\":1,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"1\":2,\"-1\":3,\"01\":4,\"1.5\":5,\"4294967295\":6,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"e\":3,\"z\":2,\"é\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"😀\":2,\"｡\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[{\"y\":2,\"z\":1}],\"b\":{\"c\":2,\"d\":1}}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[3,1,2],\"b\":[\"b\",\"a\"]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "[{\"a\":2,\"b\":1},{\"c\":4,\"d\":3}]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"bb\":1,\"ccc\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "canonicalize(JSON.parse(value))",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "canonicalize",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"A\":4,\"B\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a1\":3,\"a10\":1,\"a2\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"10\":1,\"2\":2,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"-1\":3,\"01\":4,\"1\":2,\"1.5\":5,\"4294967295\":6,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"e\":3,\"z\":2,\"é\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"😀\":2,\"｡\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[{\"y\":2,\"z\":1}],\"b\":{\"c\":2,\"d\":1}}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[3,1,2],\"b\":[\"b\",\"a\"]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "[{\"a\":2,\"b\":1},{\"c\":4,\"d\":3}]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"bb\":1,\"ccc\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "5.1.0"
+    },
+    {
+      "call": "stringify(JSON.parse(value))",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "fast-json-stable-stringify",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"A\":4,\"B\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a1\":3,\"a10\":1,\"a2\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"10\":1,\"2\":2,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"-1\":3,\"01\":4,\"1\":2,\"1.5\":5,\"4294967295\":6,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"e\":3,\"z\":2,\"é\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"😀\":2,\"｡\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[{\"y\":2,\"z\":1}],\"b\":{\"c\":2,\"d\":1}}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[3,1,2],\"b\":[\"b\",\"a\"]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "[{\"a\":2,\"b\":1},{\"c\":4,\"d\":3}]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"bb\":1,\"ccc\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.1.0"
+    },
+    {
+      "call": "JSON.stringify(JSON.parse(value))",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:761948ce0352376a9dea504e5c2b6cef0ecbcabc60bb85bd2fa3778a1f5b209e",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"b\":1,\"a\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"b\":1,\"B\":2,\"a\":3,\"A\":4}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a10\":1,\"a2\":2,\"a1\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"2\":2,\"10\":1,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"1\":2,\"b\":1,\"-1\":3,\"01\":4,\"1.5\":5,\"4294967295\":6}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"é\":1,\"z\":2,\"e\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"｡\":1,\"😀\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"b\":{\"d\":1,\"c\":2},\"a\":[{\"z\":1,\"y\":2}]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[3,1,2],\"b\":[\"b\",\"a\"]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"b\":1,\"__proto__\":2,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "[{\"b\":1,\"a\":2},{\"d\":3,\"c\":4}]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"bb\":1,\"a\":2,\"ccc\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "JSON.stringify(JSON.parse(value))",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"b\":1,\"a\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"b\":1,\"B\":2,\"a\":3,\"A\":4}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a10\":1,\"a2\":2,\"a1\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"2\":2,\"10\":1,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"1\":2,\"b\":1,\"-1\":3,\"01\":4,\"1.5\":5,\"4294967295\":6}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"é\":1,\"z\":2,\"e\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"｡\":1,\"😀\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"b\":{\"d\":1,\"c\":2},\"a\":[{\"z\":1,\"y\":2}]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[3,1,2],\"b\":[\"b\",\"a\"]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"b\":1,\"__proto__\":2,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "[{\"b\":1,\"a\":2},{\"d\":3,\"c\":4}]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"bb\":1,\"a\":2,\"ccc\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.10.0"
+    },
+    {
+      "call": "stringify(JSON.parse(value))",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "safe-stable-stringify",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"A\":4,\"B\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a1\":3,\"a10\":1,\"a2\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"10\":1,\"2\":2,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"-1\":3,\"01\":4,\"1\":2,\"1.5\":5,\"4294967295\":6,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"e\":3,\"z\":2,\"é\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"😀\":2,\"｡\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[{\"y\":2,\"z\":1}],\"b\":{\"c\":2,\"d\":1}}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[3,1,2],\"b\":[\"b\",\"a\"]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "[{\"a\":2,\"b\":1},{\"c\":4,\"d\":3}]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"bb\":1,\"ccc\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.5.0"
+    },
+    {
+      "call": "json.Unmarshal(value, &v); json.Marshal(v)",
+      "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+      "inputs": "sha256:9d7311e1f994672a872ffacbbe9c894234379a07e4cc64f9c466d89f4d471805",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"A\":4,\"B\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a1\":3,\"a10\":1,\"a2\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"10\":1,\"2\":2,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"-1\":3,\"01\":4,\"1\":2,\"1.5\":5,\"4294967295\":6,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"e\":3,\"z\":2,\"é\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"｡\":1,\"😀\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[{\"y\":2,\"z\":1}],\"b\":{\"c\":2,\"d\":1}}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[3,1,2],\"b\":[\"b\",\"a\"]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "[{\"a\":2,\"b\":1},{\"c\":4,\"d\":3}]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"bb\":1,\"ccc\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.1"
+    },
+    {
+      "call": "sortingMapper.writeValueAsString(mapper.readValue(value, Object.class))",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "locale": "en",
+      "name": "Jackson",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"A\":4,\"B\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a1\":3,\"a10\":1,\"a2\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"10\":1,\"2\":2,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"-1\":3,\"01\":4,\"1\":2,\"1.5\":5,\"4294967295\":6,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"e\":3,\"z\":2,\"é\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"😀\":2,\"｡\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[{\"y\":2,\"z\":1}],\"b\":{\"c\":2,\"d\":1}}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[3,1,2],\"b\":[\"b\",\"a\"]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "[{\"a\":2,\"b\":1},{\"c\":4,\"d\":3}]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"bb\":1,\"ccc\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "3.2.3"
+    },
+    {
+      "call": "json.dumps(json.loads(value), ensure_ascii=False, separators=(\",\", \":\"), sort_keys=True)",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"A\":4,\"B\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a1\":3,\"a10\":1,\"a2\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"10\":1,\"2\":2,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"-1\":3,\"01\":4,\"1\":2,\"1.5\":5,\"4294967295\":6,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"e\":3,\"z\":2,\"é\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"｡\":1,\"😀\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[{\"y\":2,\"z\":1}],\"b\":{\"c\":2,\"d\":1}}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[3,1,2],\"b\":[\"b\",\"a\"]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "[{\"a\":2,\"b\":1},{\"c\":4,\"d\":3}]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"bb\":1,\"ccc\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "serde_json::to_string(&serde_json::from_str::<Value>(value)?) (arbitrary_precision)",
+      "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
+      "inputs": "sha256:ddb1e2ed335640c1d7d7b888941e9ed51ccc574b2fed1c4635f0a3078575f67b",
+      "locale": "C.UTF-8",
+      "name": "Rust",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"A\":4,\"B\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a1\":3,\"a10\":1,\"a2\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"10\":1,\"2\":2,\"a\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"-1\":3,\"01\":4,\"1\":2,\"1.5\":5,\"4294967295\":6,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"e\":3,\"z\":2,\"é\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"｡\":1,\"😀\":2}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[{\"y\":2,\"z\":1}],\"b\":{\"c\":2,\"d\":1}}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":[3,1,2],\"b\":[\"b\",\"a\"]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__proto__\":2,\"a\":3,\"b\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "[{\"a\":2,\"b\":1},{\"c\":4,\"d\":3}]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":2,\"bb\":1,\"ccc\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "\"text\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        }
+      ],
+      "service": "rust",
+      "tier": 2,
+      "version": "1.99.0"
+    }
+  ],
+  "function": "deepSortObject"
+}
