@@ -28,6 +28,7 @@ final class Main {
                 JavaTools.TOOL,
                 KotlinTools.TOOL,
                 SpringTools.TOOL,
+                XmlSchemaTools.TOOL,
             ]
         )
     }

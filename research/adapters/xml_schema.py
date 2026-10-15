@@ -1,7 +1,23 @@
-"""The XML Schema adapter: decodes each case as an XSD 1.0 built-in type.
+r"""The `xmlschema` adapter: decodes each case as an XSD 1.0 built-in type.
 
 Usage: `python xml_schema.py <case-file>...`, inside the `xml-schema` Compose
 service, whose image adds the `xmlschema` package to the pinned Python.
+
+The column is named for the library, not the spec, because `xmlschema`'s
+`whiteSpace` normalization deviates from XSD 1.0:
+
+- The spec's `replace` and `collapse` act on exactly tab, LF, CR, and space
+  (https://www.w3.org/TR/xmlschema-2/#rf-whiteSpace).
+
+- `xmlschema` normalizes with Unicode-aware regex `\s` and `str.strip()`,
+  so it also collapses NBSP, NEL, and every other Unicode `White_Space`
+  character, in `token` and every `collapse` type (`boolean`, `integer`,
+  `double`).
+
+- Its `integer` also takes whatever Python's `int()` does, such as `1_000`
+  and Arabic-Indic digits, where the spec's lexical space is ASCII digits.
+
+- The JVM adapter's Xerces-J column is the spec-conformant `XML Schema 1.0`.
 """
 
 from __future__ import annotations
@@ -52,12 +68,12 @@ TOOLS: list[Tool] = [
             "safeParseNumber": [type_probe("double")],
             "safeParseString": [type_probe("string"), type_probe("token")],
         },
-        "name": "XML Schema 1.0",
-        "tier": 3,
+        "name": "xmlschema (Python)",
+        "tier": 4,
         "version": f"xmlschema {version('xmlschema')}",
     }
 ]
-"""The one tool this adapter runs: XSD 1.0's built-in types."""
+"""The one tool this adapter runs: XSD 1.0's types, per `xmlschema`."""
 
 
 if __name__ == "__main__":

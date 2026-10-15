@@ -2850,7 +2850,7 @@
     {
       "call": "NumberUtils.createNumber(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Commons Lang",
       "outcomes": [
@@ -3018,7 +3018,7 @@
     {
       "call": "NumberUtils.toDouble(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Commons Lang",
       "outcomes": [
@@ -3365,7 +3365,7 @@
     {
       "call": "value as Double",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -3556,7 +3556,7 @@
     {
       "call": "value.toBigDecimal()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -3769,7 +3769,7 @@
     {
       "call": "value.toDouble()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -3960,7 +3960,7 @@
     {
       "call": "Doubles.tryParse(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Guava",
       "outcomes": [
@@ -4133,7 +4133,7 @@
     {
       "call": "Double.parseDouble(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -4306,7 +4306,7 @@
     {
       "call": "value.toDoubleOrNull()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [
@@ -4847,7 +4847,7 @@
     {
       "call": "conversionService.convert(value, Double.class)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:d787099caa7ad10470590778a7aba0c9c06a47c61ec1315599dfeb738750f2f8",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
       "locale": "en",
       "name": "Spring",
       "outcomes": [
@@ -6972,9 +6972,9 @@
     },
     {
       "call": "decode(<double>value</double>)",
-      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
-      "inputs": "sha256:a8a3e9ce51165e63dfd632a196ed157c66afbaef67eacdbaa2617ec3c6791d1a",
-      "locale": "C.UTF-8",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:62b96bec7eb98c4ae779c3fec6cdcad967c240b4cbe793bd0d249cd763f1ca5d",
+      "locale": "en",
       "name": "XML Schema 1.0",
       "outcomes": [
         {
@@ -7008,8 +7008,8 @@
           "value": 1.5
         },
         {
-          "kind": "value",
-          "value": 42
+          "error": "SAXParseException",
+          "kind": "error"
         },
         {
           "kind": "value",
@@ -7038,31 +7038,31 @@
           }
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
@@ -7072,27 +7072,27 @@
           }
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
-          "error": "XMLSchemaValidationError",
+          "error": "SAXParseException",
           "kind": "error"
         },
         {
@@ -7135,9 +7135,9 @@
           "kind": "n/a"
         }
       ],
-      "service": "xml-schema",
+      "service": "jvm",
       "tier": 3,
-      "version": "xmlschema 4.3.2"
+      "version": "Xerces-J 2.12.2"
     },
     {
       "call": "parse(value, { version: \"1.1\" })",
@@ -10753,6 +10753,175 @@
       "service": "node",
       "tier": 4,
       "version": "13.15.35"
+    },
+    {
+      "call": "decode(<double>value</double>)",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:a8a3e9ce51165e63dfd632a196ed157c66afbaef67eacdbaa2617ec3c6791d1a",
+      "locale": "C.UTF-8",
+      "name": "xmlschema (Python)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "-0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "xml-schema",
+      "tier": 4,
+      "version": "xmlschema 4.3.2"
     },
     {
       "call": "printf '%s' \"$(( $1 ))\"",
