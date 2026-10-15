@@ -50,6 +50,15 @@
 | `{ "a": 1 }` | `undefined` | 💥 `SyntaxError` | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
 | `‹a boxed JSON string›` | `{ "a": 1 }` | — | `{ "a": 1 }` | 💥 `ValiError` | — | — | — | — | — | — |
 | `‹a boxed string›` | `undefined` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹a Buffer of JSON text›` | `{ "a": 1 }` | — | `{ "a": 1 }` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹UTF-8 bytes of JSON text›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹UTF-8 bytes of JSON text with a BOM›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹an ArrayBuffer of JSON text›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹a DataView of JSON text›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹UTF-16LE bytes of JSON text with a BOM›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹UTF-16BE bytes of JSON text with a BOM›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹UTF-16LE bytes of JSON text without a BOM›` | `undefined` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹invalid UTF-8 bytes›` | `undefined` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
 | `‹an object with a throwing toString›` | `undefined` | — | 💥 `Error` | 💥 `ValiError` | — | — | — | — | — | — |
 
 ## Every tool
@@ -100,6 +109,15 @@
 | `{ "a": 1 }` | `undefined` | 💥 `SyntaxError` | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
 | `‹a boxed JSON string›` | `{ "a": 1 }` | — | `{ "a": 1 }` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
 | `‹a boxed string›` | `undefined` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a Buffer of JSON text›` | `{ "a": 1 }` | — | `{ "a": 1 }` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹UTF-8 bytes of JSON text›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹UTF-8 bytes of JSON text with a BOM›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹an ArrayBuffer of JSON text›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹a DataView of JSON text›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹UTF-16LE bytes of JSON text with a BOM›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹UTF-16BE bytes of JSON text with a BOM›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹UTF-16LE bytes of JSON text without a BOM›` | `undefined` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| `‹invalid UTF-8 bytes›` | `undefined` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
 | `‹an object with a throwing toString›` | `undefined` | — | 💥 `Error` | 💥 `ValiError` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
 
 ## Versions

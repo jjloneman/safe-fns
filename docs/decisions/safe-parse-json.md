@@ -1,9 +1,9 @@
 ---
 type: Decision
 title: What safeParseJson returns
-description: A JsonValue by default; an optional guard checks the shape at runtime and returns the fallback when it fails, and an explicit type argument is the caller's own unchecked assertion.
+description: Strings, boxed strings, and UTF-8 or BOM-marked UTF-16 bytes parse to a JsonValue by default; an optional guard checks the shape at runtime and returns the fallback when it fails, and an explicit type argument is the caller's own unchecked assertion.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T14:51:45Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T21:36:20Z }
 ---
 
 # What safeParseJson returns
@@ -26,12 +26,18 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T14:51:45Z }
   ): T | F
   ```
 
-- **A string or a boxed string is parsed; any other input returns the fallback.**
+- **A string, a boxed string, or bytes are parsed; any other input returns the fallback.**
   - A boxed string (`new String('{"a":1}')`) is unwrapped first, identified by brand check, as every parser does.
-  - Numbers, booleans, `null`, arrays, and buffers return the fallback, although native `JSON.parse` coerces them to text first (`JSON.parse(42)` is `42`).
+  - Numbers, booleans, `null`, arrays, and other objects return the fallback, although native `JSON.parse` coerces them to text first (`JSON.parse(42)` is `42`); nothing's `toString` is ever called.
+- **Bytes are decoded to text first:** any typed array, including a Node `Buffer`, a `DataView`, or an `ArrayBuffer`, so `safeParseJson(fs.readFileSync(path))` and `safeParseJson(await response.arrayBuffer())` both work.
+  - The encoding comes from a leading byte order mark: `EF BB BF` is UTF-8, `FF FE` is UTF-16LE, and `FE FF` is UTF-16BE; without one, the bytes are UTF-8, as [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259#section-8.1) requires of exchanged JSON.
+  - The mark itself is dropped, and decoding is strict (`TextDecoder` with `fatal: true`), so invalid bytes return the fallback rather than turning into `�`.
+  - UTF-16 without a mark isn't guessed: read as UTF-8 it holds NUL characters, which JSON rejects, so it returns the fallback.
+  - There's no `encoding` option: a wrong single-byte encoding never fails, it decodes to different text, so a caller with legacy bytes decodes them explicitly, `safeParseJson(new TextDecoder("shift_jis").decode(bytes))`.
+  - `TextDecoder` is looked up when the function is called, inside the same `try`: where it's missing (Hermes), bytes return the fallback, strings still parse, and a polyfill installed globally is used.
 - **Text that isn't valid JSON returns the fallback**, exactly as `JSON.parse` judges it.
-  - JSON's own whitespace around the value is allowed; anything else, including a leading byte order mark (U+FEFF) or a no-break space, returns the fallback.
-  - The docs tell callers reading a file to strip a byte order mark themselves.
+  - JSON's own whitespace around the value is allowed; anything else, including a leading byte order mark (U+FEFF) in a string or a no-break space, returns the fallback.
+  - A mark in a string isn't an encoding artifact the way one in bytes is, so only bytes have it dropped.
 - **Numbers keep `JSON.parse`'s rounding.**
   - An integer past `Number.MAX_SAFE_INTEGER` rounds silently (`9007199254740993` → `9007199254740992`); exact values need a big-number JSON parser.
   - A number too large for a double becomes `Infinity` (`"1e400"`), which `number` already includes; `JSON.stringify` writes it back as `null`, and the docs say so.
@@ -98,6 +104,15 @@ The tiers 0–2 summary from [research/results/safe-parse-json.md](../../researc
 | `{ "a": 1 }` | `undefined` | 💥 `SyntaxError` | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
 | `‹a boxed JSON string›` | `{ "a": 1 }` | — | `{ "a": 1 }` | 💥 `ValiError` | — | — | — | — | — | — |
 | `‹a boxed string›` | `undefined` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹a Buffer of JSON text›` | `{ "a": 1 }` | — | `{ "a": 1 }` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹UTF-8 bytes of JSON text›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹UTF-8 bytes of JSON text with a BOM›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹an ArrayBuffer of JSON text›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹a DataView of JSON text›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹UTF-16LE bytes of JSON text with a BOM›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹UTF-16BE bytes of JSON text with a BOM›` | `{ "a": 1 }` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹UTF-16LE bytes of JSON text without a BOM›` | `undefined` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
+| `‹invalid UTF-8 bytes›` | `undefined` | — | 💥 `SyntaxError` | 💥 `ValiError` | — | — | — | — | — | — |
 | `‹an object with a throwing toString›` | `undefined` | — | 💥 `Error` | 💥 `ValiError` | — | — | — | — | — | — |
 <!-- prettier-ignore-end -->
 
@@ -110,6 +125,8 @@ The tiers 0–2 summary from [research/results/safe-parse-json.md](../../researc
 - All three forms were checked on TypeScript 6.0 and 4.9.
 - Following `JSON.parse` on rounding, `Infinity`, and lone surrogates costs nothing on the common path; rejecting an overflow would need a scan of the text or a reviver, measured on Node 26 at about 1.6× and 4.6× the parse time of a 1 MB document.
 - Seven of the nine tier 1–2 parsers return `Infinity` for `"1e400"`, and JavaScript, Python, Jackson, and Gson all return a lone surrogate as-is.
+- Native `JSON.parse` reads a Node `Buffer` only because `Buffer.prototype.toString` decodes UTF-8; a plain `Uint8Array` stringifies to its byte values (`"123,34,…"`), so `new Uint8Array([7])` would parse as `7`. Decoding bytes explicitly gives the same answer on every runtime.
+- `TextDecoder` never reads a byte order mark to pick the byte order, and decoding UTF-16 with the wrong one gives other characters without failing, even with `fatal: true`, so the mark is read before choosing the decoder.
 - Gson is the one lenient parser compared: it accepts unquoted keys, trailing commas, comments, `NaN`, and a byte order mark; every other parser rejects them, as `safeParseJson` does.
 
 ## Consequences

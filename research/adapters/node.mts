@@ -98,6 +98,7 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ["a boxed string", () => new String("hi")],
   ["a boxed true", () => new Boolean(true)],
   ["a boxed URL string", () => new String("https://example.com/")],
+  ["a Buffer of JSON text", () => Buffer.from('{"a":1}')],
   [
     "a class instance",
     () =>
@@ -109,11 +110,19 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
     "a cross-realm Error with a message",
     (): unknown => runInNewContext('new Error("boom")'),
   ],
+  [
+    "a DataView of JSON text",
+    () => new DataView(new TextEncoder().encode('{"a":1}').buffer),
+  ],
   ["a Date", () => new Date(0)],
   ["a DOMException", () => new DOMException("aborted", "AbortError")],
   ["a function", () => () => undefined],
   ["a lone surrogate", () => "\uD800"],
   ["a Map with an entry", () => new Map([["a", 1]])],
+  [
+    "an ArrayBuffer of JSON text",
+    () => new TextEncoder().encode('{"a":1}').buffer,
+  ],
   ["an array with a cycle", () => arrayWithCycle()],
   ["an empty cross-realm object", (): unknown => runInNewContext("({})")],
   ["an empty Map", () => new Map()],
@@ -172,6 +181,26 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ["a Uint8Array", () => Uint8Array.of(1, 2)],
   ["a URL", () => new URL("https://example.com/")],
   ["a URLSearchParams with an entry", () => new URLSearchParams("a=1")],
+  ["invalid UTF-8 bytes", () => Uint8Array.of(0x22, 0xff, 0x22)],
+  [
+    "UTF-16BE bytes of JSON text with a BOM",
+    () =>
+      Uint8Array.of(0xfe, 0xff, ...Buffer.from('{"a":1}', "utf16le").swap16()),
+  ],
+  [
+    "UTF-16LE bytes of JSON text with a BOM",
+    () => Uint8Array.of(0xff, 0xfe, ...Buffer.from('{"a":1}', "utf16le")),
+  ],
+  [
+    "UTF-16LE bytes of JSON text without a BOM",
+    () => Uint8Array.from(Buffer.from('{"a":1}', "utf16le")),
+  ],
+  ["UTF-8 bytes of JSON text", () => new TextEncoder().encode('{"a":1}')],
+  [
+    "UTF-8 bytes of JSON text with a BOM",
+    () =>
+      Uint8Array.of(0xef, 0xbb, 0xbf, ...new TextEncoder().encode('{"a":1}')),
+  ],
 ]);
 
 /** The locale the Node runtime resolved, reported with every column. */

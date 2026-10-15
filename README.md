@@ -216,6 +216,7 @@ safe-fns replaces helpers that were copy-pasted between projects and had drifted
   - Copies that drifted may disagree on details such as case-sensitive key sorting.
   - `isSafePopulated` treats a string of invisible characters, such as a zero-width space, as blank, where `value.trim() !== ""` doesn't.
   - `safeParseBoolean` accepts `yes`, `on`, `t`, `y`, and `1` as `true` (and their opposites as `false`), where `value === "true"` accepts only `"true"`.
+  - `safeParseJson` also takes bytes (a `Buffer`, `Uint8Array`, or `ArrayBuffer`), decoded as UTF-8 or as UTF-16 by its byte order mark, but never calls `toString` on other values the way `JSON.parse` does.
   - `getErrorMessage` returns the message alone, where `String(error)` prefixes the error's name (`"TypeError: boom"`).
   - `safeJsonStringify` takes `replacer` and `space` in its options object, not as positional arguments, and writes a cycle as `"[Circular]"` and a BigInt as a string where `JSON.stringify` throws.
   - `deepSortObject` sorts keys only; arrays keep their order unless `sortArrays` picks them.

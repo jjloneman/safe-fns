@@ -261,6 +261,96 @@
     {
       "args": [
         {
+          "$js": "a Buffer of JSON text"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "UTF-8 bytes of JSON text"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "UTF-8 bytes of JSON text with a BOM"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an ArrayBuffer of JSON text"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a DataView of JSON text"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "UTF-16LE bytes of JSON text with a BOM"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "UTF-16BE bytes of JSON text with a BOM"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "UTF-16LE bytes of JSON text without a BOM"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "invalid UTF-8 bytes"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
           "$js": "an object with a throwing toString"
         }
       ],

@@ -18,7 +18,7 @@ okf_version: "0.2"
 - [What counts as a plain object](is-plain-object.md) - A prototype of `Object.prototype` (any realm) or `null`, and no `Symbol.toStringTag` or `Symbol.iterator`; no `isRecord`.
 - [What every export promises](package-promise.md) - Every export is total and precisely typed; taking an `unknown` value is the common case, not a requirement.
 - [What safeParseBoolean accepts](safe-parse-boolean.md) - Booleans, `1` / `0`, `1n` / `0n`, and `true` `t` `yes` `y` `on` `1` / `false` `f` `no` `n` `off` `0`, trimmed and in any case, the set `yn`, Python's `strtobool`, and systemd share; everything else returns the fallback.
-- [What safeParseJson returns](safe-parse-json.md) - A `JsonValue` by default; an optional `guard` checks the shape at runtime, and an explicit type argument is the caller's unchecked assertion.
+- [What safeParseJson returns](safe-parse-json.md) - Strings, boxed strings, and UTF-8 or BOM-marked UTF-16 bytes parse to a `JsonValue` by default; an optional `guard` checks the shape at runtime, and an explicit type argument is the caller's unchecked assertion.
 - [What safeParseNumber and safeParseInteger accept](safe-parse-number.md) - Finite numbers and trimmed decimal strings; hex, units, separators, and blanks return the fallback, and `min` / `max` reject or, with `clamp`, clamp.
 - [What safeParseString accepts and returns](safe-parse-string.md) - Strings, finite numbers, bigints, and booleans become trimmed, non-blank text; everything else returns the fallback.
 - [What safeParseUrl accepts](safe-parse-url.md) - A string or `URL`, trimmed of blank characters and parsed by the native URL parser against an optional `base`, returning a new `URL` or the fallback; an opt-in `protocols` list rejects any other scheme.
