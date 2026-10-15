@@ -151,7 +151,7 @@ Each adapter service sits in one profile, named for its image.
 | `dotnet`     | .NET SDK                                                           | C# / .NET                                                                                                                                                                                                                    |
 | `go`         | `golang`                                                           | Go                                                                                                                                                                                                                           |
 | `hermes`     | `docker/hermes/`: `node`, plus the Hermes CLI release (amd64)      | Hermes, React Native's engine, running the JS built-ins' calls                                                                                                                                                               |
-| `jvm`        | `gradle` (JDK 25)                                                  | Java, Commons Lang, Guava, Spring, Kotlin, Groovy                                                                                                                                                                            |
+| `jvm`        | `gradle` (JDK 25)                                                  | Java, Commons Lang, Guava, Spring, Kotlin, Groovy; XML Schema 1.0 (Xerces-J)                                                                                                                                                 |
 | `node`       | `node`, plus `package.json`'s libraries                            | JS built-ins; lodash, es-toolkit, remeda, Underscore, Ramda, radash, Effect, `@sindresorhus/is`, is-plain-obj; zod, valibot, joi, yup, envalid, yn, validator.js, Ajv; JSON, YAML, TOML, CSV, INI, and the HTML spec (jsdom) |
 | `php`        | `php` (CLI)                                                        | PHP                                                                                                                                                                                                                          |
 | `powershell` | .NET SDK, which ships PowerShell                                   | PowerShell                                                                                                                                                                                                                   |
@@ -161,7 +161,7 @@ Each adapter service sits in one profile, named for its image.
 | `shell`      | `debian`, plus Debian's packages                                   | bash, dash (POSIX sh), fish, zsh, git, systemd                                                                                                                                                                               |
 | `sources`    | `docker/node/`'s `base` stage: `node`, without the libraries       | Docs-only columns from `sources/`; Excel and Google Sheets are cached, but settle no current case                                                                                                                            |
 | `swift`      | `swift`, with the adapter compiled in                              | Swift on Linux (swift-corelibs-foundation, not Darwin's)                                                                                                                                                                     |
-| `xml`        | `docker/xml-schema/`: `python`, plus hash-pinned `xmlschema`       | XML Schema 1.0's built-in types                                                                                                                                                                                              |
+| `xml`        | `docker/xml-schema/`: `python`, plus hash-pinned `xmlschema`       | `xmlschema`'s XSD 1.0 built-in types                                                                                                                                                                                         |
 
 - Microsoft no longer publishes PowerShell's own image, so PowerShell comes from
   the .NET SDK image.
@@ -195,9 +195,11 @@ Each adapter service sits in one profile, named for its image.
     `swift.swift` on `research_codec.swift`, and `powershell.ps1` on
     `research_codec.psm1`.
   - `jvm/` is a Gradle project, compiled into the `jvm` image rather than
-    mounted: Java's standard library, Commons Lang, Guava, and Spring in Java,
-    Kotlin in `.kt`, Groovy in `.groovy`, and `ResearchCodec.java`, the JVM
-    codec.
+    mounted: Java's standard library, Commons Lang, Guava, Spring, and Xerces-J
+    in Java, Kotlin in `.kt`, Groovy in `.groovy`, and `ResearchCodec.java`, the
+    JVM codec.
+  - `XmlSchemaTools.java` decodes against the shared `xml-schema.xsd`, which the
+    `jvm` service passes to its build as the `adapters` context.
   - The runner's `docker compose build` step recompiles it after an edit; its
     library versions are exact, and Dependabot's cooldown holds them 7 days
     back, since Maven has no release-age floor.
@@ -322,13 +324,13 @@ and its twin in every other language). Tables sort columns by tier, and the
 summary table that decision records quote shows tiers 0–2 only, so a tier
 decides whether a column is quoted.
 
-| Tier | What                                          | Examples                                                                                                                                             |
-| :--: | :-------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  0   | safe-fns itself                               | **safe-fns (planned)**, from the case files' `expected` answers                                                                                      |
-|  1   | JavaScript runtimes and libraries             | JS built-ins, Hermes, lodash, es-toolkit, Ramda, remeda, zod, valibot, yn                                                                            |
-|  2   | Python, the JVM languages, .NET, Go, and Rust | their standard libraries, plus the libraries most code in them reaches for: Guava, Commons Lang, Spring                                              |
-|  3   | Formats, specs, and databases                 | JSON, YAML, TOML, CSV, INI, HTML, XML Schema, SQLite, PostgreSQL, MySQL, MariaDB, SQL Server, MongoDB, Firebase                                      |
-|  4   | Everything else                               | JS validation and config libraries (Ajv, envalid, joi, validator.js, yup); C, C++, PHP, Ruby, Rails, Swift, PowerShell, the shells, systemd, and git |
+| Tier | What                                          | Examples                                                                                                                                                                 |
+| :--: | :-------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  0   | safe-fns itself                               | **safe-fns (planned)**, from the case files' `expected` answers                                                                                                          |
+|  1   | JavaScript runtimes and libraries             | JS built-ins, Hermes, lodash, es-toolkit, Ramda, remeda, zod, valibot, yn                                                                                                |
+|  2   | Python, the JVM languages, .NET, Go, and Rust | their standard libraries, plus the libraries most code in them reaches for: Guava, Commons Lang, Spring                                                                  |
+|  3   | Formats, specs, and databases                 | JSON, YAML, TOML, CSV, INI, HTML, XML Schema, SQLite, PostgreSQL, MySQL, MariaDB, SQL Server, MongoDB, Firebase                                                          |
+|  4   | Everything else                               | JS validation and config libraries (Ajv, envalid, joi, validator.js, yup); Python's xmlschema; C, C++, PHP, Ruby, Rails, Swift, PowerShell, the shells, systemd, and git |
 
 - Tier 2 is set by language, not by "standard library": Guava is tier 2, while
   Ruby's and PHP's standard libraries are tier 4.

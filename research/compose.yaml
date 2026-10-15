@@ -348,10 +348,14 @@ services:
       - ./cases:/work/research/cases:ro
       - ../scripts/research:/work/scripts/research:ro
 
-  # Java, Commons Lang, Guava, Spring, Kotlin, and Groovy in one JVM, so it
-  # starts once per run; the adapter is compiled into the image, not mounted.
+  # Java, Commons Lang, Guava, Spring, Kotlin, Groovy, and Xerces-J (XML
+  # Schema 1.0) in one JVM, so it starts once per run; the adapter is compiled
+  # into the image, not mounted.
   jvm:
     build:
+      # `xml-schema.xsd`, shared with `xml-schema`, sits outside the context.
+      additional_contexts:
+        adapters: adapters
       context: adapters/jvm
       dockerfile: ../../docker/jvm/Dockerfile
     environment: *adapter-environment
