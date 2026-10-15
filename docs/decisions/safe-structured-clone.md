@@ -98,6 +98,7 @@ The tiers 0–2 summary from [research/results/safe-structured-clone.md](../../r
 - Swapping functions out and cloning natively keeps every built-in type the engine's job; a cloner of its own would have to follow the structured clone rules for each of them.
 - Measured on Node 26 with a sketch of the walk, cloning 5,000 records: 3.46 ms natively, 3.45 ms through the fast path, and 8.27 ms when one function forces the slow path.
 - Other libraries don't fall back to `structuredClone` when it's missing: lodash, es-toolkit, rfdc, klona, and fast-copy each implement their own algorithm, and @ungap/structured-clone and core-js are polyfills of the native one; this package leaves the polyfill to the caller rather than ship one.
+- A JavaScript clone of its own was weighed and left as a part 2b candidate, `deepClone`: a minimal one ran 1.8× to 3.6× faster than native on Node 26, but a copy that keeps prototypes breaks classes with `#private` fields (reading one throws `TypeError`), JavaScript can't copy host objects such as `File` (it comes back as `{}`), and the two names wouldn't tell a caller how they differ.
 - The getters a failed native clone has read are read again by the walk on the slow path, as `safeJsonStringify`'s fallback walk does; the docs say so.
 
 ## Consequences
