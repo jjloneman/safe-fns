@@ -1,6 +1,7 @@
 /*
  * The JVM adapter: Java's standard library, Commons Lang, Guava, Spring,
- * Kotlin, and Groovy, compiled into one image so the JVM starts once per run.
+ * Kotlin, Groovy, and Xerces-J, compiled into one image so the JVM starts once
+ * per run.
  *
  * - Every version is exact and at least 7 days old; Dependabot's cooldown
  *   keeps the bumps there, since Maven has no `minimumReleaseAge`.
@@ -19,6 +20,11 @@ dependencies {
     implementation("org.apache.groovy:groovy:6.0.0")
     implementation("org.springframework:spring-core:7.0.9")
     implementation("tools.jackson.core:jackson-databind:3.2.3")
+
+    // `xml-apis` repeats the JDK's own `java.xml` packages, which win anyway.
+    implementation("xerces:xercesImpl:2.12.2") {
+        exclude(group = "xml-apis", module = "xml-apis")
+    }
 }
 
 application { mainClass = "com.safefns.research.Main" }

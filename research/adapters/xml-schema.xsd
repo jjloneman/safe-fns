@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-  The XML Schema adapter's schema: one element per built-in type a case is
-  decoded as, so `xml_schema.py` reads each case as that element's content.
+  The XML Schema adapters' schema: one element per built-in type a case is
+  decoded as, so `xml_schema.py` and the JVM adapter's `XmlSchemaTools.java`
+  read each case as that element's content.
+
+  - The JVM image copies it in at build time, from the `jvm` service's
+    `adapters` build context.
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="boolean" type="xs:boolean" />

@@ -1,9 +1,10 @@
-# The `c` and `swift` images build from `research/adapters`, so this keeps
-# their context to the files they copy; every other adapter has its own
-# directory and context.
+# The `c` and `swift` images build from `research/adapters`, and the `jvm` image
+# takes `xml-schema.xsd` from it, so this keeps that context to the files they
+# copy; every other adapter has its own directory and context.
 *
 !c.py
 !cxx_probes.cpp
 !research_codec.py
 !research_codec.swift
 !swift.swift
+!xml-schema.xsd

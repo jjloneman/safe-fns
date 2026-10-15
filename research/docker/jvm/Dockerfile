@@ -14,8 +14,11 @@ RUN gradle --no-daemon --quiet resolveDependencies
 
 # Then the sources, compiled offline against the jars cached above, so an edit
 # rebuilds only from here; `installDist` lays the classes and every jar out
-# under `build/install`, the classpath the entrypoint runs.
+# under `build/install`, the classpath the entrypoint runs. The XML Schema
+# column's schema is shared with the `xml-schema` service, so it comes from
+# the `adapters` build context, into the resources the jar bundles.
 COPY src ./src
+COPY --from=adapters xml-schema.xsd ./src/main/resources/
 RUN gradle --no-daemon --offline --quiet installDist
 
 # `java` expands the classpath wildcard itself, so no shell or start script
