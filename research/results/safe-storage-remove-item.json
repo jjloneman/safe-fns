@@ -1,0 +1,183 @@
+{
+  "cases": [
+    [
+      "present"
+    ],
+    [
+      "missing"
+    ],
+    [
+      42
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$js": "an object with a throwing toString"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "safeStorageRemoveItem",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "localStorage.removeItem(key); localStorage.getItem(key) (no --localstorage-file)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.10.0"
+    },
+    {
+      "call": "sessionStorage.removeItem(key); sessionStorage.getItem(key)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.10.0"
+    },
+    {
+      "call": "localStorage.removeItem(key); localStorage.getItem(key)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "HTML (jsdom)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 3,
+      "version": "jsdom 30.1.2"
+    },
+    {
+      "call": "localStorage.removeItem(key); localStorage.getItem(key) (opaque origin)",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "HTML (jsdom)",
+      "outcomes": [
+        {
+          "error": "SecurityError",
+          "kind": "error"
+        },
+        {
+          "error": "SecurityError",
+          "kind": "error"
+        },
+        {
+          "error": "SecurityError",
+          "kind": "error"
+        },
+        {
+          "error": "SecurityError",
+          "kind": "error"
+        },
+        {
+          "error": "SecurityError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 3,
+      "version": "jsdom 30.1.2"
+    }
+  ],
+  "function": "safeStorageRemoveItem"
+}
