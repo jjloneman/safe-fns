@@ -54,6 +54,11 @@ describe("parseCaseFile", () => {
       cases: [
         { args: ["a"], expected: { $utf16: [0xd8_00] } },
         { args: ["b"], expected: [{ text: { $utf16: [0x68, 0x69] } }] },
+        { args: ["c"], expected: { a: { $utf16: [0x61] }, b: 1 } },
+        {
+          args: ["d"],
+          expected: { $object: { $utf16: { $utf16: [0x78] } } },
+        },
       ],
       function: "f",
     };
@@ -61,10 +66,12 @@ describe("parseCaseFile", () => {
     // When - narrowing it
     const caseFile = parseCaseFile(json);
 
-    // Then - each tag becomes the string its code units spell
+    // Then - each tag becomes its string, and an escaped `$utf16` key stays
     expect(caseFile.cases.map(({ expected }) => expected)).toStrictEqual([
       "\uD800",
       [{ text: "hi" }],
+      { a: "a", b: 1 },
+      { $object: { $utf16: "x" } },
     ]);
   });
 
@@ -74,7 +81,7 @@ describe("parseCaseFile", () => {
     { description: "a negative number", payload: [-1] },
     { description: "a value past 0xFFFF", payload: [0x1_00_00] },
     { description: "a string code unit", payload: ["d800"] },
-  ])("rejects a $utf16 tag holding $description", ({ payload }) => {
+  ])("rejects a utf16 tag holding $description", ({ payload }) => {
     // Given - a planned answer whose tag isn't an array of code units
     const json = {
       cases: [{ args: [], expected: { $utf16: payload } }],

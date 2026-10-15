@@ -564,6 +564,9 @@ function compareColumns(left: ResultColumn, right: ResultColumn): number {
  *
  * - Adapters never read `expected`, so the tag needs no twin in their codecs.
  *
+ * - A `$object` escape's keys are data, so a `$utf16` key inside one stays a
+ *   key; only its values are decoded.
+ *
  * @returns the answer, with each tag replaced by its string.
  * @throws Error when a tag's payload isn't an array of UTF-16 code units.
  */
@@ -579,7 +582,23 @@ function decodeUtf16Tags({
     return value;
   }
 
-  if (Object.keys(value).length === 1 && "$utf16" in value) {
+  const decodeValues = (
+    entries: Record<string, EncodedValue>
+  ): Record<string, EncodedValue> =>
+    Object.fromEntries(
+      Object.entries(entries).map(([key, item]) => [
+        key,
+        decodeUtf16Tags({ caseIndex, value: item }),
+      ])
+    );
+
+  const isSingleKey = Object.keys(value).length === 1;
+
+  if (isSingleKey && isRecord(value.$object)) {
+    return { $object: decodeValues(value.$object) };
+  }
+
+  if (isSingleKey && "$utf16" in value) {
     const codeUnits = value.$utf16;
 
     if (
@@ -597,15 +616,10 @@ function decodeUtf16Tags({
       );
     }
 
-    return String.fromCharCode(...codeUnits);
+    return codeUnits.map((codeUnit) => String.fromCharCode(codeUnit)).join("");
   }
 
-  return Object.fromEntries(
-    Object.entries(value).map(([key, item]) => [
-      key,
-      decodeUtf16Tags({ caseIndex, value: item }),
-    ])
-  );
+  return decodeValues(value);
 }
 
 /** Check that a value is JSON the portable format can hold. */
