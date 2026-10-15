@@ -36,6 +36,15 @@ runAdapter([
                     run: static fn(mixed $value): bool => empty($value),
                 ),
             ],
+            "safeJsonStringify" => [
+                new Probe(
+                    call: 'json_encode($value, JSON_THROW_ON_ERROR)',
+                    run: static fn(mixed $value): string => json_encode(
+                        $value,
+                        JSON_THROW_ON_ERROR,
+                    ),
+                ),
+            ],
             "safeObjectHasOwn" => [
                 new Probe(
                     call: 'property_exists($object, $key)',
@@ -72,6 +81,18 @@ runAdapter([
                     ),
                 ),
             ],
+            "safeParseJson" => [
+                new Probe(
+                    call: 'json_decode($value, flags: JSON_THROW_ON_ERROR)',
+                    run: static fn(string $value): mixed => json_decode(
+                        $value,
+                        flags: JSON_THROW_ON_ERROR,
+                    ),
+                    accepts: static fn(mixed ...$args): bool => is_string(
+                        $args[0],
+                    ),
+                ),
+            ],
             "safeParseNumber" => [
                 new Probe(
                     call: 'floatval($value)',
@@ -95,6 +116,16 @@ runAdapter([
                     run: static fn(mixed $value): string => trim(
                         strval($value),
                     ),
+                ),
+            ],
+            "safeParseUrl" => [
+                new Probe(
+                    call: 'parse_url($value)',
+                    run: static fn(string $value): array|false => parse_url(
+                        $value,
+                    ),
+                    accepts: static fn(mixed ...$args): bool => count($args) ===
+                        1 && is_string($args[0]),
                 ),
             ],
         ],

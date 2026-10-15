@@ -61,12 +61,17 @@ type HermesProbe = {
  */
 const PROBES: Readonly<Record<string, readonly HermesProbe[]>> = {
   codec: [{ call: "value" }],
+  deepSortObject: [
+    { call: "JSON.stringify(JSON.parse(value))", isStringOnly: true },
+  ],
+  safeJsonStringify: [{ call: "JSON.stringify(value)" }],
   safeObjectHasOwn: [
     { call: "Object.hasOwn(object, key)", parameters: ["object", "key"] },
     { call: "key in object", parameters: ["object", "key"] },
   ],
   safeParseBoolean: [{ call: "JSON.parse(value)", isStringOnly: true }],
   safeParseInteger: [{ call: "Number.parseInt(value, 10)" }],
+  safeParseJson: [{ call: "JSON.parse(value)" }],
   safeParseNumber: [
     { call: "Number(value)" },
     { call: "Number.parseFloat(value)" },
@@ -75,6 +80,10 @@ const PROBES: Readonly<Record<string, readonly HermesProbe[]>> = {
     { call: "String(value)" },
     { call: "String(value).trim()" },
   ],
+  safeParseUrl: [
+    { call: "new URL(value, base).href", parameters: ["value", "base"] },
+  ],
+  safeStructuredClone: [{ call: "structuredClone(value)" }],
 };
 
 /**

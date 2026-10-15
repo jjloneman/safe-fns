@@ -4,8 +4,32 @@ import { parseInteger } from "jsdom/lib/jsdom/living/helpers/strings.js";
 import type { Tool } from "./tool.mts";
 
 import { isString, packageVersion } from "./tool.mts";
+import { storageProbes } from "./web-storage.mts";
 
-const DOCUMENT = new JSDOM("").window.document;
+/** A document with no URL, whose origin is opaque. */
+const OPAQUE_WINDOW = new JSDOM("").window;
+
+/** A document served from a real origin, so its storage is reachable. */
+const ORIGIN_WINDOW = new JSDOM("", { url: "https://example.com/" }).window;
+
+const DOCUMENT = OPAQUE_WINDOW.document;
+
+/** `localStorage` where the document has an origin. */
+const ORIGIN_STORAGE = storageProbes({
+  read: () => ORIGIN_WINDOW.localStorage,
+  receiver: "localStorage",
+  suffix: "",
+});
+
+/**
+ * `localStorage` in an opaque-origin document, where the spec throws a
+ * `SecurityError`, as a sandboxed iframe does.
+ */
+const OPAQUE_STORAGE = storageProbes({
+  read: () => OPAQUE_WINDOW.localStorage,
+  receiver: "localStorage",
+  suffix: " (opaque origin)",
+});
 
 /**
  * Read a boolean attribute back: the HTML spec counts any value, even
@@ -59,6 +83,26 @@ export const HTML: Tool = {
         call: "input.value = value; input.valueAsNumber",
         run: ([value]) => readNumberInput(value as string),
       },
+    ],
+    safeParseUrl: [
+      {
+        call: "new URL(value, base).href",
+        run: ([value, base]) =>
+          new ORIGIN_WINDOW.URL(value as string, base as string | undefined)
+            .href,
+      },
+    ],
+    safeStorageGetItem: [
+      ...ORIGIN_STORAGE.safeStorageGetItem,
+      ...OPAQUE_STORAGE.safeStorageGetItem,
+    ],
+    safeStorageRemoveItem: [
+      ...ORIGIN_STORAGE.safeStorageRemoveItem,
+      ...OPAQUE_STORAGE.safeStorageRemoveItem,
+    ],
+    safeStorageSetItem: [
+      ...ORIGIN_STORAGE.safeStorageSetItem,
+      ...OPAQUE_STORAGE.safeStorageSetItem,
     ],
   },
   name: "HTML (jsdom)",

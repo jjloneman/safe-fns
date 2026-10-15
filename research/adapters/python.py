@@ -8,9 +8,12 @@ codec check), so the two images never duplicate a column.
 from __future__ import annotations
 
 import configparser
+import copy
+import json
 import platform
 import sys
 import warnings
+from urllib.parse import urljoin, urlsplit
 
 from research_codec import Probe, Tool, run_adapter
 
@@ -23,6 +26,26 @@ CODEC_PROBE: Probe = {
 
 VERSION = platform.python_version()
 """The Python that actually ran, reported with every column."""
+
+
+def are_two_strings(*args: object) -> bool:
+    """Accept exactly two string arguments: a value and a base."""
+    return len(args) == 2 and all(isinstance(arg, str) for arg in args)
+
+
+def canonical_json(value: str) -> str:
+    """Re-serialize JSON text with sorted keys, compactly, keeping non-ASCII."""
+    return json.dumps(
+        json.loads(value),
+        ensure_ascii=False,
+        separators=(",", ":"),
+        sort_keys=True,
+    )
+
+
+def compact_json(value: object) -> str:
+    """Serialize a value as compact JSON, as `JSON.stringify` spaces it."""
+    return json.dumps(value, separators=(",", ":"))
 
 
 def config_boolean(value: str) -> bool:
@@ -40,6 +63,15 @@ def current_tools() -> list[Tool]:
         {
             "functions": {
                 "codec": [CODEC_PROBE],
+                "deepSortObject": [
+                    {
+                        "accepts": is_string,
+                        "call": "json.dumps(json.loads(value), "
+                        'ensure_ascii=False, separators=(",", ":"), '
+                        "sort_keys=True)",
+                        "run": canonical_json,
+                    }
+                ],
                 "isPlainObject": [
                     {
                         "call": "type(value) is dict",
@@ -48,6 +80,12 @@ def current_tools() -> list[Tool]:
                 ],
                 "isSafeEmpty": [
                     {"call": "not value", "run": lambda value: not value}
+                ],
+                "safeJsonStringify": [
+                    {
+                        "call": 'json.dumps(value, separators=(",", ":"))',
+                        "run": compact_json,
+                    }
                 ],
                 "safeObjectHasOwn": [
                     {"call": "key in obj", "run": lambda obj, key: key in obj}
@@ -60,6 +98,13 @@ def current_tools() -> list[Tool]:
                     }
                 ],
                 "safeParseInteger": [{"call": "int(value)", "run": int}],
+                "safeParseJson": [
+                    {
+                        "accepts": is_string,
+                        "call": "json.loads(value)",
+                        "run": json.loads,
+                    }
+                ],
                 "safeParseNumber": [{"call": "float(value)", "run": float}],
                 "safeParseString": [
                     {"call": "str(value)", "run": str},
@@ -68,12 +113,32 @@ def current_tools() -> list[Tool]:
                         "run": lambda value: str(value).strip(),
                     },
                 ],
+                "safeParseUrl": [
+                    {
+                        "accepts": is_lone_string,
+                        "call": "urlsplit(value).geturl()",
+                        "run": lambda value: urlsplit(value).geturl(),
+                    },
+                    {
+                        "accepts": are_two_strings,
+                        "call": "urljoin(base, value)",
+                        "run": lambda value, base: urljoin(base, value),
+                    },
+                ],
+                "safeStructuredClone": [
+                    {"call": "copy.deepcopy(value)", "run": copy.deepcopy}
+                ],
             },
             "name": "Python",
             "tier": 2,
             "version": VERSION,
         }
     ]
+
+
+def is_lone_string(*args: object) -> bool:
+    """Accept exactly one argument, a string."""
+    return len(args) == 1 and isinstance(args[0], str)
 
 
 def is_string(value: object, *_rest: object) -> bool:

@@ -2,7 +2,9 @@ import {
   integer,
   parse,
   parseBoolean,
+  parseJson,
   pipe,
+  string,
   toNumber,
   toString,
   unknown,
@@ -25,6 +27,12 @@ export const VALIBOT: Tool = {
       {
         call: "v.parse(v.pipe(v.unknown(), v.toNumber(), v.integer()), value)",
         run: ([value]) => parse(pipe(unknown(), toNumber(), integer()), value),
+      },
+    ],
+    safeParseJson: [
+      {
+        call: "v.parse(v.pipe(v.string(), v.parseJson()), value)",
+        run: ([value]) => parse(pipe(string(), parseJson()), value),
       },
     ],
     safeParseNumber: [

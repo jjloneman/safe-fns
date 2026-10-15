@@ -71,8 +71,13 @@ def query_text(sql: str) -> str:
 TOOLS: list[Tool] = [
     {
         "functions": {
+            "deepSortObject": [cast("SELECT CAST(%s AS jsonb)::text")],
             "safeParseBoolean": [cast("SELECT CAST(%s AS boolean)")],
             "safeParseInteger": [cast("SELECT CAST(%s AS bigint)")],
+            "safeParseJson": [
+                cast("SELECT CAST(%s AS json)::text"),
+                cast("SELECT CAST(%s AS jsonb)::text"),
+            ],
             "safeParseNumber": [cast("SELECT CAST(%s AS double precision)")],
             "safeParseString": [
                 cast("SELECT CAST(%s AS text)"),
