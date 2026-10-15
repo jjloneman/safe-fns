@@ -3,7 +3,7 @@ type: Decision
 title: What safeParseUrl accepts
 description: A string or URL, trimmed of blank characters and resolved against an optional base with the native URL parser, returning a new URL or the fallback; an opt-in protocols list rejects any other scheme.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:34:31Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:53:58Z }
 ---
 
 # What safeParseUrl accepts
@@ -31,7 +31,8 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:34:31Z }
 - **Blank characters at both ends are trimmed first** with the shared `trimBlank`, so a pasted no-break space or zero-width space doesn't fail the parse; the native parser on its own strips only ASCII whitespace and control characters.
 - **Parsing is the native WHATWG URL parser's,** run inside a `try`:
   - its normalization applies unchanged: lowercase scheme and host, default port dropped, spaces percent-encoded, Unicode hosts in punycode, `\` read as `/` in web URLs, and legacy IPv4 shorthand (`http://1.2.3/` → `http://1.2.0.3/`);
-  - the query is kept as written, so a comma-separated list (`?filters=in-progress,to-do,done`) survives; `url.searchParams.get("filters")` returns the whole list as one string for the caller to split, and editing `searchParams` re-serializes the commas as `%2C`;
+  - the query is kept as written, so a comma-separated list (`?filters=in-progress,to-do,done`) survives; `url.searchParams.get("filters")` returns the whole list as one string, and editing `searchParams` re-serializes the commas as `%2C`;
+  - splitting a list is `getSearchParamValues`' job, not an option here, since the result is a native `URL` whose `searchParams` methods can't be changed (see Consequences);
   - a relative URL without a `base` returns the fallback.
 - **`protocols` is an opt-in allow-list,** compared with `url.protocol` (`["http:", "https:"]`).
   - With it, a URL of any other protocol returns the fallback, which makes the result safe to put in an `href`.
@@ -104,4 +105,7 @@ The tiers 0–2 summary from [research/results/safe-parse-url.md](../../research
 ## Consequences
 
 - Trimming and the `protocols` list keep it useful once every supported runtime has `URL.parse`, so it isn't a candidate for [the native-first list](native-first-scope.md).
+- **Comma-separated query values are read with `getSearchParamValues`,** which accepts the `URL` this returns: `getSearchParamValues(url, "filters", { separator: "," })` gives `["in-progress", "to-do", "done"]`. Its own record, in part 2b, settles the details agreed so far:
+  - `separator` is a plain string, matched against the decoded value, so `,` and `%2C` both split;
+  - repeated keys are merged (`getAll`), each piece is trimmed with `trimBlank`, and empty pieces are dropped.
 - `trimBlank` is shared with the other parsers, so a change to the blank set changes what `safeParseUrl` accepts too.

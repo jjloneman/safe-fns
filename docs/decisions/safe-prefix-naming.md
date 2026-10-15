@@ -3,7 +3,7 @@ type: Decision
 title: When a name starts with `safe`
 description: "`safeParse` + what it reads for every parser, `safe` + the native API's path for any other wrapper of one native API, `isSafe*` against a same-named unsafe helper, and plain names otherwise."
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T21:14:18Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:53:58Z }
 verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }
 ---
 
@@ -25,7 +25,7 @@ verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }
   | `Object.hasOwn`             | `safeObjectHasOwn`    |
   | `structuredClone`           | `safeStructuredClone` |
   | `Storage.prototype.getItem` | `safeStorageGetItem`  |
-  - Its shape stays close to the native API: the native arguments in the native order, and the same result on success; anything extra goes in an options object.
+  - Its shape stays close to the native API: the values the native call works on, in the native order, and the same result on success; the native call's optional configuration (`JSON.stringify`'s `replacer` and `space`) and anything extra go in an options object, per [the parameter rule](function-parameters.md).
   - `safeLocalStorageGetItem(key)` and `safeSessionStorageGetItem(key)` mirror `getItem(key)` exactly; the base `safeStorageGetItem(key, { area })` takes the area as configuration, per [the parameter rule](function-parameters.md).
 
 - **A predicate that shares a name with a well-known unsafe helper is `isSafe` + the name, and its positive twin keeps the same prefix:** `isSafeEmpty` (against lodash's and ramda's `isEmpty`) and its pair `isSafePopulated`.
