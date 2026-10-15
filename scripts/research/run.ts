@@ -919,14 +919,18 @@ function writeResults({
   });
 
   for (const { merged, stem } of mergedResults) {
-    writeFileSync(
-      path.join(RESULTS_DIR, `${stem}.json`),
-      stringifyStable(merged)
-    );
+    const json = stringifyStable(merged);
 
+    writeFileSync(path.join(RESULTS_DIR, `${stem}.json`), json);
+
+    // Render from the sorted JSON, not the in-memory result, so an object an
+    // adapter returned with unsorted keys reads the same whether this run
+    // produced its column or kept it from the committed results.
     writeFileSync(
       path.join(RESULTS_DIR, `${stem}.md`),
-      renderResultMarkdown(merged)
+      renderResultMarkdown(
+        parseFunctionResult(parseJson({ source: `${stem}.json`, text: json }))
+      )
     );
 
     log(`wrote research/results/${stem}.{json,md}`);
