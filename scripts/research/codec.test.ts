@@ -236,6 +236,11 @@ describe("renderValue", () => {
       expected: String.raw`"\u{A0}x\u{200B}\u{9}"`,
     },
     {
+      description: "a lone surrogate, but not a pair",
+      encoded: "\uD800\u{1F600}",
+      expected: '"\\u{D800}\u{1F600}"',
+    },
+    {
       description: "quotes and backslashes",
       encoded: String.raw`a"\u{A0}`,
       expected: String.raw`"a\"\\u{A0}"`,

@@ -113,10 +113,11 @@ const BIGINT_PATTERN = /^-?\d+$/u;
  * The characters a table cell escapes, so it never hides what it holds.
  *
  * - Control characters, default-ignorable ones (zero-width spaces, the BOM),
- *   every Unicode space, and the braille blank, which renders as a space.
+ *   lone surrogates, which render as `�`, every Unicode space, and the braille
+ *   blank, which renders as a space.
  */
 const INVISIBLE_PATTERN =
-  /[\p{Control}\p{Default_Ignorable_Code_Point}\p{White_Space}\u2800]/gu;
+  /[\p{Control}\p{Default_Ignorable_Code_Point}\p{Surrogate}\p{White_Space}\u2800]/gu;
 
 /** The spellings `$number` accepts, each with its value. */
 const SPECIAL_NUMBERS: ReadonlyMap<string, number> = new Map([
