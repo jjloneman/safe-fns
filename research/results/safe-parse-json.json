@@ -132,6 +132,16 @@
     ],
     [
       {
+        "$js": "a boxed JSON string"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed string"
+      }
+    ],
+    [
+      {
         "$js": "an object with a throwing toString"
       }
     ]
@@ -327,7 +337,10 @@
           "value": 0.1
         },
         {
-          "kind": "n/a"
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
         },
         {
           "kind": "n/a"
@@ -362,6 +375,18 @@
           "kind": "value",
           "value": {
             "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
           }
         },
         {
@@ -575,6 +600,12 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "hermes",
@@ -774,6 +805,16 @@
           "kind": "error"
         },
         {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
           "error": "Error",
           "kind": "error"
         }
@@ -953,6 +994,14 @@
         {
           "kind": "value",
           "value": " "
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
         },
         {
           "error": "ValiError",
@@ -1174,6 +1223,12 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "dotnet",
@@ -1349,6 +1404,12 @@
         {
           "kind": "value",
           "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1570,6 +1631,12 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -1749,6 +1816,12 @@
         {
           "kind": "value",
           "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1968,6 +2041,12 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "python",
@@ -2147,6 +2226,12 @@
         {
           "kind": "value",
           "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2345,6 +2430,12 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "mariadb-adapter",
@@ -2525,6 +2616,12 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "mariadb-adapter",
@@ -2696,6 +2793,12 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2886,6 +2989,12 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "postgres-adapter",
@@ -3058,6 +3167,12 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3247,6 +3362,12 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "mssql-adapter",
@@ -3418,6 +3539,12 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3622,6 +3749,12 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "php",
@@ -3799,6 +3932,12 @@
         {
           "kind": "value",
           "value": " "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"

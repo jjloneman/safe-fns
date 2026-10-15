@@ -181,7 +181,10 @@
       "expected": 0.1
     },
     {
-      "args": ["1e400"]
+      "args": ["1e400"],
+      "expected": {
+        "$number": "Infinity"
+      }
     },
     {
       "args": ["\"\\ud800\""]
@@ -226,6 +229,26 @@
       "args": [
         {
           "a": 1
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed JSON string"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed string"
         }
       ],
       "expected": {
