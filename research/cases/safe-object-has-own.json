@@ -6,7 +6,8 @@
           "a": 1
         },
         "a"
-      ]
+      ],
+      "expected": true
     },
     {
       "args": [
@@ -14,7 +15,8 @@
           "a": 1
         },
         "b"
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
@@ -22,7 +24,8 @@
           "a": 1
         },
         "toString"
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
@@ -30,7 +33,8 @@
           "a": null
         },
         "a"
-      ]
+      ],
+      "expected": true
     },
     {
       "args": [
@@ -38,7 +42,8 @@
           "a.b": 1
         },
         "a.b"
-      ]
+      ],
+      "expected": true
     },
     {
       "args": [
@@ -48,7 +53,8 @@
           }
         },
         "a.b"
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
@@ -56,25 +62,32 @@
           "$js": "a null-prototype object with a"
         },
         "a"
-      ]
+      ],
+      "expected": true
     },
     {
-      "args": [["x"], "0"]
+      "args": [["x"], "0"],
+      "expected": true
     },
     {
-      "args": [["x"], "length"]
+      "args": [["x"], "length"],
+      "expected": true
     },
     {
-      "args": ["abc", "0"]
+      "args": ["abc", "0"],
+      "expected": false
     },
     {
-      "args": ["abc", "length"]
+      "args": ["abc", "length"],
+      "expected": false
     },
     {
-      "args": [42, "toFixed"]
+      "args": [42, "toFixed"],
+      "expected": false
     },
     {
-      "args": [null, "a"]
+      "args": [null, "a"],
+      "expected": false
     },
     {
       "args": [
@@ -82,7 +95,8 @@
           "$undefined": true
         },
         "a"
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
@@ -90,7 +104,8 @@
           "$js": "a revoked proxy"
         },
         "a"
-      ]
+      ],
+      "expected": false
     },
     {
       "args": [
@@ -98,7 +113,8 @@
           "$js": "a proxy of a plain object"
         },
         "a"
-      ]
+      ],
+      "expected": true
     },
     {
       "args": [
@@ -106,7 +122,8 @@
           "$js": "a cross-realm object"
         },
         "a"
-      ]
+      ],
+      "expected": true
     }
   ],
   "function": "safeObjectHasOwn"

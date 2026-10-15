@@ -82,6 +82,13 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ...[...HOSTILE_INPUTS, ...CROSS_REALM_INPUTS].map(
     ({ description, value }) => [description, () => value] as const
   ),
+  ["a boxed bigint", (): unknown => Object(1n)],
+  ["a boxed blank string", () => new String("   ")],
+  ["a boxed false", () => new Boolean(false)],
+  ["a boxed number", () => new Number(1)],
+  ["a boxed numeric string", () => new String(" 42 ")],
+  ["a boxed string", () => new String("hi")],
+  ["a boxed true", () => new Boolean(true)],
   [
     "a class instance",
     () =>

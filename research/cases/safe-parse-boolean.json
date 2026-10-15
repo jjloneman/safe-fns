@@ -293,6 +293,48 @@
       "expected": {
         "$undefined": true
       }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed true"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed false"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed number"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed bigint"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed string"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
     }
   ],
   "function": "safeParseBoolean"

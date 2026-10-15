@@ -1,147 +1,264 @@
 {
   "cases": [
     {
-      "args": ["42"]
+      "args": ["42"],
+      "expected": 42
     },
     {
-      "args": ["-42"]
+      "args": ["-42"],
+      "expected": -42
     },
     {
-      "args": ["+42"]
+      "args": ["+42"],
+      "expected": 42
     },
     {
-      "args": ["0"]
+      "args": ["0"],
+      "expected": 0
     },
     {
-      "args": ["-0"]
+      "args": ["-0"],
+      "expected": {
+        "$number": "-0"
+      }
     },
     {
-      "args": ["1.5"]
+      "args": ["1.5"],
+      "expected": 1.5
     },
     {
-      "args": [" 1.5 "]
+      "args": [" 1.5 "],
+      "expected": 1.5
     },
     {
-      "args": ["\u00a042\u00a0"]
+      "args": ["\u00a042\u00a0"],
+      "expected": 42
     },
     {
-      "args": [".5"]
+      "args": [".5"],
+      "expected": 0.5
     },
     {
-      "args": ["5."]
+      "args": ["5."],
+      "expected": 5
     },
     {
-      "args": ["1e3"]
+      "args": ["1e3"],
+      "expected": 1000
     },
     {
-      "args": ["1E3"]
+      "args": ["1E3"],
+      "expected": 1000
     },
     {
-      "args": ["1e-400"]
+      "args": ["1e-400"],
+      "expected": 0
     },
     {
-      "args": ["1e400"]
+      "args": ["1e400"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["0x1A"]
+      "args": ["0x1A"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["0b11"]
+      "args": ["0b11"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["0o17"]
+      "args": ["0o17"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["1_000"]
+      "args": ["1_000"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["1,000"]
+      "args": ["1,000"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["Infinity"]
+      "args": ["Infinity"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["-Infinity"]
+      "args": ["-Infinity"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["NaN"]
+      "args": ["NaN"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["inf"]
+      "args": ["inf"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": [""]
+      "args": [""],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["   "]
+      "args": ["   "],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["12px"]
+      "args": ["12px"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["\u0664\u0662"]
+      "args": ["\u0664\u0662"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["\uff11\uff12"]
+      "args": ["\uff11\uff12"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": [42]
+      "args": [42],
+      "expected": 42
     },
     {
-      "args": [1.5]
+      "args": [1.5],
+      "expected": 1.5
     },
     {
       "args": [
         {
           "$number": "-0"
         }
-      ]
+      ],
+      "expected": {
+        "$number": "-0"
+      }
     },
     {
       "args": [
         {
           "$number": "NaN"
         }
-      ]
+      ],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
       "args": [
         {
           "$number": "Infinity"
         }
-      ]
+      ],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": [true]
+      "args": [true],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": [false]
+      "args": [false],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": [null]
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
       "args": [
         {
           "$undefined": true
         }
-      ]
+      ],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
       "args": [
         {
           "$bigint": "10"
         }
-      ]
+      ],
+      "expected": 10
     },
     {
-      "args": [[]]
+      "args": [[]],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": [["7"]]
+      "args": [["7"]],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": [{}]
+      "args": [{}],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed number"
+        }
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed bigint"
+        }
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed numeric string"
+        }
+      ],
+      "expected": 42
     }
   ],
   "function": "safeParseNumber"
