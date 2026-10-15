@@ -97,6 +97,7 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ["a boxed numeric string", () => new String(" 42 ")],
   ["a boxed string", () => new String("hi")],
   ["a boxed true", () => new Boolean(true)],
+  ["a boxed URL string", () => new String("https://example.com/")],
   [
     "a class instance",
     () =>

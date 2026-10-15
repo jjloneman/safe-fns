@@ -13,6 +13,12 @@
       " https://example.com/"
     ],
     [
+      "​https://example.com/​"
+    ],
+    [
+      "https://example.com/?filters=in-progress,to-do,done"
+    ],
+    [
       "https://example.com/a b"
     ],
     [
@@ -125,6 +131,11 @@
     ],
     [
       {
+        "$js": "a boxed URL string"
+      }
+    ],
+    [
+      {
         "$js": "an object with a throwing toString"
       }
     ]
@@ -150,9 +161,15 @@
         },
         {
           "kind": "value",
-          "value": {
-            "$undefined": true
-          }
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?filters=in-progress,to-do,done"
         },
         {
           "kind": "value",
@@ -237,10 +254,12 @@
           "value": "file:///C:/x"
         },
         {
-          "kind": "n/a"
+          "kind": "value",
+          "value": "javascript:alert(1)"
         },
         {
-          "kind": "n/a"
+          "kind": "value",
+          "value": "data:text/plain,hi"
         },
         {
           "kind": "value",
@@ -301,6 +320,10 @@
           "value": {
             "$undefined": true
           }
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
         },
         {
           "kind": "value",
@@ -469,6 +492,17 @@
           "kind": "error"
         },
         {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -501,6 +535,14 @@
         {
           "error": "TypeError",
           "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?filters=in-progress,to-do,done"
         },
         {
           "kind": "value",
@@ -629,6 +671,10 @@
         {
           "error": "TypeError",
           "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
         },
         {
           "kind": "value",
@@ -670,6 +716,16 @@
         },
         {
           "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?filters=in-progress,to-do,done"
+        },
+        {
+          "kind": "value",
           "value": "https://example.com/a%20b"
         },
         {
@@ -817,6 +873,10 @@
           "value": {
             "$undefined": true
           }
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/"
         },
         {
           "kind": "value",
@@ -914,6 +974,12 @@
           "kind": "n/a"
         },
         {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "value",
           "value": "https://example.com/path"
         },
@@ -959,6 +1025,9 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "dotnet",
@@ -987,6 +1056,14 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?filters=in-progress,to-do,done"
         },
         {
           "kind": "value",
@@ -1071,6 +1148,9 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1199,6 +1279,12 @@
           "kind": "n/a"
         },
         {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "value",
           "value": "https://example.com/path"
         },
@@ -1244,6 +1330,9 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "go",
@@ -1272,6 +1361,14 @@
         {
           "error": "*url.Error",
           "kind": "error"
+        },
+        {
+          "error": "*url.Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?filters=in-progress,to-do,done"
         },
         {
           "kind": "value",
@@ -1356,6 +1453,9 @@
         {
           "kind": "value",
           "value": ""
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1484,6 +1584,12 @@
           "kind": "n/a"
         },
         {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "value",
           "value": "https://example.com/path"
         },
@@ -1529,6 +1635,9 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -1557,6 +1666,14 @@
         {
           "error": "URISyntaxException",
           "kind": "error"
+        },
+        {
+          "error": "URISyntaxException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?filters=in-progress,to-do,done"
         },
         {
           "error": "URISyntaxException",
@@ -1641,6 +1758,9 @@
         {
           "kind": "value",
           "value": ""
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1769,6 +1889,12 @@
           "kind": "n/a"
         },
         {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "value",
           "value": "https://example.com/path"
         },
@@ -1814,6 +1940,9 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "python",
@@ -1842,6 +1971,14 @@
         {
           "kind": "value",
           "value": " https://example.com/"
+        },
+        {
+          "kind": "value",
+          "value": "​https://example.com/​"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?filters=in-progress,to-do,done"
         },
         {
           "kind": "value",
@@ -1926,6 +2063,9 @@
         {
           "kind": "value",
           "value": ""
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2054,6 +2194,12 @@
           "kind": "n/a"
         },
         {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "value",
           "value": "https://example.com/path"
         },
@@ -2099,6 +2245,9 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "rust",
@@ -2127,6 +2276,14 @@
         {
           "error": "ParseError::RelativeUrlWithoutBase",
           "kind": "error"
+        },
+        {
+          "error": "ParseError::RelativeUrlWithoutBase",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?filters=in-progress,to-do,done"
         },
         {
           "kind": "value",
@@ -2250,6 +2407,9 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "rust",
@@ -2278,6 +2438,14 @@
         {
           "error": "TypeError",
           "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?filters=in-progress,to-do,done"
         },
         {
           "kind": "value",
@@ -2412,6 +2580,10 @@
           "value": "https://example.com/"
         },
         {
+          "kind": "value",
+          "value": "https://example.com/"
+        },
+        {
           "error": "Error",
           "kind": "error"
         }
@@ -2452,6 +2624,21 @@
           "kind": "value",
           "value": {
             "path": " https://example.com/"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "path": "​https://example.com/​"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "host": "example.com",
+            "path": "/",
+            "query": "filters=in-progress,to-do,done",
+            "scheme": "https"
           }
         },
         {
@@ -2651,6 +2838,9 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "php",
@@ -2664,6 +2854,12 @@
       "locale": "C.UTF-8",
       "name": "Ruby",
       "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
         {
           "kind": "n/a"
         },
@@ -2785,6 +2981,9 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "ruby",
@@ -2813,6 +3012,14 @@
         {
           "error": "URI::InvalidURIError",
           "kind": "error"
+        },
+        {
+          "error": "URI::InvalidURIError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "https://example.com/?filters=in-progress,to-do,done"
         },
         {
           "error": "URI::InvalidURIError",
@@ -2897,6 +3104,9 @@
         {
           "kind": "value",
           "value": ""
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"

@@ -14,9 +14,15 @@
     },
     {
       "args": ["\u00a0https://example.com/"],
-      "expected": {
-        "$undefined": true
-      }
+      "expected": "https://example.com/"
+    },
+    {
+      "args": ["\u200bhttps://example.com/\u200b"],
+      "expected": "https://example.com/"
+    },
+    {
+      "args": ["https://example.com/?filters=in-progress,to-do,done"],
+      "expected": "https://example.com/?filters=in-progress,to-do,done"
     },
     {
       "args": ["https://example.com/a b"],
@@ -101,10 +107,12 @@
       "expected": "file:///C:/x"
     },
     {
-      "args": ["javascript:alert(1)"]
+      "args": ["javascript:alert(1)"],
+      "expected": "javascript:alert(1)"
     },
     {
-      "args": ["data:text/plain,hi"]
+      "args": ["data:text/plain,hi"],
+      "expected": "data:text/plain,hi"
     },
     {
       "args": [""],
@@ -174,6 +182,14 @@
       "args": [
         {
           "$js": "a URL"
+        }
+      ],
+      "expected": "https://example.com/"
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed URL string"
         }
       ],
       "expected": "https://example.com/"
