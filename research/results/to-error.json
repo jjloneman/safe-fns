@@ -1,0 +1,774 @@
+{
+  "cases": [
+    [
+      "boom"
+    ],
+    [
+      ""
+    ],
+    [
+      "  "
+    ],
+    [
+      {
+        "$js": "an Error"
+      }
+    ],
+    [
+      {
+        "$js": "a TypeError"
+      }
+    ],
+    [
+      {
+        "$js": "an Error with no message"
+      }
+    ],
+    [
+      {
+        "$js": "an Error with a blank message"
+      }
+    ],
+    [
+      {
+        "$js": "an Error with a cause"
+      }
+    ],
+    [
+      {
+        "$js": "an Error whose message getter throws"
+      }
+    ],
+    [
+      {
+        "$js": "a DOMException"
+      }
+    ],
+    [
+      {
+        "$js": "a cross-realm Error"
+      }
+    ],
+    [
+      {
+        "$js": "a cross-realm Error with a message"
+      }
+    ],
+    [
+      {
+        "$js": "an object tagged as an Error"
+      }
+    ],
+    [
+      {
+        "message": "from payload"
+      }
+    ],
+    [
+      {
+        "message": ""
+      }
+    ],
+    [
+      {
+        "message": 42
+      }
+    ],
+    [
+      {
+        "code": 42
+      }
+    ],
+    [
+      {
+        "error": {
+          "message": "nested"
+        }
+      }
+    ],
+    [
+      {
+        "$js": "an object with an inherited message"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a throwing getter"
+      }
+    ],
+    [
+      {
+        "$js": "a revoked proxy"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a cycle"
+      }
+    ],
+    [
+      42
+    ],
+    [
+      true
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      {
+        "$js": "a symbol"
+      }
+    ],
+    [
+      {
+        "$js": "a function"
+      }
+    ],
+    [
+      [
+        1,
+        2
+      ]
+    ]
+  ],
+  "columns": [
+    {
+      "call": "toError",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "message": "boom",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "\"\"",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "\"  \"",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "boom",
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "bad type",
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "",
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": " \n",
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "outer",
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": {
+              "$repr": "Symbol(unreadable message)"
+            },
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "aborted",
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Unknown error",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "boom",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "spoofed",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "from payload",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{\"message\":\"\"}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{\"message\":42}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{\"code\":42}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{\"error\":{\"message\":\"nested\"}}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Unknown error",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Unknown error",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{\"name\":\"a\",\"self\":\"[Circular]\"}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "42",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "true",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "null",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Unknown error",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Unknown error",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Unknown error",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[1,2]",
+            "unchanged": false
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "ensureError(value) → { message, unchanged }",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "ensure-error",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "message": "'boom'",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "''",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "'  '",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "boom",
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "bad type",
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "<No error message>",
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": " \n",
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "outer",
+            "unchanged": true
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "aborted",
+            "unchanged": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{\"message\":\"spoofed\"}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{\"message\":\"from payload\"}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{\"message\":\"\"}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{\"message\":42}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{\"code\":42}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{\"error\":{\"message\":\"nested\"}}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "{}",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[object Object]",
+            "unchanged": false
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[object Object]",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "42",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "true",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "null",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "undefined",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Symbol(hostile)",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[Function (anonymous)]",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[1,2]",
+            "unchanged": false
+          }
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "5.0.0"
+    },
+    {
+      "call": "new Error(value) → { message, unchanged }",
+      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
+      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "message": "boom",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "  ",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Error: boom",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "TypeError: bad type",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Error",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Error:  \n",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Error: outer",
+            "unchanged": false
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "AbortError: aborted",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Error",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "Error: boom",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[object Error]",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[object Object]",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[object Object]",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[object Object]",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[object Object]",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[object Object]",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[object Object]",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[object Object]",
+            "unchanged": false
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "[object Object]",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "42",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "true",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "null",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "",
+            "unchanged": false
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "() => undefined",
+            "unchanged": false
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "message": "1,2",
+            "unchanged": false
+          }
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.10.0"
+    }
+  ],
+  "function": "toError"
+}

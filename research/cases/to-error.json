@@ -1,0 +1,300 @@
+{
+  "cases": [
+    {
+      "args": ["boom"],
+      "expected": {
+        "message": "boom",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [""],
+      "expected": {
+        "message": "\"\"",
+        "unchanged": false
+      }
+    },
+    {
+      "args": ["  "],
+      "expected": {
+        "message": "\"  \"",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error"
+        }
+      ],
+      "expected": {
+        "message": "boom",
+        "unchanged": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a TypeError"
+        }
+      ],
+      "expected": {
+        "message": "bad type",
+        "unchanged": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error with no message"
+        }
+      ],
+      "expected": {
+        "message": "",
+        "unchanged": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error with a blank message"
+        }
+      ],
+      "expected": {
+        "message": " \n",
+        "unchanged": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error with a cause"
+        }
+      ],
+      "expected": {
+        "message": "outer",
+        "unchanged": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error whose message getter throws"
+        }
+      ],
+      "expected": {
+        "message": {
+          "$repr": "Symbol(unreadable message)"
+        },
+        "unchanged": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a DOMException"
+        }
+      ],
+      "expected": {
+        "message": "aborted",
+        "unchanged": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm Error"
+        }
+      ],
+      "expected": {
+        "message": "Unknown error",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm Error with a message"
+        }
+      ],
+      "expected": {
+        "message": "boom",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object tagged as an Error"
+        }
+      ],
+      "expected": {
+        "message": "spoofed",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "message": "from payload"
+        }
+      ],
+      "expected": {
+        "message": "from payload",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "message": ""
+        }
+      ],
+      "expected": {
+        "message": "{\"message\":\"\"}",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "message": 42
+        }
+      ],
+      "expected": {
+        "message": "{\"message\":42}",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "code": 42
+        }
+      ],
+      "expected": {
+        "message": "{\"code\":42}",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "error": {
+            "message": "nested"
+          }
+        }
+      ],
+      "expected": {
+        "message": "{\"error\":{\"message\":\"nested\"}}",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with an inherited message"
+        }
+      ],
+      "expected": {
+        "message": "{}",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing getter"
+        }
+      ],
+      "expected": {
+        "message": "Unknown error",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        }
+      ],
+      "expected": {
+        "message": "Unknown error",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a cycle"
+        }
+      ],
+      "expected": {
+        "message": "{\"name\":\"a\",\"self\":\"[Circular]\"}",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [42],
+      "expected": {
+        "message": "42",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [true],
+      "expected": {
+        "message": "true",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "message": "null",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "message": "Unknown error",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a symbol"
+        }
+      ],
+      "expected": {
+        "message": "Unknown error",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a function"
+        }
+      ],
+      "expected": {
+        "message": "Unknown error",
+        "unchanged": false
+      }
+    },
+    {
+      "args": [[1, 2]],
+      "expected": {
+        "message": "[1,2]",
+        "unchanged": false
+      }
+    }
+  ],
+  "function": "toError"
+}
