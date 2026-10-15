@@ -1,0 +1,247 @@
+{
+  "cases": [
+    {
+      "args": ["{\"a\":1}"],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": ["[1,2]"],
+      "expected": [1, 2]
+    },
+    {
+      "args": ["\"text\""],
+      "expected": "text"
+    },
+    {
+      "args": ["42"],
+      "expected": 42
+    },
+    {
+      "args": ["-0"],
+      "expected": {
+        "$number": "-0"
+      }
+    },
+    {
+      "args": ["1.0"],
+      "expected": 1
+    },
+    {
+      "args": ["1E2"],
+      "expected": 100
+    },
+    {
+      "args": ["true"],
+      "expected": true
+    },
+    {
+      "args": ["null"],
+      "expected": null
+    },
+    {
+      "args": [" \t\n{\"a\":1}\n"],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [""],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["   "],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["{a:1}"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["{'a':1}"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["[1,2,]"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["{\"a\":1,}"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["// comment\n1"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["/* comment */ 1"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["NaN"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["Infinity"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["01"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["+1"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [".5"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["0x10"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["\"a\tb\""],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["[1] [2]"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["\u00a0{}"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["\ufeff{}"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["{\"a\":1,\"a\":2}"],
+      "expected": {
+        "a": 2
+      }
+    },
+    {
+      "args": ["{\"__proto__\":{\"x\":1}}"],
+      "expected": {
+        "__proto__": {
+          "x": 1
+        }
+      }
+    },
+    {
+      "args": ["9007199254740993"],
+      "expected": 9007199254740992
+    },
+    {
+      "args": ["12345678901234567890"],
+      "expected": 12345678901234567000
+    },
+    {
+      "args": ["0.1"],
+      "expected": 0.1
+    },
+    {
+      "args": ["1e400"]
+    },
+    {
+      "args": ["\"\\ud800\""]
+    },
+    {
+      "args": ["\"\\u0000\""],
+      "expected": "\u0000"
+    },
+    {
+      "args": ["\"\u2028\""],
+      "expected": "\u2028"
+    },
+    {
+      "args": [42],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [true],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing toString"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "safeParseJson"
+}
