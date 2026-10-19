@@ -3791,7 +3791,7 @@
     {
       "call": "SELECT CAST(? AS CHAR)",
       "image": "mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "utf8mb4_uca1400_ai_ci",
       "name": "MariaDB",
       "outcomes": [
@@ -3920,7 +3920,7 @@
     {
       "call": "SELECT TRIM(?)",
       "image": "mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "utf8mb4_uca1400_ai_ci",
       "name": "MariaDB",
       "outcomes": [
@@ -4049,7 +4049,7 @@
     {
       "call": "{ $toString: value }",
       "image": "mongo:9.0.2-noble@sha256:61dd87ff554dc20386c63ebe1f7ede27314370ad5a7bf357c685fab424672158",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "simple",
       "name": "MongoDB",
       "outcomes": [
@@ -4182,7 +4182,7 @@
     {
       "call": "{ $trim: { input: value } }",
       "image": "mongo:9.0.2-noble@sha256:61dd87ff554dc20386c63ebe1f7ede27314370ad5a7bf357c685fab424672158",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "simple",
       "name": "MongoDB",
       "outcomes": [
@@ -4315,7 +4315,7 @@
     {
       "call": "SELECT CAST(? AS CHAR)",
       "image": "mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "utf8mb4_0900_ai_ci",
       "name": "MySQL",
       "outcomes": [
@@ -4444,7 +4444,7 @@
     {
       "call": "SELECT TRIM(?)",
       "image": "mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "utf8mb4_0900_ai_ci",
       "name": "MySQL",
       "outcomes": [
@@ -4573,7 +4573,7 @@
     {
       "call": "SELECT CAST(? AS text)",
       "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "C.UTF-8",
       "name": "PostgreSQL",
       "outcomes": [
@@ -4706,7 +4706,7 @@
     {
       "call": "SELECT trim(?)",
       "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "C.UTF-8",
       "name": "PostgreSQL",
       "outcomes": [
@@ -4839,7 +4839,7 @@
     {
       "call": "SELECT CAST(? AS nvarchar(max))",
       "image": "mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "SQL_Latin1_General_CP1_CI_AS",
       "name": "SQL Server",
       "outcomes": [
@@ -4968,7 +4968,7 @@
     {
       "call": "SELECT TRIM(?)",
       "image": "mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "SQL_Latin1_General_CP1_CI_AS",
       "name": "SQL Server",
       "outcomes": [
