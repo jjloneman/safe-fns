@@ -22,6 +22,7 @@ the generated tables instead of summarizing other tools' docs.
 - [🗄️ Databases](#️-databases)
 - [➕ Adding a function or a tool](#-adding-a-function-or-a-tool)
 - [🖌️ Formatters](#️-formatters)
+- [🔎 Usage in the wild](#-usage-in-the-wild)
 
 ---
 
@@ -236,7 +237,10 @@ Each adapter service sits in one profile, named for its image.
 - `tsconfig.json` — a nested config, so the editor and ESLint resolve the Node
   adapter's imports from `research/node_modules`.
 - The host-side TypeScript lives in [scripts/research/](../scripts/research/):
-  the runner, the codec, result merging, and the table generator.
+  the runner, the codec, result merging, and the table generator, plus
+  `usage-search.ts` and its pure halves, `usage-tally.ts` and
+  `call-arguments.ts` (see [Usage in the wild](#-usage-in-the-wild)), and
+  `logging.ts`, the log and error helpers both scripts share.
 
 ## 📦 The case format
 
@@ -437,3 +441,46 @@ it.
 - `--format` runs the container formatters one at a time, since `ruff format`
   and `ruff check --fix` can rewrite the same file; `--format --check` runs them
   in parallel.
+
+## 🔎 Usage in the wild
+
+`pnpm research:usage` measures how code outside this repo names and calls things
+— the naming and semantics questions a decision review asks, such as
+`safeJsonParse` vs `safeParseJson`, or whether `parseInt` calls pass a radix.
+
+| Command                                             | What it does                                                         |
+| :-------------------------------------------------- | :------------------------------------------------------------------- |
+| `pnpm research:usage counts <name>…`                | Counts the files GitHub's code search finds for each exact name      |
+| `pnpm research:usage calls <callee> --argument <n>` | Tallies the values a call's `n`th argument takes in a sample of code |
+| `pnpm research:usage files <query>`                 | Lists the files a code search finds, qualifiers such as `repo:` kept |
+| `pnpm research:usage npm <package>…`                | Prints each package's downloads over the last week                   |
+
+- `--language <name>` (repeatable) gives `counts` a column per language, plus a
+  `Total` of them when there are several, and sets the languages `calls` samples
+  (default JavaScript and TypeScript); `--pages` sets how many pages of 100
+  files `calls` reads per language (default 3, at most 10); `--limit` caps
+  `files` (default 30, at most 100).
+- `files` joins its words with spaces, so quote an exact phrase inside the
+  query: `pnpm research:usage files '"safe parse" repo:o/r'`.
+- The report is JSON on stdout, ready for `jq`, or a Markdown table with
+  `--markdown`, stamped with its method, date, and caveats, so a decision record
+  can quote it with how it was measured; progress goes to stderr.
+- GitHub is called through `gh api`, so it uses `gh`'s own login. Code search
+  allows about 10 requests a minute: the script spaces its requests and waits
+  out a rate-limit response.
+- **Its numbers aren't reproducible**, unlike the harness, so they never go into
+  `research/results/`:
+  - counts drift daily (`safeJsonParse` read 35.8k on 2026-09-29 and 72.6k on
+    2026-10-18), so cite one with its date, as an order of magnitude;
+  - matching ignores case, and without a `language:` qualifier every language
+    counts, so an unprefixed name can collide (`parseBoolean` matches Java's
+    `Boolean.parseBoolean`);
+  - a `calls` sample is GitHub's top-ranked files, not a random sample, and sees
+    only the calls inside GitHub's text-match fragments;
+  - `calls` scans rather than parses: it skips calls inside comments and strings
+    (but not a template's `${…}`) and definitions (`function parseInt(`, a
+    method followed by `{`, a typed signature followed by `:`), skips comments,
+    strings, and regex literals inside a call, and counts a call it can't finish
+    as `(cut off)`.
+- A question none of the modes answers is a new mode in the script, not a
+  one-off `gh api` or `curl` loop, so the next session gets the same method.
