@@ -362,8 +362,8 @@
     },
     {
       "call": "new URL(value, base).href",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:761948ce0352376a9dea504e5c2b6cef0ecbcabc60bb85bd2fa3778a1f5b209e",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:22a587be3c9e261d9fff0b28315fade39a4c25e74ee81d2c1e48140008b2210b",
       "locale": "-",
       "name": "Hermes",
       "outcomes": [
@@ -543,8 +543,8 @@
     },
     {
       "call": "new URL(value, base).href",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -723,12 +723,12 @@
       ],
       "service": "node",
       "tier": 1,
-      "version": "v26.10.0"
+      "version": "v26.11.1"
     },
     {
       "call": "URL.parse(value, base)?.href",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -933,7 +933,7 @@
       ],
       "service": "node",
       "tier": 1,
-      "version": "v26.10.0"
+      "version": "v26.11.1"
     },
     {
       "call": "Uri.TryCreate(new Uri(base), value, out var uri) ? uri.AbsoluteUri : null",
@@ -2532,8 +2532,8 @@
     },
     {
       "call": "new URL(value, base).href",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "HTML (jsdom)",
       "outcomes": [

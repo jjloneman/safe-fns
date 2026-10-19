@@ -247,8 +247,8 @@
     },
     {
       "call": "is.emptyObject(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "@sindresorhus/is",
       "outcomes": [
@@ -371,8 +371,8 @@
     },
     {
       "call": "is.emptyStringOrWhitespace(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "@sindresorhus/is",
       "outcomes": [
@@ -495,8 +495,8 @@
     },
     {
       "call": "compat.isEmpty(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -619,8 +619,8 @@
     },
     {
       "call": "_.isEmpty(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -743,8 +743,8 @@
     },
     {
       "call": "isEmpty(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "radash",
       "outcomes": [
@@ -867,8 +867,8 @@
     },
     {
       "call": "R.isEmpty(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "Ramda",
       "outcomes": [
@@ -991,8 +991,8 @@
     },
     {
       "call": "isEmpty(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "remeda",
       "outcomes": [
@@ -1115,8 +1115,8 @@
     },
     {
       "call": "isEmptyish(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "remeda",
       "outcomes": [
@@ -1239,8 +1239,8 @@
     },
     {
       "call": "_.isEmpty(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "Underscore",
       "outcomes": [
@@ -3455,8 +3455,8 @@
     },
     {
       "call": "setDoc(doc, { value }); value is gone on get",
-      "image": "node:26.10.0-trixie-slim@sha256:930557a230abacbc3f4fd9b8648abf8f4bee1e17cb72195dcdfb2f709bc85b33",
-      "inputs": "sha256:ab1977a1d43f11e7a5f8ce4a3f195613be0bed9c05c34cea41e153e3c2b3b5a1",
+      "image": "node:26.11.1-trixie-slim@sha256:193fe51b64e77981119c98c2002c9e32a70e2f006fb4d25068ce0558998917f0",
+      "inputs": "sha256:9218968664b5181dd19ec0bae4b24cffd8653a78b80c1f3e539ba6edb5078326",
       "locale": "C.UTF-8",
       "name": "Cloud Firestore",
       "outcomes": [
@@ -3567,8 +3567,8 @@
     },
     {
       "call": "set(ref, { value }); value is gone on get",
-      "image": "node:26.10.0-trixie-slim@sha256:930557a230abacbc3f4fd9b8648abf8f4bee1e17cb72195dcdfb2f709bc85b33",
-      "inputs": "sha256:ab1977a1d43f11e7a5f8ce4a3f195613be0bed9c05c34cea41e153e3c2b3b5a1",
+      "image": "node:26.11.1-trixie-slim@sha256:193fe51b64e77981119c98c2002c9e32a70e2f006fb4d25068ce0558998917f0",
+      "inputs": "sha256:9218968664b5181dd19ec0bae4b24cffd8653a78b80c1f3e539ba6edb5078326",
       "locale": "C.UTF-8",
       "name": "Firebase Realtime Database",
       "outcomes": [
@@ -4537,8 +4537,8 @@
     },
     {
       "call": "validator.isEmpty(value, { ignore_whitespace: true })",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "validator.js",
       "outcomes": [

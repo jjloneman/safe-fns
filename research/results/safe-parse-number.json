@@ -393,8 +393,8 @@
     },
     {
       "call": "Schema.decodeUnknownSync(Schema.NumberFromString)(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "Effect",
       "outcomes": [
@@ -603,8 +603,8 @@
     },
     {
       "call": "compat.toNumber(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -823,8 +823,8 @@
     },
     {
       "call": "Number.parseFloat(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:761948ce0352376a9dea504e5c2b6cef0ecbcabc60bb85bd2fa3778a1f5b209e",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:22a587be3c9e261d9fff0b28315fade39a4c25e74ee81d2c1e48140008b2210b",
       "locale": "-",
       "name": "Hermes",
       "outcomes": [
@@ -1044,8 +1044,8 @@
     },
     {
       "call": "Number(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:761948ce0352376a9dea504e5c2b6cef0ecbcabc60bb85bd2fa3778a1f5b209e",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:22a587be3c9e261d9fff0b28315fade39a4c25e74ee81d2c1e48140008b2210b",
       "locale": "-",
       "name": "Hermes",
       "outcomes": [
@@ -1261,8 +1261,8 @@
     },
     {
       "call": "Number.parseFloat(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -1481,12 +1481,12 @@
       ],
       "service": "node",
       "tier": 1,
-      "version": "v26.10.0"
+      "version": "v26.11.1"
     },
     {
       "call": "Number(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -1701,12 +1701,12 @@
       ],
       "service": "node",
       "tier": 1,
-      "version": "v26.10.0"
+      "version": "v26.11.1"
     },
     {
       "call": "_.toNumber(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -1925,8 +1925,8 @@
     },
     {
       "call": "toFloat(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "radash",
       "outcomes": [
@@ -2123,8 +2123,8 @@
     },
     {
       "call": "v.parse(v.pipe(v.unknown(), v.toNumber()), value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "valibot",
       "outcomes": [
@@ -2323,8 +2323,8 @@
     },
     {
       "call": "z.coerce.number().parse(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "zod",
       "outcomes": [
@@ -5549,8 +5549,8 @@
     },
     {
       "call": "parse(value, { cast: true })[0]?.[0]",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "CSV",
       "outcomes": [
@@ -5725,8 +5725,8 @@
     },
     {
       "call": "input.value = value; input.valueAsNumber",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "HTML (jsdom)",
       "outcomes": [
@@ -5937,8 +5937,8 @@
     },
     {
       "call": "parse(`v = ${value}`).v",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "INI",
       "outcomes": [
@@ -6109,8 +6109,8 @@
     },
     {
       "call": "JSON.parse(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "JSON",
       "outcomes": [
@@ -7407,8 +7407,8 @@
     },
     {
       "call": "parse(`v = ${value}`).v",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "TOML",
       "outcomes": [
@@ -7761,8 +7761,8 @@
     },
     {
       "call": "parse(value, { version: \"1.1\" })",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "YAML 1.1",
       "outcomes": [
@@ -7937,8 +7937,8 @@
     },
     {
       "call": "parse(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "YAML 1.2 core",
       "outcomes": [
@@ -8113,8 +8113,8 @@
     },
     {
       "call": "coerce({ type: \"number\" }, value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "Ajv",
       "outcomes": [
@@ -8313,8 +8313,8 @@
     },
     {
       "call": "atof(value)",
-      "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
-      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
+      "image": "gcc:16.2.0-trixie@sha256:17043c23ec2ad97fc3beca18da77275d26be5db5cd70ea0a5d73200e21a8e999",
+      "inputs": "sha256:68e5d57b72a823599939caece108000a029725e82ce09654b4ce383aa7c6bef5",
       "locale": "C.UTF-8",
       "name": "C (glibc)",
       "outcomes": [
@@ -8493,12 +8493,12 @@
       ],
       "service": "c",
       "tier": 4,
-      "version": "2.41-12+deb13u3"
+      "version": "2.41-12+deb13u4"
     },
     {
       "call": "strtod(value, NULL)",
-      "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
-      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
+      "image": "gcc:16.2.0-trixie@sha256:17043c23ec2ad97fc3beca18da77275d26be5db5cd70ea0a5d73200e21a8e999",
+      "inputs": "sha256:68e5d57b72a823599939caece108000a029725e82ce09654b4ce383aa7c6bef5",
       "locale": "C.UTF-8",
       "name": "C (glibc)",
       "outcomes": [
@@ -8677,12 +8677,12 @@
       ],
       "service": "c",
       "tier": 4,
-      "version": "2.41-12+deb13u3"
+      "version": "2.41-12+deb13u4"
     },
     {
       "call": "std::from_chars(first, last, double&)",
-      "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
-      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
+      "image": "gcc:16.2.0-trixie@sha256:17043c23ec2ad97fc3beca18da77275d26be5db5cd70ea0a5d73200e21a8e999",
+      "inputs": "sha256:68e5d57b72a823599939caece108000a029725e82ce09654b4ce383aa7c6bef5",
       "locale": "C.UTF-8",
       "name": "C++ (libstdc++)",
       "outcomes": [
@@ -8859,12 +8859,12 @@
       ],
       "service": "c",
       "tier": 4,
-      "version": "16.1.0"
+      "version": "16.2.0"
     },
     {
       "call": "std::stod(value)",
-      "image": "gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0",
-      "inputs": "sha256:f9c029375134c8864c02f5963d210e69e6a6d5c8501a9297ccb6914949d88fb9",
+      "image": "gcc:16.2.0-trixie@sha256:17043c23ec2ad97fc3beca18da77275d26be5db5cd70ea0a5d73200e21a8e999",
+      "inputs": "sha256:68e5d57b72a823599939caece108000a029725e82ce09654b4ce383aa7c6bef5",
       "locale": "C.UTF-8",
       "name": "C++ (libstdc++)",
       "outcomes": [
@@ -9041,7 +9041,7 @@
       ],
       "service": "c",
       "tier": 4,
-      "version": "16.1.0"
+      "version": "16.2.0"
     },
     {
       "call": "math -- $argv[1]",
@@ -11351,8 +11351,8 @@
     },
     {
       "call": "validator.toFloat(value)",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "validator.js",
       "outcomes": [
