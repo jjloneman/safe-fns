@@ -1,123 +1,222 @@
 {
   "cases": [
     {
-      "args": ["hello"]
+      "args": ["hello"],
+      "expected": "hello"
     },
     {
-      "args": ["  hi  "]
+      "args": ["  hi  "],
+      "expected": "hi"
     },
     {
-      "args": [""]
+      "args": [""],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["   "]
+      "args": ["   "],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["\t\n"]
+      "args": ["\t\n"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["\u00a0"]
+      "args": ["\u00a0"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["\u0085"]
+      "args": ["\u0085"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["\ufeff"]
+      "args": ["\ufeff"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["\u200b"]
+      "args": ["\u200b"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": ["\u2800"]
+      "args": ["\u2800"],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": [42]
+      "args": [42],
+      "expected": "42"
     },
     {
       "args": [
         {
           "$number": "-0"
         }
-      ]
+      ],
+      "expected": "-0"
     },
     {
-      "args": [1e21]
+      "args": [1e21],
+      "expected": "1e+21"
     },
     {
-      "args": [1e-7]
+      "args": [1e-7],
+      "expected": "1e-7"
     },
     {
-      "args": [0.1]
+      "args": [0.1],
+      "expected": "0.1"
     },
     {
-      "args": [100]
+      "args": [100],
+      "expected": "100"
     },
     {
       "args": [
         {
           "$number": "NaN"
         }
-      ]
+      ],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
       "args": [
         {
           "$number": "Infinity"
         }
-      ]
+      ],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
       "args": [
         {
           "$bigint": "9007199254740993"
         }
-      ]
+      ],
+      "expected": "9007199254740993"
     },
     {
-      "args": [true]
+      "args": [true],
+      "expected": "true"
     },
     {
-      "args": [false]
+      "args": [false],
+      "expected": "false"
     },
     {
-      "args": [null]
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
       "args": [
         {
           "$undefined": true
         }
-      ]
+      ],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": [[]]
+      "args": [[]],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": [["a", "b"]]
+      "args": [["a", "b"]],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
-      "args": [{}]
+      "args": [{}],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
       "args": [
         {
           "$js": "a symbol"
         }
-      ]
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed string"
+        }
+      ],
+      "expected": "hi"
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed blank string"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
       "args": [
         {
           "$js": "a Date"
         }
-      ]
+      ],
+      "expected": {
+        "$undefined": true
+      }
     },
     {
       "args": [
         {
           "$js": "an object with a throwing toString"
         }
-      ]
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed number"
+        }
+      ],
+      "expected": "1"
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed true"
+        }
+      ],
+      "expected": "true"
     }
   ],
   "function": "safeParseString"

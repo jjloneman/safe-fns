@@ -1,10 +1,10 @@
 ---
 type: Decision
 title: What the package leaves to native APIs and other libraries
-description: Excludes what native JavaScript already does and wrappers around native one-liners; parks newer native APIs, date parsing, and duration and byte formatting as future candidates; leaves validation to dedicated libraries.
+description: Excludes what native JavaScript already does and wrappers around native one-liners; parks newer native APIs, date and currency-amount parsing, and duration and byte formatting as future candidates; leaves validation, IndexedDB, and exact decimals to dedicated libraries.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T21:14:18Z }
-verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T20:49:42Z }
+verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
 # What the package leaves to native APIs and other libraries
@@ -23,6 +23,7 @@ Every candidate the catalog weighed against a native API or another library land
 - lodash's `cloneDeep` — use native `structuredClone`.
   - This package plans `safeStructuredClone`, which returns the caller's fallback where `structuredClone` throws.
   - That isn't a one-liner wrapper of the kind excluded below: making a native call that can throw safe is the package's purpose, like `safeJsonStringify`.
+  - A JavaScript `deepClone` with rules of its own is a part 2b candidate, weighed in [What safeStructuredClone returns when cloning fails](safe-structured-clone.md).
 - An error check — `Error.isError` (Node 24+ and current browsers, not Node 22).
   - A library can't reproduce it reliably across realms, so callers on older runtimes keep `instanceof Error` and its limits.
 - Wrappers around native one-liners:
@@ -38,10 +39,14 @@ Every candidate the catalog weighed against a native API or another library land
   - A `formatDuration` would balance milliseconds into mixed units — the inverse of `toMs` — and format them itself, so it returns the same string on every runtime.
 - `safeParseDate` — `Date.parse` returns `NaN` for input it can't read and parses non-ISO strings differently per engine, so a total wrapper with a caller-chosen fallback may still earn a place.
 - `formatBytes` — [`Intl.NumberFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) with `style: "unit"` formats a value you've already scaled (`2.5 megabytes`, `2.5 MB`, `2.5MB`), but doesn't pick the unit, and has no binary units (`kibibyte` throws a `RangeError`).
+- `safeParseAmount` — currency strings such as `"$1,234.50"`, `"(12.00)"`, or `"1.234,50"` need a documented format rule: which symbols, separators, and negative forms count, and which locale decides.
+  - The owner's money parsers already disagree on negatives: one drops a leading `-`, one treats `-` anywhere as negative, and one reads `(…)` as a credit.
+  - `safeParseNumber` stays a plain decimal parser rather than absorbing these formats.
 - Why each is parked rather than excluded:
   - `groupBy`, the `Set` methods, and `Intl.DurationFormat` are newer than many consumers' targets — the owner's Angular apps among them still target ES2020–ES2022, where they're missing at runtime or in TypeScript's `lib`;
   - `formatDuration` and `formatBytes` would also fill gaps the native APIs leave (mixed units; picking the unit);
-  - `safeParseDate` would make `Date.parse`'s per-engine behavior total and predictable.
+  - `safeParseDate` would make `Date.parse`'s per-engine behavior total and predictable;
+  - `safeParseAmount` would need its format rules settled before it can be total without guessing.
 - Each can become a candidate if a consumer needs it.
 - Until then, the recommendation is:
   - the native API where the runtime has it;
@@ -52,6 +57,11 @@ Every candidate the catalog weighed against a native API or another library land
 
 - Schema validation — [zod](https://www.npmjs.com/package/zod).
 - English inflection dictionaries — `pluralize` handles regular endings and takes an explicit plural for the rest.
+- IndexedDB — [`idb`](https://www.npmjs.com/package/idb) for the whole API, or [`idb-keyval`](https://www.npmjs.com/package/idb-keyval) for key-value reads and writes.
+  - It isn't one native call to make safe: opening a database involves versions, upgrade handlers, transactions, and requests that report errors through events.
+  - A never-failing read is one line with `idb-keyval`: `await get(key).catch(() => undefined)`.
+  - Wrapping it would also make the package's first asynchronous export, turning "never throws" into "never rejects", which deserves a decision of its own.
+- Exact decimal arithmetic — [`big.js`](https://www.npmjs.com/package/big.js), [`bignumber.js`](https://www.npmjs.com/package/bignumber.js), or [`decimal.js`](https://www.npmjs.com/package/decimal.js); JavaScript has no built-in decimal type yet (TC39's Decimal proposal is early-stage), and money is usually stored as integer minor units (`1999` cents) instead.
 
 ### 🧭 Staying close to native
 

@@ -41,6 +41,9 @@ export type CaseEntry = {
   /**
    * What safe-fns plans to return, when its decision record settles it.
    *
+   * - A `{ "$utf16": [codeUnit, …] }` tag in it is decoded to the string
+   *   those code units spell.
+   *
    * @example true
    */
   expected?: EncodedValue;
@@ -263,6 +266,23 @@ type ColumnWithOrigin = {
   column: AdapterColumn;
 } & Pick<ServiceColumns, "image" | "inputs" | "service">;
 
+/** An `expected` answer to decode, and its case's position for errors. */
+type Utf16TagsToDecode = {
+  /**
+   * The case's position in its file.
+   *
+   * @example 0
+   */
+  caseIndex: number;
+
+  /**
+   * The answer, or a part of it.
+   *
+   * @example `{ "$utf16": [55296] }`
+   */
+  value: EncodedValue;
+};
+
 /** The function name of the case file that checks the codec itself. */
 export const CODEC_FUNCTION = "codec";
 
@@ -444,7 +464,13 @@ export function parseCaseFile(json: unknown): CaseFile {
 
       return entry.expected === undefined
         ? { args: entry.args }
-        : { args: entry.args, expected: entry.expected };
+        : {
+            args: entry.args,
+            expected: decodeUtf16Tags({
+              caseIndex: index,
+              value: entry.expected,
+            }),
+          };
     }),
     function: json.function,
   };
@@ -528,6 +554,72 @@ function compareColumns(left: ResultColumn, right: ResultColumn): number {
     left.name.localeCompare(right.name, "en-US") ||
     left.call.localeCompare(right.call, "en-US")
   );
+}
+
+/**
+ * Decode every `{ "$utf16": [codeUnit, …] }` tag in an `expected` answer.
+ *
+ * - It's the one way to plan a lone surrogate: every adapter reads the case
+ *   file itself, and Rust's JSON parser rejects `"\ud800"`.
+ *
+ * - Adapters never read `expected`, so the tag needs no twin in their codecs.
+ *
+ * - A `$object` escape's keys are data, so a `$utf16` key inside one stays a
+ *   key; only its values are decoded.
+ *
+ * @returns the answer, with each tag replaced by its string.
+ * @throws Error when a tag's payload isn't an array of UTF-16 code units.
+ */
+function decodeUtf16Tags({
+  caseIndex,
+  value,
+}: Utf16TagsToDecode): EncodedValue {
+  if (Array.isArray(value)) {
+    return value.map((item) => decodeUtf16Tags({ caseIndex, value: item }));
+  }
+
+  if (!isRecord(value)) {
+    return value;
+  }
+
+  const decodeValues = (
+    entries: Record<string, EncodedValue>
+  ): Record<string, EncodedValue> =>
+    Object.fromEntries(
+      Object.entries(entries).map(([key, item]) => [
+        key,
+        decodeUtf16Tags({ caseIndex, value: item }),
+      ])
+    );
+
+  const isSingleKey = Object.keys(value).length === 1;
+
+  if (isSingleKey && isRecord(value.$object)) {
+    return { $object: decodeValues(value.$object) };
+  }
+
+  if (isSingleKey && "$utf16" in value) {
+    const codeUnits = value.$utf16;
+
+    if (
+      !Array.isArray(codeUnits) ||
+      !codeUnits.every(
+        (codeUnit): codeUnit is number =>
+          typeof codeUnit === "number" &&
+          Number.isInteger(codeUnit) &&
+          codeUnit >= 0 &&
+          codeUnit <= 0xff_ff
+      )
+    ) {
+      throw new Error(
+        `case ${caseIndex} has a \`$utf16\` tag that isn't an array of UTF-16 code units`
+      );
+    }
+
+    return codeUnits.map((codeUnit) => String.fromCharCode(codeUnit)).join("");
+  }
+
+  return decodeValues(value);
 }
 
 /** Check that a value is JSON the portable format can hold. */

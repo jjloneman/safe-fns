@@ -181,10 +181,16 @@
       "expected": 0.1
     },
     {
-      "args": ["1e400"]
+      "args": ["1e400"],
+      "expected": {
+        "$number": "Infinity"
+      }
     },
     {
-      "args": ["\"\\ud800\""]
+      "args": ["\"\\ud800\""],
+      "expected": {
+        "$utf16": [55296]
+      }
     },
     {
       "args": ["\"\\u0000\""],
@@ -226,6 +232,116 @@
       "args": [
         {
           "a": 1
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed JSON string"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed string"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a Buffer of JSON text"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "UTF-8 bytes of JSON text"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "UTF-8 bytes of JSON text with a BOM"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an ArrayBuffer of JSON text"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a DataView of JSON text"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "UTF-16LE bytes of JSON text with a BOM"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "UTF-16BE bytes of JSON text with a BOM"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "UTF-16LE bytes of JSON text without a BOM"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "invalid UTF-8 bytes"
         }
       ],
       "expected": {

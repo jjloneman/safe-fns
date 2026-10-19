@@ -55,31 +55,32 @@ The tables below show where today's options disagree. ✅ is `true`, ❌ is `fal
 
 ### 🫙 Is it empty?
 
-| Value                      | lodash [`isEmpty`][lodash-isEmpty] | ramda [`isEmpty`][ramda-isEmpty] | remeda [`isEmptyish`][remeda-isEmptyish] | safe-fns `isSafeEmpty` (planned) |
-| -------------------------- | :--------------------------------: | :------------------------------: | :--------------------------------------: | :------------------------------: |
-| `0`                        |                 ✅                 |                ❌                |                    ❌                    |                ❌                |
-| `false`                    |                 ✅                 |                ❌                |                    ❌                    |                ❌                |
-| `NaN`                      |                 ✅                 |                ❌                |                    ❌                    |                ❌                |
-| `null`                     |                 ✅                 |                ❌                |                    ✅                    |                —                 |
-| `''`                       |                 ✅                 |                ✅                |                    ✅                    |                ✅                |
-| `'   '`                    |                 ❌                 |                ❌                |                    ❌                    |                ✅                |
-| `{}`                       |                 ✅                 |                ✅                |                    ✅                    |                ✅                |
-| `{ length: 0, name: 'x' }` |                 ❌                 |                ❌                |                    ✅                    |                ❌                |
-| `new Map()`                |                 ✅                 |                ✅                |                    ✅                    |                ✅                |
-| `new Date()`               |                 ✅                 |                ❌                |                    ✅                    |                ❌                |
+| Value                         | lodash [`isEmpty`][lodash-isEmpty] | ramda [`isEmpty`][ramda-isEmpty] | remeda [`isEmptyish`][remeda-isEmptyish] | safe-fns `isSafeEmpty` (planned) |
+| ----------------------------- | :--------------------------------: | :------------------------------: | :--------------------------------------: | :------------------------------: |
+| `0`                           |                 ✅                 |                ❌                |                    ❌                    |                ❌                |
+| `false`                       |                 ✅                 |                ❌                |                    ❌                    |                ❌                |
+| `NaN`                         |                 ✅                 |                ❌                |                    ❌                    |                ❌                |
+| `null`                        |                 ✅                 |                ❌                |                    ✅                    |                ✅                |
+| `''`                          |                 ✅                 |                ✅                |                    ✅                    |                ✅                |
+| `'   '`                       |                 ❌                 |                ❌                |                    ❌                    |                ✅                |
+| `{}`                          |                 ✅                 |                ✅                |                    ✅                    |                ✅                |
+| `{ length: 0, name: 'x' }`    |                 ❌                 |                ❌                |                    ✅                    |                ❌                |
+| `new Map()`                   |                 ✅                 |                ✅                |                    ✅                    |                ✅                |
+| `new Date()`                  |                 ✅                 |                ❌                |                    ✅                    |                ❌                |
+| `'\u200B'` (zero-width space) |                 ❌                 |                ❌                |                    ❌                    |                ✅                |
+| `new URLSearchParams('a=1')`  |                 ✅                 |                ❌                |                    ❌                    |                ❌                |
 
-- — marks a case the planned semantics haven't settled yet.
 - es-toolkit's [`compat/isEmpty`][es-toolkit-compat-isEmpty] matches lodash on every row.
 
 ### 🧱 Is it a plain object?
 
-| Value                           | lodash [`isPlainObject`][lodash-isPlainObject] | remeda [`isPlainObject`][remeda-isPlainObject] | es-toolkit [`isPlainObject`][es-toolkit-isPlainObject] |
-| ------------------------------- | :--------------------------------------------: | :--------------------------------------------: | :----------------------------------------------------: |
-| `{}`                            |                       ✅                       |                       ✅                       |                           ✅                           |
-| `Object.create(null)`           |                       ✅                       |                       ✅                       |                           ✅                           |
-| `new (class Foo {})()`          |                       ❌                       |                       ❌                       |                           ❌                           |
-| `Math`                          |                       ❌                       |                       ✅                       |                           ❌                           |
-| `{ [Symbol.toStringTag]: 'X' }` |                       ✅                       |                       ✅                       |                           ❌                           |
+| Value                           | lodash [`isPlainObject`][lodash-isPlainObject] | remeda [`isPlainObject`][remeda-isPlainObject] | es-toolkit [`isPlainObject`][es-toolkit-isPlainObject] | safe-fns `isPlainObject` (planned) |
+| ------------------------------- | :--------------------------------------------: | :--------------------------------------------: | :----------------------------------------------------: | :--------------------------------: |
+| `{}`                            |                       ✅                       |                       ✅                       |                           ✅                           |                 ✅                 |
+| `Object.create(null)`           |                       ✅                       |                       ✅                       |                           ✅                           |                 ✅                 |
+| `new (class Foo {})()`          |                       ❌                       |                       ❌                       |                           ❌                           |                 ❌                 |
+| `Math`                          |                       ❌                       |                       ✅                       |                           ❌                           |                 ❌                 |
+| `{ [Symbol.toStringTag]: 'X' }` |                       ✅                       |                       ✅                       |                           ❌                           |                 ❌                 |
 
 ### 🔢 Parse a number
 
@@ -161,12 +162,13 @@ import { isSafeEmpty } from "safe-fns/is-safe-empty";
 
 _No functions have shipped yet._ The planned families are:
 
-| Family  | Functions                                                                                     |
-| :------ | :-------------------------------------------------------------------------------------------- |
-| Guards  | `isSafeEmpty`, `isSafePopulated`, `isPlainObject`                                             |
-| Parsers | `safeParseBoolean`, `safeParseNumber`, `safeParseInteger`, `safeParseString`, `safeParseJson` |
-| Errors  | `getErrorMessage`, `toError`                                                                  |
-| Sort    | `deepSortObject`                                                                              |
+| Family    | Functions                                                                                                                       |
+| :-------- | :------------------------------------------------------------------------------------------------------------------------------ |
+| Guards    | `isSafeEmpty`, `isSafePopulated`, `isPlainObject`, `safeObjectHasOwn`                                                           |
+| Parsers   | `safeParseBoolean`, `safeParseNumber`, `safeParseInteger`, `safeParseString`, `safeParseJson`, `safeParseUrl`                   |
+| Serialize | `safeJsonStringify`, `deepSortObject`, `safeStructuredClone`                                                                    |
+| Errors    | `getErrorMessage`, `toError`                                                                                                    |
+| Storage   | `safeStorageGetItem`, `safeStorageSetItem`, `safeStorageRemoveItem`, plus `safeLocalStorage*` and `safeSessionStorage*` aliases |
 
 Parsers share one shape:
 
@@ -202,12 +204,23 @@ safe-fns replaces helpers that were copy-pasted between projects and had drifted
 | Copy-pasted pattern                                         | safe-fns                                     |
 | :---------------------------------------------------------- | :------------------------------------------- |
 | `error instanceof Error ? error.message : String(error)`    | `getErrorMessage(error)`                     |
+| `error instanceof Error ? error : new Error(String(error))` | `toError(error)`                             |
 | `value.trim() !== ""` on a string                           | `isSafePopulated(value)`                     |
 | Hand-rolled number parsing that returns `null` on bad input | `safeParseNumber(value, { fallback: null })` |
+| `try { return JSON.parse(text); } catch { return null; }`   | `safeParseJson(text, { fallback: null })`    |
+| `JSON.stringify(value, null, 2)`                            | `safeJsonStringify(value, { space: 2 })`     |
 | A local `sortKeysRecursively`                               | `deepSortObject(value)`                      |
+| `localStorage.getItem(key)` inside a `try`                  | `safeLocalStorageGetItem(key)`               |
 
 - Check each old helper's edge cases against the new function's docs before you swap.
   - Copies that drifted may disagree on details such as case-sensitive key sorting.
+  - `isSafePopulated` treats a string of invisible characters, such as a zero-width space, as blank, where `value.trim() !== ""` doesn't.
+  - `safeParseBoolean` accepts `yes`, `on`, `t`, `y`, and `1` as `true` (and their opposites as `false`), where `value === "true"` accepts only `"true"`.
+  - `safeParseJson` also takes bytes (a `Buffer`, `Uint8Array`, or `ArrayBuffer`), decoded as UTF-8 or as UTF-16 by its byte order mark, but never calls `toString` on other values the way `JSON.parse` does.
+  - `getErrorMessage` returns the message alone, where `String(error)` prefixes the error's name (`"TypeError: boom"`).
+  - `safeJsonStringify` takes `replacer` and `space` in its options object, not as positional arguments, and writes a cycle as `"[Circular]"` and a BigInt as a string where `JSON.stringify` throws.
+  - `deepSortObject` sorts keys only; arrays keep their order unless `sortArrays` picks them.
+  - `safeLocalStorageGetItem` still returns `null` for a missing key; only storage that can't be reached returns the fallback.
 
 ---
 

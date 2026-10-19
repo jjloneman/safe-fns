@@ -81,9 +81,169 @@
       {
         "$undefined": true
       }
+    ],
+    [
+      {
+        "$js": "a boxed number"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed bigint"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed numeric string"
+      }
     ]
   ],
   "columns": [
+    {
+      "call": "safeParseInteger",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": -42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 42
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
     {
       "call": "Schema.decodeUnknownSync(Schema.NumberFromString.check(Schema.isInt()))(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
@@ -140,6 +300,18 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
         },
         {
           "error": "SchemaError",
@@ -300,6 +472,18 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 42
         }
       ],
       "service": "node",
@@ -422,6 +606,15 @@
           "value": {
             "$number": "NaN"
           }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "hermes",
@@ -544,6 +737,18 @@
           "value": {
             "$number": "NaN"
           }
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 42
         }
       ],
       "service": "node",
@@ -656,6 +861,18 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
         }
       ],
       "service": "node",
@@ -768,6 +985,18 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 42
         }
       ],
       "service": "node",
@@ -878,6 +1107,18 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 42
         }
       ],
       "service": "node",
@@ -990,6 +1231,18 @@
         {
           "error": "ValiError",
           "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 42
         }
       ],
       "service": "node",
@@ -1102,6 +1355,18 @@
         {
           "error": "ZodError",
           "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 42
         }
       ],
       "service": "node",
@@ -1211,6 +1476,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "dotnet",
@@ -1283,6 +1557,15 @@
         {
           "error": "FormatException",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1411,6 +1694,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "dotnet",
@@ -1511,6 +1803,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -1608,6 +1909,15 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1712,6 +2022,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "go",
@@ -1786,6 +2105,15 @@
         {
           "kind": "value",
           "value": 1000
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1920,6 +2248,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -2027,6 +2364,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -2099,6 +2445,15 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2227,6 +2582,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -2299,6 +2663,15 @@
         {
           "error": "NumberFormatException",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2427,6 +2800,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -2499,6 +2881,15 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2600,6 +2991,15 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2738,6 +3138,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "python",
@@ -2812,6 +3221,15 @@
         {
           "error": "ParseIntError(InvalidDigit)",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -2946,6 +3364,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -3018,6 +3445,15 @@
         {
           "error": "NumberFormatException",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3148,6 +3584,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "node",
@@ -3220,6 +3665,15 @@
         {
           "kind": "value",
           "value": 1
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3346,6 +3800,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "node",
@@ -3420,6 +3883,15 @@
         {
           "error": "SyntaxError",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3556,6 +4028,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "mariadb-adapter",
@@ -3667,6 +4148,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "mongo-adapter",
@@ -3773,6 +4263,15 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -3887,6 +4386,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "postgres-adapter",
@@ -3993,6 +4501,15 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -4108,6 +4625,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "sqlite",
@@ -4180,6 +4706,15 @@
         {
           "kind": "value",
           "value": 1000
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -4308,6 +4843,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "jvm",
@@ -4409,6 +4953,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "node",
@@ -4483,6 +5036,15 @@
         {
           "kind": "value",
           "value": "1_000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -4624,6 +5186,18 @@
           "value": {
             "$undefined": true
           }
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
         }
       ],
       "service": "node",
@@ -4696,6 +5270,15 @@
         {
           "error": "exit 1",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -4822,6 +5405,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "shell",
@@ -4894,6 +5486,15 @@
         {
           "kind": "value",
           "value": 1
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5022,6 +5623,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "c",
@@ -5096,6 +5706,15 @@
         {
           "kind": "value",
           "value": 1
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5222,6 +5841,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "c",
@@ -5294,6 +5922,15 @@
         {
           "error": "exit 1",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5420,6 +6057,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "shell",
@@ -5494,6 +6140,15 @@
         {
           "error": "exit 128",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5632,6 +6287,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "php",
@@ -5743,6 +6407,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "php",
@@ -5847,6 +6520,15 @@
         {
           "error": "FormatException",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -5957,6 +6639,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "powershell",
@@ -6061,6 +6752,15 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -6175,6 +6875,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "ruby",
@@ -6283,6 +6992,15 @@
         {
           "error": "TypeError",
           "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -6397,6 +7115,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "ruby",
@@ -6471,6 +7198,15 @@
         {
           "kind": "value",
           "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -6603,6 +7339,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "node",
@@ -6677,6 +7422,15 @@
         {
           "kind": "value",
           "value": 1000
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -6803,6 +7557,15 @@
         },
         {
           "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         }
       ],
       "service": "shell",
@@ -6875,6 +7638,15 @@
         {
           "kind": "value",
           "value": "1000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"

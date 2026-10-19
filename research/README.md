@@ -253,14 +253,15 @@ the tier-0 **safe-fns (planned)** column.
 
 Plain JSON passes through. Values JSON can't hold are single-key tagged objects:
 
-| Encoding                            | Value                                                         |
-| :---------------------------------- | :------------------------------------------------------------ |
-| `{ "$number": "NaN" }`              | `NaN`, `-0`, `Infinity`, or `-Infinity`                       |
-| `{ "$bigint": "9007199254740993" }` | a bigint                                                      |
-| `{ "$undefined": true }`            | `undefined`                                                   |
-| `{ "$object": { "$tag": 1 } }`      | an object whose keys start with `$`, so data can't fake a tag |
-| `{ "$js": "a revoked proxy" }`      | a JavaScript-only value, built by the Node adapter            |
-| `{ "$repr": "[object Map]" }`       | an output with no encoding; never valid as an input           |
+| Encoding                            | Value                                                                                              |
+| :---------------------------------- | :------------------------------------------------------------------------------------------------- |
+| `{ "$number": "NaN" }`              | `NaN`, `-0`, `Infinity`, or `-Infinity`                                                            |
+| `{ "$bigint": "9007199254740993" }` | a bigint                                                                                           |
+| `{ "$undefined": true }`            | `undefined`                                                                                        |
+| `{ "$object": { "$tag": 1 } }`      | an object whose keys start with `$`, so data can't fake a tag                                      |
+| `{ "$js": "a revoked proxy" }`      | a JavaScript-only value, built by the Node adapter                                                 |
+| `{ "$utf16": [55296] }`             | in `expected` only: the string these UTF-16 code units spell, the one way to plan a lone surrogate |
+| `{ "$repr": "[object Map]" }`       | an output with no encoding; never valid as an input                                                |
 
 - A `$js` name is a factory in `adapters/node.mts`, or the `description` of an
   entry in `test/hostile-inputs.ts` or `test/cross-realm-inputs.ts`.

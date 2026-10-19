@@ -3,8 +3,8 @@ type: Decision
 title: How a function takes its parameters
 description: Up to two positional parameters for the values a function works on, configuration in a trailing options object, and nothing variadic.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-03T21:14:18Z }
-verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:53:58Z }
+verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
 # How a function takes its parameters
@@ -19,7 +19,8 @@ A public export's parameters split into the values it works on, which are positi
 - **Values are positional, one or two of them.**
   - One value: `isSafePopulated(value)`, `safeParseJson(value)`, `upperFirst(text)`.
   - Two values, where the function naturally relates them: `isDeepEqual(a, b)`, `safeObjectHasOwn(value, key)`, `keyBy(items, key)`.
-  - A function that wraps a native API keeps its parameters in the native order: `safeObjectHasOwn(value, key)`, like `Object.hasOwn(value, key)`.
+  - A function that wraps a native API keeps the native API's values in their native order: `safeObjectHasOwn(value, key)`, like `Object.hasOwn(value, key)`.
+  - A native API's optional configuration parameters move into the options object, by name: `safeJsonStringify(value, { space: 2 })`, not `JSON.stringify(value, null, 2)`.
 - **Configuration goes in a trailing options object, even with one key.**
   - `deepSortObject(value, { sortArrays: true })`, never `deepSortObject(value, true)`.
   - `isDeepEqual(a, b, { ignoreArrayOrder: true })`.
@@ -34,6 +35,7 @@ A public export's parameters split into the values it works on, which are positi
 
 - Positional values read naturally for the one or two things a function is about: `isDeepEqual(a, b)`, not `isDeepEqual({ left, right })`.
 - A bare positional flag or number hides its meaning: `deepSortObject(value, true)` doesn't say what `true` does, and `safeParseInteger(value, 10)` reads like `parseInt`'s radix.
+- A wrapper follows the same split as any other function: `JSON.stringify`'s `replacer` is almost always `null` at call sites that only want `space`, so keeping it positional would carry that placeholder into every call (owner's call, 2026-10-15).
 
 ## Consequences
 

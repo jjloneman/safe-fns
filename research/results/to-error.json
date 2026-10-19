@@ -154,14 +154,14 @@
         {
           "kind": "value",
           "value": {
-            "message": "\"\"",
+            "message": "Unknown error",
             "unchanged": false
           }
         },
         {
           "kind": "value",
           "value": {
-            "message": "\"  \"",
+            "message": "Unknown error",
             "unchanged": false
           }
         },

@@ -48,6 +48,53 @@ describe("parseCaseFile", () => {
     expect(caseFile).toStrictEqual(json);
   });
 
+  test("decodes $utf16 tags in an expected answer, at any depth", () => {
+    // Given - planned answers spelling a lone surrogate by its code unit
+    const json = {
+      cases: [
+        { args: ["a"], expected: { $utf16: [0xd8_00] } },
+        { args: ["b"], expected: [{ text: { $utf16: [0x68, 0x69] } }] },
+        { args: ["c"], expected: { a: { $utf16: [0x61] }, b: 1 } },
+        {
+          args: ["d"],
+          expected: { $object: { $utf16: { $utf16: [0x78] } } },
+        },
+      ],
+      function: "f",
+    };
+
+    // When - narrowing it
+    const caseFile = parseCaseFile(json);
+
+    // Then - each tag becomes its string, and an escaped `$utf16` key stays
+    expect(caseFile.cases.map(({ expected }) => expected)).toStrictEqual([
+      "\uD800",
+      [{ text: "hi" }],
+      { a: "a", b: 1 },
+      { $object: { $utf16: "x" } },
+    ]);
+  });
+
+  test.each([
+    { description: "a non-array", payload: "\\ud800" },
+    { description: "a fraction", payload: [1.5] },
+    { description: "a negative number", payload: [-1] },
+    { description: "a value past 0xFFFF", payload: [0x1_00_00] },
+    { description: "a string code unit", payload: ["d800"] },
+  ])("rejects a utf16 tag holding $description", ({ payload }) => {
+    // Given - a planned answer whose tag isn't an array of code units
+    const json = {
+      cases: [{ args: [], expected: { $utf16: payload } }],
+      function: "f",
+    };
+
+    // When - narrowing it
+    const parse = (): CaseFile => parseCaseFile(json);
+
+    // Then - it throws, naming the case
+    expect(parse).toThrow("case 0 has a `$utf16` tag");
+  });
+
   test.each([
     { description: "a non-object", json: [] },
     { description: "a missing function", json: { cases: [] } },

@@ -3,8 +3,8 @@ type: Decision
 title: What a parser returns when it can't parse
 description: Parsers return the caller's fallback, `undefined` by default, for any input they don't recognize — never a guess.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-05T15:44:16Z }
-verified: { by: human:jjloneman, at: 2026-10-05T15:47:12Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-13T02:00:00Z }
+verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
 # What a parser returns when it can't parse
@@ -22,6 +22,9 @@ A parser either recognizes its input or returns the caller's fallback; it never 
   - `safeParseBoolean("maybe")` returns the fallback, not `Boolean("maybe")`, which is `true`.
   - `safeParseNumber("")` returns the fallback, not `Number("")`, which is `0`.
 - **The fallback is a value, never a thunk,** so it can't throw.
+- **Every parser treats an `options` argument that isn't an object as absent.**
+  - Array and RxJS callbacks pass `(value, index, array)`, so `values.map(safeParseNumber)` hands the index to `options`; at runtime the stray number is ignored rather than misread, unlike `["1", "2"].map(parseInt)`, where the index becomes the radix.
+  - In TypeScript, passing a parser straight to `filter` is a compile error and to `map` gives `unknown[]`, so the docs show the arrow form: `values.map((value) => safeParseNumber(value))`.
 
 ## Why
 
