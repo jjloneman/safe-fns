@@ -24,9 +24,10 @@ paths:
 - **Never pin a pre-release** (`rc3`, `-beta`, `-preview`), even when Dependabot proposes one; its own pre-release filter has let Python's through.
   - `dependabot.yml` ignores Python's alphas, betas, and release candidates in `research-dockerfiles`, the one entry that bumps 3.x Python; add the next minor's range before its first alpha.
   - `scripts/research/image-pins.test.ts` fails on any pre-release `image:` or `FROM`, and on a second copy of the Python hold, so a miss shows up in CI.
-- **One Compose project per session.** Set `COMPOSE_PROJECT_NAME` (`safe-fns-research-gh-<issue>`) before any `docker compose` or `pnpm research` command, since parallel sessions share one Docker engine and the `db` profile runs `compose up` and `compose rm`.
+- **One Compose project per session.** Set `COMPOSE_PROJECT_NAME` (`safe-fns-research-gh-<issue>`) before any `docker compose` or `pnpm research` command, since parallel sessions share one Docker engine and the `db` profile runs `compose up` and a service-scoped `compose down`.
 - **After your PR merges, remove only your own project's images**, with the two commands in [research/README.md → Running it](../../research/README.md#-running-it). They match the label Compose stamps on what it builds, never a name prefix, and fail on an unset project name instead of matching every project.
-- **Never run `docker compose down`, an unscoped `docker image prune`, `docker system prune`, or `docker builder prune`** while another session may be running. The pulled base images and the build cache are kept on purpose; pruning them is the owner's housekeeping.
+- **Never run a project-wide `docker compose down`, an unscoped `docker image prune`, `docker system prune`, or `docker builder prune`** while another session may be running. The pulled base images and the build cache are kept on purpose; pruning them is the owner's housekeeping.
+  - The runner's own `compose down <databases>` is fine: given service names, it removes only those containers and their networks.
 - **Track each image's latest stable major.** A new major is a result to record, not a break to avoid; merge it once its results are regenerated.
 - **An image that several services share is bumped by one Dependabot group**, so its results are regenerated in one PR: Node, 3.x Python, and the .NET SDK today.
   - Pin it in one place where you can: `sources` builds from `docker/node/Dockerfile`, and `python` and `sqlite` from `docker/python/Dockerfile`, rather than repeating the pin in `compose.yaml`.
@@ -42,7 +43,7 @@ paths:
 - **.NET's culture needs ICU and an explicit choice.** `C.UTF-8` maps to the invariant culture, so the adapter sets `InvariantCulture` itself and names each extra culture in its own column.
 - **Cargo has no release-age floor.** Pick each locked crate by its crates.io publish date and pin a too-new one back with `cargo update -p <crate> --precise <version>`; Dependabot's cooldown covers later bumps.
 - **A formatter must exit non-zero on drift.** `gofmt -l` lists unformatted files but exits 0, so its service wraps it in `sh -c` and fails on any output; `cargo clippy --fix` likewise passes with a denied lint left, so a fixing run then checks.
-- **A database is started and removed by the runner**, not by `depends_on`: adapters run with `--no-deps`. Give it a `database` role label, a healthcheck that only passes once the real server is up (the Postgres and MySQL entrypoints run a socket-only setup server first, so probe over TCP), and an `internal` network shared only with its adapter.
+- **A database is started and removed by the runner**, network and all, not by `depends_on`: adapters run with `--no-deps`. Give it a `database` role label, a healthcheck that only passes once the real server is up (the Postgres and MySQL entrypoints run a socket-only setup server first, so probe over TCP), and an `internal` network shared only with its adapter.
 - **SQL Server can't run on `tmpfs`**, and Microsoft publishes it for amd64 only; it runs under emulation on Apple Silicon.
 - **Set a service's `platform` in Compose, never on `FROM`.** The runner reads a built image's name from the Dockerfile's first `FROM`, so `FROM --platform=…` would be recorded as the image.
 - **Report the version a binary prints, not the one its download claims.** The Hermes v0.13.0 CLI tarball reports 0.12.0.

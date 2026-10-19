@@ -36,6 +36,12 @@ import type { CaseFile, FunctionResult, ServiceColumns } from "./results.ts";
 
 import { isRecord } from "./codec.ts";
 import {
+  profileArgs,
+  toDatabaseFallbackRemovalArgs,
+  toDatabaseRemovalArgs,
+  toDatabaseStartArgs,
+} from "./compose-args.ts";
+import {
   describeStaleImage,
   findStaleImages,
   ROLE_LABEL,
@@ -305,6 +311,14 @@ const RESEARCH_DIR = path.resolve(import.meta.dirname, "../../research");
 
 /** Where results are written. */
 const RESULTS_DIR = path.join(RESEARCH_DIR, "results");
+
+/**
+ * The containers `runService` has started and not yet seen exit.
+ *
+ * - An adapter still running holds its database's network, so teardown
+ *   removes these first; otherwise `down` would skip the network.
+ */
+const RUNNING_CONTAINERS = new Set<string>();
 
 /**
  * Compare every committed column's image and inputs with its service's now.
@@ -577,11 +591,6 @@ function logError(message: string): void {
   printPrefixed({ message, prefix: LOG_PREFIX, print: console.error });
 }
 
-/** Turn profile names into Compose's `--profile` flags. */
-function profileArgs(profiles: readonly string[]): string[] {
-  return profiles.flatMap((profile) => ["--profile", profile]);
-}
-
 /** Read a function's committed result, if there is one. */
 function readPreviousResult(stem: string): FunctionResult | undefined {
   const file = path.join(RESULTS_DIR, `${stem}.json`);
@@ -589,24 +598,44 @@ function readPreviousResult(stem: string): FunctionResult | undefined {
   return existsSync(file) ? parseFunctionResult(readJsonFile(file)) : undefined;
 }
 
-/** Stop and remove database services by name, logging any failure. */
+/**
+ * Stop and remove database services by name, logging any failure.
+ *
+ * - Any adapter still running goes first, since it holds its database's
+ *   network; after a failure or an interrupt, its result is unused anyway.
+ *
+ * - `down` with service names removes only those containers, their volumes,
+ *   and their networks; leftover networks eventually exhaust Docker's address
+ *   pools.
+ *
+ * - If `down` fails, as on a Compose whose `down` takes no service names,
+ *   `rm` still removes the containers, though not their networks.
+ */
 async function removeDatabases(
   databases: readonly ComposeService[]
 ): Promise<void> {
-  const names = databases.map(({ name }) => name);
-  const profiles = [...new Set(databases.flatMap(({ profiles }) => profiles))];
+  const names = databases.map(({ name }) => name).join(", ");
 
-  const removed = await compose([
-    ...profileArgs(profiles),
-    "rm",
-    "--force",
-    "--stop",
-    "--volumes",
-    ...names,
-  ]);
+  if (RUNNING_CONTAINERS.size > 0) {
+    // A container that exits meanwhile is already gone, so failure is moot.
+    await runCommand({
+      args: ["rm", "--force", ...RUNNING_CONTAINERS],
+      command: "docker",
+    });
+  }
 
-  if (removed.exitCode !== 0) {
-    logError(`couldn't remove ${names.join(", ")}:\n${removed.stderr}`);
+  const removed = await compose(toDatabaseRemovalArgs(databases));
+
+  if (removed.exitCode === 0) {
+    return;
+  }
+
+  logError(`docker compose down failed for ${names}:\n${removed.stderr}`);
+
+  const fallback = await compose(toDatabaseFallbackRemovalArgs(databases));
+
+  if (fallback.exitCode !== 0) {
+    logError(`couldn't remove ${names}:\n${fallback.stderr}`);
   }
 }
 
@@ -766,6 +795,7 @@ async function runService({
   service,
 }: ServiceRunInput): Promise<CommandResult> {
   const containerName = `safe-fns-research-${service.name}-${process.pid}`;
+  RUNNING_CONTAINERS.add(containerName);
 
   const result = await compose([
     ...profileArgs(service.profiles),
@@ -777,7 +807,9 @@ async function runService({
     containerName,
     service.name,
     ...args,
-  ]);
+  ]).finally(() => {
+    RUNNING_CONTAINERS.delete(containerName);
+  });
 
   if (result.exitCode !== 0) {
     await runCommand({
@@ -808,8 +840,8 @@ function toStringRecord(value: unknown): Record<string, string> {
  * - Adapters run with `--no-deps`, so their `depends_on` never starts a
  *   database; this starts each once, waiting on its healthcheck.
  *
- * - The databases are removed whether the task succeeds or not, by name, so
- *   nothing else in the Compose project is touched.
+ * - The databases are removed with their networks whether the task succeeds
+ *   or not, by name, so nothing else in the Compose project is touched.
  *
  * - An interrupt (Ctrl+C) or a `SIGTERM` skips `finally`, so either one
  *   removes them first and then re-raises, rather than leaving them running.
@@ -825,7 +857,6 @@ async function withDatabases<T>({
   }
 
   const names = databases.map(({ name }) => name);
-  const profiles = [...new Set(databases.flatMap(({ profiles }) => profiles))];
   let removal: Promise<void> | undefined;
 
   // Once only: a signal and the `finally` it unwinds can both ask.
@@ -847,13 +878,7 @@ async function withDatabases<T>({
   try {
     log(`starting ${names.join(", ")}`);
 
-    const started = await compose([
-      ...profileArgs(profiles),
-      "up",
-      "--detach",
-      "--wait",
-      ...names,
-    ]);
+    const started = await compose(toDatabaseStartArgs(databases));
 
     if (started.exitCode !== 0) {
       throw new Error(`docker compose up failed:\n${started.stderr}`);
