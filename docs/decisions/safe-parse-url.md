@@ -3,7 +3,7 @@ type: Decision
 title: What safeParseUrl accepts
 description: A string or URL, trimmed of blank characters and resolved against an optional base with the native URL parser, returning a new URL or the fallback; an opt-in protocols list rejects any other scheme.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T21:12:31Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-19T00:48:01Z }
 ---
 
 # What safeParseUrl accepts
@@ -110,7 +110,18 @@ The tiers 0–2 summary from [research/results/safe-parse-url.md](../../research
 ## Consequences
 
 - Trimming and the `protocols` list keep it useful once every supported runtime has `URL.parse`, so it isn't a candidate for [the native-first list](native-first-scope.md).
-- **Comma-separated query values are read with `getSearchParamValues`,** which accepts the `URL` this returns: `getSearchParamValues(url, "filters", { separator: "," })` gives `["in-progress", "to-do", "done"]`. Its own record, in part 2b, settles the details agreed so far:
+- **Comma-separated query values are read with `getSearchParamValues`,** which accepts the `URL` this returns. Its own record, in part 2b, settles the details agreed so far:
+
+  ```ts
+  const url = safeParseUrl(
+    "https://example.com/tasks?filters=in-progress,to-do%2Cdone&filters=blocked"
+  );
+
+  url?.searchParams.get("filters"); // "in-progress,to-do,done": the first value only, unsplit
+  getSearchParamValues(url, "filters", { separator: "," }); // ["in-progress", "to-do", "done", "blocked"]
+  ```
+
   - `separator` is a plain string, matched against the decoded value, so `,` and `%2C` both split;
   - repeated keys are merged (`getAll`), each piece is trimmed with `trimBlank`, and empty pieces are dropped.
+
 - `trimBlank` is shared with the other parsers, so a change to the blank set changes what `safeParseUrl` accepts too.
