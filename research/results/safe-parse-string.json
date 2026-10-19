@@ -1707,7 +1707,7 @@
     {
       "call": "StringUtils.stripToNull(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Commons Lang",
       "outcomes": [
@@ -1829,7 +1829,7 @@
     {
       "call": "StringUtils.trimToNull(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Commons Lang",
       "outcomes": [
@@ -2208,7 +2208,7 @@
     {
       "call": "\"$value\"",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -2344,7 +2344,7 @@
     {
       "call": "value.toString()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -2480,7 +2480,7 @@
     {
       "call": "Strings.nullToEmpty(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Guava",
       "outcomes": [
@@ -2602,7 +2602,7 @@
     {
       "call": "String.valueOf(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -2738,7 +2738,7 @@
     {
       "call": "String.valueOf(value).strip()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -2874,7 +2874,7 @@
     {
       "call": "value.toString()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [
@@ -3005,12 +3005,12 @@
       ],
       "service": "jvm",
       "tier": 2,
-      "version": "2.4.20"
+      "version": "2.4.21"
     },
     {
       "call": "value.trim()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [
@@ -3126,7 +3126,7 @@
       ],
       "service": "jvm",
       "tier": 2,
-      "version": "2.4.20"
+      "version": "2.4.21"
     },
     {
       "call": "str(value)",
@@ -3655,7 +3655,7 @@
     {
       "call": "conversionService.convert(value, String.class)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Spring",
       "outcomes": [
@@ -5359,7 +5359,7 @@
     {
       "call": "decode(<string>value</string>)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "XML Schema 1.0",
       "outcomes": [
@@ -5480,7 +5480,7 @@
     {
       "call": "decode(<token>value</token>)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "XML Schema 1.0",
       "outcomes": [
