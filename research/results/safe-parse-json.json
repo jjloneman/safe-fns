@@ -742,7 +742,7 @@
     {
       "call": "JSON.parse(value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -991,7 +991,7 @@
     {
       "call": "v.parse(v.pipe(v.string(), v.parseJson()), value)",
       "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:c5a1cffacf808f280142e3902533d77b9b828fa165fa5b0d8b6ab26d62c956b1",
+      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
       "locale": "en-US",
       "name": "valibot",
       "outcomes": [
@@ -1465,8 +1465,8 @@
     },
     {
       "call": "json.Unmarshal(value, &v)",
-      "image": "golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
-      "inputs": "sha256:9d7311e1f994672a872ffacbbe9c894234379a07e4cc64f9c466d89f4d471805",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
       "locale": "C.UTF-8",
       "name": "Go",
       "outcomes": [
@@ -1687,12 +1687,12 @@
       ],
       "service": "go",
       "tier": 2,
-      "version": "1.27.1"
+      "version": "1.27.2"
     },
     {
       "call": "gson.fromJson(value, Object.class)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Gson",
       "outcomes": [
@@ -1928,7 +1928,7 @@
     {
       "call": "mapper.readValue(value, Object.class)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:701666171d159b3db221bdc8255300549005a16734a16feefddb9710c944d5f2",
+      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
       "locale": "en",
       "name": "Jackson",
       "outcomes": [
@@ -2392,7 +2392,7 @@
     {
       "call": "serde_json::from_str::<Value>(value) (arbitrary_precision)",
       "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
-      "inputs": "sha256:ddb1e2ed335640c1d7d7b888941e9ed51ccc574b2fed1c4635f0a3078575f67b",
+      "inputs": "sha256:496eb31fc2d31bfbc45792d196e8c1f8a31fc35d360ef99844e087ee2fd8ebb3",
       "locale": "C.UTF-8",
       "name": "Rust",
       "outcomes": [
@@ -2622,7 +2622,7 @@
     {
       "call": "SELECT JSON_COMPACT(?)",
       "image": "mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "utf8mb4_uca1400_ai_ci",
       "name": "MariaDB",
       "outcomes": [
@@ -2835,7 +2835,7 @@
     {
       "call": "SELECT JSON_VALID(?)",
       "image": "mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "utf8mb4_uca1400_ai_ci",
       "name": "MariaDB",
       "outcomes": [
@@ -3048,7 +3048,7 @@
     {
       "call": "SELECT CAST(? AS JSON)",
       "image": "mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "utf8mb4_0900_ai_ci",
       "name": "MySQL",
       "outcomes": [
@@ -3261,7 +3261,7 @@
     {
       "call": "SELECT CAST(? AS json)::text",
       "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "C.UTF-8",
       "name": "PostgreSQL",
       "outcomes": [
@@ -3475,7 +3475,7 @@
     {
       "call": "SELECT CAST(? AS jsonb)::text",
       "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "C.UTF-8",
       "name": "PostgreSQL",
       "outcomes": [
@@ -3689,7 +3689,7 @@
     {
       "call": "SELECT ISJSON(?)",
       "image": "mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726",
-      "inputs": "sha256:4b7072d71cf647c4a4a93cac0e7ae427fc59aa14506b345c772b2639b4c40cd4",
+      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
       "locale": "SQL_Latin1_General_CP1_CI_AS",
       "name": "SQL Server",
       "outcomes": [

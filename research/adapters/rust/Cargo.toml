@@ -10,7 +10,7 @@ version = "0.0.0"
 [dependencies]
 # `arbitrary_precision` keeps a number's digits, so an integer of any size
 # decodes exactly, as it does in Python.
-serde_json = { features = ["arbitrary_precision"], version = "=1.0.151" }
+serde_json = { features = ["arbitrary_precision"], version = "=1.0.154" }
 url = { version = "=2.5.8" }
 
 [lints.clippy]
