@@ -1836,7 +1836,7 @@
     {
       "call": "serde_json::to_string(&value) (arbitrary_precision)",
       "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
-      "inputs": "sha256:ddb1e2ed335640c1d7d7b888941e9ed51ccc574b2fed1c4635f0a3078575f67b",
+      "inputs": "sha256:496eb31fc2d31bfbc45792d196e8c1f8a31fc35d360ef99844e087ee2fd8ebb3",
       "locale": "C.UTF-8",
       "name": "Rust",
       "outcomes": [
