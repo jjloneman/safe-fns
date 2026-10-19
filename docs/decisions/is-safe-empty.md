@@ -2,8 +2,9 @@
 type: Decision
 title: What "empty" means for isSafeEmpty and isSafePopulated
 description: Nullish values, blank strings (whitespace and invisible characters), and empty arrays, maps, sets, plain objects, typed arrays, buffers, and web data containers are empty; everything else, including anything that can't be inspected, is populated, and each predicate narrows the branch where the value is known to be non-nullish: isSafePopulated's true branch and isSafeEmpty's false branch.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-19T01:16:47Z }
+verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
 # What "empty" means for isSafeEmpty and isSafePopulated

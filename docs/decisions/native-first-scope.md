@@ -4,7 +4,7 @@ title: What the package leaves to native APIs and other libraries
 description: Excludes what native JavaScript already does and wrappers around native one-liners; parks newer native APIs, date and currency-amount parsing, and duration and byte formatting as future candidates; leaves validation, IndexedDB, and exact decimals to dedicated libraries.
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T20:49:42Z }
-verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }
+verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
 # What the package leaves to native APIs and other libraries

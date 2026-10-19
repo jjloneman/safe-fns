@@ -2,8 +2,9 @@
 type: Decision
 title: How deepSortObject orders keys and arrays
 description: Keys sort by UTF-16 code units by default, with ignoreCase or a compareKeys of the caller's own; arrays keep their order unless sortArrays picks them by typed key path, each with the default item order or its own comparator; cycles are preserved, and any failure returns the input unchanged.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T18:00:36Z }
+verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
 # How deepSortObject orders keys and arrays

@@ -2,8 +2,9 @@
 type: Decision
 title: What safeParseJson returns
 description: Strings, boxed strings, and UTF-8 or BOM-marked UTF-16 bytes parse to a JsonValue by default; an optional guard checks the shape at runtime and returns the fallback when it fails, and an explicit type argument is the caller's own unchecked assertion.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T21:43:53Z }
+verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
 # What safeParseJson returns

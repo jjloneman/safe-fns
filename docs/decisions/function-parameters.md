@@ -4,7 +4,7 @@ title: How a function takes its parameters
 description: Up to two positional parameters for the values a function works on, configuration in a trailing options object, and nothing variadic.
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:53:58Z }
-verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }
+verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
 # How a function takes its parameters

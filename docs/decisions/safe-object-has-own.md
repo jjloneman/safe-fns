@@ -2,8 +2,9 @@
 type: Decision
 title: How safeObjectHasOwn narrows
 description: Two overloads — a typed object narrows the key to keyof T, and any other value narrows only the true branch to V & Record<K, unknown>; null, primitives, and trapping proxies return false.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T02:22:39Z }
+verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
 # How safeObjectHasOwn narrows

@@ -4,7 +4,7 @@ title: When a name starts with `safe`
 description: "`safeParse` + what it reads for every parser, `safe` + the native API's path for any other wrapper of one native API, `isSafe*` against a same-named unsafe helper, and plain names otherwise."
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:53:58Z }
-verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }
+verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
 # When a name starts with `safe`

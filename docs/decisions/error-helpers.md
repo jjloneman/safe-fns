@@ -2,8 +2,9 @@
 type: Decision
 title: How getErrorMessage and toError read a thrown value
 description: A message comes from an Error, a thrown string, or an object's own string message, never from nested framework shapes; getErrorMessage always returns a string, and toError returns an existing Error untouched.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T19:58:44Z }
+verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
 # How getErrorMessage and toError read a thrown value
