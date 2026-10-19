@@ -10,7 +10,7 @@
 #
 # - Dependabot can't follow a release download: bump the URL and checksum by
 #   hand, from https://github.com/facebook/hermes/releases.
-FROM node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3
+FROM node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567
 
 ADD --checksum=sha256:aead6eb0b8f563bb022354352eae32dad96c933330b6c1941b6db17674ca68ae https://github.com/facebook/hermes/releases/download/v0.13.0/hermes-cli-linux.tar.gz /tmp/hermes-cli-linux.tar.gz
 

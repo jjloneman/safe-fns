@@ -6,7 +6,7 @@
 #
 # - `c.py` drives glibc through `ctypes` and loads `/opt/cxx_probes.so`; it
 #   runs on the image's Debian Python, beside the Python codec it imports.
-FROM gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0
+FROM gcc:16.2.0-trixie@sha256:17043c23ec2ad97fc3beca18da77275d26be5db5cd70ea0a5d73200e21a8e999
 
 ENV PYTHONDONTWRITEBYTECODE=1
 
