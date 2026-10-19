@@ -48,6 +48,7 @@ import {
   toServiceInputs,
 } from "./inputs.ts";
 import { parseJson, readJsonFile } from "./json.ts";
+import { describeError, printPrefixed } from "./logging.ts";
 import {
   buildResults,
   CODEC_FUNCTION,
@@ -388,21 +389,6 @@ function compose(args: readonly string[]): Promise<CommandResult> {
 }
 
 /**
- * Describe an error and every `cause` behind it, one per line.
- *
- * @returns the messages, outermost first.
- */
-function describeError(error: unknown): string {
-  if (!(error instanceof Error)) {
-    return String(error);
-  }
-
-  return error.cause === undefined
-    ? error.message
-    : `${error.message}\n  caused by: ${describeError(error.cause)}`;
-}
-
-/**
  * Format, or check, every adapter.
  *
  * @returns whether every formatter succeeded.
@@ -582,16 +568,12 @@ async function loadServices(): Promise<ComposeService[]> {
 
 /** Print a message, prefixing every line. */
 function log(message: string): void {
-  for (const line of message.split("\n")) {
-    console.log(`${LOG_PREFIX} ${line}`);
-  }
+  printPrefixed({ message, prefix: LOG_PREFIX, print: console.log });
 }
 
 /** Print an error, prefixing every line. */
 function logError(message: string): void {
-  for (const line of message.split("\n")) {
-    console.error(`${LOG_PREFIX} ${line}`);
-  }
+  printPrefixed({ message, prefix: LOG_PREFIX, print: console.error });
 }
 
 /** Turn profile names into Compose's `--profile` flags. */
