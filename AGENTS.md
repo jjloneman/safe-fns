@@ -46,7 +46,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Readability beats a few ops/second here: nothing in `scripts/` is public API or a hot path, so `map` / `filter` / `reduce` are fine even where a plain loop would be faster.
   - An error message says only what the error shows — read its `code` or `stderr` rather than guessing a cause.
   - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/**/*.test.ts` runs in the `node` project.
-  - `scripts/research/` is the comparison harness's host side: `run.ts` (`pnpm research`) orchestrates the containers, and `codec.ts`, `images.ts`, `inputs.ts`, `results.ts`, `sources.ts`, and `tables.ts` are the pure, tested parts.
+  - `scripts/research/` is the comparison harness's host side: `run.ts` (`pnpm research`) orchestrates the containers, `usage-search.ts` (`pnpm research:usage`) queries GitHub's code search and npm, and `codec.ts`, `images.ts`, `inputs.ts`, `results.ts`, `sources.ts`, `tables.ts`, `usage-tally.ts`, `call-arguments.ts`, and `logging.ts` are the pure, tested parts.
 - `research/` — the cross-language comparison harness (see [Research harness](#-research-harness)), outside `files`, so never published.
 - `dist/` — build output (gitignored), the only directory published.
 - `README.md` — the public face: why the package exists, install and usage, the API, the support matrix, scripts, and what each label means.
@@ -304,7 +304,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Every export plugs into two harnesses in `test/`:**
   - `cross-env.cases.ts` — a table of calls and expected results, run unchanged by both projects;
   - `hostile-inputs.ts` (plus the Node-only `cross-realm-inputs.ts`) — values that trap on inspection, for proving an export never throws.
-- `scripts/research/*.test.ts` covers the research harness's codec, merging, sources, and tables, and checks its image pins (no pre-release, one shared Python hold in `dependabot.yml`); it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
+- `scripts/research/*.test.ts` covers the research harness's codec, merging, sources, and tables, and the usage script's call scanner and tallies, and checks its image pins (no pre-release, one shared Python hold in `dependabot.yml`); it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
 - How to write a test is covered by `.claude/rules/testing.md`.
 
 ## 📦 Build & package
@@ -431,6 +431,9 @@ Semantic and design decisions — what "empty" means, how a function is named, w
 - `pnpm research` runs every adapter service in `research/compose.yaml` in parallel and writes `research/results/`; it needs a Docker-compatible runtime (OrbStack on the owner's Mac mini).
 - The root ESLint config lints `research/**/*.mts` only once `pnpm --dir research install` has run, since its imports resolve nowhere else.
 - How to change it is covered by `.claude/rules/research.md`.
+- **Look things up on GitHub or npm with `pnpm research:usage`**, never a hand-written `gh api search/…` or `curl` loop: name counts (`counts`), how a call's arguments are used (`calls`), a code search's files (`files`), and weekly downloads (`npm`).
+  - Its report is JSON by default, for `jq`, and a Markdown table with `--markdown`; either carries its method, date, and caveats, so quote it whole, with the date, in a decision record or comment.
+  - When no mode answers the question, add one to the script (see [research/README.md](research/README.md#-usage-in-the-wild)) rather than working around it.
 
 ## 📄 Long Markdown files
 
