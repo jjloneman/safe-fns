@@ -1,9 +1,9 @@
 ---
 type: Decision
 title: What safeParseNumber and safeParseInteger accept
-description: Finite numbers, safe-range bigints, and trimmed decimal strings parse; hex, units, separators, blanks, and non-finite values return the fallback, and a value outside min / max returns the fallback unless clamp is set.
+description: Finite numbers, safe-range bigints, and trimmed decimal strings parse; hex, units, separators, blanks, and non-finite values return the fallback, a value outside min / max returns the fallback unless clamp is set, and safeParseInteger takes a strict radix with JavaScript's matching 0x / 0o / 0b prefixes.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T02:22:39Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-19T01:44:49Z }
 ---
 
 # What safeParseNumber and safeParseInteger accept
@@ -16,7 +16,7 @@ Both parsers read a decimal number the same way on every engine, and return the 
 
   ```ts
   safeParseNumber(value: unknown, options?: { clamp?: boolean; fallback?: F; max?: number; min?: number }): number | F
-  safeParseInteger(value: unknown, options?: { clamp?: boolean; fallback?: F; max?: number; min?: number }): number | F
+  safeParseInteger(value: unknown, options?: { clamp?: boolean; fallback?: F; max?: number; min?: number; radix?: number }): number | F
   ```
 
 - **Accepted input:**
@@ -28,7 +28,7 @@ Both parsers read a decimal number the same way on every engine, and return the 
     - Leading zeros parse (`"007"` → `7`), as do `"-0"`, `"5."`, and `".5"`; `"."`, `"+"`, `"e3"`, and `"1e"` don't.
 - **Everything else returns the fallback,** never a coercion:
   - blank and whitespace-only strings (`Number("")` is `0`);
-  - hex, binary, and octal strings (`"0x1f"`, `"0b1"`, `"0o7"`), which `Number()` accepts; a number has no base, only text does, so a hex literal in code (`0x1f`) arrives as the number `31` and parses, and hex text belongs to `Number.parseInt(text, 16)`;
+  - hex, binary, and octal strings (`"0x1f"`, `"0b1"`, `"0o7"`), which `Number()` accepts; a number has no base, only text does, so a hex literal in code (`0x1f`) arrives as the number `31` and parses, and hex text belongs to `safeParseInteger`'s `radix`;
   - digits from other scripts (`"٤٢"`, `"４２"`), which `Number()` also rejects, though Python accepts them;
   - trailing text (`"12px"`, which `parseFloat` reads as `12`) and digit separators (`"1_000"`, `"1,000"`);
   - `NaN`, `Infinity`, `"Infinity"`, and a string that overflows to `Infinity` (`"1e999"`);
@@ -41,6 +41,14 @@ Both parsers read a decimal number the same way on every engine, and return the 
   - `"1.0"` and `"1e3"` parse, since their values are integers;
   - a value past `Number.MAX_SAFE_INTEGER` (2⁵³ − 1, the largest integer `n` where `n` and `n + 1` are both stored exactly in a 64-bit double) returns the fallback, since a different integer would come back;
   - `"-0"` and `-0` return `0`, since integers have no negative zero, as in Python and Ruby; `safeParseNumber` keeps `-0`, as `Number()` does.
+- **`safeParseInteger` takes a `radix`, from 2 to 36, defaulting to 10.**
+  - With a radix, a string is an optional `+` / `-`, then optionally the prefix that matches the radix, then digits valid in that radix, in either case: `"ff"`, `"FF"`, and `"-0x1A"` parse with radix 16 (`255`, `255`, `-26`).
+  - The matching prefixes are JavaScript's own literal prefixes: `0x` for 16, `0o` for 8, and `0b` for 2, in either case; any other prefix is just digits or a mismatch, so `"0b101"` with radix 16 is the hex number `0xb101` (`45313`, as `parseInt` agrees), and `"0x1A"` with radix 8 returns the fallback.
+  - Without a `radix`, nothing is guessed: `"0x1A"` returns the fallback, unlike `parseInt("0x1A")`, which reads it as hex.
+  - The whole string must match, as at radix 10: `"12px"` and `"#ff0000"` return the fallback, and a caller strips a `#` first.
+  - Number primitives and bigints are already values, so `radix` doesn't apply to them; `min`, `max`, `clamp`, and the safe-integer check apply to every radix.
+  - A `radix` that isn't an integer from 2 to 36 returns the fallback for every input, as a bad bound does.
+  - `safeParseNumber` takes no `radix`: in a radix above 14, `e` is a digit, so `"1e3"` would mean `0x1e3` (`483`) rather than `1000`, and fractions in other bases have no JavaScript syntax to follow.
 - **`min` and `max` are inclusive bounds.**
   - By default, a value outside them returns the fallback.
   - `clamp: true` returns the nearest bound instead.
@@ -147,6 +155,8 @@ The tiers 0–2 summary from [research/results/safe-parse-integer.md](../../rese
 - The owner's shared `safeParseNumber` defaulted to `0`, and most inline call sites let `NaN` from `Number()` or `parseFloat` propagate; neither shows the caller that the input was bad.
 - `Number()` silently turns `""`, `null`, `true`, and `[5]` into numbers, and `parseFloat` silently drops trailing text, so a narrow decimal grammar is the only rule with no surprises.
 - The grammar agrees with `Number()` everywhere except the inputs `Number()` coerces on purpose (blanks, hex text, `null`, booleans, arrays); the Comparison section above shows every tool measured.
+- A sample of 979 `parseInt` calls from GitHub code search's top 600 TypeScript and JavaScript results passed no radix 56% of the time, 10 in 34%, and 16 in 8.6%, with 2, 8, and a variable each under 1%; about one call in ten reads another base, almost always hex, so `radix` is worth an option.
+- The `radix` option isn't in the Comparison tables, which call every tool with the value alone.
 - Boxed values are unwrapped because seven of the nine JavaScript tools measured do; Effect and Ajv reject them, and lodash's `toNumber` and `toInteger` throw a `TypeError` on a boxed bigint.
 - Clamping changes the caller's value, so it's opt-in; the owner asked for it as an option rather than the default.
 

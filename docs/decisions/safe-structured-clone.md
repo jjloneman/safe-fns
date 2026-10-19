@@ -1,9 +1,9 @@
 ---
 type: Decision
 title: What safeStructuredClone returns when cloning fails
-description: The native structuredClone result when it succeeds; a functions option keeps or omits functions and symbols instead of failing; otherwise the caller's fallback (undefined by default) when it throws or the runtime has no structuredClone.
+description: The native structuredClone result when it succeeds; an uncloneable option keeps or omits what the native clone rejects instead of failing; otherwise the caller's fallback (undefined by default) when it throws or the runtime has no structuredClone.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T21:12:31Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-19T01:45:31Z }
 ---
 
 # What safeStructuredClone returns when cloning fails
@@ -19,32 +19,33 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T21:12:31Z }
     value: T,
     options?: {
       fallback?: F;
-      functions?: "fallback" | "keep" | "omit";
       transfer?: Transferable[];
+      uncloneable?: "fallback" | "keep" | "omit";
     },
   ): T | F
   ```
 
   - `transfer` is the native option, passed through: it moves an `ArrayBuffer`, `MessagePort`, or other transferable into the clone instead of copying it, leaving the original detached.
 
-- **`functions` decides what happens to functions and symbol values,** which the native clone throws on:
+- **`uncloneable` decides what happens to values the native clone rejects,** named like `safeJsonStringify`'s `circular` and `bigint` options: the kind of value, then what to do with it.
+  - A value counts as uncloneable when cloning it on its own throws `DataCloneError`: functions, symbols, `WeakMap`, `WeakSet`, `Promise`, DOM nodes, and every `Proxy`, revoked or not.
   - `"fallback"`, the default, keeps the native behavior: the whole call returns the fallback;
-  - `"keep"` puts the same function or symbol in the clone, shared by reference;
+  - `"keep"` puts the same value in the clone, shared by reference;
   - `"omit"` leaves those properties and `Map` / `Set` entries out of the clone, and puts `undefined` in place of an array item, so later indexes don't shift.
-  - When the value itself is a function or symbol, `"keep"` returns it and `"omit"` returns the fallback, since nothing is left to clone.
-- **How `functions` works without a cloner of its own:**
-  1. the native `structuredClone` runs first, so a value with no functions or symbols costs one native call;
-  2. only if that throws, the value is walked, copying plain objects, arrays, `Map`s, and `Set`s, with each function or symbol swapped for a marker object whose key is unique to the call;
-  3. that copy is cloned natively, so `Date`, `RegExp`, typed arrays, `Error`, and cycles are still the engine's work;
-  4. the clone is walked again, putting each original function or symbol back in place of its marker, or removing it for `"omit"`.
-- **What `functions` can't do:**
+  - When the value itself is uncloneable, `"keep"` returns it and `"omit"` returns the fallback, since nothing is left to clone.
+- **How `uncloneable` works without a cloner of its own:**
+  1. the native `structuredClone` runs first, so a value with nothing uncloneable costs one native call;
+  2. only if that throws `DataCloneError`, the value is walked, copying plain objects, arrays, `Map`s, and `Set`s, and cloning every other value on its own;
+  3. a value whose own clone throws `DataCloneError` is swapped for a marker object whose key is unique to the call;
+  4. that copy is cloned natively, so `Date`, `RegExp`, typed arrays, `Error`, and cycles are still the engine's work;
+  5. the clone is walked again, putting each original value back in place of its marker, or removing it for `"omit"`.
+- **What `uncloneable` can't do:**
   - methods on a class's prototype are still lost, since the native clone drops every prototype; `"keep"` covers only functions stored on the value itself (`{ onClick }`);
-  - a kept function is the original, so a closure or a method using `this` still refers to the original objects, never the clone;
-  - with `"omit"`, the return type `T` still lists the omitted properties;
-  - DOM nodes, `WeakMap`, `Promise`, and other values the native clone rejects still return the fallback.
-- **Returns the fallback** whenever the native clone throws and `functions` doesn't apply:
-  - a function or symbol anywhere in the value, with `functions` left at `"fallback"`;
-  - a getter or proxy trap that throws while the value is read;
+  - a kept value is the original, so a closure, a method using `this`, or a kept proxy still refers to the original objects, never the clone;
+  - with `"omit"`, the return type `T` still lists the omitted properties.
+- **Returns the fallback** whenever the native clone throws and `uncloneable` doesn't apply:
+  - an uncloneable value anywhere in the value, with `uncloneable` left at `"fallback"`;
+  - a getter that throws while the value is read, which throws its own error rather than `DataCloneError`, so the walk never mistakes it for an uncloneable value;
   - a `transfer` list it rejects.
 - **Returns the fallback where the runtime has no `structuredClone`,** by calling it inside the same `try`, with no environment probe.
   - It's looked up at call time, so a polyfill such as `@ungap/structured-clone` or core-js, installed globally, is used where the runtime lacks one.
@@ -60,7 +61,7 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T21:12:31Z }
 
 The tiers 0–2 summary from [research/results/safe-structured-clone.md](../../research/results/safe-structured-clone.md), generated by `pnpm research`.
 
-- Every column clones with default options; `functions` and `transfer` aren't compared.
+- Every column clones with default options; `uncloneable` and `transfer` aren't compared.
 - A cell shows a JavaScript-only value by its tag (`[object Map]`), and a repeated reference as `Symbol(cycle)` or `Symbol(repeat)`.
 
 <!-- prettier-ignore-start -->
@@ -96,8 +97,8 @@ The tiers 0–2 summary from [research/results/safe-structured-clone.md](../../r
 
 - lodash's `cloneDeep` is excluded in favor of the native API (see [What the package leaves to native APIs and other libraries](native-first-scope.md)), but the native call throws on ordinary app data such as an object holding a callback.
 - Callers clone state that holds callbacks often enough that the owner wanted it handled in place, rather than by pointing them at another library or always returning the fallback.
-- Swapping functions out and cloning natively keeps every built-in type the engine's job; a cloner of its own would have to follow the structured clone rules for each of them.
-- Measured on Node 26 with a sketch of the walk, cloning 5,000 records: 3.46 ms natively, 3.45 ms through the fast path, and 8.27 ms when one function forces the slow path.
+- Swapping uncloneable values out and cloning natively keeps every built-in type the engine's job; a cloner of its own would have to follow the structured clone rules for each of them.
+- Measured on Node 26 with a sketch of the walk, cloning 5,000 records: 3.46 ms natively, 3.45 ms through the fast path, and 8.27 ms when one function forces the slow path; that sketch swapped functions only, and cloning each leaf on its own adds one native call per leaf, on the slow path only.
 - Other libraries don't fall back to `structuredClone` when it's missing: lodash, es-toolkit, rfdc, klona, and fast-copy each implement their own algorithm, and @ungap/structured-clone and core-js are polyfills of the native one; this package leaves the polyfill to the caller rather than ship one.
 - A JavaScript clone of its own was weighed and left as a part 2b candidate, `deepClone`: a minimal one ran 1.8× to 3.6× faster than native on Node 26, but a copy that keeps prototypes breaks classes with `#private` fields (reading one throws `TypeError`), JavaScript can't copy host objects such as `File` (it comes back as `{}`), and the two names wouldn't tell a caller how they differ.
 - The getters a failed native clone has read are read again by the walk on the slow path, as `safeJsonStringify`'s fallback walk does; the docs say so.
