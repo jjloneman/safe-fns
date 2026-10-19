@@ -26,6 +26,11 @@ const GROUPED_MAX_VALUES = 4;
 /** The highest tier the summary table shows, the one decision records quote. */
 const SUMMARY_MAX_TIER = 2;
 
+/** Escape a Markdown table cell's pipes. @returns the escaped text. */
+export function escapeTableCell(text: string): string {
+  return text.replaceAll("|", String.raw`\|`);
+}
+
 /**
  * Render one function's results as the Markdown file beside its JSON.
  *
@@ -63,7 +68,7 @@ export function renderResultMarkdown(result: FunctionResult): string {
 
 /** Wrap text in a Markdown code span, safe inside a table cell. */
 function codeSpan(text: string): string {
-  const escaped = text.replaceAll("|", String.raw`\|`);
+  const escaped = escapeTableCell(text);
 
   return escaped.includes("`") ? `\`\` ${escaped} \`\`` : `\`${escaped}\``;
 }
