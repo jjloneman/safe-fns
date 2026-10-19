@@ -4,7 +4,7 @@
   "private": true,
   "description": "🔬 The Firebase emulators the research harness runs, installed apart from both the published package and the Node adapter",
   "dependencies": {
-    "firebase-tools": "15.32.1"
+    "firebase-tools": "15.33.0"
   },
   "packageManager": "pnpm@12.5.1"
 }
