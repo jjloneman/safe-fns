@@ -103,9 +103,9 @@
 | Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
 | safe-fns (planned)<br>`safeParseUrl` | 0 | `-` | `-` | `-` |
-| Hermes<br>`new URL(value, base).href` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| JS built-ins<br>`new URL(value, base).href` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| JS built-ins<br>`URL.parse(value, base)?.href` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Hermes<br>`new URL(value, base).href` | 1 | `0.12.0` | `-` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| JS built-ins<br>`new URL(value, base).href` | 1 | `v26.11.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| JS built-ins<br>`URL.parse(value, base)?.href` | 1 | `v26.11.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | .NET<br>`Uri.TryCreate(new Uri(base), value, out var uri) ? uri.AbsoluteUri : null` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | .NET<br>`Uri.TryCreate(value, UriKind.Absolute, out var uri) ? uri.AbsoluteUri : null` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | Go<br>`url.Parse(base) then base.Parse(value)` | 2 | `1.27.2` | `C.UTF-8` | `golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61` |
@@ -116,7 +116,7 @@
 | Python<br>`urlsplit(value).geturl()` | 2 | `3.14.8` | `C.UTF-8` | `python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83` |
 | Rust<br>`Url::parse(base)?.join(value)` | 2 | `1.99.0` | `C.UTF-8` | `rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa` |
 | Rust<br>`Url::parse(value)` | 2 | `1.99.0` | `C.UTF-8` | `rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa` |
-| HTML (jsdom)<br>`new URL(value, base).href` | 3 | `jsdom 30.1.2` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| HTML (jsdom)<br>`new URL(value, base).href` | 3 | `jsdom 30.1.2` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | PHP<br>`parse_url($value)` | 4 | `8.5.11` | `C.UTF-8` | `php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7` |
 | Ruby<br>`URI.join(base, value).to_s` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
 | Ruby<br>`URI.parse(value).to_s` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |

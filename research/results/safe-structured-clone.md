@@ -65,8 +65,8 @@
 | Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
 | safe-fns (planned)<br>`safeStructuredClone` | 0 | `-` | `-` | `-` |
-| es-toolkit<br>`cloneDeep(value)` | 1 | `1.52.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| Hermes<br>`structuredClone(value)` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| JS built-ins<br>`structuredClone(value)` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| lodash<br>`_.cloneDeep(value)` | 1 | `4.18.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| es-toolkit<br>`cloneDeep(value)` | 1 | `1.52.0` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| Hermes<br>`structuredClone(value)` | 1 | `0.12.0` | `-` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| JS built-ins<br>`structuredClone(value)` | 1 | `v26.11.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| lodash<br>`_.cloneDeep(value)` | 1 | `4.18.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | Python<br>`copy.deepcopy(value)` | 2 | `3.14.8` | `C.UTF-8` | `python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83` |

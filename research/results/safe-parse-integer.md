@@ -71,15 +71,15 @@
 | Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
 | safe-fns (planned)<br>`safeParseInteger` | 0 | `-` | `-` | `-` |
-| Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString.check(Schema.isInt()))(value)` | 1 | `4.0.3` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| es-toolkit<br>`compat.toInteger(value)` | 1 | `1.52.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| Hermes<br>`Number.parseInt(value, 10)` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| JS built-ins<br>`Number.parseInt(value, 10)` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| lodash<br>`_.toInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| lodash<br>`_.toSafeInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| radash<br>`toInt(value)` | 1 | `12.1.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber(), v.integer()), value)` | 1 | `1.5.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| zod<br>`z.coerce.number().int().parse(value)` | 1 | `4.6.6` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString.check(Schema.isInt()))(value)` | 1 | `4.0.3` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| es-toolkit<br>`compat.toInteger(value)` | 1 | `1.52.0` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| Hermes<br>`Number.parseInt(value, 10)` | 1 | `0.12.0` | `-` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| JS built-ins<br>`Number.parseInt(value, 10)` | 1 | `v26.11.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| lodash<br>`_.toInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| lodash<br>`_.toSafeInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| radash<br>`toInt(value)` | 1 | `12.1.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber(), v.integer()), value)` | 1 | `1.5.0` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| zod<br>`z.coerce.number().int().parse(value)` | 1 | `4.6.6` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | .NET<br>`Convert.ToInt64(value, InvariantCulture)` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | .NET<br>`int.Parse(value, InvariantCulture)` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | .NET<br>`long.Parse(value, InvariantCulture)` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
@@ -99,27 +99,27 @@
 | Rust<br>`value.parse::<i64>()` | 2 | `1.99.0` | `C.UTF-8` | `rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa` |
 | Spring<br>`conversionService.convert(value, Integer.class)` | 2 | `7.0.9` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Spring<br>`NumberUtils.parseNumber(value, Integer.class)` | 2 | `7.0.9` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
-| CSV<br>`parse(value, { cast: true })[0]?.[0]` | 3 | `csv-parse 7.0.3` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| HTML (jsdom)<br>`parseInteger(value)` | 3 | `jsdom 30.1.2` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| INI<br>`` parse(`v = ${value}`).v `` | 3 | `ini 7.0.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| JSON<br>`JSON.parse(value)` | 3 | `RFC 8259` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| CSV<br>`parse(value, { cast: true })[0]?.[0]` | 3 | `csv-parse 7.0.3` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| HTML (jsdom)<br>`parseInteger(value)` | 3 | `jsdom 30.1.2` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| INI<br>`` parse(`v = ${value}`).v `` | 3 | `ini 7.0.0` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| JSON<br>`JSON.parse(value)` | 3 | `RFC 8259` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | MariaDB<br>`SELECT CAST(? AS SIGNED)` | 3 | `12.3.3` | `utf8mb4_uca1400_ai_ci` | `mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4` |
 | MongoDB<br>`{ $toLong: value }` | 3 | `9.0.2` | `simple` | `mongo:9.0.2-noble@sha256:61dd87ff554dc20386c63ebe1f7ede27314370ad5a7bf357c685fab424672158` |
 | MySQL<br>`SELECT CAST(? AS SIGNED)` | 3 | `9.7.1` | `utf8mb4_0900_ai_ci` | `mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d` |
 | PostgreSQL<br>`SELECT CAST(? AS bigint)` | 3 | `18.6` | `C.UTF-8` | `postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c` |
 | SQL Server<br>`SELECT CAST(? AS bigint)` | 3 | `17.0.5005.3` | `SQL_Latin1_General_CP1_CI_AS` | `mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726` |
 | SQLite<br>`SELECT CAST(? AS INTEGER)` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83` |
-| TOML<br>`` parse(`v = ${value}`).v `` | 3 | `smol-toml 1.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| TOML<br>`` parse(`v = ${value}`).v `` | 3 | `smol-toml 1.9.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | XML Schema 1.0<br>`decode(<integer>value</integer>)` | 3 | `Xerces-J 2.12.2` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
-| YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| Ajv<br>`coerce({ type: "integer" }, value)` | 4 | `8.20.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| Ajv<br>`coerce({ type: "integer" }, value)` | 4 | `8.20.0` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | bash<br>`printf '%d' "$1"` | 4 | `5.2.37-2+b10` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
 | bash<br>`printf '%s' "$(( $1 ))"` | 4 | `5.2.37-2+b10` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
-| C (glibc)<br>`atoi(value)` | 4 | `2.41-12+deb13u3` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
-| C (glibc)<br>`strtol(value, NULL, 10)` | 4 | `2.41-12+deb13u3` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
-| C++ (libstdc++)<br>`std::from_chars(first, last, int64_t&)` | 4 | `16.1.0` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
-| C++ (libstdc++)<br>`std::stoi(value)` | 4 | `16.1.0` | `C.UTF-8` | `gcc:16.1.0-trixie@sha256:d8dec2859f964120119abd1380563247bf02c5d64f5bcdea496dbace1f48c6f0` |
+| C (glibc)<br>`atoi(value)` | 4 | `2.41-12+deb13u4` | `C.UTF-8` | `gcc:16.2.0-trixie@sha256:17043c23ec2ad97fc3beca18da77275d26be5db5cd70ea0a5d73200e21a8e999` |
+| C (glibc)<br>`strtol(value, NULL, 10)` | 4 | `2.41-12+deb13u4` | `C.UTF-8` | `gcc:16.2.0-trixie@sha256:17043c23ec2ad97fc3beca18da77275d26be5db5cd70ea0a5d73200e21a8e999` |
+| C++ (libstdc++)<br>`std::from_chars(first, last, int64_t&)` | 4 | `16.2.0` | `C.UTF-8` | `gcc:16.2.0-trixie@sha256:17043c23ec2ad97fc3beca18da77275d26be5db5cd70ea0a5d73200e21a8e999` |
+| C++ (libstdc++)<br>`std::stoi(value)` | 4 | `16.2.0` | `C.UTF-8` | `gcc:16.2.0-trixie@sha256:17043c23ec2ad97fc3beca18da77275d26be5db5cd70ea0a5d73200e21a8e999` |
 | dash (POSIX sh)<br>`printf '%d' "$1"` | 4 | `0.5.12-12` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
 | dash (POSIX sh)<br>`printf '%s' "$(( $1 ))"` | 4 | `0.5.12-12` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
 | git<br>`git config --type=int` | 4 | `1:2.47.3-0+deb13u1` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
@@ -132,7 +132,7 @@
 | Ruby<br>`Integer(value)` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
 | Ruby<br>`value.to_i` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
 | Swift<br>`Int(value)` | 4 | `6.4` | `C.UTF-8` | `swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66` |
-| validator.js<br>`validator.toInt(value, 10)` | 4 | `13.15.35` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| validator.js<br>`validator.toInt(value, 10)` | 4 | `13.15.35` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | xmlschema (Python)<br>`decode(<integer>value</integer>)` | 4 | `xmlschema 4.3.2` | `C.UTF-8` | `python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83` |
 | zsh<br>`printf '%d' "$1"` | 4 | `5.9-8+b24` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
 | zsh<br>`printf '%s' "$(( $1 ))"` | 4 | `5.9-8+b24` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |

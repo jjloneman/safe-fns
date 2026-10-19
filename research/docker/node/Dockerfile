@@ -3,7 +3,7 @@
 #
 # - The `base` stage is the plain Node image, which the `sources` service
 #   builds alone (`target: base`), so the two can't pin different Node images.
-FROM node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3 AS base
+FROM node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567 AS base
 
 # The Node adapter's own stage, and the default target: `base` plus the
 # libraries, which the `node` service gets and `sources` doesn't. Either way the

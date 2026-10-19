@@ -356,8 +356,8 @@
     },
     {
       "call": "ensureError(value) → { message, unchanged }",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "ensure-error",
       "outcomes": [
@@ -565,8 +565,8 @@
     },
     {
       "call": "new Error(value) → { message, unchanged }",
-      "image": "node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3",
-      "inputs": "sha256:505a137bd1a33c434d8068e1c45c67401b0f3e553eb2399f662f81ea2418d970",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -767,7 +767,7 @@
       ],
       "service": "node",
       "tier": 1,
-      "version": "v26.10.0"
+      "version": "v26.11.1"
     }
   ],
   "function": "toError"

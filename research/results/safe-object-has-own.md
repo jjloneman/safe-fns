@@ -76,14 +76,14 @@
 | Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
 | safe-fns (planned)<br>`safeObjectHasOwn` | 0 | `-` | `-` | `-` |
-| Effect<br>`Predicate.hasProperty(object, key)` | 1 | `4.0.3` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| Hermes<br>`key in object` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| Hermes<br>`Object.hasOwn(object, key)` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| JS built-ins<br>`key in object` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| JS built-ins<br>`Object.hasOwn(object, key)` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| lodash<br>`_.has(object, key)` | 1 | `4.18.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| Ramda<br>`R.has(key, object)` | 1 | `0.32.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| Underscore<br>`_.has(object, key)` | 1 | `1.13.8` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| Effect<br>`Predicate.hasProperty(object, key)` | 1 | `4.0.3` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| Hermes<br>`key in object` | 1 | `0.12.0` | `-` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| Hermes<br>`Object.hasOwn(object, key)` | 1 | `0.12.0` | `-` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| JS built-ins<br>`key in object` | 1 | `v26.11.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| JS built-ins<br>`Object.hasOwn(object, key)` | 1 | `v26.11.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| lodash<br>`_.has(object, key)` | 1 | `4.18.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| Ramda<br>`R.has(key, object)` | 1 | `0.32.0` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| Underscore<br>`_.has(object, key)` | 1 | `1.13.8` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | .NET<br>`dictionary.ContainsKey(key)` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | Go<br>`_, ok := obj[key]` | 2 | `1.27.2` | `C.UTF-8` | `golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61` |
 | Groovy<br>`key in obj` | 2 | `6.0.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
