@@ -1,9 +1,9 @@
 ---
 type: Decision
 title: What "empty" means for isSafeEmpty and isSafePopulated
-description: Nullish values, blank strings (whitespace and invisible characters), and empty arrays, maps, sets, plain objects, typed arrays, buffers, and web data containers are empty; everything else, including anything that can't be inspected, is populated, and isSafePopulated narrows only its true branch.
+description: Nullish values, blank strings (whitespace and invisible characters), and empty arrays, maps, sets, plain objects, typed arrays, buffers, and web data containers are empty; everything else, including anything that can't be inspected, is populated, and each predicate narrows the branch where the value is known to be non-nullish: isSafePopulated's true branch and isSafeEmpty's false branch.
 status: draft
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T02:22:39Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-19T01:16:47Z }
 ---
 
 # What "empty" means for isSafeEmpty and isSafePopulated
@@ -61,8 +61,25 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T02:22:39Z }
   - The brand exists only in the types; nothing is added to the value at runtime.
 
 - **`isSafePopulated` takes exactly one parameter,** because `Array.prototype.filter` passes `(value, index, array)`, and an options parameter would receive the index.
-- **`isSafeEmpty` returns a plain `boolean`.** An empty value can be `""`, `[]`, or `null`, so there's no useful type to narrow to.
-- **`Populated<T>` is exported,** so a consumer's declaration emit can name the type of a value narrowed by `isSafePopulated`.
+- **`isSafeEmpty` narrows only its false branch,** through the same kind of brand:
+
+  ```ts
+  declare const empty: unique symbol;
+  export type Empty<T> =
+    | Extract<T, null | undefined>
+    | (NonNullable<T> & { readonly [empty]: true });
+  export function isSafeEmpty<T>(value: T): value is Empty<T>;
+  ```
+
+  - In the else branch, `null` and `undefined` are gone, so `if (isSafeEmpty(x)) { return 0; } return x;` compiles for `x: number | null | undefined` without a separate `x === null || x === undefined` check.
+  - In the true branch, the type is unchanged apart from the brand: a `string` that is empty isn't narrowed to `""`, since `"  "` is empty too.
+  - A type that can be empty stays whole in the else branch: a `string[] | undefined` becomes `string[]`, and a generic `T | null` becomes `T`.
+
+- **In a callback, the positive twin is the one that narrows.**
+  - `values.filter(isSafePopulated)` narrows on TypeScript 4.9 and later.
+  - `values.filter((value) => isSafePopulated(value))` narrows from TypeScript 5.5, which infers a predicate from the arrow's body.
+  - `values.filter((value) => !isSafeEmpty(value))` never narrows, because TypeScript doesn't infer a predicate through `!`; the docs point to `isSafePopulated` for filtering.
+- **`Populated<T>` and `Empty<T>` are exported,** so a consumer's declaration emit can name the type of a narrowed value.
 
 ## Comparison
 
@@ -110,7 +127,7 @@ The tiers 0–2 summary from [research/results/is-safe-empty.md](../../research/
 - Blank strings use one regex `.test()` because it was the fastest option measured on Node 26: `trim()` first allocates a new string, and `replace()` then `=== ""` was up to 100 times slower on a 1 KB string. The braille blank and the invisible characters are included because a string of them looks empty, and is a common way to fake an empty name.
 - Web data containers are included because lodash, es-toolkit/compat, and @sindresorhus/is call every `URLSearchParams`, `Blob`, `File`, and `Headers` empty, even `new URLSearchParams("a=1")`, since they count own keys and these objects keep their data internally; remeda gets `size`-based ones right only by trusting any `size` key, and ramda calls none of them empty. The WinterTC list gives a boundary that keeps results the same in every runtime.
 - Numbers and booleans are populated because `0` and `false` are real values a form or API can hold, which lodash's `isEmpty(0) === true` loses.
-- The brand (the type-only tag above) was chosen after checking both branches on TypeScript 6.0 and 4.9: narrowing inline, in `Array.prototype.filter`, and in an rxjs-style `filter` operator all keep the else branch's full type.
+- The brands (the type-only tags above) were chosen after checking both branches of both predicates on TypeScript 6.0 and 4.9, by the owner's request that neither need an extra nullish check (2026-10-18): narrowing inline, in `Array.prototype.filter`, and in an rxjs-style `filter` operator all keep the else branch's full type.
 
 ## Consequences
 

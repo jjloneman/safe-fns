@@ -13,7 +13,7 @@ okf_version: "0.2"
 - [How safeJsonStringify handles what JSON.stringify throws on](safe-json-stringify.md) - Cycles and BigInts are repaired by default, with options to change or refuse each repair; anything else unserializable returns the fallback, and `replacer` and `space` are options.
 - [How safeObjectHasOwn narrows](safe-object-has-own.md) - A typed object narrows the key; any other value narrows the object; `null`, primitives, and trapping proxies return `false`.
 - [How the storage wrappers behave](safe-storage.md) - `safeStorageGetItem` / `SetItem` / `RemoveItem` plus fixed-area aliases; a missing key reads as native `null`, unreachable storage returns the fallback, and writes return whether they succeeded.
-- [What "empty" means for isSafeEmpty and isSafePopulated](is-safe-empty.md) - Nullish values, blank strings, and empty arrays, maps, sets, and plain objects are empty; anything uninspectable is populated, and `isSafePopulated` narrows only its true branch.
+- [What "empty" means for isSafeEmpty and isSafePopulated](is-safe-empty.md) - Nullish values, blank strings, and empty arrays, maps, sets, and plain objects are empty; anything uninspectable is populated, and each predicate narrows its non-nullish branch.
 - [What a parser returns when it can't parse](parser-fallbacks.md) - Parsers return the caller's fallback, `undefined` by default, for any input they don't recognize — never a guess.
 - [What counts as a plain object](is-plain-object.md) - A prototype of `Object.prototype` (any realm) or `null`, and no `Symbol.toStringTag` or `Symbol.iterator`; no `isRecord`.
 - [What every export promises](package-promise.md) - Every export is total and precisely typed; taking an `unknown` value is the common case, not a requirement.
