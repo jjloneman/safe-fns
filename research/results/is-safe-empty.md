@@ -149,8 +149,8 @@
 | Rust<br>`value.is_empty()` | 2 | `1.99.0` | `C.UTF-8` | `rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa` |
 | Spring<br>`!StringUtils.hasText(value)` | 2 | `7.0.9` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Spring<br>`ObjectUtils.isEmpty(value)` | 2 | `7.0.9` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
-| Cloud Firestore<br>`setDoc(doc, { value }); value is gone on get` | 3 | `firebase-tools 15.32.1` | `C.UTF-8` | `node:26.10.0-trixie-slim@sha256:930557a230abacbc3f4fd9b8648abf8f4bee1e17cb72195dcdfb2f709bc85b33` |
-| Firebase Realtime Database<br>`set(ref, { value }); value is gone on get` | 3 | `firebase-tools 15.32.1` | `C.UTF-8` | `node:26.10.0-trixie-slim@sha256:930557a230abacbc3f4fd9b8648abf8f4bee1e17cb72195dcdfb2f709bc85b33` |
+| Cloud Firestore<br>`setDoc(doc, { value }); value is gone on get` | 3 | `firebase-tools 15.33.0` | `C.UTF-8` | `node:26.10.0-trixie-slim@sha256:930557a230abacbc3f4fd9b8648abf8f4bee1e17cb72195dcdfb2f709bc85b33` |
+| Firebase Realtime Database<br>`set(ref, { value }); value is gone on get` | 3 | `firebase-tools 15.33.0` | `C.UTF-8` | `node:26.10.0-trixie-slim@sha256:930557a230abacbc3f4fd9b8648abf8f4bee1e17cb72195dcdfb2f709bc85b33` |
 | bash<br>`[ -z "$1" ]` | 4 | `5.2.37-2+b10` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
 | dash (POSIX sh)<br>`[ -z "$1" ]` | 4 | `0.5.12-12` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
 | fish<br>`[ -z "$argv[1]" ]` | 4 | `4.0.2-1` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
