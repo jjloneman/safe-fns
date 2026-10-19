@@ -52,7 +52,7 @@
 | Hermes<br>`JSON.stringify(JSON.parse(value))` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | JS built-ins<br>`JSON.stringify(JSON.parse(value))` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | safe-stable-stringify<br>`stringify(JSON.parse(value))` | 1 | `2.5.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| Go<br>`json.Unmarshal(value, &v); json.Marshal(v)` | 2 | `1.27.1` | `C.UTF-8` | `golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66` |
+| Go<br>`json.Unmarshal(value, &v); json.Marshal(v)` | 2 | `1.27.2` | `C.UTF-8` | `golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61` |
 | Jackson<br>`sortingMapper.writeValueAsString(mapper.readValue(value, Object.class))` | 2 | `3.2.3` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Python<br>`json.dumps(json.loads(value), ensure_ascii=False, separators=(",", ":"), sort_keys=True)` | 2 | `3.14.8` | `C.UTF-8` | `python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83` |
 | Rust<br>`serde_json::to_string(&serde_json::from_str::<Value>(value)?) (arbitrary_precision)` | 2 | `1.99.0` | `C.UTF-8` | `rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa` |

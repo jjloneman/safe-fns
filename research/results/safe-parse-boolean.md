@@ -198,18 +198,18 @@
 | Hermes<br>`JSON.parse(value)` | 1 | `0.12.0` | `-` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | valibot<br>`v.parse(v.pipe(v.unknown(), v.parseBoolean()), value)` | 1 | `1.5.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | yn<br>`yn(value)` | 1 | `5.1.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
-| zod<br>`z.stringbool().parse(value)` | 1 | `4.6.5` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| zod<br>`z.stringbool().parse(value)` | 1 | `4.6.6` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | .NET<br>`bool.Parse(value)` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | .NET<br>`Convert.ToBoolean(value, InvariantCulture)` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | Commons Lang<br>`BooleanUtils.toBoolean(value)` | 2 | `3.21.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Commons Lang<br>`BooleanUtils.toBooleanObject(value)` | 2 | `3.21.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
-| Go<br>`strconv.ParseBool(value)` | 2 | `1.27.1` | `C.UTF-8` | `golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66` |
+| Go<br>`strconv.ParseBool(value)` | 2 | `1.27.2` | `C.UTF-8` | `golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61` |
 | Groovy<br>`value as boolean` | 2 | `6.0.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Groovy<br>`value.toBoolean()` | 2 | `6.0.0` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Java<br>`Boolean.parseBoolean(value)` | 2 | `25.0.4.1+1-LTS` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
-| Kotlin<br>`value.toBoolean()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
-| Kotlin<br>`value.toBooleanStrict()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
-| Kotlin<br>`value.toBooleanStrictOrNull()` | 2 | `2.4.20` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`value.toBoolean()` | 2 | `2.4.21` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`value.toBooleanStrict()` | 2 | `2.4.21` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
+| Kotlin<br>`value.toBooleanStrictOrNull()` | 2 | `2.4.21` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Python<br>`ConfigParser().getboolean(…)` | 2 | `3.14.8` | `C.UTF-8` | `python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83` |
 | Python<br>`distutils.util.strtobool(value)` | 2 | `3.11.17` | `C.UTF-8` | `python:3.11.17-slim-bookworm@sha256:0a310eeecf4e1f5a0743f9a6520c90c88d089c903ca5fd283f501e3a805f5f89` |
 | Rust<br>`value.parse::<bool>()` | 2 | `1.99.0` | `C.UTF-8` | `rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa` |
@@ -224,7 +224,7 @@
 | PostgreSQL<br>`SELECT CAST(? AS boolean)` | 3 | `18.6` | `C.UTF-8` | `postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c` |
 | SQL Server<br>`SELECT CAST(? AS bit)` | 3 | `17.0.5005.3` | `SQL_Latin1_General_CP1_CI_AS` | `mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04@sha256:2b5b581621126574f3d1f75e78d3eebe8d05aedb59ad0cfdf9aa42cb0634d726` |
 | SQLite<br>`SELECT ? IS TRUE` | 3 | `3.40.1` | `C.UTF-8` | `python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83` |
-| TOML<br>`` parse(`v = ${value}`).v `` | 3 | `smol-toml 1.9.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
+| TOML<br>`` parse(`v = ${value}`).v `` | 3 | `smol-toml 1.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | XML Schema 1.0<br>`decode(<boolean>value</boolean>)` | 3 | `Xerces-J 2.12.2` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | YAML 1.1<br>`parse(value, { version: "1.1" })` | 3 | `2.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | YAML 1.2 core<br>`parse(value)` | 3 | `2.9.1` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |

@@ -3,7 +3,7 @@
 #
 # - One stage, not a build stage plus a scratch image: the runner reports this
 #   `FROM` as the image a column ran on, so it must be the one that runs.
-FROM golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66
+FROM golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61
 
 # `GOTOOLCHAIN=local` stops `go` fetching the toolchain `go.mod` names, and
 # `-buildvcs=false` skips stamping a version from `.git`, which isn't copied.

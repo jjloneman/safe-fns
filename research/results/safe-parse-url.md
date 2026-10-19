@@ -108,8 +108,8 @@
 | JS built-ins<br>`URL.parse(value, base)?.href` | 1 | `v26.10.0` | `en-US` | `node:26.10.0-bookworm-slim@sha256:3ffc19ea878019d9e9ae8971732ad4a03cda44f167107173174b60ed7c65bed3` |
 | .NET<br>`Uri.TryCreate(new Uri(base), value, out var uri) ? uri.AbsoluteUri : null` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | .NET<br>`Uri.TryCreate(value, UriKind.Absolute, out var uri) ? uri.AbsoluteUri : null` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
-| Go<br>`url.Parse(base) then base.Parse(value)` | 2 | `1.27.1` | `C.UTF-8` | `golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66` |
-| Go<br>`url.Parse(value)` | 2 | `1.27.1` | `C.UTF-8` | `golang:1.27.1-bookworm@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66` |
+| Go<br>`url.Parse(base) then base.Parse(value)` | 2 | `1.27.2` | `C.UTF-8` | `golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61` |
+| Go<br>`url.Parse(value)` | 2 | `1.27.2` | `C.UTF-8` | `golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61` |
 | Java<br>`new URI(base).resolve(value).toString()` | 2 | `25.0.4.1+1-LTS` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Java<br>`new URI(value).toString()` | 2 | `25.0.4.1+1-LTS` | `en` | `gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135` |
 | Python<br>`urljoin(base, value)` | 2 | `3.14.8` | `C.UTF-8` | `python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83` |
