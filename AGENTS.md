@@ -45,6 +45,8 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - A child process sets `stdio` explicitly; `execFileSync` inherits stderr by default, which leaks the child's messages into the terminal.
   - Readability beats a few ops/second here: nothing in `scripts/` is public API or a hot path, so `map` / `filter` / `reduce` are fine even where a plain loop would be faster.
   - An error message says only what the error shows — read its `code` or `stderr` rather than guessing a cause.
+  - Dates and durations go through luxon, a dev dependency: a duration constant is `Duration.fromObject({ minutes: 15 })`, ending in `.toMillis()` only where an API takes milliseconds, and date math uses `DateTime` and `Duration` methods rather than hand-multiplied numbers.
+  - `scripts/post-ci-timings.ts` is the exception: its CI job runs it before `pnpm install`, so it imports nothing outside Node.
   - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/**/*.test.ts` runs in the `node` project.
   - `scripts/research/` is the comparison harness's host side: `run.ts` (`pnpm research`) orchestrates the containers, `usage-search.ts` (`pnpm research:usage`) queries GitHub's code search and npm, and `codec.ts`, `images.ts`, `inputs.ts`, `results.ts`, `sources.ts`, `tables.ts`, `usage-tally.ts`, `call-arguments.ts`, and `logging.ts` are the pure, tested parts.
 - `research/` — the cross-language comparison harness (see [Research harness](#-research-harness)), outside `files`, so never published.

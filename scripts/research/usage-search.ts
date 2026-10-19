@@ -1,3 +1,4 @@
+import { DateTime, Duration } from "luxon";
 /*
  * Measures how code in the wild names and calls things, `pnpm research:usage`.
  *
@@ -90,6 +91,12 @@ const DEFAULT_CALL_LANGUAGES = ["JavaScript", "TypeScript"];
 /** `execFile`, awaitable, so searches can wait between requests. */
 const EXEC_FILE_ASYNC = promisify(execFile);
 
+/**
+ * The most output `gh api` may print, 64 MiB: `execFile`'s 1 MiB default can't
+ * hold a page of 100 files with their repositories and text matches.
+ */
+const GH_MAX_BUFFER_BYTES = 64 * 1024 * 1024;
+
 /** Every log line's prefix. */
 const LOG_PREFIX = "[usage-search]";
 
@@ -103,10 +110,10 @@ const MAX_SEARCH_PAGES = 10;
 const MAX_SEARCH_PER_PAGE = 100;
 
 /** How long to wait after a rate limit: code search's window is a minute. */
-const RATE_LIMIT_WAIT_MS = 60_000;
+const RATE_LIMIT_WAIT = Duration.fromObject({ minutes: 1 });
 
 /** Code search allows 10 requests a minute, so space them a little wider. */
-const SEARCH_INTERVAL_MS = 6500;
+const SEARCH_INTERVAL = Duration.fromObject({ seconds: 6.5 });
 
 /** What to print when the command line can't be read. */
 const USAGE = `Usage:
@@ -125,19 +132,19 @@ Add --markdown for a Markdown table instead of JSON.`;
 function createCodeSearch(): (
   request: CodeSearchRequest
 ) => Promise<CodeSearchPage> {
-  let nextSearchAt = 0;
+  let nextSearchAt = DateTime.now();
 
   const search = async (
     request: CodeSearchRequest,
     attempt: number
   ): Promise<CodeSearchPage> => {
-    await sleep(Math.max(0, nextSearchAt - Date.now()));
-    nextSearchAt = Date.now() + SEARCH_INTERVAL_MS;
+    await sleep(Math.max(0, nextSearchAt.diffNow().toMillis()));
+    nextSearchAt = DateTime.now().plus(SEARCH_INTERVAL);
     log(`searching \`${request.query}\`, page ${request.page}`);
 
     try {
       const { stdout } = await EXEC_FILE_ASYNC("gh", toGhArguments(request), {
-        maxBuffer: 64 * 1024 * 1024,
+        maxBuffer: GH_MAX_BUFFER_BYTES,
       });
 
       return toCodeSearchPage(
@@ -151,8 +158,8 @@ function createCodeSearch(): (
         throw error;
       }
 
-      log(`rate-limited; retrying in ${RATE_LIMIT_WAIT_MS / 1000}s`);
-      nextSearchAt = Date.now() + RATE_LIMIT_WAIT_MS;
+      log(`rate-limited; retrying in ${RATE_LIMIT_WAIT.toHuman()}`);
+      nextSearchAt = DateTime.now().plus(RATE_LIMIT_WAIT);
 
       return search(request, attempt + 1);
     }
@@ -387,7 +394,7 @@ async function runNpm({
 
 /** Today's date in UTC, as `YYYY-MM-DD`. @returns it. */
 function today(): string {
-  return new Date().toISOString().slice(0, 10);
+  return DateTime.utc().toISODate();
 }
 
 /** Turn a code search request into `gh api`'s arguments. @returns them. */

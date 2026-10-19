@@ -19,6 +19,7 @@
  */
 import type { ChildProcess } from "node:child_process";
 
+import { Duration } from "luxon";
 import { spawn } from "node:child_process";
 import {
   existsSync,
@@ -282,7 +283,7 @@ const CHECK_ARGS_LABEL = "dev.safe-fns.research.check-args";
  * - Generous enough for a cold image pull or build; a stuck adapter fails the
  *   run instead of hanging it, locally and in CI.
  */
-const COMMAND_TIMEOUT_MS = 15 * 60 * 1000;
+const COMMAND_TIMEOUT_MS = Duration.fromObject({ minutes: 15 }).toMillis();
 
 /** The Compose file every `docker compose` call reads. */
 const COMPOSE_FILE = path.resolve(
