@@ -79,7 +79,7 @@ the generated tables instead of summarizing other tools' docs.
 
   - Leave the pulled base images and the build cache: another session may be
     building from them, and they make the next build fast.
-  - `docker compose down`, an unscoped `docker image prune`, and
+  - A project-wide `docker compose down`, an unscoped `docker image prune`, and
     `docker builder prune` are the owner's housekeeping, run only once no
     session is in flight.
 
@@ -367,7 +367,8 @@ it.
 
 - The runner starts the active profiles' databases with
   `docker compose up --wait`, gated on each one's healthcheck, and removes them
-  by name when the adapters finish, whether or not they succeeded.
+  and their networks by name (`docker compose down <names>`) when the adapters
+  finish, whether or not they succeeded.
 - An adapter shares an `internal` network with its database and nothing else, so
   neither can reach the internet; no database publishes a host port.
 - Each database keeps its data in `tmpfs`, except SQL Server, which can't run on

@@ -21,6 +21,7 @@ import type { ChildProcess } from "node:child_process";
 
 import { Duration } from "luxon";
 import { spawn } from "node:child_process";
+import { randomUUID } from "node:crypto";
 import {
   existsSync,
   mkdirSync,
@@ -35,6 +36,13 @@ import type { ServiceInputs } from "./inputs.ts";
 import type { CaseFile, FunctionResult, ServiceColumns } from "./results.ts";
 
 import { isRecord } from "./codec.ts";
+import {
+  findContainersToRemove,
+  findNetworksInUse,
+  findUnexpectedRemovalErrors,
+  profileArgs,
+  toDatabaseArgs,
+} from "./compose.ts";
 import {
   describeStaleImage,
   findStaleImages,
@@ -94,6 +102,13 @@ type CommandInput = {
    * @example "docker"
    */
   command: string;
+
+  /**
+   * Kills the command when aborted; the result still waits for it to exit.
+   *
+   * @example `TEARDOWN.signal`
+   */
+  signal?: AbortSignal;
 };
 
 /** What a finished child process printed, and how it exited. */
@@ -160,6 +175,26 @@ type ComposeService = {
    * @example `["python"]`
    */
   profiles: string[];
+};
+
+/** The databases to remove, and whether adapters may still be running. */
+type DatabaseRemovalInput = {
+  /**
+   * The database services to stop and remove.
+   *
+   * @example `[{ name: "postgres", profiles: ["db"], … }]`
+   */
+  databases: readonly ComposeService[];
+
+  /**
+   * Whether a signal cut the run short, so adapters may still be running.
+   *
+   * - Otherwise the task has settled, and `runPool` waits for every adapter it
+   *   started, so none is left.
+   *
+   * @example true
+   */
+  isInterrupted: boolean;
 };
 
 /** The formatter services, and whether to only check. */
@@ -271,6 +306,12 @@ type WriteResultsInput = {
   servicesRun: ReadonlySet<string> | undefined;
 };
 
+/**
+ * The `docker compose run` commands `runService` has in flight, so an
+ * interrupted teardown can wait until none can still create a container.
+ */
+const ADAPTER_RUNS = new Set<Promise<CommandResult>>();
+
 /** Where the case files live on the host. */
 const CASES_DIR = path.resolve(import.meta.dirname, "../../research/cases");
 
@@ -305,6 +346,31 @@ const RESEARCH_DIR = path.resolve(import.meta.dirname, "../../research");
 
 /** Where results are written. */
 const RESULTS_DIR = path.join(RESEARCH_DIR, "results");
+
+/**
+ * Identifies this run's adapter containers, by name and by `RUNNER_LABEL`.
+ *
+ * - Random rather than the pid, which another runner sharing the Docker engine
+ *   from a different container or host could also have.
+ */
+const RUN_ID = randomUUID();
+
+/**
+ * The label marking each container `runService` starts with `RUN_ID`.
+ *
+ * - Teardown asks Docker for it rather than tracking containers itself, so it
+ *   also finds one this run left behind when it killed the CLI.
+ *
+ * - Any other run's containers carry another id, so they're never touched.
+ */
+const RUNNER_LABEL = "dev.safe-fns.research.runner";
+
+/**
+ * Aborted when a signal starts database teardown: `runService` starts no new
+ * adapter, and every `docker compose run` in flight is killed, so none can
+ * recreate or hold a database network the teardown is removing.
+ */
+const TEARDOWN = new AbortController();
 
 /**
  * Compare every committed column's image and inputs with its service's now.
@@ -461,6 +527,34 @@ async function formatAdapters({
 }
 
 /**
+ * List this run's adapter containers that still need removing, logging a
+ * failure to ask.
+ *
+ * @returns their ids; none when Docker couldn't be asked.
+ */
+async function listAdapterContainers(): Promise<string[]> {
+  const listed = await runCommand({
+    args: [
+      "ps",
+      "--all",
+      "--filter",
+      `label=${RUNNER_LABEL}=${RUN_ID}`,
+      "--format",
+      "{{.ID}} {{.State}}",
+    ],
+    command: "docker",
+  });
+
+  if (listed.exitCode !== 0) {
+    logError(`couldn't list the adapter containers:\n${listed.stderr}`);
+
+    return [];
+  }
+
+  return findContainersToRemove(listed.stdout);
+}
+
+/**
  * Read and narrow the case files, keeping `codec` and the requested functions.
  *
  * @throws Error when a requested function matches no case file, so a typo
@@ -577,11 +671,6 @@ function logError(message: string): void {
   printPrefixed({ message, prefix: LOG_PREFIX, print: console.error });
 }
 
-/** Turn profile names into Compose's `--profile` flags. */
-function profileArgs(profiles: readonly string[]): string[] {
-  return profiles.flatMap((profile) => ["--profile", profile]);
-}
-
 /** Read a function's committed result, if there is one. */
 function readPreviousResult(stem: string): FunctionResult | undefined {
   const file = path.join(RESULTS_DIR, `${stem}.json`);
@@ -589,24 +678,91 @@ function readPreviousResult(stem: string): FunctionResult | undefined {
   return existsSync(file) ? parseFunctionResult(readJsonFile(file)) : undefined;
 }
 
-/** Stop and remove database services by name, logging any failure. */
-async function removeDatabases(
-  databases: readonly ComposeService[]
-): Promise<void> {
-  const names = databases.map(({ name }) => name);
-  const profiles = [...new Set(databases.flatMap(({ profiles }) => profiles))];
+/**
+ * Force-remove every container this run started, logging any failure.
+ *
+ * - `docker rm` also fails on a container `--rm` is already removing, or has
+ *   just removed; that's no failure, and Docker's listing can't tell it apart
+ *   reliably, so its error messages are what decide.
+ */
+async function removeAdapterContainers(): Promise<void> {
+  const ids = await listAdapterContainers();
 
-  const removed = await compose([
-    ...profileArgs(profiles),
-    "rm",
-    "--force",
-    "--stop",
-    "--volumes",
-    ...names,
-  ]);
+  if (ids.length === 0) {
+    return;
+  }
 
-  if (removed.exitCode !== 0) {
-    logError(`couldn't remove ${names.join(", ")}:\n${removed.stderr}`);
+  const removed = await runCommand({
+    args: ["rm", "--force", ...ids],
+    command: "docker",
+  });
+
+  const errors = findUnexpectedRemovalErrors(removed.stderr);
+
+  if (errors.length > 0) {
+    logError(`couldn't remove the adapter containers:\n${errors.join("\n")}`);
+  }
+}
+
+/**
+ * Stop and remove database services by name, logging any failure.
+ *
+ * - After an interrupt, no new adapter starts, every one in flight is killed,
+ *   and any container left goes first, since it holds its database's network.
+ *   If `down` then fails or keeps a network in use, the sweep and `down` run
+ *   once more, for a container the engine created just after its CLI died.
+ *
+ * - `down` with service names removes only those containers, their volumes,
+ *   and their networks; leftover networks eventually exhaust Docker's address
+ *   pools, so one it keeps in use is logged.
+ *
+ * - If `down` fails, as on a Compose whose `down` takes no service names,
+ *   `rm` still removes the containers, though not their networks.
+ */
+async function removeDatabases({
+  databases,
+  isInterrupted,
+}: DatabaseRemovalInput): Promise<void> {
+  const downArgs = toDatabaseArgs({ command: "down", databases });
+  const names = databases.map(({ name }) => name).join(", ");
+
+  if (isInterrupted) {
+    TEARDOWN.abort();
+    await Promise.allSettled(ADAPTER_RUNS);
+    await removeAdapterContainers();
+  }
+
+  const firstDown = await compose(downArgs);
+
+  const shouldRetry =
+    isInterrupted &&
+    (firstDown.exitCode !== 0 ||
+      findNetworksInUse(firstDown.stderr).length > 0);
+
+  if (shouldRetry) {
+    await removeAdapterContainers();
+  }
+
+  const removed = shouldRetry ? await compose(downArgs) : firstDown;
+
+  if (removed.exitCode === 0) {
+    const networksInUse = findNetworksInUse(removed.stderr);
+
+    if (networksInUse.length > 0) {
+      logError(`left in use, not removed: ${networksInUse.join(", ")}`);
+    }
+
+    return;
+  }
+
+  logError(
+    `docker compose down failed for ${names}, so removing them with rm, which leaves their networks:\n${removed.stderr}`
+  );
+
+  const fallback = await compose(toDatabaseArgs({ command: "rm", databases }));
+
+  if (fallback.exitCode !== 0) {
+    logError(`couldn't remove ${names}:\n${fallback.stderr}`);
   }
 }
 
@@ -668,13 +824,28 @@ async function runAdapter({
 }
 
 /** Run a command from the repo root, collecting its output. */
-function runCommand({ args, command }: CommandInput): Promise<CommandResult> {
+function runCommand({
+  args,
+  command,
+  signal,
+}: CommandInput): Promise<CommandResult> {
   return new Promise((resolve, reject) => {
     const child: ChildProcess = spawn(command, args, {
       cwd: REPO_ROOT,
       stdio: ["ignore", "pipe", "pipe"],
       timeout: COMMAND_TIMEOUT_MS,
     });
+
+    /*
+     * Killed by hand rather than through `spawn`'s own `signal` option, which
+     * rejects with an `AbortError` at once; this settles only once the
+     * command has exited, so a caller awaiting it knows it can do no more.
+     */
+    const kill = (): void => {
+      child.kill();
+    };
+
+    signal?.addEventListener("abort", kill, { once: true });
 
     let stdout = "";
     let stderr = "";
@@ -689,9 +860,13 @@ function runCommand({ args, command }: CommandInput): Promise<CommandResult> {
 
     child.on("error", reject);
 
-    child.on("close", (code, signal) => {
+    child.on("close", (code, exitSignal) => {
+      signal?.removeEventListener("abort", kill);
+
       const killedNote =
-        signal === null ? "" : `\nkilled by ${signal} (timeout or interrupt)`;
+        exitSignal === null
+          ? ""
+          : `\nkilled by ${exitSignal} (timeout or interrupt)`;
 
       resolve({ exitCode: code ?? 1, stderr: stderr + killedNote, stdout });
     });
@@ -729,9 +904,17 @@ async function runPool<T>({ concurrency, tasks }: PoolInput<T>): Promise<T[]> {
     }
   };
 
-  await Promise.all(
+  const outcomes = await Promise.allSettled(
     Array.from({ length: Math.min(concurrency, tasks.length) }, worker)
   );
+
+  const failure = outcomes.find(
+    (outcome): outcome is PromiseRejectedResult => outcome.status === "rejected"
+  );
+
+  if (failure !== undefined) {
+    throw failure.reason;
+  }
 
   return results;
 }
@@ -754,10 +937,14 @@ async function runSequentially<T>(
 }
 
 /**
- * Run one Compose service once, in a container named for this process.
+ * Run one Compose service once, in a container named and labeled for this
+ * run.
  *
  * - The name lets a failed or timed-out run remove its container: killing the
  *   `docker` CLI doesn't stop the container it started.
+ *
+ * - The label lets database teardown find every such container, and its
+ *   abort signal kills the CLI, so none can start after teardown begins.
  *
  * @returns what the service printed and how it exited.
  */
@@ -765,19 +952,43 @@ async function runService({
   args,
   service,
 }: ServiceRunInput): Promise<CommandResult> {
-  const containerName = `safe-fns-research-${service.name}-${process.pid}`;
+  if (TEARDOWN.signal.aborted) {
+    return {
+      exitCode: 1,
+      stderr: "not started: the databases are being removed",
+      stdout: "",
+    };
+  }
 
-  const result = await compose([
-    ...profileArgs(service.profiles),
-    "run",
-    "--rm",
-    "--no-deps",
-    "-T",
-    "--name",
-    containerName,
-    service.name,
-    ...args,
-  ]);
+  const containerName = `safe-fns-research-${service.name}-${RUN_ID}`;
+
+  // Not `compose()`, which takes no abort signal.
+  const run = runCommand({
+    args: [
+      "compose",
+      "--file",
+      COMPOSE_FILE,
+      ...profileArgs(service.profiles),
+      "run",
+      "--rm",
+      "--no-deps",
+      "-T",
+      "--label",
+      `${RUNNER_LABEL}=${RUN_ID}`,
+      "--name",
+      containerName,
+      service.name,
+      ...args,
+    ],
+    command: "docker",
+    signal: TEARDOWN.signal,
+  });
+
+  ADAPTER_RUNS.add(run);
+
+  const result = await run.finally(() => {
+    ADAPTER_RUNS.delete(run);
+  });
 
   if (result.exitCode !== 0) {
     await runCommand({
@@ -808,8 +1019,8 @@ function toStringRecord(value: unknown): Record<string, string> {
  * - Adapters run with `--no-deps`, so their `depends_on` never starts a
  *   database; this starts each once, waiting on its healthcheck.
  *
- * - The databases are removed whether the task succeeds or not, by name, so
- *   nothing else in the Compose project is touched.
+ * - The databases are removed with their networks whether the task succeeds
+ *   or not, by name, so nothing else in the Compose project is touched.
  *
  * - An interrupt (Ctrl+C) or a `SIGTERM` skips `finally`, so either one
  *   removes them first and then re-raises, rather than leaving them running.
@@ -825,18 +1036,17 @@ async function withDatabases<T>({
   }
 
   const names = databases.map(({ name }) => name);
-  const profiles = [...new Set(databases.flatMap(({ profiles }) => profiles))];
   let removal: Promise<void> | undefined;
 
   // Once only: a signal and the `finally` it unwinds can both ask.
-  const removeOnce = (): Promise<void> => {
-    removal ??= removeDatabases(databases);
+  const removeOnce = (isInterrupted: boolean): Promise<void> => {
+    removal ??= removeDatabases({ databases, isInterrupted });
 
     return removal;
   };
 
   const onSignal = (signal: NodeJS.Signals): void => {
-    void removeOnce().finally(() => {
+    void removeOnce(true).finally(() => {
       process.kill(process.pid, signal);
     });
   };
@@ -847,13 +1057,7 @@ async function withDatabases<T>({
   try {
     log(`starting ${names.join(", ")}`);
 
-    const started = await compose([
-      ...profileArgs(profiles),
-      "up",
-      "--detach",
-      "--wait",
-      ...names,
-    ]);
+    const started = await compose(toDatabaseArgs({ command: "up", databases }));
 
     if (started.exitCode !== 0) {
       throw new Error(`docker compose up failed:\n${started.stderr}`);
@@ -863,7 +1067,7 @@ async function withDatabases<T>({
   } finally {
     process.off("SIGINT", onSignal);
     process.off("SIGTERM", onSignal);
-    await removeOnce();
+    await removeOnce(false);
   }
 }
 
