@@ -168,7 +168,7 @@
     {
       "call": "is.plainObject(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "@sindresorhus/is",
       "outcomes": [
@@ -252,7 +252,7 @@
     {
       "call": "isPlainObject(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -336,7 +336,7 @@
     {
       "call": "isPlainObject(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "is-plain-obj",
       "outcomes": [
@@ -420,7 +420,7 @@
     {
       "call": "_.isPlainObject(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -504,7 +504,7 @@
     {
       "call": "isObject(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "radash",
       "outcomes": [
@@ -588,7 +588,7 @@
     {
       "call": "isPlainObject(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "remeda",
       "outcomes": [
