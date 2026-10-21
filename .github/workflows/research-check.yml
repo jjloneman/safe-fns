@@ -43,10 +43,13 @@ jobs:
       - uses: ./.github/actions/setup
 
       # With `research/node_modules` present, the root ESLint config lints the
-      # adapters too, and the nested tsconfig resolves their imports.
+      # adapters too, and the nested tsconfig resolves their imports; the
+      # AssemblyScript probes likewise need their own install, for their types.
       - run: pnpm --dir research install --frozen-lockfile
+      - run: pnpm --dir research/adapters/assemblyscript install --frozen-lockfile
       - run: pnpm exec eslint research scripts/research
       - run: pnpm exec tsc --project research
+      - run: pnpm exec tsc --project research/adapters/assemblyscript
 
       # Committed results must match the pinned images and inputs; reads
       # Compose's config, the Dockerfiles, and the lockfiles, so it builds and

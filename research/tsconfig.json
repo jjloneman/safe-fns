@@ -1,4 +1,8 @@
 {
+  "exclude": [
+    // AssemblyScript, checked by its own nested config against its own types.
+    "adapters/assemblyscript"
+  ],
   /*
    * `research/` is its own installed package, so its TypeScript resolves
    * imports from `research/node_modules` through this nested config.

@@ -58,6 +58,15 @@ paths:
 - `scripts/research/*.ts` follows the `scripts/` conventions; the Node adapters (`research/adapters/*.mts` and `node/*.mts`) follow the TypeScript ones and are checked through `research/tsconfig.json`.
 - **Choose a new tool's tier by the [Tiers table](../../research/README.md#-tiers)**, not by judgment: tier 2 is set by language (Guava is 2, Ruby's standard library is 4), and tiers 0–2 are what decision records quote, so a wrong tier puts a column in or out of the summary.
 - **One module per Node tool.** A library joins as `research/adapters/node/<tool>.mts`, exporting its `Tool`, and is listed in `node.mts`; don't grow the entry file.
+- **AssemblyScript's probes typecheck against its own standard library**, through `research/adapters/assemblyscript/tsconfig.json`, which `research/tsconfig.json` excludes.
+  - With `noLib`, `number` and `boolean` have no members in its editor typings, so `primitive-methods.d.ts` declares the `toString` that `asc` provides; `asc` never reads it.
+
+  - Prefer a type's own `parse` (`i32.parse`, `f32.parse`, `bool.parse`) over `I32.parseInt` and `Number.parseFloat`, which AssemblyScript deprecates; the globals `parseInt` and `parseFloat` aren't deprecated, and mirror JavaScript's.
+
+  - Its probes compile with `--bindings raw`, which exports `instantiate` rather than one instance, so the driver can replace an instance an abort has poisoned; `--bindings esm` instantiates once, at import. Its calls run one at a time, so none can pick up an instance another just broke.
+
+  - Report what crossed the bindings as it arrived: an `i64` comes back as a bigint and an `f32` as its widened `number`; never convert either to look like JavaScript's answer.
+
 - **Hermes runs the TS encoder's own source.** `ENCODER_SOURCE` (in `codec.ts`) and `errorName` (in `node/tool.mts`) are embedded as text in the program Hermes runs, so keep them free of imports and module-level names, and of syntax Hermes lacks, such as classes.
 - **The codecs are twins.** A change to `scripts/research/codec.ts` needs the same change in every adapter's codec under `research/adapters/`: `research_codec.py`, `research_codec.php`, `research_codec.psm1`, `research_codec.rb`, `research_codec.swift`, `dotnet/Codec.cs`, `go/codec.go`, `jvm/src/main/java/com/safefns/research/ResearchCodec.java`, and `rust/src/codec.rs`. A `codec.json` case proves it. Hermes needs no twin: it runs `ENCODER_SOURCE`, the encoder's own source.
 - **A driven adapter hands the tool a string, never a script.** Pass the value as a positional parameter or environment variable, so no quoting can change what runs; NUL can't travel that way, so it's `n/a`.

@@ -1,0 +1,10 @@
+{
+  "name": "safe-fns-research-assemblyscript",
+  "version": "0.0.0",
+  "private": true,
+  "description": "🔬 The AssemblyScript compiler the research harness builds its probes with, installed apart from both the published package and the Node adapter",
+  "devDependencies": {
+    "assemblyscript": "0.28.20"
+  },
+  "packageManager": "pnpm@12.5.1"
+}

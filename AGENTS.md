@@ -368,7 +368,7 @@ The conventions below are written for TypeScript, but they bind code in every la
   - `release-please` — opens or updates the release PR, and tags the release once it is merged;
   - `publish` — only when a release was just created; builds and publishes to npm.
 - **Dependabot** opens weekly grouped patch/minor PRs for npm and Actions, after a 7-day cooldown that matches the [moratorium](#-7-day-dependency-moratorium).
-  - `research/`'s npm libraries, its Compose images, its Dockerfiles, the `python311` image, the JVM adapter's Gradle libraries, the database adapters' pip drivers, the XML Schema adapter's pip libraries, and the Firebase emulators' npm root get their own entries, each one grouped PR a week, majors included.
+  - `research/`'s npm libraries, its Compose images, its Dockerfiles, the `python311` image, the JVM adapter's Gradle libraries, the database adapters' pip drivers, the XML Schema adapter's pip libraries, the Firebase emulators' npm root, and the AssemblyScript compiler's npm root get their own entries, each one grouped PR a week, majors included.
   - Its `ignore` rules hold the pins below: `typescript` and `@types/node` majors, and each `typescript-<version>` alias to its minor.
   - They also hold the 3.x `python` images off Python's pre-releases, and `python311` on 3.11, the last Python with `distutils`.
   - An image several research services share (Node, Python, the .NET SDK) is bumped by one group, and research images track their latest stable major.
@@ -381,7 +381,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 No npm dependency may enter the lockfile until it has been published for **at least 7 days** — a supply-chain guard that gives the registry time to yank a compromised release.
 
 - Enforced by `minimumReleaseAge: 10080` (minutes) in [pnpm-workspace.yaml](pnpm-workspace.yaml), checked on every `pnpm install`, including `--frozen-lockfile`.
-  - `research/pnpm-workspace.yaml` and `research/docker/firebase/pnpm-workspace.yaml` repeat the floor for the research harness's own pnpm roots; keep all three in sync.
+  - `research/pnpm-workspace.yaml`, `research/docker/firebase/pnpm-workspace.yaml`, and `research/adapters/assemblyscript/pnpm-workspace.yaml` repeat the floor for the research harness's own pnpm roots; keep all four in sync.
   - The same 7 days applies to a container image (pin a tag whose last push is at least 7 days old), to a Python package (`research/docker/db/requirements.txt`, compiled with `--exclude-newer`; `research/docker/xml-schema/requirements.txt`), and to a release download such as the Hermes CLI tarball.
 - A too-new version fails the install with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`.
 - When bumping a dependency by hand, pick the newest version that is already at least 7 days old (exactly 7 days is fine). If the lockfile fails the check, downgrade the offending entry rather than relaxing the floor.
@@ -432,6 +432,7 @@ Semantic and design decisions — what "empty" means, how a function is named, w
 - It's a separately installed pnpm package (`research/package.json`, its own lockfile and `pnpm-workspace.yaml`), so its libraries never reach the published package or the root lockfile.
 - `pnpm research` runs every adapter service in `research/compose.yaml` in parallel and writes `research/results/`; it needs a Docker-compatible runtime (OrbStack on the owner's Mac mini).
 - The root ESLint config lints `research/**/*.mts` only once `pnpm --dir research install` has run, since its imports resolve nowhere else.
+  - Likewise the AssemblyScript probes (`research/adapters/assemblyscript/*.ts`), typed by the compiler's own standard library, once `pnpm --dir research/adapters/assemblyscript install` has run; `tsc --project research/adapters/assemblyscript` checks them.
 - How to change it is covered by `.claude/rules/research.md`.
 - **Look things up on GitHub or npm with `pnpm research:usage`**, never a hand-written `gh api search/…` or `curl` loop: name counts (`counts`), how a call's arguments are used (`calls`), a code search's files (`files`), and weekly downloads (`npm`).
   - Its report is JSON by default, for `jq`, and a Markdown table with `--markdown`; either carries its method, date, and caveats, so quote it whole, with the date, in a decision record or comment.
