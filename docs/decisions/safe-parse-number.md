@@ -1,13 +1,13 @@
 ---
 type: Decision
-title: What safeParseNumber and safeParseInteger accept
-description: Finite numbers, safe-range bigints, and trimmed decimal strings parse; hex, units, separators, blanks, and non-finite values return the fallback, a value outside min / max returns the fallback unless clamp is set, and safeParseInteger takes a strict radix with JavaScript's matching 0x / 0o / 0b prefixes.
+title: What safeParseNumber and safeParseInt accept
+description: Finite numbers, safe-range bigints, and trimmed decimal strings parse; hex, units, separators, blanks, and non-finite values return the fallback, a value outside min / max returns the fallback unless clamp is set, and safeParseInt takes a strict radix with JavaScript's matching 0x / 0o / 0b prefixes.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-19T01:44:49Z }
-verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-21T01:00:50Z }
+verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
 ---
 
-# What safeParseNumber and safeParseInteger accept
+# What safeParseNumber and safeParseInt accept
 
 Both parsers read a decimal number the same way on every engine, and return the caller's fallback for anything else.
 
@@ -17,7 +17,7 @@ Both parsers read a decimal number the same way on every engine, and return the 
 
   ```ts
   safeParseNumber(value: unknown, options?: { clamp?: boolean; fallback?: F; max?: number; min?: number }): number | F
-  safeParseInteger(value: unknown, options?: { clamp?: boolean; fallback?: F; max?: number; min?: number; radix?: number }): number | F
+  safeParseInt(value: unknown, options?: { clamp?: boolean; fallback?: F; max?: number; min?: number; radix?: number }): number | F
   ```
 
 - **Accepted input:**
@@ -29,7 +29,7 @@ Both parsers read a decimal number the same way on every engine, and return the 
     - Leading zeros parse (`"007"` → `7`), as do `"-0"`, `"5."`, and `".5"`; `"."`, `"+"`, `"e3"`, and `"1e"` don't.
 - **Everything else returns the fallback,** never a coercion:
   - blank and whitespace-only strings (`Number("")` is `0`);
-  - hex, binary, and octal strings (`"0x1f"`, `"0b1"`, `"0o7"`), which `Number()` accepts; a number has no base, only text does, so a hex literal in code (`0x1f`) arrives as the number `31` and parses, and hex text belongs to `safeParseInteger`'s `radix`;
+  - hex, binary, and octal strings (`"0x1f"`, `"0b1"`, `"0o7"`), which `Number()` accepts; a number has no base, only text does, so a hex literal in code (`0x1f`) arrives as the number `31` and parses, and hex text belongs to `safeParseInt`'s `radix`;
   - digits from other scripts (`"٤٢"`, `"４２"`), which `Number()` also rejects, though Python accepts them;
   - trailing text (`"12px"`, which `parseFloat` reads as `12`) and digit separators (`"1_000"`, `"1,000"`);
   - `NaN`, `Infinity`, `"Infinity"`, and a string that overflows to `Infinity` (`"1e999"`);
@@ -37,12 +37,12 @@ Both parsers read a decimal number the same way on every engine, and return the 
 - **A boxed primitive is unwrapped first,** then parsed like the primitive it holds: `new String(" 42 ")`, `new Number(1)`, `new Boolean(false)`, and `Object(1n)`.
   - Each box is identified by a brand check (calling `String.prototype.valueOf` and its siblings, which read the hidden slot only a real box has and throw on anything else, cross-realm included), never by its shape.
   - Every parser in the package does the same, so a boxed value never behaves differently from one parser to the next.
-- **`safeParseInteger` also requires `Number.isSafeInteger`:**
+- **`safeParseInt` also requires `Number.isSafeInteger`:**
   - `"1.5"` returns the fallback rather than truncating;
   - `"1.0"` and `"1e3"` parse, since their values are integers;
   - a value past `Number.MAX_SAFE_INTEGER` (2⁵³ − 1, the largest integer `n` where `n` and `n + 1` are both stored exactly in a 64-bit double) returns the fallback, since a different integer would come back;
   - `"-0"` and `-0` return `0`, since integers have no negative zero, as in Python and Ruby; `safeParseNumber` keeps `-0`, as `Number()` does.
-- **`safeParseInteger` takes a `radix`, from 2 to 36, defaulting to 10.**
+- **`safeParseInt` takes a `radix`, from 2 to 36, defaulting to 10.**
   - With a radix, a string is an optional `+` / `-`, then optionally the prefix that matches the radix, then digits valid in that radix, in either case: `"ff"`, `"FF"`, and `"-0x1A"` parse with radix 16 (`255`, `255`, `-26`).
   - The matching prefixes are JavaScript's own literal prefixes: `0x` for 16, `0o` for 8, and `0b` for 2, in either case; any other prefix is just digits or a mismatch, so `"0b101"` with radix 16 is the hex number `0xb101` (`45313`, as `parseInt` agrees), and `"0x1A"` with radix 8 returns the fallback.
   - Without a `radix`, nothing is guessed: `"0x1A"` returns the fallback, unlike `parseInt("0x1A")`, which reads it as hex.
@@ -53,7 +53,7 @@ Both parsers read a decimal number the same way on every engine, and return the 
 - **`min` and `max` are inclusive bounds.**
   - By default, a value outside them returns the fallback.
   - `clamp: true` returns the nearest bound instead.
-  - A bound that is `NaN`, a `safeParseInteger` bound that isn't a safe integer or `±Infinity`, or `min` greater than `max` returns the fallback for every input rather than guessing which bound the caller meant.
+  - A bound that is `NaN`, a `safeParseInt` bound that isn't a safe integer or `±Infinity`, or `min` greater than `max` returns the fallback for every input rather than guessing which bound the caller meant.
 
 - **Rounding is accepted, as in every language:**
   - a long decimal is rounded to the nearest double, so `safeParseNumber("9007199254740993")` returns `9007199254740992`, as `Number()` does;
@@ -115,12 +115,12 @@ The tiers 0–2 summary from [research/results/safe-parse-number.md](../../resea
 | `‹a boxed numeric string›` | `42` | 💥 `SchemaError` | `42` | — | — | `42` | `42` | `42` | `42` | `42` | `42` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
 <!-- prettier-ignore-end -->
 
-### `safeParseInteger`
+### `safeParseInt`
 
-The tiers 0–2 summary from [research/results/safe-parse-integer.md](../../research/results/safe-parse-integer.md), generated by `pnpm research`; the full table there adds databases, formats, and the remaining languages.
+The tiers 0–2 summary from [research/results/safe-parse-int.md](../../research/results/safe-parse-int.md), generated by `pnpm research`; the full table there adds databases, formats, and the remaining languages.
 
 <!-- prettier-ignore-start -->
-| Case | safe-fns (planned)<br>`safeParseInteger` | Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString.check(Schema.isInt()))(value)` | es-toolkit<br>`compat.toInteger(value)` | Hermes<br>`Number.parseInt(value, 10)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | radash<br>`toInt(value)` | valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber(), v.integer()), value)` | zod<br>`z.coerce.number().int().parse(value)` | .NET<br>`Convert.ToInt64(value, InvariantCulture)` | .NET<br>`int.Parse(value, InvariantCulture)` | .NET<br>`long.Parse(value, InvariantCulture)` | Commons Lang<br>`NumberUtils.createInteger(value)` | Commons Lang<br>`NumberUtils.toInt(value)` | Go<br>`strconv.Atoi(value)` | Go<br>`strconv.ParseInt(value, 0, 64)` | Groovy<br>`value as Integer` | Groovy<br>`value.toInteger()` | Guava<br>`Ints.tryParse(value)` | Guava<br>`Longs.tryParse(value)` | Java<br>`Integer.parseInt(value)` | Java<br>`Long.parseLong(value)` | Kotlin<br>`value.toIntOrNull()` | Kotlin<br>`value.toLongOrNull()` | Python<br>`int(value)` | Rust<br>`value.parse::<i64>()` | Spring<br>`conversionService.convert(value, Integer.class)` | Spring<br>`NumberUtils.parseNumber(value, Integer.class)` |
+| Case | safe-fns (planned)<br>`safeParseInt` | Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString.check(Schema.isInt()))(value)` | es-toolkit<br>`compat.toInteger(value)` | Hermes<br>`Number.parseInt(value, 10)` | JS built-ins<br>`Number.parseInt(value, 10)` | lodash<br>`_.toInteger(value)` | lodash<br>`_.toSafeInteger(value)` | radash<br>`toInt(value)` | valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber(), v.integer()), value)` | zod<br>`z.coerce.number().int().parse(value)` | .NET<br>`Convert.ToInt64(value, InvariantCulture)` | .NET<br>`int.Parse(value, InvariantCulture)` | .NET<br>`long.Parse(value, InvariantCulture)` | Commons Lang<br>`NumberUtils.createInteger(value)` | Commons Lang<br>`NumberUtils.toInt(value)` | Go<br>`strconv.Atoi(value)` | Go<br>`strconv.ParseInt(value, 0, 64)` | Groovy<br>`value as Integer` | Groovy<br>`value.toInteger()` | Guava<br>`Ints.tryParse(value)` | Guava<br>`Longs.tryParse(value)` | Java<br>`Integer.parseInt(value)` | Java<br>`Long.parseLong(value)` | Kotlin<br>`value.toIntOrNull()` | Kotlin<br>`value.toLongOrNull()` | Python<br>`int(value)` | Rust<br>`value.parse::<i64>()` | Spring<br>`conversionService.convert(value, Integer.class)` | Spring<br>`NumberUtils.parseNumber(value, Integer.class)` |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `"42"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` |
 | `"-42"` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` | `-42` |

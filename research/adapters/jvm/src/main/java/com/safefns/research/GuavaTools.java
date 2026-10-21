@@ -1,6 +1,7 @@
 package com.safefns.research;
 
 import com.google.common.base.Strings;
+import com.google.common.net.UrlEscapers;
 import com.google.common.primitives.Doubles;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
@@ -21,7 +22,20 @@ final class GuavaTools {
           Strings::isNullOrEmpty
         )
       ),
-      "safeParseInteger",
+      "safeEncodeUriComponent",
+      List.of(
+        Probe.typed(
+          "UrlEscapers.urlPathSegmentEscaper().escape(value)",
+          String.class,
+          value -> UrlEscapers.urlPathSegmentEscaper().escape(value)
+        ),
+        Probe.typed(
+          "UrlEscapers.urlFormParameterEscaper().escape(value)",
+          String.class,
+          value -> UrlEscapers.urlFormParameterEscaper().escape(value)
+        )
+      ),
+      "safeParseInt",
       List.of(
         Probe.typed("Ints.tryParse(value)", String.class, Ints::tryParse),
         Probe.typed("Longs.tryParse(value)", String.class, Longs::tryParse)

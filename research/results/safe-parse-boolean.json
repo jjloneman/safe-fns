@@ -758,7 +758,7 @@
     {
       "call": "v.parse(v.pipe(v.unknown(), v.parseBoolean()), value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "valibot",
       "outcomes": [
@@ -1018,7 +1018,7 @@
     {
       "call": "yn(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "yn",
       "outcomes": [
@@ -1324,7 +1324,7 @@
     {
       "call": "z.stringbool().parse(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "zod",
       "outcomes": [
@@ -2078,7 +2078,7 @@
     {
       "call": "BooleanUtils.toBoolean(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "Commons Lang",
       "outcomes": [
@@ -2319,7 +2319,7 @@
     {
       "call": "BooleanUtils.toBooleanObject(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "Commons Lang",
       "outcomes": [
@@ -2800,7 +2800,7 @@
     {
       "call": "value as boolean",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -3054,7 +3054,7 @@
     {
       "call": "value.toBoolean()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
@@ -3308,7 +3308,7 @@
     {
       "call": "Boolean.parseBoolean(value)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -3549,7 +3549,7 @@
     {
       "call": "value.toBoolean()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [
@@ -3790,7 +3790,7 @@
     {
       "call": "value.toBooleanStrict()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [
@@ -4030,7 +4030,7 @@
     {
       "call": "value.toBooleanStrictOrNull()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "Kotlin",
       "outcomes": [
@@ -4990,7 +4990,7 @@
     {
       "call": "conversionService.convert(value, Boolean.class)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "Spring",
       "outcomes": [
@@ -5244,7 +5244,7 @@
     {
       "call": "parse(value, { cast: true })[0]?.[0]",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "CSV",
       "outcomes": [
@@ -5488,7 +5488,7 @@
     {
       "call": "div.setAttribute(\"hidden\", value); div.hidden",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "HTML (jsdom)",
       "outcomes": [
@@ -5728,7 +5728,7 @@
     {
       "call": "parse(`v = ${value}`).v",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "INI",
       "outcomes": [
@@ -5968,7 +5968,7 @@
     {
       "call": "JSON.parse(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "JSON",
       "outcomes": [
@@ -7711,7 +7711,7 @@
     {
       "call": "parse(`v = ${value}`).v",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "TOML",
       "outcomes": [
@@ -7951,7 +7951,7 @@
     {
       "call": "decode(<boolean>value</boolean>)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "XML Schema 1.0",
       "outcomes": [
@@ -8191,7 +8191,7 @@
     {
       "call": "parse(value, { version: \"1.1\" })",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "YAML 1.1",
       "outcomes": [
@@ -8433,7 +8433,7 @@
     {
       "call": "parse(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "YAML 1.2 core",
       "outcomes": [
@@ -8675,7 +8675,7 @@
     {
       "call": "coerce({ type: \"boolean\" }, value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "Ajv",
       "outcomes": [
@@ -9177,7 +9177,7 @@
     {
       "call": "bool()._parse(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "envalid",
       "outcomes": [
@@ -9657,7 +9657,7 @@
     {
       "call": "Joi.attempt(value, Joi.boolean())",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "joi",
       "outcomes": [
@@ -11921,7 +11921,7 @@
     {
       "call": "validator.toBoolean(value, true)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "validator.js",
       "outcomes": [
@@ -12401,7 +12401,7 @@
     {
       "call": "boolean().validateSync(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "yup",
       "outcomes": [

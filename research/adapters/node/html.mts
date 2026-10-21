@@ -70,7 +70,7 @@ export const HTML: Tool = {
         run: ([value]) => readBooleanAttribute(value as string),
       },
     ],
-    safeParseInteger: [
+    safeParseInt: [
       {
         accepts: isString,
         call: "parseInteger(value)",

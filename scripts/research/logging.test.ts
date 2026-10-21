@@ -1,6 +1,11 @@
+import { Duration } from "luxon";
 import { describe, expect, test } from "vitest";
 
-import { describeError, printPrefixed } from "./logging.ts";
+import {
+  describeError,
+  describeStillRunning,
+  printPrefixed,
+} from "./logging.ts";
 
 describe("describeError", () => {
   test.each([
@@ -20,6 +25,36 @@ describe("describeError", () => {
   ])("describes $description", ({ error, expected }) => {
     // Given/When/Then - one line per cause, outermost first
     expect(describeError(error)).toBe(expected);
+  });
+});
+
+describe("describeStillRunning", () => {
+  test.each([
+    {
+      description: "with nothing on stderr",
+      expected: "dotnet: still running after 1m 30s",
+      stderr: "",
+    },
+    {
+      description: "quoting the last non-blank stderr line",
+      expected:
+        "dotnet: still running after 1m 30s; last stderr: at Codec.Decode()",
+      stderr: "Unhandled exception. Boom\n   at Codec.Decode()\n\n",
+    },
+    {
+      description: "cutting a long stderr line short",
+      expected: `dotnet: still running after 1m 30s; last stderr: ${"x".repeat(200)}…`,
+      stderr: "x".repeat(250),
+    },
+  ])("describes a run $description", ({ expected, stderr }) => {
+    // Given - an adapter that has run for a minute and a half
+    const elapsed = Duration.fromObject({ seconds: 90 });
+
+    // When - describing it
+    const line = describeStillRunning({ elapsed, stderr, subject: "dotnet" });
+
+    // Then - the line names it, its time, and its last stderr line
+    expect(line).toBe(expected);
   });
 });
 

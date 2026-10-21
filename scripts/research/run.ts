@@ -57,7 +57,11 @@ import {
   toServiceInputs,
 } from "./inputs.ts";
 import { parseJson, readJsonFile } from "./json.ts";
-import { describeError, printPrefixed } from "./logging.ts";
+import {
+  describeError,
+  describeStillRunning,
+  printPrefixed,
+} from "./logging.ts";
 import {
   buildResults,
   CODEC_FUNCTION,
@@ -104,11 +108,26 @@ type CommandInput = {
   command: string;
 
   /**
+   * Called with each chunk the command writes to stderr, as it arrives.
+   *
+   * @example `(chunk) => { stderr += chunk; }`
+   */
+  onStderr?: ((chunk: string) => void) | undefined;
+
+  /**
    * Kills the command when aborted; the result still waits for it to exit.
    *
    * @example `TEARDOWN.signal`
    */
   signal?: AbortSignal;
+
+  /**
+   * How long the command may run before it's killed; defaults to
+   * `COMMAND_TIMEOUT_MS`.
+   *
+   * @example `ADAPTER_TIMEOUT_MS`
+   */
+  timeoutMs?: number | undefined;
 };
 
 /** What a finished child process printed, and how it exited. */
@@ -258,11 +277,25 @@ type ServiceRunInput = {
   args: readonly string[];
 
   /**
+   * Called with each chunk the service writes to stderr, as it arrives.
+   *
+   * @example `(chunk) => { stderr += chunk; }`
+   */
+  onStderr?: CommandInput["onStderr"];
+
+  /**
    * The service to run.
    *
    * @example `{ name: "ruff", profiles: ["format"], … }`
    */
   service: ComposeService;
+
+  /**
+   * How long the run may take before it's killed.
+   *
+   * @example `ADAPTER_TIMEOUT_MS`
+   */
+  timeoutMs?: CommandInput["timeoutMs"];
 };
 
 /** A task to run while the databases it queries are up. */
@@ -307,6 +340,15 @@ type WriteResultsInput = {
 };
 
 /**
+ * How long one adapter run may take before it's killed.
+ *
+ * - Images are built and pulled before any adapter starts, and the slowest
+ *   adapter finishes in seconds, so a run this long has crashed without
+ *   exiting (as .NET can while it writes a crash dump) or is stuck.
+ */
+const ADAPTER_TIMEOUT_MS = Duration.fromObject({ minutes: 5 }).toMillis();
+
+/**
  * The `docker compose run` commands `runService` has in flight, so an
  * interrupted teardown can wait until none can still create a container.
  */
@@ -334,6 +376,9 @@ const COMPOSE_FILE = path.resolve(
 
 /** The label holding a formatter's arguments when it rewrites files. */
 const FORMAT_ARGS_LABEL = "dev.safe-fns.research.format-args";
+
+/** How often a still-running adapter is reported. */
+const HEARTBEAT_MS = Duration.fromObject({ seconds: 30 }).toMillis();
 
 /** Starts every line the runner prints, per the `scripts/` conventions. */
 const LOG_PREFIX = "[research]";
@@ -364,6 +409,9 @@ const RUN_ID = randomUUID();
  * - Any other run's containers carry another id, so they're never touched.
  */
 const RUNNER_LABEL = "dev.safe-fns.research.runner";
+
+/** How much of an adapter's latest stderr the heartbeat keeps to quote. */
+const STDERR_TAIL_LENGTH = 4096;
 
 /**
  * Aborted when a signal starts database teardown: `runService` starts no new
@@ -796,10 +844,29 @@ async function runAdapter({
   service,
 }: AdapterRunInput): Promise<ServiceColumns> {
   const startedAt = performance.now();
+  let stderrTail = "";
+
+  // A crashed adapter can sit without exiting, so report each one still out.
+  const heartbeat = setInterval(() => {
+    log(
+      describeStillRunning({
+        elapsed: Duration.fromMillis(performance.now() - startedAt),
+        stderr: stderrTail,
+        subject: service.name,
+      })
+    );
+  }, HEARTBEAT_MS);
 
   const result = await runService({
     args: caseFiles.map(({ containerPath }) => containerPath),
+    // Only the end matters to the heartbeat, so the copy stays bounded.
+    onStderr: (chunk) => {
+      stderrTail = `${stderrTail}${chunk}`.slice(-STDERR_TAIL_LENGTH);
+    },
     service,
+    timeoutMs: ADAPTER_TIMEOUT_MS,
+  }).finally(() => {
+    clearInterval(heartbeat);
   });
 
   if (result.exitCode !== 0) {
@@ -827,13 +894,19 @@ async function runAdapter({
 function runCommand({
   args,
   command,
+  onStderr,
   signal,
+  timeoutMs = COMMAND_TIMEOUT_MS,
 }: CommandInput): Promise<CommandResult> {
   return new Promise((resolve, reject) => {
     const child: ChildProcess = spawn(command, args, {
       cwd: REPO_ROOT,
+      // SIGTERM can leave `docker compose run` waiting on a container that
+      // ignores it; SIGKILL ends the CLI, so `runService` can remove the
+      // container.
+      killSignal: "SIGKILL",
       stdio: ["ignore", "pipe", "pipe"],
-      timeout: COMMAND_TIMEOUT_MS,
+      timeout: timeoutMs,
     });
 
     /*
@@ -854,8 +927,12 @@ function runCommand({
       stdout += chunk.toString("utf8");
     });
 
-    child.stderr?.on("data", (chunk: Buffer) => {
-      stderr += chunk.toString("utf8");
+    // Decoding across chunks keeps a character split between two reads whole.
+    child.stderr?.setEncoding("utf8");
+
+    child.stderr?.on("data", (chunk: string) => {
+      stderr += chunk;
+      onStderr?.(chunk);
     });
 
     child.on("error", reject);
@@ -866,7 +943,7 @@ function runCommand({
       const killedNote =
         exitSignal === null
           ? ""
-          : `\nkilled by ${exitSignal} (timeout or interrupt)`;
+          : `\nkilled by ${exitSignal} (interrupted, or still running after ${Duration.fromMillis(timeoutMs).toFormat("m'm'")})`;
 
       resolve({ exitCode: code ?? 1, stderr: stderr + killedNote, stdout });
     });
@@ -950,7 +1027,9 @@ async function runSequentially<T>(
  */
 async function runService({
   args,
+  onStderr,
   service,
+  timeoutMs,
 }: ServiceRunInput): Promise<CommandResult> {
   if (TEARDOWN.signal.aborted) {
     return {
@@ -981,7 +1060,9 @@ async function runService({
       ...args,
     ],
     command: "docker",
+    onStderr,
     signal: TEARDOWN.signal,
+    timeoutMs,
   });
 
   ADAPTER_RUNS.add(run);

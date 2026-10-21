@@ -1,5 +1,10 @@
 import { hasProperty } from "effect/Predicate";
-import { decodeUnknownSync, isInt, NumberFromString } from "effect/Schema";
+import {
+  BigIntFromString,
+  decodeUnknownSync,
+  isInt,
+  NumberFromString,
+} from "effect/Schema";
 
 import type { Tool } from "./tool.mts";
 
@@ -14,7 +19,13 @@ export const EFFECT: Tool = {
         run: ([object, key]) => hasProperty(object, key as string),
       },
     ],
-    safeParseInteger: [
+    safeParseBigInt: [
+      {
+        call: "Schema.decodeUnknownSync(Schema.BigIntFromString)(value)",
+        run: ([value]) => decodeUnknownSync(BigIntFromString)(value),
+      },
+    ],
+    safeParseInt: [
       {
         call: "Schema.decodeUnknownSync(Schema.NumberFromString.check(Schema.isInt()))(value)",
         run: ([value]) =>

@@ -5,6 +5,7 @@ import {
   parseJson,
   pipe,
   string,
+  toBigint,
   toNumber,
   toString,
   unknown,
@@ -17,13 +18,19 @@ import { packageVersion } from "./tool.mts";
 /** valibot's transforming pipes. */
 export const VALIBOT: Tool = {
   functions: {
+    safeParseBigInt: [
+      {
+        call: "v.parse(v.pipe(v.unknown(), v.toBigint()), value)",
+        run: ([value]) => parse(pipe(unknown(), toBigint()), value),
+      },
+    ],
     safeParseBoolean: [
       {
         call: "v.parse(v.pipe(v.unknown(), v.parseBoolean()), value)",
         run: ([value]) => parse(pipe(unknown(), parseBoolean()), value),
       },
     ],
-    safeParseInteger: [
+    safeParseInt: [
       {
         call: "v.parse(v.pipe(v.unknown(), v.toNumber(), v.integer()), value)",
         run: ([value]) => parse(pipe(unknown(), toNumber(), integer()), value),

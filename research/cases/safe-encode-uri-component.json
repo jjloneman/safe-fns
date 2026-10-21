@@ -1,0 +1,109 @@
+{
+  "cases": [
+    {
+      "args": ["a b"],
+      "expected": "a%20b"
+    },
+    {
+      "args": ["\u20ac"],
+      "expected": "%E2%82%AC"
+    },
+    {
+      "args": ["a/b?c=d&e#f"],
+      "expected": "a%2Fb%3Fc%3Dd%26e%23f"
+    },
+    {
+      "args": ["a+b"],
+      "expected": "a%2Bb"
+    },
+    {
+      "args": ["100%"],
+      "expected": "100%25"
+    },
+    {
+      "args": ["-_.!~*'()"],
+      "expected": "-_.!~*'()"
+    },
+    {
+      "args": [""],
+      "expected": ""
+    },
+    {
+      "args": ["\ud83d\ude00"],
+      "expected": "%F0%9F%98%80"
+    },
+    {
+      "args": ["\u0000"],
+      "expected": "%00"
+    },
+    {
+      "args": [
+        {
+          "$js": "a lone surrogate"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a lone low surrogate before text"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a string ending in a lone high surrogate"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [42],
+      "expected": "42"
+    },
+    {
+      "args": [true],
+      "expected": "true"
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [["a b"]],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed numeric string"
+        }
+      ],
+      "expected": "%2042%20"
+    }
+  ],
+  "function": "safeEncodeUriComponent"
+}

@@ -255,7 +255,7 @@ def systemd_boolean(value: str) -> bool:
 
 POSIX_PROBES = {
     "isSafeEmpty": ['[ -z "$1" ]'],
-    "safeParseInteger": ["printf '%d' \"$1\"", "printf '%s' \"$(( $1 ))\""],
+    "safeParseInt": ["printf '%d' \"$1\"", "printf '%s' \"$(( $1 ))\""],
 }
 """The scripts every POSIX shell runs: a test, `printf`, and arithmetic."""
 
@@ -295,7 +295,7 @@ TOOLS: list[Tool] = [
     {
         "functions": {
             "safeParseBoolean": [git_config("bool")],
-            "safeParseInteger": [git_config("int")],
+            "safeParseInt": [git_config("int")],
         },
         "name": "git",
         "tier": 4,

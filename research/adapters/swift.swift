@@ -41,7 +41,7 @@ enum SwiftAdapter {
               Bool($0[0] as! String)
             }
           ],
-          "safeParseInteger": [
+          "safeParseInt": [
             Probe(accepts: isString, call: "Int(value)") {
               Int($0[0] as! String)
             }

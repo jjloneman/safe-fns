@@ -37,6 +37,11 @@ export function f32Parse(value: string): f32 {
   return f32.parse(value);
 }
 
+/** `new Date(i64(value)).toISOString()`, for epoch milliseconds. */
+export function f64DateToIsoString(value: f64): string {
+  return new Date(i64(value)).toISOString();
+}
+
 /** `value`, for a number: proves it crosses the bindings unchanged. */
 export function f64Identity(value: f64): f64 {
   return value;
@@ -70,6 +75,31 @@ export function i32Parse(value: string): i32 {
 /** `i64.parse(value, 10)`: a 64-bit parse, which reaches JS as a bigint. */
 export function i64Parse(value: string): i64 {
   return i64.parse(value, 10);
+}
+
+/** `Date.fromString(value).toISOString()`. */
+export function stringDateFromString(value: string): string {
+  return Date.fromString(value).toISOString();
+}
+
+/** `decodeURI(value)`. */
+export function stringDecodeUri(value: string): string {
+  return decodeURI(value);
+}
+
+/** `decodeURIComponent(value)`. */
+export function stringDecodeUriComponent(value: string): string {
+  return decodeURIComponent(value);
+}
+
+/** `encodeURI(value)`. */
+export function stringEncodeUri(value: string): string {
+  return encodeURI(value);
+}
+
+/** `encodeURIComponent(value)`. */
+export function stringEncodeUriComponent(value: string): string {
+  return encodeURIComponent(value);
 }
 
 /** `value`, for a string: proves it crosses the bindings unchanged. */

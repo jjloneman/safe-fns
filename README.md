@@ -162,13 +162,14 @@ import { isSafeEmpty } from "safe-fns/is-safe-empty";
 
 _No functions have shipped yet._ The planned families are:
 
-| Family    | Functions                                                                                                                       |
-| :-------- | :------------------------------------------------------------------------------------------------------------------------------ |
-| Guards    | `isSafeEmpty`, `isSafePopulated`, `isPlainObject`, `safeObjectHasOwn`                                                           |
-| Parsers   | `safeParseBoolean`, `safeParseNumber`, `safeParseInteger`, `safeParseString`, `safeParseJson`, `safeParseUrl`                   |
-| Serialize | `safeJsonStringify`, `deepSortObject`, `safeStructuredClone`                                                                    |
-| Errors    | `getErrorMessage`, `toError`                                                                                                    |
-| Storage   | `safeStorageGetItem`, `safeStorageSetItem`, `safeStorageRemoveItem`, plus `safeLocalStorage*` and `safeSessionStorage*` aliases |
+| Family    | Functions                                                                                                                                                        |
+| :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Guards    | `isSafeEmpty`, `isSafePopulated`, `isPlainObject`, `safeObjectHasOwn`                                                                                            |
+| Parsers   | `safeParseBoolean`, `safeParseNumber`, `safeParseInt`, `safeParseBigInt`, `safeParseString`, `safeParseJson`, `safeParseUrl`, `safeParseRegExp`, `safeParseDate` |
+| Serialize | `safeJsonStringify`, `deepSortObject`, `safeStructuredClone`, `safeDateToIsoString`                                                                              |
+| Encoding  | `decodeBase64`, `decodeBase64ToBytes`, `encodeBase64`, `safeDecodeUriComponent`, `safeEncodeUriComponent`                                                        |
+| Errors    | `getErrorMessage`, `toError`                                                                                                                                     |
+| Storage   | `safeStorageGetItem`, `safeStorageSetItem`, `safeStorageRemoveItem`, plus `safeLocalStorage*` and `safeSessionStorage*` aliases                                  |
 
 Parsers share one shape:
 

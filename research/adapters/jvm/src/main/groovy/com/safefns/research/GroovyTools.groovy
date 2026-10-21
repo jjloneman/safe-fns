@@ -23,11 +23,19 @@ final class GroovyTools {
                     key in obj
                 },
             ],
+            safeParseBigInt: [
+                Probe.any('value as BigInteger') { Object value ->
+                    value as BigInteger
+                },
+                Probe.any('value.toBigInteger()') { Object value ->
+                    value.toBigInteger()
+                },
+            ],
             safeParseBoolean: [
                 Probe.any('value as boolean') { Object value -> value as boolean },
                 Probe.any('value.toBoolean()') { Object value -> value.toBoolean() },
             ],
-            safeParseInteger: [
+            safeParseInt: [
                 Probe.any('value as Integer') { Object value -> value as Integer },
                 Probe.any('value.toInteger()') { Object value -> value.toInteger() },
             ],

@@ -47,7 +47,7 @@ final class XmlSchemaTools {
     Map.of(
       "safeParseBoolean",
       List.of(typeProbe("boolean")),
-      "safeParseInteger",
+      "safeParseInt",
       List.of(typeProbe("integer")),
       "safeParseNumber",
       List.of(typeProbe("double")),

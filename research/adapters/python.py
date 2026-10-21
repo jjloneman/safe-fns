@@ -11,9 +11,12 @@ import configparser
 import copy
 import json
 import platform
+import re
 import sys
 import warnings
-from urllib.parse import urljoin, urlsplit
+from base64 import b64decode, b64encode, urlsafe_b64decode
+from datetime import UTC, datetime
+from urllib.parse import quote, unquote, urljoin, urlsplit
 
 from research_codec import Probe, Tool, run_adapter
 
@@ -63,6 +66,25 @@ def current_tools() -> list[Tool]:
         {
             "functions": {
                 "codec": [CODEC_PROBE],
+                "decodeBase64": [
+                    {
+                        "accepts": is_string,
+                        "call": "b64decode(value, validate=True).decode()",
+                        "run": lambda value: b64decode(
+                            value, validate=True
+                        ).decode(),
+                    },
+                    {
+                        "accepts": is_string,
+                        "call": "b64decode(value).decode()",
+                        "run": lambda value: b64decode(value).decode(),
+                    },
+                    {
+                        "accepts": is_string,
+                        "call": "urlsafe_b64decode(value).decode()",
+                        "run": lambda value: urlsafe_b64decode(value).decode(),
+                    },
+                ],
                 "deepSortObject": [
                     {
                         "accepts": is_string,
@@ -70,6 +92,13 @@ def current_tools() -> list[Tool]:
                         'ensure_ascii=False, separators=(",", ":"), '
                         "sort_keys=True)",
                         "run": canonical_json,
+                    }
+                ],
+                "encodeBase64": [
+                    {
+                        "accepts": is_string,
+                        "call": "b64encode(value.encode()).decode()",
+                        "run": lambda value: b64encode(value.encode()).decode(),
                     }
                 ],
                 "isPlainObject": [
@@ -81,6 +110,35 @@ def current_tools() -> list[Tool]:
                 "isSafeEmpty": [
                     {"call": "not value", "run": lambda value: not value}
                 ],
+                "safeDateToIsoString": [
+                    {
+                        "accepts": is_number,
+                        "call": "datetime.fromtimestamp(value / 1000, tz=UTC)"
+                        '.isoformat(timespec="milliseconds")',
+                        "run": lambda value: datetime.fromtimestamp(
+                            value / 1000, tz=UTC
+                        ).isoformat(timespec="milliseconds"),
+                    }
+                ],
+                "safeDecodeUriComponent": [
+                    {
+                        "accepts": is_string,
+                        "call": "unquote(value)",
+                        "run": unquote,
+                    },
+                    {
+                        "accepts": is_string,
+                        "call": 'unquote(value, errors="strict")',
+                        "run": lambda value: unquote(value, errors="strict"),
+                    },
+                ],
+                "safeEncodeUriComponent": [
+                    {
+                        "accepts": is_string,
+                        "call": 'quote(value, safe="")',
+                        "run": lambda value: quote(value, safe=""),
+                    }
+                ],
                 "safeJsonStringify": [
                     {
                         "call": 'json.dumps(value, separators=(",", ":"))',
@@ -90,6 +148,7 @@ def current_tools() -> list[Tool]:
                 "safeObjectHasOwn": [
                     {"call": "key in obj", "run": lambda obj, key: key in obj}
                 ],
+                "safeParseBigInt": [{"call": "int(value)", "run": int}],
                 "safeParseBoolean": [
                     {
                         "accepts": is_string,
@@ -97,7 +156,19 @@ def current_tools() -> list[Tool]:
                         "run": config_boolean,
                     }
                 ],
-                "safeParseInteger": [{"call": "int(value)", "run": int}],
+                "safeParseDate": [
+                    {
+                        "accepts": is_string,
+                        "call": "datetime.fromisoformat(value).astimezone(UTC)"
+                        '.isoformat(timespec="milliseconds")',
+                        "run": lambda value: (
+                            datetime.fromisoformat(value)
+                            .astimezone(UTC)
+                            .isoformat(timespec="milliseconds")
+                        ),
+                    }
+                ],
+                "safeParseInt": [{"call": "int(value)", "run": int}],
                 "safeParseJson": [
                     {
                         "accepts": is_string,
@@ -106,6 +177,13 @@ def current_tools() -> list[Tool]:
                     }
                 ],
                 "safeParseNumber": [{"call": "float(value)", "run": float}],
+                "safeParseRegExp": [
+                    {
+                        "accepts": is_lone_string,
+                        "call": "re.compile(value).pattern",
+                        "run": lambda value: re.compile(value).pattern,
+                    }
+                ],
                 "safeParseString": [
                     {"call": "str(value)", "run": str},
                     {
@@ -139,6 +217,11 @@ def current_tools() -> list[Tool]:
 def is_lone_string(*args: object) -> bool:
     """Accept exactly one argument, a string."""
     return len(args) == 1 and isinstance(args[0], str)
+
+
+def is_number(value: object, *_rest: object) -> bool:
+    """Accept a number first argument: an int or a float, never a bool."""
+    return isinstance(value, int | float) and not isinstance(value, bool)
 
 
 def is_string(value: object, *_rest: object) -> bool:

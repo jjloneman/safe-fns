@@ -22,7 +22,7 @@ export const YAML_1_1: Tool = {
         run: ([value]) => parseYaml11(value as string),
       },
     ],
-    safeParseInteger: [
+    safeParseInt: [
       {
         accepts: isString,
         call: 'parse(value, { version: "1.1" })',
@@ -52,7 +52,7 @@ export const YAML_1_2_CORE: Tool = {
         run: ([value]) => parseYaml12(value as string),
       },
     ],
-    safeParseInteger: [
+    safeParseInt: [
       {
         accepts: isString,
         call: "parse(value)",

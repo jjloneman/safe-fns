@@ -64,7 +64,7 @@ TOOLS: list[Tool] = [
     {
         "functions": {
             "safeParseBoolean": [type_probe("boolean")],
-            "safeParseInteger": [type_probe("integer")],
+            "safeParseInt": [type_probe("integer")],
             "safeParseNumber": [type_probe("double")],
             "safeParseString": [type_probe("string"), type_probe("token")],
         },

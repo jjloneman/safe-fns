@@ -61,20 +61,39 @@ type HermesProbe = {
  */
 const PROBES: Readonly<Record<string, readonly HermesProbe[]>> = {
   codec: [{ call: "value" }],
+  decodeBase64: [{ call: "atob(value)", isStringOnly: true }],
   deepSortObject: [
     { call: "JSON.stringify(JSON.parse(value))", isStringOnly: true },
+  ],
+  encodeBase64: [{ call: "btoa(value)" }],
+  safeDateToIsoString: [{ call: "new Date(value).toISOString()" }],
+  safeDecodeUriComponent: [
+    { call: "decodeURIComponent(value)" },
+    { call: "decodeURI(value)" },
+  ],
+  safeEncodeUriComponent: [
+    { call: "encodeURIComponent(value)" },
+    { call: "encodeURI(value)" },
   ],
   safeJsonStringify: [{ call: "JSON.stringify(value)" }],
   safeObjectHasOwn: [
     { call: "Object.hasOwn(object, key)", parameters: ["object", "key"] },
     { call: "key in object", parameters: ["object", "key"] },
   ],
+  safeParseBigInt: [{ call: "BigInt(value)" }],
   safeParseBoolean: [{ call: "JSON.parse(value)", isStringOnly: true }],
-  safeParseInteger: [{ call: "Number.parseInt(value, 10)" }],
+  safeParseDate: [{ call: "new Date(value).toISOString()" }],
+  safeParseInt: [{ call: "Number.parseInt(value, 10)" }],
   safeParseJson: [{ call: "JSON.parse(value)" }],
   safeParseNumber: [
     { call: "Number(value)" },
     { call: "Number.parseFloat(value)" },
+  ],
+  safeParseRegExp: [
+    {
+      call: "String(new RegExp(value, flags))",
+      parameters: ["value", "flags"],
+    },
   ],
   safeParseString: [
     { call: "String(value)" },

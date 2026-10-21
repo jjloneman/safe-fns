@@ -544,7 +544,7 @@
     {
       "call": "new URL(value, base).href",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -728,7 +728,7 @@
     {
       "call": "URL.parse(value, base)?.href",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -1576,7 +1576,7 @@
     {
       "call": "new URI(base).resolve(value).toString()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -1727,7 +1727,7 @@
     {
       "call": "new URI(value).toString()",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5b466a38e29169cabcab4a680a38419da29fe27cc1d8d8bfb27ec2de85a529cd",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -2533,7 +2533,7 @@
     {
       "call": "new URL(value, base).href",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "HTML (jsdom)",
       "outcomes": [

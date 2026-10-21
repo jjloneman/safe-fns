@@ -1,0 +1,247 @@
+{
+  "cases": [
+    {
+      "args": ["2024-01-01"],
+      "expected": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "args": ["2024-01"],
+      "expected": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "args": ["2024"],
+      "expected": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "args": ["2024-01-01T12:34Z"],
+      "expected": "2024-01-01T12:34:00.000Z"
+    },
+    {
+      "args": ["2024-01-01T12:34:56Z"],
+      "expected": "2024-01-01T12:34:56.000Z"
+    },
+    {
+      "args": ["2024-01-01T12:34:56.789Z"],
+      "expected": "2024-01-01T12:34:56.789Z"
+    },
+    {
+      "args": ["2024-01-01T12:34:56.789123Z"],
+      "expected": "2024-01-01T12:34:56.789Z"
+    },
+    {
+      "args": ["2024-01-01T12:34:56+02:00"],
+      "expected": "2024-01-01T10:34:56.000Z"
+    },
+    {
+      "args": ["2024-01-01T12:34:56-05:30"],
+      "expected": "2024-01-01T18:04:56.000Z"
+    },
+    {
+      "args": ["+010000-01-01T00:00:00Z"],
+      "expected": "+010000-01-01T00:00:00.000Z"
+    },
+    {
+      "args": ["-000001-01-01T00:00:00Z"],
+      "expected": "-000001-01-01T00:00:00.000Z"
+    },
+    {
+      "args": ["2024-02-29"],
+      "expected": "2024-02-29T00:00:00.000Z"
+    },
+    {
+      "args": ["2024-01-01T24:00:00Z"],
+      "expected": "2024-01-02T00:00:00.000Z"
+    },
+    {
+      "args": [" 2024-01-01 "],
+      "expected": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "args": ["\u200b2024-01-01"],
+      "expected": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "args": ["2024-01-01T12:34:56"],
+      "expected": "2024-01-01T12:34:56.000Z"
+    },
+    {
+      "args": ["2024-01-01 12:34:56"],
+      "expected": "2024-01-01T12:34:56.000Z"
+    },
+    {
+      "args": ["2024-01-01 12:34:56Z"],
+      "expected": "2024-01-01T12:34:56.000Z"
+    },
+    {
+      "args": ["2024-01-01t12:34:56z"],
+      "expected": "2024-01-01T12:34:56.000Z"
+    },
+    {
+      "args": ["2024-01-01T12:34:56+0200"],
+      "expected": "2024-01-01T10:34:56.000Z"
+    },
+    {
+      "args": ["2024-01-01T12:34:56+02"],
+      "expected": "2024-01-01T10:34:56.000Z"
+    },
+    {
+      "args": ["2024-01-01 12:34:56+00"],
+      "expected": "2024-01-01T12:34:56.000Z"
+    },
+    {
+      "args": ["Mon, 01 Jan 2024 00:00:00 GMT"],
+      "expected": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "args": [
+        "Mon Jan 01 2024 00:00:00 GMT+0000 (Coordinated Universal Time)"
+      ],
+      "expected": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "args": [
+        "Mon Jan 01 2024 12:00:00 GMT+0200 (Eastern European Standard Time)"
+      ],
+      "expected": "2024-01-01T10:00:00.000Z"
+    },
+    {
+      "args": ["Tue, 01 Jan 2024 00:00:00 GMT"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["2023-02-29"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["2024-13-01"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["2024-01-32"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["2024-01-01T24:00:01Z"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["2024-01-01T23:59:60Z"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["-000000-01-01T00:00:00Z"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["20240101"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["Jan 1 2024"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["2024/01/01"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["1704067200000"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [""],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["   "],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a Date"
+        }
+      ],
+      "expected": "1970-01-01T00:00:00.000Z"
+    },
+    {
+      "args": [
+        {
+          "$js": "an invalid Date"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [0],
+      "expected": "1970-01-01T00:00:00.000Z"
+    },
+    {
+      "args": [8640000000000001],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [true],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "safeParseDate"
+}
