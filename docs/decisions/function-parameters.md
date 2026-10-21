@@ -3,8 +3,8 @@ type: Decision
 title: How a function takes its parameters
 description: Up to two positional parameters for the values a function works on, configuration in a trailing options object, and nothing variadic.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:53:58Z }
-verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-21T01:00:50Z }
+verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
 ---
 
 # How a function takes its parameters
@@ -34,7 +34,7 @@ A public export's parameters split into the values it works on, which are positi
 ## Why
 
 - Positional values read naturally for the one or two things a function is about: `isDeepEqual(a, b)`, not `isDeepEqual({ left, right })`.
-- A bare positional flag or number hides its meaning: `deepSortObject(value, true)` doesn't say what `true` does, and `safeParseInteger(value, 10)` reads like `parseInt`'s radix.
+- A bare positional flag or number hides its meaning: `deepSortObject(value, true)` doesn't say what `true` does, and `safeParseInt(value, 10)` reads like `parseInt`'s radix.
 - A wrapper follows the same split as any other function: `JSON.stringify`'s `replacer` is almost always `null` at call sites that only want `space`, so keeping it positional would carry that placeholder into every call (owner's call, 2026-10-15).
 
 ## Consequences

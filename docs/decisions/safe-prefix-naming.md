@@ -3,8 +3,8 @@ type: Decision
 title: When a name starts with `safe`
 description: "`safeParse` + what it reads for every parser, `safe` + the native API's path for any other wrapper of one native API, `isSafe*` against a same-named unsafe helper, and plain names otherwise."
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T15:53:58Z }
-verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-21T01:00:50Z }
+verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
 ---
 
 # When a name starts with `safe`
@@ -13,10 +13,11 @@ verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 
 ## Decision
 
-- **Every parser is `safeParse` + what it reads:** `safeParseJson`, `safeParseNumber`, `safeParseInteger`, `safeParseBoolean`, `safeParseString`.
+- **Every parser is `safeParse` + what it reads:** `safeParseJson`, `safeParseNumber`, `safeParseInt`, `safeParseBoolean`, `safeParseString`.
   - A parser takes any value and returns a typed result or the caller's fallback, so they share one shape (see [What a parser returns when it can't parse](parser-fallbacks.md)).
   - Typing `safeParse` lists every parser, and the verb comes first, as it reads: "parse as JSON".
   - Native parse methods aren't mirrored: `safeParseNumber` does more than `Number.parseFloat` (finite checks, `min` / `max`), and `Boolean` has no parse method at all.
+  - An integer parser takes JavaScript's own short spelling, as in `parseInt` and `BigInt`: `safeParseInt` and `safeParseBigInt`. It borrows the spelling, not `parseInt`'s behavior, so `safeParseInt("12px")` returns the fallback.
 - **Any other wrapper of one specific native API is `safe` + that API's path**, in camelCase:
 
   | Native API                  | Export                |
