@@ -1,0 +1,2 @@
+# The image installs its own compiler; the host's would only slow the build.
+node_modules/

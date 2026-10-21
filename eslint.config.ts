@@ -72,6 +72,20 @@ const CONFIG: Linter.Config[] = defineConfig(
     : [globalIgnores(["research/**/*.mts"])]),
 
   /*
+   * The AssemblyScript probes are typed by the compiler's own standard
+   * library, which only `pnpm --dir research/adapters/assemblyscript install`
+   * provides; without it they're skipped, as the adapters above are.
+   */
+  ...(existsSync(
+    path.resolve(
+      import.meta.dirname,
+      "research/adapters/assemblyscript/node_modules"
+    )
+  )
+    ? []
+    : [globalIgnores(["research/adapters/assemblyscript/**/*.ts"])]),
+
+  /*
    * TypeScript, with the full typed presets.
    *
    * - Every linted file must belong to a project, and the project service

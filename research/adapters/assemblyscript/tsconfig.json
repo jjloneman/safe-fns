@@ -1,0 +1,24 @@
+{
+  /*
+   * The AssemblyScript probes are their own installed package, typed by the
+   * compiler's own standard library rather than by JavaScript's.
+   *
+   * - Named exactly `tsconfig.json`, so an editor and ESLint's project service
+   *   find it by walking up from `probes.ts`, ahead of `research/`'s.
+   *
+   * - AssemblyScript's config comes second, so its `noLib` and `types` replace
+   *   the root's DOM and Node typings.
+   */
+  "compilerOptions": {
+    // AssemblyScript's `noLib` rejects any `lib`, so the root's is unset.
+    "lib": null,
+
+    // AssemblyScript's config says CommonJS; the probes are ES modules.
+    "module": "ESNext",
+
+    // AssemblyScript turns this off; `verbatimModuleSyntax` requires it.
+    "preserveConstEnums": true
+  },
+  "extends": ["../../../tsconfig.json", "assemblyscript/std/assembly.json"],
+  "include": ["primitive-methods.d.ts", "probes.ts"]
+}

@@ -117,6 +117,24 @@ x-swift-build: &swift-build
   dockerfile: ../docker/swift/Dockerfile
 
 services:
+  # AssemblyScript's standard library: the probes are compiled to Wasm in the
+  # image, and the mounted Node driver runs them through their bindings.
+  assemblyscript:
+    build:
+      context: adapters/assemblyscript
+      dockerfile: ../../docker/assemblyscript/Dockerfile
+    entrypoint: ["node", "/work/research/adapters/assemblyscript.mts"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.inputs: adapters/assemblyscript/package.json adapters/assemblyscript/pnpm-lock.yaml adapters/assemblyscript/pnpm-workspace.yaml
+      dev.safe-fns.research.role: adapter
+    network_mode: none
+    profiles: ["assemblyscript"]
+    volumes:
+      - ./adapters:/work/research/adapters:ro
+      - ./cases:/work/research/cases:ro
+      - ../scripts/research:/work/scripts/research:ro
+
   # glibc through `ctypes`, and libstdc++ through probes compiled into the
   # image.
   c:

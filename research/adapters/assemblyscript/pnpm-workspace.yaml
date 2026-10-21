@@ -1,0 +1,13 @@
+# Makes `research/adapters/assemblyscript/` its own pnpm root, apart from the
+# repo's and `research/`'s, so the compiler enters only the AssemblyScript
+# image.
+#
+# - `minimumReleaseAge` and `saveExact` mirror the root `pnpm-workspace.yaml`;
+#   keep them in sync.
+
+# Supply-chain floor: refuse any version younger than 7 days (in minutes).
+minimumReleaseAge: 10080
+
+# Write exact versions on `pnpm add`, so the lockfile is the only thing that
+# moves a dependency.
+saveExact: true

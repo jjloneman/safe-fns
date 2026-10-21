@@ -5745,6 +5745,268 @@
       "version": "8.20.0"
     },
     {
+      "call": "value.toString()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:eda3d5b7ab25add6c1c4ac771de8ab30570164991c102a48c5999e55522b2043",
+      "locale": "-",
+      "name": "AssemblyScript",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "  hi  "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "   "
+        },
+        {
+          "kind": "value",
+          "value": "\t\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "﻿"
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "kind": "value",
+          "value": "42.0"
+        },
+        {
+          "kind": "value",
+          "value": "0.0"
+        },
+        {
+          "kind": "value",
+          "value": "1e+21"
+        },
+        {
+          "kind": "value",
+          "value": "1e-7"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "100.0"
+        },
+        {
+          "kind": "value",
+          "value": "NaN"
+        },
+        {
+          "kind": "value",
+          "value": "Infinity"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "false"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "assemblyscript",
+      "tier": 4,
+      "version": "0.28.20"
+    },
+    {
+      "call": "value.toString().trim()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:eda3d5b7ab25add6c1c4ac771de8ab30570164991c102a48c5999e55522b2043",
+      "locale": "-",
+      "name": "AssemblyScript",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "​"
+        },
+        {
+          "kind": "value",
+          "value": "⠀"
+        },
+        {
+          "kind": "value",
+          "value": "42.0"
+        },
+        {
+          "kind": "value",
+          "value": "0.0"
+        },
+        {
+          "kind": "value",
+          "value": "1e+21"
+        },
+        {
+          "kind": "value",
+          "value": "1e-7"
+        },
+        {
+          "kind": "value",
+          "value": "0.1"
+        },
+        {
+          "kind": "value",
+          "value": "100.0"
+        },
+        {
+          "kind": "value",
+          "value": "NaN"
+        },
+        {
+          "kind": "value",
+          "value": "Infinity"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "false"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "assemblyscript",
+      "tier": 4,
+      "version": "0.28.20"
+    },
+    {
       "call": "string trim -- $argv[1]",
       "image": "debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f",
       "inputs": "sha256:e03a7e98b5ea27845fa265c13700e3ea8a933cfb9f4d98ef38f01687b8fd9bc1",

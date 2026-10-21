@@ -156,11 +156,12 @@ updates:
   # downloads can't be tracked, so that one is bumped by hand.
   #
   # - An image that several adapters share moves in this one PR, so their
-  #   results are regenerated together: Node (`firebase`, `hermes`, `node`,
-  #   and `sources`) and every 3.x Python (`db`, `python`, `sqlite`, and
-  #   `xml-schema`).
+  #   results are regenerated together: Node (`assemblyscript`, `firebase`,
+  #   `hermes`, `node`, and `sources`) and every 3.x Python (`db`, `python`,
+  #   `sqlite`, and `xml-schema`).
   - package-ecosystem: "docker"
     directories:
+      - "/research/docker/assemblyscript"
       - "/research/docker/c"
       - "/research/docker/db"
       - "/research/docker/debian"
@@ -442,6 +443,31 @@ updates:
 
     groups:
       research-firebase:
+        patterns:
+          - "*"
+    labels:
+      - "📦 dependencies"
+
+  # The AssemblyScript compiler (`research/adapters/assemblyscript/`), its own
+  # pnpm root.
+  - package-ecosystem: "npm"
+    directory: "/research/adapters/assemblyscript"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    assignees:
+      - jjloneman
+    commit-message:
+      prefix: "chore(deps-dev): ⬆️"
+
+    # Past its `pnpm-workspace.yaml`'s `minimumReleaseAge` floor.
+    cooldown:
+      default-days: 7
+
+    groups:
+      research-assemblyscript:
         patterns:
           - "*"
     labels:

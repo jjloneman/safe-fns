@@ -12,6 +12,10 @@ const REPO_ROOT = path.resolve(import.meta.dirname, "../..");
 const RESEARCH_ROOTS = [
   { description: "research/", directory: "research" },
   {
+    description: "research/adapters/assemblyscript/",
+    directory: "research/adapters/assemblyscript",
+  },
+  {
     description: "research/docker/firebase/",
     directory: "research/docker/firebase",
   },
