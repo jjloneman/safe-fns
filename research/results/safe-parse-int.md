@@ -134,7 +134,7 @@
 | Rails (ActiveModel)<br>`ActiveModel::Type::Integer.new.cast(value)` | 4 | `8.1.4` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
 | Ruby<br>`Integer(value)` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
 | Ruby<br>`value.to_i` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
-| Swift<br>`Int(value)` | 4 | `6.4` | `C.UTF-8` | `swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66` |
+| Swift<br>`Int(value)` | 4 | `6.4.1` | `C.UTF-8` | `swift:6.4.1-bookworm@sha256:966e0dce7a3b76b0533df99dd0d54b38ab989fa6592450f70a42f1a1e569c053` |
 | validator.js<br>`validator.toInt(value, 10)` | 4 | `13.15.35` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | xmlschema (Python)<br>`decode(<integer>value</integer>)` | 4 | `xmlschema 4.3.2` | `C.UTF-8` | `python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83` |
 | zsh<br>`printf '%d' "$1"` | 4 | `5.9-8+b24` | `C.UTF-8` | `debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f` |
