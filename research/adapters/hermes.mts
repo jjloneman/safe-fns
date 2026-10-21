@@ -6,13 +6,13 @@ import type {
   CaseFile,
 } from "../../scripts/research/results.ts";
 
-import { decodeValue, ENCODER_SOURCE } from "../../scripts/research/codec.ts";
+import { ENCODER_SOURCE } from "../../scripts/research/codec.ts";
 import { parseJson, readJsonFile } from "../../scripts/research/json.ts";
 import {
   parseAdapterOutput,
   parseCaseFile,
 } from "../../scripts/research/results.ts";
-import { errorName } from "./node/tool.mts";
+import { decodeWithoutFactories, errorName } from "./node/tool.mts";
 
 /*
  * The Hermes adapter: runs each case file through Hermes, React Native's
@@ -86,12 +86,6 @@ const PROBES: Readonly<Record<string, readonly HermesProbe[]>> = {
   safeStructuredClone: [{ call: "structuredClone(value)" }],
 };
 
-/**
- * What a `$js` case decodes to: Hermes can't rebuild a value that only the
- * Node adapter's factories make, so its case is `n/a`.
- */
-const UNBUILDABLE = Symbol("unbuildable");
-
 /** The Hermes release that actually ran, from its own banner. */
 const VERSION =
   /Hermes release version: (?<version>\S+)/u.exec(
@@ -108,11 +102,7 @@ const VERSION =
  * @returns the source, or `undefined` when an argument can't be rebuilt.
  */
 function argumentsSource(args: CaseEntry["args"]): string | undefined {
-  return listSource(
-    args.map((encoded) =>
-      decodeValue({ encoded, resolveJs: () => UNBUILDABLE })
-    )
-  );
+  return listSource(decodeWithoutFactories(args));
 }
 
 /**

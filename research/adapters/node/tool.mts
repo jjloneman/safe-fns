@@ -1,7 +1,8 @@
 import { fileURLToPath } from "node:url";
 
-import type { Tier } from "../../../scripts/research/results.ts";
+import type { CaseEntry, Tier } from "../../../scripts/research/results.ts";
 
+import { decodeValue } from "../../../scripts/research/codec.ts";
 import { readJsonFile } from "../../../scripts/research/json.ts";
 
 /** One expression a tool offers for a function. */
@@ -66,6 +67,13 @@ const CYCLE = Symbol("cycle");
 const REPEAT = Symbol("repeat");
 
 /** What `summarizeError` reports for a `message` whose getter throws. */
+/**
+ * What a `$js` case decodes to in an engine driven from Node (Hermes,
+ * AssemblyScript): only the Node adapter's factories can build the value, so
+ * that engine reports the case `n/a`.
+ */
+export const UNBUILDABLE: unique symbol = Symbol("unbuildable");
+
 const UNREADABLE_MESSAGE = Symbol("unreadable message");
 
 /** What an error helper returned for one input, as its cell shows it. */
@@ -135,6 +143,18 @@ type ReferenceWalk = {
 export function callJsonParse(text: string): unknown {
   // eslint-disable-next-line no-restricted-properties -- the function under test
   return JSON.parse(text);
+}
+
+/**
+ * Decode a case's arguments with the shared codec, for an engine that can't
+ * run the Node adapter's factories.
+ *
+ * @returns the decoded arguments, with each `$js` value as `UNBUILDABLE`.
+ */
+export function decodeWithoutFactories(args: CaseEntry["args"]): unknown[] {
+  return args.map((encoded) =>
+    decodeValue({ encoded, resolveJs: () => UNBUILDABLE })
+  );
 }
 
 /**
