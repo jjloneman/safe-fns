@@ -71,7 +71,7 @@
 | Tool | Tier | Version | Locale | Image or source |
 | :--- | :--- | :--- | :--- | :--- |
 | safe-fns (planned)<br>`safeParseInt` | 0 | `-` | `-` | `-` |
-| Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString.check(Schema.isInt()))(value)` | 1 | `4.0.3` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| Effect<br>`Schema.decodeUnknownSync(Schema.NumberFromString.check(Schema.isInt()))(value)` | 1 | `4.0.4` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | es-toolkit<br>`compat.toInteger(value)` | 1 | `1.52.0` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | Hermes<br>`Number.parseInt(value, 10)` | 1 | `0.12.0` | `-` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | JS built-ins<br>`Number.parseInt(value, 10)` | 1 | `v26.11.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
@@ -79,7 +79,7 @@
 | lodash<br>`_.toSafeInteger(value)` | 1 | `4.18.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | radash<br>`toInt(value)` | 1 | `12.1.1` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | valibot<br>`v.parse(v.pipe(v.unknown(), v.toNumber(), v.integer()), value)` | 1 | `1.5.0` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
-| zod<br>`z.coerce.number().int().parse(value)` | 1 | `4.6.6` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
+| zod<br>`z.coerce.number().int().parse(value)` | 1 | `4.6.7` | `en-US` | `node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567` |
 | .NET<br>`Convert.ToInt64(value, InvariantCulture)` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | .NET<br>`int.Parse(value, InvariantCulture)` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |
 | .NET<br>`long.Parse(value, InvariantCulture)` | 2 | `10.0.13` | `invariant` | `mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa` |

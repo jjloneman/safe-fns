@@ -180,7 +180,7 @@
     {
       "call": "Predicate.hasProperty(object, key)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "Effect",
       "outcomes": [
@@ -255,7 +255,7 @@
       ],
       "service": "node",
       "tier": 1,
-      "version": "4.0.3"
+      "version": "4.0.4"
     },
     {
       "call": "key in object",
@@ -412,7 +412,7 @@
     {
       "call": "key in object",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -492,7 +492,7 @@
     {
       "call": "Object.hasOwn(object, key)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -572,7 +572,7 @@
     {
       "call": "_.has(object, key)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -652,7 +652,7 @@
     {
       "call": "R.has(key, object)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "Ramda",
       "outcomes": [
@@ -732,7 +732,7 @@
     {
       "call": "_.has(object, key)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
       "locale": "en-US",
       "name": "Underscore",
       "outcomes": [

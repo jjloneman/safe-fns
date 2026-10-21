@@ -31,7 +31,7 @@
 | `true` | `undefined` | `"1970-01-01T00:00:00Z"` | `"1970-01-01T00:00:00.001Z"` | `"1970-01-01T00:00:00.001Z"` | `"1970-01-01T00:00:00.001Z"` | — | — | — | `null` | — | — | — | — |
 | `null` | `undefined` | `"1970-01-01T00:00:00Z"` | 💥 `RangeError` | `"1970-01-01T00:00:00.000Z"` | `"1970-01-01T00:00:00.000Z"` | — | — | — | `null` | — | — | — | — |
 | `undefined` | `undefined` | 💥 `RangeError` | — | 💥 `RangeError` | 💥 `RangeError` | — | — | — | — | — | — | — | — |
-| `{}` | `undefined` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | — | — | — | `"2026-10-21T15:07:47.363Z"` | — | — | — | — |
+| `{}` | `undefined` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | — | — | — | `"2026-10-21T21:06:21.244Z"` | — | — | — | — |
 
 ## Every tool
 
@@ -62,7 +62,7 @@
 | `true` | `undefined` | `"1970-01-01T00:00:00Z"` | `"1970-01-01T00:00:00.001Z"` | `"1970-01-01T00:00:00.001Z"` | `"1970-01-01T00:00:00.001Z"` | — | — | — | `null` | — | — | — | — | — | — |
 | `null` | `undefined` | `"1970-01-01T00:00:00Z"` | 💥 `RangeError` | `"1970-01-01T00:00:00.000Z"` | `"1970-01-01T00:00:00.000Z"` | — | — | — | `null` | — | — | — | — | — | — |
 | `undefined` | `undefined` | 💥 `RangeError` | — | 💥 `RangeError` | 💥 `RangeError` | — | — | — | — | — | — | — | — | — | — |
-| `{}` | `undefined` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | — | — | — | `"2026-10-21T15:07:47.363Z"` | — | — | — | — | — | — |
+| `{}` | `undefined` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | — | — | — | `"2026-10-21T21:06:21.244Z"` | — | — | — | — | — | — |
 
 ## Versions
 
