@@ -23,7 +23,7 @@
     // Python - Python language support; Pylance types the adapters' annotations
     "ms-python.python",
 
-    // YAML - schema validation for compose.yaml, dependabot.yml, issue forms
+    // YAML - schema validation for compose.yaml, workflows, issue forms
     "redhat.vscode-yaml",
 
     // Even Better TOML - syntax and validation for research/ruff.toml

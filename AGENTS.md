@@ -57,7 +57,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Security reports go through GitHub private vulnerability reporting.
 - `.githooks/` — the pre-commit and pre-push hooks (see [Pre-commit checks](#-pre-commit-checks)).
 - `.github/workflows/` — CI, CodeQL, release, and the two research workflows (see [CI](#-ci)); `.github/actions/setup/` is the shared pnpm + Node + install prelude.
-- `.github/dependabot.yml` — weekly npm, GitHub Actions, and research-image updates (see [CI](#-ci)).
+- `.github/renovate.json5` — Renovate's weekly dependency updates for npm, GitHub Actions, and the research harness, run by `.github/workflows/renovate.yml` (see [CI](#-ci)).
 - `.github/ISSUE_TEMPLATE/` — YAML issue forms (🐞 bug, ✨ feature, 🤔 semantics question, 🤝 conduct report), each labeled `📥 needs-triage`, plus `config.yml`, which disables blank issues.
 - `.github/PULL_REQUEST_TEMPLATE.md` — summary, `Closes #`, verification, and a checklist.
 - `.github/rulesets/` — the repository rulesets that protect `main` (see [Issues & PRs](#️-issues--prs)).
@@ -247,7 +247,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 | ---------- | ------- | ---------------------------------- |
 | `build`    | 🔨      | build system / typecheck infra     |
 | `chore`    | 🧹 / ⬆️ | housekeeping, dependency bumps     |
-| `ci`       | 🤖      | CI / dependabot / workflow changes |
+| `ci`       | 🤖      | CI / Renovate / workflow changes   |
 | `config`   | 🔧      | tooling config (eslint, vitest, …) |
 | `docs`     | 📝      | documentation                      |
 | `feat`     | ✨      | new feature                        |
@@ -263,7 +263,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **The `research` scope takes 🔬** in place of its type's gitmoji: `chore(research): 🔬 …`, `ci(research): 🔬 …`, `docs(research): 🔬 …`.
   - The type still decides the release; release-please hides `chore`, `ci`, and `docs`.
 - **A change that adds or updates a development script under `scripts/` takes 🔨**, gitmoji's "add or update development scripts", whatever its type (`chore(okf): 🔨 add an interactive okf:verify script`).
-- Dependabot's own `chore(deps): ⬆️` and `chore(deps-dev): ⬆️` prefixes don't change.
+- Renovate writes the same `chore(deps-dev): ⬆️ bump …` and `chore(actions): ⬆️ bump …` subjects, set in `.github/renovate.json5`.
 
 ### 🌿 Branch naming
 
@@ -306,7 +306,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Every export plugs into two harnesses in `test/`:**
   - `cross-env.cases.ts` — a table of calls and expected results, run unchanged by both projects;
   - `hostile-inputs.ts` (plus the Node-only `cross-realm-inputs.ts`) — values that trap on inspection, for proving an export never throws.
-- `scripts/research/*.test.ts` covers the research harness's codec, Compose arguments and output, merging, sources, and tables, and the usage script's call scanner and tallies, and checks its image pins (no pre-release, one shared Python hold in `dependabot.yml`); it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
+- `scripts/research/*.test.ts` covers the research harness's codec, Compose arguments and output, merging, sources, and tables, and the usage script's call scanner and tallies, and checks its image pins (no pre-release, Renovate's Python holds, one group for `research/`); it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
 - How to write a test is covered by `.claude/rules/testing.md`.
 
 ## 📦 Build & package
@@ -360,19 +360,22 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Two sticky PR comments**, each found by its opening heading and edited in place rather than re-posted:
   - `## 📊 Code coverage`, from `scripts/post-coverage-pr-comment.ts`;
   - `## ⏱️ CI timings`, from `scripts/post-ci-timings.ts`, which covers both `ci.yml` and `research-check.yml` on the PR's commit; each workflow's `report` job re-posts it, so the last to finish leaves the full table.
-  - A bug in either script fails `report`; a failure to post it can't fix, such as the read-only token Dependabot and fork PRs get, only warns.
+  - A bug in either script fails `report`; a failure to post it can't fix, such as the read-only token fork PRs get, only warns.
 - `.github/workflows/codeql.yml` scans on PRs, `main`, and weekly.
 - `.github/workflows/research-check.yml` runs only on PRs that touch the harness or what it depends on (its `paths:` list): it installs `research/`, lints and typechecks it, runs `pnpm research --check-inputs` (committed results must match the pinned images and lockfiles) and `pnpm research --format --check`, then a `report` job re-posts the CI timings comment.
 - `.github/workflows/research.yml` is manual (`workflow_dispatch`): it runs `pnpm research` from the same Compose file and uploads `research/results/` as an artifact.
 - `.github/workflows/release.yml` runs on every push to `main` (see [Versioning & releases](#-versioning--releases)):
   - `release-please` — opens or updates the release PR, and tags the release once it is merged;
   - `publish` — only when a release was just created; builds and publishes to npm.
-- **Dependabot** opens weekly grouped patch/minor PRs for npm and Actions, after a 7-day cooldown that matches the [moratorium](#-7-day-dependency-moratorium).
-  - `research/`'s npm libraries, its Compose images, its Dockerfiles, the `python311` image, the JVM adapter's Gradle libraries, the database adapters' pip drivers, the XML Schema adapter's pip libraries, the Firebase emulators' npm root, and the AssemblyScript compiler's npm root get their own entries, each one grouped PR a week, majors included.
-  - Its `ignore` rules hold the pins below: `typescript` and `@types/node` majors, and each `typescript-<version>` alias to its minor.
-  - They also hold the 3.x `python` images off Python's pre-releases, and `python311` on 3.11, the last Python with `distutils`.
-  - An image several research services share (Node, Python, the .NET SDK) is bumped by one group, and research images track their latest stable major.
-  - A research image or library bump fails `research-check.yml` until its results are regenerated by hand on the Dependabot branch (see [research/README.md](research/README.md#️-dependency-bumps)).
+- `.github/workflows/renovate.yml` runs [Renovate](https://docs.renovatebot.com), configured by `.github/renovate.json5`, on Monday mornings (and on `workflow_dispatch`):
+  - it creates and updates PRs only inside the config's Monday 9am-to-noon `schedule`, so editing the config never opens PRs midweek;
+  - it holds every update for 7 days (`minimumReleaseAge`), matching the [moratorium](#-7-day-dependency-moratorium), and skips digest-only image updates, which have no release date to age;
+  - only Docker Hub reports a tag's push date, so an image from another registry (`mcr.microsoft.com`, `ghcr.io`) stays pending until it's ticked on the Dependency Dashboard, once its tag is 7 days old;
+  - every bump is a `chore`, so none cuts a release;
+  - a typical week opens three grouped PRs: the root's patch and minor bumps, the Actions' patch and minor bumps, and everything under `research/`, majors included, across every manager; a major outside `research/` gets its own PR;
+  - its rules hold the pins below: `typescript` and `@types/node` majors, each `typescript-<version>` alias to its patches, 3.x `python` images to final releases, and `python311` on 3.11, the last Python with `distutils`;
+  - it acts as a GitHub App (`RENOVATE_APP_CLIENT_ID` and `RENOVATE_APP_PRIVATE_KEY`), since a PR opened with `GITHUB_TOKEN` starts no CI, and its Dependency Dashboard issue lists pending and held updates;
+  - a research bump fails `research-check.yml` until its results are regenerated by hand on the Renovate branch (see [research/README.md](research/README.md#️-dependency-bumps)).
 - Every action is pinned to an exact `vX.Y.Z`, and every job declares its own `permissions`.
 - How to change a workflow is covered by `.claude/rules/ci.md`.
 

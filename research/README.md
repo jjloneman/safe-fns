@@ -85,9 +85,10 @@ the generated tables instead of summarizing other tools' docs.
 
 ## ⬆️ Dependency bumps
 
-Dependabot bumps the image pins and the libraries' lockfiles weekly but never
-regenerates `research/results/`, so `research-check.yml` runs
-`pnpm research --check-inputs` on every PR that touches the harness.
+Renovate bumps the image pins and the libraries' lockfiles weekly, in one
+`research` PR, but never regenerates `research/results/`, so
+`research-check.yml` runs `pnpm research --check-inputs` on every PR that
+touches the harness.
 
 - **Every column records two pins:** its service's `image`, and an `inputs`
   fingerprint, a SHA-256 of the files that decide what the service runs.
@@ -113,33 +114,40 @@ regenerates `research/results/`, so `research-check.yml` runs
     silently drop out of its service's fingerprint.
   - The JVM adapter pins only its direct dependencies in `build.gradle.kts`, so
     a transitive change without an edit there goes unseen.
-- **Regenerate a bump's results by hand**, on the Dependabot branch:
+- **Regenerate a bump's results by hand**, on the Renovate branch:
   1. `gh pr checkout <n>`, and set your own `COMPOSE_PROJECT_NAME`.
   2. Run the command the check printed, then run it again; the second run must
      leave `git status` clean.
   3. Commit the results as `chore(research): 🔬 regenerate results for <bump>`
      and push.
-  - Dependabot stops rebasing a PR once someone else has pushed to it;
-    `@dependabot recreate` would drop the results commit, so regenerate again
-    after one.
+  - Renovate stops rebasing a branch once someone else has pushed to it; ticking
+    its rebase box would drop the results commit, so regenerate again after one.
+  - The one PR carries every research bump, so a bump that breaks an adapter
+    holds the rest; exclude it from the Dependency Dashboard to let the others
+    through.
 - **An image several adapters share moves in one PR**, so its results are
-  regenerated together; `scripts/research/image-pins.test.ts` fails if a shared
-  image is split across Dependabot groups. `python311` is the one deliberate
-  exception: its own entry holds it on 3.11.
+  regenerated together; every research bump is in Renovate's `research` group,
+  and `scripts/research/image-pins.test.ts` fails if another group rule can
+  reach `research/`. `python311` is held on 3.11 by its own rule, but still
+  moves in the same PR.
 
-  | Image                          | Services                                                  | Group                      |
-  | :----------------------------- | :-------------------------------------------------------- | :------------------------- |
-  | `node`                         | `assemblyscript`, `firebase`, `hermes`, `node`, `sources` | `research-dockerfiles`     |
-  | `python` (3.x)                 | `db`, `python`, `sqlite`, `xml-schema`                    | `research-dockerfiles`     |
-  | `mcr.microsoft.com/dotnet/sdk` | `dotnet`, `powershell`                                    | `research-compiled-images` |
+  | Image                          | Services                                                  |
+  | :----------------------------- | :-------------------------------------------------------- |
+  | `node`                         | `assemblyscript`, `firebase`, `hermes`, `node`, `sources` |
+  | `python` (3.x)                 | `db`, `python`, `sqlite`, `xml-schema`                    |
+  | `mcr.microsoft.com/dotnet/sdk` | `dotnet`, `powershell`                                    |
   - `db` and `sources` share an image without recording it: a database column
     records its database's image, and a docs-only column records `-`. A bump to
     `docker/db/Dockerfile` still fails the check, through the database columns'
     `inputs`.
 
 - **Every image tracks its latest stable major.** A new major is a result to
-  record, not a break to avoid, so Dependabot proposes majors and they merge
-  once their results are regenerated; pre-releases are never pinned.
+  record, not a break to avoid, so Renovate proposes majors and they merge once
+  their results are regenerated; pre-releases are never pinned.
+- **An image from outside Docker Hub waits for a tick.** Only Docker Hub reports
+  when a tag was pushed, so Renovate holds a `mcr.microsoft.com` or `ghcr.io`
+  update (the .NET SDK, SQL Server, ruff) as pending under the 7-day moratorium;
+  check the tag's date, then tick it on the Dependency Dashboard.
 
 ## 🧰 Profiles
 
@@ -171,7 +179,7 @@ Each adapter service sits in one profile, named for its image.
   from, so a rebuild gets the same package versions.
 - The Hermes CLI release is x86_64-only, so `hermes` runs as `linux/amd64`
   (emulated on an arm64 host), and its Dockerfile downloads a checksummed
-  release tarball that Dependabot can't track: bump it by hand from
+  release tarball that Renovate doesn't track: bump it by hand from
   [the releases page](https://github.com/facebook/hermes/releases). Its image
   column names the Node base; its version column is Hermes's own.
 
@@ -207,8 +215,8 @@ Each adapter service sits in one profile, named for its image.
   - `XmlSchemaTools.java` decodes against the shared `xml-schema.xsd`, which the
     `jvm` service passes to its build as the `adapters` context.
   - The runner's `docker compose build` step recompiles it after an edit; its
-    library versions are exact, and Dependabot's cooldown holds them 7 days
-    back, since Maven has no release-age floor.
+    library versions are exact, and Renovate's `minimumReleaseAge` holds them 7
+    days back, since Maven has no release-age floor.
   - `dotnet/`, `go/`, and `rust/` are each a project compiled into its own image
     the same way, each with its codec twin: `Codec.cs`, `codec.go`, and
     `src/codec.rs`. Go and .NET use only their standard libraries; Rust's crates
@@ -232,11 +240,10 @@ Each adapter service sits in one profile, named for its image.
     `firebase-tools` from its own pnpm root, with the emulator jars fetched at
     build time.
   - `docker/python/` — only a `FROM`: `python` and `sqlite` build from it,
-    rather than pinning Python in `compose.yaml`, so Dependabot bumps it in the
-    same PR as every other 3.x Python.
+    rather than pinning Python in `compose.yaml`, so one pin moves both.
   - `docker/python311/` — only a `FROM`, with no build step: a separate
-    Dockerfile gives Dependabot a separate dependency, so it can hold
-    `python311` on 3.11 without holding the other `python` pins.
+    Dockerfile lets a Renovate rule hold `python311` on 3.11 by file, without
+    holding the other `python` pins.
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` — the Node adapter's
   libraries, a separate pnpm root with the repo's 7-day moratorium.
 - `tsconfig.json` — a nested config, so the editor and ESLint resolve the Node
@@ -419,9 +426,9 @@ it.
   3. Add the language's formatter as a `formatter` service with `format-args`
      and `check-args` labels (see `ruff`), or a Prettier plugin in
      `package.json`.
-  4. Add a Dependabot entry if the image comes from a Dockerfile, and one for
-     any manifest the adapter or its formatter installs from (`Cargo.lock`,
-     `dotnet-tools.json`), each with the 7-day cooldown.
+  4. Check that Renovate detects the image and any manifest the adapter or its
+     formatter installs from (`Cargo.lock`, `dotnet-tools.json`); anything under
+     `research/` joins the `research` group and the 7-day hold by itself.
 - **A database:** add it as a `database`-role service with a healthcheck, on an
   `internal` network of its own, and an adapter on that network whose
   `depends_on` names it; the runner reports the database's image for the
