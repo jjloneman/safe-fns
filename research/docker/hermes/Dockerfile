@@ -8,7 +8,7 @@
 # - The v0.13.0 release's binary reports itself as 0.12.0; the adapter
 #   records the version the binary prints.
 #
-# - Dependabot can't follow a release download: bump the URL and checksum by
+# - Renovate doesn't follow a release download: bump the URL and checksum by
 #   hand, from https://github.com/facebook/hermes/releases.
 FROM node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567
 

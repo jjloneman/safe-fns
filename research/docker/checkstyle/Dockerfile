@@ -1,7 +1,7 @@
 # Checkstyle, which has no official image: the pinned Temurin JRE plus the
 # release's self-contained jar from GitHub, checked against its SHA-256.
 #
-# - Dependabot bumps the `FROM` line only; bump `CHECKSTYLE_VERSION` and the
+# - Renovate bumps the `FROM` line only; bump `CHECKSTYLE_VERSION` and the
 #   checksum by hand, to a release at least 7 days old.
 FROM eclipse-temurin:26.0.2.1_1-jre-noble@sha256:3ed5e2e03c80f8a4901f81ef30e7becd19012e32ab6e036b255ee52fdcabac30
 

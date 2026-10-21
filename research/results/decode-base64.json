@@ -255,7 +255,7 @@
     {
       "call": "atob(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:22a587be3c9e261d9fff0b28315fade39a4c25e74ee81d2c1e48140008b2210b",
+      "inputs": "sha256:d816081d0ffc1ee8c6e57b9de1a9fd2978c52ca97e32d91b011015c02481d02d",
       "locale": "-",
       "name": "Hermes",
       "outcomes": [
@@ -1620,7 +1620,7 @@
     {
       "call": "new String(Base64.getDecoder().decode(value), UTF_8)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -1743,7 +1743,7 @@
     {
       "call": "new String(Base64.getMimeDecoder().decode(value), UTF_8)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -1866,7 +1866,7 @@
     {
       "call": "new String(Base64.getUrlDecoder().decode(value), UTF_8)",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
       "locale": "en",
       "name": "Java",
       "outcomes": [
@@ -1989,7 +1989,7 @@
     {
       "call": "b64decode(value, validate=True).decode()",
       "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
-      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
       "locale": "C.UTF-8",
       "name": "Python",
       "outcomes": [
@@ -2112,7 +2112,7 @@
     {
       "call": "b64decode(value).decode()",
       "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
-      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
       "locale": "C.UTF-8",
       "name": "Python",
       "outcomes": [
@@ -2235,7 +2235,7 @@
     {
       "call": "urlsafe_b64decode(value).decode()",
       "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
-      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
       "locale": "C.UTF-8",
       "name": "Python",
       "outcomes": [

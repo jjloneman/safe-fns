@@ -265,7 +265,7 @@
     {
       "call": "JSON.stringify(JSON.parse(value))",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:22a587be3c9e261d9fff0b28315fade39a4c25e74ee81d2c1e48140008b2210b",
+      "inputs": "sha256:d816081d0ffc1ee8c6e57b9de1a9fd2978c52ca97e32d91b011015c02481d02d",
       "locale": "-",
       "name": "Hermes",
       "outcomes": [
@@ -553,7 +553,7 @@
     {
       "call": "sortingMapper.writeValueAsString(mapper.readValue(value, Object.class))",
       "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
-      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
       "locale": "en",
       "name": "Jackson",
       "outcomes": [
@@ -625,7 +625,7 @@
     {
       "call": "json.dumps(json.loads(value), ensure_ascii=False, separators=(\",\", \":\"), sort_keys=True)",
       "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
-      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
       "locale": "C.UTF-8",
       "name": "Python",
       "outcomes": [
@@ -769,7 +769,7 @@
     {
       "call": "SELECT JSON_NORMALIZE(?)",
       "image": "mariadb:12.3.3-noble@sha256:2bdff1534a7e569fecaf4b10b66ad0d410806e382d9db29ba305448addda97c4",
-      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
+      "inputs": "sha256:af37e2a0c74600a0cd25bcd6a71c2a28f6013a5a427a1ec2c77fe1b49d7b3ec5",
       "locale": "utf8mb4_uca1400_ai_ci",
       "name": "MariaDB",
       "outcomes": [
@@ -841,7 +841,7 @@
     {
       "call": "SELECT CAST(CAST(? AS JSON) AS CHAR)",
       "image": "mysql:9.7.1@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d",
-      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
+      "inputs": "sha256:af37e2a0c74600a0cd25bcd6a71c2a28f6013a5a427a1ec2c77fe1b49d7b3ec5",
       "locale": "utf8mb4_0900_ai_ci",
       "name": "MySQL",
       "outcomes": [
@@ -913,7 +913,7 @@
     {
       "call": "SELECT CAST(? AS jsonb)::text",
       "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
-      "inputs": "sha256:c61c740e38483a74b3aee92bb9ec18fbef033fb4c95a232bfd7efca70b3305f5",
+      "inputs": "sha256:af37e2a0c74600a0cd25bcd6a71c2a28f6013a5a427a1ec2c77fe1b49d7b3ec5",
       "locale": "C.UTF-8",
       "name": "PostgreSQL",
       "outcomes": [
