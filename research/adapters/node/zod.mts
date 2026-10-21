@@ -7,13 +7,19 @@ import { packageVersion } from "./tool.mts";
 /** zod's coercing schemas. */
 export const ZOD: Tool = {
   functions: {
+    safeParseBigInt: [
+      {
+        call: "z.coerce.bigint().parse(value)",
+        run: ([value]) => z.coerce.bigint().parse(value),
+      },
+    ],
     safeParseBoolean: [
       {
         call: "z.stringbool().parse(value)",
         run: ([value]) => z.stringbool().parse(value),
       },
     ],
-    safeParseInteger: [
+    safeParseInt: [
       {
         call: "z.coerce.number().int().parse(value)",
         run: ([value]) => z.coerce.number().int().parse(value),

@@ -1,0 +1,2489 @@
+{
+  "cases": [
+    [
+      "aGVsbG8="
+    ],
+    [
+      "aGVsbG8"
+    ],
+    [
+      "aGVsbA=="
+    ],
+    [
+      "aGVsbA"
+    ],
+    [
+      "aGVsbA="
+    ],
+    [
+      "4oKs"
+    ],
+    [
+      "8J+YgA=="
+    ],
+    [
+      "w78="
+    ],
+    [
+      ""
+    ],
+    [
+      " aGVs bG8= "
+    ],
+    [
+      "aGVs\nbG8="
+    ],
+    [
+      "aGVs\r\nbG8="
+    ],
+    [
+      "aGVs bG8="
+    ],
+    [
+      "aGVsbG9="
+    ],
+    [
+      "PDw/Pz4+"
+    ],
+    [
+      "PDw_Pz4-"
+    ],
+    [
+      "not base64!"
+    ],
+    [
+      "aGVsbG8=aGVsbG8="
+    ],
+    [
+      "a"
+    ],
+    [
+      "aGVsbG8=="
+    ],
+    [
+      "="
+    ],
+    [
+      "/w=="
+    ],
+    [
+      "wA=="
+    ],
+    [
+      "7aCA"
+    ],
+    [
+      42
+    ],
+    [
+      true
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      [
+        "aGk="
+      ]
+    ]
+  ],
+  "columns": [
+    {
+      "call": "decodeBase64",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "atob(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:22a587be3c9e261d9fff0b28315fade39a4c25e74ee81d2c1e48140008b2210b",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "â¬"
+        },
+        {
+          "kind": "value",
+          "value": "ð"
+        },
+        {
+          "kind": "value",
+          "value": "Ã¿"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": "À"
+        },
+        {
+          "kind": "value",
+          "value": "í "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "atob(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "InvalidCharacterError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "â¬"
+        },
+        {
+          "kind": "value",
+          "value": "ð"
+        },
+        {
+          "kind": "value",
+          "value": "Ã¿"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "InvalidCharacterError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "InvalidCharacterError",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCharacterError",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCharacterError",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCharacterError",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCharacterError",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidCharacterError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": "À"
+        },
+        {
+          "kind": "value",
+          "value": "í "
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "Buffer.from(value, \"base64\").toString(\"utf8\")",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "kind": "value",
+          "value": "��[jǺ"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "���"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "new TextDecoder(\"utf-8\", { fatal: true }).decode(Uint8Array.fromBase64(value, { alphabet: \"base64url\" }))",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "new TextDecoder(\"utf-8\", { fatal: true }).decode(Uint8Array.fromBase64(value))",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "Base64.decode(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "js-base64",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello\u001a\u0019[\u001b\u001b"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "���"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "3.9.4"
+    },
+    {
+      "call": "Encoding.UTF8.GetString(Convert.FromBase64String(value))",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "���"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "new UTF8Encoding(false, true).GetString(Convert.FromBase64String(value))",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "DecoderFallbackException",
+          "kind": "error"
+        },
+        {
+          "error": "DecoderFallbackException",
+          "kind": "error"
+        },
+        {
+          "error": "DecoderFallbackException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "base64.RawStdEncoding.DecodeString(value)",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.2"
+    },
+    {
+      "call": "base64.StdEncoding.DecodeString(value)",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.2"
+    },
+    {
+      "call": "base64.URLEncoding.DecodeString(value)",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "error": "base64.CorruptInputError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.2"
+    },
+    {
+      "call": "new String(Base64.getDecoder().decode(value), UTF_8)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "new String(Base64.getMimeDecoder().decode(value), UTF_8)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "kind": "value",
+          "value": "<<\u000f�"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "new String(Base64.getUrlDecoder().decode(value), UTF_8)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "b64decode(value, validate=True).decode()",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "b64decode(value).decode()",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "urlsafe_b64decode(value).decode()",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "base64_decode($value, strict: true)",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locale": "C.UTF-8",
+      "name": "PHP",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": "hell"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ÿ"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": "<<??>>"
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    }
+  ],
+  "function": "decodeBase64"
+}

@@ -1,0 +1,197 @@
+{
+  "cases": [
+    {
+      "args": ["a"],
+      "expected": "/a/"
+    },
+    {
+      "args": ["a+b"],
+      "expected": "/a+b/"
+    },
+    {
+      "args": ["\\d+"],
+      "expected": "/\\d+/"
+    },
+    {
+      "args": ["(?<year>\\d{4})"],
+      "expected": "/(?<year>\\d{4})/"
+    },
+    {
+      "args": ["(?<=\\$)\\d+"],
+      "expected": "/(?<=\\$)\\d+/"
+    },
+    {
+      "args": ["(?i:abc)"],
+      "expected": "/(?i:abc)/"
+    },
+    {
+      "args": ["(?<n>a)|(?<n>b)"],
+      "expected": "/(?<n>a)|(?<n>b)/"
+    },
+    {
+      "args": ["\\p{L}"],
+      "expected": "/\\p{L}/"
+    },
+    {
+      "args": ["a/b"],
+      "expected": "/a\\/b/"
+    },
+    {
+      "args": ["\n"],
+      "expected": "/\\n/"
+    },
+    {
+      "args": [" "],
+      "expected": "/ /"
+    },
+    {
+      "args": [""],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["("],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["["],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["*"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["a**"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["a{2,1}"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["\\"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["(?i)abc"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["(?<n>a)(?<n>b)"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["a", "g"],
+      "expected": "/a/g"
+    },
+    {
+      "args": ["a", "dgimsuy"],
+      "expected": "/a/dgimsuy"
+    },
+    {
+      "args": ["a", ""],
+      "expected": "/a/"
+    },
+    {
+      "args": ["\\p{L}", "u"],
+      "expected": "/\\p{L}/u"
+    },
+    {
+      "args": ["[\\p{L}--[a-z]]", "v"],
+      "expected": "/[\\p{L}--[a-z]]/v"
+    },
+    {
+      "args": ["a", "uv"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["a", "gg"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["a", "x"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["a", "G"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a RegExp"
+        }
+      ],
+      "expected": "/a/gu"
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed numeric string"
+        }
+      ],
+      "expected": "/ 42 /"
+    },
+    {
+      "args": [42],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [true],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [["a"]],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "safeParseRegExp"
+}

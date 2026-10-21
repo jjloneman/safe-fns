@@ -1,0 +1,1333 @@
+{
+  "cases": [
+    [
+      "a"
+    ],
+    [
+      "a+b"
+    ],
+    [
+      "\\d+"
+    ],
+    [
+      "(?<year>\\d{4})"
+    ],
+    [
+      "(?<=\\$)\\d+"
+    ],
+    [
+      "(?i:abc)"
+    ],
+    [
+      "(?<n>a)|(?<n>b)"
+    ],
+    [
+      "\\p{L}"
+    ],
+    [
+      "a/b"
+    ],
+    [
+      "\n"
+    ],
+    [
+      " "
+    ],
+    [
+      ""
+    ],
+    [
+      "("
+    ],
+    [
+      "["
+    ],
+    [
+      "*"
+    ],
+    [
+      "a**"
+    ],
+    [
+      "a{2,1}"
+    ],
+    [
+      "\\"
+    ],
+    [
+      "(?i)abc"
+    ],
+    [
+      "(?<n>a)(?<n>b)"
+    ],
+    [
+      "a",
+      "g"
+    ],
+    [
+      "a",
+      "dgimsuy"
+    ],
+    [
+      "a",
+      ""
+    ],
+    [
+      "\\p{L}",
+      "u"
+    ],
+    [
+      "[\\p{L}--[a-z]]",
+      "v"
+    ],
+    [
+      "a",
+      "uv"
+    ],
+    [
+      "a",
+      "gg"
+    ],
+    [
+      "a",
+      "x"
+    ],
+    [
+      "a",
+      "G"
+    ],
+    [
+      {
+        "$js": "a RegExp"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed numeric string"
+      }
+    ],
+    [
+      42
+    ],
+    [
+      true
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      [
+        "a"
+      ]
+    ]
+  ],
+  "columns": [
+    {
+      "call": "safeParseRegExp",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "/a/"
+        },
+        {
+          "kind": "value",
+          "value": "/a+b/"
+        },
+        {
+          "kind": "value",
+          "value": "/\\d+/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?<year>\\d{4})/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?<=\\$)\\d+/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?i:abc)/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?<n>a)|(?<n>b)/"
+        },
+        {
+          "kind": "value",
+          "value": "/\\p{L}/"
+        },
+        {
+          "kind": "value",
+          "value": "/a\\/b/"
+        },
+        {
+          "kind": "value",
+          "value": "/\\n/"
+        },
+        {
+          "kind": "value",
+          "value": "/ /"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "/a/g"
+        },
+        {
+          "kind": "value",
+          "value": "/a/dgimsuy"
+        },
+        {
+          "kind": "value",
+          "value": "/a/"
+        },
+        {
+          "kind": "value",
+          "value": "/\\p{L}/u"
+        },
+        {
+          "kind": "value",
+          "value": "/[\\p{L}--[a-z]]/v"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "/a/gu"
+        },
+        {
+          "kind": "value",
+          "value": "/ 42 /"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "String(new RegExp(value, flags))",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:22a587be3c9e261d9fff0b28315fade39a4c25e74ee81d2c1e48140008b2210b",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "/a/"
+        },
+        {
+          "kind": "value",
+          "value": "/a+b/"
+        },
+        {
+          "kind": "value",
+          "value": "/\\d+/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?<year>\\d{4})/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?<=\\$)\\d+/"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "/\\p{L}/"
+        },
+        {
+          "kind": "value",
+          "value": "/a\\/b/"
+        },
+        {
+          "kind": "value",
+          "value": "/\\n/"
+        },
+        {
+          "kind": "value",
+          "value": "/ /"
+        },
+        {
+          "kind": "value",
+          "value": "/(?:)/"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "/a/g"
+        },
+        {
+          "kind": "value",
+          "value": "/a/dgimsuy"
+        },
+        {
+          "kind": "value",
+          "value": "/a/"
+        },
+        {
+          "kind": "value",
+          "value": "/\\p{L}/u"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "/42/"
+        },
+        {
+          "kind": "value",
+          "value": "/true/"
+        },
+        {
+          "kind": "value",
+          "value": "/null/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?:)/"
+        },
+        {
+          "kind": "value",
+          "value": "/a/"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "String(new RegExp(value, flags))",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "/a/"
+        },
+        {
+          "kind": "value",
+          "value": "/a+b/"
+        },
+        {
+          "kind": "value",
+          "value": "/\\d+/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?<year>\\d{4})/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?<=\\$)\\d+/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?i:abc)/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?<n>a)|(?<n>b)/"
+        },
+        {
+          "kind": "value",
+          "value": "/\\p{L}/"
+        },
+        {
+          "kind": "value",
+          "value": "/a\\/b/"
+        },
+        {
+          "kind": "value",
+          "value": "/\\n/"
+        },
+        {
+          "kind": "value",
+          "value": "/ /"
+        },
+        {
+          "kind": "value",
+          "value": "/(?:)/"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "/a/g"
+        },
+        {
+          "kind": "value",
+          "value": "/a/dgimsuy"
+        },
+        {
+          "kind": "value",
+          "value": "/a/"
+        },
+        {
+          "kind": "value",
+          "value": "/\\p{L}/u"
+        },
+        {
+          "kind": "value",
+          "value": "/[\\p{L}--[a-z]]/v"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "/a/gu"
+        },
+        {
+          "kind": "value",
+          "value": "/ 42 /"
+        },
+        {
+          "kind": "value",
+          "value": "/42/"
+        },
+        {
+          "kind": "value",
+          "value": "/true/"
+        },
+        {
+          "kind": "value",
+          "value": "/null/"
+        },
+        {
+          "kind": "value",
+          "value": "/(?:)/"
+        },
+        {
+          "kind": "value",
+          "value": "/a/"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "new Regex(value).ToString()",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "\\d+"
+        },
+        {
+          "kind": "value",
+          "value": "(?<year>\\d{4})"
+        },
+        {
+          "kind": "value",
+          "value": "(?<=\\$)\\d+"
+        },
+        {
+          "kind": "value",
+          "value": "(?i:abc)"
+        },
+        {
+          "kind": "value",
+          "value": "(?<n>a)|(?<n>b)"
+        },
+        {
+          "kind": "value",
+          "value": "\\p{L}"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "RegexParseException",
+          "kind": "error"
+        },
+        {
+          "error": "RegexParseException",
+          "kind": "error"
+        },
+        {
+          "error": "RegexParseException",
+          "kind": "error"
+        },
+        {
+          "error": "RegexParseException",
+          "kind": "error"
+        },
+        {
+          "error": "RegexParseException",
+          "kind": "error"
+        },
+        {
+          "error": "RegexParseException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "(?i)abc"
+        },
+        {
+          "kind": "value",
+          "value": "(?<n>a)(?<n>b)"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "regexp.Compile(value).String()",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "\\d+"
+        },
+        {
+          "kind": "value",
+          "value": "(?<year>\\d{4})"
+        },
+        {
+          "error": "*syntax.Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "(?i:abc)"
+        },
+        {
+          "kind": "value",
+          "value": "(?<n>a)|(?<n>b)"
+        },
+        {
+          "kind": "value",
+          "value": "\\p{L}"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "*syntax.Error",
+          "kind": "error"
+        },
+        {
+          "error": "*syntax.Error",
+          "kind": "error"
+        },
+        {
+          "error": "*syntax.Error",
+          "kind": "error"
+        },
+        {
+          "error": "*syntax.Error",
+          "kind": "error"
+        },
+        {
+          "error": "*syntax.Error",
+          "kind": "error"
+        },
+        {
+          "error": "*syntax.Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "(?i)abc"
+        },
+        {
+          "kind": "value",
+          "value": "(?<n>a)(?<n>b)"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.2"
+    },
+    {
+      "call": "Pattern.compile(value).pattern()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "\\d+"
+        },
+        {
+          "kind": "value",
+          "value": "(?<year>\\d{4})"
+        },
+        {
+          "kind": "value",
+          "value": "(?<=\\$)\\d+"
+        },
+        {
+          "kind": "value",
+          "value": "(?i:abc)"
+        },
+        {
+          "error": "PatternSyntaxException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "\\p{L}"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "PatternSyntaxException",
+          "kind": "error"
+        },
+        {
+          "error": "PatternSyntaxException",
+          "kind": "error"
+        },
+        {
+          "error": "PatternSyntaxException",
+          "kind": "error"
+        },
+        {
+          "error": "PatternSyntaxException",
+          "kind": "error"
+        },
+        {
+          "error": "PatternSyntaxException",
+          "kind": "error"
+        },
+        {
+          "error": "PatternSyntaxException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "(?i)abc"
+        },
+        {
+          "error": "PatternSyntaxException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "re.compile(value).pattern",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "\\d+"
+        },
+        {
+          "error": "PatternError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "(?<=\\$)\\d+"
+        },
+        {
+          "kind": "value",
+          "value": "(?i:abc)"
+        },
+        {
+          "error": "PatternError",
+          "kind": "error"
+        },
+        {
+          "error": "PatternError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "PatternError",
+          "kind": "error"
+        },
+        {
+          "error": "PatternError",
+          "kind": "error"
+        },
+        {
+          "error": "PatternError",
+          "kind": "error"
+        },
+        {
+          "error": "PatternError",
+          "kind": "error"
+        },
+        {
+          "error": "PatternError",
+          "kind": "error"
+        },
+        {
+          "error": "PatternError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "(?i)abc"
+        },
+        {
+          "error": "PatternError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "Regexp.new(value).source",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Ruby",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "\\d+"
+        },
+        {
+          "kind": "value",
+          "value": "(?<year>\\d{4})"
+        },
+        {
+          "kind": "value",
+          "value": "(?<=\\$)\\d+"
+        },
+        {
+          "kind": "value",
+          "value": "(?i:abc)"
+        },
+        {
+          "kind": "value",
+          "value": "(?<n>a)|(?<n>b)"
+        },
+        {
+          "kind": "value",
+          "value": "\\p{L}"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "\n"
+        },
+        {
+          "kind": "value",
+          "value": " "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "RegexpError",
+          "kind": "error"
+        },
+        {
+          "error": "RegexpError",
+          "kind": "error"
+        },
+        {
+          "error": "RegexpError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "a**"
+        },
+        {
+          "error": "RegexpError",
+          "kind": "error"
+        },
+        {
+          "error": "RegexpError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "(?i)abc"
+        },
+        {
+          "kind": "value",
+          "value": "(?<n>a)(?<n>b)"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "4.0.7"
+    }
+  ],
+  "function": "safeParseRegExp"
+}

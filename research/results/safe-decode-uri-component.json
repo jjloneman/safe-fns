@@ -1,0 +1,2546 @@
+{
+  "cases": [
+    [
+      "a%20b"
+    ],
+    [
+      "%E2%82%AC"
+    ],
+    [
+      "%e2%82%ac"
+    ],
+    [
+      "a+b"
+    ],
+    [
+      "a%2Fb"
+    ],
+    [
+      "%3F%26%3D%23"
+    ],
+    [
+      "%25"
+    ],
+    [
+      "%2525"
+    ],
+    [
+      "€"
+    ],
+    [
+      ""
+    ],
+    [
+      " a%20b "
+    ],
+    [
+      "%00"
+    ],
+    [
+      {
+        "$js": "a lone surrogate"
+      }
+    ],
+    [
+      "%"
+    ],
+    [
+      "100%"
+    ],
+    [
+      "%2"
+    ],
+    [
+      "%zz"
+    ],
+    [
+      "%FF"
+    ],
+    [
+      "%C3"
+    ],
+    [
+      "%C0%AF"
+    ],
+    [
+      "%ED%A0%80"
+    ],
+    [
+      "%F4%90%80%80"
+    ],
+    [
+      42
+    ],
+    [
+      true
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      [
+        "a%20b"
+      ]
+    ],
+    [
+      {
+        "$js": "a boxed numeric string"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "safeDecodeUriComponent",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": " 42 "
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "decodeUriComponent(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "decode-uri-component",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "100%"
+        },
+        {
+          "kind": "value",
+          "value": "%2"
+        },
+        {
+          "kind": "value",
+          "value": "%zz"
+        },
+        {
+          "kind": "value",
+          "value": "%FF"
+        },
+        {
+          "kind": "value",
+          "value": "%C3"
+        },
+        {
+          "kind": "value",
+          "value": "%C0%AF"
+        },
+        {
+          "kind": "value",
+          "value": "%ED%A0%80"
+        },
+        {
+          "kind": "value",
+          "value": "%F4%90%80%80"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "0.5.0"
+    },
+    {
+      "call": "fastDecode(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "fast-decode-uri-component",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.0.1"
+    },
+    {
+      "call": "decodeURI(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:22a587be3c9e261d9fff0b28315fade39a4c25e74ee81d2c1e48140008b2210b",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a%2Fb"
+        },
+        {
+          "kind": "value",
+          "value": "%3F%26%3D%23"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "undefined"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "decodeURIComponent(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:22a587be3c9e261d9fff0b28315fade39a4c25e74ee81d2c1e48140008b2210b",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "undefined"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "decodeURI(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a%2Fb"
+        },
+        {
+          "kind": "value",
+          "value": "%3F%26%3D%23"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "undefined"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": " 42 "
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "decodeURIComponent(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "error": "URIError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "undefined"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": " 42 "
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "querystring.unescape(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "100%"
+        },
+        {
+          "kind": "value",
+          "value": "%2"
+        },
+        {
+          "kind": "value",
+          "value": "%zz"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "��"
+        },
+        {
+          "kind": "value",
+          "value": "���"
+        },
+        {
+          "kind": "value",
+          "value": "����"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "true"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "undefined"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": " 42 "
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "Uri.UnescapeDataString(value)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "100%"
+        },
+        {
+          "kind": "value",
+          "value": "%2"
+        },
+        {
+          "kind": "value",
+          "value": "%zz"
+        },
+        {
+          "kind": "value",
+          "value": "%FF"
+        },
+        {
+          "kind": "value",
+          "value": "%C3"
+        },
+        {
+          "kind": "value",
+          "value": "%C0%AF"
+        },
+        {
+          "kind": "value",
+          "value": "%ED%A0%80"
+        },
+        {
+          "kind": "value",
+          "value": "%F4%90%80%80"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "WebUtility.UrlDecode(value)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "100%"
+        },
+        {
+          "kind": "value",
+          "value": "%2"
+        },
+        {
+          "kind": "value",
+          "value": "%zz"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "��"
+        },
+        {
+          "kind": "value",
+          "value": "���"
+        },
+        {
+          "kind": "value",
+          "value": "����"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "url.PathUnescape(value)",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "url.EscapeError",
+          "kind": "error"
+        },
+        {
+          "error": "url.EscapeError",
+          "kind": "error"
+        },
+        {
+          "error": "url.EscapeError",
+          "kind": "error"
+        },
+        {
+          "error": "url.EscapeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.2"
+    },
+    {
+      "call": "url.QueryUnescape(value)",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "url.EscapeError",
+          "kind": "error"
+        },
+        {
+          "error": "url.EscapeError",
+          "kind": "error"
+        },
+        {
+          "error": "url.EscapeError",
+          "kind": "error"
+        },
+        {
+          "error": "url.EscapeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "main.invalidUTF8"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.2"
+    },
+    {
+      "call": "URLDecoder.decode(value, UTF_8)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "��"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "����"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "unquote(value, errors=\"strict\")",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "100%"
+        },
+        {
+          "kind": "value",
+          "value": "%2"
+        },
+        {
+          "kind": "value",
+          "value": "%zz"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "error": "UnicodeDecodeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "unquote(value)",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "100%"
+        },
+        {
+          "kind": "value",
+          "value": "%2"
+        },
+        {
+          "kind": "value",
+          "value": "%zz"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "��"
+        },
+        {
+          "kind": "value",
+          "value": "���"
+        },
+        {
+          "kind": "value",
+          "value": "����"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "UriUtils.decode(value, UTF_8)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
+      "locale": "en",
+      "name": "Spring",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "��"
+        },
+        {
+          "kind": "value",
+          "value": "�"
+        },
+        {
+          "kind": "value",
+          "value": "����"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "7.0.9"
+    },
+    {
+      "call": "decodeURI(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:eda3d5b7ab25add6c1c4ac771de8ab30570164991c102a48c5999e55522b2043",
+      "locale": "-",
+      "name": "AssemblyScript",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a%2Fb"
+        },
+        {
+          "kind": "value",
+          "value": "%3F%26%3D%23"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "assemblyscript",
+      "tier": 4,
+      "version": "0.28.20"
+    },
+    {
+      "call": "decodeURIComponent(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:eda3d5b7ab25add6c1c4ac771de8ab30570164991c102a48c5999e55522b2043",
+      "locale": "-",
+      "name": "AssemblyScript",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "assemblyscript",
+      "tier": 4,
+      "version": "0.28.20"
+    },
+    {
+      "call": "rawurldecode($value)",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locale": "C.UTF-8",
+      "name": "PHP",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "100%"
+        },
+        {
+          "kind": "value",
+          "value": "%2"
+        },
+        {
+          "kind": "value",
+          "value": "%zz"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    },
+    {
+      "call": "URI.decode_uri_component(value)",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Ruby",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "a/b"
+        },
+        {
+          "kind": "value",
+          "value": "?&=#"
+        },
+        {
+          "kind": "value",
+          "value": "%"
+        },
+        {
+          "kind": "value",
+          "value": "%25"
+        },
+        {
+          "kind": "value",
+          "value": "€"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": " a b "
+        },
+        {
+          "kind": "value",
+          "value": "\u0000"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "invalid UTF-8"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "4.0.7"
+    }
+  ],
+  "function": "safeDecodeUriComponent"
+}

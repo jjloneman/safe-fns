@@ -199,7 +199,7 @@ describe("findStaleInputs", () => {
         column({ inputs: "sha256:old" }),
         column({ inputs: "sha256:old" }),
       ]),
-      { ...result([column({}), column({})]), function: "safeParseInteger" },
+      { ...result([column({}), column({})]), function: "safeParseInt" },
     ];
 
     // When - checking them
@@ -218,7 +218,7 @@ describe("findStaleInputs", () => {
       },
       {
         files: RUBY_INPUTS.files,
-        function: "safeParseInteger",
+        function: "safeParseInt",
         recorded: undefined,
         service: "ruby",
       },

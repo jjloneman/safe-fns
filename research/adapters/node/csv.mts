@@ -24,7 +24,7 @@ const CSV_CELL: Probe = {
 export const CSV: Tool = {
   functions: {
     safeParseBoolean: [CSV_CELL],
-    safeParseInteger: [CSV_CELL],
+    safeParseInt: [CSV_CELL],
     safeParseNumber: [CSV_CELL],
   },
   name: "CSV",

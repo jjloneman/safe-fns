@@ -1,0 +1,287 @@
+{
+  "cases": [
+    {
+      "args": ["42"],
+      "expected": {
+        "$bigint": "42"
+      }
+    },
+    {
+      "args": ["-42"],
+      "expected": {
+        "$bigint": "-42"
+      }
+    },
+    {
+      "args": ["+42"],
+      "expected": {
+        "$bigint": "42"
+      }
+    },
+    {
+      "args": ["042"],
+      "expected": {
+        "$bigint": "42"
+      }
+    },
+    {
+      "args": ["9007199254740993"],
+      "expected": {
+        "$bigint": "9007199254740993"
+      }
+    },
+    {
+      "args": ["-123456789012345678901234567890"],
+      "expected": {
+        "$bigint": "-123456789012345678901234567890"
+      }
+    },
+    {
+      "args": ["-0"],
+      "expected": {
+        "$bigint": "0"
+      }
+    },
+    {
+      "args": [" 7 "],
+      "expected": {
+        "$bigint": "7"
+      }
+    },
+    {
+      "args": ["\u200b42"],
+      "expected": {
+        "$bigint": "42"
+      }
+    },
+    {
+      "args": [""],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["   "],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["1.5"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["1.0"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["1e3"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["0x1A"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["-0x1A"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["0b11"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["0o17"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["10n"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["1_000"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["1,000"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["\u0664\u0662"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["12px"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["Infinity"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [42],
+      "expected": {
+        "$bigint": "42"
+      }
+    },
+    {
+      "args": [
+        {
+          "$number": "-0"
+        }
+      ],
+      "expected": {
+        "$bigint": "0"
+      }
+    },
+    {
+      "args": [42.5],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [1e21],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$number": "Infinity"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$bigint": "42"
+        }
+      ],
+      "expected": {
+        "$bigint": "42"
+      }
+    },
+    {
+      "args": [
+        {
+          "$bigint": "123456789012345678901234567890"
+        }
+      ],
+      "expected": {
+        "$bigint": "123456789012345678901234567890"
+      }
+    },
+    {
+      "args": [true],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [[]],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [["7"]],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [{}],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed number"
+        }
+      ],
+      "expected": {
+        "$bigint": "1"
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed bigint"
+        }
+      ],
+      "expected": {
+        "$bigint": "1"
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed numeric string"
+        }
+      ],
+      "expected": {
+        "$bigint": "42"
+      }
+    }
+  ],
+  "function": "safeParseBigInt"
+}

@@ -1,0 +1,159 @@
+{
+  "cases": [
+    {
+      "args": ["a%20b"],
+      "expected": "a b"
+    },
+    {
+      "args": ["%E2%82%AC"],
+      "expected": "\u20ac"
+    },
+    {
+      "args": ["%e2%82%ac"],
+      "expected": "\u20ac"
+    },
+    {
+      "args": ["a+b"],
+      "expected": "a+b"
+    },
+    {
+      "args": ["a%2Fb"],
+      "expected": "a/b"
+    },
+    {
+      "args": ["%3F%26%3D%23"],
+      "expected": "?&=#"
+    },
+    {
+      "args": ["%25"],
+      "expected": "%"
+    },
+    {
+      "args": ["%2525"],
+      "expected": "%25"
+    },
+    {
+      "args": ["\u20ac"],
+      "expected": "\u20ac"
+    },
+    {
+      "args": [""],
+      "expected": ""
+    },
+    {
+      "args": [" a%20b "],
+      "expected": " a b "
+    },
+    {
+      "args": ["%00"],
+      "expected": "\u0000"
+    },
+    {
+      "args": [
+        {
+          "$js": "a lone surrogate"
+        }
+      ],
+      "expected": {
+        "$utf16": [55296]
+      }
+    },
+    {
+      "args": ["%"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["100%"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["%2"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["%zz"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["%FF"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["%C3"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["%C0%AF"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["%ED%A0%80"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["%F4%90%80%80"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [42],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [true],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [["a%20b"]],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed numeric string"
+        }
+      ],
+      "expected": " 42 "
+    }
+  ],
+  "function": "safeDecodeUriComponent"
+}

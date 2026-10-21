@@ -67,6 +67,8 @@ paths:
 
   - Report what crossed the bindings as it arrived: an `i64` comes back as a bigint and an `f32` as its widened `number`; never convert either to look like JavaScript's answer.
 
+  - Convert with the function form (`i64(value)`), never an assertion (`<i64>value`): the editor typings alias every numeric type to `number`, so `pnpm check`'s lint fix deletes the assertion as unnecessary, and `asc` then rejects the implicit `f64` to `i64` conversion.
+
 - **Hermes runs the TS encoder's own source.** `ENCODER_SOURCE` (in `codec.ts`) and `errorName` (in `node/tool.mts`) are embedded as text in the program Hermes runs, so keep them free of imports and module-level names, and of syntax Hermes lacks, such as classes.
 - **The codecs are twins.** A change to `scripts/research/codec.ts` needs the same change in every adapter's codec under `research/adapters/`: `research_codec.py`, `research_codec.php`, `research_codec.psm1`, `research_codec.rb`, `research_codec.swift`, `dotnet/Codec.cs`, `go/codec.go`, `jvm/src/main/java/com/safefns/research/ResearchCodec.java`, and `rust/src/codec.rs`. A `codec.json` case proves it. Hermes needs no twin: it runs `ENCODER_SOURCE`, the encoder's own source.
 - **A driven adapter hands the tool a string, never a script.** Pass the value as a positional parameter or environment variable, so no quoting can change what runs; NUL can't travel that way, so it's `n/a`.

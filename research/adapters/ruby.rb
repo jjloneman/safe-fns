@@ -10,6 +10,7 @@
 require "active_model"
 require "active_support/core_ext/object/blank"
 require "json"
+require "time"
 require "uri"
 
 require_relative "research_codec"
@@ -22,8 +23,25 @@ module RubyAdapter
   # Accepts exactly one argument, a string.
   IS_LONE_STRING = ->(*args) { args.length == 1 && args.first.is_a?(String) }
 
+  # Accepts only a finite number first argument.
+  IS_NUMBER = ->(value, *) { value.is_a?(Numeric) && value.finite? }
+
   # Accepts only a string first argument.
   IS_STRING = ->(value, *) { value.is_a?(String) }
+
+  # Returns text, or a `$repr` for bytes that aren't valid UTF-8, which the
+  # format can't carry as a string.
+  TEXT_OR_INVALID =
+    lambda do |text|
+      if text.valid_encoding?
+        text
+      else
+        ResearchCodec::Unrepresentable.new(
+          payload: "invalid UTF-8",
+          tag: "$repr"
+        )
+      end
+    end
 
   # Returns each value unchanged, for the `codec` round-trip check.
   CODEC_PROBE =
@@ -45,7 +63,7 @@ module RubyAdapter
             run: ->(value) { ActiveModel::Type::Boolean.new.cast(value) }
           )
         ],
-        "safeParseInteger" => [
+        "safeParseInt" => [
           ResearchCodec.probe(
             call: "ActiveModel::Type::Integer.new.cast(value)",
             run: ->(value) { ActiveModel::Type::Integer.new.cast(value) }
@@ -86,6 +104,29 @@ module RubyAdapter
             run: ->(value) { value.empty? }
           )
         ],
+        "safeDateToIsoString" => [
+          ResearchCodec.probe(
+            accepts: IS_NUMBER,
+            call: 'Time.at(value / 1000r, in: "UTC").iso8601(3)',
+            run: ->(value) { Time.at(value / 1000r, in: "UTC").iso8601(3) }
+          )
+        ],
+        "safeDecodeUriComponent" => [
+          ResearchCodec.probe(
+            accepts: IS_STRING,
+            call: "URI.decode_uri_component(value)",
+            run: ->(value) do
+              TEXT_OR_INVALID.call(URI.decode_uri_component(value))
+            end
+          )
+        ],
+        "safeEncodeUriComponent" => [
+          ResearchCodec.probe(
+            accepts: IS_STRING,
+            call: "URI.encode_uri_component(value)",
+            run: ->(value) { URI.encode_uri_component(value) }
+          )
+        ],
         "safeJsonStringify" => [
           ResearchCodec.probe(
             call: "JSON.generate(value)",
@@ -98,7 +139,20 @@ module RubyAdapter
             run: ->(object, key) { object.key?(key) }
           )
         ],
-        "safeParseInteger" => [
+        "safeParseBigInt" => [
+          ResearchCodec.probe(
+            call: "Integer(value)",
+            run: ->(value) { Integer(value) }
+          )
+        ],
+        "safeParseDate" => [
+          ResearchCodec.probe(
+            accepts: IS_STRING,
+            call: "Time.iso8601(value).utc.iso8601(3)",
+            run: ->(value) { Time.iso8601(value).utc.iso8601(3) }
+          )
+        ],
+        "safeParseInt" => [
           ResearchCodec.probe(
             call: "Integer(value)",
             run: ->(value) { Integer(value) }
@@ -118,6 +172,13 @@ module RubyAdapter
             run: ->(value) { Float(value) }
           ),
           ResearchCodec.probe(call: "value.to_f", run: ->(value) { value.to_f })
+        ],
+        "safeParseRegExp" => [
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call: "Regexp.new(value).source",
+            run: ->(value) { Regexp.new(value).source }
+          )
         ],
         "safeParseString" => [
           ResearchCodec.probe(

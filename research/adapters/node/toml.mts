@@ -20,7 +20,7 @@ const TOML_VALUE: Probe = {
 export const TOML: Tool = {
   functions: {
     safeParseBoolean: [TOML_VALUE],
-    safeParseInteger: [TOML_VALUE],
+    safeParseInt: [TOML_VALUE],
     safeParseNumber: [TOML_VALUE],
   },
   name: "TOML",

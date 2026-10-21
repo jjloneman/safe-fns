@@ -26,7 +26,7 @@ export const ES_TOOLKIT: Tool = {
         run: ([value]) => esToolkitIsEmpty(value),
       },
     ],
-    safeParseInteger: [
+    safeParseInt: [
       {
         call: "compat.toInteger(value)",
         run: ([value]) => esToolkitToInteger(value),

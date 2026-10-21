@@ -1,0 +1,157 @@
+{
+  "cases": [
+    {
+      "args": ["aGVsbG8="],
+      "expected": "hello"
+    },
+    {
+      "args": ["aGVsbG8"],
+      "expected": "hello"
+    },
+    {
+      "args": ["aGVsbA=="],
+      "expected": "hell"
+    },
+    {
+      "args": ["aGVsbA"],
+      "expected": "hell"
+    },
+    {
+      "args": ["aGVsbA="],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["4oKs"],
+      "expected": "\u20ac"
+    },
+    {
+      "args": ["8J+YgA=="],
+      "expected": "\ud83d\ude00"
+    },
+    {
+      "args": ["w78="],
+      "expected": "\u00ff"
+    },
+    {
+      "args": [""],
+      "expected": ""
+    },
+    {
+      "args": [" aGVs bG8= "],
+      "expected": "hello"
+    },
+    {
+      "args": ["aGVs\nbG8="],
+      "expected": "hello"
+    },
+    {
+      "args": ["aGVs\r\nbG8="],
+      "expected": "hello"
+    },
+    {
+      "args": ["aGVs\u00a0bG8="],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["aGVsbG9="],
+      "expected": "hello"
+    },
+    {
+      "args": ["PDw/Pz4+"],
+      "expected": "<<??>>"
+    },
+    {
+      "args": ["PDw_Pz4-"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["not base64!"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["aGVsbG8=aGVsbG8="],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["a"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["aGVsbG8=="],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["="],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["/w=="],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["wA=="],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["7aCA"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [42],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [true],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [["aGk="]],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "decodeBase64"
+}

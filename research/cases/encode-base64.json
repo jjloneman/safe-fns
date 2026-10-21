@@ -1,0 +1,105 @@
+{
+  "cases": [
+    {
+      "args": ["hello"],
+      "expected": "aGVsbG8="
+    },
+    {
+      "args": ["hell"],
+      "expected": "aGVsbA=="
+    },
+    {
+      "args": ["\u20ac"],
+      "expected": "4oKs"
+    },
+    {
+      "args": ["\ud83d\ude00"],
+      "expected": "8J+YgA=="
+    },
+    {
+      "args": ["\u00ff"],
+      "expected": "w78="
+    },
+    {
+      "args": ["<<??>>"],
+      "expected": "PDw/Pz4+"
+    },
+    {
+      "args": [""],
+      "expected": ""
+    },
+    {
+      "args": ["\u0000"],
+      "expected": "AA=="
+    },
+    {
+      "args": [
+        {
+          "$js": "a lone surrogate"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "UTF-8 bytes of JSON text"
+        }
+      ],
+      "expected": "eyJhIjoxfQ=="
+    },
+    {
+      "args": [
+        {
+          "$js": "an ArrayBuffer of JSON text"
+        }
+      ],
+      "expected": "eyJhIjoxfQ=="
+    },
+    {
+      "args": [
+        {
+          "$js": "a DataView of JSON text"
+        }
+      ],
+      "expected": "eyJhIjoxfQ=="
+    },
+    {
+      "args": [42],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [true],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [["hi"]],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "encodeBase64"
+}

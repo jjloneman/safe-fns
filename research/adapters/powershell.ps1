@@ -43,7 +43,7 @@ $powerShell = @{
                 Run  = { param($value) [System.Convert]::ToBoolean($value) }
             }
         )
-        safeParseInteger = @(
+        safeParseInt     = @(
             @{ Call = '[int]$value'; Run = { param($value) [int]$value } }
             @{ Call = '[int]::Parse($value)'; Run = { param($value) [int]::Parse($value) } }
             @{ Call = '$value -as [int]'; Run = { param($value) $value -as [int] } }

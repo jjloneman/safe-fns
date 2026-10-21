@@ -1,5 +1,7 @@
 package com.safefns.research;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -9,6 +11,7 @@ import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.util.NumberUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.util.UriUtils;
 
 /**
  * Spring Framework's core utilities.
@@ -33,13 +36,36 @@ final class SpringTools {
         ),
         Probe.any("ObjectUtils.isEmpty(value)", ObjectUtils::isEmpty)
       ),
+      "safeDecodeUriComponent",
+      List.of(
+        Probe.typed("UriUtils.decode(value, UTF_8)", String.class, value ->
+          UriUtils.decode(value, StandardCharsets.UTF_8)
+        )
+      ),
+      "safeEncodeUriComponent",
+      List.of(
+        Probe.typed("UriUtils.encode(value, UTF_8)", String.class, value ->
+          UriUtils.encode(value, StandardCharsets.UTF_8)
+        )
+      ),
+      "safeParseBigInt",
+      List.of(
+        Probe.any("conversionService.convert(value, BigInteger.class)", value ->
+          CONVERSIONS.convert(value, BigInteger.class)
+        ),
+        Probe.typed(
+          "NumberUtils.parseNumber(value, BigInteger.class)",
+          String.class,
+          value -> NumberUtils.parseNumber(value, BigInteger.class)
+        )
+      ),
       "safeParseBoolean",
       List.of(
         Probe.any("conversionService.convert(value, Boolean.class)", value ->
           CONVERSIONS.convert(value, Boolean.class)
         )
       ),
-      "safeParseInteger",
+      "safeParseInt",
       List.of(
         Probe.any("conversionService.convert(value, Integer.class)", value ->
           CONVERSIONS.convert(value, Integer.class)

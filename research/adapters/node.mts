@@ -16,20 +16,27 @@ import { HOSTILE_INPUTS } from "../../test/hostile-inputs.ts";
 import { AJV_COERCE } from "./node/ajv.mts";
 import { CANONICALIZE } from "./node/canonicalize.mts";
 import { CSV } from "./node/csv.mts";
+import { DATE_FNS } from "./node/date-fns.mts";
+import { DAYJS } from "./node/dayjs.mts";
+import { DECODE_URI_COMPONENT } from "./node/decode-uri-component.mts";
 import { EFFECT } from "./node/effect.mts";
 import { ENSURE_ERROR } from "./node/ensure-error.mts";
 import { ENVALID } from "./node/envalid.mts";
 import { ES_TOOLKIT } from "./node/es-toolkit.mts";
+import { FAST_DECODE_URI_COMPONENT } from "./node/fast-decode-uri-component.mts";
 import { FAST_JSON_STABLE_STRINGIFY } from "./node/fast-json-stable-stringify.mts";
 import { FAST_SAFE_STRINGIFY } from "./node/fast-safe-stringify.mts";
 import { HTML } from "./node/html.mts";
 import { INI } from "./node/ini.mts";
 import { IS_PLAIN_OBJ } from "./node/is-plain-obj.mts";
 import { JOI } from "./node/joi.mts";
+import { JS_BASE64 } from "./node/js-base64.mts";
 import { JS_BUILT_INS } from "./node/js-built-ins.mts";
 import { JSON_STRINGIFY_SAFE } from "./node/json-stringify-safe.mts";
 import { JSON_FORMAT } from "./node/json.mts";
 import { LODASH } from "./node/lodash.mts";
+import { LUXON } from "./node/luxon.mts";
+import { MOMENT } from "./node/moment.mts";
 import { RADASH } from "./node/radash.mts";
 import { RAMDA } from "./node/ramda.mts";
 import { REMEDA } from "./node/remeda.mts";
@@ -115,8 +122,10 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
     () => new DataView(new TextEncoder().encode('{"a":1}').buffer),
   ],
   ["a Date", () => new Date(0)],
+  ["a Date in year 10000", () => new Date(253_402_300_800_000)],
   ["a DOMException", () => new DOMException("aborted", "AbortError")],
   ["a function", () => () => undefined],
+  ["a lone low surrogate before text", () => "\uDC00a"],
   ["a lone surrogate", () => "\uD800"],
   ["a Map with an entry", () => new Map([["a", 1]])],
   [
@@ -136,6 +145,7 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
     () => new Error("outer", { cause: new Error("inner") }),
   ],
   ["an Error with no message", () => new Error()],
+  ["an invalid Date", () => new Date(Number.NaN)],
   ["an object holding a function", () => ({ a: 1, callback: () => 1 })],
   [
     "an object tagged as an Error",
@@ -177,6 +187,7 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ["a RegExp", () => /a/gu],
   ["a Set with an entry", () => new Set([1])],
   ["a sparse array", () => sparseArray()],
+  ["a string ending in a lone high surrogate", () => "a\uD83D"],
   ["a TypeError", () => new TypeError("bad type")],
   ["a Uint8Array", () => Uint8Array.of(1, 2)],
   ["a URL", () => new URL("https://example.com/")],
@@ -239,6 +250,13 @@ const TOOLS: readonly Tool[] = [
   FAST_JSON_STABLE_STRINGIFY,
   CANONICALIZE,
   ENSURE_ERROR,
+  DECODE_URI_COMPONENT,
+  FAST_DECODE_URI_COMPONENT,
+  JS_BASE64,
+  LUXON,
+  DATE_FNS,
+  DAYJS,
+  MOMENT,
 ];
 
 /** Build an array whose second item is the array itself. */

@@ -48,6 +48,15 @@ object KotlinTools {
                                 key in map
                             }
                         ),
+                    "safeParseBigInt" to
+                        listOf(
+                            Probe.typed(
+                                "value.toBigIntegerOrNull()",
+                                String::class.java,
+                            ) { value ->
+                                value.toBigIntegerOrNull()
+                            }
+                        ),
                     "safeParseBoolean" to
                         listOf(
                             Probe.nullable(
@@ -69,7 +78,7 @@ object KotlinTools {
                                 value.toBooleanStrictOrNull()
                             },
                         ),
-                    "safeParseInteger" to
+                    "safeParseInt" to
                         listOf(
                             Probe.typed(
                                 "value.toIntOrNull()",

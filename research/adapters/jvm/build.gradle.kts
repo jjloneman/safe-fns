@@ -20,6 +20,7 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.21.0")
     implementation("org.apache.groovy:groovy:6.0.0")
     implementation("org.springframework:spring-core:7.0.9")
+    implementation("org.springframework:spring-web:7.0.9")
     implementation("tools.jackson.core:jackson-databind:3.2.3")
 
     // `xml-apis` repeats the JDK's own `java.xml` packages, which win anyway.

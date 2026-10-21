@@ -76,7 +76,7 @@ function coerceProbe(type: SchemaType): Probe {
 export const AJV_COERCE: Tool = {
   functions: {
     safeParseBoolean: [coerceProbe("boolean")],
-    safeParseInteger: [coerceProbe("integer")],
+    safeParseInt: [coerceProbe("integer")],
     safeParseNumber: [coerceProbe("number")],
     safeParseString: [coerceProbe("string")],
   },

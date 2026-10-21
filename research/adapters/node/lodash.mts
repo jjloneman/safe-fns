@@ -22,7 +22,7 @@ export const LODASH: Tool = {
         run: ([object, key]) => lodash.has(object, key as string),
       },
     ],
-    safeParseInteger: [
+    safeParseInt: [
       {
         call: "_.toInteger(value)",
         run: ([value]) => lodash.toInteger(value),

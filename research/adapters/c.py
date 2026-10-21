@@ -118,7 +118,7 @@ def tools() -> list[Tool]:
     return [
         {
             "functions": {
-                "safeParseInteger": [
+                "safeParseInt": [
                     c_function(
                         call="atoi(value)", extra_args=(), function=LIBC.atoi
                     ),
@@ -145,7 +145,7 @@ def tools() -> list[Tool]:
         },
         {
             "functions": {
-                "safeParseInteger": [
+                "safeParseInt": [
                     cxx_function(
                         call="std::stoi(value)",
                         function=cxx.probe_stoi,
