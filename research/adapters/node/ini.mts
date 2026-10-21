@@ -20,7 +20,7 @@ const INI_VALUE: Probe = {
 export const INI: Tool = {
   functions: {
     safeParseBoolean: [INI_VALUE],
-    safeParseInteger: [INI_VALUE],
+    safeParseInt: [INI_VALUE],
     safeParseNumber: [INI_VALUE],
   },
   name: "INI",

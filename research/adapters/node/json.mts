@@ -13,7 +13,7 @@ const JSON_PARSE: Probe = {
 export const JSON_FORMAT: Tool = {
   functions: {
     safeParseBoolean: [JSON_PARSE],
-    safeParseInteger: [JSON_PARSE],
+    safeParseInt: [JSON_PARSE],
     safeParseNumber: [JSON_PARSE],
   },
   name: "JSON",

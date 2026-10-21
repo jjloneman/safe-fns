@@ -1,3 +1,5 @@
+import { unescape } from "node:querystring";
+
 import type { Tool } from "./tool.mts";
 
 import {
@@ -7,6 +9,23 @@ import {
   summarizeError,
 } from "./tool.mts";
 import { storageProbes } from "./web-storage.mts";
+
+/** A call to run with `TZ` set, for `inTimeZone`. */
+type TimeZoneRun<T> = {
+  /**
+   * The call, run while `TZ` is set.
+   *
+   * @example `() => new Date("2024-01-01T12:00").toISOString()`
+   */
+  run: () => T;
+
+  /**
+   * The IANA time zone to set.
+   *
+   * @example "America/New_York"
+   */
+  zone: string;
+};
 
 /** Node's `sessionStorage`, which needs no configuration. */
 const NODE_SESSION_STORAGE = storageProbes({
@@ -32,6 +51,35 @@ const NODE_UNCONFIGURED_LOCAL_STORAGE = storageProbes({
 export const JS_BUILT_INS: Tool = {
   functions: {
     codec: [{ call: "value", run: ([value]) => value }],
+    decodeBase64: [
+      {
+        accepts: isString,
+        call: "atob(value)",
+        run: ([value]) => atob(value as string),
+      },
+      {
+        accepts: isString,
+        call: 'Buffer.from(value, "base64").toString("utf8")',
+        run: ([value]) =>
+          Buffer.from(value as string, "base64").toString("utf8"),
+      },
+      {
+        accepts: isString,
+        call: 'new TextDecoder("utf-8", { fatal: true }).decode(Uint8Array.fromBase64(value))',
+        run: ([value]) =>
+          new TextDecoder("utf-8", { fatal: true }).decode(
+            Uint8Array.fromBase64(value as string)
+          ),
+      },
+      {
+        accepts: isString,
+        call: 'new TextDecoder("utf-8", { fatal: true }).decode(Uint8Array.fromBase64(value, { alphabet: "base64url" }))',
+        run: ([value]) =>
+          new TextDecoder("utf-8", { fatal: true }).decode(
+            Uint8Array.fromBase64(value as string, { alphabet: "base64url" })
+          ),
+      },
+    ],
     deepSortObject: [
       {
         accepts: isString,
@@ -39,8 +87,61 @@ export const JS_BUILT_INS: Tool = {
         run: ([value]) => JSON.stringify(callJsonParse(value as string)),
       },
     ],
+    encodeBase64: [
+      { call: "btoa(value)", run: ([value]) => btoa(value as string) },
+      {
+        accepts: isString,
+        call: "new TextEncoder().encode(value).toBase64()",
+        run: ([value]) => new TextEncoder().encode(value as string).toBase64(),
+      },
+      {
+        accepts: isBytes,
+        call: "value.toBase64()",
+        run: ([value]) => (value as Uint8Array).toBase64(),
+      },
+      {
+        accepts: isBufferSource,
+        call: 'Buffer.from(value).toString("base64")',
+        run: ([value]) => bufferOf(value).toString("base64"),
+      },
+    ],
     getErrorMessage: [
       { call: "String(value)", run: ([value]) => String(value) },
+    ],
+    safeDateToIsoString: [
+      {
+        accepts: ([value]) => value instanceof Date,
+        call: "value.toISOString()",
+        run: ([value]) => (value as Date).toISOString(),
+      },
+      {
+        call: "new Date(value).toISOString()",
+        run: ([value]) => new Date(value as number).toISOString(),
+      },
+    ],
+    safeDecodeUriComponent: [
+      {
+        call: "decodeURIComponent(value)",
+        run: ([value]) => decodeURIComponent(value as string),
+      },
+      {
+        call: "decodeURI(value)",
+        run: ([value]) => decodeURI(value as string),
+      },
+      {
+        call: "querystring.unescape(value)",
+        run: ([value]) => unescape(value as string),
+      },
+    ],
+    safeEncodeUriComponent: [
+      {
+        call: "encodeURIComponent(value)",
+        run: ([value]) => encodeURIComponent(value as string),
+      },
+      {
+        call: "encodeURI(value)",
+        run: ([value]) => encodeURI(value as string),
+      },
     ],
     safeJsonStringify: [
       {
@@ -58,7 +159,24 @@ export const JS_BUILT_INS: Tool = {
         run: ([object, key]) => (key as string) in (object as object),
       },
     ],
-    safeParseInteger: [
+    safeParseBigInt: [
+      { call: "BigInt(value)", run: ([value]) => BigInt(value as string) },
+    ],
+    safeParseDate: [
+      {
+        call: "new Date(value).toISOString()",
+        run: ([value]) => new Date(value as string).toISOString(),
+      },
+      {
+        call: 'new Date(value).toISOString() (TZ="America/New_York")',
+        run: ([value]) =>
+          inTimeZone({
+            run: () => new Date(value as string).toISOString(),
+            zone: "America/New_York",
+          }),
+      },
+    ],
+    safeParseInt: [
       {
         call: "Number.parseInt(value, 10)",
         run: ([value]) => Number.parseInt(value as string, 10),
@@ -75,6 +193,13 @@ export const JS_BUILT_INS: Tool = {
       {
         call: "Number.parseFloat(value)",
         run: ([value]) => Number.parseFloat(value as string),
+      },
+    ],
+    safeParseRegExp: [
+      {
+        call: "String(new RegExp(value, flags))",
+        run: ([value, flags]) =>
+          String(new RegExp(value as string, flags as string | undefined)),
       },
     ],
     safeParseString: [
@@ -126,3 +251,54 @@ export const JS_BUILT_INS: Tool = {
   tier: 1,
   version: process.version,
 };
+
+/** Wrap bytes, or text, in a Buffer, as `Buffer.from` reads each. */
+function bufferOf(value: unknown): Buffer {
+  if (typeof value === "string") {
+    return Buffer.from(value);
+  }
+
+  if (value instanceof ArrayBuffer) {
+    return Buffer.from(value);
+  }
+
+  const view = value as ArrayBufferView;
+
+  return Buffer.from(view.buffer, view.byteOffset, view.byteLength);
+}
+
+/**
+ * Run a call with `TZ` set, restoring it after, since Node reads `TZ` again
+ * whenever it changes.
+ *
+ * @returns what the call returned.
+ */
+function inTimeZone<T>({ run, zone }: TimeZoneRun<T>): T {
+  const previous = process.env.TZ;
+
+  process.env.TZ = zone;
+
+  try {
+    return run();
+  } finally {
+    if (previous === undefined) {
+      delete process.env.TZ;
+    } else {
+      process.env.TZ = previous;
+    }
+  }
+}
+
+/** Accept text or bytes: a string, an `ArrayBuffer`, or a view of one. */
+function isBufferSource([value]: readonly unknown[]): boolean {
+  return (
+    typeof value === "string" ||
+    value instanceof ArrayBuffer ||
+    ArrayBuffer.isView(value)
+  );
+}
+
+/** Accept a `Uint8Array`, the one type `toBase64` is a method of. */
+function isBytes([value]: readonly unknown[]): boolean {
+  return value instanceof Uint8Array;
+}

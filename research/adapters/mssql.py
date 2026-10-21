@@ -64,7 +64,7 @@ TOOLS: list[Tool] = [
     {
         "functions": {
             "safeParseBoolean": [cast("SELECT CAST(%s AS bit)")],
-            "safeParseInteger": [cast("SELECT CAST(%s AS bigint)")],
+            "safeParseInt": [cast("SELECT CAST(%s AS bigint)")],
             "safeParseJson": [cast("SELECT ISJSON(%s)")],
             "safeParseNumber": [cast("SELECT CAST(%s AS float)")],
             "safeParseString": [

@@ -78,7 +78,7 @@ TOOLS: list[Tool] = [
         "functions": {
             **JSON_FUNCTIONS,
             "safeParseBoolean": [cast("SELECT %s IS TRUE")],
-            "safeParseInteger": [cast("SELECT CAST(%s AS SIGNED)")],
+            "safeParseInt": [cast("SELECT CAST(%s AS SIGNED)")],
             "safeParseNumber": [cast("SELECT CAST(%s AS DOUBLE)")],
             "safeParseString": [
                 cast("SELECT CAST(%s AS CHAR)"),

@@ -22,6 +22,14 @@ final class CommonsLangTools {
           StringUtils::isBlank
         )
       ),
+      "safeParseBigInt",
+      List.of(
+        Probe.nullable(
+          "NumberUtils.createBigInteger(value)",
+          String.class,
+          NumberUtils::createBigInteger
+        )
+      ),
       "safeParseBoolean",
       List.of(
         Probe.nullable(
@@ -35,7 +43,7 @@ final class CommonsLangTools {
           BooleanUtils::toBooleanObject
         )
       ),
-      "safeParseInteger",
+      "safeParseInt",
       List.of(
         Probe.nullable(
           "NumberUtils.createInteger(value)",

@@ -69,7 +69,7 @@ TOOLS: list[Tool] = [
     {
         "functions": {
             "safeParseBoolean": [operator("$toBool")],
-            "safeParseInteger": [operator("$toLong")],
+            "safeParseInt": [operator("$toLong")],
             "safeParseNumber": [operator("$toDouble")],
             "safeParseString": [
                 operator("$toString"),

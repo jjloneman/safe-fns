@@ -1,0 +1,3040 @@
+{
+  "cases": [
+    [
+      "2024-01-01"
+    ],
+    [
+      "2024-01"
+    ],
+    [
+      "2024"
+    ],
+    [
+      "2024-01-01T12:34Z"
+    ],
+    [
+      "2024-01-01T12:34:56Z"
+    ],
+    [
+      "2024-01-01T12:34:56.789Z"
+    ],
+    [
+      "2024-01-01T12:34:56.789123Z"
+    ],
+    [
+      "2024-01-01T12:34:56+02:00"
+    ],
+    [
+      "2024-01-01T12:34:56-05:30"
+    ],
+    [
+      "+010000-01-01T00:00:00Z"
+    ],
+    [
+      "-000001-01-01T00:00:00Z"
+    ],
+    [
+      "2024-02-29"
+    ],
+    [
+      "2024-01-01T24:00:00Z"
+    ],
+    [
+      " 2024-01-01 "
+    ],
+    [
+      "​2024-01-01"
+    ],
+    [
+      "2024-01-01T12:34:56"
+    ],
+    [
+      "2024-01-01 12:34:56"
+    ],
+    [
+      "2024-01-01 12:34:56Z"
+    ],
+    [
+      "2024-01-01t12:34:56z"
+    ],
+    [
+      "2024-01-01T12:34:56+0200"
+    ],
+    [
+      "2024-01-01T12:34:56+02"
+    ],
+    [
+      "2024-01-01 12:34:56+00"
+    ],
+    [
+      "Mon, 01 Jan 2024 00:00:00 GMT"
+    ],
+    [
+      "Mon Jan 01 2024 00:00:00 GMT+0000 (Coordinated Universal Time)"
+    ],
+    [
+      "Mon Jan 01 2024 12:00:00 GMT+0200 (Eastern European Standard Time)"
+    ],
+    [
+      "Tue, 01 Jan 2024 00:00:00 GMT"
+    ],
+    [
+      "2023-02-29"
+    ],
+    [
+      "2024-13-01"
+    ],
+    [
+      "2024-01-32"
+    ],
+    [
+      "2024-01-01T24:00:01Z"
+    ],
+    [
+      "2024-01-01T23:59:60Z"
+    ],
+    [
+      "-000000-01-01T00:00:00Z"
+    ],
+    [
+      "20240101"
+    ],
+    [
+      "Jan 1 2024"
+    ],
+    [
+      "2024/01/01"
+    ],
+    [
+      "1704067200000"
+    ],
+    [
+      ""
+    ],
+    [
+      "   "
+    ],
+    [
+      {
+        "$js": "a Date"
+      }
+    ],
+    [
+      {
+        "$js": "an invalid Date"
+      }
+    ],
+    [
+      0
+    ],
+    [
+      8640000000000001
+    ],
+    [
+      {
+        "$number": "NaN"
+      }
+    ],
+    [
+      true
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "safeParseDate",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "+010000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "-000001-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "parseISO(value).toISOString()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "date-fns",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "+010000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "-000001-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "0000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.4.0"
+    },
+    {
+      "call": "dayjs(value).toISOString()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "Day.js",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "+010000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "-000001-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2023-03-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2025-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "1704-08-11T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.11.23"
+    },
+    {
+      "call": "new Date(value).toISOString()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:22a587be3c9e261d9fff0b28315fade39a4c25e74ee81d2c1e48140008b2210b",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "+010000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "-000001-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2023-03-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2025-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:01.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "0000-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.001Z"
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "new Date(value).toISOString()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "+010000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "-000001-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2023-03-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.001Z"
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "new Date(value).toISOString() (TZ=\"America/New_York\")",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "+010000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "-000001-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T05:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T17:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T17:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2023-03-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T05:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T05:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.001Z"
+        },
+        {
+          "kind": "value",
+          "value": "1970-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "DateTime.fromISO(value, { zone: \"utc\" }).toISO()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "luxon",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "+010000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "-000001-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "0000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "3.7.2"
+    },
+    {
+      "call": "moment(value, moment.ISO_8601, true).toISOString()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "Moment.js",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "+010000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "-000001-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "0000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.31.0"
+    },
+    {
+      "call": "moment(value).toISOString()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
+      "locale": "en-US",
+      "name": "Moment.js",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "+010000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "-000001-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": "0000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.31.0"
+    },
+    {
+      "call": "DateTimeOffset.Parse(value, InvariantCulture).UtcDateTime.ToString(\"o\", InvariantCulture)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.0000000Z"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.7890000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.7891230Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.0000000Z"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.0000000Z"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.0000000Z"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.0000000Z"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.0000000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.0000000Z"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "time.Parse(time.RFC3339Nano, value).UTC().Format(\"2006-01-02T15:04:05.000Z07:00\")",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "error": "*time.ParseError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.2"
+    },
+    {
+      "call": "OffsetDateTime.parse(value).toInstant().toString()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:5270a38adac3a2a675f16ccc9a4c8a392ae3b92e4f5af37c925e51a8754917fc",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789123Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56Z"
+        },
+        {
+          "kind": "value",
+          "value": "+10000-01-01T00:00:00Z"
+        },
+        {
+          "kind": "value",
+          "value": "-0001-01-01T00:00:00Z"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56Z"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56Z"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "error": "DateTimeParseException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "datetime.fromisoformat(value).astimezone(UTC).isoformat(timespec=\"milliseconds\")",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:97c838bb6a3cec504fbcc0090fefd05f81f23d2ffd91d34627f776016aadb587",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000+00:00"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.000+00:00"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000+00:00"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789+00:00"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789+00:00"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000+00:00"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000+00:00"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.000+00:00"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000+00:00"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000+00:00"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000+00:00"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000+00:00"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000+00:00"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000+00:00"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000+00:00"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000+00:00"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "Date.fromString(value).toISOString()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:eda3d5b7ab25add6c1c4ac771de8ab30570164991c102a48c5999e55522b2043",
+      "locale": "-",
+      "name": "AssemblyScript",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "+010000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "0000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-29T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "0000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2023-12-24T04:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "0000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2023-03-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2025-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-02-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:01.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "-000001-12-01T00:00:00.000Z"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "0000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "-005060-10-18T00:00:00.000Z"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "0000-01-01T00:00:00.000Z"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "assemblyscript",
+      "tier": 4,
+      "version": "0.28.20"
+    },
+    {
+      "call": "Time.iso8601(value).utc.iso8601(3)",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Ruby",
+      "outcomes": [
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.789Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T18:04:56.000Z"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "-0001-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T12:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-01T10:34:56.000Z"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "2024-01-02T00:00:00.000Z"
+        },
+        {
+          "kind": "value",
+          "value": "0000-01-01T00:00:00.000Z"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "4.0.7"
+    }
+  ],
+  "function": "safeParseDate"
+}

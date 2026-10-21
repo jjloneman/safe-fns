@@ -53,7 +53,7 @@
     {
       "call": "localStorage.removeItem(key); localStorage.getItem(key) (no --localstorage-file)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -85,7 +85,7 @@
     {
       "call": "sessionStorage.removeItem(key); sessionStorage.getItem(key)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -117,7 +117,7 @@
     {
       "call": "localStorage.removeItem(key); localStorage.getItem(key)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "HTML (jsdom)",
       "outcomes": [
@@ -149,7 +149,7 @@
     {
       "call": "localStorage.removeItem(key); localStorage.getItem(key) (opaque origin)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:d6a76195068a1fbf95d62216ba4319a8ec95d3d70f7072c06bf754f76720b09a",
+      "inputs": "sha256:0e1ed3a2b8d9a313d3694f11a63280f18d1a64a8e91fd516835bd5eb505bb082",
       "locale": "en-US",
       "name": "HTML (jsdom)",
       "outcomes": [

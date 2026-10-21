@@ -73,7 +73,7 @@ TOOLS: list[Tool] = [
         "functions": {
             "deepSortObject": [cast("SELECT CAST(%s AS jsonb)::text")],
             "safeParseBoolean": [cast("SELECT CAST(%s AS boolean)")],
-            "safeParseInteger": [cast("SELECT CAST(%s AS bigint)")],
+            "safeParseInt": [cast("SELECT CAST(%s AS bigint)")],
             "safeParseJson": [
                 cast("SELECT CAST(%s AS json)::text"),
                 cast("SELECT CAST(%s AS jsonb)::text"),

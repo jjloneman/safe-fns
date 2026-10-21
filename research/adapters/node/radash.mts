@@ -12,9 +12,7 @@ export const RADASH: Tool = {
       { call: "isObject(value)", run: ([value]) => isObject(value) },
     ],
     isSafeEmpty: [{ call: "isEmpty(value)", run: ([value]) => isEmpty(value) }],
-    safeParseInteger: [
-      { call: "toInt(value)", run: ([value]) => toInt(value) },
-    ],
+    safeParseInt: [{ call: "toInt(value)", run: ([value]) => toInt(value) }],
     safeParseNumber: [
       { call: "toFloat(value)", run: ([value]) => toFloat(value) },
     ],

@@ -1,0 +1,169 @@
+{
+  "cases": [
+    {
+      "args": [
+        {
+          "$js": "a Date"
+        }
+      ],
+      "expected": "1970-01-01T00:00:00.000Z"
+    },
+    {
+      "args": [
+        {
+          "$js": "a Date in year 10000"
+        }
+      ],
+      "expected": "+010000-01-01T00:00:00.000Z"
+    },
+    {
+      "args": [
+        {
+          "$js": "an invalid Date"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [0],
+      "expected": "1970-01-01T00:00:00.000Z"
+    },
+    {
+      "args": [1700000000000],
+      "expected": "2023-11-14T22:13:20.000Z"
+    },
+    {
+      "args": [1700000000123.9],
+      "expected": "2023-11-14T22:13:20.123Z"
+    },
+    {
+      "args": [-1],
+      "expected": "1969-12-31T23:59:59.999Z"
+    },
+    {
+      "args": [-62167219200000],
+      "expected": "0000-01-01T00:00:00.000Z"
+    },
+    {
+      "args": [-62198755200000],
+      "expected": "-000001-01-01T00:00:00.000Z"
+    },
+    {
+      "args": [253402300799999],
+      "expected": "9999-12-31T23:59:59.999Z"
+    },
+    {
+      "args": [253402300800000],
+      "expected": "+010000-01-01T00:00:00.000Z"
+    },
+    {
+      "args": [8640000000000000],
+      "expected": "+275760-09-13T00:00:00.000Z"
+    },
+    {
+      "args": [8640000000000001],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [-8640000000000000],
+      "expected": "-271821-04-20T00:00:00.000Z"
+    },
+    {
+      "args": [
+        {
+          "$number": "-0"
+        }
+      ],
+      "expected": "1970-01-01T00:00:00.000Z"
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$number": "Infinity"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed number"
+        }
+      ],
+      "expected": "1970-01-01T00:00:00.001Z"
+    },
+    {
+      "args": ["2024-01-01"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["2024-01-01T00:00:00Z"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [""],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$bigint": "0"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [true],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [{}],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "safeDateToIsoString"
+}

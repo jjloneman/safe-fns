@@ -10,8 +10,20 @@ require __DIR__ . "/research_codec.php";
 
 use ResearchCodec\Probe;
 use ResearchCodec\Tool;
+use ResearchCodec\Unrepresentable;
 
 use function ResearchCodec\runAdapter;
+
+/**
+ * Return text, or a `$repr` for bytes that aren't valid UTF-8, which the
+ * format can't carry as a string; a call's `false` failure passes through.
+ */
+function textOrInvalid(string|false $text): mixed
+{
+    return $text === false || mb_check_encoding($text, "UTF-8")
+        ? $text
+        : new Unrepresentable(payload: "invalid UTF-8", tag: '$repr');
+}
 
 runAdapter([
     new Tool(
@@ -21,6 +33,28 @@ runAdapter([
                     call: "value",
                     isCodec: true,
                     run: static fn(mixed $value): mixed => $value,
+                ),
+            ],
+            "decodeBase64" => [
+                new Probe(
+                    call: 'base64_decode($value, strict: true)',
+                    run: static fn(string $value): mixed => textOrInvalid(
+                        base64_decode($value, strict: true),
+                    ),
+                    accepts: static fn(mixed ...$args): bool => is_string(
+                        $args[0],
+                    ),
+                ),
+            ],
+            "encodeBase64" => [
+                new Probe(
+                    call: 'base64_encode($value)',
+                    run: static fn(string $value): string => base64_encode(
+                        $value,
+                    ),
+                    accepts: static fn(mixed ...$args): bool => is_string(
+                        $args[0],
+                    ),
                 ),
             ],
             "isPlainObject" => [
@@ -34,6 +68,28 @@ runAdapter([
                 new Probe(
                     call: 'empty($value)',
                     run: static fn(mixed $value): bool => empty($value),
+                ),
+            ],
+            "safeDecodeUriComponent" => [
+                new Probe(
+                    call: 'rawurldecode($value)',
+                    run: static fn(string $value): mixed => textOrInvalid(
+                        rawurldecode($value),
+                    ),
+                    accepts: static fn(mixed ...$args): bool => is_string(
+                        $args[0],
+                    ),
+                ),
+            ],
+            "safeEncodeUriComponent" => [
+                new Probe(
+                    call: 'rawurlencode($value)',
+                    run: static fn(string $value): string => rawurlencode(
+                        $value,
+                    ),
+                    accepts: static fn(mixed ...$args): bool => is_string(
+                        $args[0],
+                    ),
                 ),
             ],
             "safeJsonStringify" => [
@@ -68,7 +124,7 @@ runAdapter([
                     run: static fn(mixed $value): bool => (bool) $value,
                 ),
             ],
-            "safeParseInteger" => [
+            "safeParseInt" => [
                 new Probe(
                     call: 'intval($value)',
                     run: static fn(mixed $value): int => intval($value),

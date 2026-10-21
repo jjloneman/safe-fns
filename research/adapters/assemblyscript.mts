@@ -38,6 +38,7 @@ type ExportName =
   | "boolToString"
   | "boolToStringTrim"
   | "f32Parse"
+  | "f64DateToIsoString"
   | "f64Identity"
   | "f64ParseFloat"
   | "f64ParseInt"
@@ -45,6 +46,11 @@ type ExportName =
   | "f64ToStringTrim"
   | "i32Parse"
   | "i64Parse"
+  | "stringDateFromString"
+  | "stringDecodeUri"
+  | "stringDecodeUriComponent"
+  | "stringEncodeUri"
+  | "stringEncodeUriComponent"
   | "stringIdentity"
   | "stringTrim";
 
@@ -114,10 +120,45 @@ const PROBES: Readonly<Record<string, readonly ProbeColumn[]>> = {
       },
     },
   ],
+  safeDateToIsoString: [
+    {
+      call: "new Date(i64(value)).toISOString()",
+      exportsByType: { number: "f64DateToIsoString" },
+    },
+  ],
+  safeDecodeUriComponent: [
+    {
+      call: "decodeURI(value)",
+      exportsByType: { string: "stringDecodeUri" },
+    },
+    {
+      call: "decodeURIComponent(value)",
+      exportsByType: { string: "stringDecodeUriComponent" },
+    },
+  ],
+  safeEncodeUriComponent: [
+    {
+      call: "encodeURI(value)",
+      exportsByType: { string: "stringEncodeUri" },
+    },
+    {
+      call: "encodeURIComponent(value)",
+      exportsByType: { string: "stringEncodeUriComponent" },
+    },
+  ],
+  safeParseBigInt: [
+    { call: "i64.parse(value, 10)", exportsByType: { string: "i64Parse" } },
+  ],
   safeParseBoolean: [
     { call: "bool.parse(value)", exportsByType: { string: "boolParse" } },
   ],
-  safeParseInteger: [
+  safeParseDate: [
+    {
+      call: "Date.fromString(value).toISOString()",
+      exportsByType: { string: "stringDateFromString" },
+    },
+  ],
+  safeParseInt: [
     { call: "parseInt(value, 10)", exportsByType: { string: "f64ParseInt" } },
     { call: "i32.parse(value, 10)", exportsByType: { string: "i32Parse" } },
     { call: "i64.parse(value, 10)", exportsByType: { string: "i64Parse" } },

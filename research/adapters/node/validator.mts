@@ -22,7 +22,7 @@ export const VALIDATOR: Tool = {
         run: ([value]) => validator.toBoolean(value as string, true),
       },
     ],
-    safeParseInteger: [
+    safeParseInt: [
       {
         accepts: isString,
         call: "validator.toInt(value, 10)",

@@ -230,7 +230,7 @@ fn tools() -> Vec<Tool> {
             }],
         ),
         (
-            "safeParseInteger",
+            "safeParseInt",
             vec![Probe {
                 accepts: is_string,
                 call: "value.parse::<i64>()",

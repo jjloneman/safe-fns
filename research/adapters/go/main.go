@@ -13,16 +13,26 @@ Usage: `/opt/go-adapter <case-file>...`, the `go` Compose service.
 package main
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"math"
+	"math/big"
 	"net/url"
 	"os"
 	"reflect"
+	"regexp"
 	"runtime"
 	"strconv"
 	"strings"
+	"time"
+	"unicode/utf8"
 )
+
+// invalidUTF8 stands for bytes that aren't valid UTF-8, which the codec
+// reports as `$repr` by type name rather than silently replacing.
+type invalidUTF8 struct{}
 
 // sentinelError pairs a sentinel error with the name the tables show.
 type sentinelError struct {
@@ -54,6 +64,14 @@ func areTwoStrings(args []any) bool {
 	_, isBaseText := args[1].(string)
 
 	return isString(args) && isBaseText
+}
+
+// decodeBase64 decodes text in one of `encoding/base64`'s encodings, returning
+// the bytes as a string, or an invalidUTF8 for bytes that aren't UTF-8.
+func decodeBase64(encoding *base64.Encoding, text string) (any, error) {
+	decoded, err := encoding.DecodeString(text)
+
+	return textOrInvalid(string(decoded), err)
 }
 
 /*
@@ -92,6 +110,17 @@ func isMapAndString(args []any) bool {
 	return isMap && isString
 }
 
+// isMillis accepts a lone integer, or a finite number `int64` can truncate.
+func isMillis(args []any) bool {
+	if len(args) != 1 {
+		return false
+	}
+
+	_, isMillisValue := millisOf(args[0])
+
+	return isMillisValue
+}
+
 // isString accepts only a string first argument.
 func isString(args []any) bool {
 	_, isText := args[0].(string)
@@ -125,12 +154,74 @@ func marshalText(value any) (any, error) {
 	return string(text), nil
 }
 
+// millisOf converts a decoded number to whole milliseconds, truncating a
+// fraction, and reports whether it could.
+func millisOf(value any) (int64, bool) {
+	switch typed := value.(type) {
+	case int64:
+		return typed, true
+	case float64:
+		if math.IsNaN(typed) || math.IsInf(typed, 0) {
+			return 0, false
+		}
+
+		return int64(typed), true
+	}
+
+	return 0, false
+}
+
+// setBigInt runs `new(big.Int).SetString`, returning nil, as the call does,
+// when the text isn't an integer in that base.
+func setBigInt(text string, base int) any {
+	integer, isInteger := new(big.Int).SetString(text, base)
+
+	if !isInteger {
+		return nil
+	}
+
+	return integer
+}
+
+// textOrInvalid passes an unescaped string through, or an invalidUTF8 for
+// bytes that aren't valid UTF-8, which the format can't carry as a string.
+func textOrInvalid(text string, err error) (any, error) {
+	if err != nil || utf8.ValidString(text) {
+		return text, err
+	}
+
+	return invalidUTF8{}, nil
+}
+
 // tools lists the probes the Go standard library offers.
 func tools() []Tool {
 	return []Tool{
 		{
 			Functions: map[string][]Probe{
 				"codec": {CODEC_PROBE},
+				"decodeBase64": {
+					{
+						Accepts: isString,
+						Call:    "base64.StdEncoding.DecodeString(value)",
+						Run: func(args []any) (any, error) {
+							return decodeBase64(base64.StdEncoding, args[0].(string))
+						},
+					},
+					{
+						Accepts: isString,
+						Call:    "base64.RawStdEncoding.DecodeString(value)",
+						Run: func(args []any) (any, error) {
+							return decodeBase64(base64.RawStdEncoding, args[0].(string))
+						},
+					},
+					{
+						Accepts: isString,
+						Call:    "base64.URLEncoding.DecodeString(value)",
+						Run: func(args []any) (any, error) {
+							return decodeBase64(base64.URLEncoding, args[0].(string))
+						},
+					},
+				},
 				"deepSortObject": {
 					{
 						Accepts: isString,
@@ -143,6 +234,17 @@ func tools() []Tool {
 							}
 
 							return marshalText(value)
+						},
+					},
+				},
+				"encodeBase64": {
+					{
+						Accepts: isString,
+						Call:    "base64.StdEncoding.EncodeToString([]byte(value))",
+						Run: func(args []any) (any, error) {
+							return base64.StdEncoding.EncodeToString(
+								[]byte(args[0].(string)),
+							), nil
 						},
 					},
 				},
@@ -173,6 +275,51 @@ func tools() []Tool {
 						},
 					},
 				},
+				"safeDateToIsoString": {
+					{
+						Accepts: isMillis,
+						Call:    `time.UnixMilli(int64(value)).UTC().Format("2006-01-02T15:04:05.000Z07:00")`,
+						Run: func(args []any) (any, error) {
+							millis, _ := millisOf(args[0])
+
+							return time.UnixMilli(millis).
+								UTC().
+								Format("2006-01-02T15:04:05.000Z07:00"), nil
+						},
+					},
+				},
+				"safeDecodeUriComponent": {
+					{
+						Accepts: isString,
+						Call:    "url.PathUnescape(value)",
+						Run: func(args []any) (any, error) {
+							return textOrInvalid(url.PathUnescape(args[0].(string)))
+						},
+					},
+					{
+						Accepts: isString,
+						Call:    "url.QueryUnescape(value)",
+						Run: func(args []any) (any, error) {
+							return textOrInvalid(url.QueryUnescape(args[0].(string)))
+						},
+					},
+				},
+				"safeEncodeUriComponent": {
+					{
+						Accepts: isString,
+						Call:    "url.PathEscape(value)",
+						Run: func(args []any) (any, error) {
+							return url.PathEscape(args[0].(string)), nil
+						},
+					},
+					{
+						Accepts: isString,
+						Call:    "url.QueryEscape(value)",
+						Run: func(args []any) (any, error) {
+							return url.QueryEscape(args[0].(string)), nil
+						},
+					},
+				},
 				"safeJsonStringify": {
 					{
 						Call: "json.Marshal(value)",
@@ -193,6 +340,22 @@ func tools() []Tool {
 						},
 					},
 				},
+				"safeParseBigInt": {
+					{
+						Accepts: isString,
+						Call:    "new(big.Int).SetString(value, 10)",
+						Run: func(args []any) (any, error) {
+							return setBigInt(args[0].(string), 10), nil
+						},
+					},
+					{
+						Accepts: isString,
+						Call:    "new(big.Int).SetString(value, 0)",
+						Run: func(args []any) (any, error) {
+							return setBigInt(args[0].(string), 0), nil
+						},
+					},
+				},
 				"safeParseBoolean": {
 					{
 						Accepts: isString,
@@ -202,7 +365,22 @@ func tools() []Tool {
 						},
 					},
 				},
-				"safeParseInteger": {
+				"safeParseDate": {
+					{
+						Accepts: isString,
+						Call:    `time.Parse(time.RFC3339Nano, value).UTC().Format("2006-01-02T15:04:05.000Z07:00")`,
+						Run: func(args []any) (any, error) {
+							parsed, err := time.Parse(time.RFC3339Nano, args[0].(string))
+
+							if err != nil {
+								return nil, err
+							}
+
+							return parsed.UTC().Format("2006-01-02T15:04:05.000Z07:00"), nil
+						},
+					},
+				},
+				"safeParseInt": {
 					{
 						Accepts: isString,
 						Call:    "strconv.Atoi(value)",
@@ -233,6 +411,21 @@ func tools() []Tool {
 						Call:    "strconv.ParseFloat(value, 64)",
 						Run: func(args []any) (any, error) {
 							return strconv.ParseFloat(args[0].(string), 64)
+						},
+					},
+				},
+				"safeParseRegExp": {
+					{
+						Accepts: isLoneString,
+						Call:    "regexp.Compile(value).String()",
+						Run: func(args []any) (any, error) {
+							compiled, err := regexp.Compile(args[0].(string))
+
+							if err != nil {
+								return nil, err
+							}
+
+							return compiled.String(), nil
 						},
 					},
 				},
