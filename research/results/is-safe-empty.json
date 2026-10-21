@@ -4429,8 +4429,8 @@
     },
     {
       "call": "value.isEmpty",
-      "image": "swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66",
-      "inputs": "sha256:5b0e84cb182599a8af1ac16988411b10b787bf74f86b63c4fb4087555efb7c5f",
+      "image": "swift:6.4.1-bookworm@sha256:966e0dce7a3b76b0533df99dd0d54b38ab989fa6592450f70a42f1a1e569c053",
+      "inputs": "sha256:d9086177ec153c1ec9b82eb27e4d770f8ed531c6baba1656761927ce0bc91ab7",
       "locale": "C.UTF-8",
       "name": "Swift",
       "outcomes": [
@@ -4533,7 +4533,7 @@
       ],
       "service": "swift",
       "tier": 4,
-      "version": "6.4"
+      "version": "6.4.1"
     },
     {
       "call": "validator.isEmpty(value, { ignore_whitespace: true })",

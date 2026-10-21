@@ -134,7 +134,7 @@
 | Rails (ActiveModel)<br>`ActiveModel::Type::String.new.cast(value)` | 4 | `8.1.4` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
 | Ruby<br>`value.to_s` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
 | Ruby<br>`value.to_s.strip` | 4 | `4.0.7` | `C.UTF-8` | `ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4` |
-| Swift<br>`String(describing: value)` | 4 | `6.4` | `C.UTF-8` | `swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66` |
-| Swift<br>`value.trimmingCharacters(in: .whitespacesAndNewlines)` | 4 | `6.4` | `C.UTF-8` | `swift:6.4.0-bookworm@sha256:7dac8560dab0523028235ce7aa79e59fdc68b861c6aca6c709f57c3187dd7f66` |
+| Swift<br>`String(describing: value)` | 4 | `6.4.1` | `C.UTF-8` | `swift:6.4.1-bookworm@sha256:966e0dce7a3b76b0533df99dd0d54b38ab989fa6592450f70a42f1a1e569c053` |
+| Swift<br>`value.trimmingCharacters(in: .whitespacesAndNewlines)` | 4 | `6.4.1` | `C.UTF-8` | `swift:6.4.1-bookworm@sha256:966e0dce7a3b76b0533df99dd0d54b38ab989fa6592450f70a42f1a1e569c053` |
 | xmlschema (Python)<br>`decode(<string>value</string>)` | 4 | `xmlschema 4.3.2` | `C.UTF-8` | `python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83` |
 | xmlschema (Python)<br>`decode(<token>value</token>)` | 4 | `xmlschema 4.3.2` | `C.UTF-8` | `python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83` |
