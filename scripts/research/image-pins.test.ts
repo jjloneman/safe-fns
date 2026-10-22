@@ -423,16 +423,17 @@ describe("research image pins", () => {
     );
 
     // When - keeping those that can reach `research/`
-    const researchGroups = groupRules
-      .filter((rule) => isResearchRule({ researchFiles, rule }))
-      .map((rule) => ({
-        groupName: rule.groupName,
-        matchFileNames: rule.matchFileNames,
-      }));
+    const researchGroupRules = groupRules.filter((rule) =>
+      isResearchRule({ researchFiles, rule })
+    );
 
-    // Then - one group covers all of it, so a shared image moves in one PR
-    expect(researchGroups).toEqual([
-      { groupName: "research", matchFileNames: ["research/**"] },
-    ]);
+    // Then - all of it lands in one group, so a shared image moves in one PR
+    expect(new Set(researchGroupRules.map((rule) => rule.groupName))).toEqual(
+      new Set(["research"])
+    );
+
+    expect(
+      researchGroupRules.map((rule) => rule.matchFileNames)
+    ).toContainEqual(["research/**"]);
   });
 });

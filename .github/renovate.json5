@@ -81,6 +81,22 @@
     },
 
     /*
+     * pnpm itself, pinned by `packageManager` in all four pnpm roots, which
+     * must agree (`scripts/research/package-manager.test.ts`).
+     *
+     * - Three of the roots are under `research/`, and their images install
+     *   that pnpm, so every pin moves in the research PR, root included.
+     */
+    {
+      groupName: "research",
+      groupSlug: "research",
+      matchDepNames: ["pnpm"],
+      matchDepTypes: ["packageManager"],
+      separateMajorMinor: false,
+      separateMultipleMajor: false,
+    },
+
+    /*
      * A re-pushed tag has no release timestamp, so the moratorium would hold
      * its digest-only update forever; a version bump brings its new digest.
      */
