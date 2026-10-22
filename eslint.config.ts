@@ -363,8 +363,6 @@ const CONFIG: Linter.Config[] = defineConfig(
             "defaults",
             "jobs",
             "runs",
-            "version",
-            "updates",
           ],
           pathPattern: "^$",
         }),
@@ -390,14 +388,6 @@ const CONFIG: Linter.Config[] = defineConfig(
         documentedOrder({
           keys: ["cron", "timezone"],
           pathPattern: String.raw`^on\.schedule\[\d+\]$`,
-        }),
-        documentedOrder({
-          keys: ["package-ecosystem", "directory", "directories", "schedule"],
-          pathPattern: String.raw`^updates\[\d+\]$`,
-        }),
-        documentedOrder({
-          keys: ["interval", "day", "time", "timezone"],
-          pathPattern: String.raw`^updates\[\d+\]\.schedule$`,
         }),
         documentedOrder({ keys: [], pathPattern: ".*" }),
       ],
