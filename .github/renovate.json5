@@ -208,8 +208,8 @@
   prConcurrentLimit: 0,
   prHourlyLimit: 0,
 
-  // Monday 9am to noon; `renovate.yml`'s cron fires inside this window.
-  schedule: ["* 9-11 * * 1"],
+  // Sunday 6:00 to 8:59am; `renovate.yml`'s cron fires inside it, at 6:15.
+  schedule: ["* 6-8 * * SUN"],
 
   semanticCommits: "enabled",
   semanticCommitScope: "deps-dev",
