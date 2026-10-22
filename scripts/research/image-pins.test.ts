@@ -1,4 +1,5 @@
 import JSON5 from "json5";
+import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
@@ -303,6 +304,17 @@ function readPythonPins(): Map<string, string> {
   );
 }
 
+/** Every tracked file under `research/`, as a path from the repo root. */
+function readResearchFiles(): string[] {
+  return execFileSync("git", ["ls-files", "research"], {
+    cwd: path.dirname(RESEARCH_ROOT),
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+  })
+    .split("\n")
+    .filter((file) => file !== "");
+}
+
 /** A rule's `/…/` `allowedVersions` as a regex, or one matching nothing. */
 function toAllowedVersions(rule: PackageRule | undefined): RegExp {
   const source = ALLOWED_VERSIONS_REGEX.exec(rule?.allowedVersions ?? "")
@@ -413,14 +425,12 @@ describe("research image pins", () => {
   });
 
   test("bumps every research dependency in one group", () => {
-    // Given - every rule that names a group, and each research Dockerfile
+    // Given - every rule that names a group, and every file under `research/`
     const groupRules = readPackageRules().filter(
       (rule) => rule.groupName !== undefined
     );
 
-    const researchFiles = readDockerfileDirectories().map(
-      (directory) => `research/docker/${directory}/Dockerfile`
-    );
+    const researchFiles = readResearchFiles();
 
     // When - keeping those that can reach `research/`
     const researchGroupRules = groupRules.filter((rule) =>
