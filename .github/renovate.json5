@@ -22,6 +22,25 @@
 
   extends: ["config:recommended"],
 
+  // A group bumps many things, so its subject names the group, not one version.
+  group: {
+    commitMessageExtra: "",
+    commitMessageTopic: "the {{{groupName}}} group",
+  },
+
+  /*
+   * Two of `config:recommended`'s workarounds hold images back to LTS lines,
+   * but a research image tracks its latest stable major.
+   *
+   * - `javaLTSVersions` would freeze the `eclipse-temurin:26` images.
+   *
+   * - `nodeDockerVersioning` would never offer an odd ("Current") Node major.
+   */
+  ignorePresets: [
+    "workarounds:javaLTSVersions",
+    "workarounds:nodeDockerVersioning",
+  ],
+
   // Opens no branch for an update until the moratorium below has passed.
   internalChecksFilter: "strict",
 
@@ -103,6 +122,27 @@
     {
       enabled: false,
       matchUpdateTypes: ["digest"],
+    },
+
+    /*
+     * Tags Docker's versioning can't read, so without these only a digest
+     * update could move them, and those are off.
+     *
+     * - Debian's dated `trixie-20261005-slim`: the date is the version, and
+     *   the codename must stay the same.
+     *
+     * - SQL Server's `2025-CU9-ubuntu-24.04`: the CU is the minor, and the
+     *   base OS must stay the same.
+     */
+    {
+      matchDatasources: ["docker"],
+      matchDepNames: ["debian"],
+      versioning: "regex:^(?<compatibility>[a-z]+)-(?<major>\\d{8})-slim$",
+    },
+    {
+      matchDatasources: ["docker"],
+      matchDepNames: ["mcr.microsoft.com/mssql/server"],
+      versioning: "regex:^(?<major>\\d{4})-CU(?<minor>\\d+)-(?<compatibility>.+)$",
     },
 
     // Pins AGENTS.md sets on purpose; only the held update types stop.

@@ -50,6 +50,10 @@ jobs:
           # moratorium needs; stopping at 10 keeps the newest 1,000 tags.
           RENOVATE_DOCKER_MAX_PAGES: "10"
 
+          # Renovate tells its own commits from someone else's by author, so it
+          # needs the App's bot identity, or it stops rebasing its own PRs.
+          RENOVATE_GIT_AUTHOR: "safe-fns-renovate[bot] <346092702+safe-fns-renovate[bot]@users.noreply.github.com>"
           RENOVATE_ONBOARDING: "false"
           RENOVATE_REPOSITORIES: ${{ github.repository }}
           RENOVATE_REQUIRE_CONFIG: required
+          RENOVATE_USERNAME: "safe-fns-renovate[bot]"
