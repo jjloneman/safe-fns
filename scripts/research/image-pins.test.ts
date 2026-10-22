@@ -1,3 +1,5 @@
+import JSON5 from "json5";
+import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
@@ -5,15 +7,8 @@ import { describe, expect, test } from "vitest";
 /** The research harness's directory, which holds `compose.yaml`. */
 const RESEARCH_ROOT = path.resolve(import.meta.dirname, "../../research");
 
-/** Matches a `research/` directory an `updates` entry lists. */
-const DEPENDABOT_DIRECTORY =
-  /^\s+(?:- |directory: )"\/research(?<directory>[^"]*)"$/gmu;
-
-/** Matches the first group an `updates` entry names. */
-const DEPENDABOT_GROUP = /^ {4}groups:\n\s+(?<group>[\w-]+):$/mu;
-
-/** Where each `updates` entry in `dependabot.yml` starts. */
-const DEPENDABOT_ENTRY_START = /^ {2}- package-ecosystem: /mu;
+/** Matches a regex `allowedVersions`, as Renovate writes one: `/…/`. */
+const ALLOWED_VERSIONS_REGEX = /^\/(?<source>.+)\/$/u;
 
 /** Matches a Compose service's `image:` reference. */
 const COMPOSE_IMAGE = /^\s*image:\s*(?<reference>\S+)\s*$/gmu;
@@ -35,9 +30,8 @@ const DOCKERFILE_STAGE = /^FROM\s.*\sAS\s+(?<stage>\S+)\s*$/gimu;
 const PRE_RELEASE_TAG =
   /\d(?:a|b|rc)\d+|(?:^|[-._])(?:alpha|beta|canary|dev|ea|nightly|preview|rc|snapshot)\d*(?:$|[-._])/iu;
 
-/** Matches the `versions` list of an `ignore` rule on the `python` image. */
-const PYTHON_HOLD =
-  /- dependency-name: "python"\n\s+versions:\n(?<versions>(?:\s+- ".*"\n)+)/gu;
+/** Renovate's config, which groups and holds the research bumps. */
+const RENOVATE_CONFIG = path.join(RESEARCH_ROOT, "../.github/renovate.json5");
 
 /** Tags the pre-release pattern must flag, and ones it must not. */
 const TAG_CASES = [
@@ -89,6 +83,155 @@ const TAG_CASES = [
   },
 ];
 
+/** The fields of a Renovate `packageRules` entry these tests read. */
+type PackageRule = {
+  /**
+   * The versions a matched dependency may move to, as a `/…/` regex.
+   *
+   * @example `"/^3\\.11\\.\\d+-/"`
+   */
+  allowedVersions?: string;
+
+  /**
+   * The group whose one PR the matched updates share.
+   *
+   * @example "research"
+   */
+  groupName?: string;
+
+  /**
+   * The datasources a rule applies to.
+   *
+   * @example ["docker"]
+   */
+  matchDatasources?: string[];
+
+  /**
+   * The dependencies a rule applies to, by name.
+   *
+   * @example ["python"]
+   */
+  matchDepNames?: string[];
+
+  /**
+   * The files a rule applies to, as globs from the repo root.
+   *
+   * @example ["research/**"]
+   */
+  matchFileNames?: string[];
+
+  /**
+   * The managers a rule applies to.
+   *
+   * @example ["github-actions"]
+   */
+  matchManagers?: string[];
+
+  /**
+   * The packages a rule applies to, by name.
+   *
+   * @example ["python"]
+   */
+  matchPackageNames?: string[];
+};
+
+/** What `findPythonRule` looks up. */
+type PythonRuleQuery = {
+  /**
+   * The directory under `research/docker/` whose Dockerfile pins `python`.
+   *
+   * @example "python311"
+   */
+  directory: string;
+
+  /**
+   * Renovate's rules, in the order it applies them.
+   *
+   * @example `[{ allowedVersions: "/^3\\.11\\./", matchDepNames: ["python"] }]`
+   */
+  rules: PackageRule[];
+};
+
+/** What `isResearchRule` checks. */
+type ResearchRuleQuery = {
+  /**
+   * Files under `research/` that a rule's globs are tried against.
+   *
+   * @example ["research/docker/node/Dockerfile"]
+   */
+  researchFiles: string[];
+
+  /**
+   * The rule to check.
+   *
+   * @example `{ groupName: "research", matchFileNames: ["research/**"] }`
+   */
+  rule: PackageRule;
+};
+
+/**
+ * The rule that sets which versions `python` may move to in one Dockerfile.
+ *
+ * - Renovate applies its rules in order, so the last match wins.
+ */
+function findPythonRule({
+  directory,
+  rules,
+}: PythonRuleQuery): PackageRule | undefined {
+  const dockerfile = `research/docker/${directory}/Dockerfile`;
+
+  return [...rules]
+    .reverse()
+    .find(
+      (rule) =>
+        rule.allowedVersions !== undefined &&
+        isPythonRule(rule) &&
+        (rule.matchFileNames?.some((glob) =>
+          path.matchesGlob(dockerfile, glob)
+        ) ??
+          true)
+    );
+}
+
+/** Whether a parsed `packageRules` entry has the shape these tests read. */
+function isPackageRule(value: unknown): value is PackageRule {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+/** Whether a rule targets the `python` image, by dependency or package name. */
+function isPythonRule(rule: PackageRule): boolean {
+  const names = [
+    ...(rule.matchDepNames ?? []),
+    ...(rule.matchPackageNames ?? []),
+  ];
+
+  return (
+    names.includes("python") &&
+    (rule.matchDatasources?.includes("docker") ?? true)
+  );
+}
+
+/**
+ * Whether a rule can match a dependency under `research/`.
+ *
+ * - A glob counts when it names `research/`, or matches one of its files, so
+ *   `**\/Dockerfile` does too.
+ */
+function isResearchRule({ researchFiles, rule }: ResearchRuleQuery): boolean {
+  const isActionsOnly =
+    rule.matchManagers?.every((manager) => manager === "github-actions") ??
+    false;
+
+  const canReachResearch =
+    rule.matchFileNames?.some(
+      (glob) =>
+        glob.startsWith("research/") ||
+        researchFiles.some((file) => path.matchesGlob(file, glob))
+    ) ?? true;
+
+  return !isActionsOnly && canReachResearch;
+}
+
 /** Compose's `image:` references. */
 function readComposePins(): string[] {
   const compose = readFileSync(
@@ -101,9 +244,21 @@ function readComposePins(): string[] {
   );
 }
 
+/** The name of each directory under `research/docker/`, one per Dockerfile. */
+function readDockerfileDirectories(): string[] {
+  return readdirSync(path.join(RESEARCH_ROOT, "docker"), {
+    withFileTypes: true,
+  })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
+}
+
 /** Every `FROM` reference in one directory's Dockerfile, bar its own stages. */
 function readDockerfilePins(directory: string): string[] {
-  const dockerfile = readFileSync(path.join(directory, "Dockerfile"), "utf8");
+  const dockerfile = readFileSync(
+    path.join(RESEARCH_ROOT, "docker", directory, "Dockerfile"),
+    "utf8"
+  );
 
   const stages = new Set(
     [...dockerfile.matchAll(DOCKERFILE_STAGE)].flatMap(
@@ -116,77 +271,56 @@ function readDockerfilePins(directory: string): string[] {
     .filter((reference) => !stages.has(reference));
 }
 
-/** The images one Dependabot `updates` entry bumps; none for other ecosystems. */
-function readEntryPins(entry: string): string[] {
-  if (entry.startsWith('"docker-compose"')) {
-    return readComposePins();
-  }
-
-  if (!entry.startsWith('"docker"')) {
-    return [];
-  }
-
-  return [...entry.matchAll(DEPENDABOT_DIRECTORY)].flatMap((match) =>
-    readDockerfilePins(path.join(RESEARCH_ROOT, match.groups?.directory ?? ""))
-  );
-}
-
-/**
- * The Dependabot group that bumps each research image, by image name.
- *
- * - The `docker-compose` entry bumps `compose.yaml`'s `image:` lines, and each
- *   `docker` entry its directories' `FROM`s.
- *
- * @returns every group that bumps an image, keyed by its name without a tag.
- */
-function readGroupsByImage(): Map<string, Set<string>> {
-  const dependabot = readFileSync(
-    path.join(RESEARCH_ROOT, "../.github/dependabot.yml"),
-    "utf8"
-  );
-
-  return dependabot
-    .split(DEPENDABOT_ENTRY_START)
-    .flatMap((entry, index) => {
-      // An ungrouped entry opens its own PRs, so it counts as its own group.
-      const group =
-        DEPENDABOT_GROUP.exec(entry)?.groups?.group ?? `entry ${index}`;
-
-      return readEntryPins(entry).map((pin) => ({ group, name: toName(pin) }));
-    })
-    .reduce((groupsByImage, { group, name }) => {
-      groupsByImage.set(
-        name,
-        (groupsByImage.get(name) ?? new Set<string>()).add(group)
-      );
-
-      return groupsByImage;
-    }, new Map<string, Set<string>>());
-}
-
 /** Every image the harness pins: Compose's `image:` lines and each `FROM`. */
 function readImagePins(): string[] {
-  const dockerfilePins = readdirSync(path.join(RESEARCH_ROOT, "docker"), {
-    withFileTypes: true,
-  })
-    .filter((entry) => entry.isDirectory())
-    .flatMap((entry) =>
-      readDockerfilePins(path.join(RESEARCH_ROOT, "docker", entry.name))
-    );
-
-  return [...readComposePins(), ...dockerfilePins];
+  return [
+    ...readComposePins(),
+    ...readDockerfileDirectories().flatMap((directory) =>
+      readDockerfilePins(directory)
+    ),
+  ];
 }
 
-/** The `versions` of every `ignore` rule on `python` in `dependabot.yml`. */
-function readPythonHolds(): string[] {
-  const dependabot = readFileSync(
-    path.join(RESEARCH_ROOT, "../.github/dependabot.yml"),
-    "utf8"
-  );
+/** Renovate's `packageRules`, in the order it applies them. */
+function readPackageRules(): PackageRule[] {
+  const config: unknown = JSON5.parse(readFileSync(RENOVATE_CONFIG, "utf8"));
 
-  return [...dependabot.matchAll(PYTHON_HOLD)].flatMap(
-    (match) => match.groups?.versions?.replaceAll(/\s+/gu, " ").trim() ?? []
+  const rules =
+    typeof config === "object" && config !== null && "packageRules" in config
+      ? config.packageRules
+      : [];
+
+  return Array.isArray(rules) ? rules.filter(isPackageRule) : [];
+}
+
+/** Each research Dockerfile's `python` tag, keyed by its directory's name. */
+function readPythonPins(): Map<string, string> {
+  return new Map(
+    readDockerfileDirectories().flatMap((directory) =>
+      readDockerfilePins(directory)
+        .filter((pin) => toName(pin) === "python")
+        .map((pin) => [directory, toTag(pin)] as const)
+    )
   );
+}
+
+/** Every tracked file under `research/`, as a path from the repo root. */
+function readResearchFiles(): string[] {
+  return execFileSync("git", ["ls-files", "research"], {
+    cwd: path.dirname(RESEARCH_ROOT),
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+  })
+    .split("\n")
+    .filter((file) => file !== "");
+}
+
+/** A rule's `/…/` `allowedVersions` as a regex, or one matching nothing. */
+function toAllowedVersions(rule: PackageRule | undefined): RegExp {
+  const source = ALLOWED_VERSIONS_REGEX.exec(rule?.allowedVersions ?? "")
+    ?.groups?.source;
+
+  return new RegExp(source ?? "(?!)", "u");
 }
 
 /** The name of an image reference, without its tag or digest. */
@@ -223,7 +357,7 @@ describe("research image pins", () => {
     expect(pins.length).toBeGreaterThan(20);
   });
 
-  test("never pins a pre-release, so a Dependabot miss fails CI", () => {
+  test("never pins a pre-release, so a missed bot proposal fails CI", () => {
     // Given - every pin in the harness
     const pins = readImagePins();
 
@@ -234,38 +368,82 @@ describe("research image pins", () => {
     expect(preReleases).toEqual([]);
   });
 
-  test("holds Python's pre-releases in the one entry that bumps 3.x", () => {
-    // Given - every `ignore` on `python`, minus `python311`'s 3.11 hold
-    const holds = readPythonHolds().filter(
-      (versions) => versions !== '- ">= 3.12.0.a"'
+  test("holds every Python image to final releases", () => {
+    // Given - the hold on each Dockerfile that pins `python`, bar `python311`
+    const rules = readPackageRules();
+
+    const allowedVersions = [...readPythonPins().keys()]
+      .filter((directory) => directory !== "python311")
+      .map((directory) =>
+        toAllowedVersions(findPythonRule({ directory, rules }))
+      );
+
+    // When - testing a final release and each kind of pre-release
+    const verdicts = allowedVersions.map((allowed) =>
+      [
+        "3.14.8-slim-bookworm",
+        "3.15.0a2-slim-bookworm",
+        "3.15.0b1-slim-bookworm",
+        "3.15.0rc3-slim-bookworm",
+      ].map((tag) => allowed.test(tag))
     );
 
-    // When - finding the groups that bump `python`
-    const pythonGroups = readGroupsByImage().get("python");
-
-    // Then - one hold, in the group beside `python311`'s own
-    expect(holds).toHaveLength(1);
-    expect(pythonGroups).toEqual(
-      new Set(["research-dockerfiles", "research-python311"])
+    // Then - only the final release is allowed, for every Dockerfile
+    expect(allowedVersions.length).toBeGreaterThan(2);
+    expect(new Set(verdicts.map((verdict) => verdict.join()))).toEqual(
+      new Set(["true,false,false,false"])
     );
   });
 
-  test("bumps each shared image in one Dependabot group", () => {
-    // Given - the groups that bump each image
-    const groupsByImage = readGroupsByImage();
+  test("holds python311 on 3.11", () => {
+    // Given - the hold on `python311`'s Dockerfile
+    const allowed = toAllowedVersions(
+      findPythonRule({ directory: "python311", rules: readPackageRules() })
+    );
 
-    // When - keeping images split across groups, bar `python311`'s hold
-    const splitImages = [...groupsByImage]
-      .filter(
-        ([name, groups]) =>
-          [...groups].filter(
-            (group) => !(name === "python" && group === "research-python311")
-          ).length > 1
-      )
-      .map(([name, groups]) => `${name}: ${[...groups].join(", ")}`);
+    // When - testing its own pin and the next minor
+    const pin = readPythonPins().get("python311") ?? "";
 
-    // Then - every shared image moves in one PR, so its results do too
-    expect(groupsByImage.size).toBeGreaterThan(10);
-    expect(splitImages).toEqual([]);
+    // Then - it keeps 3.11 and refuses 3.12
+    expect(allowed.test(pin)).toBe(true);
+    expect(allowed.test("3.12.0-slim-bookworm")).toBe(false);
+  });
+
+  test("keeps every Python pin inside its hold", () => {
+    // Given - each Dockerfile's `python` tag, and Renovate's rules
+    const pins = [...readPythonPins()];
+    const rules = readPackageRules();
+
+    // When - keeping those its own hold would refuse
+    const refused = pins.filter(
+      ([directory, tag]) =>
+        !toAllowedVersions(findPythonRule({ directory, rules })).test(tag)
+    );
+
+    // Then - there are none
+    expect(refused).toEqual([]);
+  });
+
+  test("bumps every research dependency in one group", () => {
+    // Given - every rule that names a group, and every file under `research/`
+    const groupRules = readPackageRules().filter(
+      (rule) => rule.groupName !== undefined
+    );
+
+    const researchFiles = readResearchFiles();
+
+    // When - keeping those that can reach `research/`
+    const researchGroupRules = groupRules.filter((rule) =>
+      isResearchRule({ researchFiles, rule })
+    );
+
+    // Then - all of it lands in one group, so a shared image moves in one PR
+    expect(new Set(researchGroupRules.map((rule) => rule.groupName))).toEqual(
+      new Set(["research"])
+    );
+
+    expect(
+      researchGroupRules.map((rule) => rule.matchFileNames)
+    ).toContainEqual(["research/**"]);
   });
 });

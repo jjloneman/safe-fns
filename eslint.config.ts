@@ -292,6 +292,9 @@ const CONFIG: Linter.Config[] = defineConfig(
    *
    * - `tsconfig.json` and VS Code's `.vscode/*.json` are JSONC — their tools
    *   read comments in them — so they get the JSONC preset, which allows them.
+   *
+   * - Renovate's `.github/renovate.json5` is JSON5, so its config can carry
+   *   comments and unquoted keys.
    */
   {
     extends: [jsoncPlugin.configs["flat/recommended-with-json"]],
@@ -303,8 +306,12 @@ const CONFIG: Linter.Config[] = defineConfig(
     files: ["**/*.jsonc", "**/tsconfig.json", ".vscode/*.json"],
   },
   {
+    extends: [jsoncPlugin.configs["flat/recommended-with-json5"]],
+    files: ["**/*.json5"],
+  },
+  {
     extends: [jsoncPlugin.configs["flat/prettier"]],
-    files: ["**/*.json", "**/*.jsonc"],
+    files: ["**/*.json", "**/*.json5", "**/*.jsonc"],
     ignores: ["**/package.json"],
     rules: {
       "jsonc/sort-keys": ["error", "asc", { caseSensitive: false }],
@@ -340,7 +347,7 @@ const CONFIG: Linter.Config[] = defineConfig(
     rules: {
       "yml/sort-keys": [
         "error",
-        // A workflow's, an action's, or dependabot.yml's top level.
+        // A workflow's or an action's top level.
         documentedOrder({
           keys: [
             "name",
@@ -356,8 +363,6 @@ const CONFIG: Linter.Config[] = defineConfig(
             "defaults",
             "jobs",
             "runs",
-            "version",
-            "updates",
           ],
           pathPattern: "^$",
         }),
@@ -383,14 +388,6 @@ const CONFIG: Linter.Config[] = defineConfig(
         documentedOrder({
           keys: ["cron", "timezone"],
           pathPattern: String.raw`^on\.schedule\[\d+\]$`,
-        }),
-        documentedOrder({
-          keys: ["package-ecosystem", "directory", "directories", "schedule"],
-          pathPattern: String.raw`^updates\[\d+\]$`,
-        }),
-        documentedOrder({
-          keys: ["interval", "day", "time", "timezone"],
-          pathPattern: String.raw`^updates\[\d+\]\.schedule$`,
         }),
         documentedOrder({ keys: [], pathPattern: ".*" }),
       ],

@@ -3,8 +3,8 @@
  * Spring, Kotlin, Groovy, and Xerces-J, compiled into one image so the JVM
  * starts once per run.
  *
- * - Every version is exact and at least 7 days old; Dependabot's cooldown
- *   keeps the bumps there, since Maven has no `minimumReleaseAge`.
+ * - Every version is exact and at least 7 days old; Renovate's
+ *   `minimumReleaseAge` keeps the bumps there, since Maven has no floor.
  */
 plugins {
     application

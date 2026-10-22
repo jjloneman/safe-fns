@@ -1,5 +1,5 @@
 # The XML Schema adapter's libraries, installed with `--require-hashes`, so a
-# re-uploaded file can't change what runs; Dependabot bumps both together.
+# re-uploaded file can't change what runs; Renovate bumps both together.
 #
 # - Every transitive dependency is listed (`elementpath` has none of its own),
 #   so the image installs with `--no-deps`.

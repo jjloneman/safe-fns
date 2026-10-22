@@ -1,0 +1,218 @@
+/*
+ * Weekly dependency updates, run by `.github/workflows/renovate.yml`.
+ *
+ * - Renovate only creates or updates a branch inside `schedule`, so a change
+ *   to this file never opens PRs midweek.
+ *
+ * - A typical week opens three PRs: the root's patch and minor bumps, the
+ *   Actions' patch and minor bumps, and every research bump, across all its
+ *   managers; a major outside `research/` gets its own.
+ *
+ * - `packageRules` apply in order, and a later rule overrides an earlier one,
+ *   so the holds come after the groups.
+ */
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  assignees: ["jjloneman"],
+
+  // Reads `chore(deps-dev): ⬆️ bump foo from 1.0.0 to 1.0.1`, per AGENTS.md.
+  commitMessageAction: "⬆️ bump",
+  commitMessageExtra: "from {{{currentVersion}}} to {{{newVersion}}}",
+  commitMessageTopic: "{{{depName}}}",
+
+  extends: ["config:recommended"],
+
+  // A group bumps many things, so its subject names the group, not one version.
+  group: {
+    commitMessageExtra: "",
+    commitMessageTopic: "the {{{groupName}}} group",
+  },
+
+  /*
+   * Two of `config:recommended`'s workarounds hold images back to LTS lines,
+   * but a research image tracks its latest stable major.
+   *
+   * - `javaLTSVersions` would freeze the `eclipse-temurin:26` images.
+   *
+   * - `nodeDockerVersioning` would never offer an odd ("Current") Node major.
+   */
+  ignorePresets: [
+    "workarounds:javaLTSVersions",
+    "workarounds:nodeDockerVersioning",
+  ],
+
+  // Opens no branch for an update until the moratorium below has passed.
+  internalChecksFilter: "strict",
+
+  // Applied by exact name, so a misspelled label is silently skipped.
+  labels: ["📦 dependencies"],
+
+  /*
+   * The 7-day moratorium (AGENTS.md): an update is held until its release is
+   * that old.
+   *
+   * - pnpm's own `minimumReleaseAge` floor would otherwise reject a too-new
+   *   version when Renovate updates the lockfile.
+   *
+   * - Maven, Cargo, PyPI, and image registries have no floor of their own, so
+   *   this is what holds them back.
+   *
+   * - Only Docker Hub reports when an image tag was pushed, so an update from
+   *   another registry (`mcr.microsoft.com`, `ghcr.io`) stays pending; tick it
+   *   on the Dependency Dashboard once its tag is 7 days old.
+   */
+  minimumReleaseAge: "7 days",
+
+  packageRules: [
+    {
+      addLabels: ["🤖 ci"],
+      matchManagers: ["github-actions"],
+      semanticCommitScope: "actions",
+    },
+
+    // Majors stay ungrouped, so a breaking bump gets its own review.
+    {
+      groupName: "actions patch and minor",
+      groupSlug: "actions-patch-and-minor",
+      matchManagers: ["github-actions"],
+      matchUpdateTypes: ["minor", "patch"],
+    },
+    {
+      groupName: "root patch and minor",
+      groupSlug: "root-patch-and-minor",
+      matchFileNames: ["package.json", "pnpm-lock.yaml"],
+      matchUpdateTypes: ["minor", "patch"],
+    },
+
+    /*
+     * Every research bump, majors included, in one PR: a new major is a result
+     * to record, not a breaking change to the package.
+     *
+     * - An image several adapters share (Node, 3.x Python, the .NET SDK) moves
+     *   once, so its results are regenerated together.
+     */
+    {
+      groupName: "research",
+      groupSlug: "research",
+      matchFileNames: ["research/**"],
+      separateMajorMinor: false,
+      separateMultipleMajor: false,
+    },
+
+    /*
+     * pnpm itself, pinned by `packageManager` in all four pnpm roots, which
+     * must agree (`scripts/research/package-manager.test.ts`).
+     *
+     * - Three of the roots are under `research/`, and their images install
+     *   that pnpm, so every pin moves in the research PR, root included.
+     */
+    {
+      groupName: "research",
+      groupSlug: "research",
+      matchDepNames: ["pnpm"],
+      matchDepTypes: ["packageManager"],
+      separateMajorMinor: false,
+      separateMultipleMajor: false,
+    },
+
+    /*
+     * A re-pushed tag has no release timestamp, so the moratorium would hold
+     * its digest-only update forever; a version bump brings its new digest.
+     */
+    {
+      enabled: false,
+      matchUpdateTypes: ["digest"],
+    },
+
+    /*
+     * Tags Docker's versioning can't read, so without these only a digest
+     * update could move them, and those are off.
+     *
+     * - Debian's dated `trixie-20261005-slim`: the date is the version, and
+     *   the codename must stay the same.
+     *
+     * - SQL Server's `2025-CU9-ubuntu-24.04`: the CU is the minor, and the
+     *   base OS must stay the same.
+     */
+    {
+      matchDatasources: ["docker"],
+      matchDepNames: ["debian"],
+      versioning: "regex:^(?<compatibility>[a-z]+)-(?<major>\\d{8})-slim$",
+    },
+    {
+      matchDatasources: ["docker"],
+      matchDepNames: ["mcr.microsoft.com/mssql/server"],
+      versioning: "regex:^(?<major>\\d{4})-CU(?<minor>\\d+)-(?<compatibility>.+)$",
+    },
+
+    // Pins AGENTS.md sets on purpose; only the held update types stop.
+    {
+      // Tracks the `engines.node` floor (22), so the typecheck rejects an API a
+      // supported Node doesn't have.
+      enabled: false,
+      matchDepNames: ["@types/node"],
+      matchUpdateTypes: ["major"],
+    },
+    {
+      // Stays on 6.x until typescript-eslint supports TypeScript 7.
+      enabled: false,
+      matchDepNames: ["typescript"],
+      matchUpdateTypes: ["major"],
+    },
+    {
+      // The `typescript-<major.minor>` aliases are consumer-test fixtures, each
+      // pinned to one release line; only patches within it are wanted.
+      enabled: false,
+      matchDepNames: ["/^typescript-\\d/"],
+      matchUpdateTypes: ["major", "minor"],
+    },
+
+    /*
+     * Python's images tag pre-releases `3.15.0a2`, `3.15.0b1`, and `3.15.0rc3`,
+     * and the research harness never pins one.
+     *
+     * - Allowing only a final `X.Y.Z-` tag holds them without a range to add
+     *   before each new minor.
+     */
+    {
+      allowedVersions: "/^\\d+\\.\\d+\\.\\d+-/",
+      matchDatasources: ["docker"],
+      matchDepNames: ["python"],
+    },
+
+    // `python311` is held on 3.11, the last Python with `distutils`.
+    {
+      allowedVersions: "/^3\\.11\\.\\d+-/",
+      matchDatasources: ["docker"],
+      matchDepNames: ["python"],
+      matchFileNames: ["research/docker/python311/**"],
+    },
+
+    /*
+     * `config:recommended` makes a `dependencies`-type bump a `fix`, which
+     * release-please would publish as a release.
+     *
+     * - No dependency bump here changes the package, so every one is a
+     *   `chore`, hidden from the changelog.
+     */
+    {
+      matchPackageNames: ["*"],
+      semanticCommitType: "chore",
+    },
+  ],
+
+  // Commits go through the API, so they're signed and attributed to the App.
+  platformCommit: "enabled",
+
+  // No cap: grouping, not throttling, keeps the PR count down.
+  prConcurrentLimit: 0,
+  prHourlyLimit: 0,
+
+  // Monday 9am to noon; `renovate.yml`'s cron fires inside this window.
+  schedule: ["* 9-11 * * 1"],
+
+  semanticCommits: "enabled",
+  semanticCommitScope: "deps-dev",
+  semanticCommitType: "chore",
+  timezone: "America/New_York",
+}

@@ -9,7 +9,7 @@
 # - Each service sits in a profile per batch, so a run pulls only what it
 #   needs; the `role` label tells the runner an adapter from a formatter.
 #
-# - Every image is pinned by version and digest, and bumped by Dependabot.
+# - Every image is pinned by version and digest, and bumped by Renovate.
 #
 # - The repo is mounted read-only under `/work`, mirroring its layout, so an
 #   adapter's relative imports resolve.

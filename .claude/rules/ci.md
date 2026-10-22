@@ -66,6 +66,18 @@ What to know before editing a workflow. AGENTS.md's CI section lists what runs; 
   - `research-check.yml` has a `report` job of its own instead, which re-posts the shared CI timings comment once its check ends.
 - Every job that runs the harness grants only `contents: read`; only `research-check.yml`'s `report` job gets more (see Permissions).
 
+## ⬆️ Renovate workflow
+
+- **`renovate.yml` authenticates as a GitHub App**, minted by `actions/create-github-app-token` from `RENOVATE_APP_CLIENT_ID` and `RENOVATE_APP_PRIVATE_KEY`.
+  - A PR or push made with `GITHUB_TOKEN` starts no workflows, so Renovate's PRs would never run CI.
+  - The job itself grants only `contents: read`; the App's own permissions do the writing.
+  - `RENOVATE_GIT_AUTHOR` and `RENOVATE_USERNAME` name the App's bot user (`safe-fns-renovate[bot]`, id `346092702`); Renovate tells its own commits from someone else's by author, and stops rebasing a branch it thinks someone else edited.
+- **Its cron must overlap the config's `schedule`** (Monday 9am to noon, New York), in both EST and EDT, since Renovate creates and updates branches only inside it.
+- **The Renovate CLI version is pinned** in the action's `renovate-version`, at least 7 days old, like any other dependency: it runs with write access.
+- **`RENOVATE_DOCKER_MAX_PAGES` stays at 10.** Docker Hub refuses an anonymous tag listing past page 10, and Renovate then drops every tag's push date, which `minimumReleaseAge` needs to release an image update.
+- **`concurrency` queues, never cancels**, so a run is never stopped partway through pushing branches.
+- Like `release.yml`, it is not in `report`'s `needs:` and not in `TIMED_WORKFLOWS`: it never runs on a PR.
+
 ## 💬 Sticky comments
 
 - Each report upserts its comment through [scripts/lib/publish-ci-report.ts](../../scripts/lib/publish-ci-report.ts), found by the report's opening `## …` heading.
@@ -73,14 +85,14 @@ What to know before editing a workflow. AGENTS.md's CI section lists what runs; 
   - Changing a report's heading orphans its old comment on open PRs; the next run posts a new one.
 - **A bug fails `report`; an outage only warns.**
   - A script's own failure — a missing scope, an unreadable summary — exits 1, so it gets fixed.
-  - A failure to post that the script can't fix — the read-only token Dependabot and fork PRs get, an API blip — is warned about and swallowed in `publishCiReport`, so it never turns a PR red.
+  - A failure to post that the script can't fix — the read-only token fork PRs get, an API blip — is warned about and swallowed in `publishCiReport`, so it never turns a PR red.
 - Coverage is uploaded even when the gate fails (`!cancelled()`), guarded on `coverage/coverage-summary.json` existing, since a coverage drop is when the table matters most.
   - `report` downloads it by `pattern`, which matches nothing, rather than failing, when the tests never wrote it.
 - Run either script locally to print its report: `node scripts/post-coverage-pr-comment.ts` after `pnpm test:coverage`, or `node scripts/post-ci-timings.ts <run-id>`.
 
 ## 📌 Pins
 
-- Every `uses:` is pinned to an exact `vX.Y.Z`; Dependabot proposes bumps after a 7-day cooldown.
+- Every `uses:` is pinned to an exact `vX.Y.Z`; Renovate proposes bumps once a release is 7 days old.
 - Keys under `.github/` follow GitHub's documented order, not the alphabet: `name`, `on`, … `jobs` in a workflow; `name`, `if`, `uses`, `with`, `env`, `run` in a step.
   - `yml/sort-keys` enforces it through the `documentedOrder` options in `eslint.config.ts`; a key it doesn't list follows the listed ones, alphabetized.
   - `eslint --fix` reorders the keys but can strand a comment on the wrong key; check the diff after.

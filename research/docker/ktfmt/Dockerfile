@@ -3,7 +3,7 @@
 #
 # - A JDK, not a JRE: ktfmt loads `javac`'s `com.sun.source` classes.
 #
-# - Dependabot bumps the `FROM` line only; bump `KTFMT_VERSION` and the
+# - Renovate bumps the `FROM` line only; bump `KTFMT_VERSION` and the
 #   checksum by hand, to a release at least 7 days old.
 FROM eclipse-temurin:26.0.2.1_1-jdk-noble@sha256:3c5ccd0bde683b3d760127a75189c0d9ad7b80de53ebb184ef3e525dd44c2c94
 
