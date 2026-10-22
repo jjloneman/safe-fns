@@ -367,8 +367,8 @@ The conventions below are written for TypeScript, but they bind code in every la
 - `.github/workflows/release.yml` runs on every push to `main` (see [Versioning & releases](#-versioning--releases)):
   - `release-please` — opens or updates the release PR, and tags the release once it is merged;
   - `publish` — only when a release was just created; builds and publishes to npm.
-- `.github/workflows/renovate.yml` runs [Renovate](https://docs.renovatebot.com), configured by `.github/renovate.json5`, on Monday mornings (and on `workflow_dispatch`):
-  - it creates and updates PRs only inside the config's Monday 9am-to-noon `schedule`, so editing the config never opens PRs midweek;
+- `.github/workflows/renovate.yml` runs [Renovate](https://docs.renovatebot.com), configured by `.github/renovate.json5`, on Sunday mornings at 6:15 New York time (and on `workflow_dispatch`):
+  - it creates and updates PRs only inside the config's Sunday 6:00-to-8:59am `schedule`, so editing the config never opens PRs midweek;
   - it holds every update for 7 days (`minimumReleaseAge`), matching the [moratorium](#-7-day-dependency-moratorium), and skips digest-only image updates, which have no release date to age;
   - only Docker Hub reports a tag's push date, so an image from another registry (`mcr.microsoft.com`, `ghcr.io`) stays pending until it's ticked on the Dependency Dashboard, once its tag is 7 days old;
   - every bump is a `chore`, so none cuts a release;

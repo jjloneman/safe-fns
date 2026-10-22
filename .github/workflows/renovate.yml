@@ -2,15 +2,23 @@ name: ⬆️ Renovate
 
 # Weekly dependency updates, configured by `.github/renovate.json5`.
 #
-# - The cron fires hourly from 13:00 to 16:00 UTC on Mondays, which puts three
-#   runs inside the config's 9am-to-noon New York `schedule` in both EST and
-#   EDT; the fourth, outside it, only refreshes the Dependency Dashboard.
-#
 # - `workflow_dispatch` runs it on demand, e.g. after ticking a box on the
-#   Dependency Dashboard.
+#   Dependency Dashboard; outside the config's `schedule` window, a run only
+#   refreshes the dashboard.
 on:
   schedule:
-    - cron: "17 13-16 * * 1"
+    # Every Sunday at 6:15am New York time (EST or EDT, as `timezone` follows
+    # daylight saving).
+    #
+    # - It must fall inside the config's `schedule`, Sunday 6:00 to 8:59am,
+    #   since Renovate only creates and updates PRs there; the window leaves
+    #   room for GitHub starting the run late.
+    #
+    # - 6:15 rather than 6:00 because GitHub's scheduler is busiest on the hour
+    #   and half hour, when a queued run is more likely to be delayed or
+    #   dropped.
+    - cron: "15 6 * * SUN"
+      timezone: "America/New_York"
   workflow_dispatch: {}
 
 # Never cancel a run partway through pushing branches; queue the next instead.
