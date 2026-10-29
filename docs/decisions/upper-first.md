@@ -2,8 +2,9 @@
 type: Decision
 title: How upperFirst and lowerFirst change the first letter
 description: The first code point goes through `toUpperCase` / `toLowerCase`, locale-free by default so the result matches TypeScript's `Capitalize` / `Uncapitalize`, or through `toLocaleUpperCase` / `toLocaleLowerCase` when `locale` is set; the rest is untouched unless `upperFirst`'s `lowerRest` is set, and a non-string returns the `fallback` option, `""` by default.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T02:45:34Z }
+verified: { by: human:jjloneman, at: 2026-10-29T05:41:39Z }
 ---
 
 # How upperFirst and lowerFirst change the first letter

@@ -2,8 +2,9 @@
 type: Decision
 title: How toBasicAscii folds text to ASCII
 description: NFKD, then combining marks removed, then a small table for the Latin letters and punctuation that don't decompose; whatever is still outside ASCII is dropped unless `replaceUnknownWith` names a replacement, so the result is always ASCII, and a non-string returns the `fallback` option, `""` by default.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T05:04:12Z }
+verified: { by: human:jjloneman, at: 2026-10-29T05:41:39Z }
 ---
 
 # How toBasicAscii folds text to ASCII

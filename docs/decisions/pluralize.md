@@ -2,8 +2,9 @@
 type: Decision
 title: How pluralize picks a form
 description: pluralize(word, count) returns the singular exactly when the count is 1 or -1, and otherwise the `plural` option or a built-in English suffix, always lowercase (`-s`, `-es`, `-ies`); there is no dictionary, `includeCount` prefixes the count, and a non-string word returns the `fallback` option, `""` by default.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T18:07:40Z }
+verified: { by: human:jjloneman, at: 2026-10-29T05:41:39Z }
 ---
 
 # How pluralize picks a form
