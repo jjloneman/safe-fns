@@ -25,7 +25,7 @@ export const LODASH: Tool = {
       {
         accepts: hasNoOptions,
         call: "_.lowerFirst(value)",
-        run: ([value]) => lodash.lowerFirst(value),
+        run: ([value]) => lodash.lowerFirst(value as string),
       },
     ],
     safeObjectHasOwn: [
@@ -57,16 +57,19 @@ export const LODASH: Tool = {
       },
     ],
     toBasicAscii: [
-      { call: "_.deburr(value)", run: ([value]) => lodash.deburr(value) },
+      {
+        call: "_.deburr(value)",
+        run: ([value]) => lodash.deburr(value as string),
+      },
     ],
     trimBlank: [
-      { call: "_.trim(value)", run: ([value]) => lodash.trim(value) },
+      { call: "_.trim(value)", run: ([value]) => lodash.trim(value as string) },
     ],
     upperFirst: [
       {
         accepts: hasNoOptions,
         call: "_.upperFirst(value)",
-        run: ([value]) => lodash.upperFirst(value),
+        run: ([value]) => lodash.upperFirst(value as string),
       },
       {
         accepts: (args) =>
@@ -74,7 +77,7 @@ export const LODASH: Tool = {
           (hasOnlyOptions(args, ["lowerRest"]) &&
             (args[1] as Record<string, unknown>).lowerRest === true),
         call: "_.capitalize(value)",
-        run: ([value]) => lodash.capitalize(value),
+        run: ([value]) => lodash.capitalize(value as string),
       },
     ],
   },
