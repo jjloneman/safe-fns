@@ -84,6 +84,7 @@ TOOLS: list[Tool] = [
                 cast("SELECT CAST(%s AS CHAR)"),
                 cast("SELECT TRIM(%s)"),
             ],
+            "trimBlank": [cast("SELECT TRIM(%s)")],
         },
         "locale": query_text("SELECT @@collation_connection"),
         "name": "MariaDB" if IS_MARIADB else "MySQL",

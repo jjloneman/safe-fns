@@ -1,5 +1,6 @@
 package com.safefns.research;
 
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Strings;
 import com.google.common.net.UrlEscapers;
 import com.google.common.primitives.Doubles;
@@ -50,6 +51,14 @@ final class GuavaTools {
           "Strings.nullToEmpty(value)",
           String.class,
           Strings::nullToEmpty
+        )
+      ),
+      "trimBlank",
+      List.of(
+        Probe.typed(
+          "CharMatcher.whitespace().trimFrom(value)",
+          String.class,
+          value -> CharMatcher.whitespace().trimFrom(value)
         )
       )
     ),

@@ -29,6 +29,16 @@ enum SwiftAdapter {
               isEmpty($0[0])
             }
           ],
+          "lowerFirst": [
+            Probe(
+              accepts: isLoneString,
+              call: "value.prefix(1).lowercased() + value.dropFirst()"
+            ) {
+              let value = $0[0] as! String
+
+              return value.prefix(1).lowercased() + value.dropFirst()
+            }
+          ],
           "safeObjectHasOwn": [
             Probe(
               accepts: isDictionaryAndKey, call: "object.keys.contains(key)"
@@ -61,6 +71,37 @@ enum SwiftAdapter {
                 in: .whitespacesAndNewlines
               )
             },
+          ],
+          "toBasicAscii": [
+            Probe(
+              accepts: isString,
+              call: "value.folding(options: .diacriticInsensitive, locale: nil)"
+            ) {
+              ($0[0] as! String).folding(
+                options: .diacriticInsensitive,
+                locale: nil
+              )
+            }
+          ],
+          "trimBlank": [
+            Probe(
+              accepts: isString,
+              call: "value.trimmingCharacters(in: .whitespacesAndNewlines)"
+            ) {
+              ($0[0] as! String).trimmingCharacters(
+                in: .whitespacesAndNewlines
+              )
+            }
+          ],
+          "upperFirst": [
+            Probe(
+              accepts: isLoneString,
+              call: "value.prefix(1).uppercased() + value.dropFirst()"
+            ) {
+              let value = $0[0] as! String
+
+              return value.prefix(1).uppercased() + value.dropFirst()
+            }
           ],
         ],
         name: "Swift",
@@ -102,6 +143,11 @@ enum SwiftAdapter {
   /// Accept a string first argument.
   static func isString(_ args: [Any?]) -> Bool {
     args[0] is String
+  }
+
+  /// Accept exactly one argument, a string.
+  static func isLoneString(_ args: [Any?]) -> Bool {
+    args.count == 1 && args[0] is String
   }
 
   /// Report the compiler's Swift version, such as `6.4`.

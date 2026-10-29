@@ -68,6 +68,7 @@ TOOLS: list[Tool] = [
                 select("SELECT CAST(? AS TEXT)"),
                 select("SELECT trim(?)"),
             ],
+            "trimBlank": [select("SELECT trim(?)")],
         },
         "name": "SQLite",
         "tier": 3,

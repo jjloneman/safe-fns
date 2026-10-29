@@ -107,7 +107,17 @@ export function stringIdentity(value: string): string {
   return value;
 }
 
+/** `value.charAt(0).toLowerCase() + value.slice(1)`. */
+export function stringLowerFirst(value: string): string {
+  return value.charAt(0).toLowerCase() + value.slice(1);
+}
+
 /** `value.trim()`: `toString()` on a string returns the string itself. */
 export function stringTrim(value: string): string {
   return value.trim();
+}
+
+/** `value.charAt(0).toUpperCase() + value.slice(1)`. */
+export function stringUpperFirst(value: string): string {
+  return value.charAt(0).toUpperCase() + value.slice(1);
 }

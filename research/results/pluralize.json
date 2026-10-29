@@ -1,0 +1,1942 @@
+{
+  "cases": [
+    [
+      "box",
+      2
+    ],
+    [
+      "Box",
+      2
+    ],
+    [
+      "BOX",
+      2
+    ],
+    [
+      "bus",
+      2
+    ],
+    [
+      "buzz",
+      2
+    ],
+    [
+      "church",
+      2
+    ],
+    [
+      "dish",
+      2
+    ],
+    [
+      "quiz",
+      2
+    ],
+    [
+      "city",
+      2
+    ],
+    [
+      "CITY",
+      2
+    ],
+    [
+      "day",
+      2
+    ],
+    [
+      "toy",
+      2
+    ],
+    [
+      "key",
+      2
+    ],
+    [
+      "potato",
+      2
+    ],
+    [
+      "photo",
+      2
+    ],
+    [
+      "leaf",
+      2
+    ],
+    [
+      "knife",
+      2
+    ],
+    [
+      "child",
+      2
+    ],
+    [
+      "person",
+      2
+    ],
+    [
+      "mouse",
+      2
+    ],
+    [
+      "sheep",
+      2
+    ],
+    [
+      "series",
+      2
+    ],
+    [
+      "analysis",
+      2
+    ],
+    [
+      "cactus",
+      2
+    ],
+    [
+      "status code",
+      2
+    ],
+    [
+      "API",
+      2
+    ],
+    [
+      "ID",
+      2
+    ],
+    [
+      "OS",
+      2
+    ],
+    [
+      "AoB",
+      2
+    ],
+    [
+      "",
+      2
+    ],
+    [
+      "café",
+      2
+    ],
+    [
+      "été",
+      2
+    ],
+    [
+      "box",
+      0
+    ],
+    [
+      "box",
+      1
+    ],
+    [
+      "box",
+      -1
+    ],
+    [
+      "box",
+      -2
+    ],
+    [
+      "box",
+      0.5
+    ],
+    [
+      "box",
+      1.5
+    ],
+    [
+      "box",
+      {
+        "$number": "-0"
+      }
+    ],
+    [
+      "box",
+      {
+        "$number": "NaN"
+      }
+    ],
+    [
+      "box",
+      {
+        "$number": "Infinity"
+      }
+    ],
+    [
+      "box",
+      {
+        "$bigint": "1"
+      }
+    ],
+    [
+      "box",
+      {
+        "$bigint": "2"
+      }
+    ],
+    [
+      "box",
+      "1"
+    ],
+    [
+      "box",
+      null
+    ],
+    [
+      "child",
+      1,
+      {
+        "plural": "children"
+      }
+    ],
+    [
+      "child",
+      2,
+      {
+        "plural": "children"
+      }
+    ],
+    [
+      "sheep",
+      2,
+      {
+        "plural": "sheep"
+      }
+    ],
+    [
+      "box",
+      3,
+      {
+        "includeCount": true
+      }
+    ],
+    [
+      "box",
+      1,
+      {
+        "includeCount": true
+      }
+    ],
+    [
+      "person",
+      2,
+      {
+        "includeCount": true,
+        "plural": "people"
+      }
+    ],
+    [
+      null,
+      2
+    ],
+    [
+      42,
+      2
+    ],
+    [
+      "box",
+      {
+        "$js": "a boxed number"
+      }
+    ],
+    [
+      "box",
+      {
+        "$js": "a boxed bigint"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "pluralize",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "Boxes"
+        },
+        {
+          "kind": "value",
+          "value": "BOXes"
+        },
+        {
+          "kind": "value",
+          "value": "buses"
+        },
+        {
+          "kind": "value",
+          "value": "buzzes"
+        },
+        {
+          "kind": "value",
+          "value": "churches"
+        },
+        {
+          "kind": "value",
+          "value": "dishes"
+        },
+        {
+          "kind": "value",
+          "value": "quizes"
+        },
+        {
+          "kind": "value",
+          "value": "cities"
+        },
+        {
+          "kind": "value",
+          "value": "CITYs"
+        },
+        {
+          "kind": "value",
+          "value": "days"
+        },
+        {
+          "kind": "value",
+          "value": "toys"
+        },
+        {
+          "kind": "value",
+          "value": "keys"
+        },
+        {
+          "kind": "value",
+          "value": "potatos"
+        },
+        {
+          "kind": "value",
+          "value": "photos"
+        },
+        {
+          "kind": "value",
+          "value": "leafs"
+        },
+        {
+          "kind": "value",
+          "value": "knifes"
+        },
+        {
+          "kind": "value",
+          "value": "childs"
+        },
+        {
+          "kind": "value",
+          "value": "persons"
+        },
+        {
+          "kind": "value",
+          "value": "mouses"
+        },
+        {
+          "kind": "value",
+          "value": "sheeps"
+        },
+        {
+          "kind": "value",
+          "value": "serieses"
+        },
+        {
+          "kind": "value",
+          "value": "analysises"
+        },
+        {
+          "kind": "value",
+          "value": "cactuses"
+        },
+        {
+          "kind": "value",
+          "value": "status codes"
+        },
+        {
+          "kind": "value",
+          "value": "APIs"
+        },
+        {
+          "kind": "value",
+          "value": "IDs"
+        },
+        {
+          "kind": "value",
+          "value": "OSes"
+        },
+        {
+          "kind": "value",
+          "value": "AoBs"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafés"
+        },
+        {
+          "kind": "value",
+          "value": "étés"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "box"
+        },
+        {
+          "kind": "value",
+          "value": "box"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "box"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "child"
+        },
+        {
+          "kind": "value",
+          "value": "children"
+        },
+        {
+          "kind": "value",
+          "value": "sheep"
+        },
+        {
+          "kind": "value",
+          "value": "3 boxes"
+        },
+        {
+          "kind": "value",
+          "value": "1 box"
+        },
+        {
+          "kind": "value",
+          "value": "2 people"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "box"
+        },
+        {
+          "kind": "value",
+          "value": "box"
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "new Intl.PluralRules(\"en\").select(count)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d816081d0ffc1ee8c6e57b9de1a9fd2978c52ca97e32d91b011015c02481d02d",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "new Intl.PluralRules(\"en\").select(count)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "one"
+        },
+        {
+          "kind": "value",
+          "value": "one"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "value",
+          "value": "other"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "plur(word, count)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "plur",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "Boxes"
+        },
+        {
+          "kind": "value",
+          "value": "BOXES"
+        },
+        {
+          "kind": "value",
+          "value": "buses"
+        },
+        {
+          "kind": "value",
+          "value": "buzzes"
+        },
+        {
+          "kind": "value",
+          "value": "churches"
+        },
+        {
+          "kind": "value",
+          "value": "dishes"
+        },
+        {
+          "kind": "value",
+          "value": "quizzes"
+        },
+        {
+          "kind": "value",
+          "value": "cities"
+        },
+        {
+          "kind": "value",
+          "value": "CITIES"
+        },
+        {
+          "kind": "value",
+          "value": "days"
+        },
+        {
+          "kind": "value",
+          "value": "toys"
+        },
+        {
+          "kind": "value",
+          "value": "keys"
+        },
+        {
+          "kind": "value",
+          "value": "potatoes"
+        },
+        {
+          "kind": "value",
+          "value": "photos"
+        },
+        {
+          "kind": "value",
+          "value": "leaves"
+        },
+        {
+          "kind": "value",
+          "value": "knives"
+        },
+        {
+          "kind": "value",
+          "value": "children"
+        },
+        {
+          "kind": "value",
+          "value": "people"
+        },
+        {
+          "kind": "value",
+          "value": "mice"
+        },
+        {
+          "kind": "value",
+          "value": "sheep"
+        },
+        {
+          "kind": "value",
+          "value": "series"
+        },
+        {
+          "kind": "value",
+          "value": "analyses"
+        },
+        {
+          "kind": "value",
+          "value": "cactuses"
+        },
+        {
+          "kind": "value",
+          "value": "status codes"
+        },
+        {
+          "kind": "value",
+          "value": "APIS"
+        },
+        {
+          "kind": "value",
+          "value": "IDS"
+        },
+        {
+          "kind": "value",
+          "value": "OSES"
+        },
+        {
+          "kind": "value",
+          "value": "AoBS"
+        },
+        {
+          "kind": "value",
+          "value": "s"
+        },
+        {
+          "kind": "value",
+          "value": "cafés"
+        },
+        {
+          "kind": "value",
+          "value": "étés"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "box"
+        },
+        {
+          "kind": "value",
+          "value": "box"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "6.0.0"
+    },
+    {
+      "call": "plur(word, plural, count)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "plur",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "child"
+        },
+        {
+          "kind": "value",
+          "value": "children"
+        },
+        {
+          "kind": "value",
+          "value": "sheep"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "6.0.0"
+    },
+    {
+      "call": "pluralize(word, count, true)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "pluralize",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "3 boxes"
+        },
+        {
+          "kind": "value",
+          "value": "1 box"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "8.0.0"
+    },
+    {
+      "call": "pluralize(word, count)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "pluralize",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "Boxes"
+        },
+        {
+          "kind": "value",
+          "value": "BOXES"
+        },
+        {
+          "kind": "value",
+          "value": "buses"
+        },
+        {
+          "kind": "value",
+          "value": "buzzes"
+        },
+        {
+          "kind": "value",
+          "value": "churches"
+        },
+        {
+          "kind": "value",
+          "value": "dishes"
+        },
+        {
+          "kind": "value",
+          "value": "quizzes"
+        },
+        {
+          "kind": "value",
+          "value": "cities"
+        },
+        {
+          "kind": "value",
+          "value": "CITIES"
+        },
+        {
+          "kind": "value",
+          "value": "days"
+        },
+        {
+          "kind": "value",
+          "value": "toys"
+        },
+        {
+          "kind": "value",
+          "value": "keys"
+        },
+        {
+          "kind": "value",
+          "value": "potatoes"
+        },
+        {
+          "kind": "value",
+          "value": "photos"
+        },
+        {
+          "kind": "value",
+          "value": "leaves"
+        },
+        {
+          "kind": "value",
+          "value": "knives"
+        },
+        {
+          "kind": "value",
+          "value": "children"
+        },
+        {
+          "kind": "value",
+          "value": "people"
+        },
+        {
+          "kind": "value",
+          "value": "mice"
+        },
+        {
+          "kind": "value",
+          "value": "sheep"
+        },
+        {
+          "kind": "value",
+          "value": "series"
+        },
+        {
+          "kind": "value",
+          "value": "analyses"
+        },
+        {
+          "kind": "value",
+          "value": "cacti"
+        },
+        {
+          "kind": "value",
+          "value": "status codes"
+        },
+        {
+          "kind": "value",
+          "value": "APIS"
+        },
+        {
+          "kind": "value",
+          "value": "IDS"
+        },
+        {
+          "kind": "value",
+          "value": "OS"
+        },
+        {
+          "kind": "value",
+          "value": "AoBS"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "café"
+        },
+        {
+          "kind": "value",
+          "value": "été"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "box"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "8.0.0"
+    },
+    {
+      "call": "word.pluralize(count)",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Rails (ActiveModel)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "Boxes"
+        },
+        {
+          "kind": "value",
+          "value": "BOXes"
+        },
+        {
+          "kind": "value",
+          "value": "buses"
+        },
+        {
+          "kind": "value",
+          "value": "buzzs"
+        },
+        {
+          "kind": "value",
+          "value": "churches"
+        },
+        {
+          "kind": "value",
+          "value": "dishes"
+        },
+        {
+          "kind": "value",
+          "value": "quizzes"
+        },
+        {
+          "kind": "value",
+          "value": "cities"
+        },
+        {
+          "kind": "value",
+          "value": "CITies"
+        },
+        {
+          "kind": "value",
+          "value": "days"
+        },
+        {
+          "kind": "value",
+          "value": "toys"
+        },
+        {
+          "kind": "value",
+          "value": "keys"
+        },
+        {
+          "kind": "value",
+          "value": "potatos"
+        },
+        {
+          "kind": "value",
+          "value": "photos"
+        },
+        {
+          "kind": "value",
+          "value": "leafs"
+        },
+        {
+          "kind": "value",
+          "value": "knives"
+        },
+        {
+          "kind": "value",
+          "value": "children"
+        },
+        {
+          "kind": "value",
+          "value": "people"
+        },
+        {
+          "kind": "value",
+          "value": "mice"
+        },
+        {
+          "kind": "value",
+          "value": "sheep"
+        },
+        {
+          "kind": "value",
+          "value": "series"
+        },
+        {
+          "kind": "value",
+          "value": "analyses"
+        },
+        {
+          "kind": "value",
+          "value": "cactus"
+        },
+        {
+          "kind": "value",
+          "value": "status codes"
+        },
+        {
+          "kind": "value",
+          "value": "APIs"
+        },
+        {
+          "kind": "value",
+          "value": "IDs"
+        },
+        {
+          "kind": "value",
+          "value": "Os"
+        },
+        {
+          "kind": "value",
+          "value": "AoBs"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafés"
+        },
+        {
+          "kind": "value",
+          "value": "étés"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "box"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "value",
+          "value": "box"
+        },
+        {
+          "kind": "value",
+          "value": "boxes"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "8.1.4"
+    }
+  ],
+  "function": "pluralize"
+}

@@ -13,6 +13,7 @@ import json
 import platform
 import re
 import sys
+import unicodedata
 import warnings
 from base64 import b64decode, b64encode, urlsafe_b64decode
 from datetime import UTC, datetime
@@ -110,6 +111,13 @@ def current_tools() -> list[Tool]:
                 "isSafeEmpty": [
                     {"call": "not value", "run": lambda value: not value}
                 ],
+                "lowerFirst": [
+                    {
+                        "accepts": is_lone_string,
+                        "call": "value[:1].lower() + value[1:]",
+                        "run": lambda value: value[:1].lower() + value[1:],
+                    }
+                ],
                 "safeDateToIsoString": [
                     {
                         "accepts": is_number,
@@ -205,6 +213,39 @@ def current_tools() -> list[Tool]:
                 ],
                 "safeStructuredClone": [
                     {"call": "copy.deepcopy(value)", "run": copy.deepcopy}
+                ],
+                "toBasicAscii": [
+                    {
+                        "accepts": is_lone_string,
+                        "call": (
+                            'normalize("NFKD", value)'
+                            '.encode("ascii", "ignore").decode()'
+                        ),
+                        "run": lambda value: (
+                            unicodedata.normalize("NFKD", value)
+                            .encode("ascii", "ignore")
+                            .decode()
+                        ),
+                    }
+                ],
+                "trimBlank": [
+                    {
+                        "accepts": is_lone_string,
+                        "call": "value.strip()",
+                        "run": str.strip,
+                    }
+                ],
+                "upperFirst": [
+                    {
+                        "accepts": is_lone_string,
+                        "call": "value[:1].upper() + value[1:]",
+                        "run": lambda value: value[:1].upper() + value[1:],
+                    },
+                    {
+                        "accepts": is_lone_string,
+                        "call": "value.capitalize()",
+                        "run": str.capitalize,
+                    },
                 ],
             },
             "name": "Python",

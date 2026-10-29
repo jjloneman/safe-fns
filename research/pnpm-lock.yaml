@@ -169,9 +169,15 @@ importers:
       '@sindresorhus/is':
         specifier: 8.1.0
         version: 8.1.0
+      '@sindresorhus/transliterate':
+        specifier: 2.3.1
+        version: 2.3.1
       ajv:
         specifier: 8.20.0
         version: 8.20.0
+      any-ascii:
+        specifier: 0.3.3
+        version: 0.3.3
       canonicalize:
         specifier: 5.1.0
         version: 5.1.0
@@ -235,6 +241,12 @@ importers:
       moment:
         specifier: 2.31.0
         version: 2.31.0
+      plur:
+        specifier: 6.0.0
+        version: 6.0.0
+      pluralize:
+        specifier: 8.0.0
+        version: 8.0.0
       radash:
         specifier: 12.1.1
         version: 12.1.1
@@ -250,6 +262,9 @@ importers:
       smol-toml:
         specifier: 1.9.1
         version: 1.9.1
+      transliteration:
+        specifier: 2.6.2
+        version: 2.6.2
       underscore:
         specifier: 1.13.8
         version: 1.13.8
@@ -259,6 +274,9 @@ importers:
       validator:
         specifier: 13.15.35
         version: 13.15.35
+      voca:
+        specifier: 1.4.1
+        version: 1.4.1
       yaml:
         specifier: 2.9.1
         version: 2.9.1
@@ -287,6 +305,9 @@ importers:
       '@types/luxon':
         specifier: 3.7.6
         version: 3.7.6
+      '@types/pluralize':
+        specifier: 0.0.33
+        version: 0.0.33
       '@types/ramda':
         specifier: 0.32.0
         version: 0.32.0
@@ -296,6 +317,9 @@ importers:
       '@types/validator':
         specifier: 13.15.10
         version: 13.15.10
+      '@types/voca':
+        specifier: 1.4.6
+        version: 1.4.6
 
 packages:
 
@@ -380,6 +404,10 @@ packages:
     resolution: {integrity: sha512-2SX/1jW6CIMAiebvVv5ZInoCEuWQmMyBoJXXGC6Vjakjp/fpxP5eHs7/V6WKuPEIbuK06+VpjH+vjLQhr98rDQ==}
     engines: {node: '>=22'}
 
+  '@sindresorhus/transliterate@2.3.1':
+    resolution: {integrity: sha512-gVaaGtKYMYAMmI8buULVH3A2TXVJ98QiwGwI7ddrWGuGidGC2uRt4FHs22+8iROJ0QTzju9CuMjlVsrvpqsdhA==}
+    engines: {node: '>=20'}
+
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
@@ -401,6 +429,9 @@ packages:
   '@types/node@26.6.4':
     resolution: {integrity: sha512-ldVPDCzj7fsaGZrLB0NuHuTvJcsNasysBAqMolr/cgxrLd1xbqxIr3XJiPnHHJUCxj5sNF1vnRj9aWnrVh5Jcg==}
 
+  '@types/pluralize@0.0.33':
+    resolution: {integrity: sha512-JOqsl+ZoCpP4e8TDke9W79FDcSgPAR0l6pixx2JHkhnRjvShyYiAYw2LVsnA7K08Y6DeOnaU6ujmENO4os/cYg==}
+
   '@types/ramda@0.32.0':
     resolution: {integrity: sha512-eTRIFYUxjVvZimlPNpXzXc3j4tnSYc7lBsD7X3zwtRvJML3qXclM4+m8vvmAZAHhBASKPmZAp6qu2C/DwJpBGQ==}
 
@@ -413,8 +444,15 @@ packages:
   '@types/validator@13.15.10':
     resolution: {integrity: sha512-T8L6i7wCuyoK8A/ZeLYt1+q0ty3Zb9+qbSSvrIVitzT3YjZqkTZ40IbRsPanlB4h1QB3JVL1SYCdR6ngtFYcuA==}
 
+  '@types/voca@1.4.6':
+    resolution: {integrity: sha512-ubfCfFxlTOhBBUP2v8lzD8AQVKKu9erZ2t9/8hLpuYHYib3CM/lOwTII3mi527j5UeRDaVjIiAx+iTIWgVCWKQ==}
+
   ajv@8.20.0:
     resolution: {integrity: sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==}
+
+  any-ascii@0.3.3:
+    resolution: {integrity: sha512-8hm+zPrc1VnlxD5eRgMo9F9k2wEMZhbZVLKwA/sPKIt6ywuz7bI9uV/yb27uvc8fv8q6Wl2piJT51q1saKX0Jw==}
+    engines: {node: '>=12.20'}
 
   bidi-js@1.1.0:
     resolution: {integrity: sha512-fX1Onk0tdVPC7obPWB5EbJ1z7NVhLq4m2xZLq2YXBkxzMXIGRpNMU88n0EPgWseKl12J7zXs7qrDxPK4sRs2fg==}
@@ -489,6 +527,10 @@ packages:
     resolution: {integrity: sha512-ifK0CgjALofS5bkrcTy4RaQ9Vx2Knf/eLeIO+NaswQEpH1UblrtTSCIvN71qQDMq0PeQ/SSPojvEJp9vvvfr+w==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0}
 
+  irregular-plurals@4.2.0:
+    resolution: {integrity: sha512-bW9UXHL7bnUcNtTo+9ccSngbxc+V40H32IgvdVin0Xs8gbo+AVYD5g/72ce/54Kjfhq66vcZr8H8TKEvsifeOw==}
+    engines: {node: '>=18.20'}
+
   is-plain-obj@4.1.0:
     resolution: {integrity: sha512-+Pgi+vMuUNkJyExiMBt5IlFoMyKnr5zhJ4Uspz58WOhBF5QoIZkFyNHIbBAtHwzVAgk5RtndVNsDRN61/mmDqg==}
     engines: {node: '>=12'}
@@ -537,6 +579,14 @@ packages:
 
   parse5@8.0.1:
     resolution: {integrity: sha512-z1e/HMG90obSGeidlli3hj7cbocou0/wa5HacvI3ASx34PecNjNQeaHNo5WIZpWofN9kgkqV1q5YvXe3F0FoPw==}
+
+  plur@6.0.0:
+    resolution: {integrity: sha512-Y9wXQivjRX0REtwpA9+n0bYYypWESn3cWtW2vazymw711qn+AQXxzZjRqhANYGBLIMC1UzVdpwe/1hHQwHfwng==}
+    engines: {node: '>=20'}
+
+  pluralize@8.0.0:
+    resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
+    engines: {node: '>=4'}
 
   property-expr@2.0.6:
     resolution: {integrity: sha512-SVtmxhRE/CGkn3eZY1T6pC8Nln6Fr/lu1mKSgRud0eC73whjGfoAogbn78LkD8aFL0zz3bAFerKSnOl7NlErBA==}
@@ -597,6 +647,11 @@ packages:
     resolution: {integrity: sha512-BcDSDW+SIGWVOns1Zm6Yg91q9AEj7eaID0QDY9oIqJD1A8dscNwMcl9Sms2DeuWCNov1X0/oXanHGYQBSLwZsg==}
     engines: {node: ^22.14.0 || >=24.0.0}
 
+  transliteration@2.6.2:
+    resolution: {integrity: sha512-nS94BsBPRF1AwZG9ZfY7zl1mu9S3Opj8NqfM251J3pz4IdeAtIz4J1gZNhP5IpXAew7qevNlGvdQ4X1BZLDykw==}
+    engines: {node: '>=20.0.0'}
+    hasBin: true
+
   ts-toolbelt@9.6.0:
     resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
 
@@ -634,6 +689,9 @@ packages:
   validator@13.15.35:
     resolution: {integrity: sha512-TQ5pAGhd5whStmqWvYF4OjQROlmv9SMFVt37qoCBdqRffuuklWYQlCNnEs2ZaIBD1kZRNnikiZOS1eqgkar0iw==}
     engines: {node: '>= 0.10'}
+
+  voca@1.4.1:
+    resolution: {integrity: sha512-NJC/BzESaHT1p4B5k4JykxedeltmNbau4cummStd4RjFojgq/kLew5TzYge9N2geeWyI2w8T30wUET5v+F7ZHA==}
 
   w3c-xmlserializer@6.0.0:
     resolution: {integrity: sha512-4Nsy8K5Tr6SPDH9jhKJOHf7ChDrc1zufZTVSF7x72hwuEXBqxqk9G6cK+K2NRUtB3iELRJqjXb4JPDMBjMTl2Q==}
@@ -738,6 +796,8 @@ snapshots:
 
   '@sindresorhus/is@8.1.0': {}
 
+  '@sindresorhus/transliterate@2.3.1': {}
+
   '@standard-schema/spec@1.1.0': {}
 
   '@types/ini@4.1.1': {}
@@ -759,6 +819,8 @@ snapshots:
     dependencies:
       undici-types: 8.9.0
 
+  '@types/pluralize@0.0.33': {}
+
   '@types/ramda@0.32.0':
     dependencies:
       types-ramda: 0.32.0
@@ -769,12 +831,16 @@ snapshots:
 
   '@types/validator@13.15.10': {}
 
+  '@types/voca@1.4.6': {}
+
   ajv@8.20.0:
     dependencies:
       fast-deep-equal: 3.1.3
       fast-uri: 3.1.8
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
+
+  any-ascii@0.3.3: {}
 
   bidi-js@1.1.0:
     dependencies:
@@ -833,6 +899,8 @@ snapshots:
       - '@noble/hashes'
 
   ini@7.0.0: {}
+
+  irregular-plurals@4.2.0: {}
 
   is-plain-obj@4.1.0: {}
 
@@ -893,6 +961,12 @@ snapshots:
     dependencies:
       entities: 8.1.0
 
+  plur@6.0.0:
+    dependencies:
+      irregular-plurals: 4.2.0
+
+  pluralize@8.0.0: {}
+
   property-expr@2.0.6: {}
 
   punycode@2.3.1: {}
@@ -933,6 +1007,8 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
+  transliteration@2.6.2: {}
+
   ts-toolbelt@9.6.0: {}
 
   tslib@2.8.1: {}
@@ -954,6 +1030,8 @@ snapshots:
   valibot@1.5.0: {}
 
   validator@13.15.35: {}
+
+  voca@1.4.1: {}
 
   w3c-xmlserializer@6.0.0:
     dependencies:

@@ -7,12 +7,16 @@ import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
 /** Java's standard library. */
@@ -78,6 +82,27 @@ final class JavaTools {
           Probe.typed("map.isEmpty()", Map.class, Map::isEmpty),
           Probe.typed("string.isBlank()", String.class, String::isBlank),
           Probe.typed("string.isEmpty()", String.class, String::isEmpty)
+        )
+      ),
+      entry(
+        "lowerFirst",
+        List.of(
+          Probe.typed(
+            "value.substring(0, end).toLowerCase() + value.substring(end)" +
+              " (end = value.offsetByCodePoints(0, 1))",
+            String.class,
+            value -> mapFirstCodePoint(value, String::toLowerCase)
+          ).alone(),
+          new Probe(
+            JavaTools::isStringWithLocale,
+            "value.substring(0, end).toLowerCase(Locale.forLanguageTag(locale))" +
+              " + value.substring(end)",
+            false,
+            args ->
+              mapFirstCodePoint((String) args.get(0), text ->
+                text.toLowerCase(Locale.forLanguageTag(localeOf(args)))
+              )
+          )
         )
       ),
       entry(
@@ -198,6 +223,48 @@ final class JavaTools {
                 .toString()
           )
         )
+      ),
+      entry(
+        "toBasicAscii",
+        List.of(
+          Probe.typed(
+            "Normalizer.normalize(value, NFD).replaceAll(\"\\\\p{M}\", \"\")",
+            String.class,
+            value ->
+              Normalizer.normalize(value, Normalizer.Form.NFD).replaceAll(
+                "\\p{M}",
+                ""
+              )
+          )
+        )
+      ),
+      entry(
+        "trimBlank",
+        List.of(
+          Probe.typed("value.strip()", String.class, String::strip),
+          Probe.typed("value.trim()", String.class, String::trim)
+        )
+      ),
+      entry(
+        "upperFirst",
+        List.of(
+          Probe.typed(
+            "value.substring(0, end).toUpperCase() + value.substring(end)" +
+              " (end = value.offsetByCodePoints(0, 1))",
+            String.class,
+            value -> mapFirstCodePoint(value, String::toUpperCase)
+          ).alone(),
+          new Probe(
+            JavaTools::isStringWithLocale,
+            "value.substring(0, end).toUpperCase(Locale.forLanguageTag(locale))" +
+              " + value.substring(end)",
+            false,
+            args ->
+              mapFirstCodePoint((String) args.get(0), text ->
+                text.toUpperCase(Locale.forLanguageTag(localeOf(args)))
+              )
+          )
+        )
       )
     ),
     "Java",
@@ -206,6 +273,53 @@ final class JavaTools {
   );
 
   private JavaTools() {}
+
+  /**
+   * Accept a string and an options object holding only {@code locale}.
+   *
+   * @param args the decoded arguments
+   * @return whether the probe can take them
+   */
+  private static boolean isStringWithLocale(final List<Object> args) {
+    return (
+      args.size() == 2 &&
+      args.get(0) instanceof String &&
+      args.get(1) instanceof Map<?, ?> options &&
+      options.keySet().equals(Set.of("locale")) &&
+      options.get("locale") instanceof String
+    );
+  }
+
+  /**
+   * Read the {@code locale} tag from a case's options.
+   *
+   * @param args the decoded arguments, accepted by isStringWithLocale
+   * @return the tag
+   */
+  private static String localeOf(final List<Object> args) {
+    return (String) ((Map<?, ?>) args.get(1)).get("locale");
+  }
+
+  /**
+   * Map a string's first code point, leaving the rest unchanged; an empty
+   * string comes back as it is.
+   *
+   * @param value the string
+   * @param mapText the mapping, applied to the first code point's text
+   * @return the mapped string
+   */
+  private static String mapFirstCodePoint(
+    final String value,
+    final UnaryOperator<String> mapText
+  ) {
+    if (value.isEmpty()) {
+      return value;
+    }
+
+    final int end = value.offsetByCodePoints(0, 1);
+
+    return mapText.apply(value.substring(0, end)) + value.substring(end);
+  }
 
   /**
    * Accept exactly two string arguments: a value and a base.

@@ -71,6 +71,7 @@ TOOLS: list[Tool] = [
                 cast("SELECT CAST(%s AS nvarchar(max))"),
                 cast("SELECT TRIM(%s)"),
             ],
+            "trimBlank": [cast("SELECT TRIM(%s)")],
         },
         "locale": server_property("Collation"),
         "name": "SQL Server",

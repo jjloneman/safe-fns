@@ -81,6 +81,18 @@ internal static class Program
         args is [long] || (args is [double number] && double.IsFinite(number));
 
     /// <summary>Accept exactly one argument, a string.</summary>
+    /// <summary>Accept a string and options holding only <c>locale</c>.</summary>
+    private static bool IsStringWithLocale(IReadOnlyList<object?> args) =>
+        args.Count == 2
+        && args[0] is string
+        && args[1] is Dictionary<string, object?> { Count: 1 } options
+        && options.TryGetValue("locale", out var locale)
+        && locale is string;
+
+    /// <summary>Read the <c>locale</c> tag from a case's options.</summary>
+    private static string LocaleOf(IReadOnlyList<object?> args) =>
+        (string)((Dictionary<string, object?>)args[1]!)["locale"]!;
+
     private static bool IsLoneString(IReadOnlyList<object?> args) =>
         args is [string];
 
@@ -180,6 +192,29 @@ internal static class Program
                         Accepts: IsStringOrNull,
                         Call: "string.IsNullOrWhiteSpace(value)",
                         Run: args => string.IsNullOrWhiteSpace((string?)args[0])
+                    ),
+                ],
+                ["lowerFirst"] =
+                [
+                    new(
+                        Accepts: IsLoneString,
+                        Call: "value.Length == 0 ? value : char.ToLowerInvariant(value[0]) + value[1..]",
+                        Run: args =>
+                            Text(args).Length == 0
+                                ? Text(args)
+                                : char.ToLowerInvariant(Text(args)[0])
+                                    + Text(args)[1..]
+                    ),
+                    new(
+                        Accepts: IsStringWithLocale,
+                        Call: "value.Length == 0 ? value : char.ToLower(value[0], CultureInfo.GetCultureInfo(locale)) + value[1..]",
+                        Run: args =>
+                            Text(args).Length == 0
+                                ? Text(args)
+                                : char.ToLower(
+                                    Text(args)[0],
+                                    CultureInfo.GetCultureInfo(LocaleOf(args))
+                                ) + Text(args)[1..]
                     ),
                 ],
                 ["safeDateToIsoString"] =
@@ -355,6 +390,61 @@ internal static class Program
                             )
                                 ? uri.AbsoluteUri
                                 : null
+                    ),
+                ],
+                ["toBasicAscii"] =
+                [
+                    new(
+                        Accepts: IsString,
+                        Call: "string.Concat(value.Normalize(FormD).Where(c => GetUnicodeCategory(c) != NonSpacingMark))",
+                        Run: args =>
+                            string.Concat(
+                                Text(args)
+                                    .Normalize(NormalizationForm.FormD)
+                                    .Where(c =>
+                                        CharUnicodeInfo.GetUnicodeCategory(c)
+                                        != UnicodeCategory.NonSpacingMark
+                                    )
+                            )
+                    ),
+                    new(
+                        Accepts: IsString,
+                        Call: "Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(value))",
+                        Run: args =>
+                            Encoding.ASCII.GetString(
+                                Encoding.ASCII.GetBytes(Text(args))
+                            )
+                    ),
+                ],
+                ["trimBlank"] =
+                [
+                    new(
+                        Accepts: IsString,
+                        Call: "value.Trim()",
+                        Run: args => Text(args).Trim()
+                    ),
+                ],
+                ["upperFirst"] =
+                [
+                    new(
+                        Accepts: IsLoneString,
+                        Call: "value.Length == 0 ? value : char.ToUpperInvariant(value[0]) + value[1..]",
+                        Run: args =>
+                            Text(args).Length == 0
+                                ? Text(args)
+                                : char.ToUpperInvariant(Text(args)[0])
+                                    + Text(args)[1..]
+                    ),
+                    new(
+                        Accepts: IsStringWithLocale,
+                        Call: "value.Length == 0 ? value : char.ToUpper(value[0], CultureInfo.GetCultureInfo(locale)) + value[1..]",
+                        Run: args =>
+                            Text(args).Length == 0
+                                ? Text(args)
+                                : char.ToUpper(
+                                    Text(args)[0],
+                                    CultureInfo.GetCultureInfo(LocaleOf(args))
+                                ) + Text(args)[1..]
                     ),
                 ],
             },

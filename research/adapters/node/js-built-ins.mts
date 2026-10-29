@@ -4,11 +4,23 @@ import type { Tool } from "./tool.mts";
 
 import {
   callJsonParse,
+  hasOnlyOptions,
+  isLoneString,
   isString,
   markReferences,
   summarizeError,
 } from "./tool.mts";
 import { storageProbes } from "./web-storage.mts";
+
+/** The locale a first-letter case can carry in its options. */
+type LocaleOptions = {
+  /**
+   * The BCP 47 tag passed to `toLocaleUpperCase`.
+   *
+   * @example "tr"
+   */
+  locale?: string;
+};
 
 /** A call to run with `TZ` set, for `inTimeZone`. */
 type TimeZoneRun<T> = {
@@ -107,6 +119,43 @@ export const JS_BUILT_INS: Tool = {
     ],
     getErrorMessage: [
       { call: "String(value)", run: ([value]) => String(value) },
+    ],
+    lowerFirst: [
+      {
+        accepts: isLoneString,
+        call: "value.charAt(0).toLowerCase() + value.slice(1)",
+        run: ([value]) =>
+          (value as string).charAt(0).toLowerCase() +
+          (value as string).slice(1),
+      },
+      {
+        accepts: isLoneString,
+        call: 'first.toLowerCase() + rest.join("") ([first, ...rest] = value)',
+        run: ([value]) => {
+          const [first = "", ...rest] = value as string;
+
+          return first.toLowerCase() + rest.join("");
+        },
+      },
+      {
+        accepts: (args) => hasOnlyOptions(args, ["locale"]),
+        call: "value.charAt(0).toLocaleLowerCase(options.locale) + value.slice(1)",
+        run: ([value, options]) =>
+          (value as string)
+            .charAt(0)
+            .toLocaleLowerCase((options as LocaleOptions).locale) +
+          (value as string).slice(1),
+      },
+    ],
+    pluralize: [
+      {
+        accepts: (args) =>
+          args.length === 2 &&
+          typeof args[0] === "string" &&
+          typeof args[1] === "number",
+        call: 'new Intl.PluralRules("en").select(count)',
+        run: ([, count]) => new Intl.PluralRules("en").select(count as number),
+      },
     ],
     safeDateToIsoString: [
       {
@@ -239,11 +288,70 @@ export const JS_BUILT_INS: Tool = {
         run: ([value]) => markReferences(structuredClone(value)),
       },
     ],
+    toBasicAscii: [
+      {
+        accepts: isString,
+        call: 'value.normalize("NFD").replace(/\\p{M}/gu, "")',
+        run: ([value]) =>
+          (value as string).normalize("NFD").replace(/\p{M}/gu, ""),
+      },
+      {
+        accepts: isString,
+        call: 'value.normalize("NFKD").replace(/\\p{M}/gu, "")',
+        run: ([value]) =>
+          (value as string).normalize("NFKD").replace(/\p{M}/gu, ""),
+      },
+    ],
     toError: [
       {
         call: "new Error(value) → { message, unchanged }",
         run: ([value]) =>
           summarizeError({ error: new Error(value as string), input: value }),
+      },
+    ],
+    trimBlank: [
+      {
+        accepts: isString,
+        call: "value.trim()",
+        run: ([value]) => (value as string).trim(),
+      },
+    ],
+    upperFirst: [
+      {
+        accepts: isLoneString,
+        call: "value.charAt(0).toUpperCase() + value.slice(1)",
+        run: ([value]) =>
+          (value as string).charAt(0).toUpperCase() +
+          (value as string).slice(1),
+      },
+      {
+        accepts: isLoneString,
+        call: 'first.toUpperCase() + rest.join("") ([first, ...rest] = value)',
+        run: ([value]) => {
+          const [first = "", ...rest] = value as string;
+
+          return first.toUpperCase() + rest.join("");
+        },
+      },
+      {
+        accepts: (args) => hasOnlyOptions(args, ["locale"]),
+        call: "value.charAt(0).toLocaleUpperCase(options.locale) + value.slice(1)",
+        run: ([value, options]) =>
+          (value as string)
+            .charAt(0)
+            .toLocaleUpperCase((options as LocaleOptions).locale) +
+          (value as string).slice(1),
+      },
+      {
+        accepts: (args) =>
+          hasOnlyOptions(args, ["lowerRest"]) &&
+          (args[1] as Record<string, unknown>).lowerRest === true,
+        call: 'first.toUpperCase() + rest.join("").toLowerCase() ([first, ...rest] = value)',
+        run: ([value]) => {
+          const [first = "", ...rest] = value as string;
+
+          return first.toUpperCase() + rest.join("").toLowerCase();
+        },
       },
     ],
   },

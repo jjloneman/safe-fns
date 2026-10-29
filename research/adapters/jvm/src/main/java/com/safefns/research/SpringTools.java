@@ -1,5 +1,7 @@
 package com.safefns.research;
 
+import static java.util.Map.entry;
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -26,66 +28,113 @@ final class SpringTools {
 
   /** The probes, keyed by function. */
   static final Tool TOOL = new Tool(
-    Map.of(
-      "isSafeEmpty",
-      List.of(
-        Probe.nullable(
-          "!StringUtils.hasText(value)",
-          String.class,
-          value -> !StringUtils.hasText(value)
-        ),
-        Probe.any("ObjectUtils.isEmpty(value)", ObjectUtils::isEmpty)
-      ),
-      "safeDecodeUriComponent",
-      List.of(
-        Probe.typed("UriUtils.decode(value, UTF_8)", String.class, value ->
-          UriUtils.decode(value, StandardCharsets.UTF_8)
+    Map.ofEntries(
+      entry(
+        "isSafeEmpty",
+        List.of(
+          Probe.nullable(
+            "!StringUtils.hasText(value)",
+            String.class,
+            value -> !StringUtils.hasText(value)
+          ),
+          Probe.any("ObjectUtils.isEmpty(value)", ObjectUtils::isEmpty)
         )
       ),
-      "safeEncodeUriComponent",
-      List.of(
-        Probe.typed("UriUtils.encode(value, UTF_8)", String.class, value ->
-          UriUtils.encode(value, StandardCharsets.UTF_8)
+      entry(
+        "lowerFirst",
+        List.of(
+          Probe.nullable(
+            "StringUtils.uncapitalize(value)",
+            String.class,
+            StringUtils::uncapitalize
+          ).alone()
         )
       ),
-      "safeParseBigInt",
-      List.of(
-        Probe.any("conversionService.convert(value, BigInteger.class)", value ->
-          CONVERSIONS.convert(value, BigInteger.class)
-        ),
-        Probe.typed(
-          "NumberUtils.parseNumber(value, BigInteger.class)",
-          String.class,
-          value -> NumberUtils.parseNumber(value, BigInteger.class)
+      entry(
+        "safeDecodeUriComponent",
+        List.of(
+          Probe.typed("UriUtils.decode(value, UTF_8)", String.class, value ->
+            UriUtils.decode(value, StandardCharsets.UTF_8)
+          )
         )
       ),
-      "safeParseBoolean",
-      List.of(
-        Probe.any("conversionService.convert(value, Boolean.class)", value ->
-          CONVERSIONS.convert(value, Boolean.class)
+      entry(
+        "safeEncodeUriComponent",
+        List.of(
+          Probe.typed("UriUtils.encode(value, UTF_8)", String.class, value ->
+            UriUtils.encode(value, StandardCharsets.UTF_8)
+          )
         )
       ),
-      "safeParseInt",
-      List.of(
-        Probe.any("conversionService.convert(value, Integer.class)", value ->
-          CONVERSIONS.convert(value, Integer.class)
-        ),
-        Probe.typed(
-          "NumberUtils.parseNumber(value, Integer.class)",
-          String.class,
-          value -> NumberUtils.parseNumber(value, Integer.class)
+      entry(
+        "safeParseBigInt",
+        List.of(
+          Probe.any(
+            "conversionService.convert(value, BigInteger.class)",
+            value -> CONVERSIONS.convert(value, BigInteger.class)
+          ),
+          Probe.typed(
+            "NumberUtils.parseNumber(value, BigInteger.class)",
+            String.class,
+            value -> NumberUtils.parseNumber(value, BigInteger.class)
+          )
         )
       ),
-      "safeParseNumber",
-      List.of(
-        Probe.any("conversionService.convert(value, Double.class)", value ->
-          CONVERSIONS.convert(value, Double.class)
+      entry(
+        "safeParseBoolean",
+        List.of(
+          Probe.any("conversionService.convert(value, Boolean.class)", value ->
+            CONVERSIONS.convert(value, Boolean.class)
+          )
         )
       ),
-      "safeParseString",
-      List.of(
-        Probe.any("conversionService.convert(value, String.class)", value ->
-          CONVERSIONS.convert(value, String.class)
+      entry(
+        "safeParseInt",
+        List.of(
+          Probe.any("conversionService.convert(value, Integer.class)", value ->
+            CONVERSIONS.convert(value, Integer.class)
+          ),
+          Probe.typed(
+            "NumberUtils.parseNumber(value, Integer.class)",
+            String.class,
+            value -> NumberUtils.parseNumber(value, Integer.class)
+          )
+        )
+      ),
+      entry(
+        "safeParseNumber",
+        List.of(
+          Probe.any("conversionService.convert(value, Double.class)", value ->
+            CONVERSIONS.convert(value, Double.class)
+          )
+        )
+      ),
+      entry(
+        "safeParseString",
+        List.of(
+          Probe.any("conversionService.convert(value, String.class)", value ->
+            CONVERSIONS.convert(value, String.class)
+          )
+        )
+      ),
+      entry(
+        "trimBlank",
+        List.of(
+          Probe.nullable(
+            "StringUtils.trimWhitespace(value)",
+            String.class,
+            StringUtils::trimWhitespace
+          )
+        )
+      ),
+      entry(
+        "upperFirst",
+        List.of(
+          Probe.nullable(
+            "StringUtils.capitalize(value)",
+            String.class,
+            StringUtils::capitalize
+          ).alone()
         )
       )
     ),

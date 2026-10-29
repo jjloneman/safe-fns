@@ -6,10 +6,22 @@ import {
 } from "es-toolkit/compat";
 import { cloneDeep as esToolkitCloneDeep } from "es-toolkit/object";
 import { isPlainObject as esToolkitIsPlainObject } from "es-toolkit/predicate";
+import {
+  capitalize as esToolkitCapitalize,
+  deburr as esToolkitDeburr,
+  lowerFirst as esToolkitLowerFirst,
+  trim as esToolkitTrim,
+  upperFirst as esToolkitUpperFirst,
+} from "es-toolkit/string";
 
 import type { Tool } from "./tool.mts";
 
-import { markReferences, packageVersion } from "./tool.mts";
+import {
+  hasNoOptions,
+  hasOnlyOptions,
+  markReferences,
+  packageVersion,
+} from "./tool.mts";
 
 /** es-toolkit's own predicate, and its lodash-compatible layer. */
 export const ES_TOOLKIT: Tool = {
@@ -24,6 +36,13 @@ export const ES_TOOLKIT: Tool = {
       {
         call: "compat.isEmpty(value)",
         run: ([value]) => esToolkitIsEmpty(value),
+      },
+    ],
+    lowerFirst: [
+      {
+        accepts: hasNoOptions,
+        call: "lowerFirst(value)",
+        run: ([value]) => esToolkitLowerFirst(value as string),
       },
     ],
     safeParseInt: [
@@ -48,6 +67,30 @@ export const ES_TOOLKIT: Tool = {
       {
         call: "cloneDeep(value)",
         run: ([value]) => markReferences(esToolkitCloneDeep(value)),
+      },
+    ],
+    toBasicAscii: [
+      {
+        call: "deburr(value)",
+        run: ([value]) => esToolkitDeburr(value as string),
+      },
+    ],
+    trimBlank: [
+      { call: "trim(value)", run: ([value]) => esToolkitTrim(value as string) },
+    ],
+    upperFirst: [
+      {
+        accepts: hasNoOptions,
+        call: "upperFirst(value)",
+        run: ([value]) => esToolkitUpperFirst(value as string),
+      },
+      {
+        accepts: (args) =>
+          hasNoOptions(args) ||
+          (hasOnlyOptions(args, ["lowerRest"]) &&
+            (args[1] as Record<string, unknown>).lowerRest === true),
+        call: "capitalize(value)",
+        run: ([value]) => esToolkitCapitalize(value as string),
       },
     ],
   },

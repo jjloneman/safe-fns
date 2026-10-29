@@ -2,7 +2,12 @@ import lodash from "lodash";
 
 import type { Tool } from "./tool.mts";
 
-import { markReferences, packageVersion } from "./tool.mts";
+import {
+  hasNoOptions,
+  hasOnlyOptions,
+  markReferences,
+  packageVersion,
+} from "./tool.mts";
 
 /** lodash's checks and coercions. */
 export const LODASH: Tool = {
@@ -15,6 +20,13 @@ export const LODASH: Tool = {
     ],
     isSafeEmpty: [
       { call: "_.isEmpty(value)", run: ([value]) => lodash.isEmpty(value) },
+    ],
+    lowerFirst: [
+      {
+        accepts: hasNoOptions,
+        call: "_.lowerFirst(value)",
+        run: ([value]) => lodash.lowerFirst(value),
+      },
     ],
     safeObjectHasOwn: [
       {
@@ -42,6 +54,27 @@ export const LODASH: Tool = {
       {
         call: "_.cloneDeep(value)",
         run: ([value]) => markReferences(lodash.cloneDeep(value)),
+      },
+    ],
+    toBasicAscii: [
+      { call: "_.deburr(value)", run: ([value]) => lodash.deburr(value) },
+    ],
+    trimBlank: [
+      { call: "_.trim(value)", run: ([value]) => lodash.trim(value) },
+    ],
+    upperFirst: [
+      {
+        accepts: hasNoOptions,
+        call: "_.upperFirst(value)",
+        run: ([value]) => lodash.upperFirst(value),
+      },
+      {
+        accepts: (args) =>
+          hasNoOptions(args) ||
+          (hasOnlyOptions(args, ["lowerRest"]) &&
+            (args[1] as Record<string, unknown>).lowerRest === true),
+        call: "_.capitalize(value)",
+        run: ([value]) => lodash.capitalize(value),
       },
     ],
   },

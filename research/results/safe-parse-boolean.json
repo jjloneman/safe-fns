@@ -758,7 +758,7 @@
     {
       "call": "v.parse(v.pipe(v.unknown(), v.parseBoolean()), value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "valibot",
       "outcomes": [
@@ -1018,7 +1018,7 @@
     {
       "call": "yn(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "yn",
       "outcomes": [
@@ -1324,7 +1324,7 @@
     {
       "call": "z.stringbool().parse(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "zod",
       "outcomes": [
@@ -5244,7 +5244,7 @@
     {
       "call": "parse(value, { cast: true })[0]?.[0]",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "CSV",
       "outcomes": [
@@ -5488,7 +5488,7 @@
     {
       "call": "div.setAttribute(\"hidden\", value); div.hidden",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "HTML (jsdom)",
       "outcomes": [
@@ -5728,7 +5728,7 @@
     {
       "call": "parse(`v = ${value}`).v",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "INI",
       "outcomes": [
@@ -5968,7 +5968,7 @@
     {
       "call": "JSON.parse(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "JSON",
       "outcomes": [
@@ -7711,7 +7711,7 @@
     {
       "call": "parse(`v = ${value}`).v",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "TOML",
       "outcomes": [
@@ -8191,7 +8191,7 @@
     {
       "call": "parse(value, { version: \"1.1\" })",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "YAML 1.1",
       "outcomes": [
@@ -8433,7 +8433,7 @@
     {
       "call": "parse(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "YAML 1.2 core",
       "outcomes": [
@@ -8675,7 +8675,7 @@
     {
       "call": "coerce({ type: \"boolean\" }, value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "Ajv",
       "outcomes": [
@@ -9177,7 +9177,7 @@
     {
       "call": "bool()._parse(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "envalid",
       "outcomes": [
@@ -9657,7 +9657,7 @@
     {
       "call": "Joi.attempt(value, Joi.boolean())",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "joi",
       "outcomes": [
@@ -11921,7 +11921,7 @@
     {
       "call": "validator.toBoolean(value, true)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "validator.js",
       "outcomes": [
@@ -12401,7 +12401,7 @@
     {
       "call": "boolean().validateSync(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "yup",
       "outcomes": [

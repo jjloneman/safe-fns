@@ -83,6 +83,7 @@ TOOLS: list[Tool] = [
                 cast("SELECT CAST(%s AS text)"),
                 cast("SELECT trim(%s)"),
             ],
+            "trimBlank": [cast("SELECT trim(%s)")],
         },
         # PostgreSQL 16 dropped the `lc_ctype` setting; the database keeps it.
         "locale": query_text(

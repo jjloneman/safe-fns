@@ -12,6 +12,21 @@ import java.util.List;
  * @param run runs the expression on one case's decoded arguments
  */
 public record Probe(Accepts accepts, String call, boolean isCodec, Call run) {
+  /**
+   * This probe, restricted to cases with exactly one argument, for a call that
+   * has no way to take a case's options.
+   *
+   * @return the restricted probe
+   */
+  public Probe alone() {
+    return new Probe(
+      args -> args.size() == 1 && accepts.test(args),
+      call,
+      isCodec,
+      run
+    );
+  }
+
   /** Decides whether a call can take one case's decoded arguments. */
   @FunctionalInterface
   public interface Accepts {

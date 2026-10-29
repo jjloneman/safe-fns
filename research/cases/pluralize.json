@@ -1,0 +1,297 @@
+{
+  "cases": [
+    {
+      "args": ["box", 2],
+      "expected": "boxes"
+    },
+    {
+      "args": ["Box", 2],
+      "expected": "Boxes"
+    },
+    {
+      "args": ["BOX", 2],
+      "expected": "BOXes"
+    },
+    {
+      "args": ["bus", 2],
+      "expected": "buses"
+    },
+    {
+      "args": ["buzz", 2],
+      "expected": "buzzes"
+    },
+    {
+      "args": ["church", 2],
+      "expected": "churches"
+    },
+    {
+      "args": ["dish", 2],
+      "expected": "dishes"
+    },
+    {
+      "args": ["quiz", 2],
+      "expected": "quizes"
+    },
+    {
+      "args": ["city", 2],
+      "expected": "cities"
+    },
+    {
+      "args": ["CITY", 2],
+      "expected": "CITYs"
+    },
+    {
+      "args": ["day", 2],
+      "expected": "days"
+    },
+    {
+      "args": ["toy", 2],
+      "expected": "toys"
+    },
+    {
+      "args": ["key", 2],
+      "expected": "keys"
+    },
+    {
+      "args": ["potato", 2],
+      "expected": "potatos"
+    },
+    {
+      "args": ["photo", 2],
+      "expected": "photos"
+    },
+    {
+      "args": ["leaf", 2],
+      "expected": "leafs"
+    },
+    {
+      "args": ["knife", 2],
+      "expected": "knifes"
+    },
+    {
+      "args": ["child", 2],
+      "expected": "childs"
+    },
+    {
+      "args": ["person", 2],
+      "expected": "persons"
+    },
+    {
+      "args": ["mouse", 2],
+      "expected": "mouses"
+    },
+    {
+      "args": ["sheep", 2],
+      "expected": "sheeps"
+    },
+    {
+      "args": ["series", 2],
+      "expected": "serieses"
+    },
+    {
+      "args": ["analysis", 2],
+      "expected": "analysises"
+    },
+    {
+      "args": ["cactus", 2],
+      "expected": "cactuses"
+    },
+    {
+      "args": ["status code", 2],
+      "expected": "status codes"
+    },
+    {
+      "args": ["API", 2],
+      "expected": "APIs"
+    },
+    {
+      "args": ["ID", 2],
+      "expected": "IDs"
+    },
+    {
+      "args": ["OS", 2],
+      "expected": "OSes"
+    },
+    {
+      "args": ["AoB", 2],
+      "expected": "AoBs"
+    },
+    {
+      "args": ["", 2],
+      "expected": ""
+    },
+    {
+      "args": ["café", 2],
+      "expected": "cafés"
+    },
+    {
+      "args": ["été", 2],
+      "expected": "étés"
+    },
+    {
+      "args": ["box", 0],
+      "expected": "boxes"
+    },
+    {
+      "args": ["box", 1],
+      "expected": "box"
+    },
+    {
+      "args": ["box", -1],
+      "expected": "box"
+    },
+    {
+      "args": ["box", -2],
+      "expected": "boxes"
+    },
+    {
+      "args": ["box", 0.5],
+      "expected": "boxes"
+    },
+    {
+      "args": ["box", 1.5],
+      "expected": "boxes"
+    },
+    {
+      "args": [
+        "box",
+        {
+          "$number": "-0"
+        }
+      ],
+      "expected": "boxes"
+    },
+    {
+      "args": [
+        "box",
+        {
+          "$number": "NaN"
+        }
+      ],
+      "expected": "boxes"
+    },
+    {
+      "args": [
+        "box",
+        {
+          "$number": "Infinity"
+        }
+      ],
+      "expected": "boxes"
+    },
+    {
+      "args": [
+        "box",
+        {
+          "$bigint": "1"
+        }
+      ],
+      "expected": "box"
+    },
+    {
+      "args": [
+        "box",
+        {
+          "$bigint": "2"
+        }
+      ],
+      "expected": "boxes"
+    },
+    {
+      "args": ["box", "1"],
+      "expected": "boxes"
+    },
+    {
+      "args": ["box", null],
+      "expected": "boxes"
+    },
+    {
+      "args": [
+        "child",
+        1,
+        {
+          "plural": "children"
+        }
+      ],
+      "expected": "child"
+    },
+    {
+      "args": [
+        "child",
+        2,
+        {
+          "plural": "children"
+        }
+      ],
+      "expected": "children"
+    },
+    {
+      "args": [
+        "sheep",
+        2,
+        {
+          "plural": "sheep"
+        }
+      ],
+      "expected": "sheep"
+    },
+    {
+      "args": [
+        "box",
+        3,
+        {
+          "includeCount": true
+        }
+      ],
+      "expected": "3 boxes"
+    },
+    {
+      "args": [
+        "box",
+        1,
+        {
+          "includeCount": true
+        }
+      ],
+      "expected": "1 box"
+    },
+    {
+      "args": [
+        "person",
+        2,
+        {
+          "includeCount": true,
+          "plural": "people"
+        }
+      ],
+      "expected": "2 people"
+    },
+    {
+      "args": [null, 2],
+      "expected": ""
+    },
+    {
+      "args": [42, 2],
+      "expected": ""
+    },
+    {
+      "args": [
+        "box",
+        {
+          "$js": "a boxed number"
+        }
+      ],
+      "expected": "box"
+    },
+    {
+      "args": [
+        "box",
+        {
+          "$js": "a boxed bigint"
+        }
+      ],
+      "expected": "box"
+    }
+  ],
+  "function": "pluralize"
+}

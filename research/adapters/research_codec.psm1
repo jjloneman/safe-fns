@@ -286,7 +286,8 @@ function Get-ErrorName {
     Each tool: a hashtable with Functions (probes keyed by function name),
     Name, Tier, Version, and optionally Locale, the culture its calls name
     (the process's own culture otherwise). A probe is a hashtable with Call, Run (a script
-    block), and optionally IsCodec.
+    block), and optionally IsCodec and Accepts (a script block over the decoded arguments;
+    a case it rejects is n/a).
 #>
 function Invoke-Adapter {
     param([string[]] $Paths, [hashtable[]] $Tools)
@@ -337,6 +338,10 @@ function Invoke-Probe {
         -not $Probe['IsCodec'] -and
         @($decoded | Where-Object { Test-Unrepresentable $_ }).Count -gt 0
     ) {
+        return [ordered]@{ kind = 'n/a' }
+    }
+
+    if ($Probe['Accepts'] -and -not (& $Probe.Accepts @decoded)) {
         return [ordered]@{ kind = 'n/a' }
     }
 

@@ -22,6 +22,14 @@ final class CommonsLangTools {
           StringUtils::isBlank
         )
       ),
+      "lowerFirst",
+      List.of(
+        Probe.nullable(
+          "StringUtils.uncapitalize(value)",
+          String.class,
+          StringUtils::uncapitalize
+        ).alone()
+      ),
       "safeParseBigInt",
       List.of(
         Probe.nullable(
@@ -81,6 +89,30 @@ final class CommonsLangTools {
           String.class,
           StringUtils::trimToNull
         )
+      ),
+      "toBasicAscii",
+      List.of(
+        Probe.nullable(
+          "StringUtils.stripAccents(value)",
+          String.class,
+          StringUtils::stripAccents
+        )
+      ),
+      "trimBlank",
+      List.of(
+        Probe.nullable(
+          "StringUtils.strip(value)",
+          String.class,
+          StringUtils::strip
+        )
+      ),
+      "upperFirst",
+      List.of(
+        Probe.nullable(
+          "StringUtils.capitalize(value)",
+          String.class,
+          StringUtils::capitalize
+        ).alone()
       )
     ),
     "Commons Lang",

@@ -63,6 +63,13 @@ $powerShell = @{
                 Run  = { param($value) ([string]$value).Trim() }
             }
         )
+        trimBlank        = @(
+            @{
+                Accepts = { param($value) $value -is [string] }
+                Call    = '$value.Trim()'
+                Run     = { param($value) $value.Trim() }
+            }
+        )
     }
     Name      = 'PowerShell'
     Tier      = 4

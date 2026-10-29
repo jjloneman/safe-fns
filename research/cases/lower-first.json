@@ -1,0 +1,198 @@
+{
+  "cases": [
+    {
+      "args": ["Hello"],
+      "expected": "hello"
+    },
+    {
+      "args": ["hello"],
+      "expected": "hello"
+    },
+    {
+      "args": ["HELLO"],
+      "expected": "hELLO"
+    },
+    {
+      "args": [""],
+      "expected": ""
+    },
+    {
+      "args": ["H"],
+      "expected": "h"
+    },
+    {
+      "args": ["123ABC"],
+      "expected": "123ABC"
+    },
+    {
+      "args": ["'Hello"],
+      "expected": "'Hello"
+    },
+    {
+      "args": [" Hello"],
+      "expected": " Hello"
+    },
+    {
+      "args": ["ÉLAN"],
+      "expected": "éLAN"
+    },
+    {
+      "args": ["E\u0301LAN"],
+      "expected": "e\u0301LAN"
+    },
+    {
+      "args": ["ẞA"],
+      "expected": "ßA"
+    },
+    {
+      "args": ["İA"],
+      "expected": "i\u0307A"
+    },
+    {
+      "args": ["IA"],
+      "expected": "iA"
+    },
+    {
+      "args": ["ǄA"],
+      "expected": "ǆA"
+    },
+    {
+      "args": ["ǅA"],
+      "expected": "ǆA"
+    },
+    {
+      "args": ["ΣA"],
+      "expected": "σA"
+    },
+    {
+      "args": ["ᲐᲑ"],
+      "expected": "აᲑ"
+    },
+    {
+      "args": ["𐐀A"],
+      "expected": "𐐨A"
+    },
+    {
+      "args": ["KA"],
+      "expected": "kA"
+    },
+    {
+      "args": ["ΩA"],
+      "expected": "ωA"
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [null],
+      "expected": ""
+    },
+    {
+      "args": [42],
+      "expected": ""
+    },
+    {
+      "args": [["a"]],
+      "expected": ""
+    },
+    {
+      "args": [{}],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "a lone surrogate"
+        }
+      ],
+      "expected": {
+        "$utf16": [55296]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a lone low surrogate before text"
+        }
+      ],
+      "expected": {
+        "$utf16": [56320, 97]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed string"
+        }
+      ],
+      "expected": "hi"
+    },
+    {
+      "args": [
+        {
+          "$js": "a symbol"
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing toString"
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        "Istanbul",
+        {
+          "locale": "tr"
+        }
+      ],
+      "expected": "ıstanbul"
+    },
+    {
+      "args": [
+        "İstanbul",
+        {
+          "locale": "tr"
+        }
+      ],
+      "expected": "istanbul"
+    },
+    {
+      "args": [
+        "Istanbul",
+        {
+          "locale": "en"
+        }
+      ],
+      "expected": "istanbul"
+    },
+    {
+      "args": [
+        "Ìa",
+        {
+          "locale": "lt"
+        }
+      ],
+      "expected": "i\u0307\u0300a"
+    },
+    {
+      "args": [
+        "Istanbul",
+        {
+          "locale": "not a locale!"
+        }
+      ],
+      "expected": "istanbul"
+    }
+  ],
+  "function": "lowerFirst"
+}

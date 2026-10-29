@@ -40,6 +40,16 @@ object KotlinTools {
                                 string.isNullOrEmpty()
                             },
                         ),
+                    "lowerFirst" to
+                        listOf(
+                            Probe.typed(
+                                    "value.replaceFirstChar { it.lowercase() }",
+                                    String::class.java,
+                                ) { value ->
+                                    value.replaceFirstChar { it.lowercase() }
+                                }
+                                .alone()
+                        ),
                     "safeObjectHasOwn" to
                         listOf(
                             Probe.binary("key in map", Map::class.java) {
@@ -111,6 +121,30 @@ object KotlinTools {
                                 value ->
                                 value.trim()
                             },
+                        ),
+                    "trimBlank" to
+                        listOf(
+                            Probe.typed("value.trim()", String::class.java) {
+                                value ->
+                                value.trim()
+                            }
+                        ),
+                    "upperFirst" to
+                        listOf(
+                            Probe.typed(
+                                    "value.replaceFirstChar { it.titlecase() }",
+                                    String::class.java,
+                                ) { value ->
+                                    value.replaceFirstChar { it.titlecase() }
+                                }
+                                .alone(),
+                            Probe.typed(
+                                    "value.replaceFirstChar { it.uppercase() }",
+                                    String::class.java,
+                                ) { value ->
+                                    value.replaceFirstChar { it.uppercase() }
+                                }
+                                .alone(),
                         ),
                 ),
             name = "Kotlin",

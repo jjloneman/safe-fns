@@ -9,6 +9,7 @@
 
 require "active_model"
 require "active_support/core_ext/object/blank"
+require "active_support/core_ext/string/inflections"
 require "json"
 require "time"
 require "uri"
@@ -57,6 +58,15 @@ module RubyAdapter
             run: ->(value) { value.blank? }
           )
         ],
+        "pluralize" => [
+          ResearchCodec.probe(
+            accepts: ->(word, count, *options) do
+              word.is_a?(String) && count.is_a?(Numeric) && options.empty?
+            end,
+            call: "word.pluralize(count)",
+            run: ->(word, count, *_options) { word.pluralize(count) }
+          )
+        ],
         "safeParseBoolean" => [
           ResearchCodec.probe(
             call: "ActiveModel::Type::Boolean.new.cast(value)",
@@ -80,6 +90,13 @@ module RubyAdapter
             call: "ActiveModel::Type::String.new.cast(value)",
             run: ->(value) { ActiveModel::Type::String.new.cast(value) }
           )
+        ],
+        "toBasicAscii" => [
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call: "ActiveSupport::Inflector.transliterate(value)",
+            run: ->(value) { ActiveSupport::Inflector.transliterate(value) }
+          )
         ]
       }.freeze,
       name: "Rails (ActiveModel)",
@@ -102,6 +119,13 @@ module RubyAdapter
           ResearchCodec.probe(
             call: "value.empty?",
             run: ->(value) { value.empty? }
+          )
+        ],
+        "lowerFirst" => [
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call: "value.sub(/\\A./) { |first| first.downcase }",
+            run: ->(value) { value.sub(/\A./) { |first| first.downcase } }
           )
         ],
         "safeDateToIsoString" => [
@@ -200,6 +224,25 @@ module RubyAdapter
             accepts: ARE_TWO_STRINGS,
             call: "URI.join(base, value).to_s",
             run: ->(value, base) { URI.join(base, value).to_s }
+          )
+        ],
+        "trimBlank" => [
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call: "value.strip",
+            run: ->(value) { value.strip }
+          )
+        ],
+        "upperFirst" => [
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call: "value.capitalize",
+            run: ->(value) { value.capitalize }
+          ),
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call: "value.sub(/\\A./) { |first| first.upcase }",
+            run: ->(value) { value.sub(/\A./) { |first| first.upcase } }
           )
         ]
       }.freeze,
