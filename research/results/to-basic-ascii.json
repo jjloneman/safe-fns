@@ -1,0 +1,7233 @@
+{
+  "cases": [
+    [
+      "hello"
+    ],
+    [
+      ""
+    ],
+    [
+      "café"
+    ],
+    [
+      "Crème Brûlée"
+    ],
+    [
+      "naïve"
+    ],
+    [
+      "café"
+    ],
+    [
+      "Ångström"
+    ],
+    [
+      "Å"
+    ],
+    [
+      "Straße"
+    ],
+    [
+      "ẞ"
+    ],
+    [
+      "STRAẞE"
+    ],
+    [
+      "ÆRØ"
+    ],
+    [
+      "Œuvre"
+    ],
+    [
+      "Ærøskøbing"
+    ],
+    [
+      "Łódź"
+    ],
+    [
+      "Đorđe"
+    ],
+    [
+      "œuvre"
+    ],
+    [
+      "Þór"
+    ],
+    [
+      "Iğdır"
+    ],
+    [
+      "ð"
+    ],
+    [
+      "ħ"
+    ],
+    [
+      "Ĳ"
+    ],
+    [
+      "ſ"
+    ],
+    [
+      "ŉ"
+    ],
+    [
+      "ﬁle"
+    ],
+    [
+      "Ａｂｃ"
+    ],
+    [
+      "x²"
+    ],
+    [
+      "½"
+    ],
+    [
+      "™"
+    ],
+    [
+      "℃"
+    ],
+    [
+      "“hi” ‘yo’"
+    ],
+    [
+      "a–b—c"
+    ],
+    [
+      "…"
+    ],
+    [
+      "−5"
+    ],
+    [
+      "a b"
+    ],
+    [
+      "a b"
+    ],
+    [
+      "soft­hyphen"
+    ],
+    [
+      "zero​width"
+    ],
+    [
+      "€5"
+    ],
+    [
+      "£5"
+    ],
+    [
+      "© 2026"
+    ],
+    [
+      "°"
+    ],
+    [
+      "日本語"
+    ],
+    [
+      "Привет"
+    ],
+    [
+      "Ελλάδα"
+    ],
+    [
+      "😀"
+    ],
+    [
+      "ǅ"
+    ],
+    [
+      "tab\tnew\nline"
+    ],
+    [
+      "á̀"
+    ],
+    [
+      "«quoted»"
+    ],
+    [
+      "‹single›"
+    ],
+    [
+      "「日本」"
+    ],
+    [
+      "《書》"
+    ],
+    [
+      "⟪a⟫"
+    ],
+    [
+      "¡Hola!"
+    ],
+    [
+      "¿Qué?"
+    ],
+    [
+      "‽"
+    ],
+    [
+      "a⸺b"
+    ],
+    [
+      "a b"
+    ],
+    [
+      "❨x❩"
+    ],
+    [
+      "【注】"
+    ],
+    [
+      "⌊x⌋"
+    ],
+    [
+      "⸢x⸣"
+    ],
+    [
+      "§1"
+    ],
+    [
+      "col·lecció"
+    ],
+    [
+      "｟x｠"
+    ],
+    [
+      "Azərbaycan"
+    ],
+    [
+      "ɗaya"
+    ],
+    [
+      "Ɔkɔm"
+    ],
+    [
+      "Ŋaa"
+    ],
+    [
+      "ŊAA"
+    ],
+    [
+      "ɲɔgɔn"
+    ],
+    [
+      "Ʒuõʒ"
+    ],
+    [
+      "Tʜɪꜱ ɪꜱ"
+    ],
+    [
+      "ĸ"
+    ],
+    [
+      "ɐ"
+    ],
+    [
+      "Ꜣ"
+    ],
+    [
+      "5″"
+    ],
+    [
+      "‶x″"
+    ],
+    [
+      "x‴"
+    ],
+    [
+      "Mr. B⸺"
+    ],
+    [
+      "⸻. Title"
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      null
+    ],
+    [
+      42
+    ],
+    [
+      [
+        "a"
+      ]
+    ],
+    [
+      {}
+    ],
+    [
+      {
+        "$js": "a lone surrogate"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed string"
+      }
+    ],
+    [
+      {
+        "$js": "a symbol"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "toBasicAscii",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Strasse"
+        },
+        {
+          "kind": "value",
+          "value": "SS"
+        },
+        {
+          "kind": "value",
+          "value": "STRASSE"
+        },
+        {
+          "kind": "value",
+          "value": "AERO"
+        },
+        {
+          "kind": "value",
+          "value": "Oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Aeroskobing"
+        },
+        {
+          "kind": "value",
+          "value": "Lodz"
+        },
+        {
+          "kind": "value",
+          "value": "Dorde"
+        },
+        {
+          "kind": "value",
+          "value": "oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Thor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdir"
+        },
+        {
+          "kind": "value",
+          "value": "d"
+        },
+        {
+          "kind": "value",
+          "value": "h"
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "s"
+        },
+        {
+          "kind": "value",
+          "value": "'n"
+        },
+        {
+          "kind": "value",
+          "value": "file"
+        },
+        {
+          "kind": "value",
+          "value": "Abc"
+        },
+        {
+          "kind": "value",
+          "value": "x2"
+        },
+        {
+          "kind": "value",
+          "value": "1/2"
+        },
+        {
+          "kind": "value",
+          "value": "TM"
+        },
+        {
+          "kind": "value",
+          "value": "C"
+        },
+        {
+          "kind": "value",
+          "value": "\"hi\" 'yo'"
+        },
+        {
+          "kind": "value",
+          "value": "a-b-c"
+        },
+        {
+          "kind": "value",
+          "value": "..."
+        },
+        {
+          "kind": "value",
+          "value": "-5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "softhyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zerowidth"
+        },
+        {
+          "kind": "value",
+          "value": "5"
+        },
+        {
+          "kind": "value",
+          "value": "5"
+        },
+        {
+          "kind": "value",
+          "value": " 2026"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "Dz"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "\"quoted\""
+        },
+        {
+          "kind": "value",
+          "value": "'single'"
+        },
+        {
+          "kind": "value",
+          "value": "\"\""
+        },
+        {
+          "kind": "value",
+          "value": "\"\""
+        },
+        {
+          "kind": "value",
+          "value": "<<a>>"
+        },
+        {
+          "kind": "value",
+          "value": "Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "Que?"
+        },
+        {
+          "kind": "value",
+          "value": "?!"
+        },
+        {
+          "kind": "value",
+          "value": "a--b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "(x)"
+        },
+        {
+          "kind": "value",
+          "value": "[]"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "1"
+        },
+        {
+          "kind": "value",
+          "value": "colleccio"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "Azerbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "daya"
+        },
+        {
+          "kind": "value",
+          "value": "Okom"
+        },
+        {
+          "kind": "value",
+          "value": "Ngaa"
+        },
+        {
+          "kind": "value",
+          "value": "NGAA"
+        },
+        {
+          "kind": "value",
+          "value": "nyogon"
+        },
+        {
+          "kind": "value",
+          "value": "Dzuodz"
+        },
+        {
+          "kind": "value",
+          "value": "This is"
+        },
+        {
+          "kind": "value",
+          "value": "q"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "5\""
+        },
+        {
+          "kind": "value",
+          "value": "\"x\""
+        },
+        {
+          "kind": "value",
+          "value": "x'''"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B--"
+        },
+        {
+          "kind": "value",
+          "value": "---. Title"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "transliterate(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "@sindresorhus/transliterate",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstroem"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Strasse"
+        },
+        {
+          "kind": "value",
+          "value": "Ss"
+        },
+        {
+          "kind": "value",
+          "value": "STRASsE"
+        },
+        {
+          "kind": "value",
+          "value": "AERO"
+        },
+        {
+          "kind": "value",
+          "value": "OEuvre"
+        },
+        {
+          "kind": "value",
+          "value": "AEroskobing"
+        },
+        {
+          "kind": "value",
+          "value": "Lodz"
+        },
+        {
+          "kind": "value",
+          "value": "Dorde"
+        },
+        {
+          "kind": "value",
+          "value": "oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "THor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdir"
+        },
+        {
+          "kind": "value",
+          "value": "d"
+        },
+        {
+          "kind": "value",
+          "value": "h"
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "ſ"
+        },
+        {
+          "kind": "value",
+          "value": "ŉ"
+        },
+        {
+          "kind": "value",
+          "value": "ﬁle"
+        },
+        {
+          "kind": "value",
+          "value": "Ａｂｃ"
+        },
+        {
+          "kind": "value",
+          "value": "x²"
+        },
+        {
+          "kind": "value",
+          "value": "½"
+        },
+        {
+          "kind": "value",
+          "value": "™"
+        },
+        {
+          "kind": "value",
+          "value": "℃"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a-b-c"
+        },
+        {
+          "kind": "value",
+          "value": "…"
+        },
+        {
+          "kind": "value",
+          "value": "-5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "E5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Privet"
+        },
+        {
+          "kind": "value",
+          "value": "Ellada"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ǅ"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "?!"
+        },
+        {
+          "kind": "value",
+          "value": "a-b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "colleccio"
+        },
+        {
+          "kind": "value",
+          "value": "｟x｠"
+        },
+        {
+          "kind": "value",
+          "value": "Azarbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "ɗaya"
+        },
+        {
+          "kind": "value",
+          "value": "Ɔkɔm"
+        },
+        {
+          "kind": "value",
+          "value": "Ŋaa"
+        },
+        {
+          "kind": "value",
+          "value": "ŊAA"
+        },
+        {
+          "kind": "value",
+          "value": "ɲɔgɔn"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "ĸ"
+        },
+        {
+          "kind": "value",
+          "value": "ɐ"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5″"
+        },
+        {
+          "kind": "value",
+          "value": "‶x″"
+        },
+        {
+          "kind": "value",
+          "value": "x‴"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B-"
+        },
+        {
+          "kind": "value",
+          "value": "-. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.3.1"
+    },
+    {
+      "call": "anyAscii(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "any-ascii",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Strasse"
+        },
+        {
+          "kind": "value",
+          "value": "Ss"
+        },
+        {
+          "kind": "value",
+          "value": "STRASsE"
+        },
+        {
+          "kind": "value",
+          "value": "AeRO"
+        },
+        {
+          "kind": "value",
+          "value": "Oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Aeroskobing"
+        },
+        {
+          "kind": "value",
+          "value": "Lodz"
+        },
+        {
+          "kind": "value",
+          "value": "Dorde"
+        },
+        {
+          "kind": "value",
+          "value": "oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Thor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdir"
+        },
+        {
+          "kind": "value",
+          "value": "d"
+        },
+        {
+          "kind": "value",
+          "value": "h"
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "s"
+        },
+        {
+          "kind": "value",
+          "value": "'n"
+        },
+        {
+          "kind": "value",
+          "value": "file"
+        },
+        {
+          "kind": "value",
+          "value": "Abc"
+        },
+        {
+          "kind": "value",
+          "value": "x2"
+        },
+        {
+          "kind": "value",
+          "value": "1/2"
+        },
+        {
+          "kind": "value",
+          "value": "TM"
+        },
+        {
+          "kind": "value",
+          "value": "C"
+        },
+        {
+          "kind": "value",
+          "value": "\"hi\" 'yo'"
+        },
+        {
+          "kind": "value",
+          "value": "a-b-c"
+        },
+        {
+          "kind": "value",
+          "value": "..."
+        },
+        {
+          "kind": "value",
+          "value": "-5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "softhyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zerowidth"
+        },
+        {
+          "kind": "value",
+          "value": "EUR5"
+        },
+        {
+          "kind": "value",
+          "value": "GBP5"
+        },
+        {
+          "kind": "value",
+          "value": "(C) 2026"
+        },
+        {
+          "kind": "value",
+          "value": "deg"
+        },
+        {
+          "kind": "value",
+          "value": "RiBenYu"
+        },
+        {
+          "kind": "value",
+          "value": "Privet"
+        },
+        {
+          "kind": "value",
+          "value": "Ellada"
+        },
+        {
+          "kind": "value",
+          "value": ":grinning:"
+        },
+        {
+          "kind": "value",
+          "value": "Dz"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "<<quoted>>"
+        },
+        {
+          "kind": "value",
+          "value": "<single>"
+        },
+        {
+          "kind": "value",
+          "value": "[RiBen]"
+        },
+        {
+          "kind": "value",
+          "value": "<<Shu>>"
+        },
+        {
+          "kind": "value",
+          "value": "<<a>>"
+        },
+        {
+          "kind": "value",
+          "value": "!Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "?Que?"
+        },
+        {
+          "kind": "value",
+          "value": "!?"
+        },
+        {
+          "kind": "value",
+          "value": "a--b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "(x)"
+        },
+        {
+          "kind": "value",
+          "value": "[(Zhu)]"
+        },
+        {
+          "kind": "value",
+          "value": "[x]"
+        },
+        {
+          "kind": "value",
+          "value": "[x]"
+        },
+        {
+          "kind": "value",
+          "value": "S1"
+        },
+        {
+          "kind": "value",
+          "value": "col-leccio"
+        },
+        {
+          "kind": "value",
+          "value": "(x)"
+        },
+        {
+          "kind": "value",
+          "value": "Azerbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "daya"
+        },
+        {
+          "kind": "value",
+          "value": "Okom"
+        },
+        {
+          "kind": "value",
+          "value": "Ngaa"
+        },
+        {
+          "kind": "value",
+          "value": "NgAA"
+        },
+        {
+          "kind": "value",
+          "value": "nogon"
+        },
+        {
+          "kind": "value",
+          "value": "Zhuozh"
+        },
+        {
+          "kind": "value",
+          "value": "This is"
+        },
+        {
+          "kind": "value",
+          "value": "q"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "'"
+        },
+        {
+          "kind": "value",
+          "value": "5''"
+        },
+        {
+          "kind": "value",
+          "value": "``x''"
+        },
+        {
+          "kind": "value",
+          "value": "x'''"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B--"
+        },
+        {
+          "kind": "value",
+          "value": "---. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "0.3.3"
+    },
+    {
+      "call": "deburr(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "es-toolkit",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Strasse"
+        },
+        {
+          "kind": "value",
+          "value": "ẞ"
+        },
+        {
+          "kind": "value",
+          "value": "STRAẞE"
+        },
+        {
+          "kind": "value",
+          "value": "AeRO"
+        },
+        {
+          "kind": "value",
+          "value": "Oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Aeroskobing"
+        },
+        {
+          "kind": "value",
+          "value": "Lodz"
+        },
+        {
+          "kind": "value",
+          "value": "Dorde"
+        },
+        {
+          "kind": "value",
+          "value": "oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Thor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdir"
+        },
+        {
+          "kind": "value",
+          "value": "d"
+        },
+        {
+          "kind": "value",
+          "value": "h"
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "s"
+        },
+        {
+          "kind": "value",
+          "value": "'n"
+        },
+        {
+          "kind": "value",
+          "value": "ﬁle"
+        },
+        {
+          "kind": "value",
+          "value": "Ａｂｃ"
+        },
+        {
+          "kind": "value",
+          "value": "x²"
+        },
+        {
+          "kind": "value",
+          "value": "½"
+        },
+        {
+          "kind": "value",
+          "value": "™"
+        },
+        {
+          "kind": "value",
+          "value": "℃"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a–b—c"
+        },
+        {
+          "kind": "value",
+          "value": "…"
+        },
+        {
+          "kind": "value",
+          "value": "−5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "€5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Привет"
+        },
+        {
+          "kind": "value",
+          "value": "Ελλαδα"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ǅ"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "‽"
+        },
+        {
+          "kind": "value",
+          "value": "a⸺b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "col·leccio"
+        },
+        {
+          "kind": "value",
+          "value": "｟x｠"
+        },
+        {
+          "kind": "value",
+          "value": "Azərbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "ɗaya"
+        },
+        {
+          "kind": "value",
+          "value": "Ɔkɔm"
+        },
+        {
+          "kind": "value",
+          "value": "Naa"
+        },
+        {
+          "kind": "value",
+          "value": "NAA"
+        },
+        {
+          "kind": "value",
+          "value": "ɲɔgɔn"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "k"
+        },
+        {
+          "kind": "value",
+          "value": "ɐ"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5″"
+        },
+        {
+          "kind": "value",
+          "value": "‶x″"
+        },
+        {
+          "kind": "value",
+          "value": "x‴"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B⸺"
+        },
+        {
+          "kind": "value",
+          "value": "⸻. Title"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.52.0"
+    },
+    {
+      "call": "value.normalize(\"NFD\").replace(/\\p{M}/gu, \"\")",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d816081d0ffc1ee8c6e57b9de1a9fd2978c52ca97e32d91b011015c02481d02d",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Straße"
+        },
+        {
+          "kind": "value",
+          "value": "ẞ"
+        },
+        {
+          "kind": "value",
+          "value": "STRAẞE"
+        },
+        {
+          "kind": "value",
+          "value": "ÆRØ"
+        },
+        {
+          "kind": "value",
+          "value": "Œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Ærøskøbing"
+        },
+        {
+          "kind": "value",
+          "value": "Łodz"
+        },
+        {
+          "kind": "value",
+          "value": "Đorđe"
+        },
+        {
+          "kind": "value",
+          "value": "œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Þor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdır"
+        },
+        {
+          "kind": "value",
+          "value": "ð"
+        },
+        {
+          "kind": "value",
+          "value": "ħ"
+        },
+        {
+          "kind": "value",
+          "value": "Ĳ"
+        },
+        {
+          "kind": "value",
+          "value": "ſ"
+        },
+        {
+          "kind": "value",
+          "value": "ŉ"
+        },
+        {
+          "kind": "value",
+          "value": "ﬁle"
+        },
+        {
+          "kind": "value",
+          "value": "Ａｂｃ"
+        },
+        {
+          "kind": "value",
+          "value": "x²"
+        },
+        {
+          "kind": "value",
+          "value": "½"
+        },
+        {
+          "kind": "value",
+          "value": "™"
+        },
+        {
+          "kind": "value",
+          "value": "℃"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a–b—c"
+        },
+        {
+          "kind": "value",
+          "value": "…"
+        },
+        {
+          "kind": "value",
+          "value": "−5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "€5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Привет"
+        },
+        {
+          "kind": "value",
+          "value": "Ελλαδα"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ǅ"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "‽"
+        },
+        {
+          "kind": "value",
+          "value": "a⸺b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "col·leccio"
+        },
+        {
+          "kind": "value",
+          "value": "｟x｠"
+        },
+        {
+          "kind": "value",
+          "value": "Azərbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "ɗaya"
+        },
+        {
+          "kind": "value",
+          "value": "Ɔkɔm"
+        },
+        {
+          "kind": "value",
+          "value": "Ŋaa"
+        },
+        {
+          "kind": "value",
+          "value": "ŊAA"
+        },
+        {
+          "kind": "value",
+          "value": "ɲɔgɔn"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "ĸ"
+        },
+        {
+          "kind": "value",
+          "value": "ɐ"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5″"
+        },
+        {
+          "kind": "value",
+          "value": "‶x″"
+        },
+        {
+          "kind": "value",
+          "value": "x‴"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B⸺"
+        },
+        {
+          "kind": "value",
+          "value": "⸻. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "value.normalize(\"NFKD\").replace(/\\p{M}/gu, \"\")",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d816081d0ffc1ee8c6e57b9de1a9fd2978c52ca97e32d91b011015c02481d02d",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Straße"
+        },
+        {
+          "kind": "value",
+          "value": "ẞ"
+        },
+        {
+          "kind": "value",
+          "value": "STRAẞE"
+        },
+        {
+          "kind": "value",
+          "value": "ÆRØ"
+        },
+        {
+          "kind": "value",
+          "value": "Œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Ærøskøbing"
+        },
+        {
+          "kind": "value",
+          "value": "Łodz"
+        },
+        {
+          "kind": "value",
+          "value": "Đorđe"
+        },
+        {
+          "kind": "value",
+          "value": "œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Þor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdır"
+        },
+        {
+          "kind": "value",
+          "value": "ð"
+        },
+        {
+          "kind": "value",
+          "value": "ħ"
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "s"
+        },
+        {
+          "kind": "value",
+          "value": "ʼn"
+        },
+        {
+          "kind": "value",
+          "value": "file"
+        },
+        {
+          "kind": "value",
+          "value": "Abc"
+        },
+        {
+          "kind": "value",
+          "value": "x2"
+        },
+        {
+          "kind": "value",
+          "value": "1⁄2"
+        },
+        {
+          "kind": "value",
+          "value": "TM"
+        },
+        {
+          "kind": "value",
+          "value": "°C"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a–b—c"
+        },
+        {
+          "kind": "value",
+          "value": "..."
+        },
+        {
+          "kind": "value",
+          "value": "−5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "€5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Привет"
+        },
+        {
+          "kind": "value",
+          "value": "Ελλαδα"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "Dz"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "‽"
+        },
+        {
+          "kind": "value",
+          "value": "a⸺b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "col·leccio"
+        },
+        {
+          "kind": "value",
+          "value": "⦅x⦆"
+        },
+        {
+          "kind": "value",
+          "value": "Azərbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "ɗaya"
+        },
+        {
+          "kind": "value",
+          "value": "Ɔkɔm"
+        },
+        {
+          "kind": "value",
+          "value": "Ŋaa"
+        },
+        {
+          "kind": "value",
+          "value": "ŊAA"
+        },
+        {
+          "kind": "value",
+          "value": "ɲɔgɔn"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "ĸ"
+        },
+        {
+          "kind": "value",
+          "value": "ɐ"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5′′"
+        },
+        {
+          "kind": "value",
+          "value": "‵‵x′′"
+        },
+        {
+          "kind": "value",
+          "value": "x′′′"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B⸺"
+        },
+        {
+          "kind": "value",
+          "value": "⸻. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "value.normalize(\"NFD\").replace(/\\p{M}/gu, \"\")",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Straße"
+        },
+        {
+          "kind": "value",
+          "value": "ẞ"
+        },
+        {
+          "kind": "value",
+          "value": "STRAẞE"
+        },
+        {
+          "kind": "value",
+          "value": "ÆRØ"
+        },
+        {
+          "kind": "value",
+          "value": "Œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Ærøskøbing"
+        },
+        {
+          "kind": "value",
+          "value": "Łodz"
+        },
+        {
+          "kind": "value",
+          "value": "Đorđe"
+        },
+        {
+          "kind": "value",
+          "value": "œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Þor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdır"
+        },
+        {
+          "kind": "value",
+          "value": "ð"
+        },
+        {
+          "kind": "value",
+          "value": "ħ"
+        },
+        {
+          "kind": "value",
+          "value": "Ĳ"
+        },
+        {
+          "kind": "value",
+          "value": "ſ"
+        },
+        {
+          "kind": "value",
+          "value": "ŉ"
+        },
+        {
+          "kind": "value",
+          "value": "ﬁle"
+        },
+        {
+          "kind": "value",
+          "value": "Ａｂｃ"
+        },
+        {
+          "kind": "value",
+          "value": "x²"
+        },
+        {
+          "kind": "value",
+          "value": "½"
+        },
+        {
+          "kind": "value",
+          "value": "™"
+        },
+        {
+          "kind": "value",
+          "value": "℃"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a–b—c"
+        },
+        {
+          "kind": "value",
+          "value": "…"
+        },
+        {
+          "kind": "value",
+          "value": "−5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "€5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Привет"
+        },
+        {
+          "kind": "value",
+          "value": "Ελλαδα"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ǅ"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "‽"
+        },
+        {
+          "kind": "value",
+          "value": "a⸺b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "col·leccio"
+        },
+        {
+          "kind": "value",
+          "value": "｟x｠"
+        },
+        {
+          "kind": "value",
+          "value": "Azərbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "ɗaya"
+        },
+        {
+          "kind": "value",
+          "value": "Ɔkɔm"
+        },
+        {
+          "kind": "value",
+          "value": "Ŋaa"
+        },
+        {
+          "kind": "value",
+          "value": "ŊAA"
+        },
+        {
+          "kind": "value",
+          "value": "ɲɔgɔn"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "ĸ"
+        },
+        {
+          "kind": "value",
+          "value": "ɐ"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5″"
+        },
+        {
+          "kind": "value",
+          "value": "‶x″"
+        },
+        {
+          "kind": "value",
+          "value": "x‴"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B⸺"
+        },
+        {
+          "kind": "value",
+          "value": "⸻. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "value.normalize(\"NFKD\").replace(/\\p{M}/gu, \"\")",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Straße"
+        },
+        {
+          "kind": "value",
+          "value": "ẞ"
+        },
+        {
+          "kind": "value",
+          "value": "STRAẞE"
+        },
+        {
+          "kind": "value",
+          "value": "ÆRØ"
+        },
+        {
+          "kind": "value",
+          "value": "Œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Ærøskøbing"
+        },
+        {
+          "kind": "value",
+          "value": "Łodz"
+        },
+        {
+          "kind": "value",
+          "value": "Đorđe"
+        },
+        {
+          "kind": "value",
+          "value": "œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Þor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdır"
+        },
+        {
+          "kind": "value",
+          "value": "ð"
+        },
+        {
+          "kind": "value",
+          "value": "ħ"
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "s"
+        },
+        {
+          "kind": "value",
+          "value": "ʼn"
+        },
+        {
+          "kind": "value",
+          "value": "file"
+        },
+        {
+          "kind": "value",
+          "value": "Abc"
+        },
+        {
+          "kind": "value",
+          "value": "x2"
+        },
+        {
+          "kind": "value",
+          "value": "1⁄2"
+        },
+        {
+          "kind": "value",
+          "value": "TM"
+        },
+        {
+          "kind": "value",
+          "value": "°C"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a–b—c"
+        },
+        {
+          "kind": "value",
+          "value": "..."
+        },
+        {
+          "kind": "value",
+          "value": "−5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "€5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Привет"
+        },
+        {
+          "kind": "value",
+          "value": "Ελλαδα"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "Dz"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "‽"
+        },
+        {
+          "kind": "value",
+          "value": "a⸺b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "col·leccio"
+        },
+        {
+          "kind": "value",
+          "value": "⦅x⦆"
+        },
+        {
+          "kind": "value",
+          "value": "Azərbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "ɗaya"
+        },
+        {
+          "kind": "value",
+          "value": "Ɔkɔm"
+        },
+        {
+          "kind": "value",
+          "value": "Ŋaa"
+        },
+        {
+          "kind": "value",
+          "value": "ŊAA"
+        },
+        {
+          "kind": "value",
+          "value": "ɲɔgɔn"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "ĸ"
+        },
+        {
+          "kind": "value",
+          "value": "ɐ"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5′′"
+        },
+        {
+          "kind": "value",
+          "value": "‵‵x′′"
+        },
+        {
+          "kind": "value",
+          "value": "x′′′"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B⸺"
+        },
+        {
+          "kind": "value",
+          "value": "⸻. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "_.deburr(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "lodash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "Å"
+        },
+        {
+          "kind": "value",
+          "value": "Strasse"
+        },
+        {
+          "kind": "value",
+          "value": "ẞ"
+        },
+        {
+          "kind": "value",
+          "value": "STRAẞE"
+        },
+        {
+          "kind": "value",
+          "value": "AeRO"
+        },
+        {
+          "kind": "value",
+          "value": "Oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Aeroskobing"
+        },
+        {
+          "kind": "value",
+          "value": "Lodz"
+        },
+        {
+          "kind": "value",
+          "value": "Dorde"
+        },
+        {
+          "kind": "value",
+          "value": "oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Thor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdir"
+        },
+        {
+          "kind": "value",
+          "value": "d"
+        },
+        {
+          "kind": "value",
+          "value": "h"
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "s"
+        },
+        {
+          "kind": "value",
+          "value": "'n"
+        },
+        {
+          "kind": "value",
+          "value": "ﬁle"
+        },
+        {
+          "kind": "value",
+          "value": "Ａｂｃ"
+        },
+        {
+          "kind": "value",
+          "value": "x²"
+        },
+        {
+          "kind": "value",
+          "value": "½"
+        },
+        {
+          "kind": "value",
+          "value": "™"
+        },
+        {
+          "kind": "value",
+          "value": "℃"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a–b—c"
+        },
+        {
+          "kind": "value",
+          "value": "…"
+        },
+        {
+          "kind": "value",
+          "value": "−5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "€5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Привет"
+        },
+        {
+          "kind": "value",
+          "value": "Ελλάδα"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ǅ"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "‽"
+        },
+        {
+          "kind": "value",
+          "value": "a⸺b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "col·leccio"
+        },
+        {
+          "kind": "value",
+          "value": "｟x｠"
+        },
+        {
+          "kind": "value",
+          "value": "Azərbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "ɗaya"
+        },
+        {
+          "kind": "value",
+          "value": "Ɔkɔm"
+        },
+        {
+          "kind": "value",
+          "value": "Naa"
+        },
+        {
+          "kind": "value",
+          "value": "NAA"
+        },
+        {
+          "kind": "value",
+          "value": "ɲɔgɔn"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "k"
+        },
+        {
+          "kind": "value",
+          "value": "ɐ"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5″"
+        },
+        {
+          "kind": "value",
+          "value": "‶x″"
+        },
+        {
+          "kind": "value",
+          "value": "x‴"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B⸺"
+        },
+        {
+          "kind": "value",
+          "value": "⸻. Title"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": "Symbol(hostile)"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.18.1"
+    },
+    {
+      "call": "transliterate(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "transliteration",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "Strasse"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "STRAE"
+        },
+        {
+          "kind": "value",
+          "value": "AERO"
+        },
+        {
+          "kind": "value",
+          "value": "OEuvre"
+        },
+        {
+          "kind": "value",
+          "value": "AEroskobing"
+        },
+        {
+          "kind": "value",
+          "value": "Lodz"
+        },
+        {
+          "kind": "value",
+          "value": "Dorde"
+        },
+        {
+          "kind": "value",
+          "value": "oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Thor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdir"
+        },
+        {
+          "kind": "value",
+          "value": "d"
+        },
+        {
+          "kind": "value",
+          "value": "h"
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "s"
+        },
+        {
+          "kind": "value",
+          "value": "'n"
+        },
+        {
+          "kind": "value",
+          "value": "file"
+        },
+        {
+          "kind": "value",
+          "value": "Abc"
+        },
+        {
+          "kind": "value",
+          "value": "x2"
+        },
+        {
+          "kind": "value",
+          "value": "1/2"
+        },
+        {
+          "kind": "value",
+          "value": "(tm)"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "\"hi\" 'yo'"
+        },
+        {
+          "kind": "value",
+          "value": "a-b--c"
+        },
+        {
+          "kind": "value",
+          "value": "..."
+        },
+        {
+          "kind": "value",
+          "value": "5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "softhyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero width"
+        },
+        {
+          "kind": "value",
+          "value": "EU5"
+        },
+        {
+          "kind": "value",
+          "value": "PS5"
+        },
+        {
+          "kind": "value",
+          "value": "(c) 2026"
+        },
+        {
+          "kind": "value",
+          "value": "deg"
+        },
+        {
+          "kind": "value",
+          "value": "Ri Ben Yu"
+        },
+        {
+          "kind": "value",
+          "value": "Privet"
+        },
+        {
+          "kind": "value",
+          "value": "Ellada"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "Dz"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "<<quoted>>"
+        },
+        {
+          "kind": "value",
+          "value": "<single>"
+        },
+        {
+          "kind": "value",
+          "value": "[Ri Ben] "
+        },
+        {
+          "kind": "value",
+          "value": "<<Shu>> "
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "!Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "?Que?"
+        },
+        {
+          "kind": "value",
+          "value": "!?"
+        },
+        {
+          "kind": "value",
+          "value": "ab"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "[(Zhu)] "
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "SS1"
+        },
+        {
+          "kind": "value",
+          "value": "col*leccio"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "Az@rbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "daya"
+        },
+        {
+          "kind": "value",
+          "value": "Okom"
+        },
+        {
+          "kind": "value",
+          "value": "NGaa"
+        },
+        {
+          "kind": "value",
+          "value": "NGAA"
+        },
+        {
+          "kind": "value",
+          "value": "nogon"
+        },
+        {
+          "kind": "value",
+          "value": "ZHuoZ"
+        },
+        {
+          "kind": "value",
+          "value": "THIS IS"
+        },
+        {
+          "kind": "value",
+          "value": "k"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "5''"
+        },
+        {
+          "kind": "value",
+          "value": "``x''"
+        },
+        {
+          "kind": "value",
+          "value": "x'''"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B"
+        },
+        {
+          "kind": "value",
+          "value": ". Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.6.2"
+    },
+    {
+      "call": "v.latinise(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "Voca",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "Å"
+        },
+        {
+          "kind": "value",
+          "value": "Strase"
+        },
+        {
+          "kind": "value",
+          "value": "ẞ"
+        },
+        {
+          "kind": "value",
+          "value": "STRAẞE"
+        },
+        {
+          "kind": "value",
+          "value": "AERO"
+        },
+        {
+          "kind": "value",
+          "value": "OEuvre"
+        },
+        {
+          "kind": "value",
+          "value": "AEroskobing"
+        },
+        {
+          "kind": "value",
+          "value": "Lodz"
+        },
+        {
+          "kind": "value",
+          "value": "Dorde"
+        },
+        {
+          "kind": "value",
+          "value": "oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "THor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdir"
+        },
+        {
+          "kind": "value",
+          "value": "d"
+        },
+        {
+          "kind": "value",
+          "value": "h"
+        },
+        {
+          "kind": "value",
+          "value": "Ĳ"
+        },
+        {
+          "kind": "value",
+          "value": "l"
+        },
+        {
+          "kind": "value",
+          "value": "n"
+        },
+        {
+          "kind": "value",
+          "value": "ﬁle"
+        },
+        {
+          "kind": "value",
+          "value": "Ａｂｃ"
+        },
+        {
+          "kind": "value",
+          "value": "x²"
+        },
+        {
+          "kind": "value",
+          "value": "½"
+        },
+        {
+          "kind": "value",
+          "value": "™"
+        },
+        {
+          "kind": "value",
+          "value": "℃"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a–b—c"
+        },
+        {
+          "kind": "value",
+          "value": "…"
+        },
+        {
+          "kind": "value",
+          "value": "−5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "€5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Privet"
+        },
+        {
+          "kind": "value",
+          "value": "Ellada"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "Dz"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "‽"
+        },
+        {
+          "kind": "value",
+          "value": "a⸺b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "col·leccio"
+        },
+        {
+          "kind": "value",
+          "value": "｟x｠"
+        },
+        {
+          "kind": "value",
+          "value": "Azərbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "daya"
+        },
+        {
+          "kind": "value",
+          "value": "Okom"
+        },
+        {
+          "kind": "value",
+          "value": "Ŋaa"
+        },
+        {
+          "kind": "value",
+          "value": "ŊAA"
+        },
+        {
+          "kind": "value",
+          "value": "nogon"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "ĸ"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5″"
+        },
+        {
+          "kind": "value",
+          "value": "‶x″"
+        },
+        {
+          "kind": "value",
+          "value": "x‴"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B⸺"
+        },
+        {
+          "kind": "value",
+          "value": "⸻. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.4.1"
+    },
+    {
+      "call": "Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(value))",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "caf?"
+        },
+        {
+          "kind": "value",
+          "value": "Cr?me Br?l?e"
+        },
+        {
+          "kind": "value",
+          "value": "na?ve"
+        },
+        {
+          "kind": "value",
+          "value": "cafe?"
+        },
+        {
+          "kind": "value",
+          "value": "?ngstr?m"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "Stra?e"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "STRA?E"
+        },
+        {
+          "kind": "value",
+          "value": "?R?"
+        },
+        {
+          "kind": "value",
+          "value": "?uvre"
+        },
+        {
+          "kind": "value",
+          "value": "?r?sk?bing"
+        },
+        {
+          "kind": "value",
+          "value": "??d?"
+        },
+        {
+          "kind": "value",
+          "value": "?or?e"
+        },
+        {
+          "kind": "value",
+          "value": "?uvre"
+        },
+        {
+          "kind": "value",
+          "value": "??r"
+        },
+        {
+          "kind": "value",
+          "value": "I?d?r"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?le"
+        },
+        {
+          "kind": "value",
+          "value": "???"
+        },
+        {
+          "kind": "value",
+          "value": "x?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?hi? ?yo?"
+        },
+        {
+          "kind": "value",
+          "value": "a?b?c"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?5"
+        },
+        {
+          "kind": "value",
+          "value": "a?b"
+        },
+        {
+          "kind": "value",
+          "value": "a?b"
+        },
+        {
+          "kind": "value",
+          "value": "soft?hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero?width"
+        },
+        {
+          "kind": "value",
+          "value": "?5"
+        },
+        {
+          "kind": "value",
+          "value": "?5"
+        },
+        {
+          "kind": "value",
+          "value": "? 2026"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "???"
+        },
+        {
+          "kind": "value",
+          "value": "??????"
+        },
+        {
+          "kind": "value",
+          "value": "??????"
+        },
+        {
+          "kind": "value",
+          "value": "??"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "??"
+        },
+        {
+          "kind": "value",
+          "value": "?quoted?"
+        },
+        {
+          "kind": "value",
+          "value": "?single?"
+        },
+        {
+          "kind": "value",
+          "value": "????"
+        },
+        {
+          "kind": "value",
+          "value": "???"
+        },
+        {
+          "kind": "value",
+          "value": "?a?"
+        },
+        {
+          "kind": "value",
+          "value": "?Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "?Qu??"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "a?b"
+        },
+        {
+          "kind": "value",
+          "value": "a?b"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "???"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "?1"
+        },
+        {
+          "kind": "value",
+          "value": "col?lecci?"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "Az?rbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "?aya"
+        },
+        {
+          "kind": "value",
+          "value": "?k?m"
+        },
+        {
+          "kind": "value",
+          "value": "?aa"
+        },
+        {
+          "kind": "value",
+          "value": "?AA"
+        },
+        {
+          "kind": "value",
+          "value": "??g?n"
+        },
+        {
+          "kind": "value",
+          "value": "?u??"
+        },
+        {
+          "kind": "value",
+          "value": "T??? ??"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "5?"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "x?"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B?"
+        },
+        {
+          "kind": "value",
+          "value": "?. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "string.Concat(value.Normalize(FormD).Where(c => GetUnicodeCategory(c) != NonSpacingMark))",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Straße"
+        },
+        {
+          "kind": "value",
+          "value": "ẞ"
+        },
+        {
+          "kind": "value",
+          "value": "STRAẞE"
+        },
+        {
+          "kind": "value",
+          "value": "ÆRØ"
+        },
+        {
+          "kind": "value",
+          "value": "Œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Ærøskøbing"
+        },
+        {
+          "kind": "value",
+          "value": "Łodz"
+        },
+        {
+          "kind": "value",
+          "value": "Đorđe"
+        },
+        {
+          "kind": "value",
+          "value": "œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Þor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdır"
+        },
+        {
+          "kind": "value",
+          "value": "ð"
+        },
+        {
+          "kind": "value",
+          "value": "ħ"
+        },
+        {
+          "kind": "value",
+          "value": "Ĳ"
+        },
+        {
+          "kind": "value",
+          "value": "ſ"
+        },
+        {
+          "kind": "value",
+          "value": "ŉ"
+        },
+        {
+          "kind": "value",
+          "value": "ﬁle"
+        },
+        {
+          "kind": "value",
+          "value": "Ａｂｃ"
+        },
+        {
+          "kind": "value",
+          "value": "x²"
+        },
+        {
+          "kind": "value",
+          "value": "½"
+        },
+        {
+          "kind": "value",
+          "value": "™"
+        },
+        {
+          "kind": "value",
+          "value": "℃"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a–b—c"
+        },
+        {
+          "kind": "value",
+          "value": "…"
+        },
+        {
+          "kind": "value",
+          "value": "−5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "€5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Привет"
+        },
+        {
+          "kind": "value",
+          "value": "Ελλαδα"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ǅ"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "‽"
+        },
+        {
+          "kind": "value",
+          "value": "a⸺b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "col·leccio"
+        },
+        {
+          "kind": "value",
+          "value": "｟x｠"
+        },
+        {
+          "kind": "value",
+          "value": "Azərbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "ɗaya"
+        },
+        {
+          "kind": "value",
+          "value": "Ɔkɔm"
+        },
+        {
+          "kind": "value",
+          "value": "Ŋaa"
+        },
+        {
+          "kind": "value",
+          "value": "ŊAA"
+        },
+        {
+          "kind": "value",
+          "value": "ɲɔgɔn"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "ĸ"
+        },
+        {
+          "kind": "value",
+          "value": "ɐ"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5″"
+        },
+        {
+          "kind": "value",
+          "value": "‶x″"
+        },
+        {
+          "kind": "value",
+          "value": "x‴"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B⸺"
+        },
+        {
+          "kind": "value",
+          "value": "⸻. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "StringUtils.stripAccents(value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Commons Lang",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Straße"
+        },
+        {
+          "kind": "value",
+          "value": "ẞ"
+        },
+        {
+          "kind": "value",
+          "value": "STRAẞE"
+        },
+        {
+          "kind": "value",
+          "value": "ÆRØ"
+        },
+        {
+          "kind": "value",
+          "value": "Œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Ærøskøbing"
+        },
+        {
+          "kind": "value",
+          "value": "Lodz"
+        },
+        {
+          "kind": "value",
+          "value": "Dorde"
+        },
+        {
+          "kind": "value",
+          "value": "œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Þor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdır"
+        },
+        {
+          "kind": "value",
+          "value": "ð"
+        },
+        {
+          "kind": "value",
+          "value": "ħ"
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "s"
+        },
+        {
+          "kind": "value",
+          "value": "ʼn"
+        },
+        {
+          "kind": "value",
+          "value": "file"
+        },
+        {
+          "kind": "value",
+          "value": "Abc"
+        },
+        {
+          "kind": "value",
+          "value": "x2"
+        },
+        {
+          "kind": "value",
+          "value": "1⁄2"
+        },
+        {
+          "kind": "value",
+          "value": "TM"
+        },
+        {
+          "kind": "value",
+          "value": "°C"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a–b—c"
+        },
+        {
+          "kind": "value",
+          "value": "..."
+        },
+        {
+          "kind": "value",
+          "value": "−5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "€5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Привет"
+        },
+        {
+          "kind": "value",
+          "value": "Ελλαδα"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "Dz"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "‽"
+        },
+        {
+          "kind": "value",
+          "value": "a⸺b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "col·leccio"
+        },
+        {
+          "kind": "value",
+          "value": "⦅x⦆"
+        },
+        {
+          "kind": "value",
+          "value": "Azərbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "ɗaya"
+        },
+        {
+          "kind": "value",
+          "value": "Ɔkɔm"
+        },
+        {
+          "kind": "value",
+          "value": "Ŋaa"
+        },
+        {
+          "kind": "value",
+          "value": "ŊAA"
+        },
+        {
+          "kind": "value",
+          "value": "ɲɔgɔn"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "ĸ"
+        },
+        {
+          "kind": "value",
+          "value": "ɐ"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5′′"
+        },
+        {
+          "kind": "value",
+          "value": "‵‵x′′"
+        },
+        {
+          "kind": "value",
+          "value": "x′′′"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B⸺"
+        },
+        {
+          "kind": "value",
+          "value": "⸻. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "3.21.0"
+    },
+    {
+      "call": "Normalizer.normalize(value, NFD).replaceAll(\"\\\\p{M}\", \"\")",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Straße"
+        },
+        {
+          "kind": "value",
+          "value": "ẞ"
+        },
+        {
+          "kind": "value",
+          "value": "STRAẞE"
+        },
+        {
+          "kind": "value",
+          "value": "ÆRØ"
+        },
+        {
+          "kind": "value",
+          "value": "Œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Ærøskøbing"
+        },
+        {
+          "kind": "value",
+          "value": "Łodz"
+        },
+        {
+          "kind": "value",
+          "value": "Đorđe"
+        },
+        {
+          "kind": "value",
+          "value": "œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Þor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdır"
+        },
+        {
+          "kind": "value",
+          "value": "ð"
+        },
+        {
+          "kind": "value",
+          "value": "ħ"
+        },
+        {
+          "kind": "value",
+          "value": "Ĳ"
+        },
+        {
+          "kind": "value",
+          "value": "ſ"
+        },
+        {
+          "kind": "value",
+          "value": "ŉ"
+        },
+        {
+          "kind": "value",
+          "value": "ﬁle"
+        },
+        {
+          "kind": "value",
+          "value": "Ａｂｃ"
+        },
+        {
+          "kind": "value",
+          "value": "x²"
+        },
+        {
+          "kind": "value",
+          "value": "½"
+        },
+        {
+          "kind": "value",
+          "value": "™"
+        },
+        {
+          "kind": "value",
+          "value": "℃"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a–b—c"
+        },
+        {
+          "kind": "value",
+          "value": "…"
+        },
+        {
+          "kind": "value",
+          "value": "−5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "€5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Привет"
+        },
+        {
+          "kind": "value",
+          "value": "Ελλαδα"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ǅ"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "‽"
+        },
+        {
+          "kind": "value",
+          "value": "a⸺b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "col·leccio"
+        },
+        {
+          "kind": "value",
+          "value": "｟x｠"
+        },
+        {
+          "kind": "value",
+          "value": "Azərbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "ɗaya"
+        },
+        {
+          "kind": "value",
+          "value": "Ɔkɔm"
+        },
+        {
+          "kind": "value",
+          "value": "Ŋaa"
+        },
+        {
+          "kind": "value",
+          "value": "ŊAA"
+        },
+        {
+          "kind": "value",
+          "value": "ɲɔgɔn"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "ĸ"
+        },
+        {
+          "kind": "value",
+          "value": "ɐ"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5″"
+        },
+        {
+          "kind": "value",
+          "value": "‶x″"
+        },
+        {
+          "kind": "value",
+          "value": "x‴"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B⸺"
+        },
+        {
+          "kind": "value",
+          "value": "⸻. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "normalize(\"NFKD\", value).encode(\"ascii\", \"ignore\").decode()",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Strae"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "STRAE"
+        },
+        {
+          "kind": "value",
+          "value": "R"
+        },
+        {
+          "kind": "value",
+          "value": "uvre"
+        },
+        {
+          "kind": "value",
+          "value": "rskbing"
+        },
+        {
+          "kind": "value",
+          "value": "odz"
+        },
+        {
+          "kind": "value",
+          "value": "ore"
+        },
+        {
+          "kind": "value",
+          "value": "uvre"
+        },
+        {
+          "kind": "value",
+          "value": "or"
+        },
+        {
+          "kind": "value",
+          "value": "Igdr"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "s"
+        },
+        {
+          "kind": "value",
+          "value": "n"
+        },
+        {
+          "kind": "value",
+          "value": "file"
+        },
+        {
+          "kind": "value",
+          "value": "Abc"
+        },
+        {
+          "kind": "value",
+          "value": "x2"
+        },
+        {
+          "kind": "value",
+          "value": "12"
+        },
+        {
+          "kind": "value",
+          "value": "TM"
+        },
+        {
+          "kind": "value",
+          "value": "C"
+        },
+        {
+          "kind": "value",
+          "value": "hi yo"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "..."
+        },
+        {
+          "kind": "value",
+          "value": "5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "softhyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zerowidth"
+        },
+        {
+          "kind": "value",
+          "value": "5"
+        },
+        {
+          "kind": "value",
+          "value": "5"
+        },
+        {
+          "kind": "value",
+          "value": " 2026"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "Dz"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "quoted"
+        },
+        {
+          "kind": "value",
+          "value": "single"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "Que?"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "ab"
+        },
+        {
+          "kind": "value",
+          "value": "ab"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "1"
+        },
+        {
+          "kind": "value",
+          "value": "colleccio"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "Azrbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "aya"
+        },
+        {
+          "kind": "value",
+          "value": "km"
+        },
+        {
+          "kind": "value",
+          "value": "aa"
+        },
+        {
+          "kind": "value",
+          "value": "AA"
+        },
+        {
+          "kind": "value",
+          "value": "gn"
+        },
+        {
+          "kind": "value",
+          "value": "uo"
+        },
+        {
+          "kind": "value",
+          "value": "T "
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "5"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B"
+        },
+        {
+          "kind": "value",
+          "value": ". Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "iconv('UTF-8', 'ASCII//TRANSLIT', $value)",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locale": "C.UTF-8",
+      "name": "PHP",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Strasse"
+        },
+        {
+          "kind": "value",
+          "value": "SS"
+        },
+        {
+          "kind": "value",
+          "value": "STRASSE"
+        },
+        {
+          "kind": "value",
+          "value": "AERO"
+        },
+        {
+          "kind": "value",
+          "value": "OEuvre"
+        },
+        {
+          "kind": "value",
+          "value": "AEroskobing"
+        },
+        {
+          "kind": "value",
+          "value": "Lodz"
+        },
+        {
+          "kind": "value",
+          "value": "Dorde"
+        },
+        {
+          "kind": "value",
+          "value": "oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "THor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdir"
+        },
+        {
+          "kind": "value",
+          "value": "d"
+        },
+        {
+          "kind": "value",
+          "value": "h"
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "s"
+        },
+        {
+          "kind": "value",
+          "value": "'n"
+        },
+        {
+          "kind": "value",
+          "value": "file"
+        },
+        {
+          "kind": "value",
+          "value": "Abc"
+        },
+        {
+          "kind": "value",
+          "value": "x2"
+        },
+        {
+          "kind": "value",
+          "value": " 1/2 "
+        },
+        {
+          "kind": "value",
+          "value": "(TM)"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "\"hi\" 'yo'"
+        },
+        {
+          "kind": "value",
+          "value": "a-b--c"
+        },
+        {
+          "kind": "value",
+          "value": "..."
+        },
+        {
+          "kind": "value",
+          "value": "-5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft-hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zerowidth"
+        },
+        {
+          "kind": "value",
+          "value": "EUR5"
+        },
+        {
+          "kind": "value",
+          "value": "GBP5"
+        },
+        {
+          "kind": "value",
+          "value": "(C) 2026"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "???"
+        },
+        {
+          "kind": "value",
+          "value": "??????"
+        },
+        {
+          "kind": "value",
+          "value": "??????"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "<<quoted>>"
+        },
+        {
+          "kind": "value",
+          "value": "<single>"
+        },
+        {
+          "kind": "value",
+          "value": "????"
+        },
+        {
+          "kind": "value",
+          "value": "???"
+        },
+        {
+          "kind": "value",
+          "value": "<<a>>"
+        },
+        {
+          "kind": "value",
+          "value": "!Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "?Que?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "a?b"
+        },
+        {
+          "kind": "value",
+          "value": "a?b"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "???"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "?1"
+        },
+        {
+          "kind": "value",
+          "value": "col.leccio"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "Az?rbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "daya"
+        },
+        {
+          "kind": "value",
+          "value": "?k?m"
+        },
+        {
+          "kind": "value",
+          "value": "Naa"
+        },
+        {
+          "kind": "value",
+          "value": "NAA"
+        },
+        {
+          "kind": "value",
+          "value": "n?g?n"
+        },
+        {
+          "kind": "value",
+          "value": "?uo?"
+        },
+        {
+          "kind": "value",
+          "value": "THI? I?"
+        },
+        {
+          "kind": "value",
+          "value": "q"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "5?"
+        },
+        {
+          "kind": "value",
+          "value": "``x?"
+        },
+        {
+          "kind": "value",
+          "value": "x?"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B?"
+        },
+        {
+          "kind": "value",
+          "value": "?. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    },
+    {
+      "call": "ActiveSupport::Inflector.transliterate(value)",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Rails (ActiveModel)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Strasse"
+        },
+        {
+          "kind": "value",
+          "value": "SS"
+        },
+        {
+          "kind": "value",
+          "value": "STRASSE"
+        },
+        {
+          "kind": "value",
+          "value": "AERO"
+        },
+        {
+          "kind": "value",
+          "value": "OEuvre"
+        },
+        {
+          "kind": "value",
+          "value": "AEroskobing"
+        },
+        {
+          "kind": "value",
+          "value": "Lodz"
+        },
+        {
+          "kind": "value",
+          "value": "Dorde"
+        },
+        {
+          "kind": "value",
+          "value": "oeuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Thor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdir"
+        },
+        {
+          "kind": "value",
+          "value": "d"
+        },
+        {
+          "kind": "value",
+          "value": "h"
+        },
+        {
+          "kind": "value",
+          "value": "IJ"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "'n"
+        },
+        {
+          "kind": "value",
+          "value": "?le"
+        },
+        {
+          "kind": "value",
+          "value": "???"
+        },
+        {
+          "kind": "value",
+          "value": "x?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?hi? ?yo?"
+        },
+        {
+          "kind": "value",
+          "value": "a?b?c"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?5"
+        },
+        {
+          "kind": "value",
+          "value": "a?b"
+        },
+        {
+          "kind": "value",
+          "value": "a?b"
+        },
+        {
+          "kind": "value",
+          "value": "soft?hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero?width"
+        },
+        {
+          "kind": "value",
+          "value": "?5"
+        },
+        {
+          "kind": "value",
+          "value": "?5"
+        },
+        {
+          "kind": "value",
+          "value": "? 2026"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "???"
+        },
+        {
+          "kind": "value",
+          "value": "??????"
+        },
+        {
+          "kind": "value",
+          "value": "??????"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a?"
+        },
+        {
+          "kind": "value",
+          "value": "?quoted?"
+        },
+        {
+          "kind": "value",
+          "value": "?single?"
+        },
+        {
+          "kind": "value",
+          "value": "????"
+        },
+        {
+          "kind": "value",
+          "value": "???"
+        },
+        {
+          "kind": "value",
+          "value": "?a?"
+        },
+        {
+          "kind": "value",
+          "value": "?Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "?Que?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "a?b"
+        },
+        {
+          "kind": "value",
+          "value": "a?b"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "???"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "?1"
+        },
+        {
+          "kind": "value",
+          "value": "col?leccio"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "Az?rbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "?aya"
+        },
+        {
+          "kind": "value",
+          "value": "?k?m"
+        },
+        {
+          "kind": "value",
+          "value": "NGaa"
+        },
+        {
+          "kind": "value",
+          "value": "NGAA"
+        },
+        {
+          "kind": "value",
+          "value": "??g?n"
+        },
+        {
+          "kind": "value",
+          "value": "?uo?"
+        },
+        {
+          "kind": "value",
+          "value": "T??? ??"
+        },
+        {
+          "kind": "value",
+          "value": "k"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "?"
+        },
+        {
+          "kind": "value",
+          "value": "5?"
+        },
+        {
+          "kind": "value",
+          "value": "?x?"
+        },
+        {
+          "kind": "value",
+          "value": "x?"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B?"
+        },
+        {
+          "kind": "value",
+          "value": "?. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "8.1.4"
+    },
+    {
+      "call": "value.folding(options: .diacriticInsensitive, locale: nil)",
+      "image": "swift:6.4.1-bookworm@sha256:966e0dce7a3b76b0533df99dd0d54b38ab989fa6592450f70a42f1a1e569c053",
+      "inputs": "sha256:d9086177ec153c1ec9b82eb27e4d770f8ed531c6baba1656761927ce0bc91ab7",
+      "locale": "C.UTF-8",
+      "name": "Swift",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Creme Brulee"
+        },
+        {
+          "kind": "value",
+          "value": "naive"
+        },
+        {
+          "kind": "value",
+          "value": "cafe"
+        },
+        {
+          "kind": "value",
+          "value": "Angstrom"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "Straße"
+        },
+        {
+          "kind": "value",
+          "value": "ẞ"
+        },
+        {
+          "kind": "value",
+          "value": "STRAẞE"
+        },
+        {
+          "kind": "value",
+          "value": "ÆRØ"
+        },
+        {
+          "kind": "value",
+          "value": "Œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Ærøskøbing"
+        },
+        {
+          "kind": "value",
+          "value": "Łodz"
+        },
+        {
+          "kind": "value",
+          "value": "Đorđe"
+        },
+        {
+          "kind": "value",
+          "value": "œuvre"
+        },
+        {
+          "kind": "value",
+          "value": "Þor"
+        },
+        {
+          "kind": "value",
+          "value": "Igdır"
+        },
+        {
+          "kind": "value",
+          "value": "ð"
+        },
+        {
+          "kind": "value",
+          "value": "ħ"
+        },
+        {
+          "kind": "value",
+          "value": "Ĳ"
+        },
+        {
+          "kind": "value",
+          "value": "ſ"
+        },
+        {
+          "kind": "value",
+          "value": "ŉ"
+        },
+        {
+          "kind": "value",
+          "value": "ﬁle"
+        },
+        {
+          "kind": "value",
+          "value": "Ａｂｃ"
+        },
+        {
+          "kind": "value",
+          "value": "x²"
+        },
+        {
+          "kind": "value",
+          "value": "½"
+        },
+        {
+          "kind": "value",
+          "value": "™"
+        },
+        {
+          "kind": "value",
+          "value": "℃"
+        },
+        {
+          "kind": "value",
+          "value": "“hi” ‘yo’"
+        },
+        {
+          "kind": "value",
+          "value": "a–b—c"
+        },
+        {
+          "kind": "value",
+          "value": "…"
+        },
+        {
+          "kind": "value",
+          "value": "−5"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "soft­hyphen"
+        },
+        {
+          "kind": "value",
+          "value": "zero​width"
+        },
+        {
+          "kind": "value",
+          "value": "€5"
+        },
+        {
+          "kind": "value",
+          "value": "£5"
+        },
+        {
+          "kind": "value",
+          "value": "© 2026"
+        },
+        {
+          "kind": "value",
+          "value": "°"
+        },
+        {
+          "kind": "value",
+          "value": "日本語"
+        },
+        {
+          "kind": "value",
+          "value": "Привет"
+        },
+        {
+          "kind": "value",
+          "value": "Ελλαδα"
+        },
+        {
+          "kind": "value",
+          "value": "😀"
+        },
+        {
+          "kind": "value",
+          "value": "ǅ"
+        },
+        {
+          "kind": "value",
+          "value": "tab\tnew\nline"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": "«quoted»"
+        },
+        {
+          "kind": "value",
+          "value": "‹single›"
+        },
+        {
+          "kind": "value",
+          "value": "「日本」"
+        },
+        {
+          "kind": "value",
+          "value": "《書》"
+        },
+        {
+          "kind": "value",
+          "value": "⟪a⟫"
+        },
+        {
+          "kind": "value",
+          "value": "¡Hola!"
+        },
+        {
+          "kind": "value",
+          "value": "¿Que?"
+        },
+        {
+          "kind": "value",
+          "value": "‽"
+        },
+        {
+          "kind": "value",
+          "value": "a⸺b"
+        },
+        {
+          "kind": "value",
+          "value": "a b"
+        },
+        {
+          "kind": "value",
+          "value": "❨x❩"
+        },
+        {
+          "kind": "value",
+          "value": "【注】"
+        },
+        {
+          "kind": "value",
+          "value": "⌊x⌋"
+        },
+        {
+          "kind": "value",
+          "value": "⸢x⸣"
+        },
+        {
+          "kind": "value",
+          "value": "§1"
+        },
+        {
+          "kind": "value",
+          "value": "col·leccio"
+        },
+        {
+          "kind": "value",
+          "value": "｟x｠"
+        },
+        {
+          "kind": "value",
+          "value": "Azərbaycan"
+        },
+        {
+          "kind": "value",
+          "value": "ɗaya"
+        },
+        {
+          "kind": "value",
+          "value": "Ɔkɔm"
+        },
+        {
+          "kind": "value",
+          "value": "Ŋaa"
+        },
+        {
+          "kind": "value",
+          "value": "ŊAA"
+        },
+        {
+          "kind": "value",
+          "value": "ɲɔgɔn"
+        },
+        {
+          "kind": "value",
+          "value": "Ʒuoʒ"
+        },
+        {
+          "kind": "value",
+          "value": "Tʜɪꜱ ɪꜱ"
+        },
+        {
+          "kind": "value",
+          "value": "ĸ"
+        },
+        {
+          "kind": "value",
+          "value": "ɐ"
+        },
+        {
+          "kind": "value",
+          "value": "Ꜣ"
+        },
+        {
+          "kind": "value",
+          "value": "5″"
+        },
+        {
+          "kind": "value",
+          "value": "‶x″"
+        },
+        {
+          "kind": "value",
+          "value": "x‴"
+        },
+        {
+          "kind": "value",
+          "value": "Mr. B⸺"
+        },
+        {
+          "kind": "value",
+          "value": "⸻. Title"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "swift",
+      "tier": 4,
+      "version": "6.4.1"
+    }
+  ],
+  "function": "toBasicAscii"
+}

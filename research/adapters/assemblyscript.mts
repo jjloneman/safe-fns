@@ -52,7 +52,9 @@ type ExportName =
   | "stringEncodeUri"
   | "stringEncodeUriComponent"
   | "stringIdentity"
-  | "stringTrim";
+  | "stringLowerFirst"
+  | "stringTrim"
+  | "stringUpperFirst";
 
 /** The generated bindings' module, whose glue lowers and lifts each value. */
 type ProbeBindings = {
@@ -120,6 +122,12 @@ const PROBES: Readonly<Record<string, readonly ProbeColumn[]>> = {
       },
     },
   ],
+  lowerFirst: [
+    {
+      call: "value.charAt(0).toLowerCase() + value.slice(1)",
+      exportsByType: { string: "stringLowerFirst" },
+    },
+  ],
   safeDateToIsoString: [
     {
       call: "new Date(i64(value)).toISOString()",
@@ -183,6 +191,15 @@ const PROBES: Readonly<Record<string, readonly ProbeColumn[]>> = {
         number: "f64ToStringTrim",
         string: "stringTrim",
       },
+    },
+  ],
+  trimBlank: [
+    { call: "value.trim()", exportsByType: { string: "stringTrim" } },
+  ],
+  upperFirst: [
+    {
+      call: "value.charAt(0).toUpperCase() + value.slice(1)",
+      exportsByType: { string: "stringUpperFirst" },
     },
   ],
 };

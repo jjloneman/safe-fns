@@ -18,6 +18,9 @@ final class GroovyTools {
             isSafeEmpty: [
                 Probe.any('!value') { Object value -> !value },
             ],
+            lowerFirst: [
+                Probe.typed('value.uncapitalize()', String) { String value -> value.uncapitalize() }.alone(),
+            ],
             safeObjectHasOwn: [
                 Probe.anyBinary('key in obj') { Object obj, Object key ->
                     key in obj
@@ -49,6 +52,9 @@ final class GroovyTools {
             safeParseString: [
                 Probe.any('"$value"') { Object value -> "$value" },
                 Probe.any('value.toString()') { Object value -> value.toString() },
+            ],
+            upperFirst: [
+                Probe.typed('value.capitalize()', String) { String value -> value.capitalize() }.alone(),
             ],
         ],
         'Groovy',

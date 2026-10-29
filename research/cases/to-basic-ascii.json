@@ -1,0 +1,381 @@
+{
+  "cases": [
+    {
+      "args": ["hello"],
+      "expected": "hello"
+    },
+    {
+      "args": [""],
+      "expected": ""
+    },
+    {
+      "args": ["café"],
+      "expected": "cafe"
+    },
+    {
+      "args": ["Crème Brûlée"],
+      "expected": "Creme Brulee"
+    },
+    {
+      "args": ["naïve"],
+      "expected": "naive"
+    },
+    {
+      "args": ["cafe\u0301"],
+      "expected": "cafe"
+    },
+    {
+      "args": ["Ångström"],
+      "expected": "Angstrom"
+    },
+    {
+      "args": ["Å"],
+      "expected": "A"
+    },
+    {
+      "args": ["Straße"],
+      "expected": "Strasse"
+    },
+    {
+      "args": ["ẞ"],
+      "expected": "SS"
+    },
+    {
+      "args": ["STRAẞE"],
+      "expected": "STRASSE"
+    },
+    {
+      "args": ["ÆRØ"],
+      "expected": "AERO"
+    },
+    {
+      "args": ["Œuvre"],
+      "expected": "Oeuvre"
+    },
+    {
+      "args": ["Ærøskøbing"],
+      "expected": "Aeroskobing"
+    },
+    {
+      "args": ["Łódź"],
+      "expected": "Lodz"
+    },
+    {
+      "args": ["Đorđe"],
+      "expected": "Dorde"
+    },
+    {
+      "args": ["œuvre"],
+      "expected": "oeuvre"
+    },
+    {
+      "args": ["Þór"],
+      "expected": "Thor"
+    },
+    {
+      "args": ["Iğdır"],
+      "expected": "Igdir"
+    },
+    {
+      "args": ["ð"],
+      "expected": "d"
+    },
+    {
+      "args": ["ħ"],
+      "expected": "h"
+    },
+    {
+      "args": ["Ĳ"],
+      "expected": "IJ"
+    },
+    {
+      "args": ["ſ"],
+      "expected": "s"
+    },
+    {
+      "args": ["ŉ"],
+      "expected": "'n"
+    },
+    {
+      "args": ["ﬁle"],
+      "expected": "file"
+    },
+    {
+      "args": ["Ａｂｃ"],
+      "expected": "Abc"
+    },
+    {
+      "args": ["x²"],
+      "expected": "x2"
+    },
+    {
+      "args": ["½"],
+      "expected": "1/2"
+    },
+    {
+      "args": ["™"],
+      "expected": "TM"
+    },
+    {
+      "args": ["℃"],
+      "expected": "C"
+    },
+    {
+      "args": ["“hi” ‘yo’"],
+      "expected": "\"hi\" 'yo'"
+    },
+    {
+      "args": ["a–b—c"],
+      "expected": "a-b-c"
+    },
+    {
+      "args": ["…"],
+      "expected": "..."
+    },
+    {
+      "args": ["−5"],
+      "expected": "-5"
+    },
+    {
+      "args": ["a\u00a0b"],
+      "expected": "a b"
+    },
+    {
+      "args": ["a\u2009b"],
+      "expected": "a b"
+    },
+    {
+      "args": ["soft\u00adhyphen"],
+      "expected": "softhyphen"
+    },
+    {
+      "args": ["zero\u200bwidth"],
+      "expected": "zerowidth"
+    },
+    {
+      "args": ["€5"],
+      "expected": "5"
+    },
+    {
+      "args": ["£5"],
+      "expected": "5"
+    },
+    {
+      "args": ["© 2026"],
+      "expected": " 2026"
+    },
+    {
+      "args": ["°"],
+      "expected": ""
+    },
+    {
+      "args": ["日本語"],
+      "expected": ""
+    },
+    {
+      "args": ["Привет"],
+      "expected": ""
+    },
+    {
+      "args": ["Ελλάδα"],
+      "expected": ""
+    },
+    {
+      "args": ["😀"],
+      "expected": ""
+    },
+    {
+      "args": ["ǅ"],
+      "expected": "Dz"
+    },
+    {
+      "args": ["tab\tnew\nline"],
+      "expected": "tab\tnew\nline"
+    },
+    {
+      "args": ["á\u0300"],
+      "expected": "a"
+    },
+    {
+      "args": ["«quoted»"],
+      "expected": "\"quoted\""
+    },
+    {
+      "args": ["‹single›"],
+      "expected": "'single'"
+    },
+    {
+      "args": ["「日本」"],
+      "expected": "\"\""
+    },
+    {
+      "args": ["《書》"],
+      "expected": "\"\""
+    },
+    {
+      "args": ["⟪a⟫"],
+      "expected": "<<a>>"
+    },
+    {
+      "args": ["¡Hola!"],
+      "expected": "Hola!"
+    },
+    {
+      "args": ["¿Qué?"],
+      "expected": "Que?"
+    },
+    {
+      "args": ["‽"],
+      "expected": "?!"
+    },
+    {
+      "args": ["a⸺b"],
+      "expected": "a--b"
+    },
+    {
+      "args": ["a\u1680b"],
+      "expected": "a b"
+    },
+    {
+      "args": ["❨x❩"],
+      "expected": "(x)"
+    },
+    {
+      "args": ["【注】"],
+      "expected": "[]"
+    },
+    {
+      "args": ["⌊x⌋"],
+      "expected": "x"
+    },
+    {
+      "args": ["⸢x⸣"],
+      "expected": "x"
+    },
+    {
+      "args": ["§1"],
+      "expected": "1"
+    },
+    {
+      "args": ["col·lecció"],
+      "expected": "colleccio"
+    },
+    {
+      "args": ["｟x｠"],
+      "expected": "x"
+    },
+    {
+      "args": ["Azərbaycan"],
+      "expected": "Azerbaycan"
+    },
+    {
+      "args": ["ɗaya"],
+      "expected": "daya"
+    },
+    {
+      "args": ["Ɔkɔm"],
+      "expected": "Okom"
+    },
+    {
+      "args": ["Ŋaa"],
+      "expected": "Ngaa"
+    },
+    {
+      "args": ["ŊAA"],
+      "expected": "NGAA"
+    },
+    {
+      "args": ["ɲɔgɔn"],
+      "expected": "nyogon"
+    },
+    {
+      "args": ["Ʒuõʒ"],
+      "expected": "Dzuodz"
+    },
+    {
+      "args": ["Tʜɪꜱ ɪꜱ"],
+      "expected": "This is"
+    },
+    {
+      "args": ["ĸ"],
+      "expected": "q"
+    },
+    {
+      "args": ["ɐ"],
+      "expected": ""
+    },
+    {
+      "args": ["Ꜣ"],
+      "expected": ""
+    },
+    {
+      "args": ["5″"],
+      "expected": "5\""
+    },
+    {
+      "args": ["‶x″"],
+      "expected": "\"x\""
+    },
+    {
+      "args": ["x‴"],
+      "expected": "x'''"
+    },
+    {
+      "args": ["Mr. B⸺"],
+      "expected": "Mr. B--"
+    },
+    {
+      "args": ["⸻. Title"],
+      "expected": "---. Title"
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [null],
+      "expected": ""
+    },
+    {
+      "args": [42],
+      "expected": ""
+    },
+    {
+      "args": [["a"]],
+      "expected": ""
+    },
+    {
+      "args": [{}],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "a lone surrogate"
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed string"
+        }
+      ],
+      "expected": "hi"
+    },
+    {
+      "args": [
+        {
+          "$js": "a symbol"
+        }
+      ],
+      "expected": ""
+    }
+  ],
+  "function": "toBasicAscii"
+}

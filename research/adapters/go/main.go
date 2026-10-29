@@ -27,6 +27,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"unicode"
 	"unicode/utf8"
 )
 
@@ -126,6 +127,17 @@ func isString(args []any) bool {
 	_, isText := args[0].(string)
 
 	return isText
+}
+
+// mapFirstRune maps the first rune of value, leaving the rest unchanged.
+func mapFirstRune(value string, mapRune func(rune) rune) string {
+	first, size := utf8.DecodeRuneInString(value)
+
+	if size == 0 {
+		return value
+	}
+
+	return string(mapRune(first)) + value[size:]
 }
 
 // lengthOf returns `len` of a string, a slice, or a map, and whether the
@@ -272,6 +284,15 @@ func tools() []Tool {
 						Call: "reflect.ValueOf(value).IsZero()",
 						Run: func(args []any) (any, error) {
 							return reflect.ValueOf(args[0]).IsZero(), nil
+						},
+					},
+				},
+				"lowerFirst": {
+					{
+						Accepts: isLoneString,
+						Call:    "string(unicode.ToLower(first)) + rest",
+						Run: func(args []any) (any, error) {
+							return mapFirstRune(args[0].(string), unicode.ToLower), nil
 						},
 					},
 				},
@@ -475,6 +496,31 @@ func tools() []Tool {
 							}
 
 							return parsed.String(), nil
+						},
+					},
+				},
+				"trimBlank": {
+					{
+						Accepts: isString,
+						Call:    "strings.TrimSpace(value)",
+						Run: func(args []any) (any, error) {
+							return strings.TrimSpace(args[0].(string)), nil
+						},
+					},
+				},
+				"upperFirst": {
+					{
+						Accepts: isLoneString,
+						Call:    "string(unicode.ToTitle(first)) + rest",
+						Run: func(args []any) (any, error) {
+							return mapFirstRune(args[0].(string), unicode.ToTitle), nil
+						},
+					},
+					{
+						Accepts: isLoneString,
+						Call:    "string(unicode.ToUpper(first)) + rest",
+						Run: func(args []any) (any, error) {
+							return mapFirstRune(args[0].(string), unicode.ToUpper), nil
 						},
 					},
 				},

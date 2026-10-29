@@ -70,6 +70,20 @@ runAdapter([
                     run: static fn(mixed $value): bool => empty($value),
                 ),
             ],
+            "lowerFirst" => [
+                new Probe(
+                    call: 'lcfirst($value)',
+                    run: static fn(string $value): string => lcfirst($value),
+                    accepts: static fn(mixed ...$args): bool => count($args) ===
+                        1 && is_string($args[0]),
+                ),
+                new Probe(
+                    call: 'mb_lcfirst($value)',
+                    run: static fn(string $value): string => mb_lcfirst($value),
+                    accepts: static fn(mixed ...$args): bool => count($args) ===
+                        1 && is_string($args[0]),
+                ),
+            ],
             "safeDecodeUriComponent" => [
                 new Probe(
                     call: 'rawurldecode($value)',
@@ -180,6 +194,42 @@ runAdapter([
                     run: static fn(string $value): array|false => parse_url(
                         $value,
                     ),
+                    accepts: static fn(mixed ...$args): bool => count($args) ===
+                        1 && is_string($args[0]),
+                ),
+            ],
+            "toBasicAscii" => [
+                new Probe(
+                    call: "iconv('UTF-8', 'ASCII//TRANSLIT', \$value)",
+                    run: static fn(string $value): string|false => iconv(
+                        "UTF-8",
+                        "ASCII//TRANSLIT",
+                        $value,
+                    ),
+                    accepts: static fn(mixed ...$args): bool => is_string(
+                        $args[0],
+                    ),
+                ),
+            ],
+            "trimBlank" => [
+                new Probe(
+                    call: 'trim($value)',
+                    run: static fn(string $value): string => trim($value),
+                    accepts: static fn(mixed ...$args): bool => is_string(
+                        $args[0],
+                    ),
+                ),
+            ],
+            "upperFirst" => [
+                new Probe(
+                    call: 'ucfirst($value)',
+                    run: static fn(string $value): string => ucfirst($value),
+                    accepts: static fn(mixed ...$args): bool => count($args) ===
+                        1 && is_string($args[0]),
+                ),
+                new Probe(
+                    call: 'mb_ucfirst($value)',
+                    run: static fn(string $value): string => mb_ucfirst($value),
                     accepts: static fn(mixed ...$args): bool => count($args) ===
                         1 && is_string($args[0]),
                 ),

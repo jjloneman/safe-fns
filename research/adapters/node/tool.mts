@@ -5,6 +5,23 @@ import type { CaseEntry, Tier } from "../../../scripts/research/results.ts";
 import { decodeValue } from "../../../scripts/research/codec.ts";
 import { readJsonFile } from "../../../scripts/research/json.ts";
 
+/** The settings a `pluralize` case can carry as its third argument. */
+export type PluralizeCaseOptions = {
+  /**
+   * Whether the count leads the result.
+   *
+   * @example true
+   */
+  includeCount?: boolean;
+
+  /**
+   * The caller's own plural form.
+   *
+   * @example "children"
+   */
+  plural?: string;
+};
+
 /** One expression a tool offers for a function. */
 export type Probe = {
   /**
@@ -186,6 +203,76 @@ export function errorName(error: unknown): string {
   } catch {
     return "an uninspectable error";
   }
+}
+
+/** Accept a case with no options, for a call that has no way to take them. */
+export function hasNoOptions(args: readonly unknown[]): boolean {
+  return args.length === 1;
+}
+
+/**
+ * Whether a case is one string and an options object holding exactly these
+ * keys, so a probe runs only the cases its call can express.
+ *
+ * @returns whether the probe can run the case.
+ */
+export function hasOnlyOptions(
+  args: readonly unknown[],
+  keys: readonly string[]
+): boolean {
+  const [value, options] = args;
+
+  return (
+    args.length === 2 &&
+    typeof value === "string" &&
+    typeof options === "object" &&
+    options !== null &&
+    Object.keys(options).sort().join() === [...keys].sort().join()
+  );
+}
+
+/** Accept exactly one argument, a string; other cases are `n/a`. */
+export function isLoneString(args: readonly unknown[]): boolean {
+  return args.length === 1 && typeof args[0] === "string";
+}
+
+/**
+ * Whether a `pluralize` case is a word and a numeric count whose options pass
+ * the probe's own test, so each probe runs only the cases its call can express.
+ *
+ * @returns whether the probe can run the case.
+ */
+export function isPluralizeCase(
+  [word, count, options]: readonly unknown[],
+  hasOptions: (options: PluralizeCaseOptions | undefined) => boolean
+): boolean {
+  return (
+    typeof word === "string" &&
+    typeof count === "number" &&
+    (options === undefined || isPluralizeCaseOptions(options)) &&
+    hasOptions(options)
+  );
+}
+
+/**
+ * Whether a value is a `pluralize` case's options object, with each key it
+ * holds of the right type.
+ *
+ * @returns whether the value is the options.
+ */
+export function isPluralizeCaseOptions(
+  value: unknown
+): value is PluralizeCaseOptions {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) {
+    return false;
+  }
+
+  const { includeCount, plural } = value as Record<string, unknown>;
+
+  return (
+    (includeCount === undefined || typeof includeCount === "boolean") &&
+    (plural === undefined || typeof plural === "string")
+  );
 }
 
 /** Accept only a string first argument; other cases are `n/a`. */

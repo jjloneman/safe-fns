@@ -1,0 +1,5549 @@
+{
+  "cases": [
+    [
+      "hello"
+    ],
+    [
+      "Hello"
+    ],
+    [
+      "hELLO"
+    ],
+    [
+      ""
+    ],
+    [
+      "h"
+    ],
+    [
+      "123abc"
+    ],
+    [
+      "'hello"
+    ],
+    [
+      " hello"
+    ],
+    [
+      "élan"
+    ],
+    [
+      "élan"
+    ],
+    [
+      "ßa"
+    ],
+    [
+      "ŉa"
+    ],
+    [
+      "ﬀa"
+    ],
+    [
+      "ΐa"
+    ],
+    [
+      "ǆa"
+    ],
+    [
+      "ǳa"
+    ],
+    [
+      "ıa"
+    ],
+    [
+      "ia"
+    ],
+    [
+      "აბ"
+    ],
+    [
+      "σa"
+    ],
+    [
+      "𐐨a"
+    ],
+    [
+      "😀a"
+    ],
+    [
+      "你好"
+    ],
+    [
+      " hello"
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      null
+    ],
+    [
+      42
+    ],
+    [
+      [
+        "a"
+      ]
+    ],
+    [
+      {}
+    ],
+    [
+      {
+        "$js": "a lone surrogate"
+      }
+    ],
+    [
+      {
+        "$js": "a lone low surrogate before text"
+      }
+    ],
+    [
+      {
+        "$js": "a boxed string"
+      }
+    ],
+    [
+      {
+        "$js": "a symbol"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a throwing toString"
+      }
+    ],
+    [
+      "istanbul",
+      {
+        "locale": "tr"
+      }
+    ],
+    [
+      "istanbul",
+      {
+        "locale": "az"
+      }
+    ],
+    [
+      "istanbul",
+      {
+        "locale": "TR"
+      }
+    ],
+    [
+      "istanbul",
+      {
+        "locale": "en"
+      }
+    ],
+    [
+      "istanbul",
+      {
+        "locale": "xx"
+      }
+    ],
+    [
+      "istanbul",
+      {
+        "locale": "not a locale!"
+      }
+    ],
+    [
+      "ijssel",
+      {
+        "locale": "nl"
+      }
+    ],
+    [
+      "hELLO",
+      {
+        "lowerRest": true
+      }
+    ],
+    [
+      "ßTRASSE",
+      {
+        "lowerRest": true
+      }
+    ],
+    [
+      "ıŞIK",
+      {
+        "locale": "tr",
+        "lowerRest": true
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "upperFirst",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\udc00a"
+        },
+        {
+          "kind": "value",
+          "value": "Hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Ijssel"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "SStrasse"
+        },
+        {
+          "kind": "value",
+          "value": "Işık"
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "capitalize(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "es-toolkit",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\udc00a"
+        },
+        {
+          "kind": "value",
+          "value": "Hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "SStrasse"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.52.0"
+    },
+    {
+      "call": "upperFirst(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "es-toolkit",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\udc00a"
+        },
+        {
+          "kind": "value",
+          "value": "Hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.52.0"
+    },
+    {
+      "call": "value.charAt(0).toLocaleUpperCase(options.locale) + value.slice(1)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d816081d0ffc1ee8c6e57b9de1a9fd2978c52ca97e32d91b011015c02481d02d",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Ijssel"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "value.charAt(0).toUpperCase() + value.slice(1)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d816081d0ffc1ee8c6e57b9de1a9fd2978c52ca97e32d91b011015c02481d02d",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "first.toUpperCase() + rest.join(\"\") ([first, ...rest] = value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\udc00a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "first.toUpperCase() + rest.join(\"\").toLowerCase() ([first, ...rest] = value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "SStrasse"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "value.charAt(0).toLocaleUpperCase(options.locale) + value.slice(1)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "Ijssel"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "value.charAt(0).toUpperCase() + value.slice(1)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\udc00a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "_.capitalize(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "lodash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "[object object]"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\udc00a"
+        },
+        {
+          "kind": "value",
+          "value": "Hi"
+        },
+        {
+          "kind": "value",
+          "value": "Symbol(hostile)"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "SStrasse"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.18.1"
+    },
+    {
+      "call": "_.upperFirst(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "lodash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\udc00a"
+        },
+        {
+          "kind": "value",
+          "value": "Hi"
+        },
+        {
+          "kind": "value",
+          "value": "Symbol(hostile)"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.18.1"
+    },
+    {
+      "call": "capitalize(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
+      "locale": "en-US",
+      "name": "remeda",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "A"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "\ud800"
+        },
+        {
+          "kind": "value",
+          "value": "\udc00a"
+        },
+        {
+          "kind": "value",
+          "value": "Hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.51.0"
+    },
+    {
+      "call": "value.Length == 0 ? value : char.ToUpper(value[0], CultureInfo.GetCultureInfo(locale)) + value[1..]",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "error": "CultureNotFoundException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "Ijssel"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "value.Length == 0 ? value : char.ToUpperInvariant(value[0]) + value[1..]",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "ßa"
+        },
+        {
+          "kind": "value",
+          "value": "ŉa"
+        },
+        {
+          "kind": "value",
+          "value": "ﬀa"
+        },
+        {
+          "kind": "value",
+          "value": "ΐa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "ıa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "StringUtils.capitalize(value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Commons Lang",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "ßa"
+        },
+        {
+          "kind": "value",
+          "value": "ŉa"
+        },
+        {
+          "kind": "value",
+          "value": "ﬀa"
+        },
+        {
+          "kind": "value",
+          "value": "ΐa"
+        },
+        {
+          "kind": "value",
+          "value": "ǅa"
+        },
+        {
+          "kind": "value",
+          "value": "ǲa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "3.21.0"
+    },
+    {
+      "call": "string(unicode.ToTitle(first)) + rest",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "ßa"
+        },
+        {
+          "kind": "value",
+          "value": "ŉa"
+        },
+        {
+          "kind": "value",
+          "value": "ﬀa"
+        },
+        {
+          "kind": "value",
+          "value": "ΐa"
+        },
+        {
+          "kind": "value",
+          "value": "ǅa"
+        },
+        {
+          "kind": "value",
+          "value": "ǲa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.2"
+    },
+    {
+      "call": "string(unicode.ToUpper(first)) + rest",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "ßa"
+        },
+        {
+          "kind": "value",
+          "value": "ŉa"
+        },
+        {
+          "kind": "value",
+          "value": "ﬀa"
+        },
+        {
+          "kind": "value",
+          "value": "ΐa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.2"
+    },
+    {
+      "call": "value.capitalize()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Groovy",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "ßa"
+        },
+        {
+          "kind": "value",
+          "value": "ŉa"
+        },
+        {
+          "kind": "value",
+          "value": "ﬀa"
+        },
+        {
+          "kind": "value",
+          "value": "ΐa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "6.0.0"
+    },
+    {
+      "call": "value.substring(0, end).toUpperCase() + value.substring(end) (end = value.offsetByCodePoints(0, 1))",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "value.substring(0, end).toUpperCase(Locale.forLanguageTag(locale)) + value.substring(end)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "Ijssel"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "value.replaceFirstChar { it.titlecase() }",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Kotlin",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Ssa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "Ffa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "ǅa"
+        },
+        {
+          "kind": "value",
+          "value": "ǲa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "2.4.21"
+    },
+    {
+      "call": "value.replaceFirstChar { it.uppercase() }",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Kotlin",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "2.4.21"
+    },
+    {
+      "call": "value.capitalize()",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Ssa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "Ffa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "ǅa"
+        },
+        {
+          "kind": "value",
+          "value": "ǲa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "value[:1].upper() + value[1:]",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "first.to_uppercase().chain(rest).collect::<String>()",
+      "image": "rust:1.99.0-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa",
+      "inputs": "sha256:496eb31fc2d31bfbc45792d196e8c1f8a31fc35d360ef99844e087ee2fd8ebb3",
+      "locale": "C.UTF-8",
+      "name": "Rust",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "rust",
+      "tier": 2,
+      "version": "1.99.0"
+    },
+    {
+      "call": "StringUtils.capitalize(value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Spring",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "ßa"
+        },
+        {
+          "kind": "value",
+          "value": "ŉa"
+        },
+        {
+          "kind": "value",
+          "value": "ﬀa"
+        },
+        {
+          "kind": "value",
+          "value": "ΐa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "7.0.9"
+    },
+    {
+      "call": "value.charAt(0).toUpperCase() + value.slice(1)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:eda3d5b7ab25add6c1c4ac771de8ab30570164991c102a48c5999e55522b2043",
+      "locale": "-",
+      "name": "AssemblyScript",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "assemblyscript",
+      "tier": 4,
+      "version": "0.28.20"
+    },
+    {
+      "call": "mb_ucfirst($value)",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locale": "C.UTF-8",
+      "name": "PHP",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Ssa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "Ffa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "ǅa"
+        },
+        {
+          "kind": "value",
+          "value": "ǲa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    },
+    {
+      "call": "ucfirst($value)",
+      "image": "php:8.5.11-cli-bookworm@sha256:819080ed413631f6ec564184dd9acd08d9425bd863b9f8b5876b5ea2147d55e7",
+      "inputs": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locale": "C.UTF-8",
+      "name": "PHP",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "ßa"
+        },
+        {
+          "kind": "value",
+          "value": "ŉa"
+        },
+        {
+          "kind": "value",
+          "value": "ﬀa"
+        },
+        {
+          "kind": "value",
+          "value": "ΐa"
+        },
+        {
+          "kind": "value",
+          "value": "ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "ıa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "აბ"
+        },
+        {
+          "kind": "value",
+          "value": "σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐨a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "php",
+      "tier": 4,
+      "version": "8.5.11"
+    },
+    {
+      "call": "value.capitalize",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Ruby",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Ssa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "Ffa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "ǅa"
+        },
+        {
+          "kind": "value",
+          "value": "ǲa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "4.0.7"
+    },
+    {
+      "call": "value.sub(/\\A./) { |first| first.upcase }",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Ruby",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "4.0.7"
+    },
+    {
+      "call": "value.prefix(1).uppercased() + value.dropFirst()",
+      "image": "swift:6.4.1-bookworm@sha256:966e0dce7a3b76b0533df99dd0d54b38ab989fa6592450f70a42f1a1e569c053",
+      "inputs": "sha256:d9086177ec153c1ec9b82eb27e4d770f8ed531c6baba1656761927ce0bc91ab7",
+      "locale": "C.UTF-8",
+      "name": "Swift",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "Hello"
+        },
+        {
+          "kind": "value",
+          "value": "HELLO"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "H"
+        },
+        {
+          "kind": "value",
+          "value": "123abc"
+        },
+        {
+          "kind": "value",
+          "value": "'hello"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "Élan"
+        },
+        {
+          "kind": "value",
+          "value": "SSa"
+        },
+        {
+          "kind": "value",
+          "value": "ʼNa"
+        },
+        {
+          "kind": "value",
+          "value": "FFa"
+        },
+        {
+          "kind": "value",
+          "value": "Ϊ́a"
+        },
+        {
+          "kind": "value",
+          "value": "Ǆa"
+        },
+        {
+          "kind": "value",
+          "value": "Ǳa"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Ia"
+        },
+        {
+          "kind": "value",
+          "value": "Აბ"
+        },
+        {
+          "kind": "value",
+          "value": "Σa"
+        },
+        {
+          "kind": "value",
+          "value": "𐐀a"
+        },
+        {
+          "kind": "value",
+          "value": "😀a"
+        },
+        {
+          "kind": "value",
+          "value": "你好"
+        },
+        {
+          "kind": "value",
+          "value": " hello"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "swift",
+      "tier": 4,
+      "version": "6.4.1"
+    }
+  ],
+  "function": "upperFirst"
+}

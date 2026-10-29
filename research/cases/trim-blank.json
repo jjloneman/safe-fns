@@ -1,0 +1,243 @@
+{
+  "cases": [
+    {
+      "args": ["hi"],
+      "expected": "hi"
+    },
+    {
+      "args": ["  hi  "],
+      "expected": "hi"
+    },
+    {
+      "args": ["\t\nhi\r\n"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u000bhi\f"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u00a0hi\u00a0"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u0085hi\u0085"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u1680hi"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u2000hi\u200a"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u2028hi\u2029"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u202fhi\u205f"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u3000hi\u3000"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\ufeffhi"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u200bhi\u200b"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u200chi"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u2060hi\u2060"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u00adhi\u00ad"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u034fhi"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u180ehi\u180e"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u115fhi"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u3164hi\u3164"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\u2800hi\u2800"],
+      "expected": "hi"
+    },
+    {
+      "args": ["\udb40\udc20hi"],
+      "expected": "hi"
+    },
+    {
+      "args": ["a \u200b b"],
+      "expected": "a \u200b b"
+    },
+    {
+      "args": [""],
+      "expected": ""
+    },
+    {
+      "args": ["   "],
+      "expected": ""
+    },
+    {
+      "args": ["\u200b"],
+      "expected": ""
+    },
+    {
+      "args": ["\u2800"],
+      "expected": ""
+    },
+    {
+      "args": ["\ufe0f"],
+      "expected": ""
+    },
+    {
+      "args": ["❤\ufe0f"],
+      "expected": "❤\ufe0f"
+    },
+    {
+      "args": ["❤\ufe0f\u200b"],
+      "expected": "❤\ufe0f"
+    },
+    {
+      "args": ["❤\ufe0f "],
+      "expected": "❤\ufe0f"
+    },
+    {
+      "args": ["a\u200d"],
+      "expected": "a"
+    },
+    {
+      "args": ["\ufe0fhi"],
+      "expected": "hi"
+    },
+    {
+      "args": ["hi\u200b\ufe0f"],
+      "expected": "hi"
+    },
+    {
+      "args": [
+        "🏴\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f"
+      ],
+      "expected": "🏴\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f"
+    },
+    {
+      "args": ["👨\u200d👩\u200d👧"],
+      "expected": "👨\u200d👩\u200d👧"
+    },
+    {
+      "args": ["1\ufe0f\u20e3 "],
+      "expected": "1\ufe0f\u20e3"
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [null],
+      "expected": ""
+    },
+    {
+      "args": [42],
+      "expected": ""
+    },
+    {
+      "args": [true],
+      "expected": ""
+    },
+    {
+      "args": [["a"]],
+      "expected": ""
+    },
+    {
+      "args": [{}],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "a lone surrogate"
+        }
+      ],
+      "expected": {
+        "$utf16": [55296]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a string ending in a lone high surrogate"
+        }
+      ],
+      "expected": {
+        "$utf16": [97, 55357]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed string"
+        }
+      ],
+      "expected": "hi"
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed blank string"
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "a symbol"
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing toString"
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        }
+      ],
+      "expected": ""
+    }
+  ],
+  "function": "trimBlank"
+}

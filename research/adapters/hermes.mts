@@ -31,6 +31,15 @@ import { decodeWithoutFactories, errorName } from "./node/tool.mts";
 /** One expression Hermes runs for a function, as JavaScript source. */
 type HermesProbe = {
   /**
+   * The `typeof` each argument must have, in order, and so how many there
+   * are; a case whose arguments don't match is `n/a`, as the JS built-ins
+   * column's `accepts` makes it.
+   *
+   * @example `["string", "number"]`
+   */
+  argumentTypes?: readonly string[];
+
+  /**
    * The expression, as the table header shows it, and as Hermes runs it with
    * the case's arguments bound to `parameters`.
    *
@@ -39,11 +48,12 @@ type HermesProbe = {
   call: string;
 
   /**
-   * Whether the call takes a string only; other cases are `n/a`.
+   * The keys a case's last argument, an options object, must hold exactly;
+   * a case with other options is `n/a`.
    *
-   * @example true
+   * @example `["locale"]`
    */
-  isStringOnly?: boolean;
+  optionKeys?: readonly string[];
 
   /**
    * The names the case's arguments are bound to, in order; the JS built-ins
@@ -61,11 +71,30 @@ type HermesProbe = {
  */
 const PROBES: Readonly<Record<string, readonly HermesProbe[]>> = {
   codec: [{ call: "value" }],
-  decodeBase64: [{ call: "atob(value)", isStringOnly: true }],
+  decodeBase64: [{ argumentTypes: ["string"], call: "atob(value)" }],
   deepSortObject: [
-    { call: "JSON.stringify(JSON.parse(value))", isStringOnly: true },
+    { argumentTypes: ["string"], call: "JSON.stringify(JSON.parse(value))" },
   ],
   encodeBase64: [{ call: "btoa(value)" }],
+  lowerFirst: [
+    {
+      argumentTypes: ["string"],
+      call: "value.charAt(0).toLowerCase() + value.slice(1)",
+    },
+    {
+      argumentTypes: ["string", "object"],
+      call: "value.charAt(0).toLocaleLowerCase(options.locale) + value.slice(1)",
+      optionKeys: ["locale"],
+      parameters: ["value", "options"],
+    },
+  ],
+  pluralize: [
+    {
+      argumentTypes: ["string", "number"],
+      call: 'new Intl.PluralRules("en").select(count)',
+      parameters: ["word", "count"],
+    },
+  ],
   safeDateToIsoString: [{ call: "new Date(value).toISOString()" }],
   safeDecodeUriComponent: [
     { call: "decodeURIComponent(value)" },
@@ -81,7 +110,7 @@ const PROBES: Readonly<Record<string, readonly HermesProbe[]>> = {
     { call: "key in object", parameters: ["object", "key"] },
   ],
   safeParseBigInt: [{ call: "BigInt(value)" }],
-  safeParseBoolean: [{ call: "JSON.parse(value)", isStringOnly: true }],
+  safeParseBoolean: [{ argumentTypes: ["string"], call: "JSON.parse(value)" }],
   safeParseDate: [{ call: "new Date(value).toISOString()" }],
   safeParseInt: [{ call: "Number.parseInt(value, 10)" }],
   safeParseJson: [{ call: "JSON.parse(value)" }],
@@ -103,6 +132,29 @@ const PROBES: Readonly<Record<string, readonly HermesProbe[]>> = {
     { call: "new URL(value, base).href", parameters: ["value", "base"] },
   ],
   safeStructuredClone: [{ call: "structuredClone(value)" }],
+  toBasicAscii: [
+    {
+      argumentTypes: ["string"],
+      call: 'value.normalize("NFD").replace(/\\p{M}/gu, "")',
+    },
+    {
+      argumentTypes: ["string"],
+      call: 'value.normalize("NFKD").replace(/\\p{M}/gu, "")',
+    },
+  ],
+  trimBlank: [{ argumentTypes: ["string"], call: "value.trim()" }],
+  upperFirst: [
+    {
+      argumentTypes: ["string"],
+      call: "value.charAt(0).toUpperCase() + value.slice(1)",
+    },
+    {
+      argumentTypes: ["string", "object"],
+      call: "value.charAt(0).toLocaleUpperCase(options.locale) + value.slice(1)",
+      optionKeys: ["locale"],
+      parameters: ["value", "options"],
+    },
+  ],
 };
 
 /** The Hermes release that actually ran, from its own banner. */
@@ -161,8 +213,8 @@ function objectSource(object: object): string | undefined {
 /** Build the program that runs one case file's probes and prints outcomes. */
 function programSource(caseFile: CaseFile): string {
   const probes = (PROBES[caseFile.function] ?? []).map(
-    ({ call, isStringOnly = false, parameters = ["value"] }) =>
-      `{ isStringOnly: ${String(isStringOnly)}, run: function (${parameters.join(", ")}) { return ${call}; } }`
+    ({ argumentTypes = [], call, optionKeys, parameters = ["value"] }) =>
+      `{ argumentTypes: ${JSON.stringify(argumentTypes)}, optionKeys: ${JSON.stringify(optionKeys ?? null)}, run: function (${parameters.join(", ")}) { return ${call}; } }`
   );
 
   const cases = caseFile.cases.map(
@@ -174,7 +226,7 @@ function programSource(caseFile: CaseFile): string {
 ${String(errorName)}
 
 function runProbe(probe, args) {
-  if (args === undefined || (probe.isStringOnly && typeof args[0] !== "string")) {
+  if (args === undefined || (probe.argumentTypes.length > 0 && (args.length !== probe.argumentTypes.length || !probe.argumentTypes.every(function (type, index) { return typeof args[index] === type; }))) || (probe.optionKeys !== null && (args[args.length - 1] === null || Object.keys(args[args.length - 1]).sort().join() !== probe.optionKeys.slice().sort().join()))) {
     return { kind: "n/a" };
   }
 

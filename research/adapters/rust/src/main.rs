@@ -254,6 +254,42 @@ fn tools() -> Vec<Tool> {
                 },
             }],
         ),
+    ]);
+    functions.extend(
+        json_functions()
+            .into_iter()
+            .chain(string_functions())
+            .chain(url_functions()),
+    );
+
+    vec![Tool {
+        functions,
+        locale: env::var("LC_ALL").unwrap_or_default(),
+        name: "Rust",
+        tier: 2,
+        version: VERSION,
+    }]
+}
+
+/// The string helpers' probes, from the standard library's `str`.
+fn string_functions() -> [(&'static str, Vec<Probe>); 4] {
+    [
+        (
+            "lowerFirst",
+            vec![Probe {
+                accepts: is_lone_string,
+                call: "first.to_lowercase().chain(rest).collect::<String>()",
+                run: |args| {
+                    let mut chars = text(args).chars();
+
+                    Ok(Value::Str(
+                        chars.next().map_or_else(String::new, |first| {
+                            first.to_lowercase().chain(chars).collect()
+                        }),
+                    ))
+                },
+            }],
+        ),
         (
             "safeParseString",
             vec![
@@ -269,16 +305,31 @@ fn tools() -> Vec<Tool> {
                 },
             ],
         ),
-    ]);
-    functions.extend(json_functions().into_iter().chain(url_functions()));
+        (
+            "trimBlank",
+            vec![Probe {
+                accepts: is_string,
+                call: "value.trim()",
+                run: |args| Ok(Value::Str(text(args).trim().to_owned())),
+            }],
+        ),
+        (
+            "upperFirst",
+            vec![Probe {
+                accepts: is_lone_string,
+                call: "first.to_uppercase().chain(rest).collect::<String>()",
+                run: |args| {
+                    let mut chars = text(args).chars();
 
-    vec![Tool {
-        functions,
-        locale: env::var("LC_ALL").unwrap_or_default(),
-        name: "Rust",
-        tier: 2,
-        version: VERSION,
-    }]
+                    Ok(Value::Str(
+                        chars.next().map_or_else(String::new, |first| {
+                            first.to_uppercase().chain(chars).collect()
+                        }),
+                    ))
+                },
+            }],
+        ),
+    ]
 }
 
 /// The URL probes: the `url` crate, a WHATWG URL parser.

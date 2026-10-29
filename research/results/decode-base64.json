@@ -378,7 +378,7 @@
     {
       "call": "atob(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -501,7 +501,7 @@
     {
       "call": "Buffer.from(value, \"base64\").toString(\"utf8\")",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -624,7 +624,7 @@
     {
       "call": "new TextDecoder(\"utf-8\", { fatal: true }).decode(Uint8Array.fromBase64(value, { alphabet: \"base64url\" }))",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -747,7 +747,7 @@
     {
       "call": "new TextDecoder(\"utf-8\", { fatal: true }).decode(Uint8Array.fromBase64(value))",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -870,7 +870,7 @@
     {
       "call": "Base64.decode(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:6dcb636fe7c861610742661c912d70efd2d800a2dceecedd3257d54d6c3ca162",
+      "inputs": "sha256:160911aa4293649ac1594b446fc89a0a2b4d9a966c4db55e8239d69c69d4f86b",
       "locale": "en-US",
       "name": "js-base64",
       "outcomes": [

@@ -59,6 +59,10 @@ jobs:
       # Prettier plus each language's formatter, in its pinned container.
       - run: pnpm research --format --check
 
+      # The fold audit must match its rules and the pinned Node's Unicode
+      # tables; builds the node image, since the scan runs inside it.
+      - run: pnpm research:audit --check
+
   # Re-posts the shared `## ⏱️ CI timings` comment once this workflow ends, so
   # the table covers both workflows whichever finishes last.
   #

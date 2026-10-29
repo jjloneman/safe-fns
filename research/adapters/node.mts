@@ -14,6 +14,7 @@ import { parseCaseFile } from "../../scripts/research/results.ts";
 import { CROSS_REALM_INPUTS } from "../../test/cross-realm-inputs.ts";
 import { HOSTILE_INPUTS } from "../../test/hostile-inputs.ts";
 import { AJV_COERCE } from "./node/ajv.mts";
+import { ANY_ASCII } from "./node/any-ascii.mts";
 import { CANONICALIZE } from "./node/canonicalize.mts";
 import { CSV } from "./node/csv.mts";
 import { DATE_FNS } from "./node/date-fns.mts";
@@ -37,16 +38,21 @@ import { JSON_FORMAT } from "./node/json.mts";
 import { LODASH } from "./node/lodash.mts";
 import { LUXON } from "./node/luxon.mts";
 import { MOMENT } from "./node/moment.mts";
+import { PLUR } from "./node/plur.mts";
+import { PLURALIZE } from "./node/pluralize.mts";
 import { RADASH } from "./node/radash.mts";
 import { RAMDA } from "./node/ramda.mts";
 import { REMEDA } from "./node/remeda.mts";
 import { SAFE_STABLE_STRINGIFY } from "./node/safe-stable-stringify.mts";
 import { SINDRESORHUS_IS } from "./node/sindresorhus-is.mts";
+import { SINDRESORHUS_TRANSLITERATE } from "./node/sindresorhus-transliterate.mts";
 import { TOML } from "./node/toml.mts";
 import { errorName } from "./node/tool.mts";
+import { TRANSLITERATION } from "./node/transliteration.mts";
 import { UNDERSCORE } from "./node/underscore.mts";
 import { VALIBOT } from "./node/valibot.mts";
 import { VALIDATOR } from "./node/validator.mts";
+import { VOCA } from "./node/voca.mts";
 import { YAML_1_1, YAML_1_2_CORE } from "./node/yaml.mts";
 import { YN } from "./node/yn.mts";
 import { YUP } from "./node/yup.mts";
@@ -257,6 +263,12 @@ const TOOLS: readonly Tool[] = [
   DATE_FNS,
   DAYJS,
   MOMENT,
+  ANY_ASCII,
+  TRANSLITERATION,
+  SINDRESORHUS_TRANSLITERATE,
+  VOCA,
+  PLURALIZE,
+  PLUR,
 ];
 
 /** Build an array whose second item is the array itself. */

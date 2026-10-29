@@ -280,6 +280,7 @@ TOOLS: list[Tool] = [
             "isSafeEmpty": ['[ -z "$argv[1]" ]'],
             "safeParseNumber": ["math -- $argv[1]"],
             "safeParseString": ["string trim -- $argv[1]"],
+            "trimBlank": ["string trim -- $argv[1]"],
         },
     ),
     shell_tool(

@@ -78,6 +78,12 @@ TOOLS: list[Tool] = [
                     expression=lambda literal: {"$trim": {"input": literal}},
                 ),
             ],
+            "trimBlank": [
+                aggregate(
+                    call="{ $trim: { input: value } }",
+                    expression=lambda literal: {"$trim": {"input": literal}},
+                ),
+            ],
         },
         # MongoDB compares strings bytewise unless a query names a collation.
         "locale": "simple",

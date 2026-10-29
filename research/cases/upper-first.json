@@ -1,0 +1,260 @@
+{
+  "cases": [
+    {
+      "args": ["hello"],
+      "expected": "Hello"
+    },
+    {
+      "args": ["Hello"],
+      "expected": "Hello"
+    },
+    {
+      "args": ["hELLO"],
+      "expected": "HELLO"
+    },
+    {
+      "args": [""],
+      "expected": ""
+    },
+    {
+      "args": ["h"],
+      "expected": "H"
+    },
+    {
+      "args": ["123abc"],
+      "expected": "123abc"
+    },
+    {
+      "args": ["'hello"],
+      "expected": "'hello"
+    },
+    {
+      "args": [" hello"],
+      "expected": " hello"
+    },
+    {
+      "args": ["élan"],
+      "expected": "Élan"
+    },
+    {
+      "args": ["e\u0301lan"],
+      "expected": "E\u0301lan"
+    },
+    {
+      "args": ["ßa"],
+      "expected": "SSa"
+    },
+    {
+      "args": ["ŉa"],
+      "expected": "ʼNa"
+    },
+    {
+      "args": ["ﬀa"],
+      "expected": "FFa"
+    },
+    {
+      "args": ["ΐa"],
+      "expected": "Ι\u0308\u0301a"
+    },
+    {
+      "args": ["ǆa"],
+      "expected": "Ǆa"
+    },
+    {
+      "args": ["ǳa"],
+      "expected": "Ǳa"
+    },
+    {
+      "args": ["ıa"],
+      "expected": "Ia"
+    },
+    {
+      "args": ["ia"],
+      "expected": "Ia"
+    },
+    {
+      "args": ["აბ"],
+      "expected": "Აბ"
+    },
+    {
+      "args": ["σa"],
+      "expected": "Σa"
+    },
+    {
+      "args": ["𐐨a"],
+      "expected": "𐐀a"
+    },
+    {
+      "args": ["😀a"],
+      "expected": "😀a"
+    },
+    {
+      "args": ["你好"],
+      "expected": "你好"
+    },
+    {
+      "args": ["\u00a0hello"],
+      "expected": "\u00a0hello"
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [null],
+      "expected": ""
+    },
+    {
+      "args": [42],
+      "expected": ""
+    },
+    {
+      "args": [["a"]],
+      "expected": ""
+    },
+    {
+      "args": [{}],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "a lone surrogate"
+        }
+      ],
+      "expected": {
+        "$utf16": [55296]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a lone low surrogate before text"
+        }
+      ],
+      "expected": {
+        "$utf16": [56320, 97]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed string"
+        }
+      ],
+      "expected": "Hi"
+    },
+    {
+      "args": [
+        {
+          "$js": "a symbol"
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing toString"
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        "istanbul",
+        {
+          "locale": "tr"
+        }
+      ],
+      "expected": "İstanbul"
+    },
+    {
+      "args": [
+        "istanbul",
+        {
+          "locale": "az"
+        }
+      ],
+      "expected": "İstanbul"
+    },
+    {
+      "args": [
+        "istanbul",
+        {
+          "locale": "TR"
+        }
+      ],
+      "expected": "İstanbul"
+    },
+    {
+      "args": [
+        "istanbul",
+        {
+          "locale": "en"
+        }
+      ],
+      "expected": "Istanbul"
+    },
+    {
+      "args": [
+        "istanbul",
+        {
+          "locale": "xx"
+        }
+      ],
+      "expected": "Istanbul"
+    },
+    {
+      "args": [
+        "istanbul",
+        {
+          "locale": "not a locale!"
+        }
+      ],
+      "expected": "Istanbul"
+    },
+    {
+      "args": [
+        "ijssel",
+        {
+          "locale": "nl"
+        }
+      ],
+      "expected": "Ijssel"
+    },
+    {
+      "args": [
+        "hELLO",
+        {
+          "lowerRest": true
+        }
+      ],
+      "expected": "Hello"
+    },
+    {
+      "args": [
+        "ßTRASSE",
+        {
+          "lowerRest": true
+        }
+      ],
+      "expected": "SStrasse"
+    },
+    {
+      "args": [
+        "ıŞIK",
+        {
+          "locale": "tr",
+          "lowerRest": true
+        }
+      ],
+      "expected": "Işık"
+    }
+  ],
+  "function": "upperFirst"
+}
