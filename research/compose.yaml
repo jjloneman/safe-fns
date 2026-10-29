@@ -286,6 +286,24 @@ services:
     profiles: ["db"]
     volumes: *adapter-volumes
 
+  # The toBasicAscii fold audit (`pnpm research:audit`), on the `node` image so
+  # its Unicode tables are the pinned Node's; not an adapter, so `pnpm
+  # research` never runs it.
+  fold-audit:
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile
+    entrypoint: ["node", "/work/research/adapters/fold-audit/audit.mts"]
+    environment: *adapter-environment
+    labels:
+      dev.safe-fns.research.inputs: package.json pnpm-lock.yaml pnpm-workspace.yaml
+      dev.safe-fns.research.role: audit
+    network_mode: none
+    profiles: ["audit"]
+    volumes:
+      - ./adapters:/work/research/adapters:ro
+      - ../scripts/research:/work/scripts/research:ro
+
   # Go's standard library; the adapter is compiled into the image, not
   # mounted.
   go:
