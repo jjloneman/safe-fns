@@ -2,8 +2,9 @@
 type: Decision
 title: When isDeepEqual calls two values equal
 description: Primitives by SameValueZero; plain objects and arrays by their own enumerable string and symbol keys, with a missing key or hole never equal to `undefined`; other objects need the same prototype, and built-ins compare by their contents across realms; `Map` keys and `Set` members by SameValueZero unless `ignoreMapSetKeyIdentity` matches them by content; cycles compare by shape, anything that throws returns `false`, and `ignoreArrayOrder` compares arrays as multisets at every depth.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T16:19:17Z }
+verified: { by: human:jjloneman, at: 2026-10-30T02:54:00Z }
 ---
 
 # When isDeepEqual calls two values equal
