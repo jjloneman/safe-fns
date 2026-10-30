@@ -13,6 +13,10 @@ object KotlinTools {
         Tool(
             functions =
                 mapOf(
+                    "isDeepEqual" to
+                        listOf(
+                            Probe.anyBinary("a == b") { a, b -> a == b }.pair()
+                        ),
                     "isSafeEmpty" to
                         listOf(
                             Probe.nullable(

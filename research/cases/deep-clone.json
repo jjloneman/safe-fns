@@ -1,0 +1,623 @@
+{
+  "cases": [
+    {
+      "args": [
+        {
+          "a": [
+            1,
+            {
+              "b": "x"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "a": [
+          1,
+          {
+            "b": "x"
+          }
+        ]
+      }
+    },
+    {
+      "args": ["text"],
+      "expected": "text"
+    },
+    {
+      "args": [42],
+      "expected": 42
+    },
+    {
+      "args": [
+        {
+          "$number": "-0"
+        }
+      ],
+      "expected": {
+        "$number": "-0"
+      }
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        }
+      ],
+      "expected": {
+        "$number": "NaN"
+      }
+    },
+    {
+      "args": [
+        {
+          "$bigint": "12"
+        }
+      ],
+      "expected": {
+        "$bigint": "12"
+      }
+    },
+    {
+      "args": [null],
+      "expected": null
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a Date"
+        }
+      ],
+      "expected": {
+        "Date": 0
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an invalid Date"
+        }
+      ],
+      "expected": {
+        "Date": {
+          "$number": "NaN"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a Map with an entry"
+        }
+      ],
+      "expected": {
+        "Map": [["a", 1]]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a Map with an object key"
+        }
+      ],
+      "expected": {
+        "Map": [
+          [
+            {
+              "a": 1
+            },
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a Set with an entry"
+        }
+      ],
+      "expected": {
+        "Set": [1]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a RegExp"
+        }
+      ],
+      "expected": {
+        "RegExp": "/a/gu"
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a Uint8Array"
+        }
+      ],
+      "expected": {
+        "Uint8Array": [1, 2]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an ArrayBuffer of two bytes"
+        }
+      ],
+      "expected": {
+        "ArrayBuffer": [1, 2]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed number"
+        }
+      ],
+      "expected": {
+        "Number": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error"
+        }
+      ],
+      "expected": {
+        "Error": {
+          "message": "boom",
+          "name": "Error"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a TypeError"
+        }
+      ],
+      "expected": {
+        "Error": {
+          "message": "bad type",
+          "name": "TypeError"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error with a cause"
+        }
+      ],
+      "expected": {
+        "Error": {
+          "cause": {
+            "Error": {
+              "message": "inner",
+              "name": "Error"
+            }
+          },
+          "message": "outer",
+          "name": "Error"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a null-prototype object with a"
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": 1
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm object"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a sparse array"
+        }
+      ],
+      "expected": [
+        1,
+        {
+          "$repr": "Symbol(hole)"
+        },
+        3
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a getter"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a non-enumerable key"
+        }
+      ],
+      "expected": {}
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy of a plain object"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a cycle"
+        }
+      ],
+      "expected": {
+        "name": "a",
+        "self": {
+          "$repr": "Symbol(cycle)"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a nested cycle"
+        }
+      ],
+      "expected": {
+        "a": {
+          "b": {
+            "$repr": "Symbol(cycle)"
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an array with a cycle"
+        }
+      ],
+      "expected": [
+        1,
+        {
+          "$repr": "Symbol(cycle)"
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a shared reference"
+        }
+      ],
+      "expected": {
+        "a": {
+          "x": 1
+        },
+        "b": {
+          "$repr": "Symbol(repeat)"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a class instance"
+        }
+      ],
+      "expected": {
+        "$repr": "Symbol(shared)"
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a URL"
+        }
+      ],
+      "expected": {
+        "$repr": "Symbol(shared)"
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a function"
+        }
+      ],
+      "expected": {
+        "$repr": "Symbol(shared)"
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object holding a function"
+        }
+      ],
+      "expected": {
+        "a": 1,
+        "callback": {
+          "$repr": "Symbol(shared)"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a symbol"
+        }
+      ],
+      "expected": {
+        "$repr": "Symbol(hostile)"
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing getter"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy whose ownKeys trap throws"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a class instance"
+        },
+        {
+          "uncopyable": "structuredClone"
+        }
+      ],
+      "expected": {
+        "x": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a URL"
+        },
+        {
+          "uncopyable": "structuredClone"
+        }
+      ],
+      "expected": {
+        "$repr": "Symbol(shared)"
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object holding a function"
+        },
+        {
+          "uncopyable": "structuredClone"
+        }
+      ],
+      "expected": {
+        "a": 1,
+        "callback": {
+          "$repr": "Symbol(shared)"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing getter"
+        },
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": {}
+    },
+    {
+      "args": [
+        {
+          "a": 1,
+          "b": {
+            "$js": "a revoked proxy"
+          }
+        },
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          {
+            "$js": "a revoked proxy"
+          }
+        ],
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": [
+        1,
+        {
+          "$undefined": true
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        },
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a Map with an object key"
+        },
+        {
+          "mapSetKeys": "share"
+        }
+      ],
+      "expected": {
+        "Map": [
+          [
+            {
+              "$repr": "Symbol(shared)"
+            },
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a Set with an object"
+        }
+      ],
+      "expected": {
+        "Set": [
+          {
+            "a": 1
+          }
+        ]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a Set with an object"
+        },
+        {
+          "mapSetKeys": "share"
+        }
+      ],
+      "expected": {
+        "Set": [
+          {
+            "$repr": "Symbol(shared)"
+          }
+        ]
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a symbol key"
+        }
+      ],
+      "expected": {
+        "[Symbol(key)]": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm array"
+        }
+      ],
+      "expected": [1, 2]
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm Date"
+        }
+      ],
+      "expected": {
+        "Date": 0
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm Map"
+        }
+      ],
+      "expected": {
+        "Map": []
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm Set"
+        }
+      ],
+      "expected": {
+        "Set": []
+      }
+    }
+  ],
+  "function": "deepClone"
+}

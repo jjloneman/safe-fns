@@ -1,0 +1,637 @@
+{
+  "cases": [
+    {
+      "args": [1, 1],
+      "expected": true
+    },
+    {
+      "args": ["a", "a"],
+      "expected": true
+    },
+    {
+      "args": [1, "1"],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        },
+        {
+          "$number": "NaN"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        0,
+        {
+          "$number": "-0"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        null,
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$bigint": "1"
+        },
+        {
+          "$bigint": "1"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [{}, {}],
+      "expected": true
+    },
+    {
+      "args": [[], {}],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "a": [
+            1,
+            {
+              "b": "x"
+            }
+          ]
+        },
+        {
+          "a": [
+            1,
+            {
+              "b": "x"
+            }
+          ]
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "a": [
+            1,
+            {
+              "b": "x"
+            }
+          ]
+        },
+        {
+          "a": [
+            1,
+            {
+              "b": "y"
+            }
+          ]
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "a": 1,
+          "b": 2
+        },
+        {
+          "$js": "an object with keys b then a"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "$undefined": true
+          }
+        },
+        {}
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [1, 2],
+        [2, 1]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a sparse array"
+        },
+        [
+          1,
+          {
+            "$undefined": true
+          },
+          3
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a shared reference"
+        },
+        {
+          "a": {
+            "x": 1
+          },
+          "b": {
+            "x": 1
+          }
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a null-prototype object with a"
+        },
+        {
+          "a": 1
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a class instance"
+        },
+        {
+          "x": 1
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed number"
+        },
+        1
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed number"
+        },
+        {
+          "$js": "a boxed number"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a non-enumerable key"
+        },
+        {}
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a symbol key"
+        },
+        {
+          "$js": "an object with a symbol key"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a symbol key"
+        },
+        {
+          "$js": "an object with a different symbol-key value"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy of a plain object"
+        },
+        {
+          "a": 1
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a function"
+        },
+        {
+          "$js": "a function"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a Date"
+        },
+        {
+          "$js": "a Date"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a Date"
+        },
+        {
+          "$js": "a Date at 1 ms"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a Date"
+        },
+        0
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "an invalid Date"
+        },
+        {
+          "$js": "an invalid Date"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a RegExp"
+        },
+        {
+          "$js": "a RegExp"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a RegExp"
+        },
+        {
+          "$js": "a RegExp with other flags"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a Map with a then b"
+        },
+        {
+          "$js": "a Map with b then a"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a Map with an entry"
+        },
+        {
+          "$js": "a Map with a different value"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a Map with an entry"
+        },
+        {
+          "a": 1
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a Map with an object key"
+        },
+        {
+          "$js": "a Map with an object key"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a Set with an entry"
+        },
+        {
+          "$js": "a Set with an entry"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a Set with an object"
+        },
+        {
+          "$js": "a Set with an object"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a Uint8Array"
+        },
+        {
+          "$js": "a Uint8Array"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a Uint8Array"
+        },
+        {
+          "$js": "a Uint16Array"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "an ArrayBuffer of two bytes"
+        },
+        {
+          "$js": "an ArrayBuffer of two bytes"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error"
+        },
+        {
+          "$js": "an Error"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error"
+        },
+        {
+          "$js": "an Error with another message"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "an Error"
+        },
+        {
+          "$js": "a TypeError saying boom"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm object"
+        },
+        {
+          "a": 1
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm array"
+        },
+        [1, 2]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a cross-realm Date"
+        },
+        {
+          "$js": "a Date"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a cycle"
+        },
+        {
+          "$js": "an object with a cycle"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "an array with a cycle"
+        },
+        {
+          "$js": "an array with a cycle"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing getter"
+        },
+        {
+          "trap": 1
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        },
+        {}
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy whose ownKeys trap throws"
+        },
+        {}
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [1, 2],
+        [2, 1],
+        {
+          "ignoreArrayOrder": true
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [1, 1, 2],
+        [1, 2, 2],
+        {
+          "ignoreArrayOrder": true
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [[1, 2]],
+        [[2, 1]],
+        {
+          "ignoreArrayOrder": true
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          {
+            "a": 1
+          },
+          {
+            "b": 2
+          }
+        ],
+        [
+          {
+            "b": 2
+          },
+          {
+            "a": 1
+          }
+        ],
+        {
+          "ignoreArrayOrder": true
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a Map with an object key"
+        },
+        {
+          "$js": "a Map with an object key"
+        },
+        {
+          "ignoreMapSetKeyIdentity": true
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a Set with an object"
+        },
+        {
+          "$js": "a Set with an object"
+        },
+        {
+          "ignoreMapSetKeyIdentity": true
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        {
+          "$js": "a Map with an entry"
+        },
+        {
+          "$js": "a Map with a different value"
+        },
+        {
+          "ignoreMapSetKeyIdentity": true
+        }
+      ],
+      "expected": false
+    }
+  ],
+  "function": "isDeepEqual"
+}

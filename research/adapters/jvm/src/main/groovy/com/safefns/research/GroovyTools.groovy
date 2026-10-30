@@ -15,6 +15,9 @@ final class GroovyTools {
     /** The probes, keyed by function. */
     static final Tool TOOL = new Tool(
         [
+            isDeepEqual: [
+                Probe.anyBinary('a == b') { Object a, Object b -> a == b }.pair(),
+            ],
             isSafeEmpty: [
                 Probe.any('!value') { Object value -> !value },
             ],

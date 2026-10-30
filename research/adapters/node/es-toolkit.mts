@@ -5,7 +5,10 @@ import {
   toString as esToolkitToString,
 } from "es-toolkit/compat";
 import { cloneDeep as esToolkitCloneDeep } from "es-toolkit/object";
-import { isPlainObject as esToolkitIsPlainObject } from "es-toolkit/predicate";
+import {
+  isEqual as esToolkitIsEqual,
+  isPlainObject as esToolkitIsPlainObject,
+} from "es-toolkit/predicate";
 import {
   capitalize as esToolkitCapitalize,
   deburr as esToolkitDeburr,
@@ -19,6 +22,8 @@ import type { Tool } from "./tool.mts";
 import {
   hasNoOptions,
   hasOnlyOptions,
+  isPair,
+  markClone,
   markReferences,
   packageVersion,
 } from "./tool.mts";
@@ -26,6 +31,21 @@ import {
 /** es-toolkit's own predicate, and its lodash-compatible layer. */
 export const ES_TOOLKIT: Tool = {
   functions: {
+    deepClone: [
+      {
+        accepts: hasNoOptions,
+        call: "cloneDeep(value)",
+        run: ([value]) =>
+          markClone({ clone: esToolkitCloneDeep(value), source: value }),
+      },
+    ],
+    isDeepEqual: [
+      {
+        accepts: isPair,
+        call: "isEqual(a, b)",
+        run: ([a, b]) => esToolkitIsEqual(a, b),
+      },
+    ],
     isPlainObject: [
       {
         call: "isPlainObject(value)",

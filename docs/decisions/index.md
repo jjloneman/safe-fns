@@ -22,6 +22,7 @@ okf_version: "0.2"
 - [What "empty" means for isSafeEmpty and isSafePopulated](is-safe-empty.md) - Nullish values, blank strings, and empty arrays, maps, sets, and plain objects are empty; anything uninspectable is populated, and each predicate narrows its non-nullish branch.
 - [What a parser returns when it can't parse](parser-fallbacks.md) - Parsers return the caller's fallback, `undefined` by default, for any input they don't recognize — never a guess.
 - [What counts as a plain object](is-plain-object.md) - A prototype of `Object.prototype` (any realm) or `null`, and no `Symbol.toStringTag` or `Symbol.iterator`; no `isRecord`.
+- [What deepClone copies and what it shares](deep-clone.md) - Copies plain objects, arrays, `Map`, `Set` (keys and members too), and value-like built-ins; shares class instances, functions, and host objects; `mapSetKeys`, `uncopyable`, and `unreadable` opt into sharing keys, `structuredClone`, and omitting what throws; keeps cycles, runs where `structuredClone` doesn't, and a throw returns the `fallback` option.
 - [What every export promises](package-promise.md) - Every export is total and precisely typed; taking an `unknown` value is the common case, not a requirement.
 - [What safeParseBigInt accepts](safe-parse-big-int.md) - Bigints, safe-integer numbers, and trimmed integer strings; fractions, exponents, `n` suffixes, and blanks return the fallback, and `radix`, `min`, `max`, and `clamp` mirror `safeParseInt`.
 - [What safeParseBoolean accepts](safe-parse-boolean.md) - Booleans, `1` / `0`, `1n` / `0n`, and `true` `t` `yes` `y` `on` `1` / `false` `f` `no` `n` `off` `0`, trimmed and in any case, the set `yn`, Python's `strtobool`, and systemd share; everything else returns the fallback.
@@ -35,6 +36,7 @@ okf_version: "0.2"
 - [What the package leaves to native APIs and other libraries](native-first-scope.md) - Excludes what native JavaScript already does and wrappers around native one-liners; parks newer native APIs, currency-amount parsing, and duration and byte formatting as future candidates; leaves validation, IndexedDB, and exact decimals to dedicated libraries.
 - [What trimBlank trims](trim-blank.md) - Exactly the characters `isSafeEmpty` calls blank, from both ends or one, without splitting a grapheme cluster; a non-string returns the `fallback` option, `""` by default.
 - [When a name starts with `safe`](safe-prefix-naming.md) - `safeParse` + what it reads for every parser, `safe` + the native API's path for any other wrapper of one native API, `isSafe*` against a same-named unsafe helper, and plain names otherwise.
+- [When isDeepEqual calls two values equal](is-deep-equal.md) - Primitives by SameValueZero; plain objects and arrays by own enumerable string and symbol keys, a missing key never equal to `undefined`; other objects by prototype and built-ins by contents across realms; `Map` keys and `Set` members by SameValueZero or, with `ignoreMapSetKeyIdentity`, by content; cycles by shape, a throw returns `false`, and `ignoreArrayOrder` compares multisets.
 
 # About this bundle
 

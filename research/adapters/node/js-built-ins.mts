@@ -1,12 +1,16 @@
 import { unescape } from "node:querystring";
+import { isDeepStrictEqual } from "node:util";
 
 import type { Tool } from "./tool.mts";
 
 import {
   callJsonParse,
+  hasNoOptions,
   hasOnlyOptions,
   isLoneString,
+  isPair,
   isString,
+  markClone,
   markReferences,
   summarizeError,
 } from "./tool.mts";
@@ -92,6 +96,23 @@ export const JS_BUILT_INS: Tool = {
           ),
       },
     ],
+    deepClone: [
+      {
+        accepts: hasNoOptions,
+        call: "structuredClone(value)",
+        run: ([value]) =>
+          markClone({ clone: structuredClone(value), source: value }),
+      },
+      {
+        accepts: hasNoOptions,
+        call: "JSON.parse(JSON.stringify(value))",
+        run: ([value]) =>
+          markClone({
+            clone: callJsonParse(JSON.stringify(value)),
+            source: value,
+          }),
+      },
+    ],
     deepSortObject: [
       {
         accepts: isString,
@@ -119,6 +140,18 @@ export const JS_BUILT_INS: Tool = {
     ],
     getErrorMessage: [
       { call: "String(value)", run: ([value]) => String(value) },
+    ],
+    isDeepEqual: [
+      {
+        accepts: isPair,
+        call: "util.isDeepStrictEqual(a, b)",
+        run: ([a, b]) => isDeepStrictEqual(a, b),
+      },
+      {
+        accepts: isPair,
+        call: "JSON.stringify(a) === JSON.stringify(b)",
+        run: ([a, b]) => JSON.stringify(a) === JSON.stringify(b),
+      },
     ],
     lowerFirst: [
       {

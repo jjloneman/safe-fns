@@ -35,6 +35,8 @@ type HermesProbe = {
    * are; a case whose arguments don't match is `n/a`, as the JS built-ins
    * column's `accepts` makes it.
    *
+   * - `"any"` accepts every type, so a probe can fix only the count.
+   *
    * @example `["string", "number"]`
    */
   argumentTypes?: readonly string[];
@@ -72,10 +74,20 @@ type HermesProbe = {
 const PROBES: Readonly<Record<string, readonly HermesProbe[]>> = {
   codec: [{ call: "value" }],
   decodeBase64: [{ argumentTypes: ["string"], call: "atob(value)" }],
+  deepClone: [
+    { argumentTypes: ["any"], call: "JSON.parse(JSON.stringify(value))" },
+  ],
   deepSortObject: [
     { argumentTypes: ["string"], call: "JSON.stringify(JSON.parse(value))" },
   ],
   encodeBase64: [{ call: "btoa(value)" }],
+  isDeepEqual: [
+    {
+      argumentTypes: ["any", "any"],
+      call: "JSON.stringify(a) === JSON.stringify(b)",
+      parameters: ["a", "b"],
+    },
+  ],
   lowerFirst: [
     {
       argumentTypes: ["string"],
@@ -226,7 +238,7 @@ function programSource(caseFile: CaseFile): string {
 ${String(errorName)}
 
 function runProbe(probe, args) {
-  if (args === undefined || (probe.argumentTypes.length > 0 && (args.length !== probe.argumentTypes.length || !probe.argumentTypes.every(function (type, index) { return typeof args[index] === type; }))) || (probe.optionKeys !== null && (args[args.length - 1] === null || Object.keys(args[args.length - 1]).sort().join() !== probe.optionKeys.slice().sort().join()))) {
+  if (args === undefined || (probe.argumentTypes.length > 0 && (args.length !== probe.argumentTypes.length || !probe.argumentTypes.every(function (type, index) { return type === "any" || typeof args[index] === type; }))) || (probe.optionKeys !== null && (args[args.length - 1] === null || Object.keys(args[args.length - 1]).sort().join() !== probe.optionKeys.slice().sort().join()))) {
     return { kind: "n/a" };
   }
 

@@ -37,6 +37,11 @@ def are_two_strings(*args: object) -> bool:
     return len(args) == 2 and all(isinstance(arg, str) for arg in args)
 
 
+def are_two_values(*args: object) -> bool:
+    """Accept exactly two values and no options."""
+    return len(args) == 2
+
+
 def canonical_json(value: str) -> str:
     """Re-serialize JSON text with sorted keys, compactly, keeping non-ASCII."""
     return json.dumps(
@@ -100,6 +105,20 @@ def current_tools() -> list[Tool]:
                         "accepts": is_string,
                         "call": "b64encode(value.encode()).decode()",
                         "run": lambda value: b64encode(value.encode()).decode(),
+                    }
+                ],
+                "deepClone": [
+                    {
+                        "accepts": has_no_options,
+                        "call": "copy.deepcopy(value)",
+                        "run": copy.deepcopy,
+                    }
+                ],
+                "isDeepEqual": [
+                    {
+                        "accepts": are_two_values,
+                        "call": "a == b",
+                        "run": lambda a, b: a == b,
                     }
                 ],
                 "isPlainObject": [
@@ -253,6 +272,11 @@ def current_tools() -> list[Tool]:
             "version": VERSION,
         }
     ]
+
+
+def has_no_options(*args: object) -> bool:
+    """Accept exactly one value and no options."""
+    return len(args) == 1
 
 
 def is_lone_string(*args: object) -> bool:
