@@ -77,13 +77,61 @@ export type Tool = {
   version: string;
 };
 
+/**
+ * The value-like built-ins a `markClone` cell spells out, each read by a call
+ * that throws for any other object, so the read is the brand check.
+ */
+/* eslint-disable @typescript-eslint/unbound-method -- each method is applied
+   to another object on purpose: its throw is the brand check. */
+const BUILT_IN_READERS: readonly (readonly [
+  string,
+  (value: object) => unknown,
+])[] = [
+  ["ArrayBuffer", (value) => readBytes(value)],
+  ["BigInt", (value) => Reflect.apply(BigInt.prototype.valueOf, value, [])],
+  ["Boolean", (value) => Reflect.apply(Boolean.prototype.valueOf, value, [])],
+  ["Date", (value) => Reflect.apply(Date.prototype.getTime, value, [])],
+  ["Number", (value) => Reflect.apply(Number.prototype.valueOf, value, [])],
+  // `source` is the getter that throws for a non-RegExp; `flags` doesn't.
+  [
+    "RegExp",
+    (value) =>
+      `/${Reflect.get(RegExp.prototype, "source", value)}/${Reflect.get(
+        RegExp.prototype,
+        "flags",
+        value
+      )}`,
+  ],
+  ["String", (value) => Reflect.apply(String.prototype.valueOf, value, [])],
+  ["Symbol", (value) => Reflect.apply(Symbol.prototype.valueOf, value, [])],
+];
+/* eslint-enable @typescript-eslint/unbound-method */
+
 /** What `markReferences` writes for a reference back to an ancestor. */
 const CYCLE = Symbol("cycle");
+
+/** An error's own keys `markClone` shows without a non-enumerable suffix. */
+const ERROR_KEYS: ReadonlySet<PropertyKey> = new Set(["cause", "message"]);
+
+/** What `markClone` writes for a property that is a getter, never run. */
+const GETTER = Symbol("getter");
+
+/** What `markClone` writes for an array's missing index. */
+const HOLE = Symbol("hole");
 
 /** What `markReferences` writes for an object it already copied elsewhere. */
 const REPEAT = Symbol("repeat");
 
-/** What `summarizeError` reports for a `message` whose getter throws. */
+/** What `markClone` writes for an object the clone holds from its source. */
+const SHARED = Symbol("shared");
+
+/** What `markClone` writes for a part of a clone that threw when read. */
+const THREW = Symbol("threw");
+
+/** The prototype every typed array shares, whose tag getter names its kind. */
+const TYPED_ARRAY_PROTOTYPE: object =
+  Reflect.getPrototypeOf(Uint8Array.prototype) ?? Object.prototype;
+
 /**
  * What a `$js` case decodes to in an engine driven from Node (Hermes,
  * AssemblyScript): only the Node adapter's factories can build the value, so
@@ -91,7 +139,63 @@ const REPEAT = Symbol("repeat");
  */
 export const UNBUILDABLE: unique symbol = Symbol("unbuildable");
 
+/** What `summarizeError` reports for a `message` whose getter throws. */
 const UNREADABLE_MESSAGE = Symbol("unreadable message");
+
+/** A clone and the value it was made from, for `markClone`. */
+type CloneComparison = {
+  /**
+   * What the cloner returned.
+   *
+   * @example `{ a: [1] }`
+   */
+  clone: unknown;
+
+  /**
+   * The value the cloner was given.
+   *
+   * @example `{ a: [1] }`
+   */
+  source: unknown;
+};
+
+/** One object a `markClone` cell spells out, and how to mark its parts. */
+type CloneDescription = {
+  /**
+   * Whether the object is an array, or a plain object from this realm.
+   *
+   * @example true
+   */
+  isPlain: boolean;
+
+  /**
+   * The object's prototype, read once by the walk.
+   *
+   * @example `null`
+   */
+  prototype: unknown;
+
+  /**
+   * Every object reachable from the clone's source.
+   *
+   * @example `new Set([source])`
+   */
+  sourceObjects: ReadonlySet<object>;
+
+  /**
+   * The object.
+   *
+   * @example `new Map([["a", 1]])`
+   */
+  value: object;
+
+  /**
+   * Marks one part of the object, on the path through it.
+   *
+   * @example `(item) => markWithin({ …walk, value: item })`
+   */
+  visit: (item: unknown) => unknown;
+};
 
 /** What an error helper returned for one input, as its cell shows it. */
 type ErrorSummary = {
@@ -127,6 +231,40 @@ type ErrorSummaryInput = {
   input: unknown;
 };
 
+/** An own key, and the object that holds it. */
+type KeyRead = {
+  /**
+   * The key.
+   *
+   * @example "a"
+   */
+  key: ReturnType<typeof Reflect.ownKeys>[number];
+
+  /**
+   * The object.
+   *
+   * @example `{ a: 1 }`
+   */
+  value: object;
+};
+
+/** An object whose own keys a `markClone` cell lists, and how to list them. */
+type OwnEntriesRead = {
+  /**
+   * Keys shown without a non-enumerable suffix, though they have one.
+   *
+   * @example `new Set(["message"])`
+   */
+  plainKeys?: ReadonlySet<PropertyKey>;
+
+  /**
+   * Keys left out.
+   *
+   * @example `new Set(["stack"])`
+   */
+  skippedKeys?: ReadonlySet<PropertyKey>;
+} & Pick<CloneDescription, "value" | "visit">;
+
 /** An object, the path that reached it, and every object copied so far. */
 type ReferenceWalk = {
   /**
@@ -142,6 +280,14 @@ type ReferenceWalk = {
    * @example `new Set([root])`
    */
   seen: Set<object>;
+
+  /**
+   * For `markClone`: every object reachable from the source, so one the
+   * clone still holds is marked as shared; absent for `markReferences`.
+   *
+   * @example `new Set([source])`
+   */
+  sourceObjects?: ReadonlySet<object>;
 
   /**
    * The value to copy.
@@ -236,6 +382,11 @@ export function isLoneString(args: readonly unknown[]): boolean {
   return args.length === 1 && typeof args[0] === "string";
 }
 
+/** Accept exactly two values and no options; other cases are `n/a`. */
+export function isPair(args: readonly unknown[]): boolean {
+  return args.length === 2;
+}
+
 /**
  * Whether a `pluralize` case is a word and a numeric count whose options pass
  * the probe's own test, so each probe runs only the cases its call can express.
@@ -281,6 +432,32 @@ export function isString([value]: readonly unknown[]): boolean {
 }
 
 /**
+ * Mark what a deep clone copied and what it shared, for a `deepClone` column.
+ *
+ * - Like `markReferences`, plus `Symbol(shared)` for any object the clone
+ *   holds from its source, and `Symbol(hole)` for an array's missing index,
+ *   which would otherwise encode as `null`.
+ *
+ * - A `Map`, `Set`, or `Error` is spelled out (`{ Map: [[key, value]] }`,
+ *   `{ Set: [member] }`, `{ Error: { cause, message, name } }`), so a shared
+ *   key, member, or cause shows; a brand check finds one from any realm.
+ *
+ * - Every own key shows: a symbol key as `[Symbol(key)]`, a non-enumerable
+ *   key with a ` (non-enumerable)` suffix, and a null-prototype object is
+ *   wrapped as `{ "null-prototype": { … } }`.
+ *
+ * @returns the marked copy, safe to encode.
+ */
+export function markClone({ clone, source }: CloneComparison): unknown {
+  return markWithin({
+    ancestors: [],
+    seen: new Set(),
+    sourceObjects: collectObjects(source),
+    value: clone,
+  });
+}
+
+/**
  * Copy a result's arrays and plain objects, writing `Symbol(cycle)` where a
  * value refers back to one of its ancestors, and `Symbol(repeat)` where it
  * refers to an object already copied elsewhere.
@@ -297,7 +474,7 @@ export function isString([value]: readonly unknown[]): boolean {
  * @returns the copy, safe to encode.
  */
 export function markReferences(value: unknown): unknown {
-  return markReferencesWithin({ ancestors: [], seen: new Set(), value });
+  return markWithin({ ancestors: [], seen: new Set(), value });
 }
 
 /** Read an installed library's version. */
@@ -329,12 +506,250 @@ export function summarizeError({
   return { message: readMessage(error), unchanged: error === input };
 }
 
-/** Copy one value for `markReferences`, given the path that reached it. */
-function markReferencesWithin({
-  ancestors,
-  seen,
+/**
+ * Gather every object reachable from a value: every own key's value, a typed
+ * array's buffer, and `Map` and `Set` contents; a read that throws skips just
+ * that part.
+ *
+ * @returns the objects found.
+ */
+function collectObjects(root: unknown): Set<object> {
+  const found = new Set<object>();
+  const pending: unknown[] = [root];
+
+  while (pending.length > 0) {
+    const value = pending.pop();
+
+    if (
+      (typeof value !== "object" && typeof value !== "function") ||
+      value === null ||
+      found.has(value)
+    ) {
+      continue;
+    }
+
+    found.add(value);
+    pending.push(...readContents(value));
+  }
+
+  return found;
+}
+
+/**
+ * Spell out one object for `markClone`.
+ *
+ * @returns the object's marked description, or the object itself for one it
+ * can't spell out, for the codec to show by its tag.
+ */
+function describeClone({
+  isPlain,
+  prototype,
+  sourceObjects,
   value,
-}: ReferenceWalk): unknown {
+  visit,
+}: CloneDescription): unknown {
+  if (Array.isArray(value)) {
+    return Array.from(value, (item: unknown, index) =>
+      index in value ? visit(item) : HOLE
+    );
+  }
+
+  if (isPlain) {
+    const entries = describeOwnEntries({ value, visit });
+
+    return prototype === null ? { "null-prototype": entries } : entries;
+  }
+
+  if (Error.isError(value)) {
+    return { Error: describeError({ value, visit }) };
+  }
+
+  if (isMap(value)) {
+    return { Map: readMapEntries(value).map((entry) => entry.map(visit)) };
+  }
+
+  if (isSet(value)) {
+    return { Set: readSetMembers(value).map(visit) };
+  }
+
+  if (ArrayBuffer.isView(value)) {
+    return describeView({ sourceObjects, value });
+  }
+
+  return describeValueLike(value) ?? value;
+}
+
+/**
+ * Spell out an error's `name` and own keys for `markClone`, leaving out its
+ * `stack`, whose text names file paths.
+ *
+ * @returns the error's parts, each marked.
+ */
+function describeError({
+  value,
+  visit,
+}: Pick<CloneDescription, "value" | "visit">): Record<string, unknown> {
+  return {
+    name: readGuarded(() => Reflect.get(value, "name")),
+    ...describeOwnEntries({
+      plainKeys: ERROR_KEYS,
+      skippedKeys: new Set(["stack"]),
+      value,
+      visit,
+    }),
+  };
+}
+
+/**
+ * List an object's own keys for `markClone`, reading each descriptor so no
+ * getter runs.
+ *
+ * - A symbol key shows as `[Symbol(key)]`, a non-enumerable key with a
+ *   ` (non-enumerable)` suffix, and a label already used gets a ` #2`.
+ *
+ * - A getter shows as `Symbol(getter)`, and a descriptor that can't be read
+ *   as `Symbol(threw)`.
+ *
+ * @returns the labeled, marked entries.
+ */
+function describeOwnEntries({
+  plainKeys,
+  skippedKeys,
+  value,
+  visit,
+}: OwnEntriesRead): Record<string, unknown> {
+  const labelCounts = new Map<string, number>();
+
+  try {
+    return Object.fromEntries(
+      Reflect.ownKeys(value).flatMap((key) => {
+        const descriptor = Object.getOwnPropertyDescriptor(value, key);
+
+        if (skippedKeys?.has(key) === true || descriptor === undefined) {
+          return [];
+        }
+
+        const name = typeof key === "symbol" ? `[${String(key)}]` : key;
+        const isShownPlain =
+          descriptor.enumerable === true || plainKeys?.has(key) === true;
+
+        const baseLabel = isShownPlain ? name : `${name} (non-enumerable)`;
+        const count = (labelCounts.get(baseLabel) ?? 0) + 1;
+        const item: unknown = descriptor.value;
+
+        labelCounts.set(baseLabel, count);
+
+        return [
+          [
+            count === 1 ? baseLabel : `${baseLabel} #${count}`,
+            "get" in descriptor || "set" in descriptor ? GETTER : visit(item),
+          ],
+        ];
+      })
+    );
+  } catch {
+    return { "": THREW };
+  }
+}
+
+/**
+ * Spell out a value-like built-in for `markClone`: a `Date` by its time,
+ * a `RegExp` by its text, a boxed primitive by its value, and an
+ * `ArrayBuffer` by its bytes.
+ *
+ * @returns `{ [kind]: contents }`, or `undefined` for any other object.
+ */
+function describeValueLike(value: object): Record<string, unknown> | undefined {
+  for (const [kind, read] of BUILT_IN_READERS) {
+    try {
+      return { [kind]: read(value) };
+    } catch {
+      // Not this kind; try the next.
+    }
+  }
+
+  return undefined;
+}
+
+/**
+ * Spell out a typed array or `DataView` for `markClone`: its items, or a
+ * `DataView`'s bytes, plus `buffer: Symbol(shared)` when its bytes are the
+ * source's own.
+ *
+ * @returns the view's marked description.
+ */
+function describeView({
+  sourceObjects,
+  value,
+}: {
+  /**
+   * The typed array or `DataView`.
+   *
+   * @example `Uint8Array.of(1, 2)`
+   */
+  value: ArrayBufferView;
+} & Pick<CloneDescription, "sourceObjects">): Record<string, unknown> {
+  const tag: unknown = Reflect.get(
+    TYPED_ARRAY_PROTOTYPE,
+    Symbol.toStringTag,
+    value
+  );
+
+  const contents: unknown =
+    typeof tag === "string"
+      ? Reflect.apply(Array.prototype.slice, value, [])
+      : Array.from(
+          new Uint8Array(value.buffer, value.byteOffset, value.byteLength)
+        );
+
+  const description = {
+    [typeof tag === "string" ? tag : "DataView"]: contents,
+  };
+
+  return sourceObjects.has(value.buffer)
+    ? { ...description, buffer: SHARED }
+    : description;
+}
+
+/** Whether a value is a `Map` from any realm, by `Map.prototype.has`. */
+function isMap(value: object): boolean {
+  try {
+    Map.prototype.has.call(value, undefined);
+
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** Whether a value is a `Set` from any realm, by `Set.prototype.has`. */
+function isSet(value: object): boolean {
+  try {
+    Set.prototype.has.call(value, undefined);
+
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Copy one value for `markReferences` or `markClone`, given the path that
+ * reached it; `sourceObjects` turns on what only `markClone` shows.
+ *
+ * @returns the marked copy.
+ */
+function markWithin(walk: ReferenceWalk): unknown {
+  const { ancestors, seen, sourceObjects, value } = walk;
+
+  if (
+    (typeof value === "object" || typeof value === "function") &&
+    value !== null &&
+    sourceObjects?.has(value) === true
+  ) {
+    return SHARED;
+  }
+
   if (typeof value !== "object" || value === null) {
     return value;
   }
@@ -345,8 +760,10 @@ function markReferencesWithin({
 
   const prototype: unknown = Object.getPrototypeOf(value);
   const isArray = Array.isArray(value);
+  const isPlain =
+    isArray || prototype === Object.prototype || prototype === null;
 
-  if (!isArray && prototype !== Object.prototype && prototype !== null) {
+  if (!isPlain && sourceObjects === undefined) {
     return value;
   }
 
@@ -357,18 +774,19 @@ function markReferencesWithin({
   seen.add(value);
 
   const path = [...ancestors, value];
+  const visit = (item: unknown): unknown =>
+    markWithin({ ...walk, ancestors: path, value: item });
+
+  if (sourceObjects !== undefined) {
+    return describeClone({ isPlain, prototype, sourceObjects, value, visit });
+  }
 
   if (isArray) {
-    return value.map((item: unknown) =>
-      markReferencesWithin({ ancestors: path, seen, value: item })
-    );
+    return value.map(visit);
   }
 
   const entries = Object.fromEntries(
-    Object.entries(value).map(([key, item]) => [
-      key,
-      markReferencesWithin({ ancestors: path, seen, value: item }),
-    ])
+    Object.entries(value).map(([key, item]) => [key, visit(item)])
   );
 
   // `Object.assign` sets keys on a null-prototype target, where `__proto__`
@@ -378,6 +796,71 @@ function markReferencesWithin({
     : entries;
 }
 
+/** Copy an `ArrayBuffer`'s bytes; `slice` throws for any other object. */
+function readBytes(value: object): number[] {
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- the brand check
+  const copy: unknown = Reflect.apply(ArrayBuffer.prototype.slice, value, [0]);
+
+  return copy instanceof ArrayBuffer ? Array.from(new Uint8Array(copy)) : [];
+}
+
+/**
+ * Read what an object holds, for `collectObjects`: a `Map`'s keys and
+ * values, a `Set`'s members, a typed array's buffer, or every own key's
+ * value.
+ *
+ * @returns the values read; one whose read throws is left out.
+ */
+function readContents(value: object): unknown[] {
+  try {
+    if (isMap(value)) {
+      return readMapEntries(value).flat();
+    }
+
+    if (isSet(value)) {
+      return readSetMembers(value);
+    }
+
+    const ownValues = Reflect.ownKeys(value).flatMap((key) => {
+      try {
+        return [readKey({ key, value })];
+      } catch {
+        return [];
+      }
+    });
+
+    return ArrayBuffer.isView(value) ? [...ownValues, value.buffer] : ownValues;
+  } catch {
+    // A trap that throws hides everything behind it.
+    return [];
+  }
+}
+
+/** Run a read for `markClone`, marking one that throws. */
+function readGuarded(read: () => unknown): unknown {
+  try {
+    return read();
+  } catch {
+    return THREW;
+  }
+}
+
+/** Read one own key's value, through its getter if it has one. */
+function readKey({ key, value }: KeyRead): unknown {
+  const item: unknown = Reflect.get(value, key);
+
+  return item;
+}
+
+/** Read a brand-checked `Map`'s entries, from any realm. */
+function readMapEntries(map: object): unknown[][] {
+  const entries: Iterable<[unknown, unknown]> = Map.prototype.entries.call(
+    map as Map<unknown, unknown>
+  );
+
+  return Array.from(entries, ([key, item]) => [key, item]);
+}
+
 /** Read an error's `message`, marking one whose getter throws. */
 function readMessage(error: Error): unknown {
   try {
@@ -385,4 +868,13 @@ function readMessage(error: Error): unknown {
   } catch {
     return UNREADABLE_MESSAGE;
   }
+}
+
+/** Read a brand-checked `Set`'s members, from any realm. */
+function readSetMembers(set: object): unknown[] {
+  const members: Iterable<unknown> = Set.prototype.values.call(
+    set as Set<unknown>
+  );
+
+  return Array.from(members);
 }

@@ -5,6 +5,8 @@ import type { Tool } from "./tool.mts";
 import {
   hasNoOptions,
   hasOnlyOptions,
+  isPair,
+  markClone,
   markReferences,
   packageVersion,
 } from "./tool.mts";
@@ -12,6 +14,21 @@ import {
 /** lodash's checks and coercions. */
 export const LODASH: Tool = {
   functions: {
+    deepClone: [
+      {
+        accepts: hasNoOptions,
+        call: "_.cloneDeep(value)",
+        run: ([value]) =>
+          markClone({ clone: lodash.cloneDeep(value), source: value }),
+      },
+    ],
+    isDeepEqual: [
+      {
+        accepts: isPair,
+        call: "_.isEqual(a, b)",
+        run: ([a, b]) => lodash.isEqual(a, b),
+      },
+    ],
     isPlainObject: [
       {
         call: "_.isPlainObject(value)",

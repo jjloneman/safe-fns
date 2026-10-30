@@ -1,5 +1,7 @@
 import {
   capitalize as remedaCapitalize,
+  clone as remedaClone,
+  isDeepEqual as remedaIsDeepEqual,
   isEmpty as remedaIsEmpty,
   isEmptyish as remedaIsEmptyish,
   isPlainObject as remedaIsPlainObject,
@@ -8,11 +10,26 @@ import {
 
 import type { Tool } from "./tool.mts";
 
-import { hasNoOptions, packageVersion } from "./tool.mts";
+import { hasNoOptions, isPair, markClone, packageVersion } from "./tool.mts";
 
 /** remeda's type guards. */
 export const REMEDA: Tool = {
   functions: {
+    deepClone: [
+      {
+        accepts: hasNoOptions,
+        call: "clone(value)",
+        run: ([value]) =>
+          markClone({ clone: remedaClone(value), source: value }),
+      },
+    ],
+    isDeepEqual: [
+      {
+        accepts: isPair,
+        call: "isDeepEqual(a, b)",
+        run: ([a, b]) => remedaIsDeepEqual(a, b),
+      },
+    ],
     isPlainObject: [
       {
         call: "isPlainObject(value)",

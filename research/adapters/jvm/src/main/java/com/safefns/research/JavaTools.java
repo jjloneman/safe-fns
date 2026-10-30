@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
@@ -69,6 +70,15 @@ final class JavaTools {
                 value.getBytes(StandardCharsets.UTF_8)
               )
           )
+        )
+      ),
+      entry(
+        "isDeepEqual",
+        List.of(
+          Probe.anyBinary(
+            "Objects.deepEquals(a, b)",
+            Objects::deepEquals
+          ).pair()
         )
       ),
       entry(

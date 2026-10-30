@@ -67,6 +67,11 @@ func areTwoStrings(args []any) bool {
 	return isString(args) && isBaseText
 }
 
+// areTwoValues accepts exactly two values and no options.
+func areTwoValues(args []any) bool {
+	return len(args) == 2
+}
+
 // decodeBase64 decodes text in one of `encoding/base64`'s encodings, returning
 // the bytes as a string, or an invalidUTF8 for bytes that aren't UTF-8.
 func decodeBase64(encoding *base64.Encoding, text string) (any, error) {
@@ -257,6 +262,15 @@ func tools() []Tool {
 							return base64.StdEncoding.EncodeToString(
 								[]byte(args[0].(string)),
 							), nil
+						},
+					},
+				},
+				"isDeepEqual": {
+					{
+						Accepts: areTwoValues,
+						Call:    "reflect.DeepEqual(a, b)",
+						Run: func(args []any) (any, error) {
+							return reflect.DeepEqual(args[0], args[1]), nil
 						},
 					},
 				},

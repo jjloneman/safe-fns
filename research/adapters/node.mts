@@ -20,11 +20,14 @@ import { CSV } from "./node/csv.mts";
 import { DATE_FNS } from "./node/date-fns.mts";
 import { DAYJS } from "./node/dayjs.mts";
 import { DECODE_URI_COMPONENT } from "./node/decode-uri-component.mts";
+import { DEQUAL } from "./node/dequal.mts";
 import { EFFECT } from "./node/effect.mts";
 import { ENSURE_ERROR } from "./node/ensure-error.mts";
 import { ENVALID } from "./node/envalid.mts";
 import { ES_TOOLKIT } from "./node/es-toolkit.mts";
+import { FAST_COPY } from "./node/fast-copy.mts";
 import { FAST_DECODE_URI_COMPONENT } from "./node/fast-decode-uri-component.mts";
+import { FAST_DEEP_EQUAL } from "./node/fast-deep-equal.mts";
 import { FAST_JSON_STABLE_STRINGIFY } from "./node/fast-json-stable-stringify.mts";
 import { FAST_SAFE_STRINGIFY } from "./node/fast-safe-stringify.mts";
 import { HTML } from "./node/html.mts";
@@ -35,6 +38,7 @@ import { JS_BASE64 } from "./node/js-base64.mts";
 import { JS_BUILT_INS } from "./node/js-built-ins.mts";
 import { JSON_STRINGIFY_SAFE } from "./node/json-stringify-safe.mts";
 import { JSON_FORMAT } from "./node/json.mts";
+import { KLONA } from "./node/klona.mts";
 import { LODASH } from "./node/lodash.mts";
 import { LUXON } from "./node/luxon.mts";
 import { MOMENT } from "./node/moment.mts";
@@ -43,6 +47,7 @@ import { PLURALIZE } from "./node/pluralize.mts";
 import { RADASH } from "./node/radash.mts";
 import { RAMDA } from "./node/ramda.mts";
 import { REMEDA } from "./node/remeda.mts";
+import { RFDC } from "./node/rfdc.mts";
 import { SAFE_STABLE_STRINGIFY } from "./node/safe-stable-stringify.mts";
 import { SINDRESORHUS_IS } from "./node/sindresorhus-is.mts";
 import { SINDRESORHUS_TRANSLITERATE } from "./node/sindresorhus-transliterate.mts";
@@ -128,16 +133,33 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
     () => new DataView(new TextEncoder().encode('{"a":1}').buffer),
   ],
   ["a Date", () => new Date(0)],
+  ["a Date at 1 ms", () => new Date(1)],
   ["a Date in year 10000", () => new Date(253_402_300_800_000)],
   ["a DOMException", () => new DOMException("aborted", "AbortError")],
   ["a function", () => () => undefined],
   ["a lone low surrogate before text", () => "\uDC00a"],
   ["a lone surrogate", () => "\uD800"],
+  ["a Map with a different value", () => new Map([["a", 2]])],
   ["a Map with an entry", () => new Map([["a", 1]])],
+  ["a Map with an object key", () => new Map([[{ a: 1 }, 1]])],
+  [
+    "a Map with a then b",
+    () =>
+      new Map([
+        ["a", 1],
+        ["b", 2],
+      ]),
+  ],
+  [
+    "a Map with b then a",
+    // Chained, so no lint fix can sort the entries back into "a then b".
+    () => new Map<string, number>().set("b", 2).set("a", 1),
+  ],
   [
     "an ArrayBuffer of JSON text",
     () => new TextEncoder().encode('{"a":1}').buffer,
   ],
+  ["an ArrayBuffer of two bytes", () => Uint8Array.of(1, 2).buffer],
   ["an array with a cycle", () => arrayWithCycle()],
   ["an empty cross-realm object", (): unknown => runInNewContext("({})")],
   ["an empty Map", () => new Map()],
@@ -150,6 +172,7 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
     "an Error with a cause",
     () => new Error("outer", { cause: new Error("inner") }),
   ],
+  ["an Error with another message", () => new Error("bang")],
   ["an Error with no message", () => new Error()],
   ["an invalid Date", () => new Date(Number.NaN)],
   ["an object holding a function", () => ({ a: 1, callback: () => 1 })],
@@ -167,6 +190,10 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ],
   ["an object with a cycle", () => objectWithCycle()],
   [
+    "an object with a different symbol-key value",
+    () => ({ [Symbol.for("key")]: 2 }),
+  ],
+  [
     "an object with a getter",
     () => ({
       get a(): number {
@@ -179,8 +206,21 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
     "an object with an inherited message",
     (): unknown => Object.create({ message: "inherited" }),
   ],
+  [
+    "an object with a non-enumerable key",
+    () => Object.defineProperty({}, "a", { value: 1 }),
+  ],
   ["an object with a shared reference", () => objectWithSharedReference()],
+  ["an object with a symbol key", () => ({ [Symbol.for("key")]: 1 })],
   ["an object with a toJSON", () => ({ toJSON: () => "custom" })],
+  [
+    "an object with keys b then a",
+    () =>
+      Object.fromEntries([
+        ["b", 2],
+        ["a", 1],
+      ]),
+  ],
   [
     "an object with Symbol.toStringTag",
     () => ({ [Symbol.toStringTag]: "Custom" }),
@@ -191,10 +231,14 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ],
   ["a proxy of a plain object", () => new Proxy({ a: 1 }, {})],
   ["a RegExp", () => /a/gu],
+  ["a RegExp with other flags", () => /a/gi],
   ["a Set with an entry", () => new Set([1])],
+  ["a Set with an object", () => new Set([{ a: 1 }])],
   ["a sparse array", () => sparseArray()],
   ["a string ending in a lone high surrogate", () => "a\uD83D"],
   ["a TypeError", () => new TypeError("bad type")],
+  ["a TypeError saying boom", () => new TypeError("boom")],
+  ["a Uint16Array", () => Uint16Array.of(1, 2)],
   ["a Uint8Array", () => Uint8Array.of(1, 2)],
   ["a URL", () => new URL("https://example.com/")],
   ["a URLSearchParams with an entry", () => new URLSearchParams("a=1")],
@@ -269,6 +313,11 @@ const TOOLS: readonly Tool[] = [
   VOCA,
   PLURALIZE,
   PLUR,
+  FAST_DEEP_EQUAL,
+  DEQUAL,
+  RFDC,
+  KLONA,
+  FAST_COPY,
 ];
 
 /** Build an array whose second item is the array itself. */
