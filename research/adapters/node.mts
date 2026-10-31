@@ -16,10 +16,13 @@ import { HOSTILE_INPUTS } from "../../test/hostile-inputs.ts";
 import { AJV_COERCE } from "./node/ajv.mts";
 import { ANY_ASCII } from "./node/any-ascii.mts";
 import { CANONICALIZE } from "./node/canonicalize.mts";
+import { CORE_JS } from "./node/core-js.mts";
 import { CSV } from "./node/csv.mts";
 import { DATE_FNS } from "./node/date-fns.mts";
 import { DAYJS } from "./node/dayjs.mts";
 import { DECODE_URI_COMPONENT } from "./node/decode-uri-component.mts";
+import { DEEPMERGE } from "./node/deepmerge.mts";
+import { DEFU } from "./node/defu.mts";
 import { DEQUAL } from "./node/dequal.mts";
 import { EFFECT } from "./node/effect.mts";
 import { ENSURE_ERROR } from "./node/ensure-error.mts";
@@ -137,6 +140,18 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ["a Date in year 10000", () => new Date(253_402_300_800_000)],
   ["a DOMException", () => new DOMException("aborted", "AbortError")],
   ["a function", () => () => undefined],
+  [
+    "a function that throws",
+    () => (): never => {
+      throw new Error("boom");
+    },
+  ],
+  [
+    "a key function reading id",
+    () =>
+      ({ id }: { id: unknown }): unknown =>
+        id,
+  ],
   ["a lone low surrogate before text", () => "\uDC00a"],
   ["a lone surrogate", () => "\uD800"],
   ["a Map with a different value", () => new Map([["a", 2]])],
@@ -210,6 +225,16 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
     "an object with a non-enumerable key",
     () => Object.defineProperty({}, "a", { value: 1 }),
   ],
+  [
+    "an object with an own __proto__ key",
+    () =>
+      Object.defineProperty({}, "__proto__", {
+        configurable: true,
+        enumerable: true,
+        value: { polluted: true },
+        writable: true,
+      }),
+  ],
   ["an object with a shared reference", () => objectWithSharedReference()],
   ["an object with a symbol key", () => ({ [Symbol.for("key")]: 1 })],
   ["an object with a toJSON", () => ({ toJSON: () => "custom" })],
@@ -242,6 +267,12 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ["a Uint8Array", () => Uint8Array.of(1, 2)],
   ["a URL", () => new URL("https://example.com/")],
   ["a URLSearchParams with an entry", () => new URLSearchParams("a=1")],
+  [
+    "a value function reading n",
+    () =>
+      ({ n }: { n: unknown }): unknown =>
+        n,
+  ],
   ["invalid UTF-8 bytes", () => Uint8Array.of(0x22, 0xff, 0x22)],
   [
     "UTF-16BE bytes of JSON text with a BOM",
@@ -318,6 +349,9 @@ const TOOLS: readonly Tool[] = [
   RFDC,
   KLONA,
   FAST_COPY,
+  DEEPMERGE,
+  DEFU,
+  CORE_JS,
 ];
 
 /** Build an array whose second item is the array itself. */

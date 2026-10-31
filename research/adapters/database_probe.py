@@ -84,6 +84,39 @@ def accepts_scalar(
     return accepts
 
 
+def is_json_pair(*args: object) -> bool:
+    """Accept exactly two values that JSON text can hold as they are.
+
+    - A `JsBigInt` and a non-finite float have no JSON form, so a case holding
+      one is `n/a` rather than a value the database never saw.
+    """
+    return len(args) == 2 and all(is_json_value(arg) for arg in args)
+
+
+def is_json_list_and_key(*args: object) -> bool:
+    """Accept a list JSON text can hold as it is, and a property name."""
+    return (
+        len(args) == 2
+        and isinstance(args[0], list)
+        and is_json_value(args[0])
+        and isinstance(args[1], str)
+    )
+
+
+def is_json_value(value: object) -> bool:
+    """Report whether JSON text holds a decoded value exactly."""
+    if isinstance(value, dict):
+        return all(is_json_value(item) for item in value.values())
+
+    if isinstance(value, list):
+        return all(is_json_value(item) for item in value)
+
+    if isinstance(value, float):
+        return math.isfinite(value)
+
+    return value is None or type(value) in {bool, int, str}
+
+
 def is_utf8(text: str) -> bool:
     """Report whether a string encodes as UTF-8."""
     try:

@@ -3,6 +3,10 @@
 #
 # - Both settings mirror the root `pnpm-workspace.yaml`; keep them in sync.
 
+# core-js-pure's install script only prints a funding message.
+allowBuilds:
+  core-js-pure: false
+
 # Supply-chain floor: refuse any version younger than 7 days (in minutes).
 minimumReleaseAge: 10080
 

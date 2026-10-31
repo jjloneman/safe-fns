@@ -15,14 +15,29 @@ final class GroovyTools {
     /** The probes, keyed by function. */
     static final Tool TOOL = new Tool(
         [
+            deepMerge: [
+                Probe.mapPair('defaults + overrides') { Map defaults, Map overrides ->
+                    defaults + overrides
+                },
+            ],
             isDeepEqual: [
                 Probe.anyBinary('a == b') { Object a, Object b -> a == b }.pair(),
             ],
             isSafeEmpty: [
                 Probe.any('!value') { Object value -> !value },
             ],
+            keyBy: [
+                Probe.listKey('items.collectEntries { item -> [(item[key]): item] }') { List items, String key ->
+                    items.collectEntries { item -> [(item[key]): item] }
+                },
+            ],
             lowerFirst: [
                 Probe.typed('value.uncapitalize()', String) { String value -> value.uncapitalize() }.alone(),
+            ],
+            range: [
+                Probe.intRange('(start..<end).step(step)') { int start, int end, int step ->
+                    (start..<end).step(step)
+                },
             ],
             safeObjectHasOwn: [
                 Probe.anyBinary('key in obj') { Object obj, Object key ->

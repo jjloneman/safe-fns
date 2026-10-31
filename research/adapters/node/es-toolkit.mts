@@ -1,10 +1,15 @@
+import { keyBy as esToolkitKeyBy } from "es-toolkit/array";
 import {
   isEmpty as esToolkitIsEmpty,
   toInteger as esToolkitToInteger,
   toNumber as esToolkitToNumber,
   toString as esToolkitToString,
 } from "es-toolkit/compat";
-import { cloneDeep as esToolkitCloneDeep } from "es-toolkit/object";
+import { range as esToolkitRange } from "es-toolkit/math";
+import {
+  cloneDeep as esToolkitCloneDeep,
+  toMerged as esToolkitToMerged,
+} from "es-toolkit/object";
 import {
   isEqual as esToolkitIsEqual,
   isPlainObject as esToolkitIsPlainObject,
@@ -20,10 +25,14 @@ import {
 import type { Tool } from "./tool.mts";
 
 import {
+  callWithRange,
   hasNoOptions,
   hasOnlyOptions,
   isPair,
+  isRangeCase,
+  keyGetter,
   markClone,
+  markKeyed,
   markReferences,
   packageVersion,
 } from "./tool.mts";
@@ -37,6 +46,17 @@ export const ES_TOOLKIT: Tool = {
         call: "cloneDeep(value)",
         run: ([value]) =>
           markClone({ clone: esToolkitCloneDeep(value), source: value }),
+      },
+    ],
+    deepMerge: [
+      {
+        accepts: isPair,
+        call: "toMerged(defaults, overrides)",
+        run: ([defaults, overrides]) =>
+          markClone({
+            clone: esToolkitToMerged(defaults as object, overrides as object),
+            source: [defaults, overrides],
+          }),
       },
     ],
     isDeepEqual: [
@@ -58,11 +78,38 @@ export const ES_TOOLKIT: Tool = {
         run: ([value]) => esToolkitIsEmpty(value),
       },
     ],
+    keyBy: [
+      {
+        accepts: isPair,
+        call: "keyBy(items, getKey)",
+        run: ([items, key]) =>
+          markKeyed(
+            esToolkitKeyBy(
+              items as readonly unknown[],
+              keyGetter(key) as (item: unknown) => PropertyKey
+            )
+          ),
+      },
+    ],
     lowerFirst: [
       {
         accepts: hasNoOptions,
         call: "lowerFirst(value)",
         run: ([value]) => esToolkitLowerFirst(value as string),
+      },
+    ],
+    range: [
+      {
+        accepts: (args) =>
+          isRangeCase({
+            args,
+            hasEndForm: true,
+            hasOptionsParameter: false,
+            optionKeys: ["step"],
+            shouldBoundEveryCount: false,
+          }),
+        call: "range(start, end, step)",
+        run: (args) => callWithRange({ args, call: esToolkitRange }),
       },
     ],
     safeParseInt: [

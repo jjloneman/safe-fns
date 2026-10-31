@@ -1,0 +1,516 @@
+{
+  "cases": [
+    {
+      "args": [4],
+      "expected": [0, 1, 2, 3]
+    },
+    {
+      "args": [0],
+      "expected": []
+    },
+    {
+      "args": [-3],
+      "expected": []
+    },
+    {
+      "args": [2.5],
+      "expected": [0, 1, 2]
+    },
+    {
+      "args": [1, 4],
+      "expected": [1, 2, 3]
+    },
+    {
+      "args": [4, 1],
+      "expected": [4, 3, 2]
+    },
+    {
+      "args": [4, 0],
+      "expected": [4, 3, 2, 1]
+    },
+    {
+      "args": [
+        4,
+        0,
+        {
+          "inclusive": true
+        }
+      ],
+      "expected": [4, 3, 2, 1, 0]
+    },
+    {
+      "args": [
+        4,
+        0,
+        {
+          "step": 1
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        4,
+        0,
+        {
+          "step": -1
+        }
+      ],
+      "expected": [4, 3, 2, 1]
+    },
+    {
+      "args": [-2, 2],
+      "expected": [-2, -1, 0, 1]
+    },
+    {
+      "args": [3, 3],
+      "expected": []
+    },
+    {
+      "args": [
+        {
+          "$number": "-0"
+        },
+        2
+      ],
+      "expected": [0, 1]
+    },
+    {
+      "args": [0.5, 3],
+      "expected": [0.5, 1.5, 2.5]
+    },
+    {
+      "args": [
+        0,
+        10,
+        {
+          "step": 3
+        }
+      ],
+      "expected": [0, 3, 6, 9]
+    },
+    {
+      "args": [
+        4,
+        1,
+        {
+          "step": -1
+        }
+      ],
+      "expected": [4, 3, 2]
+    },
+    {
+      "args": [
+        1,
+        4,
+        {
+          "step": -1
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        1,
+        4,
+        {
+          "step": 1.5
+        }
+      ],
+      "expected": [1, 2.5]
+    },
+    {
+      "args": [
+        1,
+        0,
+        {
+          "step": -0.25
+        }
+      ],
+      "expected": [1, 0.75, 0.5, 0.25]
+    },
+    {
+      "args": [
+        0,
+        1,
+        {
+          "step": 0.1
+        }
+      ],
+      "expected": [
+        0, 0.1, 0.2, 0.30000000000000004, 0.4, 0.5, 0.6000000000000001,
+        0.7000000000000001, 0.8, 0.9
+      ]
+    },
+    {
+      "args": [
+        0,
+        0.3,
+        {
+          "step": 0.1
+        }
+      ],
+      "expected": [0, 0.1, 0.2]
+    },
+    {
+      "args": [
+        0,
+        4,
+        {
+          "inclusive": true
+        }
+      ],
+      "expected": [0, 1, 2, 3, 4]
+    },
+    {
+      "args": [
+        3,
+        3,
+        {
+          "inclusive": true
+        }
+      ],
+      "expected": [3]
+    },
+    {
+      "args": [
+        0,
+        9,
+        {
+          "inclusive": true,
+          "step": 3
+        }
+      ],
+      "expected": [0, 3, 6, 9]
+    },
+    {
+      "args": [
+        0,
+        10,
+        {
+          "inclusive": true,
+          "step": 3
+        }
+      ],
+      "expected": [0, 3, 6, 9]
+    },
+    {
+      "args": [
+        0,
+        0.3,
+        {
+          "inclusive": true,
+          "step": 0.1
+        }
+      ],
+      "expected": [0, 0.1, 0.2]
+    },
+    {
+      "args": [
+        0,
+        4,
+        {
+          "step": 0
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        0,
+        0,
+        {
+          "step": 0
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        0,
+        4,
+        {
+          "step": {
+            "$number": "NaN"
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        0,
+        4,
+        {
+          "step": {
+            "$number": "Infinity"
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        0,
+        {
+          "$number": "NaN"
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        {
+          "$number": "Infinity"
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        0,
+        {
+          "$number": "Infinity"
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        {
+          "$number": "-Infinity"
+        },
+        0
+      ],
+      "expected": []
+    },
+    {
+      "args": [0, 4294967296],
+      "expected": []
+    },
+    {
+      "args": [9007199254740989, 9007199254740991],
+      "expected": [9007199254740989, 9007199254740990]
+    },
+    {
+      "args": [-9007199254740991, -9007199254740989],
+      "expected": [-9007199254740991, -9007199254740990]
+    },
+    {
+      "args": [9007199254740991, 9007199254740994.0],
+      "expected": []
+    },
+    {
+      "args": [
+        4503599627370496.0,
+        4503599627370498.0,
+        {
+          "step": 0.5
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        1.152921504606847e18,
+        1.152921504606851e18,
+        {
+          "step": 1024
+        }
+      ],
+      "expected": [
+        1.152921504606847e18, 1.152921504606848e18, 1.152921504606849e18,
+        1.15292150460685e18
+      ]
+    },
+    {
+      "args": [
+        -9007199254740991,
+        9007199254740991,
+        {
+          "step": 1e-200
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [0, 1.7976931348623157e308],
+      "expected": []
+    },
+    {
+      "args": [
+        -1.7976931348623157e308,
+        1.7976931348623157e308,
+        {
+          "step": 1.7976931348623157e308
+        }
+      ],
+      "expected": [-1.7976931348623157e308, 0]
+    },
+    {
+      "args": [
+        0,
+        1.5e-323,
+        {
+          "step": 5e-324
+        }
+      ],
+      "expected": [0, 5e-324, 1e-323]
+    },
+    {
+      "args": [
+        {
+          "$bigint": "1"
+        },
+        {
+          "$bigint": "4"
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": ["3"],
+      "expected": []
+    },
+    {
+      "args": [null],
+      "expected": []
+    },
+    {
+      "args": [],
+      "expected": []
+    },
+    {
+      "args": [
+        0,
+        4,
+        {
+          "step": "1"
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        0,
+        4,
+        {
+          "$js": "a revoked proxy"
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        0,
+        4,
+        {
+          "$js": "a proxy whose get trap throws"
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        {
+          "$number": "NaN"
+        },
+        {
+          "fallback": null
+        }
+      ],
+      "expected": null
+    },
+    {
+      "args": [
+        -3,
+        {
+          "fallback": null
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        0,
+        {
+          "fallback": null
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        0,
+        0,
+        {
+          "fallback": null
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        1,
+        4,
+        {
+          "fallback": null,
+          "step": -1
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        0,
+        4,
+        {
+          "fallback": null,
+          "step": 0
+        }
+      ],
+      "expected": null
+    },
+    {
+      "args": [
+        0,
+        4294967296,
+        {
+          "fallback": null
+        }
+      ],
+      "expected": null
+    },
+    {
+      "args": [
+        4503599627370496.0,
+        4503599627370498.0,
+        {
+          "fallback": null,
+          "step": 0.5
+        }
+      ],
+      "expected": null
+    },
+    {
+      "args": [
+        0,
+        4,
+        {
+          "fallback": null,
+          "step": "1"
+        }
+      ],
+      "expected": null
+    }
+  ],
+  "function": "range"
+}

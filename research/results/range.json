@@ -1,0 +1,4883 @@
+{
+  "cases": [
+    [
+      4
+    ],
+    [
+      0
+    ],
+    [
+      -3
+    ],
+    [
+      2.5
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      4,
+      0,
+      {
+        "inclusive": true
+      }
+    ],
+    [
+      4,
+      0,
+      {
+        "step": 1
+      }
+    ],
+    [
+      4,
+      0,
+      {
+        "step": -1
+      }
+    ],
+    [
+      -2,
+      2
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      {
+        "$number": "-0"
+      },
+      2
+    ],
+    [
+      0.5,
+      3
+    ],
+    [
+      0,
+      10,
+      {
+        "step": 3
+      }
+    ],
+    [
+      4,
+      1,
+      {
+        "step": -1
+      }
+    ],
+    [
+      1,
+      4,
+      {
+        "step": -1
+      }
+    ],
+    [
+      1,
+      4,
+      {
+        "step": 1.5
+      }
+    ],
+    [
+      1,
+      0,
+      {
+        "step": -0.25
+      }
+    ],
+    [
+      0,
+      1,
+      {
+        "step": 0.1
+      }
+    ],
+    [
+      0,
+      0.3,
+      {
+        "step": 0.1
+      }
+    ],
+    [
+      0,
+      4,
+      {
+        "inclusive": true
+      }
+    ],
+    [
+      3,
+      3,
+      {
+        "inclusive": true
+      }
+    ],
+    [
+      0,
+      9,
+      {
+        "inclusive": true,
+        "step": 3
+      }
+    ],
+    [
+      0,
+      10,
+      {
+        "inclusive": true,
+        "step": 3
+      }
+    ],
+    [
+      0,
+      0.3,
+      {
+        "inclusive": true,
+        "step": 0.1
+      }
+    ],
+    [
+      0,
+      4,
+      {
+        "step": 0
+      }
+    ],
+    [
+      0,
+      0,
+      {
+        "step": 0
+      }
+    ],
+    [
+      0,
+      4,
+      {
+        "step": {
+          "$number": "NaN"
+        }
+      }
+    ],
+    [
+      0,
+      4,
+      {
+        "step": {
+          "$number": "Infinity"
+        }
+      }
+    ],
+    [
+      {
+        "$number": "NaN"
+      }
+    ],
+    [
+      0,
+      {
+        "$number": "NaN"
+      }
+    ],
+    [
+      {
+        "$number": "Infinity"
+      }
+    ],
+    [
+      0,
+      {
+        "$number": "Infinity"
+      }
+    ],
+    [
+      {
+        "$number": "-Infinity"
+      },
+      0
+    ],
+    [
+      0,
+      4294967296
+    ],
+    [
+      9007199254740989,
+      9007199254740991
+    ],
+    [
+      -9007199254740991,
+      -9007199254740989
+    ],
+    [
+      9007199254740991,
+      9007199254740994
+    ],
+    [
+      4503599627370496,
+      4503599627370498,
+      {
+        "step": 0.5
+      }
+    ],
+    [
+      1152921504606847000,
+      1152921504606851000,
+      {
+        "step": 1024
+      }
+    ],
+    [
+      -9007199254740991,
+      9007199254740991,
+      {
+        "step": 1e-200
+      }
+    ],
+    [
+      0,
+      1.7976931348623157e+308
+    ],
+    [
+      -1.7976931348623157e+308,
+      1.7976931348623157e+308,
+      {
+        "step": 1.7976931348623157e+308
+      }
+    ],
+    [
+      0,
+      1.5e-323,
+      {
+        "step": 5e-324
+      }
+    ],
+    [
+      {
+        "$bigint": "1"
+      },
+      {
+        "$bigint": "4"
+      }
+    ],
+    [
+      "3"
+    ],
+    [
+      null
+    ],
+    [],
+    [
+      0,
+      4,
+      {
+        "step": "1"
+      }
+    ],
+    [
+      0,
+      4,
+      {
+        "$js": "a revoked proxy"
+      }
+    ],
+    [
+      0,
+      4,
+      {
+        "$js": "a proxy whose get trap throws"
+      }
+    ],
+    [
+      {
+        "$number": "NaN"
+      },
+      {
+        "fallback": null
+      }
+    ],
+    [
+      -3,
+      {
+        "fallback": null
+      }
+    ],
+    [
+      0,
+      {
+        "fallback": null
+      }
+    ],
+    [
+      0,
+      0,
+      {
+        "fallback": null
+      }
+    ],
+    [
+      1,
+      4,
+      {
+        "fallback": null,
+        "step": -1
+      }
+    ],
+    [
+      0,
+      4,
+      {
+        "fallback": null,
+        "step": 0
+      }
+    ],
+    [
+      0,
+      4294967296,
+      {
+        "fallback": null
+      }
+    ],
+    [
+      4503599627370496,
+      4503599627370498,
+      {
+        "fallback": null,
+        "step": 0.5
+      }
+    ],
+    [
+      0,
+      4,
+      {
+        "fallback": null,
+        "step": "1"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "range",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            0.75,
+            0.5,
+            0.25
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.30000000000000004,
+            0.4,
+            0.5,
+            0.6000000000000001,
+            0.7000000000000001,
+            0.8,
+            0.9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740989,
+            9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -9007199254740991,
+            -9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            1152921504606847000,
+            1152921504606848000,
+            1152921504606849000,
+            1152921504606850000
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            -1.7976931348623157e+308,
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            5e-324,
+            1e-323
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": null
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "Array.from(Iterator.range(start, end, option))",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "core-js",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            0.75,
+            0.5,
+            0.25
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.30000000000000004,
+            0.4,
+            0.5,
+            0.6000000000000001,
+            0.7000000000000001,
+            0.8,
+            0.9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740989,
+            9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -9007199254740991,
+            -9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740991,
+            9007199254740992,
+            9007199254740992
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4503599627370496,
+            4503599627370496,
+            4503599627370497
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1152921504606847000,
+            1152921504606848000,
+            1152921504606849000,
+            1152921504606850000
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            -1.7976931348623157e+308,
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            5e-324,
+            1e-323
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "$bigint": "1"
+            },
+            {
+              "$bigint": "2"
+            },
+            {
+              "$bigint": "3"
+            }
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "3.51.0"
+    },
+    {
+      "call": "range(start, end, step)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "es-toolkit",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740989,
+            9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -9007199254740991,
+            -9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740991,
+            9007199254740992,
+            9007199254740992
+          ]
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1152921504606847000,
+            1152921504606848000,
+            1152921504606849000,
+            1152921504606850000
+          ]
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.52.0"
+    },
+    {
+      "call": "_.range(start, end, step)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "lodash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            -1,
+            -2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "$number": "-0"
+            },
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            0.75,
+            0.5,
+            0.25
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.30000000000000004,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.7999999999999999,
+            0.8999999999999999
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740989,
+            9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -9007199254740991,
+            -9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740991,
+            9007199254740992,
+            9007199254740992
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4503599627370496,
+            4503599627370496,
+            4503599627370496,
+            4503599627370496
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1152921504606847000,
+            1152921504606848000,
+            1152921504606849000,
+            1152921504606850000
+          ]
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            5e-324,
+            1e-323
+          ]
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.18.1"
+    },
+    {
+      "call": "list(start, end, undefined, step)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "radash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "$number": "-0"
+            },
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2.5,
+            4
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.30000000000000004,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.7999999999999999,
+            0.8999999999999999,
+            0.9999999999999999
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740989,
+            9007199254740990,
+            9007199254740991
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -9007199254740991,
+            -9007199254740990,
+            -9007199254740989
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1152921504606847000,
+            1152921504606848000,
+            1152921504606849000,
+            1152921504606850000,
+            1152921504606851000
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            -1.7976931348623157e+308,
+            0,
+            1.7976931348623157e+308
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            5e-324,
+            1e-323,
+            1.5e-323
+          ]
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "12.1.1"
+    },
+    {
+      "call": "range(from, to)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "Ramda",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740989,
+            9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -9007199254740991,
+            -9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740991,
+            9007199254740992,
+            9007199254740992
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "0.32.0"
+    },
+    {
+      "call": "range(start, { end, step })",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "remeda",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "$number": "-0"
+            },
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            0.75,
+            0.5,
+            0.25
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.30000000000000004,
+            0.4,
+            0.5,
+            0.6000000000000001,
+            0.7000000000000001,
+            0.8,
+            0.9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740989,
+            9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -9007199254740991,
+            -9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740991,
+            9007199254740992,
+            9007199254740992
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4503599627370496,
+            4503599627370496,
+            4503599627370497,
+            4503599627370498
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1152921504606847000,
+            1152921504606848000,
+            1152921504606849000,
+            1152921504606850000
+          ]
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            5e-324,
+            1e-323
+          ]
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.51.0"
+    },
+    {
+      "call": "_.range(start, stop, step)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "Underscore",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            -1,
+            -2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "$number": "-0"
+            },
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            0.75,
+            0.5,
+            0.25
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.30000000000000004,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.7999999999999999,
+            0.8999999999999999
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740989,
+            9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -9007199254740991,
+            -9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740991,
+            9007199254740992,
+            9007199254740992
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4503599627370496,
+            4503599627370496,
+            4503599627370496,
+            4503599627370496
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1152921504606847000,
+            1152921504606848000,
+            1152921504606849000,
+            1152921504606850000
+          ]
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            5e-324,
+            1e-323
+          ]
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            "01",
+            "011",
+            "0111"
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.13.8"
+    },
+    {
+      "call": "for i := range end",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.2"
+    },
+    {
+      "call": "(start..<end).step(step)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Groovy",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "6.0.0"
+    },
+    {
+      "call": "IntStream.range(start, end).boxed().toList()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "(start until end step step).toList()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Kotlin",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "2.4.21"
+    },
+    {
+      "call": "list(range(start, stop, step))",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740989,
+            9007199254740990
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -9007199254740991,
+            -9007199254740990
+          ]
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "generate_series(start, stop, step)",
+      "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
+      "inputs": "sha256:af37e2a0c74600a0cd25bcd6a71c2a28f6013a5a427a1ec2c77fe1b49d7b3ec5",
+      "locale": "C.UTF-8",
+      "name": "PostgreSQL",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2.5,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            0.75,
+            0.5,
+            0.25,
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740989,
+            9007199254740990,
+            9007199254740991
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -9007199254740991,
+            -9007199254740990,
+            -9007199254740989
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740991,
+            {
+              "$bigint": "9007199254740992"
+            },
+            {
+              "$bigint": "9007199254740993"
+            },
+            {
+              "$bigint": "9007199254740994"
+            }
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4503599627370496,
+            "4503599627370496.5",
+            4503599627370497,
+            "4503599627370497.5",
+            4503599627370498
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "$bigint": "1152921504606846976"
+            },
+            {
+              "$bigint": "1152921504606848000"
+            },
+            {
+              "$bigint": "1152921504606849024"
+            },
+            {
+              "$bigint": "1152921504606850048"
+            },
+            {
+              "$bigint": "1152921504606851072"
+            }
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "$bigint": "-179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368"
+            },
+            0,
+            {
+              "$bigint": "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368"
+            }
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            5e-324,
+            1e-323,
+            1.5e-323
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "postgres-adapter",
+      "tier": 3,
+      "version": "18.6"
+    },
+    {
+      "call": "seq first increment last",
+      "image": "debian:trixie-20261005-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f",
+      "inputs": "sha256:e03a7e98b5ea27845fa265c13700e3ea8a933cfb9f4d98ef38f01687b8fd9bc1",
+      "locale": "C.UTF-8",
+      "name": "GNU seq",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -2,
+            -1,
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "$number": "-0"
+            },
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2.5,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            0.75,
+            0.5,
+            0.25,
+            0
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            1
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            3
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740989,
+            9007199254740990,
+            9007199254740991
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            -9007199254740991,
+            -9007199254740990,
+            -9007199254740989
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            9007199254740991,
+            {
+              "$bigint": "9007199254740992"
+            },
+            {
+              "$bigint": "9007199254740993"
+            },
+            {
+              "$bigint": "9007199254740994"
+            }
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            4503599627370496,
+            4503599627370496,
+            4503599627370497,
+            4503599627370498,
+            4503599627370498
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "$bigint": "1152921504606846976"
+            },
+            {
+              "$bigint": "1152921504606848000"
+            },
+            {
+              "$bigint": "1152921504606849024"
+            },
+            {
+              "$bigint": "1152921504606850048"
+            },
+            {
+              "$bigint": "1152921504606851072"
+            }
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "$bigint": "-179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368"
+            },
+            0,
+            {
+              "$bigint": "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368"
+            }
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            0,
+            5e-324,
+            1e-323,
+            1.5e-323
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "shell",
+      "tier": 4,
+      "version": "9.7-3"
+    }
+  ],
+  "function": "range"
+}

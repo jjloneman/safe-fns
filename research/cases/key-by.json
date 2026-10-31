@@ -1,0 +1,699 @@
+{
+  "cases": [
+    {
+      "args": [
+        [
+          {
+            "id": "a",
+            "n": 1
+          },
+          {
+            "id": "b",
+            "n": 2
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a",
+            "n": 1
+          },
+          "b": {
+            "id": "b",
+            "n": 2
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a",
+            "n": 1
+          },
+          {
+            "id": "a",
+            "n": 2
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a",
+            "n": 2
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "1": {
+            "id": 1
+          },
+          "2": {
+            "id": 2
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": 1,
+            "n": 1
+          },
+          {
+            "id": "1",
+            "n": 2
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "1": {
+            "id": "1",
+            "n": 2
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": {
+              "$number": "-0"
+            }
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "0": {
+            "id": {
+              "$number": "-0"
+            }
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": 1.5
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "1.5": {
+            "id": 1.5
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a"
+          },
+          {
+            "n": 1
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a"
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a"
+          },
+          {
+            "id": {
+              "$undefined": true
+            }
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a"
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a"
+          },
+          {
+            "id": null
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a"
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a"
+          },
+          {
+            "id": true
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a"
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a"
+          },
+          {
+            "id": {
+              "b": 1
+            }
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a"
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a"
+          },
+          {
+            "id": ["b"]
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a"
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a"
+          },
+          {
+            "id": {
+              "$number": "NaN"
+            }
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a"
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a"
+          },
+          {
+            "id": {
+              "$number": "Infinity"
+            }
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a"
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "__proto__"
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "__proto__": {
+            "id": "__proto__"
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "toString"
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "toString": {
+            "id": "toString"
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          null,
+          {
+            "id": "a"
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a"
+          }
+        }
+      }
+    },
+    {
+      "args": [["ab", "cde"], "length"],
+      "expected": {
+        "null-prototype": {}
+      }
+    },
+    {
+      "args": [[], "id"],
+      "expected": {
+        "null-prototype": {}
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "id": "a"
+          }
+        },
+        "id"
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null, "id"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        },
+        "id"
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        },
+        "id"
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "$js": "an object with a throwing getter"
+          }
+        ],
+        "trap"
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "$js": "a proxy whose get trap throws"
+          }
+        ],
+        "id"
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a",
+            "n": 1
+          },
+          {
+            "id": "b",
+            "n": 2
+          }
+        ],
+        {
+          "$js": "a key function reading id"
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a",
+            "n": 1
+          },
+          "b": {
+            "id": "b",
+            "n": 2
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a",
+            "n": 1
+          },
+          {
+            "id": "b",
+            "n": 2
+          }
+        ],
+        {
+          "$js": "a function that throws"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "id": "a"
+          }
+        },
+        "id",
+        {
+          "fallback": {}
+        }
+      ],
+      "expected": {}
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a",
+            "n": 1
+          },
+          {
+            "id": "a",
+            "n": 2
+          }
+        ],
+        "id",
+        {
+          "duplicates": "first"
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a",
+            "n": 1
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a",
+            "n": 1
+          },
+          {
+            "id": "a",
+            "n": 2
+          }
+        ],
+        "id",
+        {
+          "duplicates": "fallback"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a",
+            "n": 1
+          },
+          {
+            "id": "b",
+            "n": 2
+          }
+        ],
+        "id",
+        {
+          "duplicates": "fallback"
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a",
+            "n": 1
+          },
+          "b": {
+            "id": "b",
+            "n": 2
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a"
+          },
+          {
+            "n": 1
+          },
+          {
+            "id": null
+          },
+          {
+            "id": true
+          },
+          {
+            "id": {
+              "$number": "NaN"
+            }
+          },
+          {
+            "id": {
+              "b": 1
+            }
+          }
+        ],
+        "id",
+        {
+          "invalidKeys": "asString"
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": {
+            "id": "a"
+          },
+          "NaN": {
+            "id": {
+              "$number": "NaN"
+            }
+          },
+          "null": {
+            "id": null
+          },
+          "true": {
+            "id": true
+          },
+          "undefined": {
+            "n": 1
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a"
+          },
+          {
+            "id": null
+          }
+        ],
+        "id",
+        {
+          "invalidKeys": "fallback"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a",
+            "n": 1
+          },
+          {
+            "id": "b",
+            "n": 2
+          }
+        ],
+        "id",
+        {
+          "mapValue": {
+            "$js": "a value function reading n"
+          }
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": 1,
+          "b": 2
+        }
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "id": "a",
+            "n": 1
+          },
+          {
+            "id": "b",
+            "n": 2
+          }
+        ],
+        "id",
+        {
+          "mapValue": {
+            "$js": "a function that throws"
+          }
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "keyBy"
+}

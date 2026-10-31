@@ -19,6 +19,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /** Java's standard library. */
 final class JavaTools {
@@ -95,6 +97,23 @@ final class JavaTools {
         )
       ),
       entry(
+        "keyBy",
+        List.of(
+          Probe.listKey(
+            "items.stream().collect(toMap(item -> item.get(key), item -> item))",
+            (items, key) ->
+              items
+                .stream()
+                .collect(
+                  Collectors.toMap(
+                    item -> ((Map<?, ?>) item).get(key),
+                    item -> item
+                  )
+                )
+          )
+        )
+      ),
+      entry(
         "lowerFirst",
         List.of(
           Probe.typed(
@@ -113,6 +132,15 @@ final class JavaTools {
                 text.toLowerCase(Locale.forLanguageTag(localeOf(args)))
               )
           )
+        )
+      ),
+      entry(
+        "range",
+        List.of(
+          Probe.intRange(
+            "IntStream.range(start, end).boxed().toList()",
+            (start, end, step) -> IntStream.range(start, end).boxed().toList()
+          ).pair()
         )
       ),
       entry(

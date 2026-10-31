@@ -325,7 +325,7 @@
     {
       "call": "stringify(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "fast-json-stable-stringify",
       "outcomes": [
@@ -475,7 +475,7 @@
     {
       "call": "safeStringify(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "fast-safe-stringify",
       "outcomes": [
@@ -756,7 +756,7 @@
     {
       "call": "JSON.stringify(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -906,7 +906,7 @@
     {
       "call": "stringify(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "json-stringify-safe",
       "outcomes": [
@@ -1056,7 +1056,7 @@
     {
       "call": "stringify(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "safe-stable-stringify",
       "outcomes": [

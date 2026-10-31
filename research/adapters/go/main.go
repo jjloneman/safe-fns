@@ -50,6 +50,10 @@ var CODEC_PROBE = Probe{
 	Run:  func(args []any) (any, error) { return args[0], nil },
 }
 
+// MAX_RANGE_LENGTH is the most items the `range` probe builds, so a long
+// span is `n/a` rather than a slow or out-of-memory run.
+const MAX_RANGE_LENGTH = 10_000
+
 // SENTINEL_ERRORS are the errors named by sentinel rather than by type.
 var SENTINEL_ERRORS = []sentinelError{
 	{err: strconv.ErrRange, name: "strconv.ErrRange"},
@@ -101,6 +105,17 @@ func hasLength(args []any) bool {
 	_, isMeasurable := lengthOf(args[0])
 
 	return isMeasurable
+}
+
+// isBoundedCount accepts a lone integer short enough to range over.
+func isBoundedCount(args []any) bool {
+	if len(args) != 1 {
+		return false
+	}
+
+	count, isInteger := args[0].(int64)
+
+	return isInteger && count <= MAX_RANGE_LENGTH
 }
 
 // isLoneString accepts exactly one argument, a string.
@@ -307,6 +322,21 @@ func tools() []Tool {
 						Call:    "string(unicode.ToLower(first)) + rest",
 						Run: func(args []any) (any, error) {
 							return mapFirstRune(args[0].(string), unicode.ToLower), nil
+						},
+					},
+				},
+				"range": {
+					{
+						Accepts: isBoundedCount,
+						Call:    "for i := range end",
+						Run: func(args []any) (any, error) {
+							items := []any{}
+
+							for i := range args[0].(int64) {
+								items = append(items, i)
+							}
+
+							return items, nil
 						},
 					},
 				},
