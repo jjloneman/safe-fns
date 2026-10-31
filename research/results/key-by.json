@@ -1,0 +1,4824 @@
+{
+  "cases": [
+    [
+      [
+        {
+          "id": "a",
+          "n": 1
+        },
+        {
+          "id": "b",
+          "n": 2
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "a",
+          "n": 1
+        },
+        {
+          "id": "a",
+          "n": 2
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": 1
+        },
+        {
+          "id": 2
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": 1,
+          "n": 1
+        },
+        {
+          "id": "1",
+          "n": 2
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": {
+            "$number": "-0"
+          }
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": 1.5
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "a"
+        },
+        {
+          "n": 1
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "a"
+        },
+        {
+          "id": {
+            "$undefined": true
+          }
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "a"
+        },
+        {
+          "id": null
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "a"
+        },
+        {
+          "id": true
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "a"
+        },
+        {
+          "id": {
+            "b": 1
+          }
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "a"
+        },
+        {
+          "id": [
+            "b"
+          ]
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "a"
+        },
+        {
+          "id": {
+            "$number": "NaN"
+          }
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "a"
+        },
+        {
+          "id": {
+            "$number": "Infinity"
+          }
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "__proto__"
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "toString"
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        null,
+        {
+          "id": "a"
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        "ab",
+        "cde"
+      ],
+      "length"
+    ],
+    [
+      [],
+      "id"
+    ],
+    [
+      {
+        "a": {
+          "id": "a"
+        }
+      },
+      "id"
+    ],
+    [
+      null,
+      "id"
+    ],
+    [
+      {
+        "$undefined": true
+      },
+      "id"
+    ],
+    [
+      {
+        "$js": "a revoked proxy"
+      },
+      "id"
+    ],
+    [
+      [
+        {
+          "$js": "an object with a throwing getter"
+        }
+      ],
+      "trap"
+    ],
+    [
+      [
+        {
+          "$js": "a proxy whose get trap throws"
+        }
+      ],
+      "id"
+    ],
+    [
+      [
+        {
+          "id": "a",
+          "n": 1
+        },
+        {
+          "id": "b",
+          "n": 2
+        }
+      ],
+      {
+        "$js": "a key function reading id"
+      }
+    ],
+    [
+      [
+        {
+          "id": "a",
+          "n": 1
+        },
+        {
+          "id": "b",
+          "n": 2
+        }
+      ],
+      {
+        "$js": "a function that throws"
+      }
+    ],
+    [
+      {
+        "a": {
+          "id": "a"
+        }
+      },
+      "id",
+      {
+        "fallback": {}
+      }
+    ],
+    [
+      [
+        {
+          "id": "a",
+          "n": 1
+        },
+        {
+          "id": "a",
+          "n": 2
+        }
+      ],
+      "id",
+      {
+        "duplicates": "first"
+      }
+    ],
+    [
+      [
+        {
+          "id": "a",
+          "n": 1
+        },
+        {
+          "id": "a",
+          "n": 2
+        }
+      ],
+      "id",
+      {
+        "duplicates": "fallback"
+      }
+    ],
+    [
+      [
+        {
+          "id": "a",
+          "n": 1
+        },
+        {
+          "id": "b",
+          "n": 2
+        }
+      ],
+      "id",
+      {
+        "duplicates": "fallback"
+      }
+    ],
+    [
+      [
+        {
+          "id": "a"
+        },
+        {
+          "n": 1
+        },
+        {
+          "id": null
+        },
+        {
+          "id": true
+        },
+        {
+          "id": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "id": {
+            "b": 1
+          }
+        }
+      ],
+      "id",
+      {
+        "invalidKeys": "asString"
+      }
+    ],
+    [
+      [
+        {
+          "id": "a"
+        },
+        {
+          "id": null
+        }
+      ],
+      "id",
+      {
+        "invalidKeys": "fallback"
+      }
+    ],
+    [
+      [
+        {
+          "id": "a",
+          "n": 1
+        },
+        {
+          "id": "b",
+          "n": 2
+        }
+      ],
+      "id",
+      {
+        "mapValue": {
+          "$js": "a value function reading n"
+        }
+      }
+    ],
+    [
+      [
+        {
+          "id": "a",
+          "n": 1
+        },
+        {
+          "id": "b",
+          "n": 2
+        }
+      ],
+      "id",
+      {
+        "mapValue": {
+          "$js": "a function that throws"
+        }
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "keyBy",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a",
+                "n": 1
+              },
+              "b": {
+                "id": "b",
+                "n": 2
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a",
+                "n": 2
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "1": {
+                "id": 1
+              },
+              "2": {
+                "id": 2
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "1": {
+                "id": "1",
+                "n": 2
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "0": {
+                "id": {
+                  "$number": "-0"
+                }
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "1.5": {
+                "id": 1.5
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "__proto__": {
+                "id": "__proto__"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "toString": {
+                "id": "toString"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {}
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {}
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a",
+                "n": 1
+              },
+              "b": {
+                "id": "b",
+                "n": 2
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a",
+                "n": 1
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": {
+                "id": "a",
+                "n": 1
+              },
+              "b": {
+                "id": "b",
+                "n": 2
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "NaN": {
+                "id": {
+                  "$number": "NaN"
+                }
+              },
+              "a": {
+                "id": "a"
+              },
+              "null": {
+                "id": null
+              },
+              "true": {
+                "id": true
+              },
+              "undefined": {
+                "n": 1
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": 1,
+              "b": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "keyBy(items, getKey)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "es-toolkit",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": 1
+            },
+            "2": {
+              "id": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": "1",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "0": {
+              "id": {
+                "$number": "-0"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1.5": {
+              "id": 1.5
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "n": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "id": {
+                "$undefined": true
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "null": {
+              "id": null
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "true": {
+              "id": true
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "[object Object]": {
+              "id": {
+                "b": 1
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "b": {
+              "id": [
+                "b"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "NaN": {
+              "id": {
+                "$number": "NaN"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Infinity": {
+              "id": {
+                "$number": "Infinity"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Object]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "2": "ab",
+            "3": "cde"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.52.0"
+    },
+    {
+      "call": "new Map(items.map((item) => [getKey(item), item]))",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a",
+                  "n": 1
+                }
+              ],
+              [
+                "b",
+                {
+                  "id": "b",
+                  "n": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a",
+                  "n": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1,
+                {
+                  "id": 1
+                }
+              ],
+              [
+                2,
+                {
+                  "id": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1,
+                {
+                  "id": 1,
+                  "n": 1
+                }
+              ],
+              [
+                "1",
+                {
+                  "id": "1",
+                  "n": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                0,
+                {
+                  "id": {
+                    "$number": "-0"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1.5,
+                {
+                  "id": 1.5
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "$undefined": true
+                },
+                {
+                  "n": 1
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "$undefined": true
+                },
+                {
+                  "id": {
+                    "$undefined": true
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                null,
+                {
+                  "id": null
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                true,
+                {
+                  "id": true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "b": 1
+                },
+                {
+                  "id": {
+                    "$repr": "Symbol(repeat)"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                [
+                  "b"
+                ],
+                {
+                  "id": {
+                    "$repr": "Symbol(repeat)"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "$number": "NaN"
+                },
+                {
+                  "id": {
+                    "$number": "NaN"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "$number": "Infinity"
+                },
+                {
+                  "id": {
+                    "$number": "Infinity"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "__proto__",
+                {
+                  "id": "__proto__"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "toString",
+                {
+                  "id": "toString"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                2,
+                "ab"
+              ],
+              [
+                3,
+                "cde"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": []
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a",
+                  "n": 1
+                }
+              ],
+              [
+                "b",
+                {
+                  "id": "b",
+                  "n": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "Object.fromEntries(items.map((item) => [getKey(item), item]))",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": 1
+            },
+            "2": {
+              "id": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": "1",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "0": {
+              "id": {
+                "$number": "-0"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1.5": {
+              "id": 1.5
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "n": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "id": {
+                "$undefined": true
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "null": {
+              "id": null
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "true": {
+              "id": true
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "[object Object]": {
+              "id": {
+                "b": 1
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "b": {
+              "id": [
+                "b"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "NaN": {
+              "id": {
+                "$number": "NaN"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Infinity": {
+              "id": {
+                "$number": "Infinity"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "id": "__proto__"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "2": "ab",
+            "3": "cde"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "Object.groupBy(items, getKey)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                {
+                  "id": "a",
+                  "n": 1
+                }
+              ],
+              "b": [
+                {
+                  "id": "b",
+                  "n": 2
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                {
+                  "id": "a",
+                  "n": 1
+                },
+                {
+                  "id": "a",
+                  "n": 2
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "1": [
+                {
+                  "id": 1
+                }
+              ],
+              "2": [
+                {
+                  "id": 2
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "1": [
+                {
+                  "id": 1,
+                  "n": 1
+                },
+                {
+                  "id": "1",
+                  "n": 2
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "0": [
+                {
+                  "id": {
+                    "$number": "-0"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "1.5": [
+                {
+                  "id": 1.5
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                {
+                  "id": "a"
+                }
+              ],
+              "undefined": [
+                {
+                  "n": 1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                {
+                  "id": "a"
+                }
+              ],
+              "undefined": [
+                {
+                  "id": {
+                    "$undefined": true
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                {
+                  "id": "a"
+                }
+              ],
+              "null": [
+                {
+                  "id": null
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                {
+                  "id": "a"
+                }
+              ],
+              "true": [
+                {
+                  "id": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "[object Object]": [
+                {
+                  "id": {
+                    "b": 1
+                  }
+                }
+              ],
+              "a": [
+                {
+                  "id": "a"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                {
+                  "id": "a"
+                }
+              ],
+              "b": [
+                {
+                  "id": [
+                    "b"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "NaN": [
+                {
+                  "id": {
+                    "$number": "NaN"
+                  }
+                }
+              ],
+              "a": [
+                {
+                  "id": "a"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "Infinity": [
+                {
+                  "id": {
+                    "$number": "Infinity"
+                  }
+                }
+              ],
+              "a": [
+                {
+                  "id": "a"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "__proto__": [
+                {
+                  "id": "__proto__"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "toString": [
+                {
+                  "id": "toString"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "2": [
+                "ab"
+              ],
+              "3": [
+                "cde"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {}
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                {
+                  "id": "a",
+                  "n": 1
+                }
+              ],
+              "b": [
+                {
+                  "id": "b",
+                  "n": 2
+                }
+              ]
+            }
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "_.keyBy(items, key)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "lodash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": 1
+            },
+            "2": {
+              "id": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": "1",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "0": {
+              "id": {
+                "$number": "-0"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1.5": {
+              "id": 1.5
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "n": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "id": {
+                "$undefined": true
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "null": {
+              "id": null
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "true": {
+              "id": true
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "[object Object]": {
+              "id": {
+                "b": 1
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "b": {
+              "id": [
+                "b"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "NaN": {
+              "id": {
+                "$number": "NaN"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Infinity": {
+              "id": {
+                "$number": "Infinity"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "id": "__proto__"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": null
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "2": "ab",
+            "3": "cde"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.18.1"
+    },
+    {
+      "call": "objectify(items, getKey)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "radash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": 1
+            },
+            "2": {
+              "id": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": "1",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "0": {
+              "id": {
+                "$number": "-0"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1.5": {
+              "id": 1.5
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "n": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "id": {
+                "$undefined": true
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "null": {
+              "id": null
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "true": {
+              "id": true
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "[object Object]": {
+              "id": {
+                "b": 1
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "b": {
+              "id": [
+                "b"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "NaN": {
+              "id": {
+                "$number": "NaN"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Infinity": {
+              "id": {
+                "$number": "Infinity"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Object]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "2": "ab",
+            "3": "cde"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "12.1.1"
+    },
+    {
+      "call": "indexBy(items, getKey)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "remeda",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": 1
+            },
+            "2": {
+              "id": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": "1",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "0": {
+              "id": {
+                "$number": "-0"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1.5": {
+              "id": 1.5
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "n": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "id": {
+                "$undefined": true
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "null": {
+              "id": null
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "true": {
+              "id": true
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "[object Object]": {
+              "id": {
+                "b": 1
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "b": {
+              "id": [
+                "b"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "NaN": {
+              "id": {
+                "$number": "NaN"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Infinity": {
+              "id": {
+                "$number": "Infinity"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Object]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "2": "ab",
+            "3": "cde"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.51.0"
+    },
+    {
+      "call": "_.indexBy(items, key)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
+      "locale": "en-US",
+      "name": "Underscore",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": 1
+            },
+            "2": {
+              "id": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": "1",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "0": {
+              "id": {
+                "$number": "-0"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1.5": {
+              "id": 1.5
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "n": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": {
+              "id": {
+                "$undefined": true
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "null": {
+              "id": null
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "true": {
+              "id": true
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "[object Object]": {
+              "id": {
+                "b": 1
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "b": {
+              "id": [
+                "b"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "NaN": {
+              "id": {
+                "$number": "NaN"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Infinity": {
+              "id": {
+                "$number": "Infinity"
+              }
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Object]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "undefined": null
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "2": "ab",
+            "3": "cde"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.13.8"
+    },
+    {
+      "call": "items.collectEntries { item -> [(item[key]): item] }",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Groovy",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1,
+                {
+                  "id": 1
+                }
+              ],
+              [
+                2,
+                {
+                  "id": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1,
+                {
+                  "id": 1,
+                  "n": 1
+                }
+              ],
+              [
+                "1",
+                {
+                  "id": "1",
+                  "n": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                {
+                  "$number": "-0"
+                },
+                {
+                  "id": {
+                    "$number": "-0"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1.5,
+                {
+                  "id": 1.5
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                null,
+                {
+                  "n": 1
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                null,
+                {
+                  "id": null
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                true,
+                {
+                  "id": true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "b": 1
+                },
+                {
+                  "id": {
+                    "b": 1
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                [
+                  "b"
+                ],
+                {
+                  "id": [
+                    "b"
+                  ]
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "$number": "NaN"
+                },
+                {
+                  "id": {
+                    "$number": "NaN"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "$number": "Infinity"
+                },
+                {
+                  "id": {
+                    "$number": "Infinity"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "id": "__proto__"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "error": "NullPointerException",
+          "kind": "error"
+        },
+        {
+          "error": "MissingPropertyException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "6.0.0"
+    },
+    {
+      "call": "items.stream().collect(toMap(item -> item.get(key), item -> item))",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Java",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "error": "IllegalStateException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1,
+                {
+                  "id": 1
+                }
+              ],
+              [
+                2,
+                {
+                  "id": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1,
+                {
+                  "id": 1,
+                  "n": 1
+                }
+              ],
+              [
+                "1",
+                {
+                  "id": "1",
+                  "n": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                {
+                  "$number": "-0"
+                },
+                {
+                  "id": {
+                    "$number": "-0"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1.5,
+                {
+                  "id": 1.5
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                null,
+                {
+                  "n": 1
+                }
+              ],
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                null,
+                {
+                  "id": null
+                }
+              ],
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                true,
+                {
+                  "id": true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "b": 1
+                },
+                {
+                  "id": {
+                    "b": 1
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                [
+                  "b"
+                ],
+                {
+                  "id": [
+                    "b"
+                  ]
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "$number": "NaN"
+                },
+                {
+                  "id": {
+                    "$number": "NaN"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                {
+                  "$number": "Infinity"
+                },
+                {
+                  "id": {
+                    "$number": "Infinity"
+                  }
+                }
+              ],
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "id": "__proto__"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "error": "NullPointerException",
+          "kind": "error"
+        },
+        {
+          "error": "ClassCastException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "25.0.4.1+1-LTS"
+    },
+    {
+      "call": "items.associateBy { it[key] }",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Kotlin",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1,
+                {
+                  "id": 1
+                }
+              ],
+              [
+                2,
+                {
+                  "id": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1,
+                {
+                  "id": 1,
+                  "n": 1
+                }
+              ],
+              [
+                "1",
+                {
+                  "id": "1",
+                  "n": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                {
+                  "$number": "-0"
+                },
+                {
+                  "id": {
+                    "$number": "-0"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1.5,
+                {
+                  "id": 1.5
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                null,
+                {
+                  "n": 1
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                null,
+                {
+                  "id": null
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                true,
+                {
+                  "id": true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "b": 1
+                },
+                {
+                  "id": {
+                    "b": 1
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                [
+                  "b"
+                ],
+                {
+                  "id": [
+                    "b"
+                  ]
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "$number": "NaN"
+                },
+                {
+                  "id": {
+                    "$number": "NaN"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "$number": "Infinity"
+                },
+                {
+                  "id": {
+                    "$number": "Infinity"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "id": "__proto__"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "error": "NullPointerException",
+          "kind": "error"
+        },
+        {
+          "error": "ClassCastException",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "2.4.21"
+    },
+    {
+      "call": "{item[key]: item for item in items}",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1,
+                {
+                  "id": 1
+                }
+              ],
+              [
+                2,
+                {
+                  "id": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1,
+                {
+                  "id": 1,
+                  "n": 1
+                }
+              ],
+              [
+                "1",
+                {
+                  "id": "1",
+                  "n": 2
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                {
+                  "$number": "-0"
+                },
+                {
+                  "id": {
+                    "$number": "-0"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                1.5,
+                {
+                  "id": 1.5
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "error": "KeyError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                null,
+                {
+                  "id": null
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                true,
+                {
+                  "id": true
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "$number": "NaN"
+                },
+                {
+                  "id": {
+                    "$number": "NaN"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Map": [
+              [
+                "a",
+                {
+                  "id": "a"
+                }
+              ],
+              [
+                {
+                  "$number": "Infinity"
+                },
+                {
+                  "id": {
+                    "$number": "Infinity"
+                  }
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "id": "__proto__"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "SELECT jsonb_object_agg(item ->> ?, item) FROM jsonb_array_elements(CAST(? AS jsonb)) AS item",
+      "image": "postgres:18.6-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c",
+      "inputs": "sha256:af37e2a0c74600a0cd25bcd6a71c2a28f6013a5a427a1ec2c77fe1b49d7b3ec5",
+      "locale": "C.UTF-8",
+      "name": "PostgreSQL",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": 1
+            },
+            "2": {
+              "id": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": "1",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "0.0": {
+              "id": 0
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1.5": {
+              "id": 1.5
+            }
+          }
+        },
+        {
+          "error": "22023",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "22023",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "true": {
+              "id": true
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "{\"b\": 1}": {
+              "id": {
+                "b": 1
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "[\"b\"]": {
+              "id": [
+                "b"
+              ]
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "id": "__proto__"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "error": "22023",
+          "kind": "error"
+        },
+        {
+          "error": "22023",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "postgres-adapter",
+      "tier": 3,
+      "version": "18.6"
+    },
+    {
+      "call": "SELECT json_group_object(item.value ->> ?, json(item.value)) FROM json_each(?) AS item",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
+      "locale": "C.UTF-8",
+      "name": "SQLite",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 1
+            },
+            "b": {
+              "id": "b",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": 1
+            },
+            "2": {
+              "id": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": "1",
+              "n": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "0.0": {
+              "id": {
+                "$number": "-0"
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1.5": {
+              "id": 1.5
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":{\"id\":\"a\"},:{\"n\":1}}"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":{\"id\":\"a\"},:{\"id\":null}}"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": {
+              "id": true
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": {
+              "id": "a"
+            },
+            "{\"b\":1}": {
+              "id": {
+                "b": 1
+              }
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "[\"b\"]": {
+              "id": [
+                "b"
+              ]
+            },
+            "a": {
+              "id": "a"
+            }
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "id": "__proto__"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "toString": {
+              "id": "toString"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": "{:null,\"a\":{\"id\":\"a\"}}"
+        },
+        {
+          "error": "OperationalError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "sqlite",
+      "tier": 3,
+      "version": "3.40.1"
+    }
+  ],
+  "function": "keyBy"
+}

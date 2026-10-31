@@ -709,7 +709,7 @@
     {
       "call": "cloneDeep(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -1081,7 +1081,7 @@
     {
       "call": "copy(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "fast-copy",
       "outcomes": [
@@ -1426,7 +1426,7 @@
     {
       "call": "copyStrict(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "fast-copy",
       "outcomes": [
@@ -1965,7 +1965,7 @@
     {
       "call": "JSON.parse(JSON.stringify(value))",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -2216,7 +2216,7 @@
     {
       "call": "structuredClone(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -2559,7 +2559,7 @@
     {
       "call": "klona(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "klona",
       "outcomes": [
@@ -2884,7 +2884,7 @@
     {
       "call": "klona(value) from \"klona/full\"",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "klona",
       "outcomes": [
@@ -3221,7 +3221,7 @@
     {
       "call": "_.cloneDeep(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -3554,7 +3554,7 @@
     {
       "call": "clone(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "Ramda",
       "outcomes": [
@@ -3876,7 +3876,7 @@
     {
       "call": "clone(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "remeda",
       "outcomes": [
@@ -4228,7 +4228,7 @@
     {
       "call": "rfdc()(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "rfdc",
       "outcomes": [
@@ -4528,7 +4528,7 @@
     {
       "call": "rfdc({ circles: true })(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:652c0c23da4d6054b206b47ce60210da927776f235b88344753027a28fe4031a",
+      "inputs": "sha256:71e4c02f1450576d3e1bff7e4b185874a0454d060d8750171927343c363aedee",
       "locale": "en-US",
       "name": "rfdc",
       "outcomes": [
