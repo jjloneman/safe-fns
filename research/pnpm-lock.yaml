@@ -181,6 +181,9 @@ importers:
       canonicalize:
         specifier: 5.1.0
         version: 5.1.0
+      core-js-pure:
+        specifier: 3.51.0
+        version: 3.51.0
       csv-parse:
         specifier: 7.0.3
         version: 7.0.3
@@ -193,6 +196,12 @@ importers:
       decode-uri-component:
         specifier: 0.5.0
         version: 0.5.0
+      deepmerge:
+        specifier: 4.3.1
+        version: 4.3.1
+      defu:
+        specifier: 6.1.7
+        version: 6.1.7
       dequal:
         specifier: 2.0.3
         version: 2.0.3
@@ -477,6 +486,9 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
+  core-js-pure@3.51.0:
+    resolution: {integrity: sha512-NE4SFDJ+qzQeqHG2vVSNwopzS6zZNPYJ5kinIqs+OofTqGzOmICgT89E/yvS9XY7rwb3eU1utWXTJ9nVFqv74A==}
+
   css-tree@3.2.1:
     resolution: {integrity: sha512-X7sjQzceUhu1u7Y/ylrRZFU2FS6LRiFVp6rKLPg23y3x3c3DOKAwuXGDp+PAGjh6CSnCjYeAul8pcT8bAl+lSA==}
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0}
@@ -500,6 +512,13 @@ packages:
   decode-uri-component@0.5.0:
     resolution: {integrity: sha512-1BiQVoK8C9gUbQU6NzAtO/tkz2qOFpEObMWpcFvhx4fYnj4Oc5yzaJN/LD36ihkVUdXyh5ZekzX+yM+ty/SrPg==}
     engines: {node: '>=14.16'}
+
+  deepmerge@4.3.1:
+    resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
+    engines: {node: '>=0.10.0'}
+
+  defu@6.1.7:
+    resolution: {integrity: sha512-7z22QmUWiQ/2d0KkdYmANbRUVABpZ9SNYyH5vx6PZ+nE5bcC0l7uFvEfHlyld/HcGBFTL536ClDt3DEcSlEJAQ==}
 
   dequal@2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
@@ -877,6 +896,8 @@ snapshots:
 
   canonicalize@5.1.0: {}
 
+  core-js-pure@3.51.0: {}
+
   css-tree@3.2.1:
     dependencies:
       mdn-data: 2.27.1
@@ -898,6 +919,10 @@ snapshots:
   decimal.js@10.6.0: {}
 
   decode-uri-component@0.5.0: {}
+
+  deepmerge@4.3.1: {}
+
+  defu@6.1.7: {}
 
   dequal@2.0.3: {}
 

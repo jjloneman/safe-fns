@@ -2,10 +2,10 @@
   "compilerOptions": {
     /*
      * The adapters run only on the pinned Node image, which has
-     * `Uint8Array.fromBase64` and `toBase64`, and `Error.isError`; the
-     * package itself stays on ES2022.
+     * `Uint8Array.fromBase64` and `toBase64`, `Error.isError`, and
+     * `Object.groupBy`; the package itself stays on ES2022.
      */
-    "lib": ["ES2022", "esnext.error", "esnext.typedarrays"]
+    "lib": ["ES2022", "es2024.object", "esnext.error", "esnext.typedarrays"]
   },
   "exclude": [
     // AssemblyScript, checked by its own nested config against its own types.
