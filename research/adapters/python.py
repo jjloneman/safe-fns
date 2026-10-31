@@ -17,8 +17,10 @@ import unicodedata
 import warnings
 from base64 import b64decode, b64encode, urlsafe_b64decode
 from datetime import UTC, datetime
+from typing import cast
 from urllib.parse import quote, unquote, urljoin, urlsplit
 
+from range_case import MAX_RANGE_LENGTH, read_range_case
 from research_codec import Probe, Tool, run_adapter
 
 CODEC_PROBE: Probe = {
@@ -30,6 +32,20 @@ CODEC_PROBE: Probe = {
 
 VERSION = platform.python_version()
 """The Python that actually ran, reported with every column."""
+
+
+def are_a_list_and_key(*args: object) -> bool:
+    """Accept a list and a property name, and no options."""
+    return (
+        len(args) == 2
+        and isinstance(args[0], list)
+        and isinstance(args[1], str)
+    )
+
+
+def are_two_dicts(*args: object) -> bool:
+    """Accept exactly two dicts and no options."""
+    return len(args) == 2 and all(isinstance(arg, dict) for arg in args)
 
 
 def are_two_strings(*args: object) -> bool:
@@ -114,6 +130,13 @@ def current_tools() -> list[Tool]:
                         "run": copy.deepcopy,
                     }
                 ],
+                "deepMerge": [
+                    {
+                        "accepts": are_two_dicts,
+                        "call": "defaults | overrides",
+                        "run": lambda defaults, overrides: defaults | overrides,
+                    }
+                ],
                 "isDeepEqual": [
                     {
                         "accepts": are_two_values,
@@ -130,11 +153,29 @@ def current_tools() -> list[Tool]:
                 "isSafeEmpty": [
                     {"call": "not value", "run": lambda value: not value}
                 ],
+                "keyBy": [
+                    {
+                        "accepts": are_a_list_and_key,
+                        "call": "{item[key]: item for item in items}",
+                        "run": lambda items, key: spell_map(
+                            {item[key]: item for item in items}
+                        ),
+                    }
+                ],
                 "lowerFirst": [
                     {
                         "accepts": is_lone_string,
                         "call": "value[:1].lower() + value[1:]",
                         "run": lambda value: value[:1].lower() + value[1:],
+                    }
+                ],
+                "range": [
+                    {
+                        "accepts": is_short_range,
+                        "call": "list(range(start, stop, step))",
+                        "run": lambda *args: list(
+                            range(*range_arguments(*args))
+                        ),
                     }
                 ],
                 "safeDateToIsoString": [
@@ -289,6 +330,29 @@ def is_number(value: object, *_rest: object) -> bool:
     return isinstance(value, int | float) and not isinstance(value, bool)
 
 
+def is_short_range(*args: object) -> bool:
+    """Accept `[end]`, `[start, end]`, or `[start, end, {step}]`, if short.
+
+    `range` is lazy, but `list` builds every item, so a long span is `n/a`;
+    arguments `range` rejects are accepted, since it raises before building.
+    """
+    if (
+        read_range_case(
+            *args, has_end_form=True, option_keys=frozenset({"step"})
+        )
+        is None
+    ):
+        return False
+
+    try:
+        return len(range(*range_arguments(*args))) <= MAX_RANGE_LENGTH
+    except OverflowError:
+        # Longer than `sys.maxsize`: valid, so `list` would build it all.
+        return False
+    except (TypeError, ValueError):
+        return True
+
+
 def is_string(value: object, *_rest: object) -> bool:
     """Accept only a string first argument."""
     return isinstance(value, str)
@@ -317,6 +381,29 @@ def legacy_tools() -> list[Tool]:
             "version": VERSION,
         }
     ]
+
+
+def range_arguments(*args: object) -> list[object]:
+    """Spread a `range` case into `range`'s positional arguments."""
+    if len(args) < 3:
+        return list(args)
+
+    start, end, options = args
+    step = cast("dict[str, object]", options).get("step")
+
+    return [start, end] if step is None else [start, end, step]
+
+
+def spell_map(mapping: dict[object, object]) -> object:
+    """Spell a dict with a non-string key as `{"Map": [[key, value]]}`.
+
+    The codec writes only string keys, so such a dict would show as its type;
+    the Node adapter spells a JavaScript `Map` the same way.
+    """
+    if all(isinstance(key, str) for key in mapping):
+        return mapping
+
+    return {"Map": [[key, value] for key, value in mapping.items()]}
 
 
 if __name__ == "__main__":

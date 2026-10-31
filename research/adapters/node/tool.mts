@@ -119,6 +119,19 @@ const GETTER = Symbol("getter");
 /** What `markClone` writes for an array's missing index. */
 const HOLE = Symbol("hole");
 
+/** The first length `Array(n)` rejects with `RangeError`: 2^32. */
+const ARRAY_LENGTH_LIMIT = 2 ** 32;
+
+/**
+ * The most items a `range` probe may be asked to build.
+ *
+ * - `Array(n)` throws `RangeError` only past 2^32 - 1, so a tool that
+ *   allocates up front fills a shorter array as surely as one that pushes;
+ *   either way, a length near 2^29 crashes Node with an uncatchable
+ *   out-of-memory error.
+ */
+const MAX_RANGE_LENGTH = 10_000;
+
 /** What `markReferences` writes for an object it already copied elsewhere. */
 const REPEAT = Symbol("repeat");
 
@@ -141,6 +154,30 @@ export const UNBUILDABLE: unique symbol = Symbol("unbuildable");
 
 /** What `summarizeError` reports for a `message` whose getter throws. */
 const UNREADABLE_MESSAGE = Symbol("unreadable message");
+
+/** A numeric `range` case's bounds and step. */
+export type RangeSpan = {
+  /**
+   * Where the range ends.
+   *
+   * @example 10
+   */
+  end: number;
+
+  /**
+   * Where the range starts, `0` for a one-argument case.
+   *
+   * @example 0
+   */
+  start: number;
+
+  /**
+   * The step, `1` when the case gives none.
+   *
+   * @example 3
+   */
+  step: number;
+};
 
 /** A clone and the value it was made from, for `markClone`. */
 type CloneComparison = {
@@ -265,6 +302,67 @@ type OwnEntriesRead = {
   skippedKeys?: ReadonlySet<PropertyKey>;
 } & Pick<CloneDescription, "value" | "visit">;
 
+/** What `isBoundedRange` reads from a `range` case's check. */
+type RangeBoundCheck = Pick<RangeCaseCheck, "args" | "shouldBoundEveryCount">;
+
+/** A positional `range` function, and the case to call it with. */
+type RangeCall = {
+  /**
+   * The case's arguments.
+   *
+   * @example `[0, 10, { step: 3 }]`
+   */
+  args: readonly unknown[];
+
+  /**
+   * The function, called as `call(start, end, step)`.
+   *
+   * @example `lodash.range`
+   */
+  call: (...args: never[]) => unknown;
+};
+
+/** A `range` case, and the forms a call can express. */
+type RangeCaseCheck = {
+  /**
+   * The case's arguments.
+   *
+   * @example `[0, 10, { step: 3 }]`
+   */
+  args: readonly unknown[];
+
+  /**
+   * Whether the call has a one-argument `(end)` form.
+   *
+   * @example true
+   */
+  hasEndForm: boolean;
+
+  /**
+   * Whether the call takes the case's options object whole, so an unreadable
+   * one is the call's own input rather than a read the probe fails.
+   *
+   * @example true
+   */
+  hasOptionsParameter: boolean;
+
+  /**
+   * The option keys the call can express.
+   *
+   * @example `["step"]`
+   */
+  optionKeys: readonly string[];
+
+  /**
+   * Whether every long count is `n/a`, even one past the array limit, for a
+   * call that steps toward `end` with no length to fail on (`Iterator.range`
+   * is lazy, and radash's `list` loops).
+   *
+   * @example true
+   */
+  shouldBoundEveryCount: boolean;
+};
+
 /** An object, the path that reached it, and every object copied so far. */
 type ReferenceWalk = {
   /**
@@ -306,6 +404,18 @@ type ReferenceWalk = {
 export function callJsonParse(text: string): unknown {
   // eslint-disable-next-line no-restricted-properties -- the function under test
   return JSON.parse(text);
+}
+
+/**
+ * Call a positional `range` function with a case's arguments, spread as
+ * `rangeArguments` spreads them.
+ *
+ * @returns whatever the call returns.
+ */
+export function callWithRange({ args, call }: RangeCall): unknown {
+  const result: unknown = Reflect.apply(call, undefined, rangeArguments(args));
+
+  return result;
 }
 
 /**
@@ -377,6 +487,31 @@ export function hasOnlyOptions(
   );
 }
 
+/**
+ * Whether a `deepMerge` case is two values and `{ arrays: "concat" }`, for a
+ * call that concatenates arrays.
+ *
+ * @returns whether the probe can run the case.
+ */
+export function isConcatPair(args: readonly unknown[]): boolean {
+  const [, , options] = args;
+
+  if (args.length !== 3 || typeof options !== "object" || options === null) {
+    return false;
+  }
+
+  try {
+    return (
+      Object.keys(options).join() === "arrays" &&
+      "arrays" in options &&
+      options.arrays === "concat"
+    );
+  } catch {
+    // Options no call could read are `n/a`, not a crash of the whole run.
+    return false;
+  }
+}
+
 /** Accept exactly one argument, a string; other cases are `n/a`. */
 export function isLoneString(args: readonly unknown[]): boolean {
   return args.length === 1 && typeof args[0] === "string";
@@ -426,9 +561,48 @@ export function isPluralizeCaseOptions(
   );
 }
 
+/**
+ * Whether a `range` case fits a call and is short enough to build: `[end]`
+ * only if the call has that form, `[start, end]`, or `[start, end, options]`
+ * holding only `optionKeys`; never `[end, options]`.
+ *
+ * - An options object that can't be read (a revoked proxy, a throwing trap)
+ *   is `n/a` for a positional call, which never receives it, since the
+ *   probe's own read of `step` would throw first; a call that takes the
+ *   object whole runs it.
+ *
+ * - The span is bounded by `isBoundedRange`.
+ *
+ * @returns whether the probe can run the case.
+ */
+export function isRangeCase(check: RangeCaseCheck): boolean {
+  return hasRangeForm(check) && isBoundedRange(check);
+}
+
 /** Accept only a string first argument; other cases are `n/a`. */
 export function isString([value]: readonly unknown[]): boolean {
   return typeof value === "string";
+}
+
+/**
+ * Turn a `keyBy` case's key into the function a probe calls on each item.
+ *
+ * - A key function is called as it is; a property name `key` becomes
+ *   `(item) => item[key]`, the arrow a caller would write for a library that
+ *   takes only a function.
+ *
+ * @returns the function that reads an item's key.
+ */
+export function keyGetter(key: unknown): (item: unknown) => unknown {
+  if (typeof key === "function") {
+    return (item) => {
+      const itemKey: unknown = Reflect.apply(key, undefined, [item]);
+
+      return itemKey;
+    };
+  }
+
+  return (item) => (item as Record<PropertyKey, unknown>)[key as PropertyKey];
 }
 
 /**
@@ -455,6 +629,21 @@ export function markClone({ clone, source }: CloneComparison): unknown {
     sourceObjects: collectObjects(source),
     value: clone,
   });
+}
+
+/**
+ * Mark a `keyBy` result, showing its prototype and the items it holds.
+ *
+ * - Every tool shares the items it keys, so nothing is marked shared: an item
+ *   shows as its data, and a winning duplicate shows which item it is.
+ *
+ * - A null-prototype result is wrapped as `{ "null-prototype": { … } }`, as
+ *   `markClone` wraps one, and a `Map` is spelled out.
+ *
+ * @returns the marked result, safe to encode.
+ */
+export function markKeyed(value: unknown): unknown {
+  return markClone({ clone: value, source: [] });
 }
 
 /**
@@ -492,6 +681,56 @@ export function packageVersion(name: string): string {
     typeof manifest.version === "string"
     ? manifest.version
     : "unknown";
+}
+
+/**
+ * Spread a `range` case into a positional call's arguments: `[end]`,
+ * `[start, end]`, or `[start, end, step]`, reading `step` from the options.
+ *
+ * @returns the arguments, in the call's order.
+ * @throws whatever reading the options' `step` throws.
+ */
+export function rangeArguments(args: readonly unknown[]): unknown[] {
+  const [start, end, options] = args;
+
+  if (args.length < 3) {
+    return [...args];
+  }
+
+  return [start, end, (options as Record<string, unknown>).step];
+}
+
+/**
+ * Read a numeric `range` case as its start, end, and step, the way a call
+ * that counts would: a one-argument case starts at `0`, a missing step is
+ * `1`, and a bigint counts as its `Number`.
+ *
+ * @returns the three numbers, or `undefined` for a case whose arguments
+ *   aren't all numbers or whose options can't be read, which every tool
+ *   rejects before it loops.
+ */
+export function readRangeSpan(args: readonly unknown[]): RangeSpan | undefined {
+  let parts: unknown[];
+
+  try {
+    parts = rangeArguments(args);
+  } catch {
+    return undefined;
+  }
+
+  const [start, end, step = 1] = (
+    args.length === 1 ? [0, ...parts] : parts
+  ).map((value) => (typeof value === "bigint" ? Number(value) : value));
+
+  if (
+    typeof start !== "number" ||
+    typeof end !== "number" ||
+    typeof step !== "number"
+  ) {
+    return undefined;
+  }
+
+  return { end, start, step };
 }
 
 /**
@@ -711,6 +950,100 @@ function describeView({
     : description;
 }
 
+/**
+ * Whether a `range` case has a form the call takes, with readable options.
+ *
+ * @returns whether the case's arguments fit the call.
+ */
+function hasRangeForm({
+  args,
+  hasEndForm,
+  hasOptionsParameter,
+  optionKeys,
+}: Omit<RangeCaseCheck, "shouldBoundEveryCount">): boolean {
+  if (args.length === 1) {
+    return hasEndForm;
+  }
+
+  const [, end, options] = args;
+
+  if (args.length === 2) {
+    // `[end, options]` is safe-fns' own form; no other tool has it.
+    return end === null || typeof end !== "object";
+  }
+
+  if (
+    args.length !== 3 ||
+    optionKeys.length === 0 ||
+    typeof options !== "object" ||
+    options === null
+  ) {
+    return false;
+  }
+
+  try {
+    if (!Object.keys(options).every((key) => optionKeys.includes(key))) {
+      return false;
+    }
+
+    if (!hasOptionsParameter) {
+      // The probe spreads each key itself, a read a `get` trap can throw on.
+      for (const key of optionKeys) {
+        Reflect.get(options, key);
+      }
+    }
+
+    return true;
+  } catch {
+    // Only a call that takes the object whole ever receives it.
+    return hasOptionsParameter;
+  }
+}
+
+/**
+ * Whether a `range` case's span is safe for a probe to build.
+ *
+ * - The count is `|end - start| / |step|`, counting either way, read as
+ *   `readRangeSpan` reads the case, with a string read as its `Number`, since
+ *   lodash and Underscore coerce one. A count that can't be computed (`NaN`,
+ *   `null`) is accepted: no tool loops on it.
+ *
+ * - A count up to `MAX_RANGE_LENGTH` is accepted. Past it, a call that sizes
+ *   or grows a real array fails with `RangeError` once the count reaches the
+ *   array limit, 2^32, so only a count below that is `n/a`: that array would
+ *   be built, and could exhaust memory.
+ *
+ * - With `shouldBoundEveryCount`, a zero step and every longer count are
+ *   `n/a`, since such a call never fails on its own.
+ *
+ * @returns whether the probe can run the case.
+ */
+function isBoundedRange({
+  args,
+  shouldBoundEveryCount,
+}: RangeBoundCheck): boolean {
+  const span = readRangeSpan(args.map(numberFromString));
+
+  if (span === undefined) {
+    return true;
+  }
+
+  const { end, start, step } = span;
+
+  if (step === 0) {
+    return !shouldBoundEveryCount;
+  }
+
+  // Divide first: `end - start` overflows near `Number.MAX_VALUE`.
+  const count = Math.abs(end / step - start / step);
+
+  if (Number.isNaN(count) || count <= MAX_RANGE_LENGTH) {
+    return true;
+  }
+
+  return !shouldBoundEveryCount && count >= ARRAY_LENGTH_LIMIT;
+}
+
 /** Whether a value is a `Map` from any realm, by `Map.prototype.has`. */
 function isMap(value: object): boolean {
   try {
@@ -794,6 +1127,16 @@ function markWithin(walk: ReferenceWalk): unknown {
   return prototype === null
     ? Object.assign(Object.create(null) as object, entries)
     : entries;
+}
+
+/**
+ * Read a string as its `Number`, as lodash and Underscore coerce a `range`
+ * argument; any other value is returned as it is.
+ *
+ * @returns the number, or the value unchanged.
+ */
+function numberFromString(value: unknown): unknown {
+  return typeof value === "string" ? Number(value) : value;
 }
 
 /** Copy an `ArrayBuffer`'s bytes; `slice` throws for any other object. */

@@ -10,7 +10,9 @@ import {
   isLoneString,
   isPair,
   isString,
+  keyGetter,
   markClone,
+  markKeyed,
   markReferences,
   summarizeError,
 } from "./tool.mts";
@@ -113,6 +115,17 @@ export const JS_BUILT_INS: Tool = {
           }),
       },
     ],
+    deepMerge: [
+      {
+        accepts: isPair,
+        call: "{ ...defaults, ...overrides }",
+        run: ([defaults, overrides]) =>
+          markClone({
+            clone: { ...(defaults as object), ...(overrides as object) },
+            source: [defaults, overrides],
+          }),
+      },
+    ],
     deepSortObject: [
       {
         accepts: isString,
@@ -151,6 +164,45 @@ export const JS_BUILT_INS: Tool = {
         accepts: isPair,
         call: "JSON.stringify(a) === JSON.stringify(b)",
         run: ([a, b]) => JSON.stringify(a) === JSON.stringify(b),
+      },
+    ],
+    keyBy: [
+      {
+        accepts: isPair,
+        call: "Object.fromEntries(items.map((item) => [getKey(item), item]))",
+        run: ([items, key]) => {
+          const getKey = keyGetter(key);
+
+          return markKeyed(
+            Object.fromEntries(
+              (items as readonly unknown[]).map((item) => [getKey(item), item])
+            )
+          );
+        },
+      },
+      {
+        accepts: isPair,
+        call: "new Map(items.map((item) => [getKey(item), item]))",
+        run: ([items, key]) => {
+          const getKey = keyGetter(key);
+
+          return markKeyed(
+            new Map(
+              (items as readonly unknown[]).map((item) => [getKey(item), item])
+            )
+          );
+        },
+      },
+      {
+        accepts: isPair,
+        call: "Object.groupBy(items, getKey)",
+        run: ([items, key]) =>
+          markKeyed(
+            Object.groupBy(
+              items as readonly unknown[],
+              keyGetter(key) as (item: unknown) => PropertyKey
+            )
+          ),
       },
     ],
     lowerFirst: [

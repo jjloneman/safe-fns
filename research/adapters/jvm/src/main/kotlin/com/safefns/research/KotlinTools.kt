@@ -13,6 +13,14 @@ object KotlinTools {
         Tool(
             functions =
                 mapOf(
+                    "deepMerge" to
+                        listOf(
+                            Probe.mapPair("defaults + overrides") {
+                                defaults,
+                                overrides ->
+                                defaults + overrides
+                            }
+                        ),
                     "isDeepEqual" to
                         listOf(
                             Probe.anyBinary("a == b") { a, b -> a == b }.pair()
@@ -44,6 +52,14 @@ object KotlinTools {
                                 string.isNullOrEmpty()
                             },
                         ),
+                    "keyBy" to
+                        listOf(
+                            Probe.listKey("items.associateBy { it[key] }") {
+                                items,
+                                key ->
+                                items.associateBy { (it as Map<*, *>)[key] }
+                            }
+                        ),
                     "lowerFirst" to
                         listOf(
                             Probe.typed(
@@ -53,6 +69,14 @@ object KotlinTools {
                                     value.replaceFirstChar { it.lowercase() }
                                 }
                                 .alone()
+                        ),
+                    "range" to
+                        listOf(
+                            Probe.intRange(
+                                "(start until end step step).toList()"
+                            ) { start, end, step ->
+                                (start until end step step).toList()
+                            }
                         ),
                     "safeObjectHasOwn" to
                         listOf(

@@ -1,0 +1,827 @@
+{
+  "cases": [
+    {
+      "args": [
+        {
+          "a": {
+            "b": 1,
+            "c": 2
+          }
+        },
+        {
+          "a": {
+            "b": 3
+          }
+        }
+      ],
+      "expected": {
+        "a": {
+          "b": 3,
+          "c": 2
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "a": 1,
+          "b": 2
+        },
+        {
+          "c": 3
+        }
+      ],
+      "expected": {
+        "a": 1,
+        "b": 2,
+        "c": 3
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "b": {
+              "c": 1
+            }
+          }
+        },
+        {
+          "a": {
+            "b": {
+              "d": 2
+            }
+          }
+        }
+      ],
+      "expected": {
+        "a": {
+          "b": {
+            "c": 1,
+            "d": 2
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "a": [1, 2]
+        },
+        {
+          "a": [3]
+        }
+      ],
+      "expected": {
+        "a": [3]
+      }
+    },
+    {
+      "args": [
+        {
+          "a": [
+            {
+              "b": 1
+            }
+          ]
+        },
+        {
+          "a": [
+            {
+              "c": 2
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "a": [
+          {
+            "c": 2
+          }
+        ]
+      }
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        {
+          "a": {
+            "$undefined": true
+          }
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        {
+          "a": null
+        }
+      ],
+      "expected": {
+        "a": null
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "b": 1
+          }
+        },
+        {
+          "a": null
+        }
+      ],
+      "expected": {
+        "a": null
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "b": 1
+          }
+        },
+        {
+          "a": 1
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        {
+          "a": {
+            "b": 1
+          }
+        }
+      ],
+      "expected": {
+        "a": {
+          "b": 1
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "b": 1
+          }
+        },
+        {}
+      ],
+      "expected": {
+        "a": {
+          "b": 1
+        }
+      }
+    },
+    {
+      "args": [
+        {},
+        {
+          "a": {
+            "b": 1
+          }
+        }
+      ],
+      "expected": {
+        "a": {
+          "b": 1
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "$js": "a Date"
+          }
+        },
+        {}
+      ],
+      "expected": {
+        "a": {
+          "Date": 0
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        {
+          "a": {
+            "$js": "a Date"
+          }
+        }
+      ],
+      "expected": {
+        "a": {
+          "Date": 0
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "$js": "a Date"
+          }
+        },
+        {
+          "a": {
+            "b": 1
+          }
+        }
+      ],
+      "expected": {
+        "a": {
+          "b": 1
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "b": 1
+          }
+        },
+        {
+          "a": {
+            "$js": "a Date"
+          }
+        }
+      ],
+      "expected": {
+        "a": {
+          "Date": 0
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "$js": "a Map with an entry"
+          }
+        },
+        {
+          "a": {
+            "$js": "a Map with a different value"
+          }
+        }
+      ],
+      "expected": {
+        "a": {
+          "Map": [["a", 2]]
+        }
+      }
+    },
+    {
+      "args": [
+        {},
+        {
+          "a": {
+            "$js": "a class instance"
+          }
+        }
+      ],
+      "expected": {
+        "a": {
+          "$repr": "Symbol(shared)"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "a": {
+            "$js": "a class instance"
+          }
+        },
+        {}
+      ],
+      "expected": {
+        "a": {
+          "$repr": "Symbol(shared)"
+        }
+      }
+    },
+    {
+      "args": [
+        {},
+        {
+          "a": {
+            "$js": "a function"
+          }
+        }
+      ],
+      "expected": {
+        "a": {
+          "$repr": "Symbol(shared)"
+        }
+      }
+    },
+    {
+      "args": [
+        {},
+        {
+          "$js": "an object with a cycle"
+        }
+      ],
+      "expected": {
+        "name": "a",
+        "self": {
+          "$repr": "Symbol(cycle)"
+        }
+      }
+    },
+    {
+      "args": [
+        {},
+        {
+          "$js": "an object with a symbol key"
+        }
+      ],
+      "expected": {
+        "[Symbol(key)]": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a symbol key"
+        },
+        {
+          "$js": "an object with a different symbol-key value"
+        }
+      ],
+      "expected": {
+        "[Symbol(key)]": 2
+      }
+    },
+    {
+      "args": [
+        {},
+        {
+          "$js": "an object with an own __proto__ key"
+        }
+      ],
+      "expected": {}
+    },
+    {
+      "args": [
+        {},
+        {
+          "constructor": {
+            "prototype": {
+              "polluted": true
+            }
+          }
+        }
+      ],
+      "expected": {
+        "constructor": {
+          "prototype": {
+            "polluted": true
+          }
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        {
+          "prototype": {
+            "polluted": true
+          }
+        }
+      ],
+      "expected": {
+        "a": 1,
+        "prototype": {
+          "polluted": true
+        }
+      }
+    },
+    {
+      "args": [
+        {},
+        {
+          "$js": "an object with a getter"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a null-prototype object with a"
+        },
+        {
+          "b": 2
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": 1,
+          "b": 2
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        {
+          "$js": "a cross-realm object"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "b": 1
+        },
+        {
+          "$js": "a proxy of a plain object"
+        }
+      ],
+      "expected": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        },
+        {
+          "a": 1
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        2
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        1,
+        {
+          "a": 1
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [[1, 2], [3]],
+      "expected": [3]
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        [1]
+      ],
+      "expected": [1]
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        null
+      ],
+      "expected": null
+    },
+    {
+      "args": [
+        {},
+        {
+          "$js": "a revoked proxy"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {},
+        {
+          "$js": "an object with a throwing getter"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy whose ownKeys trap throws"
+        },
+        {
+          "a": 1
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "a": [1, 2]
+        },
+        {
+          "a": [3]
+        },
+        {
+          "arrays": "concat"
+        }
+      ],
+      "expected": {
+        "a": [1, 2, 3]
+      }
+    },
+    {
+      "args": [
+        {
+          "a": [
+            {
+              "b": 1
+            }
+          ]
+        },
+        {
+          "a": [
+            {
+              "c": 2
+            }
+          ]
+        },
+        {
+          "arrays": "concat"
+        }
+      ],
+      "expected": {
+        "a": [
+          {
+            "b": 1
+          },
+          {
+            "c": 2
+          }
+        ]
+      }
+    },
+    {
+      "args": [
+        {
+          "a": [1]
+        },
+        {
+          "a": {
+            "$undefined": true
+          }
+        },
+        {
+          "arrays": "concat"
+        }
+      ],
+      "expected": {
+        "a": [1]
+      }
+    },
+    {
+      "args": [
+        {
+          "a": [1]
+        },
+        {
+          "a": 2
+        },
+        {
+          "arrays": "concat"
+        }
+      ],
+      "expected": {
+        "a": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "a": 1
+        },
+        {
+          "a": [2]
+        },
+        {
+          "arrays": "concat"
+        }
+      ],
+      "expected": {
+        "a": [2]
+      }
+    },
+    {
+      "args": [
+        [1, 2],
+        [3],
+        {
+          "arrays": "concat"
+        }
+      ],
+      "expected": [1, 2, 3]
+    },
+    {
+      "args": [
+        {},
+        {
+          "$js": "an object with a throwing getter"
+        },
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": {}
+    },
+    {
+      "args": [
+        {
+          "trap": 1
+        },
+        {
+          "$js": "an object with a throwing getter"
+        },
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": {
+        "trap": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing getter"
+        },
+        {
+          "b": 1
+        },
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": {
+        "b": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing getter"
+        },
+        {
+          "trap": 2
+        },
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": {
+        "trap": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "b": 2
+        },
+        {
+          "a": 1,
+          "b": {
+            "$js": "a revoked proxy"
+          }
+        },
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": {
+        "a": 1,
+        "b": 2
+      }
+    },
+    {
+      "args": [
+        {},
+        {
+          "a": [
+            1,
+            {
+              "$js": "a revoked proxy"
+            }
+          ]
+        },
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": {
+        "a": [
+          1,
+          {
+            "$undefined": true
+          }
+        ]
+      }
+    },
+    {
+      "args": [
+        {},
+        {
+          "$js": "a revoked proxy"
+        },
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy whose ownKeys trap throws"
+        },
+        {
+          "a": 1
+        },
+        {
+          "unreadable": "omit"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "deepMerge"
+}

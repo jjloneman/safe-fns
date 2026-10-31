@@ -18,7 +18,14 @@ from __future__ import annotations
 import os
 import subprocess
 from collections.abc import Callable
+from typing import cast
 
+from range_case import (
+    RangeCase,
+    is_short_span,
+    number_text,
+    read_range_case,
+)
 from research_codec import Probe, Tool, ToolError, run_adapter
 
 GIT_ENVIRONMENT = {
@@ -29,6 +36,10 @@ GIT_ENVIRONMENT = {
     "GIT_CONFIG_NOSYSTEM": "1",
 }
 """Git's environment: one config entry, and no system or user config."""
+
+SEQ_OPTION_KEYS = frozenset({"inclusive", "step"})
+"""The options `seq` can express: it always includes `last` when it lands
+on it, so `inclusive: true` asks for nothing more."""
 
 SYSTEMD_FALSE = "Conditions succeeded."
 """What `systemd-analyze condition` prints when `ConditionFirstBoot` holds.
@@ -62,6 +73,18 @@ def accepts_condition(value: object, *_rest: object) -> bool:
         accepts_argument(value)
         and str(value).lstrip(SYSTEMD_LEADING_WHITESPACE) != ""
     )
+
+
+def accepts_seq(*args: object) -> bool:
+    """Accept a numeric `range` case short enough for `seq` to print.
+
+    A one-argument case is `seq last`, which starts at 1.
+    """
+    case = read_range_case(
+        *args, has_end_form=True, option_keys=SEQ_OPTION_KEYS
+    )
+
+    return case is not None and is_short_span(case=case, start=1)
 
 
 def git_config(value_type: str) -> Probe:
@@ -162,6 +185,43 @@ def script(
         return interpret(result)
 
     return {"accepts": accepts_argument, "call": source, "run": run}
+
+
+def seq(*args: object) -> list[float | int]:
+    """Run `seq first increment last` and read each line it prints.
+
+    A case's numbers are passed as arguments, after `--`, so a negative
+    number is never read as an option.
+
+    Raises:
+        ToolError: for a nonzero exit status.
+    """
+    # `accepts_seq` has already read the case, so it is never `None` here.
+    case = cast(
+        "RangeCase",
+        read_range_case(*args, has_end_form=True, option_keys=SEQ_OPTION_KEYS),
+    )
+    numbers = (
+        [case["end"]]
+        if case["start"] is None
+        else [
+            part
+            for part in (case["start"], case["step"], case["end"])
+            if part is not None
+        ]
+    )
+
+    result = subprocess.run(
+        ["seq", "--", *(number_text(number) for number in numbers)],
+        capture_output=True,
+        check=False,
+        text=True,
+    )
+
+    return [
+        int(line) if line.lstrip("-").isdigit() else float(line)
+        for line in stdout(result).splitlines()
+    ]
 
 
 def shell_tool(
@@ -301,6 +361,20 @@ TOOLS: list[Tool] = [
         "name": "git",
         "tier": 4,
         "version": package_version("git"),
+    },
+    {
+        "functions": {
+            "range": [
+                {
+                    "accepts": accepts_seq,
+                    "call": "seq first increment last",
+                    "run": seq,
+                }
+            ]
+        },
+        "name": "GNU seq",
+        "tier": 4,
+        "version": package_version("coreutils"),
     },
     {
         "functions": {

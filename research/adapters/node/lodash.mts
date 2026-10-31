@@ -3,10 +3,14 @@ import lodash from "lodash";
 import type { Tool } from "./tool.mts";
 
 import {
+  callWithRange,
   hasNoOptions,
   hasOnlyOptions,
+  isConcatPair,
   isPair,
+  isRangeCase,
   markClone,
+  markKeyed,
   markReferences,
   packageVersion,
 } from "./tool.mts";
@@ -20,6 +24,35 @@ export const LODASH: Tool = {
         call: "_.cloneDeep(value)",
         run: ([value]) =>
           markClone({ clone: lodash.cloneDeep(value), source: value }),
+      },
+    ],
+    deepMerge: [
+      {
+        accepts: isPair,
+        call: "_.merge({}, defaults, overrides)",
+        run: ([defaults, overrides]) =>
+          markClone({
+            clone: lodash.merge({}, defaults, overrides),
+            source: [defaults, overrides],
+          }),
+      },
+      {
+        accepts: isPair,
+        call: "_.defaultsDeep({}, overrides, defaults)",
+        run: ([defaults, overrides]) =>
+          markClone({
+            clone: lodash.defaultsDeep({}, overrides, defaults),
+            source: [defaults, overrides],
+          }),
+      },
+      {
+        accepts: isConcatPair,
+        call: "_.mergeWith({}, defaults, overrides, concatArrays)",
+        run: ([defaults, overrides]) =>
+          markClone({
+            clone: lodash.mergeWith({}, defaults, overrides, concatArrays),
+            source: [defaults, overrides],
+          }),
       },
     ],
     isDeepEqual: [
@@ -38,11 +71,38 @@ export const LODASH: Tool = {
     isSafeEmpty: [
       { call: "_.isEmpty(value)", run: ([value]) => lodash.isEmpty(value) },
     ],
+    keyBy: [
+      {
+        accepts: isPair,
+        call: "_.keyBy(items, key)",
+        run: ([items, key]) =>
+          markKeyed(
+            lodash.keyBy(
+              items as readonly unknown[],
+              key as Parameters<typeof lodash.keyBy>[1]
+            )
+          ),
+      },
+    ],
     lowerFirst: [
       {
         accepts: hasNoOptions,
         call: "_.lowerFirst(value)",
         run: ([value]) => lodash.lowerFirst(value as string),
+      },
+    ],
+    range: [
+      {
+        accepts: (args) =>
+          isRangeCase({
+            args,
+            hasEndForm: true,
+            hasOptionsParameter: false,
+            optionKeys: ["step"],
+            shouldBoundEveryCount: false,
+          }),
+        call: "_.range(start, end, step)",
+        run: (args) => callWithRange({ args, call: lodash.range.bind(lodash) }),
       },
     ],
     safeObjectHasOwn: [
@@ -102,3 +162,15 @@ export const LODASH: Tool = {
   tier: 1,
   version: packageVersion("lodash"),
 };
+
+/**
+ * Concatenate two arrays, the customizer lodash's `mergeWith` docs show;
+ * anything else is left to lodash's own merge.
+ */
+function concatArrays(objectValue: unknown, sourceValue: unknown): unknown {
+  if (Array.isArray(objectValue)) {
+    return objectValue.concat(sourceValue);
+  }
+
+  return undefined;
+}
