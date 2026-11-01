@@ -372,6 +372,7 @@ The conventions below are written for TypeScript, but they bind code in every la
   - it holds every update for 7 days (`minimumReleaseAge`), matching the [moratorium](#-7-day-dependency-moratorium), and skips digest-only image updates, which have no release date to age;
   - only Docker Hub reports a tag's push date, so an image from another registry (`mcr.microsoft.com`, `ghcr.io`) stays pending until it's ticked on the Dependency Dashboard, once its tag is 7 days old;
   - every bump is a `chore`, so none cuts a release;
+  - its separate security PRs are off (`vulnerabilityAlerts`), since they skip the moratorium and add a `minimumReleaseAgeExclude` entry; a fix arrives in the weekly PRs once it is 7 days old;
   - a typical week opens three grouped PRs: the root's patch and minor bumps, the Actions' patch and minor bumps, and everything under `research/`, majors included, across every manager; a major outside `research/` gets its own PR;
   - pnpm itself (each root's `packageManager`) moves in the `research` PR, so all four pins stay equal, as `scripts/research/package-manager.test.ts` requires;
   - its rules hold the pins below: `typescript` and `@types/node` majors, each `typescript-<version>` alias to its patches, 3.x `python` images to final releases, and `python311` on 3.11, the last Python with `distutils`;
