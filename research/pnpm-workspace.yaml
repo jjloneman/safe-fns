@@ -13,3 +13,6 @@ minimumReleaseAge: 10080
 # Write exact versions on `pnpm add`, so the lockfile is the only thing that
 # moves a dependency.
 saveExact: true
+minimumReleaseAgeExclude:
+  # Renovate security update: decode-uri-component@0.5.1
+  - decode-uri-component@0.5.1
