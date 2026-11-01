@@ -215,4 +215,19 @@
   semanticCommitScope: "deps-dev",
   semanticCommitType: "chore",
   timezone: "America/New_York",
+
+  /*
+   * No separate security PRs: a vulnerability fix arrives in the weekly
+   * updates above, once it clears the 7-day moratorium like any other release.
+   *
+   * - Renovate's security updates skip `minimumReleaseAge` by default, so they
+   *   can open for a release only hours old.
+   *
+   * - For every one, Renovate also appends a `minimumReleaseAgeExclude` entry
+   *   to that root's `pnpm-workspace.yaml`, however old the release is, which
+   *   relaxes the floor AGENTS.md forbids relaxing and breaks `yml/sort-keys`.
+   *
+   * - GitHub's own security alerts still flag a vulnerable version meanwhile.
+   */
+  vulnerabilityAlerts: { enabled: false },
 }
