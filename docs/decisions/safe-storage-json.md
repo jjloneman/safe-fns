@@ -2,8 +2,9 @@
 type: Decision
 title: How the JSON storage helpers read and write
 description: "`safeStorageGetJson(key, options?)` reads a key and parses it as `safeParseJson` does, with its `guard`, and `safeStorageSetJson(key, value, options?)` writes exactly what `safeJsonStringify` returns, with all its options but `fallback`, and returns whether it did; both take `area`, and four fixed-area aliases ship as the string wrappers' six do; a missing key, unreachable storage, text that isn't JSON, or a guard that rejects returns the `fallback` option, `undefined` by default; where `safeJsonStringify` would return its fallback, the write stores nothing, keeps the key's old value, and returns `false`."
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-02T00:30:00Z }
+verified: { by: human:jjloneman, at: 2026-11-02T06:25:10Z }
 ---
 
 # How the JSON storage helpers read and write
