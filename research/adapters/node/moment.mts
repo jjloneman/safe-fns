@@ -2,7 +2,7 @@ import moment from "moment";
 
 import type { Tool } from "./tool.mts";
 
-import { isString } from "./tool.mts";
+import { hasNoOptions, isString } from "./tool.mts";
 
 // moment warns on stderr when it falls back to `new Date`; keep runs quiet.
 moment.suppressDeprecationWarnings = true;
@@ -47,6 +47,16 @@ export const MOMENT: Tool = {
         call: "moment(value, moment.ISO_8601, true).toISOString()",
         run: ([value]) =>
           moment(value as string, moment.ISO_8601, true).toISOString(),
+      },
+    ],
+    toMs: [
+      {
+        accepts: hasNoOptions,
+        call: "moment.duration(value).asMilliseconds()",
+        run: ([value]) =>
+          moment
+            .duration(value as Parameters<typeof moment.duration>[0])
+            .asMilliseconds(),
       },
     ],
   },

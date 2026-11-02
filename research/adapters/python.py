@@ -16,9 +16,9 @@ import sys
 import unicodedata
 import warnings
 from base64 import b64decode, b64encode, urlsafe_b64decode
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from typing import cast
-from urllib.parse import quote, unquote, urljoin, urlsplit
+from urllib.parse import parse_qs, quote, unquote, urljoin, urlsplit
 
 from range_case import MAX_RANGE_LENGTH, read_range_case
 from research_codec import Probe, Tool, run_adapter
@@ -49,7 +49,7 @@ def are_two_dicts(*args: object) -> bool:
 
 
 def are_two_strings(*args: object) -> bool:
-    """Accept exactly two string arguments: a value and a base."""
+    """Accept exactly two string arguments, such as a value and a base."""
     return len(args) == 2 and all(isinstance(arg, str) for arg in args)
 
 
@@ -136,6 +136,27 @@ def current_tools() -> list[Tool]:
                         "call": "defaults | overrides",
                         "run": lambda defaults, overrides: defaults | overrides,
                     }
+                ],
+                "getSearchParams": [
+                    {
+                        "accepts": is_lone_string,
+                        "call": "parse_qs(value)",
+                        "run": parse_qs,
+                    },
+                ],
+                "getSearchParamValues": [
+                    {
+                        "accepts": are_two_strings,
+                        "call": "parse_qs(value).get(key)",
+                        "run": lambda value, key: parse_qs(value).get(key),
+                    },
+                    {
+                        "accepts": are_two_strings,
+                        "call": "parse_qs(urlsplit(value).query).get(key)",
+                        "run": lambda value, key: parse_qs(
+                            urlsplit(value).query
+                        ).get(key),
+                    },
                 ],
                 "isDeepEqual": [
                     {
@@ -288,6 +309,17 @@ def current_tools() -> list[Tool]:
                         ),
                     }
                 ],
+                "toMs": [
+                    {
+                        "accepts": is_lone_dict,
+                        "call": (
+                            "timedelta(**value) / timedelta(milliseconds=1)"
+                        ),
+                        "run": lambda value: (
+                            timedelta(**value) / timedelta(milliseconds=1)
+                        ),
+                    },
+                ],
                 "trimBlank": [
                     {
                         "accepts": is_lone_string,
@@ -318,6 +350,11 @@ def current_tools() -> list[Tool]:
 def has_no_options(*args: object) -> bool:
     """Accept exactly one value and no options."""
     return len(args) == 1
+
+
+def is_lone_dict(*args: object) -> bool:
+    """Accept exactly one argument, a dict."""
+    return len(args) == 1 and isinstance(args[0], dict)
 
 
 def is_lone_string(*args: object) -> bool:

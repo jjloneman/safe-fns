@@ -1,0 +1,129 @@
+{
+  "cases": [
+    {
+      "args": ["object"],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": ["array"],
+      "expected": [1, 2]
+    },
+    {
+      "args": ["number"],
+      "expected": 42
+    },
+    {
+      "args": ["string"],
+      "expected": "hi"
+    },
+    {
+      "args": ["null"],
+      "expected": null
+    },
+    {
+      "args": ["spaced"],
+      "expected": 42
+    },
+    {
+      "args": ["bare"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["broken"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["empty"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["undefined"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["objectString"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["missing"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        "missing",
+        {
+          "fallback": null
+        }
+      ],
+      "expected": null
+    },
+    {
+      "args": [
+        "object",
+        {
+          "guard": {
+            "$js": "a guard accepting only plain objects"
+          }
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        "number",
+        {
+          "guard": {
+            "$js": "a guard accepting only plain objects"
+          }
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        "object",
+        {
+          "area": "session"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [42],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "safeStorageGetJson"
+}

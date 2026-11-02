@@ -1,0 +1,200 @@
+{
+  "cases": [
+    {
+      "args": [
+        "https://example.com/tasks?filters=in-progress,to-do%2Cdone&filters=blocked&page=2",
+        {
+          "separator": ","
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "filters": ["in-progress", "to-do", "done", "blocked"],
+          "page": ["2"]
+        }
+      }
+    },
+    {
+      "args": [
+        "https://example.com/tasks?filters=in-progress,to-do%2Cdone&filters=blocked&page=2"
+      ],
+      "expected": {
+        "null-prototype": {
+          "filters": ["in-progress,to-do,done", "blocked"],
+          "page": ["2"]
+        }
+      }
+    },
+    {
+      "args": ["?a=1&b=2&a=3"],
+      "expected": {
+        "null-prototype": {
+          "a": ["1", "3"],
+          "b": ["2"]
+        }
+      }
+    },
+    {
+      "args": ["a=1&b=2&a=3"],
+      "expected": {
+        "null-prototype": {
+          "a": ["1", "3"],
+          "b": ["2"]
+        }
+      }
+    },
+    {
+      "args": ["/tasks?a=1#b=2"],
+      "expected": {
+        "null-prototype": {
+          "a": ["1"]
+        }
+      }
+    },
+    {
+      "args": [
+        "a=x,%20,y&b=&c",
+        {
+          "separator": ","
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": ["x", "y"],
+          "b": [],
+          "c": []
+        }
+      }
+    },
+    {
+      "args": [
+        "filters=a,b%2Cc%2cd",
+        {
+          "separator": ","
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "filters": ["a", "b", "c", "d"]
+        }
+      }
+    },
+    {
+      "args": ["?enableMockAutofill"],
+      "expected": {
+        "null-prototype": {
+          "enableMockAutofill": []
+        }
+      }
+    },
+    {
+      "args": ["phone=+15551234"],
+      "expected": {
+        "null-prototype": {
+          "phone": ["15551234"]
+        }
+      }
+    },
+    {
+      "args": [
+        "?from%5B0%5D=NYC&to%5B0%5D=LAX&from%5B1%5D=LAX&to%5B1%5D=LAS&noOfRoute=2"
+      ],
+      "expected": {
+        "null-prototype": {
+          "from[0]": ["NYC"],
+          "from[1]": ["LAX"],
+          "noOfRoute": ["2"],
+          "to[0]": ["LAX"],
+          "to[1]": ["LAS"]
+        }
+      }
+    },
+    {
+      "args": ["A=1&a=2"],
+      "expected": {
+        "null-prototype": {
+          "A": ["1"],
+          "a": ["2"]
+        }
+      }
+    },
+    {
+      "args": ["a=1;b=2"],
+      "expected": {
+        "null-prototype": {
+          "a": ["1;b=2"]
+        }
+      }
+    },
+    {
+      "args": ["__proto__=1&constructor=2"],
+      "expected": {
+        "null-prototype": {
+          "__proto__": ["1"],
+          "constructor": ["2"]
+        }
+      }
+    },
+    {
+      "args": [""],
+      "expected": {
+        "null-prototype": {}
+      }
+    },
+    {
+      "args": [
+        "a=1",
+        {
+          "separator": ""
+        }
+      ],
+      "expected": {
+        "null-prototype": {}
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a URL with a filters list"
+        },
+        {
+          "separator": ","
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "filters": ["in-progress", "to-do", "done", "blocked"]
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a URLSearchParams with an entry"
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "a": ["1"]
+        }
+      }
+    },
+    {
+      "args": [42],
+      "expected": {
+        "null-prototype": {}
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        }
+      ],
+      "expected": {
+        "null-prototype": {}
+      }
+    }
+  ],
+  "function": "getSearchParams"
+}

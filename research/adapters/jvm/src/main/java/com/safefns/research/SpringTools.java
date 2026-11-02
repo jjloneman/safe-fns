@@ -13,6 +13,7 @@ import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.util.NumberUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 
 /**
@@ -29,6 +30,32 @@ final class SpringTools {
   /** The probes, keyed by function. */
   static final Tool TOOL = new Tool(
     Map.ofEntries(
+      entry(
+        "getSearchParams",
+        List.of(
+          Probe.typed(
+            "UriComponentsBuilder.fromUriString(value).build().getQueryParams()",
+            String.class,
+            value ->
+              UriComponentsBuilder.fromUriString(value).build().getQueryParams()
+          ).alone()
+        )
+      ),
+      entry(
+        "getSearchParamValues",
+        List.of(
+          new Probe(
+            JavaTools::areTwoStrings,
+            "UriComponentsBuilder.fromUriString(value).build().getQueryParams().get(key)",
+            false,
+            args ->
+              UriComponentsBuilder.fromUriString((String) args.get(0))
+                .build()
+                .getQueryParams()
+                .get((String) args.get(1))
+          )
+        )
+      ),
       entry(
         "isSafeEmpty",
         List.of(

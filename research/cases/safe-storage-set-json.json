@@ -1,0 +1,141 @@
+{
+  "cases": [
+    {
+      "args": [
+        "key",
+        {
+          "a": 1
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": ["key", "hi"],
+      "expected": true
+    },
+    {
+      "args": ["key", 42],
+      "expected": true
+    },
+    {
+      "args": ["key", null],
+      "expected": true
+    },
+    {
+      "args": ["key", [1, 2]],
+      "expected": true
+    },
+    {
+      "args": [
+        "key",
+        {
+          "$js": "a Date"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "key",
+        {
+          "$number": "NaN"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "key",
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "key",
+        {
+          "$bigint": "12"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "key",
+        {
+          "$js": "an object with a cycle"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "key",
+        {
+          "$bigint": "12"
+        },
+        {
+          "bigint": "fallback"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "key",
+        {
+          "$js": "an object with a cycle"
+        },
+        {
+          "circular": "fallback"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "key",
+        {
+          "a": 1
+        },
+        {
+          "space": 2
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "key",
+        {
+          "$js": "an object with a throwing getter"
+        }
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "key",
+        {
+          "a": 1
+        },
+        {
+          "area": "session"
+        }
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        42,
+        {
+          "a": 1
+        }
+      ],
+      "expected": false
+    }
+  ],
+  "function": "safeStorageSetJson"
+}

@@ -17,6 +17,7 @@ using System.Numerics;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace ResearchAdapter;
 
@@ -179,6 +180,19 @@ internal static class Program
                             Convert.ToBase64String(
                                 Encoding.UTF8.GetBytes(Text(args))
                             )
+                    ),
+                ],
+                ["getSearchParamValues"] =
+                [
+                    new(
+                        Accepts: AreTwoStrings,
+                        Call: "HttpUtility.ParseQueryString(value).GetValues(key)",
+                        Run: args =>
+                            HttpUtility
+                                .ParseQueryString(Text(args))
+                                .GetValues((string)args[1]!)
+                                ?.Select(value => (object?)value)
+                                .ToList()
                     ),
                 ],
                 ["isSafeEmpty"] =

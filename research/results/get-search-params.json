@@ -1,0 +1,1368 @@
+{
+  "cases": [
+    [
+      "https://example.com/tasks?filters=in-progress,to-do%2Cdone&filters=blocked&page=2",
+      {
+        "separator": ","
+      }
+    ],
+    [
+      "https://example.com/tasks?filters=in-progress,to-do%2Cdone&filters=blocked&page=2"
+    ],
+    [
+      "?a=1&b=2&a=3"
+    ],
+    [
+      "a=1&b=2&a=3"
+    ],
+    [
+      "/tasks?a=1#b=2"
+    ],
+    [
+      "a=x,%20,y&b=&c",
+      {
+        "separator": ","
+      }
+    ],
+    [
+      "filters=a,b%2Cc%2cd",
+      {
+        "separator": ","
+      }
+    ],
+    [
+      "?enableMockAutofill"
+    ],
+    [
+      "phone=+15551234"
+    ],
+    [
+      "?from%5B0%5D=NYC&to%5B0%5D=LAX&from%5B1%5D=LAX&to%5B1%5D=LAS&noOfRoute=2"
+    ],
+    [
+      "A=1&a=2"
+    ],
+    [
+      "a=1;b=2"
+    ],
+    [
+      "__proto__=1&constructor=2"
+    ],
+    [
+      ""
+    ],
+    [
+      "a=1",
+      {
+        "separator": ""
+      }
+    ],
+    [
+      {
+        "$js": "a URL with a filters list"
+      },
+      {
+        "separator": ","
+      }
+    ],
+    [
+      {
+        "$js": "a URLSearchParams with an entry"
+      }
+    ],
+    [
+      42
+    ],
+    [
+      {
+        "$js": "a revoked proxy"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "getSearchParams",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "filters": [
+                "in-progress",
+                "to-do",
+                "done",
+                "blocked"
+              ],
+              "page": [
+                "2"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "filters": [
+                "in-progress,to-do,done",
+                "blocked"
+              ],
+              "page": [
+                "2"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                "1",
+                "3"
+              ],
+              "b": [
+                "2"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                "1",
+                "3"
+              ],
+              "b": [
+                "2"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                "x",
+                "y"
+              ],
+              "b": [],
+              "c": []
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "filters": [
+                "a",
+                "b",
+                "c",
+                "d"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "enableMockAutofill": []
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "phone": [
+                "15551234"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "from[0]": [
+                "NYC"
+              ],
+              "from[1]": [
+                "LAX"
+              ],
+              "noOfRoute": [
+                "2"
+              ],
+              "to[0]": [
+                "LAX"
+              ],
+              "to[1]": [
+                "LAS"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "A": [
+                "1"
+              ],
+              "a": [
+                "2"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                "1;b=2"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "__proto__": [
+                "1"
+              ],
+              "constructor": [
+                "2"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {}
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {}
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "filters": [
+                "in-progress",
+                "to-do",
+                "done",
+                "blocked"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {}
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {}
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "Object.fromEntries(new URLSearchParams(value))",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d816081d0ffc1ee8c6e57b9de1a9fd2978c52ca97e32d91b011015c02481d02d",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "Object.fromEntries(new URLSearchParams(value))",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "filters": "blocked",
+            "https://example.com/tasks?filters": "in-progress,to-do,done",
+            "page": "2"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": "3",
+            "b": "2"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": "3",
+            "b": "2"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "/tasks?a": "1#b=2"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "enableMockAutofill": ""
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "phone": " 15551234"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "from[0]": "NYC",
+            "from[1]": "LAX",
+            "noOfRoute": "2",
+            "to[0]": "LAX",
+            "to[1]": "LAS"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "A": "1",
+            "a": "2"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": "1;b=2"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": "1",
+            "constructor": "2"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "qs.parse(value, { comma: true })",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "qs",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "filters": "blocked",
+            "https://example.com/tasks?filters": [
+              "in-progress",
+              "to-do,done"
+            ],
+            "page": "2"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              "x",
+              " ",
+              "y"
+            ],
+            "b": "",
+            "c": ""
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "filters": [
+              "a",
+              "b,c,d"
+            ]
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "6.16.1"
+    },
+    {
+      "call": "qs.parse(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "qs",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "filters": "blocked",
+            "https://example.com/tasks?filters": "in-progress,to-do,done",
+            "page": "2"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "?a": "1",
+            "a": "3",
+            "b": "2"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              "1",
+              "3"
+            ],
+            "b": "2"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "/tasks?a": "1#b=2"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "?enableMockAutofill": ""
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "phone": " 15551234"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "?from": [
+              "NYC"
+            ],
+            "from": [
+              "LAX"
+            ],
+            "noOfRoute": "2",
+            "to": [
+              "LAX",
+              "LAS"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "A": "1",
+            "a": "2"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": "1;b=2"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "6.16.1"
+    },
+    {
+      "call": "queryString.parse(value, { arrayFormat: \"comma\" })",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "query-string",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "filters": "blocked",
+              "https://example.com/tasks?filters": [
+                "in-progress",
+                "to-do,done"
+              ],
+              "page": "2"
+            }
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                "x",
+                " ",
+                "y"
+              ],
+              "b": "",
+              "c": null
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "filters": [
+                "a",
+                "b,c,d"
+              ]
+            }
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "10.0.0"
+    },
+    {
+      "call": "queryString.parse(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "query-string",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "filters": "blocked",
+              "https://example.com/tasks?filters": "in-progress,to-do,done",
+              "page": "2"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                "1",
+                "3"
+              ],
+              "b": "2"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": [
+                "1",
+                "3"
+              ],
+              "b": "2"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "/tasks?a": "1#b=2"
+            }
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "enableMockAutofill": null
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "phone": " 15551234"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "from[0]": "NYC",
+              "from[1]": "LAX",
+              "noOfRoute": "2",
+              "to[0]": "LAX",
+              "to[1]": "LAS"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "A": "1",
+              "a": "2"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "a": "1;b=2"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "__proto__": "1",
+              "constructor": "2"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {}
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "10.0.0"
+    },
+    {
+      "call": "url.ParseQuery(value)",
+      "image": "golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61",
+      "inputs": "sha256:aba1403739c1b6ff250e073c2c7c4cc1034615ab25610edc502411753967e094",
+      "locale": "C.UTF-8",
+      "name": "Go",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "filters": [
+              "blocked"
+            ],
+            "https://example.com/tasks?filters": [
+              "in-progress,to-do,done"
+            ],
+            "page": [
+              "2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "?a": [
+              "1"
+            ],
+            "a": [
+              "3"
+            ],
+            "b": [
+              "2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              "1",
+              "3"
+            ],
+            "b": [
+              "2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "/tasks?a": [
+              "1#b=2"
+            ]
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "?enableMockAutofill": [
+              ""
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "phone": [
+              " 15551234"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "?from[0]": [
+              "NYC"
+            ],
+            "from[1]": [
+              "LAX"
+            ],
+            "noOfRoute": [
+              "2"
+            ],
+            "to[0]": [
+              "LAX"
+            ],
+            "to[1]": [
+              "LAS"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "A": [
+              "1"
+            ],
+            "a": [
+              "2"
+            ]
+          }
+        },
+        {
+          "error": "*errors.errorString",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": [
+              "1"
+            ],
+            "constructor": [
+              "2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "go",
+      "tier": 2,
+      "version": "1.27.2"
+    },
+    {
+      "call": "parse_qs(value)",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "filters": [
+              "blocked"
+            ],
+            "https://example.com/tasks?filters": [
+              "in-progress,to-do,done"
+            ],
+            "page": [
+              "2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "?a": [
+              "1"
+            ],
+            "a": [
+              "3"
+            ],
+            "b": [
+              "2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              "1",
+              "3"
+            ],
+            "b": [
+              "2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "/tasks?a": [
+              "1#b=2"
+            ]
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {
+            "phone": [
+              " 15551234"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "?from[0]": [
+              "NYC"
+            ],
+            "from[1]": [
+              "LAX"
+            ],
+            "noOfRoute": [
+              "2"
+            ],
+            "to[0]": [
+              "LAX"
+            ],
+            "to[1]": [
+              "LAS"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "A": [
+              "1"
+            ],
+            "a": [
+              "2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              "1;b=2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": [
+              "1"
+            ],
+            "constructor": [
+              "2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    },
+    {
+      "call": "UriComponentsBuilder.fromUriString(value).build().getQueryParams()",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Spring",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "filters": [
+              "in-progress,to-do%2Cdone",
+              "blocked"
+            ],
+            "page": [
+              "2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              "1",
+              "3"
+            ],
+            "b": [
+              "2"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": [
+              "1"
+            ]
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "enableMockAutofill": [
+              null
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {
+            "from%5B0%5D": [
+              "NYC"
+            ],
+            "from%5B1%5D": [
+              "LAX"
+            ],
+            "noOfRoute": [
+              "2"
+            ],
+            "to%5B0%5D": [
+              "LAX"
+            ],
+            "to%5B1%5D": [
+              "LAS"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "7.0.9"
+    }
+  ],
+  "function": "getSearchParams"
+}

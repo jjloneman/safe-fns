@@ -9,6 +9,8 @@ import {
   hasOnlyOptions,
   isLoneString,
   isPair,
+  isSearchParamCase,
+  isSearchParamsCase,
   isString,
   keyGetter,
   markClone,
@@ -16,7 +18,7 @@ import {
   markReferences,
   summarizeError,
 } from "./tool.mts";
-import { storageProbes } from "./web-storage.mts";
+import { jsonStorageProbes, storageProbes } from "./web-storage.mts";
 
 /** The locale a first-letter case can carry in its options. */
 type LocaleOptions = {
@@ -47,6 +49,13 @@ type TimeZoneRun<T> = {
 
 /** Node's `sessionStorage`, which needs no configuration. */
 const NODE_SESSION_STORAGE = storageProbes({
+  read: () => globalThis.sessionStorage,
+  receiver: "sessionStorage",
+  suffix: "",
+});
+
+/** The JSON storage helpers' native composition on Node's `sessionStorage`. */
+const NODE_SESSION_STORAGE_JSON = jsonStorageProbes({
   read: () => globalThis.sessionStorage,
   receiver: "sessionStorage",
   suffix: "",
@@ -153,6 +162,28 @@ export const JS_BUILT_INS: Tool = {
     ],
     getErrorMessage: [
       { call: "String(value)", run: ([value]) => String(value) },
+    ],
+    getSearchParams: [
+      {
+        accepts: (args) => isSearchParamsCase({ args, separator: undefined }),
+        call: "Object.fromEntries(new URLSearchParams(value))",
+        run: ([value]) =>
+          markKeyed(Object.fromEntries(new URLSearchParams(value as string))),
+      },
+    ],
+    getSearchParamValues: [
+      {
+        accepts: (args) => isSearchParamCase({ args, separator: undefined }),
+        call: "new URLSearchParams(value).getAll(key)",
+        run: ([value, key]) =>
+          new URLSearchParams(value as string).getAll(key as string),
+      },
+      {
+        accepts: (args) => isSearchParamCase({ args, separator: undefined }),
+        call: "new URL(value).searchParams.getAll(key)",
+        run: ([value, key]) =>
+          new URL(value as string).searchParams.getAll(key as string),
+      },
     ],
     isDeepEqual: [
       {
@@ -359,6 +390,7 @@ export const JS_BUILT_INS: Tool = {
       ...NODE_SESSION_STORAGE.safeStorageGetItem,
       ...NODE_UNCONFIGURED_LOCAL_STORAGE.safeStorageGetItem,
     ],
+    safeStorageGetJson: NODE_SESSION_STORAGE_JSON.safeStorageGetJson,
     safeStorageRemoveItem: [
       ...NODE_SESSION_STORAGE.safeStorageRemoveItem,
       ...NODE_UNCONFIGURED_LOCAL_STORAGE.safeStorageRemoveItem,
@@ -367,6 +399,7 @@ export const JS_BUILT_INS: Tool = {
       ...NODE_SESSION_STORAGE.safeStorageSetItem,
       ...NODE_UNCONFIGURED_LOCAL_STORAGE.safeStorageSetItem,
     ],
+    safeStorageSetJson: NODE_SESSION_STORAGE_JSON.safeStorageSetJson,
     safeStructuredClone: [
       {
         call: "structuredClone(value)",
@@ -392,6 +425,16 @@ export const JS_BUILT_INS: Tool = {
         call: "new Error(value) → { message, unchanged }",
         run: ([value]) =>
           summarizeError({ error: new Error(value as string), input: value }),
+      },
+    ],
+    toMs: [
+      {
+        accepts: hasNoOptions,
+        call: 'Temporal.Duration.from(value).total("millisecond")',
+        run: ([value]) =>
+          Temporal.Duration.from(
+            value as Parameters<typeof Temporal.Duration.from>[0]
+          ).total("millisecond"),
       },
     ],
     trimBlank: [

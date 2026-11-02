@@ -1,0 +1,244 @@
+{
+  "cases": [
+    {
+      "args": [
+        "https://example.com/tasks?filters=in-progress,to-do%2Cdone&filters=blocked",
+        "filters",
+        {
+          "separator": ","
+        }
+      ],
+      "expected": ["in-progress", "to-do", "done", "blocked"]
+    },
+    {
+      "args": [
+        "https://example.com/tasks?filters=in-progress,to-do%2Cdone&filters=blocked",
+        "filters"
+      ],
+      "expected": ["in-progress,to-do,done", "blocked"]
+    },
+    {
+      "args": ["https://example.com/?a=1#a=2", "a"],
+      "expected": ["1"]
+    },
+    {
+      "args": ["/tasks?a=1&a=2", "a"],
+      "expected": ["1", "2"]
+    },
+    {
+      "args": ["?a=1&a=2", "a"],
+      "expected": ["1", "2"]
+    },
+    {
+      "args": ["a=1&a=2", "a"],
+      "expected": ["1", "2"]
+    },
+    {
+      "args": ["a=1;a=2", "a"],
+      "expected": ["1;a=2"]
+    },
+    {
+      "args": ["q=what?", "q"],
+      "expected": []
+    },
+    {
+      "args": ["a=hello+world", "a"],
+      "expected": ["hello world"]
+    },
+    {
+      "args": ["a=hello%20world", "a"],
+      "expected": ["hello world"]
+    },
+    {
+      "args": ["a=%2B", "a"],
+      "expected": ["+"]
+    },
+    {
+      "args": ["a=%C3%A9", "a"],
+      "expected": ["é"]
+    },
+    {
+      "args": ["a=%E0%A4%A", "a"],
+      "expected": ["\ufffd%A"]
+    },
+    {
+      "args": ["a=%ZZ", "a"],
+      "expected": ["%ZZ"]
+    },
+    {
+      "args": ["filter%73=x", "filters"],
+      "expected": ["x"]
+    },
+    {
+      "args": ["A=1", "a"],
+      "expected": []
+    },
+    {
+      "args": ["a", "a"],
+      "expected": []
+    },
+    {
+      "args": ["a=", "a"],
+      "expected": []
+    },
+    {
+      "args": ["a=1&&a=&a=2&", "a"],
+      "expected": ["1", "2"]
+    },
+    {
+      "args": [
+        "a=%20x%20,%20,y\u00a0",
+        "a",
+        {
+          "separator": ","
+        }
+      ],
+      "expected": ["x", "y"]
+    },
+    {
+      "args": [
+        "filters=to-do%2Cdone,blocked",
+        "filters",
+        {
+          "separator": ","
+        }
+      ],
+      "expected": ["to-do", "done", "blocked"]
+    },
+    {
+      "args": [
+        "a=x,x",
+        "a",
+        {
+          "separator": ","
+        }
+      ],
+      "expected": ["x", "x"]
+    },
+    {
+      "args": [
+        "a=x%2cy",
+        "a",
+        {
+          "separator": ","
+        }
+      ],
+      "expected": ["x", "y"]
+    },
+    {
+      "args": ["phone=+15551234", "phone"],
+      "expected": ["15551234"]
+    },
+    {
+      "args": ["?from%5B0%5D=NYC&from%5B1%5D=LAX", "from[1]"],
+      "expected": ["LAX"]
+    },
+    {
+      "args": ["?from%5B0%5D=NYC&from%5B1%5D=LAX", "from"],
+      "expected": []
+    },
+    {
+      "args": ["?enableMockAutofill", "enableMockAutofill"],
+      "expected": []
+    },
+    {
+      "args": [
+        "a=x;y",
+        "a",
+        {
+          "separator": ";"
+        }
+      ],
+      "expected": ["x", "y"]
+    },
+    {
+      "args": [
+        "a=x||y",
+        "a",
+        {
+          "separator": "||"
+        }
+      ],
+      "expected": ["x", "y"]
+    },
+    {
+      "args": [
+        "a=x,y",
+        "a",
+        {
+          "separator": ""
+        }
+      ],
+      "expected": []
+    },
+    {
+      "args": ["", "a"],
+      "expected": []
+    },
+    {
+      "args": ["a=1", "b"],
+      "expected": []
+    },
+    {
+      "args": ["a=1", 1],
+      "expected": []
+    },
+    {
+      "args": [
+        {
+          "$js": "a URL with a filters list"
+        },
+        "filters",
+        {
+          "separator": ","
+        }
+      ],
+      "expected": ["in-progress", "to-do", "done", "blocked"]
+    },
+    {
+      "args": [
+        {
+          "$js": "a URLSearchParams with an entry"
+        },
+        "a"
+      ],
+      "expected": ["1"]
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed query string"
+        },
+        "a"
+      ],
+      "expected": ["1", "2"]
+    },
+    {
+      "args": [42, "a"],
+      "expected": []
+    },
+    {
+      "args": [null, "a"],
+      "expected": []
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        },
+        "a"
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing getter"
+        },
+        "a"
+      ],
+      "expected": []
+    }
+  ],
+  "function": "getSearchParamValues"
+}

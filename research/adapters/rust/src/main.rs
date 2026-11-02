@@ -13,12 +13,13 @@
 
 mod codec;
 
+use std::borrow::Cow;
 use std::collections::BTreeMap;
 use std::env;
 
 use codec::{Probe, Tool, Value, accepts_any, decode_number, run_adapter};
 use serde_json::{Number, Value as Json, json};
-use url::Url;
+use url::{Url, form_urlencoded};
 
 /// Accept exactly two string arguments: a value and a base.
 fn are_two_strings(args: &[Value]) -> bool {
@@ -333,30 +334,83 @@ fn string_functions() -> [(&'static str, Vec<Probe>); 4] {
 }
 
 /// The URL probes: the `url` crate, a WHATWG URL parser.
-fn url_functions() -> [(&'static str, Vec<Probe>); 1] {
-    [(
-        "safeParseUrl",
-        vec![
-            Probe {
-                accepts: is_lone_string,
-                call: "Url::parse(value)",
-                run: |args| {
-                    parse_url(text(args)).map(|url| Value::Str(url.into()))
+fn url_functions() -> [(&'static str, Vec<Probe>); 2] {
+    [
+        (
+            "getSearchParamValues",
+            vec![
+                Probe {
+                    accepts: are_two_strings,
+                    call: "form_urlencoded::parse(value.as_bytes()), values under key",
+                    run: |args| match args {
+                        [Value::Str(value), Value::Str(key)] => {
+                            Ok(values_under(
+                                form_urlencoded::parse(value.as_bytes()),
+                                key,
+                            ))
+                        }
+                        _ => unreachable!(
+                            "are_two_strings accepted another type"
+                        ),
+                    },
                 },
-            },
-            Probe {
-                accepts: are_two_strings,
-                call: "Url::parse(base)?.join(value)",
-                run: |args| match args {
-                    [Value::Str(value), Value::Str(base)] => parse_url(base)?
-                        .join(value)
-                        .map(|url| Value::Str(url.into()))
-                        .map_err(|error| format!("ParseError::{error:?}")),
-                    _ => unreachable!("are_two_strings accepted another type"),
+                Probe {
+                    accepts: are_two_strings,
+                    call: "Url::parse(value)?.query_pairs(), values under key",
+                    run: |args| match args {
+                        [Value::Str(value), Value::Str(key)] => Ok(
+                            values_under(parse_url(value)?.query_pairs(), key),
+                        ),
+                        _ => unreachable!(
+                            "are_two_strings accepted another type"
+                        ),
+                    },
                 },
-            },
-        ],
-    )]
+            ],
+        ),
+        (
+            "safeParseUrl",
+            vec![
+                Probe {
+                    accepts: is_lone_string,
+                    call: "Url::parse(value)",
+                    run: |args| {
+                        parse_url(text(args)).map(|url| Value::Str(url.into()))
+                    },
+                },
+                Probe {
+                    accepts: are_two_strings,
+                    call: "Url::parse(base)?.join(value)",
+                    run: |args| match args {
+                        [Value::Str(value), Value::Str(base)] => {
+                            parse_url(base)?
+                                .join(value)
+                                .map(|url| Value::Str(url.into()))
+                                .map_err(|error| {
+                                    format!("ParseError::{error:?}")
+                                })
+                        }
+                        _ => unreachable!(
+                            "are_two_strings accepted another type"
+                        ),
+                    },
+                },
+            ],
+        ),
+    ]
+}
+
+/// Collect the values a parsed query holds under `key`, in order.
+fn values_under<'a>(
+    pairs: impl Iterator<Item = (Cow<'a, str>, Cow<'a, str>)>,
+    key: &str,
+) -> Value {
+    Value::Array(
+        pairs
+            .filter(|(name, _)| name == key)
+            .map(|(_, value)| Value::Str(value.into_owned()))
+            .collect(),
+    )
 }
 
 /// Run the case files named on the command line.

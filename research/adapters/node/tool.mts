@@ -395,6 +395,25 @@ type ReferenceWalk = {
   value: unknown;
 };
 
+/** What a search-param probe can run: its call's one separator. */
+type SearchParamCaseCheck = {
+  /**
+   * The case's arguments: a source, a key for `getSearchParamValues`, and
+   * optional options.
+   *
+   * @example `["a=1,2", "a", { separator: "," }]`
+   */
+  args: readonly unknown[];
+
+  /**
+   * The only separator the call can express, or `undefined` for a call that
+   * never splits.
+   *
+   * @example ","
+   */
+  separator: string | undefined;
+};
+
 /**
  * JSON's `JSON.parse`, typed `unknown`.
  *
@@ -579,6 +598,54 @@ export function isRangeCase(check: RangeCaseCheck): boolean {
   return hasRangeForm(check) && isBoundedRange(check);
 }
 
+/**
+ * Whether a `getSearchParamValues` case is a string source and a string key
+ * whose `separator` is exactly the one the call can express, so a call that
+ * never splits skips every case that asks for a split.
+ *
+ * @returns whether the probe can run the case.
+ */
+export function isSearchParamCase({
+  args: [source, key, options, ...rest],
+  separator,
+}: SearchParamCaseCheck): boolean {
+  return (
+    typeof key === "string" &&
+    rest.length === 0 &&
+    isSearchParamsCase({ args: [source, options], separator })
+  );
+}
+
+/**
+ * Whether a `getSearchParams` case is a string source whose `separator` is
+ * exactly the one the call can express, as `isSearchParamCase` checks.
+ *
+ * @returns whether the probe can run the case.
+ */
+export function isSearchParamsCase({
+  args: [source, options, ...rest],
+  separator,
+}: SearchParamCaseCheck): boolean {
+  if (typeof source !== "string" || rest.length) {
+    return false;
+  }
+
+  if (options === undefined) {
+    return separator === undefined;
+  }
+
+  if (typeof options !== "object" || options === null) {
+    return false;
+  }
+
+  const { separator: caseSeparator, ...others } = options as Record<
+    string,
+    unknown
+  >;
+
+  return Object.keys(others).length === 0 && caseSeparator === separator;
+}
+
 /** Accept only a string first argument; other cases are `n/a`. */
 export function isString([value]: readonly unknown[]): boolean {
   return typeof value === "string";
@@ -731,6 +798,22 @@ export function readRangeSpan(args: readonly unknown[]): RangeSpan | undefined {
   }
 
   return { end, start, step };
+}
+
+/**
+ * The `separator` a `getSearchParamValues` case's options ask for, as it is,
+ * or `undefined` when the case has no options object.
+ *
+ * @returns the separator, unchecked.
+ */
+export function readSearchParamSeparator([
+  ,
+  ,
+  options,
+]: readonly unknown[]): unknown {
+  return typeof options === "object" && options !== null
+    ? (options as Record<string, unknown>).separator
+    : undefined;
 }
 
 /**

@@ -1,0 +1,359 @@
+{
+  "cases": [
+    [
+      "object"
+    ],
+    [
+      "array"
+    ],
+    [
+      "number"
+    ],
+    [
+      "string"
+    ],
+    [
+      "null"
+    ],
+    [
+      "spaced"
+    ],
+    [
+      "bare"
+    ],
+    [
+      "broken"
+    ],
+    [
+      "empty"
+    ],
+    [
+      "undefined"
+    ],
+    [
+      "objectString"
+    ],
+    [
+      "missing"
+    ],
+    [
+      "missing",
+      {
+        "fallback": null
+      }
+    ],
+    [
+      "object",
+      {
+        "guard": {
+          "$js": "a guard accepting only plain objects"
+        }
+      }
+    ],
+    [
+      "number",
+      {
+        "guard": {
+          "$js": "a guard accepting only plain objects"
+        }
+      }
+    ],
+    [
+      "object",
+      {
+        "area": "session"
+      }
+    ],
+    [
+      42
+    ],
+    [
+      {
+        "$js": "a revoked proxy"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "safeStorageGetJson",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "JSON.parse(sessionStorage.getItem(key))",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "store.session.get(key)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "store2",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            1,
+            2
+          ]
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": "{"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "undefined"
+        },
+        {
+          "kind": "value",
+          "value": "[object Object]"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.14.4"
+    }
+  ],
+  "function": "safeStorageGetJson"
+}

@@ -60,7 +60,24 @@ var SENTINEL_ERRORS = []sentinelError{
 	{err: strconv.ErrSyntax, name: "strconv.ErrSyntax"},
 }
 
-// areTwoStrings accepts exactly two string arguments: a value and a base.
+// anyStrings widens a string slice to the codec's []any, keeping a nil slice
+// nil, so a missing key still reads as one.
+func anyStrings(values []string) any {
+	if values == nil {
+		return nil
+	}
+
+	widened := make([]any, len(values))
+
+	for index, value := range values {
+		widened[index] = value
+	}
+
+	return widened
+}
+
+// areTwoStrings accepts exactly two string arguments, such as a value and a
+// base.
 func areTwoStrings(args []any) bool {
 	if len(args) != 2 {
 		return false
@@ -277,6 +294,55 @@ func tools() []Tool {
 							return base64.StdEncoding.EncodeToString(
 								[]byte(args[0].(string)),
 							), nil
+						},
+					},
+				},
+				"getSearchParams": {
+					{
+						Accepts: isLoneString,
+						Call:    "url.ParseQuery(value)",
+						Run: func(args []any) (any, error) {
+							values, err := url.ParseQuery(args[0].(string))
+
+							if err != nil {
+								return nil, err
+							}
+
+							widened := make(map[string]any, len(values))
+
+							for key, list := range values {
+								widened[key] = anyStrings(list)
+							}
+
+							return widened, nil
+						},
+					},
+				},
+				"getSearchParamValues": {
+					{
+						Accepts: areTwoStrings,
+						Call:    "url.ParseQuery(value) then values[key]",
+						Run: func(args []any) (any, error) {
+							values, err := url.ParseQuery(args[0].(string))
+
+							if err != nil {
+								return nil, err
+							}
+
+							return anyStrings(values[args[1].(string)]), nil
+						},
+					},
+					{
+						Accepts: areTwoStrings,
+						Call:    "url.Parse(value) then .Query()[key]",
+						Run: func(args []any) (any, error) {
+							parsed, err := url.Parse(args[0].(string))
+
+							if err != nil {
+								return nil, err
+							}
+
+							return anyStrings(parsed.Query()[args[1].(string)]), nil
 						},
 					},
 				},

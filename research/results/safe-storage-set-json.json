@@ -1,0 +1,329 @@
+{
+  "cases": [
+    [
+      "key",
+      {
+        "a": 1
+      }
+    ],
+    [
+      "key",
+      "hi"
+    ],
+    [
+      "key",
+      42
+    ],
+    [
+      "key",
+      null
+    ],
+    [
+      "key",
+      [
+        1,
+        2
+      ]
+    ],
+    [
+      "key",
+      {
+        "$js": "a Date"
+      }
+    ],
+    [
+      "key",
+      {
+        "$number": "NaN"
+      }
+    ],
+    [
+      "key",
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      "key",
+      {
+        "$bigint": "12"
+      }
+    ],
+    [
+      "key",
+      {
+        "$js": "an object with a cycle"
+      }
+    ],
+    [
+      "key",
+      {
+        "$bigint": "12"
+      },
+      {
+        "bigint": "fallback"
+      }
+    ],
+    [
+      "key",
+      {
+        "$js": "an object with a cycle"
+      },
+      {
+        "circular": "fallback"
+      }
+    ],
+    [
+      "key",
+      {
+        "a": 1
+      },
+      {
+        "space": 2
+      }
+    ],
+    [
+      "key",
+      {
+        "$js": "an object with a throwing getter"
+      }
+    ],
+    [
+      "key",
+      {
+        "a": 1
+      },
+      {
+        "area": "session"
+      }
+    ],
+    [
+      42,
+      {
+        "a": 1
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "safeStorageSetJson",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "sessionStorage.setItem(key, JSON.stringify(value)); sessionStorage.getItem(key)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "\"hi\""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "[1,2]"
+        },
+        {
+          "kind": "value",
+          "value": "\"1970-01-01T00:00:00.000Z\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "undefined"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":1}"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "store.session.set(key, value); sessionStorage.getItem(key)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "store2",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"a\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "\"hi\""
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "[1,2]"
+        },
+        {
+          "kind": "value",
+          "value": "\"1970-01-01T00:00:00.000Z\""
+        },
+        {
+          "kind": "value",
+          "value": "null"
+        },
+        {
+          "kind": "value",
+          "value": "undefined"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "{\"a\":1}"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.14.4"
+    }
+  ],
+  "function": "safeStorageSetJson"
+}
