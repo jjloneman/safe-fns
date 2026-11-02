@@ -47,6 +47,8 @@ import { LUXON } from "./node/luxon.mts";
 import { MOMENT } from "./node/moment.mts";
 import { PLUR } from "./node/plur.mts";
 import { PLURALIZE } from "./node/pluralize.mts";
+import { QS } from "./node/qs.mts";
+import { QUERY_STRING } from "./node/query-string.mts";
 import { RADASH } from "./node/radash.mts";
 import { RAMDA } from "./node/ramda.mts";
 import { REMEDA } from "./node/remeda.mts";
@@ -54,6 +56,7 @@ import { RFDC } from "./node/rfdc.mts";
 import { SAFE_STABLE_STRINGIFY } from "./node/safe-stable-stringify.mts";
 import { SINDRESORHUS_IS } from "./node/sindresorhus-is.mts";
 import { SINDRESORHUS_TRANSLITERATE } from "./node/sindresorhus-transliterate.mts";
+import { STORE2 } from "./node/store2.mts";
 import { TOML } from "./node/toml.mts";
 import { errorName } from "./node/tool.mts";
 import { TRANSLITERATION } from "./node/transliteration.mts";
@@ -116,6 +119,7 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ["a boxed JSON string", () => new String('{"a":1}')],
   ["a boxed number", () => new Number(1)],
   ["a boxed numeric string", () => new String(" 42 ")],
+  ["a boxed query string", () => new String("a=1&a=2")],
   ["a boxed string", () => new String("hi")],
   ["a boxed true", () => new Boolean(true)],
   ["a boxed URL string", () => new String("https://example.com/")],
@@ -145,6 +149,12 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
     () => (): never => {
       throw new Error("boom");
     },
+  ],
+  [
+    "a guard accepting only plain objects",
+    () =>
+      (value: unknown): boolean =>
+        typeof value === "object" && value !== null && !Array.isArray(value),
   ],
   [
     "a key function reading id",
@@ -268,6 +278,13 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ["a URL", () => new URL("https://example.com/")],
   ["a URLSearchParams with an entry", () => new URLSearchParams("a=1")],
   [
+    "a URL with a filters list",
+    () =>
+      new URL(
+        "https://example.com/tasks?filters=in-progress,to-do%2Cdone&filters=blocked"
+      ),
+  ],
+  [
     "a value function reading n",
     () =>
       ({ n }: { n: unknown }): unknown =>
@@ -352,6 +369,9 @@ const TOOLS: readonly Tool[] = [
   DEEPMERGE,
   DEFU,
   CORE_JS,
+  QS,
+  QUERY_STRING,
+  STORE2,
 ];
 
 /** Build an array whose second item is the array itself. */

@@ -1,8 +1,8 @@
-import { DateTime } from "luxon";
+import { DateTime, Duration } from "luxon";
 
 import type { Tool } from "./tool.mts";
 
-import { isString, packageVersion } from "./tool.mts";
+import { hasNoOptions, isString, packageVersion } from "./tool.mts";
 
 /** luxon, whose `DateTime` reports an invalid date by returning `null`. */
 export const LUXON: Tool = {
@@ -27,6 +27,16 @@ export const LUXON: Tool = {
         call: 'DateTime.fromISO(value, { zone: "utc" }).toISO()',
         run: ([value]) =>
           DateTime.fromISO(value as string, { zone: "utc" }).toISO(),
+      },
+    ],
+    toMs: [
+      {
+        accepts: hasNoOptions,
+        call: "Duration.fromObject(value).toMillis()",
+        run: ([value]) =>
+          Duration.fromObject(
+            value as Parameters<typeof Duration.fromObject>[0]
+          ).toMillis(),
       },
     ],
   },

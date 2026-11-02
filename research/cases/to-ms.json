@@ -1,0 +1,338 @@
+{
+  "cases": [
+    {
+      "args": [
+        {
+          "minutes": 2
+        }
+      ],
+      "expected": 120000
+    },
+    {
+      "args": [
+        {
+          "minutes": 2.5
+        }
+      ],
+      "expected": 150000
+    },
+    {
+      "args": [
+        {
+          "minutes": 2,
+          "seconds": 30
+        }
+      ],
+      "expected": 150000
+    },
+    {
+      "args": [
+        {
+          "seconds": 90
+        }
+      ],
+      "expected": 90000
+    },
+    {
+      "args": [
+        {
+          "weeks": 1
+        }
+      ],
+      "expected": 604800000
+    },
+    {
+      "args": [
+        {
+          "days": 1
+        }
+      ],
+      "expected": 86400000
+    },
+    {
+      "args": [
+        {
+          "days": 1,
+          "hours": 2,
+          "milliseconds": 4,
+          "minutes": 3,
+          "seconds": 5,
+          "weeks": 1
+        }
+      ],
+      "expected": 698585004
+    },
+    {
+      "args": [
+        {
+          "hours": 1.1
+        }
+      ],
+      "expected": 3960000
+    },
+    {
+      "args": [
+        {
+          "milliseconds": 0.5
+        }
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        {
+          "milliseconds": 0.4
+        }
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        {
+          "milliseconds": -0.5
+        }
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        {
+          "hours": -1
+        }
+      ],
+      "expected": -3600000
+    },
+    {
+      "args": [
+        {
+          "hours": 1,
+          "minutes": -15
+        }
+      ],
+      "expected": 2700000
+    },
+    {
+      "args": [
+        {
+          "minutes": {
+            "$number": "-0"
+          }
+        }
+      ],
+      "expected": 0
+    },
+    {
+      "args": [{}],
+      "expected": 0
+    },
+    {
+      "args": [
+        {
+          "minutes": {
+            "$undefined": true
+          }
+        }
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        {
+          "minute": 5
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "mins": 5
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "months": 1
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "years": 1
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "microseconds": 1
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "minutes": "5"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "minutes": null
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "minutes": {
+            "$number": "NaN"
+          }
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "minutes": {
+            "$number": "Infinity"
+          }
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "days": 100000000
+        }
+      ],
+      "expected": 8640000000000000
+    },
+    {
+      "args": [
+        {
+          "days": 1000000000
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "minutes": {
+            "$bigint": "5"
+          }
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "minute": 5
+        },
+        {
+          "fallback": null
+        }
+      ],
+      "expected": null
+    },
+    {
+      "args": [
+        {
+          "minutes": 2
+        },
+        {
+          "fallback": null
+        }
+      ],
+      "expected": 120000
+    },
+    {
+      "args": [5000],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": ["5m"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [null],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [[]],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a null-prototype object"
+        }
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing getter"
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "toMs"
+}

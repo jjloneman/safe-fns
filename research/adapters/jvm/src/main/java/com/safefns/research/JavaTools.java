@@ -360,12 +360,12 @@ final class JavaTools {
   }
 
   /**
-   * Accept exactly two string arguments: a value and a base.
+   * Accept exactly two string arguments, such as a value and a base.
    *
    * @param args the decoded arguments
    * @return whether both are strings
    */
-  private static boolean areTwoStrings(final List<Object> args) {
+  static boolean areTwoStrings(final List<Object> args) {
     return (
       args.size() == 2 &&
       args.get(0) instanceof String &&

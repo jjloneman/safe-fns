@@ -1,8 +1,8 @@
-import { formatISO, parseISO } from "date-fns";
+import { formatISO, milliseconds, parseISO } from "date-fns";
 
 import type { Tool } from "./tool.mts";
 
-import { isString, packageVersion } from "./tool.mts";
+import { hasNoOptions, isString, packageVersion } from "./tool.mts";
 
 /** date-fns, whose `formatISO` writes the runtime's local offset. */
 export const DATE_FNS: Tool = {
@@ -18,6 +18,14 @@ export const DATE_FNS: Tool = {
         accepts: isString,
         call: "parseISO(value).toISOString()",
         run: ([value]) => parseISO(value as string).toISOString(),
+      },
+    ],
+    toMs: [
+      {
+        accepts: hasNoOptions,
+        call: "milliseconds(value)",
+        run: ([value]) =>
+          milliseconds(value as Parameters<typeof milliseconds>[0]),
       },
     ],
   },

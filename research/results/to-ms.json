@@ -1,0 +1,1507 @@
+{
+  "cases": [
+    [
+      {
+        "minutes": 2
+      }
+    ],
+    [
+      {
+        "minutes": 2.5
+      }
+    ],
+    [
+      {
+        "minutes": 2,
+        "seconds": 30
+      }
+    ],
+    [
+      {
+        "seconds": 90
+      }
+    ],
+    [
+      {
+        "weeks": 1
+      }
+    ],
+    [
+      {
+        "days": 1
+      }
+    ],
+    [
+      {
+        "days": 1,
+        "hours": 2,
+        "milliseconds": 4,
+        "minutes": 3,
+        "seconds": 5,
+        "weeks": 1
+      }
+    ],
+    [
+      {
+        "hours": 1.1
+      }
+    ],
+    [
+      {
+        "milliseconds": 0.5
+      }
+    ],
+    [
+      {
+        "milliseconds": 0.4
+      }
+    ],
+    [
+      {
+        "milliseconds": -0.5
+      }
+    ],
+    [
+      {
+        "hours": -1
+      }
+    ],
+    [
+      {
+        "hours": 1,
+        "minutes": -15
+      }
+    ],
+    [
+      {
+        "minutes": {
+          "$number": "-0"
+        }
+      }
+    ],
+    [
+      {}
+    ],
+    [
+      {
+        "minutes": {
+          "$undefined": true
+        }
+      }
+    ],
+    [
+      {
+        "minute": 5
+      }
+    ],
+    [
+      {
+        "mins": 5
+      }
+    ],
+    [
+      {
+        "months": 1
+      }
+    ],
+    [
+      {
+        "years": 1
+      }
+    ],
+    [
+      {
+        "microseconds": 1
+      }
+    ],
+    [
+      {
+        "minutes": "5"
+      }
+    ],
+    [
+      {
+        "minutes": null
+      }
+    ],
+    [
+      {
+        "minutes": {
+          "$number": "NaN"
+        }
+      }
+    ],
+    [
+      {
+        "minutes": {
+          "$number": "Infinity"
+        }
+      }
+    ],
+    [
+      {
+        "days": 100000000
+      }
+    ],
+    [
+      {
+        "days": 1000000000
+      }
+    ],
+    [
+      {
+        "minutes": {
+          "$bigint": "5"
+        }
+      }
+    ],
+    [
+      {
+        "minute": 5
+      },
+      {
+        "fallback": null
+      }
+    ],
+    [
+      {
+        "minutes": 2
+      },
+      {
+        "fallback": null
+      }
+    ],
+    [
+      5000
+    ],
+    [
+      "5m"
+    ],
+    [
+      null
+    ],
+    [
+      []
+    ],
+    [
+      {
+        "$js": "a null-prototype object"
+      }
+    ],
+    [
+      {
+        "$js": "a revoked proxy"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a throwing getter"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "toMs",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 120000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 90000
+        },
+        {
+          "kind": "value",
+          "value": 604800000
+        },
+        {
+          "kind": "value",
+          "value": 86400000
+        },
+        {
+          "kind": "value",
+          "value": 698585004
+        },
+        {
+          "kind": "value",
+          "value": 3960000
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": -1
+        },
+        {
+          "kind": "value",
+          "value": -3600000
+        },
+        {
+          "kind": "value",
+          "value": 2700000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": 8640000000000000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": 120000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "milliseconds(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "date-fns",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 120000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 90000
+        },
+        {
+          "kind": "value",
+          "value": 604800000
+        },
+        {
+          "kind": "value",
+          "value": 86400000
+        },
+        {
+          "kind": "value",
+          "value": 698585000
+        },
+        {
+          "kind": "value",
+          "value": 3960000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": -3600000
+        },
+        {
+          "kind": "value",
+          "value": 2700000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 2629746000
+        },
+        {
+          "kind": "value",
+          "value": 31556951999
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 300000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 8640000000000000
+        },
+        {
+          "kind": "value",
+          "value": 86400000000000000
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.4.0"
+    },
+    {
+      "call": "dayjs.duration(value).asMilliseconds()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "Day.js",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 120000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 90000
+        },
+        {
+          "kind": "value",
+          "value": 604800000
+        },
+        {
+          "kind": "value",
+          "value": 86400000
+        },
+        {
+          "kind": "value",
+          "value": 698585004
+        },
+        {
+          "kind": "value",
+          "value": 3960000.0000000005
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 0.4
+        },
+        {
+          "kind": "value",
+          "value": -0.5
+        },
+        {
+          "kind": "value",
+          "value": -3600000
+        },
+        {
+          "kind": "value",
+          "value": 2700000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 300000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 2628000000
+        },
+        {
+          "kind": "value",
+          "value": 31536000000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 300000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 8640000000000000
+        },
+        {
+          "kind": "value",
+          "value": 86400000000000000
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 5000
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.11.23"
+    },
+    {
+      "call": "Temporal.Duration.from(value).total(\"millisecond\")",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:d816081d0ffc1ee8c6e57b9de1a9fd2978c52ca97e32d91b011015c02481d02d",
+      "locale": "-",
+      "name": "Hermes",
+      "outcomes": [
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "error": "ReferenceError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "hermes",
+      "tier": 1,
+      "version": "0.12.0"
+    },
+    {
+      "call": "Temporal.Duration.from(value).total(\"millisecond\")",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 120000
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 90000
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 86400000
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": -3600000
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.001
+        },
+        {
+          "kind": "value",
+          "value": 300000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 8640000000000000
+        },
+        {
+          "kind": "value",
+          "value": 86400000000000000
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "Duration.fromObject(value).toMillis()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "luxon",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 120000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 90000
+        },
+        {
+          "kind": "value",
+          "value": 604800000
+        },
+        {
+          "kind": "value",
+          "value": 86400000
+        },
+        {
+          "kind": "value",
+          "value": 698585004
+        },
+        {
+          "kind": "value",
+          "value": 3960000.0000000005
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 0.4
+        },
+        {
+          "kind": "value",
+          "value": -0.5
+        },
+        {
+          "kind": "value",
+          "value": -3600000
+        },
+        {
+          "kind": "value",
+          "value": 2700000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 300000
+        },
+        {
+          "error": "InvalidUnitError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 2592000000
+        },
+        {
+          "kind": "value",
+          "value": 31536000000
+        },
+        {
+          "error": "InvalidUnitError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 300000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "InvalidArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 8640000000000000
+        },
+        {
+          "kind": "value",
+          "value": 86400000000000000
+        },
+        {
+          "kind": "value",
+          "value": 300000
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "InvalidArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidArgumentError",
+          "kind": "error"
+        },
+        {
+          "error": "InvalidArgumentError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "3.7.2"
+    },
+    {
+      "call": "moment.duration(value).asMilliseconds()",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
+      "locale": "en-US",
+      "name": "Moment.js",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 120000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 90000
+        },
+        {
+          "kind": "value",
+          "value": 604800000
+        },
+        {
+          "kind": "value",
+          "value": 86400000
+        },
+        {
+          "kind": "value",
+          "value": 698585004
+        },
+        {
+          "kind": "value",
+          "value": 3960000
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 0.4
+        },
+        {
+          "kind": "value",
+          "value": -0.5
+        },
+        {
+          "kind": "value",
+          "value": -3600000
+        },
+        {
+          "kind": "value",
+          "value": 2700000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 300000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 2592000000
+        },
+        {
+          "kind": "value",
+          "value": 31536000000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 300000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "Infinity"
+          }
+        },
+        {
+          "kind": "value",
+          "value": 8640000000000000
+        },
+        {
+          "kind": "value",
+          "value": 86400000000000000
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": 5000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.31.0"
+    },
+    {
+      "call": "timedelta(**value) / timedelta(milliseconds=1)",
+      "image": "python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+      "inputs": "sha256:ede8245272629845a50d23e15814aeac5947ceddeeac184c55ae30cda8569748",
+      "locale": "C.UTF-8",
+      "name": "Python",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": 120000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 150000
+        },
+        {
+          "kind": "value",
+          "value": 90000
+        },
+        {
+          "kind": "value",
+          "value": 604800000
+        },
+        {
+          "kind": "value",
+          "value": 86400000
+        },
+        {
+          "kind": "value",
+          "value": 698585004
+        },
+        {
+          "kind": "value",
+          "value": 3960000
+        },
+        {
+          "kind": "value",
+          "value": 0.5
+        },
+        {
+          "kind": "value",
+          "value": 0.4
+        },
+        {
+          "kind": "value",
+          "value": -0.5
+        },
+        {
+          "kind": "value",
+          "value": -3600000
+        },
+        {
+          "kind": "value",
+          "value": 2700000
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 0.001
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
+          "error": "OverflowError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 8640000000000000
+        },
+        {
+          "error": "OverflowError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": 300000
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "python",
+      "tier": 2,
+      "version": "3.14.8"
+    }
+  ],
+  "function": "toMs"
+}

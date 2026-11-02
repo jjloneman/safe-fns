@@ -81,6 +81,24 @@ const PROBES: Readonly<Record<string, readonly HermesProbe[]>> = {
     { argumentTypes: ["string"], call: "JSON.stringify(JSON.parse(value))" },
   ],
   encodeBase64: [{ call: "btoa(value)" }],
+  getSearchParams: [
+    {
+      argumentTypes: ["string"],
+      call: "Object.fromEntries(new URLSearchParams(value))",
+    },
+  ],
+  getSearchParamValues: [
+    {
+      argumentTypes: ["string", "string"],
+      call: "new URLSearchParams(value).getAll(key)",
+      parameters: ["value", "key"],
+    },
+    {
+      argumentTypes: ["string", "string"],
+      call: "new URL(value).searchParams.getAll(key)",
+      parameters: ["value", "key"],
+    },
+  ],
   isDeepEqual: [
     {
       argumentTypes: ["any", "any"],
@@ -152,6 +170,12 @@ const PROBES: Readonly<Record<string, readonly HermesProbe[]>> = {
     {
       argumentTypes: ["string"],
       call: 'value.normalize("NFKD").replace(/\\p{M}/gu, "")',
+    },
+  ],
+  toMs: [
+    {
+      argumentTypes: ["any"],
+      call: 'Temporal.Duration.from(value).total("millisecond")',
     },
   ],
   trimBlank: [{ argumentTypes: ["string"], call: "value.trim()" }],

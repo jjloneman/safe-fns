@@ -235,7 +235,7 @@
     {
       "call": "btoa(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:eb83af30715fb74d9a945dbce3c60a69b4a98e11f63bff7ec4399fd475745030",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -315,7 +315,7 @@
     {
       "call": "Buffer.from(value).toString(\"base64\")",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:eb83af30715fb74d9a945dbce3c60a69b4a98e11f63bff7ec4399fd475745030",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -390,7 +390,7 @@
     {
       "call": "new TextEncoder().encode(value).toBase64()",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:eb83af30715fb74d9a945dbce3c60a69b4a98e11f63bff7ec4399fd475745030",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -462,7 +462,7 @@
     {
       "call": "value.toBase64()",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:eb83af30715fb74d9a945dbce3c60a69b4a98e11f63bff7ec4399fd475745030",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -526,7 +526,7 @@
     {
       "call": "Base64.encode(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:eb83af30715fb74d9a945dbce3c60a69b4a98e11f63bff7ec4399fd475745030",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
       "locale": "en-US",
       "name": "js-base64",
       "outcomes": [
@@ -598,7 +598,7 @@
     {
       "call": "Base64.fromUint8Array(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:eb83af30715fb74d9a945dbce3c60a69b4a98e11f63bff7ec4399fd475745030",
+      "inputs": "sha256:a48f4709531bd357567d61eb62beea5c5b1faf241f3c5a76e4c527a7e03bf9ee",
       "locale": "en-US",
       "name": "js-base64",
       "outcomes": [
