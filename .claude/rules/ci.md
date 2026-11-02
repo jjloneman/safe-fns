@@ -71,7 +71,7 @@ What to know before editing a workflow. AGENTS.md's CI section lists what runs; 
 - **`renovate.yml` authenticates as a GitHub App**, minted by `actions/create-github-app-token` from `RENOVATE_APP_CLIENT_ID` and `RENOVATE_APP_PRIVATE_KEY`.
   - A PR or push made with `GITHUB_TOKEN` starts no workflows, so Renovate's PRs would never run CI.
   - The job itself grants only `contents: read`; the App's own permissions do the writing.
-  - `RENOVATE_GIT_AUTHOR` and `RENOVATE_USERNAME` name the App's bot user (`safe-fns-renovate[bot]`, id `346092702`); Renovate tells its own commits from someone else's by author, and stops rebasing a branch it thinks someone else edited.
+  - `RENOVATE_GIT_AUTHOR` and `RENOVATE_USERNAME` name the App's bot user (`jjloneman-renovate[bot]`, id `346092702`); Renovate tells its own commits from someone else's by author, and stops rebasing a branch it thinks someone else edited.
 - **Its cron must fall inside the config's `schedule`** (Sunday 6:00 to 8:59am, New York), since Renovate creates and updates branches only inside it.
   - The cron sets `timezone: "America/New_York"`, so it follows daylight saving with no UTC conversion.
   - It fires at 6:15, off the hour and half hour, when GitHub's scheduler is busiest and a run is likelier to be delayed or dropped; the window absorbs a late start.
