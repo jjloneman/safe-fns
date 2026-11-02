@@ -60,8 +60,8 @@ jobs:
 
           # Renovate tells its own commits from someone else's by author, so it
           # needs the App's bot identity, or it stops rebasing its own PRs.
-          RENOVATE_GIT_AUTHOR: "safe-fns-renovate[bot] <346092702+safe-fns-renovate[bot]@users.noreply.github.com>"
+          RENOVATE_GIT_AUTHOR: "jjloneman-renovate[bot] <346092702+jjloneman-renovate[bot]@users.noreply.github.com>"
           RENOVATE_ONBOARDING: "false"
           RENOVATE_REPOSITORIES: ${{ github.repository }}
           RENOVATE_REQUIRE_CONFIG: required
-          RENOVATE_USERNAME: "safe-fns-renovate[bot]"
+          RENOVATE_USERNAME: "jjloneman-renovate[bot]"
