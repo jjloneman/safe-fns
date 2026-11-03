@@ -10,10 +10,12 @@
     "ajv": "8.20.0",
     "any-ascii": "0.3.3",
     "canonicalize": "5.1.0",
+    "consola": "3.4.2",
     "core-js-pure": "3.51.0",
     "csv-parse": "7.0.3",
     "date-fns": "4.4.0",
     "dayjs": "1.11.23",
+    "debug": "4.4.3",
     "decode-uri-component": "0.5.1",
     "deepmerge": "4.3.1",
     "defu": "6.1.7",
@@ -35,6 +37,7 @@
     "json-stringify-safe": "5.0.1",
     "klona": "2.0.6",
     "lodash": "4.18.1",
+    "loglevel": "1.9.2",
     "luxon": "3.7.2",
     "moment": "2.31.0",
     "plur": "6.0.0",
@@ -59,6 +62,7 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
+    "@types/debug": "4.1.13",
     "@types/ini": "4.1.1",
     "@types/jsdom": "30.0.0",
     "@types/json-stringify-safe": "5.0.3",

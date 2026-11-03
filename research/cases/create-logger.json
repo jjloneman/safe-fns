@@ -1,0 +1,153 @@
+{
+  "cases": [
+    {
+      "args": ["app", "info", ["hello"]],
+      "expected": ["console.info: [app] hello"]
+    },
+    {
+      "args": ["app", "info", ["hello %s", "x"]],
+      "expected": ["console.info: [app] hello %s x"]
+    },
+    {
+      "args": [
+        "app",
+        "info",
+        [
+          "count",
+          {
+            "a": 1
+          }
+        ]
+      ],
+      "expected": ["console.info: [app] count { a: 1 }"]
+    },
+    {
+      "args": ["app", "debug", ["d"]],
+      "expected": ["console.debug: [app] d"]
+    },
+    {
+      "args": ["app", "log", ["l"]],
+      "expected": ["console.log: [app] l"]
+    },
+    {
+      "args": ["app", "warn", ["w"]],
+      "expected": ["console.warn: [app] w"]
+    },
+    {
+      "args": ["app", "error", ["e"]],
+      "expected": ["console.error: [app] e"]
+    },
+    {
+      "args": ["app", "trace", ["t"]],
+      "expected": ["console.trace: [app] t"]
+    },
+    {
+      "args": ["50%s", "info", ["a"]],
+      "expected": ["console.info: [50%s] a"]
+    },
+    {
+      "args": ["50%s", "info", []],
+      "expected": ["console.info: [50%s]"]
+    },
+    {
+      "args": ["", "info", ["x"]],
+      "expected": ["console.info: x"]
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        },
+        "info",
+        ["x"]
+      ],
+      "expected": ["console.info: x"]
+    },
+    {
+      "args": ["no-debug", "debug", ["d"], "without console.debug"],
+      "expected": []
+    },
+    {
+      "args": ["no-console", "info", ["x"], "without console"],
+      "expected": []
+    },
+    {
+      "args": ["getter", "info", ["x"], "console.info is a throwing getter"],
+      "expected": []
+    },
+    {
+      "args": [
+        "replaced",
+        "info",
+        ["x"],
+        "console.info replaced after creation"
+      ],
+      "expected": ["console.info (replaced): [replaced] x"]
+    },
+    {
+      "args": [
+        "app",
+        "warn",
+        ["w"],
+        {
+          "$undefined": true
+        },
+        {
+          "prefix": {
+            "$js": "a prefix showing the level"
+          }
+        }
+      ],
+      "expected": ["console.warn: [app] WARN w"]
+    },
+    {
+      "args": [
+        "app",
+        "warn",
+        ["w"],
+        {
+          "$undefined": true
+        },
+        {
+          "prefix": {
+            "$js": "a prefix that throws"
+          }
+        }
+      ],
+      "expected": ["console.warn: [app] w"]
+    },
+    {
+      "args": [
+        "app",
+        "warn",
+        ["w"],
+        {
+          "$undefined": true
+        },
+        {
+          "prefix": {
+            "$js": "a prefix returning a number"
+          }
+        }
+      ],
+      "expected": ["console.warn: [app] w"]
+    },
+    {
+      "args": [
+        "app",
+        "warn",
+        ["w"],
+        {
+          "$undefined": true
+        },
+        {
+          "prefix": {
+            "$js": "a prefix returning an empty string"
+          }
+        }
+      ],
+      "expected": ["console.warn: w"]
+    }
+  ],
+  "function": "createLogger"
+}

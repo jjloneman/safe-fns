@@ -18,6 +18,7 @@ on:
       - "pnpm-lock.yaml"
       - "prettier.config.ts"
       - "research/**"
+      - "scripts/lib/typescript-versions.ts"
       - "scripts/research/**"
       - "test/cross-realm-inputs.ts"
       - "test/hostile-inputs.ts"
@@ -47,6 +48,9 @@ jobs:
       # AssemblyScript probes likewise need their own install, for their types.
       - run: pnpm --dir research install --frozen-lockfile
       - run: pnpm --dir research/adapters/assemblyscript install --frozen-lockfile
+      # The type-only libraries `pnpm research:types` compares, in their own
+      # pnpm root so a bump never moves the Node adapter's lockfile.
+      - run: pnpm --dir research/types install --frozen-lockfile
       - run: pnpm exec eslint research scripts/research
       - run: pnpm exec tsc --project research
       - run: pnpm exec tsc --project research/adapters/assemblyscript
@@ -62,6 +66,11 @@ jobs:
       # The fold audit must match its rules and the pinned Node's Unicode
       # tables; builds the node image, since the scan runs inside it.
       - run: pnpm research:audit --check
+
+      # The type-helper tables must match their cases, the planned helpers,
+      # and the pinned compilers and libraries; runs on the host, compiling
+      # with the root's `typescript-<version>` aliases.
+      - run: pnpm research:types --check
 
   # Re-posts the shared `## ⏱️ CI timings` comment once this workflow ends, so
   # the table covers both workflows whichever finishes last.

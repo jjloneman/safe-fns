@@ -1,0 +1,12 @@
+{
+  "name": "safe-fns-research-types",
+  "version": "0.0.0",
+  "private": true,
+  "description": "🔬 The type-only libraries `pnpm research:types` compares the planned type helpers with, installed apart from the published package and the Node adapter",
+  "devDependencies": {
+    "ts-essentials": "10.2.1",
+    "type-fest": "5.10.0",
+    "utility-types": "3.11.0"
+  },
+  "packageManager": "pnpm@12.5.1"
+}

@@ -23,6 +23,7 @@ the generated tables instead of summarizing other tools' docs.
 - [➕ Adding a function or a tool](#-adding-a-function-or-a-tool)
 - [🖌️ Formatters](#️-formatters)
 - [🔤 The fold audit](#-the-fold-audit)
+- [🔷 Type checks](#-type-checks)
 - [🔎 Usage in the wild](#-usage-in-the-wild)
 
 ---
@@ -222,6 +223,11 @@ Each adapter service sits in one profile, named for its image.
     the same way, each with its codec twin: `Codec.cs`, `codec.go`, and
     `src/codec.rs`. Go and .NET use only their standard libraries; Rust's crates
     come from the committed `Cargo.lock`.
+- `types/` — the planned type helpers, one file each plus their shared
+  `leaf.ts`, that [Type checks](#-type-checks) compiles; also its own pnpm root,
+  for the type-only libraries they're compared with.
+- `audits/` — generated tables that aren't adapter results: the fold audit's and
+  the type checks'; never edit them by hand.
 - `results/<function>.json` and `.md` — generated; never edit them by hand.
   - The Markdown has a tiers 0–2 summary for decision records, a by-outcome
     table for functions with few distinct results, the full table, and every
@@ -252,8 +258,10 @@ Each adapter service sits in one profile, named for its image.
 - The host-side TypeScript lives in [scripts/research/](../scripts/research/):
   the runner, the codec, result merging, and the table generator, plus
   `usage-search.ts` and its pure halves, `usage-tally.ts` and
-  `call-arguments.ts` (see [Usage in the wild](#-usage-in-the-wild)), and
-  `logging.ts`, the log and error helpers both scripts share.
+  `call-arguments.ts` (see [Usage in the wild](#-usage-in-the-wild)),
+  `type-checks.ts` with its cases, `type-check-cases.ts`, and its table,
+  `type-check-table.ts` (see [Type checks](#-type-checks)), and `logging.ts`,
+  the log and error helpers the scripts share.
 
 ## 📦 The case format
 
@@ -483,6 +491,34 @@ any-ascii's spelling beside each as a reference. It writes
   never runs it.
 - `pnpm research:audit --check` fails when the committed table no longer
   matches, as after a rule change or a Node bump; rerun it without `--check`.
+
+## 🔷 Type checks
+
+`pnpm research:types` checks the planned type helpers, which have no runtime
+value for an adapter to report. It compiles each case once per consumer
+TypeScript version the package supports, for the planned helper and each
+compared library, and writes one table per helper to `audits/` (such as
+[audits/partial-deep.md](audits/partial-deep.md)).
+
+- The planned helpers live in `types/`, one file each, checked by this
+  directory's `tsconfig.json`; the cases and the compared libraries are in
+  [scripts/research/type-check-cases.ts](../scripts/research/type-check-cases.ts).
+- Each case is one assertion, written against the helper as `H`, that must
+  resolve to `true`; it's compiled with `strict`, `lib: ["es2022"]`, no `types`,
+  and `skipLibCheck`.
+- It runs on the host, not in a container: the compilers are the root's pinned
+  `typescript-<version>` aliases, the same list `pnpm test:consumer` checks
+  (`scripts/lib/typescript-versions.ts`), and the libraries are installed in
+  `types/`, its own pnpm root, so a bump to one never moves the Node adapter's
+  lockfile. Run `pnpm --dir research/types install` once first.
+- It writes its check files under `types/node_modules/.cache/type-checks/` and
+  removes them afterward, even when a run fails.
+- A compiler that fails without printing a compiler error, such as a missing
+  binary or a crash, fails the run rather than reading as a pass.
+- `pnpm research:types --check`, run by `research-check.yml`, fails when a
+  committed table no longer matches, as after a case, a library, or a compiler
+  changes, or when a table's helper is gone; rerun it without `--check`, and
+  delete a gone helper's table.
 
 ## 🔎 Usage in the wild
 

@@ -6,6 +6,7 @@ import type {
   CaseFile,
   Outcome,
 } from "../../scripts/research/results.ts";
+import type { ConsoleMethod } from "./node/logger-capture.mts";
 import type { Probe, Tool } from "./node/tool.mts";
 
 import { decodeValue, encodeValue } from "../../scripts/research/codec.ts";
@@ -16,10 +17,12 @@ import { HOSTILE_INPUTS } from "../../test/hostile-inputs.ts";
 import { AJV_COERCE } from "./node/ajv.mts";
 import { ANY_ASCII } from "./node/any-ascii.mts";
 import { CANONICALIZE } from "./node/canonicalize.mts";
+import { CONSOLA } from "./node/consola.mts";
 import { CORE_JS } from "./node/core-js.mts";
 import { CSV } from "./node/csv.mts";
 import { DATE_FNS } from "./node/date-fns.mts";
 import { DAYJS } from "./node/dayjs.mts";
+import { DEBUG } from "./node/debug.mts";
 import { DECODE_URI_COMPONENT } from "./node/decode-uri-component.mts";
 import { DEEPMERGE } from "./node/deepmerge.mts";
 import { DEFU } from "./node/defu.mts";
@@ -43,6 +46,7 @@ import { JSON_STRINGIFY_SAFE } from "./node/json-stringify-safe.mts";
 import { JSON_FORMAT } from "./node/json.mts";
 import { KLONA } from "./node/klona.mts";
 import { LODASH } from "./node/lodash.mts";
+import { LOGLEVEL } from "./node/loglevel.mts";
 import { LUXON } from "./node/luxon.mts";
 import { MOMENT } from "./node/moment.mts";
 import { PLUR } from "./node/plur.mts";
@@ -81,6 +85,23 @@ import { ZOD } from "./node/zod.mts";
  * - A `$js` case names a factory below, or an entry in the repo's own hostile
  *   and cross-realm test inputs.
  */
+
+/** What `createLogger` passes its `prefix` option. */
+type PrefixInput = {
+  /**
+   * The method being read.
+   *
+   * @example "warn"
+   */
+  level: ConsoleMethod;
+
+  /**
+   * The logger's scope.
+   *
+   * @example "app"
+   */
+  scope: string;
+};
 
 /** One case's encoded arguments, and the probe to run them through. */
 type ProbeRun = {
@@ -264,6 +285,15 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
     "a null-prototype object with a",
     () => Object.assign(Object.create(null) as object, { a: 1 }),
   ],
+  ["a prefix returning an empty string", () => () => ""],
+  ["a prefix returning a number", () => () => 42],
+  ["a prefix showing the level", () => showLevel],
+  [
+    "a prefix that throws",
+    () => () => {
+      throw new Error("prefix");
+    },
+  ],
   ["a proxy of a plain object", () => new Proxy({ a: 1 }, {})],
   ["a RegExp", () => /a/gu],
   ["a RegExp with other flags", () => /a/gi],
@@ -372,6 +402,9 @@ const TOOLS: readonly Tool[] = [
   QS,
   QUERY_STRING,
   STORE2,
+  DEBUG,
+  LOGLEVEL,
+  CONSOLA,
 ];
 
 /** Build an array whose second item is the array itself. */
@@ -414,7 +447,7 @@ function objectWithSharedReference(): Record<string, unknown> {
   return { a: shared, b: shared };
 }
 
-/** Build the value a `$js` tag names. */
+/** Build the value a `$js` case names, from `JS_FACTORIES`. */
 function resolveJs(name: string): unknown {
   const factory = JS_FACTORIES.get(name);
 
@@ -438,6 +471,11 @@ function runProbe({ args, probe }: ProbeRun): Outcome {
   } catch (error) {
     return { error: errorName(error), kind: "error" };
   }
+}
+
+/** A `createLogger` prefix that adds the level after the scope. */
+function showLevel({ level, scope }: PrefixInput): string {
+  return `[${scope}] ${level.toUpperCase()}`;
 }
 
 /** Build `[1, <hole>, 3]`, an array with a missing index. */

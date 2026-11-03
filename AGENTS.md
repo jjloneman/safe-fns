@@ -47,8 +47,8 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - An error message says only what the error shows — read its `code` or `stderr` rather than guessing a cause.
   - Dates and durations go through luxon, a dev dependency: a duration constant is `Duration.fromObject({ minutes: 15 })`, ending in `.toMillis()` only where an API takes milliseconds, and date math uses `DateTime` and `Duration` methods rather than hand-multiplied numbers.
   - `scripts/post-ci-timings.ts` is the exception: its CI job runs it before `pnpm install`, so it imports nothing outside Node.
-  - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/**/*.test.ts` runs in the `node` project.
-  - `scripts/research/` is the comparison harness's host side: `run.ts` (`pnpm research`) orchestrates the containers, `usage-search.ts` (`pnpm research:usage`) queries GitHub's code search and npm, `fold-audit.ts` (`pnpm research:audit`) writes the `toBasicAscii` fold audit, and `codec.ts`, `compose.ts`, `fold-audit-table.ts`, `images.ts`, `inputs.ts`, `results.ts`, `sources.ts`, `tables.ts`, `usage-tally.ts`, `call-arguments.ts`, and `logging.ts` are the pure, tested parts.
+  - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/lib/typescript-versions.ts` is the consumer TypeScript matrix that `pnpm test:consumer` and `pnpm research:types` both compile with; `scripts/**/*.test.ts` runs in the `node` project.
+  - `scripts/research/` is the comparison harness's host side: `run.ts` (`pnpm research`) orchestrates the containers, `usage-search.ts` (`pnpm research:usage`) queries GitHub's code search and npm, `fold-audit.ts` (`pnpm research:audit`) writes the `toBasicAscii` fold audit, `type-checks.ts` (`pnpm research:types`) compiles the planned type helpers with every consumer TypeScript version from the cases in `type-check-cases.ts`, and `codec.ts`, `compose.ts`, `fold-audit-table.ts`, `images.ts`, `inputs.ts`, `results.ts`, `sources.ts`, `tables.ts`, `type-check-table.ts`, `usage-tally.ts`, `call-arguments.ts`, and `logging.ts` are the pure, tested parts.
 - `research/` — the cross-language comparison harness (see [Research harness](#-research-harness)), outside `files`, so never published.
 - `dist/` — build output (gitignored), the only directory published.
 - `README.md` — the public face: why the package exists, install and usage, the API, the support matrix, scripts, and what each label means.
@@ -306,7 +306,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 - **Every export plugs into two harnesses in `test/`:**
   - `cross-env.cases.ts` — a table of calls and expected results, run unchanged by both projects;
   - `hostile-inputs.ts` (plus the Node-only `cross-realm-inputs.ts`) — values that trap on inspection, for proving an export never throws.
-- `scripts/research/*.test.ts` covers the research harness's codec, Compose arguments and output, merging, sources, and tables, and the usage script's call scanner and tallies, and checks its image pins (no pre-release, Renovate's Python holds, one group for `research/`); it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
+- `scripts/research/*.test.ts` covers the research harness's codec, Compose arguments and output, merging, sources, and tables, the usage script's call scanner and tallies, and the type checks' table, and checks its image pins (no pre-release, Renovate's Python holds, one group for `research/`); it runs in the `node` project, outside the `src/` coverage gate, but is kept at 100% too.
 - How to write a test is covered by `.claude/rules/testing.md`.
 
 ## 📦 Build & package
@@ -362,7 +362,7 @@ The conventions below are written for TypeScript, but they bind code in every la
   - `## ⏱️ CI timings`, from `scripts/post-ci-timings.ts`, which covers both `ci.yml` and `research-check.yml` on the PR's commit; each workflow's `report` job re-posts it, so the last to finish leaves the full table.
   - A bug in either script fails `report`; a failure to post it can't fix, such as the read-only token fork PRs get, only warns.
 - `.github/workflows/codeql.yml` scans on PRs, `main`, and weekly.
-- `.github/workflows/research-check.yml` runs only on PRs that touch the harness or what it depends on (its `paths:` list): it installs `research/`, lints and typechecks it, runs `pnpm research --check-inputs` (committed results must match the pinned images and lockfiles) and `pnpm research --format --check`, then a `report` job re-posts the CI timings comment.
+- `.github/workflows/research-check.yml` runs only on PRs that touch the harness or what it depends on (its `paths:` list): it installs `research/`, lints and typechecks it, runs `pnpm research --check-inputs` (committed results must match the pinned images and lockfiles), `pnpm research --format --check`, `pnpm research:audit --check`, and `pnpm research:types --check`, then a `report` job re-posts the CI timings comment.
 - `.github/workflows/research.yml` is manual (`workflow_dispatch`): it runs `pnpm research` from the same Compose file and uploads `research/results/` as an artifact.
 - `.github/workflows/release.yml` runs on every push to `main` (see [Versioning & releases](#-versioning--releases)):
   - `release-please` — opens or updates the release PR, and tags the release once it is merged;
@@ -374,7 +374,7 @@ The conventions below are written for TypeScript, but they bind code in every la
   - every bump is a `chore`, so none cuts a release;
   - its separate security PRs are off (`vulnerabilityAlerts`), since they skip the moratorium and add a `minimumReleaseAgeExclude` entry; a fix arrives in the weekly PRs once it is 7 days old;
   - a typical week opens three grouped PRs: the root's patch and minor bumps, the Actions' patch and minor bumps, and everything under `research/`, majors included, across every manager; a major outside `research/` gets its own PR;
-  - pnpm itself (each root's `packageManager`) moves in the `research` PR, so all four pins stay equal, as `scripts/research/package-manager.test.ts` requires;
+  - pnpm itself (each root's `packageManager`) moves in the `research` PR, so all five pins stay equal, as `scripts/research/package-manager.test.ts` requires;
   - its rules hold the pins below: `typescript` and `@types/node` majors, each `typescript-<version>` alias to its patches, 3.x `python` images to final releases, and `python311` on 3.11, the last Python with `distutils`;
   - it acts as a GitHub App (`RENOVATE_APP_CLIENT_ID` and `RENOVATE_APP_PRIVATE_KEY`), since a PR opened with `GITHUB_TOKEN` starts no CI, and its Dependency Dashboard issue lists pending and held updates;
   - a research bump fails `research-check.yml` until its results are regenerated by hand on the Renovate branch (see [research/README.md](research/README.md#️-dependency-bumps)).
@@ -386,7 +386,7 @@ The conventions below are written for TypeScript, but they bind code in every la
 No npm dependency may enter the lockfile until it has been published for **at least 7 days** — a supply-chain guard that gives the registry time to yank a compromised release.
 
 - Enforced by `minimumReleaseAge: 10080` (minutes) in [pnpm-workspace.yaml](pnpm-workspace.yaml), checked on every `pnpm install`, including `--frozen-lockfile`.
-  - `research/pnpm-workspace.yaml`, `research/docker/firebase/pnpm-workspace.yaml`, and `research/adapters/assemblyscript/pnpm-workspace.yaml` repeat the floor for the research harness's own pnpm roots; keep all four in sync.
+  - `research/pnpm-workspace.yaml`, `research/docker/firebase/pnpm-workspace.yaml`, `research/adapters/assemblyscript/pnpm-workspace.yaml`, and `research/types/pnpm-workspace.yaml` repeat the floor for the research harness's own pnpm roots; keep all five in sync.
   - The same 7 days applies to a container image (pin a tag whose last push is at least 7 days old), to a Python package (`research/docker/db/requirements.txt`, compiled with `--exclude-newer`; `research/docker/xml-schema/requirements.txt`), and to a release download such as the Hermes CLI tarball.
 - A too-new version fails the install with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`.
 - When bumping a dependency by hand, pick the newest version that is already at least 7 days old (exactly 7 days is fine). If the lockfile fails the check, downgrade the offending entry rather than relaxing the floor.
@@ -421,7 +421,7 @@ No npm dependency may enter the lockfile until it has been published for **at le
 Semantic and design decisions — what "empty" means, how a function is named, why an edge case resolves the way it does — are recorded in [docs/decisions/](docs/decisions/index.md), a small [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) v0.2 bundle.
 
 - One Markdown file per decision, listed in [docs/decisions/index.md](docs/decisions/index.md).
-- A comparison table in a decision comes from `research/results/<function>.md`, generated by `pnpm research`, never built by hand.
+- A comparison table in a decision comes from `research/results/<function>.md`, generated by `pnpm research`, never built by hand; a type helper's comes from `research/audits/<helper>.md`, generated by `pnpm research:types`.
 - Check a decision's `verified` field before changing the behavior it describes:
   - `verified` by `human:jjloneman` means the repo owner reviewed it — change it only with their agreement.
   - No `verified` means it is an unreviewed draft.

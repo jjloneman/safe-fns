@@ -1,0 +1,772 @@
+{
+  "cases": [
+    [
+      "app",
+      "info",
+      [
+        "hello"
+      ]
+    ],
+    [
+      "app",
+      "info",
+      [
+        "hello %s",
+        "x"
+      ]
+    ],
+    [
+      "app",
+      "info",
+      [
+        "count",
+        {
+          "a": 1
+        }
+      ]
+    ],
+    [
+      "app",
+      "debug",
+      [
+        "d"
+      ]
+    ],
+    [
+      "app",
+      "log",
+      [
+        "l"
+      ]
+    ],
+    [
+      "app",
+      "warn",
+      [
+        "w"
+      ]
+    ],
+    [
+      "app",
+      "error",
+      [
+        "e"
+      ]
+    ],
+    [
+      "app",
+      "trace",
+      [
+        "t"
+      ]
+    ],
+    [
+      "50%s",
+      "info",
+      [
+        "a"
+      ]
+    ],
+    [
+      "50%s",
+      "info",
+      []
+    ],
+    [
+      "",
+      "info",
+      [
+        "x"
+      ]
+    ],
+    [
+      {
+        "$js": "a revoked proxy"
+      },
+      "info",
+      [
+        "x"
+      ]
+    ],
+    [
+      "no-debug",
+      "debug",
+      [
+        "d"
+      ],
+      "without console.debug"
+    ],
+    [
+      "no-console",
+      "info",
+      [
+        "x"
+      ],
+      "without console"
+    ],
+    [
+      "getter",
+      "info",
+      [
+        "x"
+      ],
+      "console.info is a throwing getter"
+    ],
+    [
+      "replaced",
+      "info",
+      [
+        "x"
+      ],
+      "console.info replaced after creation"
+    ],
+    [
+      "app",
+      "warn",
+      [
+        "w"
+      ],
+      {
+        "$undefined": true
+      },
+      {
+        "prefix": {
+          "$js": "a prefix showing the level"
+        }
+      }
+    ],
+    [
+      "app",
+      "warn",
+      [
+        "w"
+      ],
+      {
+        "$undefined": true
+      },
+      {
+        "prefix": {
+          "$js": "a prefix that throws"
+        }
+      }
+    ],
+    [
+      "app",
+      "warn",
+      [
+        "w"
+      ],
+      {
+        "$undefined": true
+      },
+      {
+        "prefix": {
+          "$js": "a prefix returning a number"
+        }
+      }
+    ],
+    [
+      "app",
+      "warn",
+      [
+        "w"
+      ],
+      {
+        "$undefined": true
+      },
+      {
+        "prefix": {
+          "$js": "a prefix returning an empty string"
+        }
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "createLogger",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [app] hello"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [app] hello %s x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [app] count { a: 1 }"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.debug: [app] d"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.log: [app] l"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.warn: [app] w"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.error: [app] e"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.trace: [app] t"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [50%s] a"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [50%s]"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info (replaced): [replaced] x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.warn: [app] WARN w"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.warn: [app] w"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.warn: [app] w"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.warn: w"
+          ]
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "createConsola({ formatOptions: { date: false }, level: 5 }).withTag(scope)[method](...args)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:2dfa0fef2643065d4955fc20f5bae4cd9bef325392321473fd8deed7720cc264",
+      "locale": "en-US",
+      "name": "consola",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [info] [app] hello"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [info] [app] hello x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [info] [app] count { a: 1 }"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [debug] [app] d"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [log] [app] l"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: [warn] [app] w"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: [error] [app] e"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [trace] [app] t"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [info] [50%s] a"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [info] [50%s]"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [info] x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [info] x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [debug] [no-debug] d"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [info] [no-console] x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [info] [getter] x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stdout: [info] [replaced] x"
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "3.4.2"
+    },
+    {
+      "call": "createDebug.enable(scope); createDebug(scope)(...args)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:2dfa0fef2643065d4955fc20f5bae4cd9bef325392321473fd8deed7720cc264",
+      "locale": "en-US",
+      "name": "debug",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            "stderr: app hello"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: app hello x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: app count { a: 1 }"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: app d"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: app l"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: app w"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: app e"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: app t"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: 50%s a"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: 50%s undefined"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: no-debug d"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: no-console x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: getter x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "stderr: replaced x"
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.4.3"
+    },
+    {
+      "call": "Object.fromEntries(methods.map((m) => [m, console[m].bind(console, `[${scope}]`)]))[method](...args)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:2dfa0fef2643065d4955fc20f5bae4cd9bef325392321473fd8deed7720cc264",
+      "locale": "en-US",
+      "name": "JS built-ins",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [app] hello"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [app] hello %s x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [app] count { a: 1 }"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.debug: [app] d"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.log: [app] l"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.warn: [app] w"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.error: [app] e"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.trace: [app] t"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [50a]"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [50%s]"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [] x"
+          ]
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: [replaced] x"
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "v26.11.1"
+    },
+    {
+      "call": "log.getLogger(scope).setLevel(\"trace\"); log.getLogger(scope)[method](...args)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:2dfa0fef2643065d4955fc20f5bae4cd9bef325392321473fd8deed7720cc264",
+      "locale": "en-US",
+      "name": "loglevel",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": [
+            "console.info: hello"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: hello x"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: count { a: 1 }"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.log: d"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.log: l"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.warn: w"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.error: e"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.trace: t"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: a"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: "
+          ]
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.log: d"
+          ]
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": [
+            "console.info: x"
+          ]
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.9.2"
+    }
+  ],
+  "function": "createLogger"
+}
