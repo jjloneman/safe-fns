@@ -15,17 +15,27 @@ import {
   isPlainObject as esToolkitIsPlainObject,
 } from "es-toolkit/predicate";
 import {
+  camelCase as esToolkitCamelCase,
   capitalize as esToolkitCapitalize,
+  constantCase as esToolkitConstantCase,
   deburr as esToolkitDeburr,
+  kebabCase as esToolkitKebabCase,
+  lowerCase as esToolkitLowerCase,
   lowerFirst as esToolkitLowerFirst,
+  pascalCase as esToolkitPascalCase,
+  snakeCase as esToolkitSnakeCase,
+  startCase as esToolkitStartCase,
   trim as esToolkitTrim,
+  upperCase as esToolkitUpperCase,
   upperFirst as esToolkitUpperFirst,
+  words as esToolkitWords,
 } from "es-toolkit/string";
 
 import type { Tool } from "./tool.mts";
 
 import {
   callWithRange,
+  converterProbe,
   hasNoOptions,
   hasOnlyOptions,
   isPair,
@@ -40,6 +50,20 @@ import {
 /** es-toolkit's own predicate, and its lodash-compatible layer. */
 export const ES_TOOLKIT: Tool = {
   functions: {
+    camelCase: [
+      converterProbe({
+        call: "camelCase(value)",
+        convert: esToolkitCamelCase,
+        splitsNumbers: true,
+      }),
+    ],
+    constantCase: [
+      converterProbe({
+        call: "constantCase(value)",
+        convert: esToolkitConstantCase,
+        splitsNumbers: true,
+      }),
+    ],
     deepClone: [
       {
         accepts: hasNoOptions,
@@ -78,6 +102,13 @@ export const ES_TOOLKIT: Tool = {
         run: ([value]) => esToolkitIsEmpty(value),
       },
     ],
+    kebabCase: [
+      converterProbe({
+        call: "kebabCase(value)",
+        convert: esToolkitKebabCase,
+        splitsNumbers: true,
+      }),
+    ],
     keyBy: [
       {
         accepts: isPair,
@@ -91,12 +122,26 @@ export const ES_TOOLKIT: Tool = {
           ),
       },
     ],
+    lowerCase: [
+      converterProbe({
+        call: "lowerCase(value)",
+        convert: esToolkitLowerCase,
+        splitsNumbers: true,
+      }),
+    ],
     lowerFirst: [
       {
         accepts: hasNoOptions,
         call: "lowerFirst(value)",
         run: ([value]) => esToolkitLowerFirst(value as string),
       },
+    ],
+    pascalCase: [
+      converterProbe({
+        call: "pascalCase(value)",
+        convert: esToolkitPascalCase,
+        splitsNumbers: true,
+      }),
     ],
     range: [
       {
@@ -136,6 +181,20 @@ export const ES_TOOLKIT: Tool = {
         run: ([value]) => markReferences(esToolkitCloneDeep(value)),
       },
     ],
+    snakeCase: [
+      converterProbe({
+        call: "snakeCase(value)",
+        convert: esToolkitSnakeCase,
+        splitsNumbers: true,
+      }),
+    ],
+    titleCase: [
+      converterProbe({
+        call: "startCase(value)",
+        convert: esToolkitStartCase,
+        splitsNumbers: true,
+      }),
+    ],
     toBasicAscii: [
       {
         call: "deburr(value)",
@@ -144,6 +203,13 @@ export const ES_TOOLKIT: Tool = {
     ],
     trimBlank: [
       { call: "trim(value)", run: ([value]) => esToolkitTrim(value as string) },
+    ],
+    upperCase: [
+      converterProbe({
+        call: "upperCase(value)",
+        convert: esToolkitUpperCase,
+        splitsNumbers: true,
+      }),
     ],
     upperFirst: [
       {
@@ -159,6 +225,13 @@ export const ES_TOOLKIT: Tool = {
         call: "capitalize(value)",
         run: ([value]) => esToolkitCapitalize(value as string),
       },
+    ],
+    words: [
+      converterProbe({
+        call: "words(value)",
+        convert: esToolkitWords,
+        splitsNumbers: true,
+      }),
     ],
   },
   name: "es-toolkit",

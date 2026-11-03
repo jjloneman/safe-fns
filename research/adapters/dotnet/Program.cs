@@ -144,6 +144,15 @@ internal static class Program
         var invariantTool = new Tool(
             Functions: new Dictionary<string, IReadOnlyList<Probe>>
             {
+                ["camelCase"] =
+                [
+                    new(
+                        Accepts: IsLoneString,
+                        Call: "JsonNamingPolicy.CamelCase.ConvertName(value)",
+                        Run: args =>
+                            JsonNamingPolicy.CamelCase.ConvertName(Text(args))
+                    ),
+                ],
                 ["codec"] =
                 [
                     new(
@@ -182,6 +191,17 @@ internal static class Program
                             )
                     ),
                 ],
+                ["constantCase"] =
+                [
+                    new(
+                        Accepts: IsLoneString,
+                        Call: "JsonNamingPolicy.SnakeCaseUpper.ConvertName(value)",
+                        Run: args =>
+                            JsonNamingPolicy.SnakeCaseUpper.ConvertName(
+                                Text(args)
+                            )
+                    ),
+                ],
                 ["getSearchParamValues"] =
                 [
                     new(
@@ -206,6 +226,17 @@ internal static class Program
                         Accepts: IsStringOrNull,
                         Call: "string.IsNullOrWhiteSpace(value)",
                         Run: args => string.IsNullOrWhiteSpace((string?)args[0])
+                    ),
+                ],
+                ["kebabCase"] =
+                [
+                    new(
+                        Accepts: IsLoneString,
+                        Call: "JsonNamingPolicy.KebabCaseLower.ConvertName(value)",
+                        Run: args =>
+                            JsonNamingPolicy.KebabCaseLower.ConvertName(
+                                Text(args)
+                            )
                     ),
                 ],
                 ["lowerFirst"] =
@@ -404,6 +435,28 @@ internal static class Program
                             )
                                 ? uri.AbsoluteUri
                                 : null
+                    ),
+                ],
+                ["screamingKebabCase"] =
+                [
+                    new(
+                        Accepts: IsLoneString,
+                        Call: "JsonNamingPolicy.KebabCaseUpper.ConvertName(value)",
+                        Run: args =>
+                            JsonNamingPolicy.KebabCaseUpper.ConvertName(
+                                Text(args)
+                            )
+                    ),
+                ],
+                ["snakeCase"] =
+                [
+                    new(
+                        Accepts: IsLoneString,
+                        Call: "JsonNamingPolicy.SnakeCaseLower.ConvertName(value)",
+                        Run: args =>
+                            JsonNamingPolicy.SnakeCaseLower.ConvertName(
+                                Text(args)
+                            )
                     ),
                 ],
                 ["toBasicAscii"] =

@@ -155,6 +155,49 @@ export const UNBUILDABLE: unique symbol = Symbol("unbuildable");
 /** What `summarizeError` reports for a `message` whose getter throws. */
 const UNREADABLE_MESSAGE = Symbol("unreadable message");
 
+/** A one-argument case converter, and the call text its column shows. */
+export type ConverterProbe = {
+  /**
+   * The expression, as the table header shows it.
+   *
+   * @example "camelCase(value)"
+   */
+  call: string;
+
+  /**
+   * The library's converter, handed each case's value as it came.
+   *
+   * @example `camelCase`
+   */
+  convert: (value: string) => unknown;
+
+  /**
+   * Whether the call answers only cases that set an option, because its text
+   * already passes the library's own equivalent of one.
+   *
+   * @example true
+   */
+  isOptionsOnly?: boolean;
+
+  /**
+   * Whether the call keeps leading and trailing underscore runs, so it can
+   * answer a case setting `keepOuterUnderscores` to the same value; `false`
+   * unless `isOptionsOnly` is set.
+   *
+   * @example true
+   */
+  keepsOuterUnderscores?: boolean;
+
+  /**
+   * Whether the converter always splits a digit run into a word of its own,
+   * so it can also answer a case that sets `splitNumbers` to the same value;
+   * `false` unless `isOptionsOnly` is set.
+   *
+   * @example true
+   */
+  splitsNumbers?: boolean;
+};
+
 /** A numeric `range` case's bounds and step. */
 export type RangeSpan = {
   /**
@@ -177,6 +220,24 @@ export type RangeSpan = {
    * @example 3
    */
   step: number;
+};
+
+/** A case's arguments, and the `splitNumbers` value a probe can answer. */
+type CaseOptionsCheck = {
+  /**
+   * The case's decoded arguments.
+   *
+   * @example `["version2Beta", { splitNumbers: true }]`
+   */
+  args: readonly unknown[];
+
+  /**
+   * The value each option has in the probe's call; an option left out isn't
+   * one the call can answer.
+   *
+   * @example `{ splitNumbers: true }`
+   */
+  behavior: Readonly<Record<string, boolean | undefined>>;
 };
 
 /** A clone and the value it was made from, for `markClone`. */
@@ -435,6 +496,43 @@ export function callWithRange({ args, call }: RangeCall): unknown {
   const result: unknown = Reflect.apply(call, undefined, rangeArguments(args));
 
   return result;
+}
+
+/**
+ * A probe for a case converter or word splitter, which hands it each case's
+ * value as it came.
+ *
+ * - A non-string goes in too, so a library's own coercion (`String(value)`) or
+ *   throw shows in its column, beside safe-fns' planned fallback.
+ *
+ * - A case setting `splitNumbers` or `keepOuterUnderscores` runs only where
+ *   it matches what the call always does, as a call with no such option
+ *   would.
+ *
+ * @returns the probe.
+ */
+export function converterProbe({
+  call,
+  convert,
+  isOptionsOnly = false,
+  keepsOuterUnderscores: isKeepingOuterUnderscores,
+  splitsNumbers: isSplittingNumbers,
+}: ConverterProbe): Probe {
+  // A plain call behaves as if every option were off; an options-only call
+  // answers just the option its text passes.
+  const isOffUnlessSet = isOptionsOnly ? undefined : false;
+  const behavior = {
+    keepOuterUnderscores: isKeepingOuterUnderscores ?? isOffUnlessSet,
+    splitNumbers: isSplittingNumbers ?? isOffUnlessSet,
+  };
+
+  return {
+    accepts: (args) =>
+      (!isOptionsOnly && hasNoOptions(args)) ||
+      hasCaseOptions({ args, behavior }),
+    call,
+    run: ([value]) => convert(value as string),
+  };
 }
 
 /**
@@ -1031,6 +1129,37 @@ function describeView({
   return sourceObjects.has(value.buffer)
     ? { ...description, buffer: SHARED }
     : description;
+}
+
+/**
+ * Whether a case is one string and options that each match how a probe's
+ * call behaves, so a call with no such option can still answer it.
+ *
+ * @returns whether the probe can run the case.
+ */
+function hasCaseOptions({ args, behavior }: CaseOptionsCheck): boolean {
+  const [value, options] = args;
+
+  if (
+    args.length !== 2 ||
+    typeof value !== "string" ||
+    typeof options !== "object" ||
+    options === null
+  ) {
+    return false;
+  }
+
+  const entries = Object.entries(options);
+
+  return (
+    entries.length > 0 &&
+    entries.every(
+      ([key, setting]) =>
+        Object.hasOwn(behavior, key) &&
+        behavior[key] !== undefined &&
+        behavior[key] === setting
+    )
+  );
 }
 
 /**

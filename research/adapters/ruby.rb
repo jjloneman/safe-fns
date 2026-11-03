@@ -48,14 +48,41 @@ module RubyAdapter
   CODEC_PROBE =
     ResearchCodec.probe(call: "value", is_codec: true, run: ->(value) { value })
 
-  # Rails' ActiveModel types and ActiveSupport's `blank?`.
+  # Rails' ActiveModel types, and ActiveSupport's `blank?` and inflector.
   RAILS =
     ResearchCodec::Tool.new(
       functions: {
+        "camelCase" => [
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call: "ActiveSupport::Inflector.camelize(value, false)",
+            run: ->(value) { ActiveSupport::Inflector.camelize(value, false) }
+          )
+        ],
         "isSafeEmpty" => [
           ResearchCodec.probe(
             call: "value.blank?",
             run: ->(value) { value.blank? }
+          )
+        ],
+        "kebabCase" => [
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call:
+              "ActiveSupport::Inflector.dasherize(" \
+                "ActiveSupport::Inflector.underscore(value))",
+            run: ->(value) do
+              ActiveSupport::Inflector.dasherize(
+                ActiveSupport::Inflector.underscore(value)
+              )
+            end
+          )
+        ],
+        "pascalCase" => [
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call: "ActiveSupport::Inflector.camelize(value)",
+            run: ->(value) { ActiveSupport::Inflector.camelize(value) }
           )
         ],
         "pluralize" => [
@@ -89,6 +116,27 @@ module RubyAdapter
           ResearchCodec.probe(
             call: "ActiveModel::Type::String.new.cast(value)",
             run: ->(value) { ActiveModel::Type::String.new.cast(value) }
+          )
+        ],
+        "sentenceCase" => [
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call: "ActiveSupport::Inflector.humanize(value)",
+            run: ->(value) { ActiveSupport::Inflector.humanize(value) }
+          )
+        ],
+        "snakeCase" => [
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call: "ActiveSupport::Inflector.underscore(value)",
+            run: ->(value) { ActiveSupport::Inflector.underscore(value) }
+          )
+        ],
+        "titleCase" => [
+          ResearchCodec.probe(
+            accepts: IS_LONE_STRING,
+            call: "ActiveSupport::Inflector.titleize(value)",
+            run: ->(value) { ActiveSupport::Inflector.titleize(value) }
           )
         ],
         "toBasicAscii" => [

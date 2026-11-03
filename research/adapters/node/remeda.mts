@@ -8,12 +8,17 @@ import {
   isPlainObject as remedaIsPlainObject,
   mergeDeep as remedaMergeDeep,
   range as remedaRange,
+  toCamelCase as remedaToCamelCase,
+  toKebabCase as remedaToKebabCase,
+  toSnakeCase as remedaToSnakeCase,
+  toTitleCase as remedaToTitleCase,
   uncapitalize as remedaUncapitalize,
 } from "remeda";
 
 import type { Tool } from "./tool.mts";
 
 import {
+  converterProbe,
   hasNoOptions,
   isPair,
   isRangeCase,
@@ -26,6 +31,13 @@ import {
 /** remeda's type guards. */
 export const REMEDA: Tool = {
   functions: {
+    camelCase: [
+      converterProbe({
+        call: "toCamelCase(value)",
+        convert: remedaToCamelCase,
+        splitsNumbers: true,
+      }),
+    ],
     deepClone: [
       {
         accepts: hasNoOptions,
@@ -71,6 +83,13 @@ export const REMEDA: Tool = {
         run: ([value]) => remedaIsEmptyish(value),
       },
     ],
+    kebabCase: [
+      converterProbe({
+        call: "toKebabCase(value)",
+        convert: remedaToKebabCase,
+        splitsNumbers: true,
+      }),
+    ],
     keyBy: [
       {
         accepts: isPair,
@@ -110,6 +129,20 @@ export const REMEDA: Tool = {
                 step: (options as { step: number }).step,
               }),
       },
+    ],
+    snakeCase: [
+      converterProbe({
+        call: "toSnakeCase(value)",
+        convert: remedaToSnakeCase,
+        splitsNumbers: true,
+      }),
+    ],
+    titleCase: [
+      converterProbe({
+        call: "toTitleCase(value)",
+        convert: remedaToTitleCase,
+        splitsNumbers: true,
+      }),
     ],
     upperFirst: [
       {

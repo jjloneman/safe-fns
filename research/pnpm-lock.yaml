@@ -181,6 +181,12 @@ importers:
       canonicalize:
         specifier: 5.1.0
         version: 5.1.0
+      case-anything:
+        specifier: 3.1.7
+        version: 3.1.7
+      change-case:
+        specifier: 5.4.4
+        version: 5.4.4
       consola:
         specifier: 3.4.2
         version: 3.4.2
@@ -238,6 +244,9 @@ importers:
       fast-safe-stringify:
         specifier: 2.1.1
         version: 2.1.1
+      humanize-string:
+        specifier: 4.0.0
+        version: 4.0.0
       ini:
         specifier: 7.0.0
         version: 7.0.0
@@ -298,12 +307,18 @@ importers:
       safe-stable-stringify:
         specifier: 2.5.0
         version: 2.5.0
+      scule:
+        specifier: 1.3.0
+        version: 1.3.0
       smol-toml:
         specifier: 1.9.1
         version: 1.9.1
       store2:
         specifier: 2.14.4
         version: 2.14.4
+      string-ts:
+        specifier: 2.3.1
+        version: 2.3.1
       transliteration:
         specifier: 2.6.2
         version: 2.6.2
@@ -527,6 +542,13 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
+  case-anything@3.1.7:
+    resolution: {integrity: sha512-52UPzAJDZgxaNsYK4kvmov1kVaAfPc+OU2j0OSUZWbdWMuJd7Axi94XWSfSuafMd7K9avhsEnU6W6rXJdAd+Ug==}
+    engines: {node: '>=18'}
+
+  change-case@5.4.4:
+    resolution: {integrity: sha512-HRQyTk2/YPEkt9TnUPbOpr64Uw3KOicFWPVBb+xiHvd6eBx/qPr9xqfBFDT8P2vWsvvz4jbEkfDe71W3VyNu2w==}
+
   consola@3.4.2:
     resolution: {integrity: sha512-5IKcdX0nnYavi6G7TtOhwkYzyjfJlatbjMjuLSfE2kYT5pMDOilZ4OvMhi637CcDICTmz3wARPoyhqyX1Y+XvA==}
     engines: {node: ^14.18.0 || >=16.10.0}
@@ -559,6 +581,10 @@ packages:
     peerDependenciesMeta:
       supports-color:
         optional: true
+
+  decamelize@7.0.0:
+    resolution: {integrity: sha512-uT/0KzZIx9u4b5vW3HLWtSYwjLTuY2QFVY3xNmfXXUmTqnfgzfT8DEA2gY93go5sXEjnbqP66KcURdVxm0rDXA==}
+    engines: {node: '>=22'}
 
   decimal.js@10.6.0:
     resolution: {integrity: sha512-YpgQiITW3JXGntzdUmyUR1V812Hn8T1YVXhCu+wO3OpS4eU9l4YdD3qjyiKdV6mvV29zapkMeD390UVEf2lkUg==}
@@ -660,6 +686,10 @@ packages:
   html-encoding-sniffer@7.0.0:
     resolution: {integrity: sha512-UikN5yr7xsCDAq87Or5or0PAlD3HJJOKVzM05az588WnpDJ4Ux7a2A53Qi6gofGg2/EtvF/H4hCi/TXfCW4Y6w==}
     engines: {node: ^22.13.0 || >=24.0.0}
+
+  humanize-string@4.0.0:
+    resolution: {integrity: sha512-oKTbe92h1hinDADnGU7310aeeoaSFIL3UJ13GuM+E2D/wKMFewot4wbbHWeiAW53ymmK6cF89mRrlCkom0umgg==}
+    engines: {node: '>=22'}
 
   ini@7.0.0:
     resolution: {integrity: sha512-ifK0CgjALofS5bkrcTy4RaQ9Vx2Knf/eLeIO+NaswQEpH1UblrtTSCIvN71qQDMq0PeQ/SSPojvEJp9vvvfr+w==}
@@ -786,6 +816,9 @@ packages:
     resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
     engines: {node: '>=v12.22.7'}
 
+  scule@1.3.0:
+    resolution: {integrity: sha512-6FtHJEvt+pVMIB9IBY+IcCJ6Z5f1iQnytgyfKMhDKgmzYG+TeH/wx1y3l27rshSbLiSanrR9ffZDrEsmjlQF2g==}
+
   side-channel-list@1.0.1:
     resolution: {integrity: sha512-mjn/0bi/oUURjc5Xl7IaWi/OJJJumuoJFQJfDDyO46+hBWsfaVM65TBHq2eoZBhzl9EchxOijpkbRC8SVBQU0w==}
     engines: {node: '>= 0.4'}
@@ -816,6 +849,9 @@ packages:
 
   store2@2.14.4:
     resolution: {integrity: sha512-srTItn1GOvyvOycgxjAnPA63FZNwy0PTyUBFMHRM+hVFltAeoh0LmNBz9SZqUS9mMqGk8rfyWyXn3GH5ReJ8Zw==}
+
+  string-ts@2.3.1:
+    resolution: {integrity: sha512-xSJq+BS52SaFFAVxuStmx6n5aYZU571uYUnUrPXkPFCfdHyZMMlbP2v2Wx5sNBnAVzq/2+0+mcBLBa3Xa5ubYw==}
 
   tiny-case@1.0.3:
     resolution: {integrity: sha512-Eet/eeMhkO6TX8mnUteS9zgPbUMQa4I6Kkp5ORiBD5476/m+PIRiumP5tmh5ioJpH7k51Kehawy2UDfsnxxY8Q==}
@@ -1057,6 +1093,10 @@ snapshots:
 
   canonicalize@5.1.0: {}
 
+  case-anything@3.1.7: {}
+
+  change-case@5.4.4: {}
+
   consola@3.4.2: {}
 
   core-js-pure@3.51.0: {}
@@ -1082,6 +1122,8 @@ snapshots:
   debug@4.4.3:
     dependencies:
       ms: 2.1.3
+
+  decamelize@7.0.0: {}
 
   decimal.js@10.6.0: {}
 
@@ -1166,6 +1208,10 @@ snapshots:
       '@exodus/bytes': 1.16.0
     transitivePeerDependencies:
       - '@noble/hashes'
+
+  humanize-string@4.0.0:
+    dependencies:
+      decamelize: 7.0.0
 
   ini@7.0.0: {}
 
@@ -1276,6 +1322,8 @@ snapshots:
     dependencies:
       xmlchars: 2.2.0
 
+  scule@1.3.0: {}
+
   side-channel-list@1.0.1:
     dependencies:
       es-errors: 1.3.0
@@ -1311,6 +1359,8 @@ snapshots:
   split-on-first@4.0.0: {}
 
   store2@2.14.4: {}
+
+  string-ts@2.3.1: {}
 
   tiny-case@1.0.3: {}
 
