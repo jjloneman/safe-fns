@@ -4,6 +4,11 @@ import { isDeepStrictEqual } from "node:util";
 import type { Tool } from "./tool.mts";
 
 import {
+  captureLogging,
+  CONSOLE_METHODS,
+  isLoggerCase,
+} from "./logger-capture.mts";
+import {
   callJsonParse,
   hasNoOptions,
   hasOnlyOptions,
@@ -78,6 +83,37 @@ const NODE_UNCONFIGURED_LOCAL_STORAGE = storageProbes({
 export const JS_BUILT_INS: Tool = {
   functions: {
     codec: [{ call: "value", run: ([value]) => value }],
+    createLogger: [
+      {
+        accepts: isLoggerCase,
+        call: "Object.fromEntries(methods.map((m) => [m, console[m].bind(console, `[${scope}]`)]))[method](...args)",
+        run: (args) =>
+          captureLogging({
+            args,
+            create: (scope) => {
+              // Every method is bound when the logger is created, as an object of
+              // bound methods is.
+              const bound = Object.fromEntries(
+                CONSOLE_METHODS.map((method) => {
+                  const native = Reflect.get(console, method) as (
+                    ...values: unknown[]
+                  ) => void;
+
+                  return [method, native.bind(console, `[${scope as string}]`)];
+                })
+              );
+
+              return (method, logArgs) => {
+                Reflect.apply(
+                  bound[method] as (...values: unknown[]) => void,
+                  console,
+                  logArgs
+                );
+              };
+            },
+          }),
+      },
+    ],
     decodeBase64: [
       {
         accepts: isString,
