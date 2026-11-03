@@ -2,8 +2,9 @@
 type: Decision
 title: What PartialDeep and EnumLiteralsDeep do
 description: "Two types-only helpers, each on its own subpath: `PartialDeep<T, Leaf>` makes every property optional at any depth, and `EnumLiteralsDeep<T, Leaf>` turns every string enum into its string literal values; both distribute over unions, keep `any`, `unknown`, primitives, functions, built-ins, and the caller's `Leaf` types whole, and map arrays and tuples item by item without changing their length or `readonly`; they parse on TypeScript 4.9 and are checked on every supported consumer version."
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-02T10:10:00Z }
+verified: { by: human:jjloneman, at: 2026-11-03T02:37:04Z }
 ---
 
 # What PartialDeep and EnumLiteralsDeep do
