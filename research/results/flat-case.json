@@ -1,0 +1,1055 @@
+{
+  "cases": [
+    [
+      "fooBarBaz"
+    ],
+    [
+      "FooBarBaz"
+    ],
+    [
+      "foo_bar_baz"
+    ],
+    [
+      "foo-bar-baz"
+    ],
+    [
+      "foo bar baz"
+    ],
+    [
+      "FOO_BAR_BAZ"
+    ],
+    [
+      "Foo Bar Baz"
+    ],
+    [
+      "foo.bar/baz"
+    ],
+    [
+      "XMLHttpRequest"
+    ],
+    [
+      "IOError"
+    ],
+    [
+      "userID"
+    ],
+    [
+      "iPhone"
+    ],
+    [
+      "ABC"
+    ],
+    [
+      "version2Beta"
+    ],
+    [
+      "base64Encode"
+    ],
+    [
+      "HTML5Parser"
+    ],
+    [
+      "ABC123Def"
+    ],
+    [
+      "v1.2.3"
+    ],
+    [
+      "don't stop"
+    ],
+    [
+      "the lord of the rings"
+    ],
+    [
+      "foo__bar"
+    ],
+    [
+      "_private"
+    ],
+    [
+      "  padded  "
+    ],
+    [
+      "c++ code"
+    ],
+    [
+      "a+b"
+    ],
+    [
+      "price$"
+    ],
+    [
+      "20°C"
+    ],
+    [
+      "userIDs"
+    ],
+    [
+      "iOSApp"
+    ],
+    [
+      "version2beta"
+    ],
+    [
+      "2fast4you"
+    ],
+    [
+      "ÉcoleNormale"
+    ],
+    [
+      "écoleNormale"
+    ],
+    [
+      "straße"
+    ],
+    [
+      "İstanbul"
+    ],
+    [
+      "ǅemal"
+    ],
+    [
+      "日本語Text"
+    ],
+    [
+      "emoji😀Face"
+    ],
+    [
+      "👩‍💻dev"
+    ],
+    [
+      "a"
+    ],
+    [
+      ""
+    ],
+    [
+      "version2Beta",
+      {
+        "splitNumbers": false
+      }
+    ],
+    [
+      "version2Beta",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "base64Encode",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "HTML5Parser",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "ABC123Def",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "v1.2.3",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "utf8",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "version2beta",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "2fast4you",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "x²",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "fooBarBaz",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "_private",
+      {
+        "keepOuterUnderscores": false
+      }
+    ],
+    [
+      "_private",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "_private_key",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "__foo_bar__",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "__init__",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "___",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "foo__bar",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "fooBar",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      {
+        "$js": "a boxed string"
+      }
+    ],
+    [
+      42
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      {
+        "$js": "a symbol"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a throwing toString"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "flatCase",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "xmlhttprequest"
+        },
+        {
+          "kind": "value",
+          "value": "ioerror"
+        },
+        {
+          "kind": "value",
+          "value": "userid"
+        },
+        {
+          "kind": "value",
+          "value": "iphone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "base64encode"
+        },
+        {
+          "kind": "value",
+          "value": "html5parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc123def"
+        },
+        {
+          "kind": "value",
+          "value": "v123"
+        },
+        {
+          "kind": "value",
+          "value": "dontstop"
+        },
+        {
+          "kind": "value",
+          "value": "thelordoftherings"
+        },
+        {
+          "kind": "value",
+          "value": "foobar"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "padded"
+        },
+        {
+          "kind": "value",
+          "value": "c++code"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "price$"
+        },
+        {
+          "kind": "value",
+          "value": "20°c"
+        },
+        {
+          "kind": "value",
+          "value": "userids"
+        },
+        {
+          "kind": "value",
+          "value": "iosapp"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "écolenormale"
+        },
+        {
+          "kind": "value",
+          "value": "écolenormale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "i̇stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji😀face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "base64encode"
+        },
+        {
+          "kind": "value",
+          "value": "html5parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc123def"
+        },
+        {
+          "kind": "value",
+          "value": "v123"
+        },
+        {
+          "kind": "value",
+          "value": "utf8"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "x²"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "_private"
+        },
+        {
+          "kind": "value",
+          "value": "_privatekey"
+        },
+        {
+          "kind": "value",
+          "value": "__foobar__"
+        },
+        {
+          "kind": "value",
+          "value": "__init__"
+        },
+        {
+          "kind": "value",
+          "value": "___"
+        },
+        {
+          "kind": "value",
+          "value": "foobar"
+        },
+        {
+          "kind": "value",
+          "value": "foobar"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "flatCase(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "scule",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foo bar baz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foo bar baz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "xmlhttprequest"
+        },
+        {
+          "kind": "value",
+          "value": "ioerror"
+        },
+        {
+          "kind": "value",
+          "value": "userid"
+        },
+        {
+          "kind": "value",
+          "value": "iphone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "base64encode"
+        },
+        {
+          "kind": "value",
+          "value": "html5parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc123def"
+        },
+        {
+          "kind": "value",
+          "value": "v123"
+        },
+        {
+          "kind": "value",
+          "value": "don't stop"
+        },
+        {
+          "kind": "value",
+          "value": "the lord of the rings"
+        },
+        {
+          "kind": "value",
+          "value": "foobar"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "  padded  "
+        },
+        {
+          "kind": "value",
+          "value": "c++ code"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "price$"
+        },
+        {
+          "kind": "value",
+          "value": "20°c"
+        },
+        {
+          "kind": "value",
+          "value": "userids"
+        },
+        {
+          "kind": "value",
+          "value": "iosapp"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "écolenormale"
+        },
+        {
+          "kind": "value",
+          "value": "écolenormale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "i̇stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji😀face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.3.0"
+    },
+    {
+      "call": "PropertyNamingStrategies.LOWER_CASE.nameForField(null, null, value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Jackson",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foobarbaz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo-bar-baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo bar baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo bar baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo.bar/baz"
+        },
+        {
+          "kind": "value",
+          "value": "xmlhttprequest"
+        },
+        {
+          "kind": "value",
+          "value": "ioerror"
+        },
+        {
+          "kind": "value",
+          "value": "userid"
+        },
+        {
+          "kind": "value",
+          "value": "iphone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "base64encode"
+        },
+        {
+          "kind": "value",
+          "value": "html5parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc123def"
+        },
+        {
+          "kind": "value",
+          "value": "v1.2.3"
+        },
+        {
+          "kind": "value",
+          "value": "don't stop"
+        },
+        {
+          "kind": "value",
+          "value": "the lord of the rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo__bar"
+        },
+        {
+          "kind": "value",
+          "value": "_private"
+        },
+        {
+          "kind": "value",
+          "value": "  padded  "
+        },
+        {
+          "kind": "value",
+          "value": "c++ code"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "price$"
+        },
+        {
+          "kind": "value",
+          "value": "20°c"
+        },
+        {
+          "kind": "value",
+          "value": "userids"
+        },
+        {
+          "kind": "value",
+          "value": "iosapp"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "écolenormale"
+        },
+        {
+          "kind": "value",
+          "value": "écolenormale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "i̇stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji😀face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "3.2.3"
+    }
+  ],
+  "function": "flatCase"
+}

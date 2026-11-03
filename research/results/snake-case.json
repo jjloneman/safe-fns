@@ -1,0 +1,4371 @@
+{
+  "cases": [
+    [
+      "fooBarBaz"
+    ],
+    [
+      "FooBarBaz"
+    ],
+    [
+      "foo_bar_baz"
+    ],
+    [
+      "foo-bar-baz"
+    ],
+    [
+      "foo bar baz"
+    ],
+    [
+      "FOO_BAR_BAZ"
+    ],
+    [
+      "Foo Bar Baz"
+    ],
+    [
+      "foo.bar/baz"
+    ],
+    [
+      "XMLHttpRequest"
+    ],
+    [
+      "IOError"
+    ],
+    [
+      "userID"
+    ],
+    [
+      "iPhone"
+    ],
+    [
+      "ABC"
+    ],
+    [
+      "version2Beta"
+    ],
+    [
+      "base64Encode"
+    ],
+    [
+      "HTML5Parser"
+    ],
+    [
+      "ABC123Def"
+    ],
+    [
+      "v1.2.3"
+    ],
+    [
+      "don't stop"
+    ],
+    [
+      "the lord of the rings"
+    ],
+    [
+      "foo__bar"
+    ],
+    [
+      "_private"
+    ],
+    [
+      "  padded  "
+    ],
+    [
+      "c++ code"
+    ],
+    [
+      "a+b"
+    ],
+    [
+      "price$"
+    ],
+    [
+      "20°C"
+    ],
+    [
+      "userIDs"
+    ],
+    [
+      "iOSApp"
+    ],
+    [
+      "version2beta"
+    ],
+    [
+      "2fast4you"
+    ],
+    [
+      "ÉcoleNormale"
+    ],
+    [
+      "écoleNormale"
+    ],
+    [
+      "straße"
+    ],
+    [
+      "İstanbul"
+    ],
+    [
+      "ǅemal"
+    ],
+    [
+      "日本語Text"
+    ],
+    [
+      "emoji😀Face"
+    ],
+    [
+      "👩‍💻dev"
+    ],
+    [
+      "a"
+    ],
+    [
+      ""
+    ],
+    [
+      "version2Beta",
+      {
+        "splitNumbers": false
+      }
+    ],
+    [
+      "version2Beta",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "base64Encode",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "HTML5Parser",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "ABC123Def",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "v1.2.3",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "utf8",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "version2beta",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "2fast4you",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "x²",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "fooBarBaz",
+      {
+        "splitNumbers": true
+      }
+    ],
+    [
+      "_private",
+      {
+        "keepOuterUnderscores": false
+      }
+    ],
+    [
+      "_private",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "_private_key",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "__foo_bar__",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "__init__",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "___",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "foo__bar",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      "fooBar",
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      {
+        "$js": "a boxed string"
+      }
+    ],
+    [
+      42
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ],
+    [
+      {
+        "$js": "a symbol"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a throwing toString"
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "snakeCase",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "xml_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "io_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "dont_stop"
+        },
+        {
+          "kind": "value",
+          "value": "the_lord_of_the_rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "padded"
+        },
+        {
+          "kind": "value",
+          "value": "c_++_code"
+        },
+        {
+          "kind": "value",
+          "value": "a_+_b"
+        },
+        {
+          "kind": "value",
+          "value": "price_$"
+        },
+        {
+          "kind": "value",
+          "value": "20_°_c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_os_app"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "i̇stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語_text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji_😀_face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻_dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "version2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "utf_8"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "x_²"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "_private"
+        },
+        {
+          "kind": "value",
+          "value": "_private_key"
+        },
+        {
+          "kind": "value",
+          "value": "__foo_bar__"
+        },
+        {
+          "kind": "value",
+          "value": "__init__"
+        },
+        {
+          "kind": "value",
+          "value": "___"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "snakeCase(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "case-anything",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "xml_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "io_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "dont_stop"
+        },
+        {
+          "kind": "value",
+          "value": "the_lord_of_the_rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "padded"
+        },
+        {
+          "kind": "value",
+          "value": "c_code"
+        },
+        {
+          "kind": "value",
+          "value": "a_b"
+        },
+        {
+          "kind": "value",
+          "value": "price"
+        },
+        {
+          "kind": "value",
+          "value": "20_c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_os_app"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "ecole_normale"
+        },
+        {
+          "kind": "value",
+          "value": "ecole_normale"
+        },
+        {
+          "kind": "value",
+          "value": "stra_ße"
+        },
+        {
+          "kind": "value",
+          "value": "stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "emal"
+        },
+        {
+          "kind": "value",
+          "value": "text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji_face"
+        },
+        {
+          "kind": "value",
+          "value": "dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "utf_8"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "3.1.7"
+    },
+    {
+      "call": "snakeCase(value, { prefixCharacters: \"_\", suffixCharacters: \"_\" })",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "change-case",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "_private"
+        },
+        {
+          "kind": "value",
+          "value": "_private_key"
+        },
+        {
+          "kind": "value",
+          "value": "__foo_bar__"
+        },
+        {
+          "kind": "value",
+          "value": "__init__"
+        },
+        {
+          "kind": "value",
+          "value": "___"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "5.4.4"
+    },
+    {
+      "call": "snakeCase(value, { split: splitSeparateNumbers })",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "change-case",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "utf_8"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "5.4.4"
+    },
+    {
+      "call": "snakeCase(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "change-case",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "xml_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "io_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "don_t_stop"
+        },
+        {
+          "kind": "value",
+          "value": "the_lord_of_the_rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "padded"
+        },
+        {
+          "kind": "value",
+          "value": "c_code"
+        },
+        {
+          "kind": "value",
+          "value": "a_b"
+        },
+        {
+          "kind": "value",
+          "value": "price"
+        },
+        {
+          "kind": "value",
+          "value": "20_c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_os_app"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "e_cole_normale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "i̇stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji_face"
+        },
+        {
+          "kind": "value",
+          "value": "dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "version2_beta"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "5.4.4"
+    },
+    {
+      "call": "snakeCase(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "es-toolkit",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "xml_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "io_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "don_t_stop"
+        },
+        {
+          "kind": "value",
+          "value": "the_lord_of_the_rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "padded"
+        },
+        {
+          "kind": "value",
+          "value": "c_code"
+        },
+        {
+          "kind": "value",
+          "value": "a_b"
+        },
+        {
+          "kind": "value",
+          "value": "price"
+        },
+        {
+          "kind": "value",
+          "value": "20_c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_os_app"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "e_cole_normale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "i̇stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji_😀_face"
+        },
+        {
+          "kind": "value",
+          "value": "👩_💻_dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "utf_8"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.52.0"
+    },
+    {
+      "call": "snakeCase(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "lodash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "xml_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "io_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "dont_stop"
+        },
+        {
+          "kind": "value",
+          "value": "the_lord_of_the_rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "padded"
+        },
+        {
+          "kind": "value",
+          "value": "c_code"
+        },
+        {
+          "kind": "value",
+          "value": "a_b"
+        },
+        {
+          "kind": "value",
+          "value": "price"
+        },
+        {
+          "kind": "value",
+          "value": "20_c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_os_app"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "ecole_normale"
+        },
+        {
+          "kind": "value",
+          "value": "ecole_normale"
+        },
+        {
+          "kind": "value",
+          "value": "strasse"
+        },
+        {
+          "kind": "value",
+          "value": "istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語_text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji_😀_face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻_dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "utf_8"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "symbol_hostile"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "4.18.1"
+    },
+    {
+      "call": "snake(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "radash",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar/baz"
+        },
+        {
+          "kind": "value",
+          "value": "xmlhttp_request"
+        },
+        {
+          "kind": "value",
+          "value": "ioerror"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "don't_stop"
+        },
+        {
+          "kind": "value",
+          "value": "the_lord_of_the_rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo__bar"
+        },
+        {
+          "kind": "value",
+          "value": "_private"
+        },
+        {
+          "kind": "value",
+          "value": "__padded__"
+        },
+        {
+          "kind": "value",
+          "value": "c++_code"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "price$"
+        },
+        {
+          "kind": "value",
+          "value": "20°_c"
+        },
+        {
+          "kind": "value",
+          "value": "user_ids"
+        },
+        {
+          "kind": "value",
+          "value": "i_osapp"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "i̇stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語_text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji😀_face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "_private"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "12.1.1"
+    },
+    {
+      "call": "toSnakeCase(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "remeda",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo.bar/baz"
+        },
+        {
+          "kind": "value",
+          "value": "xml_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "io_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_._2_._3"
+        },
+        {
+          "kind": "value",
+          "value": "don't_stop"
+        },
+        {
+          "kind": "value",
+          "value": "the_lord_of_the_rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "padded"
+        },
+        {
+          "kind": "value",
+          "value": "c++_code"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "price$"
+        },
+        {
+          "kind": "value",
+          "value": "20_°c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_os_app"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "i̇stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji😀face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_._2_._3"
+        },
+        {
+          "kind": "value",
+          "value": "utf_8"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "x²"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.51.0"
+    },
+    {
+      "call": "snakeCase(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "scule",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo bar baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo _bar _baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "xml_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "io_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "don't stop"
+        },
+        {
+          "kind": "value",
+          "value": "the lord of the rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo__bar"
+        },
+        {
+          "kind": "value",
+          "value": "_private"
+        },
+        {
+          "kind": "value",
+          "value": "  padded  "
+        },
+        {
+          "kind": "value",
+          "value": "c++ code"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "price$"
+        },
+        {
+          "kind": "value",
+          "value": "20°_c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_os_app"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "i̇stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語_text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji😀_face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "version2_beta"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "_private"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.3.0"
+    },
+    {
+      "call": "snakeCase(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "string-ts",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "xml_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "io_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "dont_stop"
+        },
+        {
+          "kind": "value",
+          "value": "the_lord_of_the_rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "padded"
+        },
+        {
+          "kind": "value",
+          "value": "c_++_code"
+        },
+        {
+          "kind": "value",
+          "value": "a_+_b"
+        },
+        {
+          "kind": "value",
+          "value": "price_$"
+        },
+        {
+          "kind": "value",
+          "value": "20_°_c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_os_app"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "é_cole_normale"
+        },
+        {
+          "kind": "value",
+          "value": "e_́_cole_normale"
+        },
+        {
+          "kind": "value",
+          "value": "stra_ß_e"
+        },
+        {
+          "kind": "value",
+          "value": "i̇_stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆ_emal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語_text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji_😀_face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻_dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "utf_8"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "x_²"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.3.1"
+    },
+    {
+      "call": "v.snakeCase(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
+      "locale": "en-US",
+      "name": "Voca",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "xml_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "io_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "don_t_stop"
+        },
+        {
+          "kind": "value",
+          "value": "the_lord_of_the_rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "padded"
+        },
+        {
+          "kind": "value",
+          "value": "c_code"
+        },
+        {
+          "kind": "value",
+          "value": "a_b"
+        },
+        {
+          "kind": "value",
+          "value": "price"
+        },
+        {
+          "kind": "value",
+          "value": "20_c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_os_app"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "i̇stanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǆemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji_😀face"
+        },
+        {
+          "kind": "value",
+          "value": "👩_💻dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base_64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html_5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc_123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v_1_2_3"
+        },
+        {
+          "kind": "value",
+          "value": "utf_8"
+        },
+        {
+          "kind": "value",
+          "value": "version_2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "2_fast_4_you"
+        },
+        {
+          "kind": "value",
+          "value": "x"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "hi"
+        },
+        {
+          "kind": "value",
+          "value": "42"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "value",
+          "value": "symbol_hostile"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.4.1"
+    },
+    {
+      "call": "JsonNamingPolicy.SnakeCaseLower.ConvertName(value)",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo-bar-baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo.bar/baz"
+        },
+        {
+          "kind": "value",
+          "value": "xml_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "io_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v1.2.3"
+        },
+        {
+          "kind": "value",
+          "value": "don't_stop"
+        },
+        {
+          "kind": "value",
+          "value": "the_lord_of_the_rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo__bar"
+        },
+        {
+          "kind": "value",
+          "value": "_private"
+        },
+        {
+          "kind": "value",
+          "value": "padded"
+        },
+        {
+          "kind": "value",
+          "value": "c++code"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "price$"
+        },
+        {
+          "kind": "value",
+          "value": "20°c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_os_app"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǅemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji😀face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Guava",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo-bar-baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo bar baz"
+        },
+        {
+          "kind": "value",
+          "value": "f_o_o__b_a_r__b_a_z"
+        },
+        {
+          "kind": "value",
+          "value": "foo _bar _baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo.bar/baz"
+        },
+        {
+          "kind": "value",
+          "value": "x_m_l_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "i_o_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_d"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "a_b_c"
+        },
+        {
+          "kind": "value",
+          "value": "version2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "h_t_m_l5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "a_b_c123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v1.2.3"
+        },
+        {
+          "kind": "value",
+          "value": "don't stop"
+        },
+        {
+          "kind": "value",
+          "value": "the lord of the rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo__bar"
+        },
+        {
+          "kind": "value",
+          "value": "_private"
+        },
+        {
+          "kind": "value",
+          "value": "  padded  "
+        },
+        {
+          "kind": "value",
+          "value": "c++ code"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "price$"
+        },
+        {
+          "kind": "value",
+          "value": "20°_c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_o_s_app"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "École_normale"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǅemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語_text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji😀_face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "33.7.2-jre"
+    },
+    {
+      "call": "PropertyNamingStrategies.SNAKE_CASE.nameForField(null, null, value)",
+      "image": "gradle:9.8.0-jdk25-noble@sha256:47cb7270db91b1a58742e19d9d6ca27387d953b1cfc67ee48ab567702e600135",
+      "inputs": "sha256:7c5399c5fdfcee0f4351a3836193901b450f4f740a70510b1e94746f212a15dc",
+      "locale": "en",
+      "name": "Jackson",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo-bar-baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo bar baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo _bar _baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo.bar/baz"
+        },
+        {
+          "kind": "value",
+          "value": "xmlhttp_request"
+        },
+        {
+          "kind": "value",
+          "value": "ioerror"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v1.2.3"
+        },
+        {
+          "kind": "value",
+          "value": "don't stop"
+        },
+        {
+          "kind": "value",
+          "value": "the lord of the rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo__bar"
+        },
+        {
+          "kind": "value",
+          "value": "private"
+        },
+        {
+          "kind": "value",
+          "value": "  padded  "
+        },
+        {
+          "kind": "value",
+          "value": "c++ code"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "price$"
+        },
+        {
+          "kind": "value",
+          "value": "20°_c"
+        },
+        {
+          "kind": "value",
+          "value": "user_ids"
+        },
+        {
+          "kind": "value",
+          "value": "i_osapp"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "istanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǅemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語_text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji😀_face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "jvm",
+      "tier": 2,
+      "version": "3.2.3"
+    },
+    {
+      "call": "ActiveSupport::Inflector.underscore(value)",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Rails (ActiveModel)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo bar baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo_bar_baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo bar baz"
+        },
+        {
+          "kind": "value",
+          "value": "foo.bar/baz"
+        },
+        {
+          "kind": "value",
+          "value": "xml_http_request"
+        },
+        {
+          "kind": "value",
+          "value": "io_error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": "i_phone"
+        },
+        {
+          "kind": "value",
+          "value": "abc"
+        },
+        {
+          "kind": "value",
+          "value": "version2_beta"
+        },
+        {
+          "kind": "value",
+          "value": "base64_encode"
+        },
+        {
+          "kind": "value",
+          "value": "html5_parser"
+        },
+        {
+          "kind": "value",
+          "value": "abc123_def"
+        },
+        {
+          "kind": "value",
+          "value": "v1.2.3"
+        },
+        {
+          "kind": "value",
+          "value": "don't stop"
+        },
+        {
+          "kind": "value",
+          "value": "the lord of the rings"
+        },
+        {
+          "kind": "value",
+          "value": "foo__bar"
+        },
+        {
+          "kind": "value",
+          "value": "_private"
+        },
+        {
+          "kind": "value",
+          "value": "  padded  "
+        },
+        {
+          "kind": "value",
+          "value": "c++ code"
+        },
+        {
+          "kind": "value",
+          "value": "a+b"
+        },
+        {
+          "kind": "value",
+          "value": "price$"
+        },
+        {
+          "kind": "value",
+          "value": "20°c"
+        },
+        {
+          "kind": "value",
+          "value": "user_i_ds"
+        },
+        {
+          "kind": "value",
+          "value": "i_os_app"
+        },
+        {
+          "kind": "value",
+          "value": "version2beta"
+        },
+        {
+          "kind": "value",
+          "value": "2fast4you"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "école_normale"
+        },
+        {
+          "kind": "value",
+          "value": "straße"
+        },
+        {
+          "kind": "value",
+          "value": "İstanbul"
+        },
+        {
+          "kind": "value",
+          "value": "ǅemal"
+        },
+        {
+          "kind": "value",
+          "value": "日本語text"
+        },
+        {
+          "kind": "value",
+          "value": "emoji😀face"
+        },
+        {
+          "kind": "value",
+          "value": "👩‍💻dev"
+        },
+        {
+          "kind": "value",
+          "value": "a"
+        },
+        {
+          "kind": "value",
+          "value": ""
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "8.1.4"
+    }
+  ],
+  "function": "snakeCase"
+}
