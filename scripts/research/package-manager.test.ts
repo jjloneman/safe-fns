@@ -19,6 +19,7 @@ const RESEARCH_ROOTS = [
     description: "research/docker/firebase/",
     directory: "research/docker/firebase",
   },
+  { description: "research/types/", directory: "research/types" },
 ];
 
 /** Matches a `pnpm-workspace.yaml`'s release-age floor, in minutes. */

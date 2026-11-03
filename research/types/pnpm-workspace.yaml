@@ -1,0 +1,13 @@
+# Makes `research/types/` its own pnpm root, apart from the repo's and
+# `research/`'s, so a bump to a type-only library never moves the Node
+# adapter's lockfile, and with it every Node column's inputs fingerprint.
+#
+# - `minimumReleaseAge` and `saveExact` mirror the root `pnpm-workspace.yaml`;
+#   keep them in sync.
+
+# Supply-chain floor: refuse any version younger than 7 days (in minutes).
+minimumReleaseAge: 10080
+
+# Write exact versions on `pnpm add`, so the lockfile is the only thing that
+# moves a dependency.
+saveExact: true

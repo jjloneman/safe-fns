@@ -83,6 +83,7 @@
     "prune-branches": "git fetch --prune && git-removed-branches --force --prune",
     "research": "node scripts/research/run.ts",
     "research:audit": "node scripts/research/fold-audit.ts",
+    "research:types": "node scripts/research/type-checks.ts",
     "research:usage": "node scripts/research/usage-search.ts",
     "size": "pnpm build && size-limit --config size-limit.config.ts",
     "test": "vitest run",

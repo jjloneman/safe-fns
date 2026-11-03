@@ -30,6 +30,8 @@
   "extends": "../tsconfig.json",
   "include": [
     // The Node adapter, plus whatever it imports from `scripts/` and `test/`.
-    "adapters"
+    "adapters",
+    // The planned type helpers `pnpm research:types` checks.
+    "types"
   ]
 }
