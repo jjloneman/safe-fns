@@ -2,8 +2,9 @@
 type: Decision
 title: How the case functions split words and which styles ship
 description: One splitter, `words`, breaks a string at separators, at a lower-to-upper change, and before the last capital of an acronym, keeping digits on the word before them unless `splitNumbers` is set and making a run of symbols a word of its own; `camelCase`, `pascalCase`, `snakeCase`, `constantCase`, `kebabCase`, `lowerCase`, `titleCase`, and `sentenceCase` join its words, each flattening a word's case locale-free, `keepOuterUnderscores` keeps a leading or trailing `_` run, and a non-string returns the `fallback` option, `""` by default.
-status: draft
+status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T07:05:37Z }
+verified: { by: human:jjloneman, at: 2026-11-03T23:46:53Z }
 ---
 
 # How the case functions split words and which styles ship
