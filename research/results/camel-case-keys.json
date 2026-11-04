@@ -1,0 +1,2820 @@
+{
+  "cases": [
+    [
+      {
+        "first_name": "Ada",
+        "user_id": 1
+      }
+    ],
+    [
+      {
+        "home_address": {
+          "street_name": "Main",
+          "zip_code": "02139"
+        }
+      }
+    ],
+    [
+      {
+        "line_items": [
+          {
+            "unit_price": 2
+          },
+          {
+            "unit_price": 3
+          }
+        ]
+      }
+    ],
+    [
+      [
+        {
+          "user_id": 1
+        },
+        {
+          "user_id": 2
+        }
+      ]
+    ],
+    [
+      {
+        "matrix_rows": [
+          [
+            {
+              "cell_value": 1
+            }
+          ]
+        ]
+      }
+    ],
+    [
+      {
+        "status_code": "NOT_FOUND",
+        "tag_list": [
+          "snake_case"
+        ]
+      }
+    ],
+    [
+      {
+        "userId": 1
+      }
+    ],
+    [
+      {
+        "UserEmail": 2,
+        "XMLHttpRequest": 3,
+        "user-name": 1,
+        "user_IDs": 4
+      }
+    ],
+    [
+      {
+        "fooBar": 2,
+        "foo_bar": 1
+      }
+    ],
+    [
+      {
+        "$js": "an object with fooBar then foo_bar"
+      }
+    ],
+    [
+      {
+        "1": "a",
+        "item_2": "b"
+      }
+    ],
+    [
+      {
+        "": 1
+      }
+    ],
+    [
+      {}
+    ],
+    [
+      []
+    ],
+    [
+      {
+        "__typename": "User",
+        "_id": 1
+      }
+    ],
+    [
+      {
+        "__typename": "User",
+        "_id": 1
+      },
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      {
+        "home_address": {
+          "zip_code": "02139"
+        }
+      },
+      {
+        "deep": false
+      }
+    ],
+    [
+      {
+        "home_address": {
+          "zip_code": "02139"
+        }
+      },
+      {
+        "deep": true
+      }
+    ],
+    [
+      {
+        "created_at": {
+          "$js": "a Date"
+        }
+      }
+    ],
+    [
+      {
+        "by_id": {
+          "$js": "a Map with an entry"
+        }
+      }
+    ],
+    [
+      {
+        "on_change": {
+          "$js": "a function"
+        }
+      }
+    ],
+    [
+      {
+        "$js": "a class instance with mixed-case fields"
+      }
+    ],
+    [
+      {
+        "the_account": {
+          "$js": "a class instance with mixed-case fields"
+        }
+      }
+    ],
+    [
+      {
+        "$js": "a null-prototype mixed-key object"
+      }
+    ],
+    [
+      {
+        "$js": "a mixed-key object with a cycle"
+      }
+    ],
+    [
+      {
+        "$js": "a mixed-key object with a symbol key"
+      }
+    ],
+    [
+      {
+        "$js": "a mixed-key object with a non-enumerable key"
+      }
+    ],
+    [
+      {
+        "$js": "a mixed-key object with an inherited key"
+      }
+    ],
+    [
+      {
+        "$js": "a mixed-key object with getters"
+      }
+    ],
+    [
+      {
+        "$js": "a mixed-key object with an own __proto__ key"
+      }
+    ],
+    [
+      {
+        "$js": "a mixed-key object with an own __proto__ key"
+      },
+      {
+        "keepOuterUnderscores": true
+      }
+    ],
+    [
+      {
+        "$js": "a proxy of a plain object"
+      }
+    ],
+    [
+      {
+        "$js": "an object with a throwing getter"
+      }
+    ],
+    [
+      {
+        "outer_key": {
+          "$js": "an object with a throwing getter"
+        }
+      }
+    ],
+    [
+      {
+        "$js": "a revoked proxy"
+      }
+    ],
+    [
+      {
+        "$js": "a proxy whose ownKeys trap throws"
+      }
+    ],
+    [
+      "user_id"
+    ],
+    [
+      42
+    ],
+    [
+      null
+    ],
+    [
+      {
+        "$undefined": true
+      }
+    ]
+  ],
+  "columns": [
+    {
+      "call": "camelCaseKeys",
+      "image": "-",
+      "locale": "-",
+      "name": "safe-fns (planned)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "firstName": "Ada",
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "streetName": "Main",
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "lineItems": [
+              {
+                "unitPrice": 2
+              },
+              {
+                "unitPrice": 3
+              }
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "userId": 1
+            },
+            {
+              "userId": 2
+            }
+          ]
+        },
+        {
+          "kind": "value",
+          "value": {
+            "matrixRows": [
+              [
+                {
+                  "cellValue": 1
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "statusCode": "NOT_FOUND",
+            "tagList": [
+              "snake_case"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userEmail": 2,
+            "userIDs": 4,
+            "userName": 1,
+            "xmlHttpRequest": 3
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": "a",
+            "item2": "b"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": {
+            "id": 1,
+            "typename": "User"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__typename": "User",
+            "_id": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "createdAt": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "byId": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "onChange": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "Symbol(shared)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "theAccount": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "userId": 1,
+              "userName": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "otherKey": 1,
+            "selfRef": {
+              "$repr": "Symbol(cycle)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "[Symbol(key)]": 3,
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "Symbol(shared)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "proto": {
+              "innerKey": 1,
+              "innerName": 2
+            },
+            "userId": 3
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto__": {
+              "innerKey": 1,
+              "innerName": 2
+            },
+            "userId": 3
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "Symbol(shared)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "Symbol(shared)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "Symbol(shared)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "Symbol(shared)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "-",
+      "tier": 0,
+      "version": "-"
+    },
+    {
+      "call": "camelcaseKeys(value, { deep: true })",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "locale": "en-US",
+      "name": "camelcase-keys",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "firstName": "Ada",
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "streetName": "Main",
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "lineItems": [
+              {
+                "unitPrice": 2
+              },
+              {
+                "unitPrice": 3
+              }
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "userId": 1
+            },
+            {
+              "userId": 2
+            }
+          ]
+        },
+        {
+          "kind": "value",
+          "value": {
+            "matrixRows": [
+              [
+                {
+                  "cellValue": 1
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "statusCode": "NOT_FOUND",
+            "tagList": [
+              "snake_case"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userEmail": 2,
+            "userIDs": 4,
+            "userName": 1,
+            "xmlHttpRequest": 3
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": "a",
+            "item2": "b"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__typename": "User",
+            "_id": 1
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "createdAt": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "byId": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "onChange": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "theAccount": {
+              "userId": 1,
+              "userName": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "otherKey": 1,
+            "selfRef": {
+              "$repr": "Symbol(cycle)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "[Symbol(key)]": 3,
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 3,
+            "userName": 4
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__proto": {
+              "innerKey": 1,
+              "innerName": 2
+            },
+            "userId": 3
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "10.0.3"
+    },
+    {
+      "call": "camelcaseKeys(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "locale": "en-US",
+      "name": "camelcase-keys",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "10.0.3"
+    },
+    {
+      "call": "camelCase(value, Infinity)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "locale": "en-US",
+      "name": "change-case",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "firstName": "Ada",
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "streetName": "Main",
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "lineItems": [
+              {
+                "unitPrice": 2
+              },
+              {
+                "unitPrice": 3
+              }
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "userId": 1
+            },
+            {
+              "userId": 2
+            }
+          ]
+        },
+        {
+          "kind": "value",
+          "value": {
+            "matrixRows": [
+              [
+                {
+                  "cellValue": 1
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "statusCode": "NOT_FOUND",
+            "tagList": [
+              "snake_case"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userEmail": 2,
+            "userIDs": 4,
+            "userName": 1,
+            "xmlHttpRequest": 3
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": "a",
+            "item_2": "b"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": {
+            "id": 1,
+            "typename": "User"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "createdAt": {
+              "$repr": "[object Object]"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "byId": {
+              "$repr": "[object Map]"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "onChange": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Object]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "theAccount": {
+              "$repr": "[object Object]"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "null-prototype": {
+              "userId": 1,
+              "userName": 2
+            }
+          }
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "[object Object]"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "proto": {
+              "innerKey": 1,
+              "innerName": 2
+            },
+            "userId": 3
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "5.4.4"
+    },
+    {
+      "call": "camelCase(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "locale": "en-US",
+      "name": "change-case",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "5.4.4"
+    },
+    {
+      "call": "toCamelCaseKeys(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "locale": "en-US",
+      "name": "es-toolkit",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "firstName": "Ada",
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "streetName": "Main",
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "lineItems": [
+              {
+                "unitPrice": 2
+              },
+              {
+                "unitPrice": 3
+              }
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "userId": 1
+            },
+            {
+              "userId": 2
+            }
+          ]
+        },
+        {
+          "kind": "value",
+          "value": {
+            "matrixRows": [
+              [
+                {
+                  "cellValue": 1
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "statusCode": "NOT_FOUND",
+            "tagList": [
+              "snake_case"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userEmail": 2,
+            "userIDs": 4,
+            "userName": 1,
+            "xmlHttpRequest": 3
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": "a",
+            "item2": "b"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": {
+            "id": 1,
+            "typename": "User"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "createdAt": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "byId": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "onChange": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "Symbol(shared)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "theAccount": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$repr": "Symbol(shared)"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "proto": {
+              "innerKey": 1,
+              "innerName": 2
+            },
+            "userId": 3
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "1.52.0"
+    },
+    {
+      "call": "camelizeKeys(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "locale": "en-US",
+      "name": "humps",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "firstName": "Ada",
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "streetName": "Main",
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "lineItems": [
+              {
+                "unitPrice": 2
+              },
+              {
+                "unitPrice": 3
+              }
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "userId": 1
+            },
+            {
+              "userId": 2
+            }
+          ]
+        },
+        {
+          "kind": "value",
+          "value": {
+            "matrixRows": [
+              [
+                {
+                  "cellValue": 1
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "statusCode": "NOT_FOUND",
+            "tagList": [
+              "snake_case"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userEmail": 2,
+            "userIDs": 4,
+            "userName": 1,
+            "xMLHttpRequest": 3
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": "a",
+            "item2": "b"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": {
+            "id": 1,
+            "typename": "User"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "createdAt": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "byId": {}
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "onChange": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "theAccount": {
+              "userId": 1,
+              "userName": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 3,
+            "userName": 4
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "proto": {
+              "innerKey": 1,
+              "innerName": 2
+            },
+            "userId": 3
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.0.1"
+    },
+    {
+      "call": "camelKeys(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "locale": "en-US",
+      "name": "string-ts",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.3.1"
+    },
+    {
+      "call": "deepCamelKeys(value)",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "locale": "en-US",
+      "name": "string-ts",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "firstName": "Ada",
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "streetName": "Main",
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "lineItems": [
+              {
+                "unitPrice": 2
+              },
+              {
+                "unitPrice": 3
+              }
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": [
+            {
+              "userId": 1
+            },
+            {
+              "userId": 2
+            }
+          ]
+        },
+        {
+          "kind": "value",
+          "value": {
+            "matrixRows": [
+              [
+                {
+                  "cellValue": 1
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "statusCode": "NOT_FOUND",
+            "tagList": [
+              "snake_case"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userEmail": 2,
+            "userIDs": 4,
+            "userName": 1,
+            "xmlHttpRequest": 3
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": "a",
+            "item2": "b"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "value",
+          "value": []
+        },
+        {
+          "kind": "value",
+          "value": {
+            "id": 1,
+            "typename": "User"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "createdAt": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "byId": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "onChange": {
+              "$repr": "Symbol(shared)"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "theAccount": {
+              "userId": 1,
+              "userName": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "error": "RangeError",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "inheritedKey": 1,
+            "inheritedName": 2,
+            "userId": 3,
+            "userName": 4
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1,
+            "userName": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "proto": {
+              "innerKey": 1,
+              "innerName": 2
+            },
+            "userId": 3
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "a": 1
+          }
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "error": "TypeError",
+          "kind": "error"
+        },
+        {
+          "error": "Error",
+          "kind": "error"
+        },
+        {
+          "kind": "value",
+          "value": "user_id"
+        },
+        {
+          "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.3.1"
+    },
+    {
+      "call": "JsonSerializer.Serialize(value, new JsonSerializerOptions { DictionaryKeyPolicy = JsonNamingPolicy.CamelCase })",
+      "image": "mcr.microsoft.com/dotnet/sdk:10.0.402-noble@sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+      "inputs": "sha256:8a884fcebb1f9abeea4525351b62173c6efb1bd4e27da8d73d4a73cb4500ba54",
+      "locale": "invariant",
+      "name": ".NET",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": "{\"first_name\":\"Ada\",\"user_id\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"home_address\":{\"street_name\":\"Main\",\"zip_code\":\"02139\"}}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"line_items\":[{\"unit_price\":2},{\"unit_price\":3}]}"
+        },
+        {
+          "kind": "value",
+          "value": "[{\"user_id\":1},{\"user_id\":2}]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"matrix_rows\":[[{\"cell_value\":1}]]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"status_code\":\"NOT_FOUND\",\"tag_list\":[\"snake_case\"]}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"userId\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"user-name\":1,\"user_IDs\":4,\"userEmail\":2,\"xmlHttpRequest\":3}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"foo_bar\":1,\"fooBar\":2}"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "{\"1\":\"a\",\"item_2\":\"b\"}"
+        },
+        {
+          "kind": "value",
+          "value": "{\"\":1}"
+        },
+        {
+          "kind": "value",
+          "value": "{}"
+        },
+        {
+          "kind": "value",
+          "value": "[]"
+        },
+        {
+          "kind": "value",
+          "value": "{\"__typename\":\"User\",\"_id\":1}"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "{\"home_address\":{\"zip_code\":\"02139\"}}"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "dotnet",
+      "tier": 2,
+      "version": "10.0.13"
+    },
+    {
+      "call": "value.deep_transform_keys { |key| key.camelize(:lower) }",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Rails (ActiveModel)",
+      "outcomes": [
+        {
+          "kind": "value",
+          "value": {
+            "firstName": "Ada",
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "streetName": "Main",
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "lineItems": [
+              {
+                "unitPrice": 2
+              },
+              {
+                "unitPrice": 3
+              }
+            ]
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "matrixRows": [
+              [
+                {
+                  "cellValue": 1
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "statusCode": "NOT_FOUND",
+            "tagList": [
+              "snake_case"
+            ]
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "userId": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "user-name": 1,
+            "userEmail": 2,
+            "userIds": 4,
+            "xMLHttpRequest": 3
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "fooBar": 2
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "1": "a",
+            "item2": "b"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {}
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "Id": 1,
+            "Typename": "User"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "zipCode": "02139"
+            }
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "8.1.4"
+    },
+    {
+      "call": "value.transform_keys { |key| key.camelize(:lower) }",
+      "image": "ruby:4.0.7-slim-bookworm@sha256:ff110532f77ece9a77d75159600193852442509aa5f1314beb3c99dc4b3298b4",
+      "inputs": "sha256:60ee825af5e2ee659dda52c5129933720277af9cb8f9f212f5589d346337cfe6",
+      "locale": "C.UTF-8",
+      "name": "Rails (ActiveModel)",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "homeAddress": {
+              "zip_code": "02139"
+            }
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "ruby",
+      "tier": 4,
+      "version": "8.1.4"
+    }
+  ],
+  "function": "camelCaseKeys"
+}

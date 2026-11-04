@@ -198,6 +198,47 @@ export type ConverterProbe = {
   splitsNumbers?: boolean;
 };
 
+/** An object-key converter, and the call text its column shows. */
+export type KeysProbe = {
+  /**
+   * The expression, as the table header shows it.
+   *
+   * @example `"camelcaseKeys(value, { deep: true })"`
+   */
+  call: string;
+
+  /**
+   * The library's converter, handed each case's value as it came.
+   *
+   * @example `(value) => camelcaseKeys(value, { deep: true })`
+   */
+  convert: (value: unknown) => unknown;
+
+  /**
+   * Whether the call converts only the outermost keys, so it answers just
+   * the cases that set `deep` to `false`.
+   *
+   * @example true
+   */
+  isShallow?: boolean;
+
+  /**
+   * Whether the call keeps leading and trailing underscore runs, so it can
+   * answer a case setting `keepOuterUnderscores` to the same value.
+   *
+   * @example true
+   */
+  keepsOuterUnderscores?: boolean;
+
+  /**
+   * Whether the call always splits a digit run into a word of its own, so
+   * it can answer a case setting `splitNumbers` to the same value.
+   *
+   * @example true
+   */
+  splitsNumbers?: boolean;
+};
+
 /** A numeric `range` case's bounds and step. */
 export type RangeSpan = {
   /**
@@ -345,6 +386,24 @@ type KeyRead = {
    */
   value: object;
 };
+
+/** A case's options, and the settings a probe's call can answer. */
+type OptionsMatch = {
+  /**
+   * A case's options argument, of any type.
+   *
+   * @example `{ deep: false }`
+   */
+  options: unknown;
+
+  /**
+   * Options the case must set, because the call answers only that setting,
+   * as a shallow keys call answers only `deep: false`.
+   *
+   * @example `["deep"]`
+   */
+  requiredKeys?: readonly string[];
+} & Pick<CaseOptionsCheck, "behavior">;
 
 /** An object whose own keys a `markClone` cell lists, and how to list them. */
 type OwnEntriesRead = {
@@ -771,6 +830,47 @@ export function keyGetter(key: unknown): (item: unknown) => unknown {
 }
 
 /**
+ * Build the probe for an object-key converter.
+ *
+ * - The result is marked as `markClone` marks a clone, so a value the call
+ *   kept whole shows as `Symbol(shared)` and a cycle as `Symbol(cycle)`.
+ *
+ * - A deep call answers the cases with no options; a shallow one answers only
+ *   those setting `deep` to `false`.
+ *
+ * - A case setting `splitNumbers` or `keepOuterUnderscores` runs only where
+ *   it matches what the call always does.
+ *
+ * @returns the probe.
+ */
+export function keysProbe({
+  call,
+  convert,
+  isShallow = false,
+  keepsOuterUnderscores: isKeepingOuterUnderscores = false,
+  splitsNumbers: isSplittingNumbers = false,
+}: KeysProbe): Probe {
+  const behavior = {
+    deep: !isShallow,
+    keepOuterUnderscores: isKeepingOuterUnderscores,
+    splitNumbers: isSplittingNumbers,
+  };
+
+  return {
+    accepts: (args) =>
+      (!isShallow && hasNoOptions(args)) ||
+      (args.length === 2 &&
+        isMatchingOptions({
+          behavior,
+          options: args[1],
+          requiredKeys: isShallow ? ["deep"] : [],
+        })),
+    call,
+    run: ([value]) => markClone({ clone: convert(value), source: [value] }),
+  };
+}
+
+/**
  * Mark what a deep clone copied and what it shared, for a `deepClone` column.
  *
  * - Like `markReferences`, plus `Symbol(shared)` for any object the clone
@@ -1140,25 +1240,10 @@ function describeView({
 function hasCaseOptions({ args, behavior }: CaseOptionsCheck): boolean {
   const [value, options] = args;
 
-  if (
-    args.length !== 2 ||
-    typeof value !== "string" ||
-    typeof options !== "object" ||
-    options === null
-  ) {
-    return false;
-  }
-
-  const entries = Object.entries(options);
-
   return (
-    entries.length > 0 &&
-    entries.every(
-      ([key, setting]) =>
-        Object.hasOwn(behavior, key) &&
-        behavior[key] !== undefined &&
-        behavior[key] === setting
-    )
+    args.length === 2 &&
+    typeof value === "string" &&
+    isMatchingOptions({ behavior, options })
   );
 }
 
@@ -1265,6 +1350,38 @@ function isMap(value: object): boolean {
   } catch {
     return false;
   }
+}
+
+/**
+ * Whether a case's options are an object whose every setting matches how a
+ * probe's call behaves.
+ *
+ * @returns whether the call can answer the options.
+ */
+function isMatchingOptions({
+  behavior,
+  options,
+  requiredKeys = [],
+}: OptionsMatch): boolean {
+  if (
+    typeof options !== "object" ||
+    options === null ||
+    !requiredKeys.every((key) => Object.hasOwn(options, key))
+  ) {
+    return false;
+  }
+
+  const entries = Object.entries(options);
+
+  return (
+    entries.length > 0 &&
+    entries.every(
+      ([key, setting]) =>
+        Object.hasOwn(behavior, key) &&
+        behavior[key] !== undefined &&
+        behavior[key] === setting
+    )
+  );
 }
 
 /** Whether a value is a `Set` from any realm, by `Set.prototype.has`. */
