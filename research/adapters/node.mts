@@ -17,6 +17,8 @@ import { HOSTILE_INPUTS } from "../../test/hostile-inputs.ts";
 import { AJV_COERCE } from "./node/ajv.mts";
 import { ANY_ASCII } from "./node/any-ascii.mts";
 import { CANONICALIZE } from "./node/canonicalize.mts";
+import { CASE_ANYTHING } from "./node/case-anything.mts";
+import { CHANGE_CASE } from "./node/change-case.mts";
 import { CONSOLA } from "./node/consola.mts";
 import { CORE_JS } from "./node/core-js.mts";
 import { CSV } from "./node/csv.mts";
@@ -37,6 +39,7 @@ import { FAST_DEEP_EQUAL } from "./node/fast-deep-equal.mts";
 import { FAST_JSON_STABLE_STRINGIFY } from "./node/fast-json-stable-stringify.mts";
 import { FAST_SAFE_STRINGIFY } from "./node/fast-safe-stringify.mts";
 import { HTML } from "./node/html.mts";
+import { HUMANIZE_STRING } from "./node/humanize-string.mts";
 import { INI } from "./node/ini.mts";
 import { IS_PLAIN_OBJ } from "./node/is-plain-obj.mts";
 import { JOI } from "./node/joi.mts";
@@ -58,9 +61,11 @@ import { RAMDA } from "./node/ramda.mts";
 import { REMEDA } from "./node/remeda.mts";
 import { RFDC } from "./node/rfdc.mts";
 import { SAFE_STABLE_STRINGIFY } from "./node/safe-stable-stringify.mts";
+import { SCULE } from "./node/scule.mts";
 import { SINDRESORHUS_IS } from "./node/sindresorhus-is.mts";
 import { SINDRESORHUS_TRANSLITERATE } from "./node/sindresorhus-transliterate.mts";
 import { STORE2 } from "./node/store2.mts";
+import { STRING_TS } from "./node/string-ts.mts";
 import { TOML } from "./node/toml.mts";
 import { errorName } from "./node/tool.mts";
 import { TRANSLITERATION } from "./node/transliteration.mts";
@@ -389,6 +394,11 @@ const TOOLS: readonly Tool[] = [
   TRANSLITERATION,
   SINDRESORHUS_TRANSLITERATE,
   VOCA,
+  CASE_ANYTHING,
+  CHANGE_CASE,
+  HUMANIZE_STRING,
+  SCULE,
+  STRING_TS,
   PLURALIZE,
   PLUR,
   FAST_DEEP_EQUAL,

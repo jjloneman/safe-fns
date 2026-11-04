@@ -4,6 +4,7 @@ import type { Tool } from "./tool.mts";
 
 import {
   callWithRange,
+  converterProbe,
   hasNoOptions,
   hasOnlyOptions,
   isConcatPair,
@@ -18,6 +19,13 @@ import {
 /** lodash's checks and coercions. */
 export const LODASH: Tool = {
   functions: {
+    camelCase: [
+      converterProbe({
+        call: "camelCase(value)",
+        convert: (value) => lodash.camelCase(value),
+        splitsNumbers: true,
+      }),
+    ],
     deepClone: [
       {
         accepts: hasNoOptions,
@@ -71,6 +79,13 @@ export const LODASH: Tool = {
     isSafeEmpty: [
       { call: "_.isEmpty(value)", run: ([value]) => lodash.isEmpty(value) },
     ],
+    kebabCase: [
+      converterProbe({
+        call: "kebabCase(value)",
+        convert: (value) => lodash.kebabCase(value),
+        splitsNumbers: true,
+      }),
+    ],
     keyBy: [
       {
         accepts: isPair,
@@ -83,6 +98,13 @@ export const LODASH: Tool = {
             )
           ),
       },
+    ],
+    lowerCase: [
+      converterProbe({
+        call: "lowerCase(value)",
+        convert: (value) => lodash.lowerCase(value),
+        splitsNumbers: true,
+      }),
     ],
     lowerFirst: [
       {
@@ -133,6 +155,20 @@ export const LODASH: Tool = {
         run: ([value]) => markReferences(lodash.cloneDeep(value)),
       },
     ],
+    snakeCase: [
+      converterProbe({
+        call: "snakeCase(value)",
+        convert: (value) => lodash.snakeCase(value),
+        splitsNumbers: true,
+      }),
+    ],
+    titleCase: [
+      converterProbe({
+        call: "startCase(value)",
+        convert: (value) => lodash.startCase(value),
+        splitsNumbers: true,
+      }),
+    ],
     toBasicAscii: [
       {
         call: "_.deburr(value)",
@@ -141,6 +177,13 @@ export const LODASH: Tool = {
     ],
     trimBlank: [
       { call: "_.trim(value)", run: ([value]) => lodash.trim(value as string) },
+    ],
+    upperCase: [
+      converterProbe({
+        call: "upperCase(value)",
+        convert: (value) => lodash.upperCase(value),
+        splitsNumbers: true,
+      }),
     ],
     upperFirst: [
       {
@@ -156,6 +199,13 @@ export const LODASH: Tool = {
         call: "_.capitalize(value)",
         run: ([value]) => lodash.capitalize(value as string),
       },
+    ],
+    words: [
+      converterProbe({
+        call: "words(value)",
+        convert: (value) => lodash.words(value),
+        splitsNumbers: true,
+      }),
     ],
   },
   name: "lodash",

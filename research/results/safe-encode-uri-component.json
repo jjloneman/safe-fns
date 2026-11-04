@@ -326,7 +326,7 @@
     {
       "call": "encodeURI(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:2dfa0fef2643065d4955fc20f5bae4cd9bef325392321473fd8deed7720cc264",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [
@@ -410,7 +410,7 @@
     {
       "call": "encodeURIComponent(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:2dfa0fef2643065d4955fc20f5bae4cd9bef325392321473fd8deed7720cc264",
+      "inputs": "sha256:3d3089385b4681ce685ccd32f4f69354223a5957bc00ad6a7f3b7c8ac4285d1f",
       "locale": "en-US",
       "name": "JS built-ins",
       "outcomes": [

@@ -1,10 +1,15 @@
 import {
   assign,
+  camel,
+  dash,
   isEmpty,
   isEqual,
   isObject,
   list,
   objectify,
+  pascal,
+  snake,
+  title,
   toFloat,
   toInt,
 } from "radash";
@@ -12,6 +17,7 @@ import {
 import type { Tool } from "./tool.mts";
 
 import {
+  converterProbe,
   isPair,
   isRangeCase,
   keyGetter,
@@ -25,6 +31,7 @@ import {
 /** radash, whose `toInt` and `toFloat` return a fallback instead of `NaN`. */
 export const RADASH: Tool = {
   functions: {
+    camelCase: [converterProbe({ call: "camel(value)", convert: camel })],
     deepMerge: [
       {
         accepts: isPair,
@@ -51,6 +58,12 @@ export const RADASH: Tool = {
       { call: "isObject(value)", run: ([value]) => isObject(value) },
     ],
     isSafeEmpty: [{ call: "isEmpty(value)", run: ([value]) => isEmpty(value) }],
+    kebabCase: [
+      converterProbe({
+        call: "dash(value)",
+        convert: dash,
+      }),
+    ],
     keyBy: [
       {
         accepts: isPair,
@@ -64,6 +77,7 @@ export const RADASH: Tool = {
           ),
       },
     ],
+    pascalCase: [converterProbe({ call: "pascal(value)", convert: pascal })],
     range: [
       {
         accepts: isRadashRange,
@@ -84,6 +98,13 @@ export const RADASH: Tool = {
     safeParseNumber: [
       { call: "toFloat(value)", run: ([value]) => toFloat(value) },
     ],
+    snakeCase: [
+      converterProbe({
+        call: "snake(value)",
+        convert: snake,
+      }),
+    ],
+    titleCase: [converterProbe({ call: "title(value)", convert: title })],
   },
   name: "radash",
   tier: 1,

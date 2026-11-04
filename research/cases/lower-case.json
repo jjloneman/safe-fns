@@ -1,0 +1,380 @@
+{
+  "cases": [
+    {
+      "args": ["fooBarBaz"],
+      "expected": "foo bar baz"
+    },
+    {
+      "args": ["FooBarBaz"],
+      "expected": "foo bar baz"
+    },
+    {
+      "args": ["foo_bar_baz"],
+      "expected": "foo bar baz"
+    },
+    {
+      "args": ["foo-bar-baz"],
+      "expected": "foo bar baz"
+    },
+    {
+      "args": ["foo bar baz"],
+      "expected": "foo bar baz"
+    },
+    {
+      "args": ["FOO_BAR_BAZ"],
+      "expected": "foo bar baz"
+    },
+    {
+      "args": ["Foo Bar Baz"],
+      "expected": "foo bar baz"
+    },
+    {
+      "args": ["foo.bar/baz"],
+      "expected": "foo bar baz"
+    },
+    {
+      "args": ["XMLHttpRequest"],
+      "expected": "xml http request"
+    },
+    {
+      "args": ["IOError"],
+      "expected": "io error"
+    },
+    {
+      "args": ["userID"],
+      "expected": "user id"
+    },
+    {
+      "args": ["iPhone"],
+      "expected": "i phone"
+    },
+    {
+      "args": ["ABC"],
+      "expected": "abc"
+    },
+    {
+      "args": ["version2Beta"],
+      "expected": "version2 beta"
+    },
+    {
+      "args": ["base64Encode"],
+      "expected": "base64 encode"
+    },
+    {
+      "args": ["HTML5Parser"],
+      "expected": "html5 parser"
+    },
+    {
+      "args": ["ABC123Def"],
+      "expected": "abc123 def"
+    },
+    {
+      "args": ["v1.2.3"],
+      "expected": "v1 2 3"
+    },
+    {
+      "args": ["don't stop"],
+      "expected": "don't stop"
+    },
+    {
+      "args": ["the lord of the rings"],
+      "expected": "the lord of the rings"
+    },
+    {
+      "args": ["foo__bar"],
+      "expected": "foo bar"
+    },
+    {
+      "args": ["_private"],
+      "expected": "private"
+    },
+    {
+      "args": ["  padded  "],
+      "expected": "padded"
+    },
+    {
+      "args": ["c++ code"],
+      "expected": "c ++ code"
+    },
+    {
+      "args": ["a+b"],
+      "expected": "a + b"
+    },
+    {
+      "args": ["price$"],
+      "expected": "price $"
+    },
+    {
+      "args": ["20°C"],
+      "expected": "20 ° c"
+    },
+    {
+      "args": ["userIDs"],
+      "expected": "user i ds"
+    },
+    {
+      "args": ["iOSApp"],
+      "expected": "i os app"
+    },
+    {
+      "args": ["version2beta"],
+      "expected": "version2beta"
+    },
+    {
+      "args": ["2fast4you"],
+      "expected": "2fast4you"
+    },
+    {
+      "args": ["ÉcoleNormale"],
+      "expected": "école normale"
+    },
+    {
+      "args": ["e\u0301coleNormale"],
+      "expected": "e\u0301cole normale"
+    },
+    {
+      "args": ["straße"],
+      "expected": "straße"
+    },
+    {
+      "args": ["İstanbul"],
+      "expected": "i\u0307stanbul"
+    },
+    {
+      "args": ["ǅemal"],
+      "expected": "ǆemal"
+    },
+    {
+      "args": ["日本語Text"],
+      "expected": "日本語 text"
+    },
+    {
+      "args": ["emoji😀Face"],
+      "expected": "emoji 😀 face"
+    },
+    {
+      "args": ["👩\u200d💻dev"],
+      "expected": "👩\u200d💻 dev"
+    },
+    {
+      "args": ["a"],
+      "expected": "a"
+    },
+    {
+      "args": [""],
+      "expected": ""
+    },
+    {
+      "args": [
+        "version2Beta",
+        {
+          "splitNumbers": false
+        }
+      ],
+      "expected": "version2 beta"
+    },
+    {
+      "args": [
+        "version2Beta",
+        {
+          "splitNumbers": true
+        }
+      ],
+      "expected": "version 2 beta"
+    },
+    {
+      "args": [
+        "base64Encode",
+        {
+          "splitNumbers": true
+        }
+      ],
+      "expected": "base 64 encode"
+    },
+    {
+      "args": [
+        "HTML5Parser",
+        {
+          "splitNumbers": true
+        }
+      ],
+      "expected": "html 5 parser"
+    },
+    {
+      "args": [
+        "ABC123Def",
+        {
+          "splitNumbers": true
+        }
+      ],
+      "expected": "abc 123 def"
+    },
+    {
+      "args": [
+        "v1.2.3",
+        {
+          "splitNumbers": true
+        }
+      ],
+      "expected": "v 1 2 3"
+    },
+    {
+      "args": [
+        "utf8",
+        {
+          "splitNumbers": true
+        }
+      ],
+      "expected": "utf 8"
+    },
+    {
+      "args": [
+        "version2beta",
+        {
+          "splitNumbers": true
+        }
+      ],
+      "expected": "version 2 beta"
+    },
+    {
+      "args": [
+        "2fast4you",
+        {
+          "splitNumbers": true
+        }
+      ],
+      "expected": "2 fast 4 you"
+    },
+    {
+      "args": [
+        "x²",
+        {
+          "splitNumbers": true
+        }
+      ],
+      "expected": "x ²"
+    },
+    {
+      "args": [
+        "fooBarBaz",
+        {
+          "splitNumbers": true
+        }
+      ],
+      "expected": "foo bar baz"
+    },
+    {
+      "args": [
+        "_private",
+        {
+          "keepOuterUnderscores": false
+        }
+      ],
+      "expected": "private"
+    },
+    {
+      "args": [
+        "_private",
+        {
+          "keepOuterUnderscores": true
+        }
+      ],
+      "expected": "_private"
+    },
+    {
+      "args": [
+        "_private_key",
+        {
+          "keepOuterUnderscores": true
+        }
+      ],
+      "expected": "_private key"
+    },
+    {
+      "args": [
+        "__foo_bar__",
+        {
+          "keepOuterUnderscores": true
+        }
+      ],
+      "expected": "__foo bar__"
+    },
+    {
+      "args": [
+        "__init__",
+        {
+          "keepOuterUnderscores": true
+        }
+      ],
+      "expected": "__init__"
+    },
+    {
+      "args": [
+        "___",
+        {
+          "keepOuterUnderscores": true
+        }
+      ],
+      "expected": "___"
+    },
+    {
+      "args": [
+        "foo__bar",
+        {
+          "keepOuterUnderscores": true
+        }
+      ],
+      "expected": "foo bar"
+    },
+    {
+      "args": [
+        "fooBar",
+        {
+          "keepOuterUnderscores": true
+        }
+      ],
+      "expected": "foo bar"
+    },
+    {
+      "args": [
+        {
+          "$js": "a boxed string"
+        }
+      ],
+      "expected": "hi"
+    },
+    {
+      "args": [42],
+      "expected": ""
+    },
+    {
+      "args": [null],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "a symbol"
+        }
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing toString"
+        }
+      ],
+      "expected": ""
+    }
+  ],
+  "function": "lowerCase"
+}
