@@ -186,6 +186,21 @@ describe("renderTypeChecks", () => {
       expected: "| ❌ `TS5108` | ❌ `TS5108` |",
     },
     {
+      description: "an error in a shared file counts only for its program",
+      errors: [{ code: "TS2589", file: "leaf.ts", program: "./other-helper" }],
+      expected: "| ✅ | ✅ |",
+    },
+    {
+      description: "an error in a shared file fails its own program's tool",
+      errors: [{ code: "TS2589", file: "leaf.ts", program: "./partial-deep" }],
+      expected: "| ❌ `TS2589` | ✅ |",
+    },
+    {
+      description: "an error with no file fails only its program's tool",
+      errors: [{ code: "TS5108", file: "", program: "type-fest" }],
+      expected: "| ✅ | ❌ `TS5108` |",
+    },
+    {
       description: "a repeated code is listed once",
       errors: [
         { code: "TS2344", file: "PartialDeep/1-0.ts" },
