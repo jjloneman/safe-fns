@@ -13,3 +13,6 @@ minimumReleaseAge: 10080
 # Write exact versions on `pnpm add`, so the lockfile is the only thing that
 # moves a dependency.
 saveExact: true
+minimumReleaseAgeExclude:
+  # Renovate security update: joi@18.3.1
+  - joi@18.3.1
