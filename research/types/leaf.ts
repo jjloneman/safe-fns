@@ -1,6 +1,6 @@
 /*
- * What the planned type helpers keep whole, shared by `partial-deep.ts` and
- * `enum-literals-deep.ts`, as the package's `src/internal/` module will be.
+ * What the planned deep type helpers keep whole, shared among them as the
+ * package's `src/internal/` module will be.
  */
 
 /** Values the helpers keep whole: functions, constructors, and built-ins. */
