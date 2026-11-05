@@ -1,4 +1,4 @@
-import { execFileSync } from "node:child_process";
+import { execFile } from "node:child_process";
 import {
   copyFileSync,
   mkdirSync,
@@ -9,7 +9,7 @@ import {
 } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { parseArgs } from "node:util";
+import { parseArgs, promisify } from "node:util";
 
 import type { TypeScriptVersion } from "../lib/typescript-versions.ts";
 import type { TypeCheckFunction } from "./type-check-cases.ts";
@@ -69,6 +69,82 @@ const ROOT_MODULES = fileURLToPath(
  * their imports resolve the compared libraries.
  */
 const WORK_DIR = path.join(TYPES_MODULES, ".cache", "type-checks");
+
+/** The check files one program compiles, and the module they import. */
+type CheckGroup = {
+  /**
+   * The check files.
+   *
+   * @example `["CamelCase/0-0.ts", "CamelCase/1-0.ts"]`
+   */
+  files: string[];
+
+  /**
+   * The module every check in the group imports as `H`, which the program's
+   * errors are tagged with.
+   *
+   * @example "./camel-case"
+   */
+  module: string;
+};
+
+/** Whether a run compares the tables rather than writing them. */
+type CheckMode = {
+  /**
+   * Compare against the committed tables, failing on any difference.
+   *
+   * @example true
+   */
+  isCheck: boolean;
+};
+
+/** One compiler, and the groups of check files it compiles. */
+type CompilerPrograms = {
+  /**
+   * The consumer TypeScript version to compile with.
+   *
+   * @example `TYPESCRIPT_VERSIONS[0]`
+   */
+  compiler: TypeScriptVersion;
+
+  /**
+   * Every group, each compiled as a program of its own.
+   *
+   * @example `[{ files: ["CamelCase/0-0.ts"], module: "./camel-case" }]`
+   */
+  groups: readonly CheckGroup[];
+};
+
+/** One group of check files, and how to compile it as its own program. */
+type ProgramRun = {
+  /**
+   * The config file to write for the program, inside the check directory.
+   *
+   * @example "tsconfig.typescript-4.9.0.json"
+   */
+  configFile: string;
+
+  /**
+   * The group of check files the program compiles.
+   *
+   * @example `{ files: ["PartialDeep/1-3.ts"], module: "./partial-deep" }`
+   */
+  group: CheckGroup;
+
+  /**
+   * Whether the compiler has `moduleResolution: "bundler"`.
+   *
+   * @example true
+   */
+  hasBundler: boolean;
+
+  /**
+   * The compiler's package directory, holding `bin/tsc`.
+   *
+   * @example "/repo/node_modules/typescript-4.9"
+   */
+  packageDir: string;
+};
 
 /** Print one line, prefixed with the script's name. */
 function log(message: string): void {
@@ -132,24 +208,52 @@ function readToolVersions(
 }
 
 /**
- * Run one compiler over every check file, returning what it reported.
+ * Run one compiler over each group of check files, each in its own program
+ * and all at once, returning everything it reported.
+ *
+ * - `tsc` reports no semantic errors once any file has a syntax error, so a
+ *   library the compiler can't parse would otherwise read as a pass for every
+ *   other column; each library's checks, and each planned helper's, compile
+ *   apart.
  *
  * - It resolves with `bundler` where the version has it, and `node` otherwise
  *   (4.9).
  */
-function runCompiler({
+async function runCompiler({
   compiler,
-  files,
-}: {
-  compiler: TypeScriptVersion;
-  files: readonly string[];
-}): CompilerRun {
+  groups,
+}: CompilerPrograms): Promise<CompilerRun> {
   const packageDir = path.join(ROOT_MODULES, compiler.packageName);
-  const configFile = `tsconfig.${compiler.packageName}.json`;
   const hasBundler = compiler.resolutionModes.some(
     ({ name }) => name === "bundler"
   );
 
+  const errorsByGroup = await Promise.all(
+    groups.map((group, groupIndex) =>
+      runProgram({
+        configFile: `tsconfig.${compiler.packageName}.${String(groupIndex)}.json`,
+        group,
+        hasBundler,
+        packageDir,
+      })
+    )
+  );
+
+  return { errors: errorsByGroup.flat(), version: packageVersion(packageDir) };
+}
+
+/**
+ * Compile one group of check files as a program of its own.
+ *
+ * @returns the compiler errors it reported, each tagged with the group's
+ * module, so an error in a shared file counts only against that module.
+ */
+async function runProgram({
+  configFile,
+  group,
+  hasBundler,
+  packageDir,
+}: ProgramRun): Promise<CompilerRun["errors"]> {
   writeFileSync(
     path.join(WORK_DIR, configFile),
     JSON.stringify({
@@ -163,24 +267,23 @@ function runCompiler({
         target: "es2022",
         types: [],
       },
-      files,
+      files: group.files,
     })
   );
 
-  return {
-    errors: parseTscErrors(
-      runTsc({
-        args: [
-          path.join(packageDir, "bin", "tsc"),
-          "--project",
-          configFile,
-          "--pretty",
-          "false",
-        ],
-      })
-    ),
-    version: packageVersion(packageDir),
-  };
+  const errors = parseTscErrors(
+    await runTsc({
+      args: [
+        path.join(packageDir, "bin", "tsc"),
+        "--project",
+        configFile,
+        "--pretty",
+        "false",
+      ],
+    })
+  );
+
+  return errors.map((error) => ({ ...error, program: group.module }));
 }
 
 /**
@@ -190,13 +293,16 @@ function runCompiler({
  *   failed some other way, such as a missing binary or a crash, throws with
  *   what it wrote to stderr, rather than reading as a clean pass.
  */
-function runTsc({ args }: { args: readonly string[] }): string {
+async function runTsc({ args }: { args: readonly string[] }): Promise<string> {
   try {
-    return execFileSync(process.execPath, args, {
+    // `execFile` has no `stdio` option: it always pipes stdout and stderr,
+    // so nothing the compiler prints reaches the terminal.
+    const { stdout } = await promisify(execFile)(process.execPath, args, {
       cwd: WORK_DIR,
       encoding: "utf8",
-      stdio: ["ignore", "pipe", "pipe"],
     });
+
+    return stdout;
   } catch (error) {
     const stdout = readOutput({ error, key: "stdout" });
 
@@ -212,14 +318,16 @@ function runTsc({ args }: { args: readonly string[] }): string {
 }
 
 /** Write the check files, compile them, then write or compare each table. */
-function writeAndCompare({ isCheck }: { isCheck: boolean }): void {
-  const files = writeCheckFiles();
+async function writeAndCompare({ isCheck }: CheckMode): Promise<void> {
+  const groups = writeCheckFiles();
+  const fileCount = groups.flatMap(({ files }) => files).length;
+  const runs: CompilerRun[] = [];
 
-  const runs = TYPESCRIPT_VERSIONS.map((compiler) => {
-    log(`compiling ${files.length} checks with ${compiler.packageName}`);
-
-    return runCompiler({ compiler, files });
-  });
+  // One compiler at a time, so at most one program per group runs at once.
+  for (const compiler of TYPESCRIPT_VERSIONS) {
+    log(`compiling ${fileCount} checks with ${compiler.packageName}`);
+    runs.push(await runCompiler({ compiler, groups }));
+  }
 
   const tables = TYPE_CHECK_FUNCTIONS.map((checkedFunction) => ({
     file: toTableFile(checkedFunction.name),
@@ -267,8 +375,13 @@ function writeAndCompare({ isCheck }: { isCheck: boolean }): void {
   log("every type-check table is up to date");
 }
 
-/** Write every check file, returning their paths. */
-function writeCheckFiles(): string[] {
+/**
+ * Write every check file.
+ *
+ * @returns their paths, grouped by the program each compiles in: one per
+ * module, so each compared library and each planned helper compiles apart.
+ */
+function writeCheckFiles(): CheckGroup[] {
   rmSync(WORK_DIR, { force: true, recursive: true });
   mkdirSync(WORK_DIR, { recursive: true });
 
@@ -282,7 +395,7 @@ function writeCheckFiles(): string[] {
     }
   }
 
-  return TYPE_CHECK_FUNCTIONS.flatMap(({ cases, name, tools }) => {
+  const checks = TYPE_CHECK_FUNCTIONS.flatMap(({ cases, name, tools }) => {
     mkdirSync(path.join(WORK_DIR, name), { recursive: true });
 
     return tools.flatMap(({ exportName, module }, toolIndex) =>
@@ -300,25 +413,38 @@ function writeCheckFiles(): string[] {
           ].join("\n")
         );
 
-        return file;
+        return { file, module };
       })
     );
   });
+
+  const groupsByModule = checks.reduce<Map<string, CheckGroup>>(
+    (moduleGroups, { file, module }) => {
+      const group = moduleGroups.get(module) ?? { files: [], module };
+      group.files.push(file);
+      moduleGroups.set(module, group);
+
+      return moduleGroups;
+    },
+    new Map()
+  );
+
+  return [...groupsByModule.values()];
 }
 
 /** Run every check, then write or compare every table. */
-function main(): void {
+async function main(): Promise<void> {
   const { values } = parseArgs({ options: { check: { type: "boolean" } } });
 
   try {
-    writeAndCompare({ isCheck: values.check === true });
+    await writeAndCompare({ isCheck: values.check === true });
   } finally {
     rmSync(WORK_DIR, { force: true, recursive: true });
   }
 }
 
 try {
-  main();
+  await main();
 } catch (error) {
   printPrefixed({
     message: describeError(error),

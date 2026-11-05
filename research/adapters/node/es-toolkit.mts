@@ -8,7 +8,9 @@ import {
 import { range as esToolkitRange } from "es-toolkit/math";
 import {
   cloneDeep as esToolkitCloneDeep,
+  toCamelCaseKeys as esToolkitToCamelCaseKeys,
   toMerged as esToolkitToMerged,
+  toSnakeCaseKeys as esToolkitToSnakeCaseKeys,
 } from "es-toolkit/object";
 import {
   isEqual as esToolkitIsEqual,
@@ -41,6 +43,7 @@ import {
   isPair,
   isRangeCase,
   keyGetter,
+  keysProbe,
   markClone,
   markKeyed,
   markReferences,
@@ -54,6 +57,13 @@ export const ES_TOOLKIT: Tool = {
       converterProbe({
         call: "camelCase(value)",
         convert: esToolkitCamelCase,
+        splitsNumbers: true,
+      }),
+    ],
+    camelCaseKeys: [
+      keysProbe({
+        call: "toCamelCaseKeys(value)",
+        convert: esToolkitToCamelCaseKeys,
         splitsNumbers: true,
       }),
     ],
@@ -185,6 +195,13 @@ export const ES_TOOLKIT: Tool = {
       converterProbe({
         call: "snakeCase(value)",
         convert: esToolkitSnakeCase,
+        splitsNumbers: true,
+      }),
+    ],
+    snakeCaseKeys: [
+      keysProbe({
+        call: "toSnakeCaseKeys(value)",
+        convert: esToolkitToSnakeCaseKeys,
         splitsNumbers: true,
       }),
     ],

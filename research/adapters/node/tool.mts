@@ -198,6 +198,64 @@ export type ConverterProbe = {
   splitsNumbers?: boolean;
 };
 
+/** An object-key converter that leaves named keys alone, and its call text. */
+export type ExcludeKeysProbe = {
+  /**
+   * The expression, as the table header shows it.
+   *
+   * @example `"camelcaseKeys(value, { deep: true, exclude })"`
+   */
+  call: string;
+
+  /**
+   * The library's converter, handed each case's value and its `exclude` list.
+   *
+   * @example `(value, exclude) => camelcaseKeys(value, { deep: true, exclude })`
+   */
+  convert: (value: unknown, exclude: string[]) => unknown;
+};
+
+/** An object-key converter, and the call text its column shows. */
+export type KeysProbe = {
+  /**
+   * The expression, as the table header shows it.
+   *
+   * @example `"camelcaseKeys(value, { deep: true })"`
+   */
+  call: string;
+
+  /**
+   * The library's converter, handed each case's value as it came.
+   *
+   * @example `(value) => camelcaseKeys(value, { deep: true })`
+   */
+  convert: (value: unknown) => unknown;
+
+  /**
+   * Whether the call converts only the outermost keys, so it answers just
+   * the cases that set `deep` to `false`.
+   *
+   * @example true
+   */
+  isShallow?: boolean;
+
+  /**
+   * Whether the call keeps leading and trailing underscore runs, so it can
+   * answer a case setting `keepOuterUnderscores` to the same value.
+   *
+   * @example true
+   */
+  keepsOuterUnderscores?: boolean;
+
+  /**
+   * Whether the call always splits a digit run into a word of its own, so
+   * it can answer a case setting `splitNumbers` to the same value.
+   *
+   * @example true
+   */
+  splitsNumbers?: boolean;
+};
+
 /** A numeric `range` case's bounds and step. */
 export type RangeSpan = {
   /**
@@ -345,6 +403,24 @@ type KeyRead = {
    */
   value: object;
 };
+
+/** A case's options, and the settings a probe's call can answer. */
+type OptionsMatch = {
+  /**
+   * A case's options argument, of any type.
+   *
+   * @example `{ deep: false }`
+   */
+  options: unknown;
+
+  /**
+   * Options the case must set, because the call answers only that setting,
+   * as a shallow keys call answers only `deep: false`.
+   *
+   * @example `["deep"]`
+   */
+  requiredKeys?: readonly string[];
+} & Pick<CaseOptionsCheck, "behavior">;
 
 /** An object whose own keys a `markClone` cell lists, and how to list them. */
 type OwnEntriesRead = {
@@ -578,6 +654,31 @@ export function errorName(error: unknown): string {
   }
 }
 
+/**
+ * Build the probe for an object-key converter's own way to leave keys alone.
+ *
+ * - It answers only the cases whose options are exactly `{ exclude }`, a list
+ *   of key names, passing the list as the library takes it.
+ *
+ * - The result is marked as `keysProbe` marks one.
+ *
+ * @returns the probe.
+ */
+export function excludeKeysProbe({ call, convert }: ExcludeKeysProbe): Probe {
+  return {
+    accepts: (args) => readExcludeList(args) !== undefined,
+    call,
+    run: (args) => {
+      const [value] = args;
+
+      return markClone({
+        clone: convert(value, readExcludeList(args) ?? []),
+        source: [value],
+      });
+    },
+  };
+}
+
 /** Accept a case with no options, for a call that has no way to take them. */
 export function hasNoOptions(args: readonly unknown[]): boolean {
   return args.length === 1;
@@ -768,6 +869,47 @@ export function keyGetter(key: unknown): (item: unknown) => unknown {
   }
 
   return (item) => (item as Record<PropertyKey, unknown>)[key as PropertyKey];
+}
+
+/**
+ * Build the probe for an object-key converter.
+ *
+ * - The result is marked as `markClone` marks a clone, so a value the call
+ *   kept whole shows as `Symbol(shared)` and a cycle as `Symbol(cycle)`.
+ *
+ * - A deep call answers the cases with no options; a shallow one answers only
+ *   those setting `deep` to `false`.
+ *
+ * - A case setting `splitNumbers` or `keepOuterUnderscores` runs only where
+ *   it matches what the call always does.
+ *
+ * @returns the probe.
+ */
+export function keysProbe({
+  call,
+  convert,
+  isShallow = false,
+  keepsOuterUnderscores: isKeepingOuterUnderscores = false,
+  splitsNumbers: isSplittingNumbers = false,
+}: KeysProbe): Probe {
+  const behavior = {
+    deep: !isShallow,
+    keepOuterUnderscores: isKeepingOuterUnderscores,
+    splitNumbers: isSplittingNumbers,
+  };
+
+  return {
+    accepts: (args) =>
+      (!isShallow && hasNoOptions(args)) ||
+      (args.length === 2 &&
+        isMatchingOptions({
+          behavior,
+          options: args[1],
+          requiredKeys: isShallow ? ["deep"] : [],
+        })),
+    call,
+    run: ([value]) => markClone({ clone: convert(value), source: [value] }),
+  };
 }
 
 /**
@@ -1140,25 +1282,10 @@ function describeView({
 function hasCaseOptions({ args, behavior }: CaseOptionsCheck): boolean {
   const [value, options] = args;
 
-  if (
-    args.length !== 2 ||
-    typeof value !== "string" ||
-    typeof options !== "object" ||
-    options === null
-  ) {
-    return false;
-  }
-
-  const entries = Object.entries(options);
-
   return (
-    entries.length > 0 &&
-    entries.every(
-      ([key, setting]) =>
-        Object.hasOwn(behavior, key) &&
-        behavior[key] !== undefined &&
-        behavior[key] === setting
-    )
+    args.length === 2 &&
+    typeof value === "string" &&
+    isMatchingOptions({ behavior, options })
   );
 }
 
@@ -1265,6 +1392,38 @@ function isMap(value: object): boolean {
   } catch {
     return false;
   }
+}
+
+/**
+ * Whether a case's options are an object whose every setting matches how a
+ * probe's call behaves.
+ *
+ * @returns whether the call can answer the options.
+ */
+function isMatchingOptions({
+  behavior,
+  options,
+  requiredKeys = [],
+}: OptionsMatch): boolean {
+  if (
+    typeof options !== "object" ||
+    options === null ||
+    !requiredKeys.every((key) => Object.hasOwn(options, key))
+  ) {
+    return false;
+  }
+
+  const entries = Object.entries(options);
+
+  return (
+    entries.length > 0 &&
+    entries.every(
+      ([key, setting]) =>
+        Object.hasOwn(behavior, key) &&
+        behavior[key] !== undefined &&
+        behavior[key] === setting
+    )
+  );
 }
 
 /** Whether a value is a `Set` from any realm, by `Set.prototype.has`. */
@@ -1389,6 +1548,31 @@ function readContents(value: object): unknown[] {
     // A trap that throws hides everything behind it.
     return [];
   }
+}
+
+/**
+ * Read a keys case's `exclude` list, when its options hold nothing else.
+ *
+ * @returns the key names, or `undefined` for any other case.
+ */
+function readExcludeList(args: readonly unknown[]): string[] | undefined {
+  const [, options] = args;
+
+  if (
+    args.length !== 2 ||
+    typeof options !== "object" ||
+    options === null ||
+    Object.keys(options).join() !== "exclude"
+  ) {
+    return undefined;
+  }
+
+  const { exclude } = options as { exclude: unknown };
+
+  return Array.isArray(exclude) &&
+    exclude.every((key): key is string => typeof key === "string")
+    ? exclude
+    : undefined;
 }
 
 /** Run a read for `markClone`, marking one that throws. */

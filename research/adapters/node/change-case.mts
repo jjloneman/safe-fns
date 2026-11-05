@@ -16,10 +16,14 @@ import {
   splitSeparateNumbers as changeCaseSplitSeparateNumbers,
   trainCase as changeCaseTrainCase,
 } from "change-case";
+import {
+  camelCase as changeCaseCamelCaseKeys,
+  snakeCase as changeCaseSnakeCaseKeys,
+} from "change-case/keys";
 
 import type { Probe, Tool } from "./tool.mts";
 
-import { converterProbe, packageVersion } from "./tool.mts";
+import { converterProbe, keysProbe, packageVersion } from "./tool.mts";
 
 /** change-case, a case conversion library. */
 export const CHANGE_CASE: Tool = {
@@ -33,6 +37,17 @@ export const CHANGE_CASE: Tool = {
       outerUnderscoresProbe({
         call: "camelCase",
         convert: changeCaseCamelCase,
+      }),
+    ],
+    camelCaseKeys: [
+      keysProbe({
+        call: "camelCase(value, Infinity)",
+        convert: (value) => changeCaseCamelCaseKeys(value, Infinity),
+      }),
+      keysProbe({
+        call: "camelCase(value)",
+        convert: (value) => changeCaseCamelCaseKeys(value),
+        isShallow: true,
       }),
     ],
     constantCase: [
@@ -123,6 +138,17 @@ export const CHANGE_CASE: Tool = {
       outerUnderscoresProbe({
         call: "snakeCase",
         convert: changeCaseSnakeCase,
+      }),
+    ],
+    snakeCaseKeys: [
+      keysProbe({
+        call: "snakeCase(value, Infinity)",
+        convert: (value) => changeCaseSnakeCaseKeys(value, Infinity),
+      }),
+      keysProbe({
+        call: "snakeCase(value)",
+        convert: (value) => changeCaseSnakeCaseKeys(value),
+        isShallow: true,
       }),
     ],
     titleCase: [

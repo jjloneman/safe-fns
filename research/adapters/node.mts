@@ -16,6 +16,7 @@ import { CROSS_REALM_INPUTS } from "../../test/cross-realm-inputs.ts";
 import { HOSTILE_INPUTS } from "../../test/hostile-inputs.ts";
 import { AJV_COERCE } from "./node/ajv.mts";
 import { ANY_ASCII } from "./node/any-ascii.mts";
+import { CAMELCASE_KEYS } from "./node/camelcase-keys.mts";
 import { CANONICALIZE } from "./node/canonicalize.mts";
 import { CASE_ANYTHING } from "./node/case-anything.mts";
 import { CHANGE_CASE } from "./node/change-case.mts";
@@ -40,6 +41,7 @@ import { FAST_JSON_STABLE_STRINGIFY } from "./node/fast-json-stable-stringify.mt
 import { FAST_SAFE_STRINGIFY } from "./node/fast-safe-stringify.mts";
 import { HTML } from "./node/html.mts";
 import { HUMANIZE_STRING } from "./node/humanize-string.mts";
+import { HUMPS } from "./node/humps.mts";
 import { INI } from "./node/ini.mts";
 import { IS_PLAIN_OBJ } from "./node/is-plain-obj.mts";
 import { JOI } from "./node/joi.mts";
@@ -64,10 +66,11 @@ import { SAFE_STABLE_STRINGIFY } from "./node/safe-stable-stringify.mts";
 import { SCULE } from "./node/scule.mts";
 import { SINDRESORHUS_IS } from "./node/sindresorhus-is.mts";
 import { SINDRESORHUS_TRANSLITERATE } from "./node/sindresorhus-transliterate.mts";
+import { SNAKECASE_KEYS } from "./node/snakecase-keys.mts";
 import { STORE2 } from "./node/store2.mts";
 import { STRING_TS } from "./node/string-ts.mts";
 import { TOML } from "./node/toml.mts";
-import { errorName } from "./node/tool.mts";
+import { callJsonParse, errorName } from "./node/tool.mts";
 import { TRANSLITERATION } from "./node/transliteration.mts";
 import { UNDERSCORE } from "./node/underscore.mts";
 import { VALIBOT } from "./node/valibot.mts";
@@ -158,6 +161,14 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
       })(),
   ],
   [
+    "a class instance with mixed-case fields",
+    () =>
+      new (class Account {
+        readonly user_id = 1;
+        readonly userName = 2;
+      })(),
+  ],
+  [
     "a cross-realm Error with a message",
     (): unknown => runInNewContext('new Error("boom")'),
   ],
@@ -205,6 +216,43 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
     "a Map with b then a",
     // Chained, so no lint fix can sort the entries back into "a then b".
     () => new Map<string, number>().set("b", 2).set("a", 1),
+  ],
+  ["a mixed-key object with a cycle", () => mixedKeyObjectWithCycle()],
+  [
+    "a mixed-key object with an inherited key",
+    (): unknown =>
+      Object.assign(Object.create({ inherited_key: 1, inheritedName: 2 }), {
+        user_id: 3,
+        userName: 4,
+      }),
+  ],
+  [
+    "a mixed-key object with a non-enumerable key",
+    () =>
+      Object.defineProperties(
+        { user_id: 1, userName: 2 },
+        { hidden_key: { value: 3 } }
+      ),
+  ],
+  [
+    "a mixed-key object with an own __proto__ key",
+    (): unknown =>
+      callJsonParse('{"__proto__":{"inner_key":1,"innerName":2},"user_id":3}'),
+  ],
+  [
+    "a mixed-key object with a symbol key",
+    () => ({ [Symbol.for("key")]: 3, user_id: 1, userName: 2 }),
+  ],
+  [
+    "a mixed-key object with getters",
+    () => ({
+      get user_id(): number {
+        return 1;
+      },
+      get userName(): number {
+        return 2;
+      },
+    }),
   ],
   [
     "an ArrayBuffer of JSON text",
@@ -275,6 +323,14 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   ["an object with a symbol key", () => ({ [Symbol.for("key")]: 1 })],
   ["an object with a toJSON", () => ({ toJSON: () => "custom" })],
   [
+    "an object with fooBar then foo_bar",
+    () =>
+      Object.fromEntries([
+        ["fooBar", 1],
+        ["foo_bar", 2],
+      ]),
+  ],
+  [
     "an object with keys b then a",
     () =>
       Object.fromEntries([
@@ -285,6 +341,11 @@ const JS_FACTORIES: ReadonlyMap<string, () => unknown> = new Map<
   [
     "an object with Symbol.toStringTag",
     () => ({ [Symbol.toStringTag]: "Custom" }),
+  ],
+  [
+    "a null-prototype mixed-key object",
+    () =>
+      Object.assign(Object.create(null) as object, { user_id: 1, userName: 2 }),
   ],
   [
     "a null-prototype object with a",
@@ -399,6 +460,9 @@ const TOOLS: readonly Tool[] = [
   HUMANIZE_STRING,
   SCULE,
   STRING_TS,
+  CAMELCASE_KEYS,
+  SNAKECASE_KEYS,
+  HUMPS,
   PLURALIZE,
   PLUR,
   FAST_DEEP_EQUAL,
@@ -432,6 +496,14 @@ function errorWithThrowingMessage(): Error {
       throw new Error("message trap");
     },
   });
+}
+
+/** Build `{ other_key: 1, selfRef }`, where `selfRef` is the object itself. */
+function mixedKeyObjectWithCycle(): Record<string, unknown> {
+  const object: Record<string, unknown> = { other_key: 1 };
+  object.selfRef = object;
+
+  return object;
 }
 
 /** Build `{ name: "a", self }`, where `self` is the object itself. */

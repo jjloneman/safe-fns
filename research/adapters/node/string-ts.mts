@@ -1,17 +1,21 @@
 import {
   camelCase as stringTsCamelCase,
+  camelKeys as stringTsCamelKeys,
   constantCase as stringTsConstantCase,
+  deepCamelKeys as stringTsDeepCamelKeys,
+  deepSnakeKeys as stringTsDeepSnakeKeys,
   delimiterCase as stringTsDelimiterCase,
   kebabCase as stringTsKebabCase,
   pascalCase as stringTsPascalCase,
   snakeCase as stringTsSnakeCase,
+  snakeKeys as stringTsSnakeKeys,
   titleCase as stringTsTitleCase,
   words as stringTsWords,
 } from "string-ts";
 
 import type { Tool } from "./tool.mts";
 
-import { converterProbe, packageVersion } from "./tool.mts";
+import { converterProbe, keysProbe, packageVersion } from "./tool.mts";
 
 /** string-ts, string helpers with type-level twins. */
 export const STRING_TS: Tool = {
@@ -20,6 +24,19 @@ export const STRING_TS: Tool = {
       converterProbe({
         call: "camelCase(value)",
         convert: stringTsCamelCase,
+        splitsNumbers: true,
+      }),
+    ],
+    camelCaseKeys: [
+      keysProbe({
+        call: "deepCamelKeys(value)",
+        convert: stringTsDeepCamelKeys,
+        splitsNumbers: true,
+      }),
+      keysProbe({
+        call: "camelKeys(value)",
+        convert: stringTsCamelKeys,
+        isShallow: true,
         splitsNumbers: true,
       }),
     ],
@@ -62,6 +79,19 @@ export const STRING_TS: Tool = {
       converterProbe({
         call: "snakeCase(value)",
         convert: stringTsSnakeCase,
+        splitsNumbers: true,
+      }),
+    ],
+    snakeCaseKeys: [
+      keysProbe({
+        call: "deepSnakeKeys(value)",
+        convert: stringTsDeepSnakeKeys,
+        splitsNumbers: true,
+      }),
+      keysProbe({
+        call: "snakeKeys(value)",
+        convert: stringTsSnakeKeys,
+        isShallow: true,
         splitsNumbers: true,
       }),
     ],

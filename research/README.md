@@ -515,6 +515,12 @@ compared library, and writes one table per helper to `audits/` (such as
   removes them afterward, even when a run fails.
 - A compiler that fails without printing a compiler error, such as a missing
   binary or a crash, fails the run rather than reading as a pass.
+- Each module's checks, a compared library's or a planned helper's, compile in a
+  program of their own: `tsc` reports no semantic error once any file in a
+  program has a syntax error, so a library a compiler can't parse (string-ts on
+  TypeScript 4.9) would otherwise read as a pass in every other column.
+- An error in a file several programs share (`words.ts`, `leaf.ts`) counts only
+  against the tool whose program reported it.
 - `pnpm research:types --check`, run by `research-check.yml`, fails when a
   committed table no longer matches, as after a case, a library, or a compiler
   changes, or when a table's helper is gone; rerun it without `--check`, and

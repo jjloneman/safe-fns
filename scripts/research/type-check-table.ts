@@ -120,6 +120,14 @@ export type TscError = {
    * @example "PartialDeep/1-3.ts"
    */
   file: string;
+
+  /**
+   * The module whose program reported it; an error in a shared file, or in
+   * none, counts only for that module's tool. Absent counts for every tool.
+   *
+   * @example "./camel-case"
+   */
+  program?: string;
 };
 
 /** The first line of a table `renderTypeChecks` writes. */
@@ -196,10 +204,10 @@ export function renderTypeChecks({
         runs.map(({ errors, version }) => ({
           codes: errors
             .filter(
-              ({ file }) =>
-                file === "" ||
+              ({ file, program }) =>
                 file === toCheckFile({ caseIndex, functionName, toolIndex }) ||
-                isToolFile({ file, tool })
+                ((file === "" || isToolFile({ file, tool })) &&
+                  (program === undefined || program === tool.module))
             )
             .map(({ code }) => code),
           version,

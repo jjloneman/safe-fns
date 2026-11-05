@@ -8,6 +8,7 @@
 # rest of Rails; it brings ActiveSupport, whose `blank?` is Rails' emptiness.
 
 require "active_model"
+require "active_support/core_ext/hash/keys"
 require "active_support/core_ext/object/blank"
 require "active_support/core_ext/string/inflections"
 require "json"
@@ -20,6 +21,20 @@ require_relative "research_codec"
 module RubyAdapter
   # Accepts exactly two strings: a value and a base.
   ARE_TWO_STRINGS = ->(*args) { args.length == 2 && args.all?(String) }
+
+  # Accepts a hash, alone or with `{ "deep" => true }`, for a call that
+  # converts keys at every depth; ActiveSupport defines it on `Hash` only.
+  IS_DEEP_KEYS_CASE =
+    lambda do |value, *options|
+      value.is_a?(Hash) && (options.empty? || options == [{ "deep" => true }])
+    end
+
+  # Accepts a hash with `{ "deep" => false }`, for a call that converts only
+  # the outermost keys.
+  IS_SHALLOW_KEYS_CASE =
+    lambda do |value, *options|
+      value.is_a?(Hash) && options == [{ "deep" => false }]
+    end
 
   # Accepts exactly one argument, a string.
   IS_LONE_STRING = ->(*args) { args.length == 1 && args.first.is_a?(String) }
@@ -57,6 +72,22 @@ module RubyAdapter
             accepts: IS_LONE_STRING,
             call: "ActiveSupport::Inflector.camelize(value, false)",
             run: ->(value) { ActiveSupport::Inflector.camelize(value, false) }
+          )
+        ],
+        "camelCaseKeys" => [
+          ResearchCodec.probe(
+            accepts: IS_DEEP_KEYS_CASE,
+            call: "value.deep_transform_keys { |key| key.camelize(:lower) }",
+            run: ->(value, *) do
+              value.deep_transform_keys { |key| key.camelize(:lower) }
+            end
+          ),
+          ResearchCodec.probe(
+            accepts: IS_SHALLOW_KEYS_CASE,
+            call: "value.transform_keys { |key| key.camelize(:lower) }",
+            run: ->(value, *) do
+              value.transform_keys { |key| key.camelize(:lower) }
+            end
           )
         ],
         "isSafeEmpty" => [
@@ -130,6 +161,18 @@ module RubyAdapter
             accepts: IS_LONE_STRING,
             call: "ActiveSupport::Inflector.underscore(value)",
             run: ->(value) { ActiveSupport::Inflector.underscore(value) }
+          )
+        ],
+        "snakeCaseKeys" => [
+          ResearchCodec.probe(
+            accepts: IS_DEEP_KEYS_CASE,
+            call: "value.deep_transform_keys(&:underscore)",
+            run: ->(value, *) { value.deep_transform_keys(&:underscore) }
+          ),
+          ResearchCodec.probe(
+            accepts: IS_SHALLOW_KEYS_CASE,
+            call: "value.transform_keys(&:underscore)",
+            run: ->(value, *) { value.transform_keys(&:underscore) }
           )
         ],
         "titleCase" => [

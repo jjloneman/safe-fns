@@ -1,0 +1,605 @@
+{
+  "cases": [
+    {
+      "args": [
+        {
+          "firstName": "Ada",
+          "userId": 1
+        }
+      ],
+      "expected": {
+        "first_name": "Ada",
+        "user_id": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "homeAddress": {
+            "streetName": "Main",
+            "zipCode": "02139"
+          }
+        }
+      ],
+      "expected": {
+        "home_address": {
+          "street_name": "Main",
+          "zip_code": "02139"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "lineItems": [
+            {
+              "unitPrice": 2
+            },
+            {
+              "unitPrice": 3
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "line_items": [
+          {
+            "unit_price": 2
+          },
+          {
+            "unit_price": 3
+          }
+        ]
+      }
+    },
+    {
+      "args": [
+        [
+          {
+            "userId": 1
+          },
+          {
+            "userId": 2
+          }
+        ]
+      ],
+      "expected": [
+        {
+          "user_id": 1
+        },
+        {
+          "user_id": 2
+        }
+      ]
+    },
+    {
+      "args": [
+        {
+          "matrixRows": [
+            [
+              {
+                "cellValue": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "expected": {
+        "matrix_rows": [
+          [
+            {
+              "cell_value": 1
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "args": [
+        {
+          "statusCode": "notFound",
+          "tagList": ["camelCase"]
+        }
+      ],
+      "expected": {
+        "status_code": "notFound",
+        "tag_list": ["camelCase"]
+      }
+    },
+    {
+      "args": [
+        {
+          "user_id": 1
+        }
+      ],
+      "expected": {
+        "user_id": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "user-name": 1,
+          "UserEmail": 2,
+          "userIDs": 4,
+          "XMLHttpRequest": 3
+        }
+      ],
+      "expected": {
+        "user_email": 2,
+        "user_i_ds": 4,
+        "user_name": 1,
+        "xml_http_request": 3
+      }
+    },
+    {
+      "args": [
+        {
+          "foo_bar": 1,
+          "fooBar": 2
+        }
+      ],
+      "expected": {
+        "foo_bar": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with fooBar then foo_bar"
+        }
+      ],
+      "expected": {
+        "foo_bar": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "1": "a",
+          "item2": "b"
+        }
+      ],
+      "expected": {
+        "1": "a",
+        "item2": "b"
+      }
+    },
+    {
+      "args": [
+        {
+          "base64Value": 1
+        }
+      ],
+      "expected": {
+        "base64_value": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "base64Value": 1
+        },
+        {
+          "splitNumbers": true
+        }
+      ],
+      "expected": {
+        "base_64_value": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "": 1
+        }
+      ],
+      "expected": {
+        "": 1
+      }
+    },
+    {
+      "args": [{}],
+      "expected": {}
+    },
+    {
+      "args": [[]],
+      "expected": []
+    },
+    {
+      "args": [
+        {
+          "__typename": "User",
+          "_id": 1
+        }
+      ],
+      "expected": {
+        "id": 1,
+        "typename": "User"
+      }
+    },
+    {
+      "args": [
+        {
+          "__typename": "User",
+          "_id": 1
+        },
+        {
+          "keepOuterUnderscores": true
+        }
+      ],
+      "expected": {
+        "__typename": "User",
+        "_id": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "__typename": "User",
+          "_id": 1,
+          "userId": 2
+        },
+        {
+          "exclude": ["_id", "__typename"]
+        }
+      ],
+      "expected": {
+        "__typename": "User",
+        "_id": 1,
+        "user_id": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "metaData": {
+            "_id": 1,
+            "innerKey": 2
+          }
+        },
+        {
+          "exclude": ["_id"]
+        }
+      ],
+      "expected": {
+        "meta_data": {
+          "_id": 1,
+          "inner_key": 2
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "rawData": {
+            "innerKey": 1
+          }
+        },
+        {
+          "exclude": ["rawData"]
+        }
+      ],
+      "expected": {
+        "rawData": {
+          "inner_key": 1
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "_id": 1,
+          "id": 2
+        },
+        {
+          "exclude": ["_id"]
+        }
+      ],
+      "expected": {
+        "_id": 1,
+        "id": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "_id": 1,
+          "id": 2
+        }
+      ],
+      "expected": {
+        "id": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "userId": 1
+        },
+        {
+          "exclude": []
+        }
+      ],
+      "expected": {
+        "user_id": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "homeAddress": {
+            "zipCode": "02139"
+          }
+        },
+        {
+          "deep": false
+        }
+      ],
+      "expected": {
+        "home_address": {
+          "$repr": "Symbol(shared)"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "homeAddress": {
+            "zipCode": "02139"
+          }
+        },
+        {
+          "deep": true
+        }
+      ],
+      "expected": {
+        "home_address": {
+          "zip_code": "02139"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "createdAt": {
+            "$js": "a Date"
+          }
+        }
+      ],
+      "expected": {
+        "created_at": {
+          "$repr": "Symbol(shared)"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "byId": {
+            "$js": "a Map with an entry"
+          }
+        }
+      ],
+      "expected": {
+        "by_id": {
+          "$repr": "Symbol(shared)"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "onChange": {
+            "$js": "a function"
+          }
+        }
+      ],
+      "expected": {
+        "on_change": {
+          "$repr": "Symbol(shared)"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a class instance with mixed-case fields"
+        }
+      ],
+      "expected": {
+        "$repr": "Symbol(shared)"
+      }
+    },
+    {
+      "args": [
+        {
+          "theAccount": {
+            "$js": "a class instance with mixed-case fields"
+          }
+        }
+      ],
+      "expected": {
+        "the_account": {
+          "$repr": "Symbol(shared)"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a null-prototype mixed-key object"
+        }
+      ],
+      "expected": {
+        "null-prototype": {
+          "user_id": 1,
+          "user_name": 2
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a mixed-key object with a cycle"
+        }
+      ],
+      "expected": {
+        "other_key": 1,
+        "self_ref": {
+          "$repr": "Symbol(cycle)"
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a mixed-key object with a symbol key"
+        }
+      ],
+      "expected": {
+        "[Symbol(key)]": 3,
+        "user_id": 1,
+        "user_name": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a mixed-key object with a non-enumerable key"
+        }
+      ],
+      "expected": {
+        "user_id": 1,
+        "user_name": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a mixed-key object with an inherited key"
+        }
+      ],
+      "expected": {
+        "$repr": "Symbol(shared)"
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a mixed-key object with getters"
+        }
+      ],
+      "expected": {
+        "user_id": 1,
+        "user_name": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a mixed-key object with an own __proto__ key"
+        }
+      ],
+      "expected": {
+        "proto": {
+          "inner_key": 1,
+          "inner_name": 2
+        },
+        "user_id": 3
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a mixed-key object with an own __proto__ key"
+        },
+        {
+          "keepOuterUnderscores": true
+        }
+      ],
+      "expected": {
+        "__proto__": {
+          "inner_key": 1,
+          "inner_name": 2
+        },
+        "user_id": 3
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy of a plain object"
+        }
+      ],
+      "expected": {
+        "a": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "an object with a throwing getter"
+        }
+      ],
+      "expected": {
+        "$repr": "Symbol(shared)"
+      }
+    },
+    {
+      "args": [
+        {
+          "outerKey": {
+            "$js": "an object with a throwing getter"
+          }
+        }
+      ],
+      "expected": {
+        "$repr": "Symbol(shared)"
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a revoked proxy"
+        }
+      ],
+      "expected": {
+        "$repr": "Symbol(shared)"
+      }
+    },
+    {
+      "args": [
+        {
+          "$js": "a proxy whose ownKeys trap throws"
+        }
+      ],
+      "expected": {
+        "$repr": "Symbol(shared)"
+      }
+    },
+    {
+      "args": ["userId"],
+      "expected": "userId"
+    },
+    {
+      "args": [42],
+      "expected": 42
+    },
+    {
+      "args": [null],
+      "expected": null
+    },
+    {
+      "args": [
+        {
+          "$undefined": true
+        }
+      ],
+      "expected": {
+        "$undefined": true
+      }
+    }
+  ],
+  "function": "snakeCaseKeys"
+}

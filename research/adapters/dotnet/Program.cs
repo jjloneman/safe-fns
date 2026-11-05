@@ -24,6 +24,12 @@ namespace ResearchAdapter;
 /// <summary>Lists the .NET probes and runs them.</summary>
 internal static class Program
 {
+    /// <summary>Renames every dictionary key it writes to camel case.</summary>
+    private static readonly JsonSerializerOptions CamelCaseKeysOptions = new()
+    {
+        DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+    };
+
     /// <summary>
     /// The cultures that get their own `double.Parse` column.
     /// </summary>
@@ -32,6 +38,12 @@ internal static class Program
     /// U+202F), which ICU supplies.
     /// </remarks>
     private static readonly string[] ExtraCultures = ["de-DE", "fr-FR"];
+
+    /// <summary>Renames every dictionary key it writes to snake case.</summary>
+    private static readonly JsonSerializerOptions SnakeCaseKeysOptions = new()
+    {
+        DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseLower,
+    };
 
     /// <summary>The runtime that actually ran.</summary>
     private static readonly string Version = Environment.Version.ToString();
@@ -94,6 +106,19 @@ internal static class Program
     private static string LocaleOf(IReadOnlyList<object?> args) =>
         (string)((Dictionary<string, object?>)args[1]!)["locale"]!;
 
+    /// <summary>
+    /// Accept a dictionary or a list, alone or with <c>{ deep: true }</c>,
+    /// for a serializer that renames dictionary keys at every depth.
+    /// </summary>
+    private static bool IsDeepKeysCase(IReadOnlyList<object?> args) =>
+        args[0] is Dictionary<string, object?> or List<object?>
+        && (
+            args.Count == 1
+            || args is [_, Dictionary<string, object?> { Count: 1 } options]
+                && options.TryGetValue("deep", out var deep)
+                && deep is true
+        );
+
     private static bool IsLoneString(IReadOnlyList<object?> args) =>
         args is [string];
 
@@ -151,6 +176,18 @@ internal static class Program
                         Call: "JsonNamingPolicy.CamelCase.ConvertName(value)",
                         Run: args =>
                             JsonNamingPolicy.CamelCase.ConvertName(Text(args))
+                    ),
+                ],
+                ["camelCaseKeys"] =
+                [
+                    new(
+                        Accepts: IsDeepKeysCase,
+                        Call: "JsonSerializer.Serialize(value, new JsonSerializerOptions { DictionaryKeyPolicy = JsonNamingPolicy.CamelCase })",
+                        Run: args =>
+                            JsonSerializer.Serialize(
+                                value: args[0],
+                                options: CamelCaseKeysOptions
+                            )
                     ),
                 ],
                 ["codec"] =
@@ -456,6 +493,18 @@ internal static class Program
                         Run: args =>
                             JsonNamingPolicy.SnakeCaseLower.ConvertName(
                                 Text(args)
+                            )
+                    ),
+                ],
+                ["snakeCaseKeys"] =
+                [
+                    new(
+                        Accepts: IsDeepKeysCase,
+                        Call: "JsonSerializer.Serialize(value, new JsonSerializerOptions { DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseLower })",
+                        Run: args =>
+                            JsonSerializer.Serialize(
+                                value: args[0],
+                                options: SnakeCaseKeysOptions
                             )
                     ),
                 ],
