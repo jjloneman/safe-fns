@@ -126,6 +126,69 @@
     ],
     [
       {
+        "__typename": "User",
+        "_id": 1,
+        "userId": 2
+      },
+      {
+        "exclude": [
+          "_id",
+          "__typename"
+        ]
+      }
+    ],
+    [
+      {
+        "metaData": {
+          "_id": 1,
+          "innerKey": 2
+        }
+      },
+      {
+        "exclude": [
+          "_id"
+        ]
+      }
+    ],
+    [
+      {
+        "rawData": {
+          "innerKey": 1
+        }
+      },
+      {
+        "exclude": [
+          "rawData"
+        ]
+      }
+    ],
+    [
+      {
+        "_id": 1,
+        "id": 2
+      },
+      {
+        "exclude": [
+          "_id"
+        ]
+      }
+    ],
+    [
+      {
+        "_id": 1,
+        "id": 2
+      }
+    ],
+    [
+      {
+        "userId": 1
+      },
+      {
+        "exclude": []
+      }
+    ],
+    [
+      {
         "homeAddress": {
           "zipCode": "02139"
         }
@@ -402,6 +465,50 @@
           "value": {
             "__typename": "User",
             "_id": 1
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__typename": "User",
+            "_id": 1,
+            "user_id": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "meta_data": {
+              "_id": 1,
+              "inner_key": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "rawData": {
+              "inner_key": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "_id": 1,
+            "id": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "id": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "user_id": 1
           }
         },
         {
@@ -716,6 +823,27 @@
           "kind": "n/a"
         },
         {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "id": 2
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "value",
           "value": {
             "home_address": {
@@ -866,6 +994,24 @@
       "locale": "en-US",
       "name": "change-case",
       "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
         {
           "kind": "n/a"
         },
@@ -1144,6 +1290,27 @@
           "kind": "n/a"
         },
         {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "id": 2
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "value",
           "value": {
             "home_address": {
@@ -1286,6 +1453,185 @@
       "version": "1.52.0"
     },
     {
+      "call": "decamelizeKeys(value, (key, convert) => exclude.includes(key) ? key : convert(key))",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "locale": "en-US",
+      "name": "humps",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__typename": "User",
+            "_id": 1,
+            "user_id": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "meta_data": {
+              "_id": 1,
+              "inner_key": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "rawData": {
+              "inner_key": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "_id": 1,
+            "id": 2
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "user_id": 1
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "2.0.1"
+    },
+    {
       "call": "decamelizeKeys(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
       "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
@@ -1423,6 +1769,28 @@
             "__typename": "User",
             "_id": 1
           }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "_id": 1,
+            "id": 2
+          }
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1631,12 +1999,209 @@
           "kind": "n/a"
         },
         {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "value",
           "value": {
             "home_address": {
               "$repr": "Symbol(shared)"
             }
           }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        }
+      ],
+      "service": "node",
+      "tier": 1,
+      "version": "9.0.2"
+    },
+    {
+      "call": "snakecaseKeys(value, { exclude })",
+      "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
+      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "locale": "en-US",
+      "name": "snakecase-keys",
+      "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "__typename": "User",
+            "_id": 1,
+            "user_id": 2
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "meta_data": {
+              "_id": 1,
+              "inner_key": 2
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "rawData": {
+              "inner_key": 1
+            }
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "_id": 1,
+            "id": 2
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "user_id": 1
+          }
+        },
+        {
+          "kind": "n/a"
         },
         {
           "kind": "n/a"
@@ -1842,6 +2407,27 @@
           "value": {
             "id": 1,
             "typename": "User"
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "id": 2
           }
         },
         {
@@ -2132,6 +2718,27 @@
           "kind": "n/a"
         },
         {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "id": 2
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "value",
           "value": {
             "home_address": {
@@ -2285,6 +2892,24 @@
       "locale": "en-US",
       "name": "string-ts",
       "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
         {
           "kind": "n/a"
         },
@@ -2501,6 +3126,25 @@
           "kind": "n/a"
         },
         {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": "{\"_id\":1,\"id\":2}"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "value",
           "value": "{\"home_address\":{\"zip_code\":\"02139\"}}"
         },
@@ -2702,6 +3346,28 @@
           "kind": "n/a"
         },
         {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "value",
+          "value": {
+            "_id": 1,
+            "id": 2
+          }
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
           "kind": "value",
           "value": {
             "home_address": {
@@ -2787,6 +3453,24 @@
       "locale": "C.UTF-8",
       "name": "Rails (ActiveModel)",
       "outcomes": [
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
+        {
+          "kind": "n/a"
+        },
         {
           "kind": "n/a"
         },

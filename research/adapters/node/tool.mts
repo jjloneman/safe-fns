@@ -198,6 +198,23 @@ export type ConverterProbe = {
   splitsNumbers?: boolean;
 };
 
+/** An object-key converter that leaves named keys alone, and its call text. */
+export type ExcludeKeysProbe = {
+  /**
+   * The expression, as the table header shows it.
+   *
+   * @example `"camelcaseKeys(value, { deep: true, exclude })"`
+   */
+  call: string;
+
+  /**
+   * The library's converter, handed each case's value and its `exclude` list.
+   *
+   * @example `(value, exclude) => camelcaseKeys(value, { deep: true, exclude })`
+   */
+  convert: (value: unknown, exclude: string[]) => unknown;
+};
+
 /** An object-key converter, and the call text its column shows. */
 export type KeysProbe = {
   /**
@@ -635,6 +652,31 @@ export function errorName(error: unknown): string {
   } catch {
     return "an uninspectable error";
   }
+}
+
+/**
+ * Build the probe for an object-key converter's own way to leave keys alone.
+ *
+ * - It answers only the cases whose options are exactly `{ exclude }`, a list
+ *   of key names, passing the list as the library takes it.
+ *
+ * - The result is marked as `keysProbe` marks one.
+ *
+ * @returns the probe.
+ */
+export function excludeKeysProbe({ call, convert }: ExcludeKeysProbe): Probe {
+  return {
+    accepts: (args) => readExcludeList(args) !== undefined,
+    call,
+    run: (args) => {
+      const [value] = args;
+
+      return markClone({
+        clone: convert(value, readExcludeList(args) ?? []),
+        source: [value],
+      });
+    },
+  };
 }
 
 /** Accept a case with no options, for a call that has no way to take them. */
@@ -1506,6 +1548,31 @@ function readContents(value: object): unknown[] {
     // A trap that throws hides everything behind it.
     return [];
   }
+}
+
+/**
+ * Read a keys case's `exclude` list, when its options hold nothing else.
+ *
+ * @returns the key names, or `undefined` for any other case.
+ */
+function readExcludeList(args: readonly unknown[]): string[] | undefined {
+  const [, options] = args;
+
+  if (
+    args.length !== 2 ||
+    typeof options !== "object" ||
+    options === null ||
+    Object.keys(options).join() !== "exclude"
+  ) {
+    return undefined;
+  }
+
+  const { exclude } = options as { exclude: unknown };
+
+  return Array.isArray(exclude) &&
+    exclude.every((key): key is string => typeof key === "string")
+    ? exclude
+    : undefined;
 }
 
 /** Run a read for `markClone`, marking one that throws. */

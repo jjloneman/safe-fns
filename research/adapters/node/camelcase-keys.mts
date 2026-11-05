@@ -2,7 +2,7 @@ import camelcaseKeys from "camelcase-keys";
 
 import type { Tool } from "./tool.mts";
 
-import { keysProbe, packageVersion } from "./tool.mts";
+import { excludeKeysProbe, keysProbe, packageVersion } from "./tool.mts";
 
 /** The value type camelcase-keys declares, which a case's value is cast to. */
 type CamelcaseKeysInput = Parameters<typeof camelcaseKeys>[0];
@@ -20,6 +20,11 @@ export const CAMELCASE_KEYS: Tool = {
         call: "camelcaseKeys(value)",
         convert: (value) => camelcaseKeys(value as CamelcaseKeysInput),
         isShallow: true,
+      }),
+      excludeKeysProbe({
+        call: "camelcaseKeys(value, { deep: true, exclude })",
+        convert: (value, exclude) =>
+          camelcaseKeys(value as CamelcaseKeysInput, { deep: true, exclude }),
       }),
     ],
   },

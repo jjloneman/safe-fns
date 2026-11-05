@@ -2,7 +2,7 @@ import snakecaseKeys from "snakecase-keys";
 
 import type { Tool } from "./tool.mts";
 
-import { keysProbe, packageVersion } from "./tool.mts";
+import { excludeKeysProbe, keysProbe, packageVersion } from "./tool.mts";
 
 /** The value type snakecase-keys declares, which a case's value is cast to. */
 type SnakecaseKeysInput = Parameters<typeof snakecaseKeys>[0];
@@ -20,6 +20,11 @@ export const SNAKECASE_KEYS: Tool = {
         convert: (value) =>
           snakecaseKeys(value as SnakecaseKeysInput, { deep: false }),
         isShallow: true,
+      }),
+      excludeKeysProbe({
+        call: "snakecaseKeys(value, { exclude })",
+        convert: (value, exclude) =>
+          snakecaseKeys(value as SnakecaseKeysInput, { exclude }),
       }),
     ],
   },

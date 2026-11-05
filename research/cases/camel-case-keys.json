@@ -213,6 +213,98 @@
     {
       "args": [
         {
+          "__typename": "User",
+          "_id": 1,
+          "user_id": 2
+        },
+        {
+          "exclude": ["_id", "__typename"]
+        }
+      ],
+      "expected": {
+        "__typename": "User",
+        "_id": 1,
+        "userId": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "meta_data": {
+            "_id": 1,
+            "inner_key": 2
+          }
+        },
+        {
+          "exclude": ["_id"]
+        }
+      ],
+      "expected": {
+        "metaData": {
+          "_id": 1,
+          "innerKey": 2
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "raw_data": {
+            "inner_key": 1
+          }
+        },
+        {
+          "exclude": ["raw_data"]
+        }
+      ],
+      "expected": {
+        "raw_data": {
+          "innerKey": 1
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "_id": 1,
+          "id": 2
+        },
+        {
+          "exclude": ["_id"]
+        }
+      ],
+      "expected": {
+        "_id": 1,
+        "id": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "_id": 1,
+          "id": 2
+        }
+      ],
+      "expected": {
+        "id": 2
+      }
+    },
+    {
+      "args": [
+        {
+          "user_id": 1
+        },
+        {
+          "exclude": []
+        }
+      ],
+      "expected": {
+        "userId": 1
+      }
+    },
+    {
+      "args": [
+        {
           "home_address": {
             "zip_code": "02139"
           }

@@ -377,6 +377,21 @@ export const TYPE_CHECK_FUNCTIONS: readonly TypeCheckFunction[] = [
         description: "a key outside ASCII becomes an index signature",
       },
       {
+        assertion:
+          'Equal<H<{ __typename: string; _id: number; user_id: number }, never, "_id" | "__typename">, { __typename: string; _id: number; userId: number }>',
+        description: "an excluded key keeps its name",
+      },
+      {
+        assertion:
+          'Equal<H<{ meta_data: { _id: number; inner_key: number } }, never, "_id">, { metaData: { _id: number; innerKey: number } }>',
+        description: "a key is excluded at any depth",
+      },
+      {
+        assertion:
+          'Equal<H<{ raw_data: { inner_key: number } }, never, "raw_data">, { raw_data: { innerKey: number } }>',
+        description: "an excluded key's value is still converted",
+      },
+      {
         assertion: "Equal<H<any>, any>",
         description: "`any` stays `any`",
       },
