@@ -744,7 +744,7 @@
     {
       "call": "Array.from(Iterator.range(start, end, option))",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "core-js",
       "outcomes": [
@@ -1101,7 +1101,7 @@
     {
       "call": "range(start, end, step)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -1397,7 +1397,7 @@
     {
       "call": "_.range(start, end, step)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "lodash",
       "outcomes": [
@@ -1757,7 +1757,7 @@
     {
       "call": "list(start, end, undefined, step)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "radash",
       "outcomes": [
@@ -2064,7 +2064,7 @@
     {
       "call": "range(from, to)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "Ramda",
       "outcomes": [
@@ -2301,7 +2301,7 @@
     {
       "call": "range(start, { end, step })",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "remeda",
       "outcomes": [
@@ -2615,7 +2615,7 @@
     {
       "call": "_.range(start, stop, step)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "Underscore",
       "outcomes": [

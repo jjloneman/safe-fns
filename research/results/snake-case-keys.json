@@ -687,7 +687,7 @@
     {
       "call": "snakeCase(value, Infinity)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "change-case",
       "outcomes": [
@@ -990,7 +990,7 @@
     {
       "call": "snakeCase(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "change-case",
       "outcomes": [
@@ -1151,7 +1151,7 @@
     {
       "call": "toSnakeCaseKeys(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "es-toolkit",
       "outcomes": [
@@ -1455,7 +1455,7 @@
     {
       "call": "decamelizeKeys(value, (key, convert) => exclude.includes(key) ? key : convert(key))",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "humps",
       "outcomes": [
@@ -1634,7 +1634,7 @@
     {
       "call": "decamelizeKeys(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "humps",
       "outcomes": [
@@ -1940,7 +1940,7 @@
     {
       "call": "snakecaseKeys(value, { deep: false })",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "snakecase-keys",
       "outcomes": [
@@ -2101,7 +2101,7 @@
     {
       "call": "snakecaseKeys(value, { exclude })",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "snakecase-keys",
       "outcomes": [
@@ -2280,7 +2280,7 @@
     {
       "call": "snakecaseKeys(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "snakecase-keys",
       "outcomes": [
@@ -2579,7 +2579,7 @@
     {
       "call": "deepSnakeKeys(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "string-ts",
       "outcomes": [
@@ -2888,7 +2888,7 @@
     {
       "call": "snakeKeys(value)",
       "image": "node:26.11.1-bookworm-slim@sha256:86f07bc9c5dce4578cf37e5a418b7bfc7f817cda25cde66e2b66e95ed86c4567",
-      "inputs": "sha256:7ec651141ee8d496987685e7dd5190b9b89de95736f6ce55fec465789c5e4fcd",
+      "inputs": "sha256:2c38ef451028933fb889ac20ac7fbf3b5a3d815fa252391dd0d691a1a7c2a7b9",
       "locale": "en-US",
       "name": "string-ts",
       "outcomes": [
