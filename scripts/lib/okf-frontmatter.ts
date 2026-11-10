@@ -421,6 +421,22 @@ export function readRecordSummary(
 }
 
 /**
+ * Read a record's `title`, without its quotes or a trailing comment.
+ *
+ * @returns the title, or `undefined` when the record has no frontmatter block
+ * or no `title`.
+ */
+export function readRecordTitle(text: string): string | undefined {
+  const block = splitFrontmatter(text);
+
+  if (block === undefined) {
+    return undefined;
+  }
+
+  return readScalar({ key: FRONTMATTER_KEYS.title, lines: block.lines });
+}
+
+/**
  * Split a record around its frontmatter, remembering its line breaks.
  *
  * - The opening fence's line break decides the file's, so a stray CRLF in

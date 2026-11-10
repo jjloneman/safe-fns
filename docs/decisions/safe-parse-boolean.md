@@ -2,7 +2,7 @@
 type: Decision
 title: What safeParseBoolean accepts
 description: Booleans, 1n / 0n, the numbers 1 and 0, and the strings true, t, yes, y, on, 1 and false, f, no, n, off, 0 (trimmed, any case) parse; everything else returns the fallback.
-tags: [fallback, parsing]
+tags: [parse]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }

@@ -89,6 +89,7 @@
     "lint": "eslint . --cache --cache-strategy content",
     "lint:fix": "eslint . --fix",
     "lint:package": "pnpm build && publint && attw --pack",
+    "okf:tags": "node scripts/okf-tags.ts",
     "okf:verify": "node scripts/okf-verify.ts",
     "prepare": "git config core.hooksPath .githooks || true",
     "prune-branches": "git fetch --prune && git-removed-branches --force --prune",

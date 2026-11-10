@@ -2,7 +2,7 @@
 type: Decision
 title: What safeStructuredClone returns when cloning fails
 description: The native structuredClone result when it succeeds; an uncloneable option keeps or omits what the native clone rejects instead of failing; otherwise the caller's fallback (undefined by default) when it throws or the runtime has no structuredClone.
-tags: [cloning, errors, fallback]
+tags: [fallback, serialize]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }

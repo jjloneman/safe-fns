@@ -2,7 +2,7 @@
 type: Decision
 title: What counts as a plain object
 description: isPlainObject is true only for objects whose prototype is Object.prototype from any realm, or null, and that carry no Symbol.toStringTag or Symbol.iterator; no isRecord ships alongside it.
-tags: [cross-realm, hostile-input, predicates]
+tags: [cross-realm, guards, hostile-input]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T02:22:39Z }
 verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }

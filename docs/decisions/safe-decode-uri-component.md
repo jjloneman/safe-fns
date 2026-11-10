@@ -2,7 +2,7 @@
 type: Decision
 title: How safeDecodeUriComponent and safeEncodeUriComponent behave
 description: Each is the native call on the input types TypeScript allows it, returning the caller's fallback where the native call throws (a malformed escape, invalid UTF-8, a lone surrogate) or for any other input; a `replaceInvalidWith` option replaces what can't be converted instead, `usePlusForSpace` opts into form-style `+`, nothing is trimmed, and decodeURI / encodeURI get no wrapper.
-tags: [encoding, fallback, strings]
+tags: [encoding]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-21T02:36:43Z }
 verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }

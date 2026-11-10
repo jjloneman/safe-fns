@@ -2,7 +2,7 @@
 type: Decision
 title: What safeParseString accepts and returns
 description: Strings, finite numbers, bigints, and booleans come back as a trimmed, non-blank string; blank text and every other value return the fallback.
-tags: [fallback, parsing, strings]
+tags: [parse]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }

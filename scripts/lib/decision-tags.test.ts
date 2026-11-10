@@ -5,17 +5,19 @@ import { describe, expect, test } from "vitest";
 import { buildRecord } from "#test/okf-record";
 
 import {
+  buildTagIndex,
   DECISION_TAGS,
   isDecisionTag,
   readRecordTags,
+  replaceTagIndex,
+  TAG_INDEX_END,
+  TAG_INDEX_START,
+  toTaggedRecord,
 } from "./decision-tags.ts";
 
 const DECISIONS_DIRECTORY = join(import.meta.dirname, "../../docs/decisions");
 const INDEX_FILE = "index.md";
 const MAX_TAGS = 4;
-const NEXT_HEADING = "\n## ";
-const VOCABULARY_HEADING = "## Tag vocabulary";
-const VOCABULARY_LINE = /^- `(?<tag>[a-z-]+)` — (?<meaning>.+)$/;
 
 const RECORD_FILES = readdirSync(DECISIONS_DIRECTORY).filter(
   (file) => file.endsWith(".md") && file !== INDEX_FILE
@@ -75,29 +77,111 @@ describe("readRecordTags", () => {
 describe("isDecisionTag", () => {
   test("accepts a tag in the vocabulary and rejects any other", () => {
     // Given/When/Then - one of each
-    expect(isDecisionTag("parsing")).toBe(true);
-    expect(isDecisionTag("parse")).toBe(false);
+    expect(isDecisionTag("parse")).toBe(true);
+    expect(isDecisionTag("parsing")).toBe(false);
   });
 });
 
-describe("the index's tag vocabulary", () => {
-  test("lists exactly DECISION_TAGS, in order, with the same meanings", () => {
-    // Given - the bullets under the vocabulary heading in index.md
+describe("buildTagIndex", () => {
+  test("lists each tag's records by file name, and marks unused tags", () => {
+    // Given - two records under `parse`, one under `numbers`
+    const records = [
+      { fileName: "b.md", tags: ["parse"], title: "B" },
+      { fileName: "a.md", tags: ["numbers", "parse"], title: "A" },
+    ];
+
+    // When - building the index
+    const index = buildTagIndex(records);
+
+    // Then - records sort by file name, and a tag with none says so
+    expect(index).toContain(
+      `- \`parse\` — ${DECISION_TAGS.parse}\n  - [A](a.md)\n  - [B](b.md)\n`
+    );
+    expect(index).toContain(
+      `- \`sort\` — ${DECISION_TAGS.sort}\n  - _No records yet._\n`
+    );
+  });
+});
+
+describe("replaceTagIndex", () => {
+  test("replaces only the text between the markers", () => {
+    // Given - an index file with a stale index
+    const text = `# Index\n\n${TAG_INDEX_START}\n\n- old\n\n${TAG_INDEX_END}\n`;
+
+    // When - putting in a new one
+    const updated = replaceTagIndex({ index: "- new", text });
+
+    // Then - the markers and surrounding text stay
+    expect(updated).toBe(
+      `# Index\n\n${TAG_INDEX_START}\n\n- new\n\n${TAG_INDEX_END}\n`
+    );
+  });
+
+  test("keeps a CRLF file's line breaks", () => {
+    // Given - an index file with Windows line breaks
+    const text = `${TAG_INDEX_START}\r\n${TAG_INDEX_END}\r\n`;
+
+    // When - putting in a two-line index
+    const updated = replaceTagIndex({ index: "- a\n- b", text });
+
+    // Then - every inserted line ends in CRLF
+    expect(updated).toBe(
+      `${TAG_INDEX_START}\r\n\r\n- a\r\n- b\r\n\r\n${TAG_INDEX_END}\r\n`
+    );
+  });
+
+  test.each([
+    { description: "no start marker", text: `${TAG_INDEX_END}\n` },
+    { description: "no end marker", text: `${TAG_INDEX_START}\n` },
+    {
+      description: "the end marker first",
+      text: `${TAG_INDEX_END}\n${TAG_INDEX_START}\n`,
+    },
+  ])("returns undefined for $description", ({ text }) => {
+    // Given/When/Then - nothing to replace
+    expect(replaceTagIndex({ index: "- a", text })).toBeUndefined();
+  });
+});
+
+describe("toTaggedRecord", () => {
+  test("reads a record's title and tags", () => {
+    // Given - a record with both
+    const text = buildRecord(['title: "What X accepts"', "tags: [parse]"]);
+
+    // When/Then - both come back with the file name
+    expect(toTaggedRecord({ fileName: "x.md", text })).toStrictEqual({
+      fileName: "x.md",
+      tags: ["parse"],
+      title: "What X accepts",
+    });
+  });
+
+  test("falls back to the file name and no tags", () => {
+    // Given/When/Then - a record without frontmatter
+    expect(toTaggedRecord({ fileName: "x.md", text: "# X\n" })).toStrictEqual({
+      fileName: "x.md",
+      tags: [],
+      title: "x.md",
+    });
+  });
+});
+
+describe("docs/decisions/index.md", () => {
+  test("holds the current tag index; run pnpm okf:tags if this fails", () => {
+    // Given - every record and the index file
+    const records = RECORD_FILES.map((fileName) =>
+      toTaggedRecord({
+        fileName,
+        text: readFileSync(join(DECISIONS_DIRECTORY, fileName), "utf8"),
+      })
+    );
     const text = readFileSync(join(DECISIONS_DIRECTORY, INDEX_FILE), "utf8");
-    const start = text.indexOf(VOCABULARY_HEADING);
-    const end = text.indexOf(NEXT_HEADING, start + VOCABULARY_HEADING.length);
-    const section = text.slice(start, end === -1 ? undefined : end);
 
-    // When - reading each tag and its meaning
-    const listed = section
-      .split(/\r?\n/u)
-      .map((line) => VOCABULARY_LINE.exec(line)?.groups)
-      .filter((groups) => groups !== undefined)
-      .map(({ meaning, tag }) => [tag, meaning]);
+    // When - regenerating the index into it
+    const updated = replaceTagIndex({ index: buildTagIndex(records), text });
 
-    // Then - they match the constant
-    expect(text).toContain(VOCABULARY_HEADING);
-    expect(listed).toStrictEqual(Object.entries(DECISION_TAGS));
+    // Then - nothing changes
+    expect(updated).toBe(text);
   });
 });
 

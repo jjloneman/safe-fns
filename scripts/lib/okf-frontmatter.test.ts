@@ -5,6 +5,7 @@ import { buildRecord } from "#test/okf-record";
 import {
   getRecordState,
   readRecordSummary,
+  readRecordTitle,
   splitFrontmatter,
   verifyRecord,
 } from "./okf-frontmatter.ts";
@@ -787,5 +788,23 @@ describe("splitFrontmatter", () => {
     // Then - the frontmatter reads, with CRLF line breaks
     expect(block?.lineBreak).toBe("\r\n");
     expect(block?.lines).toStrictEqual(["status: draft"]);
+  });
+});
+
+describe("readRecordTitle", () => {
+  test("reads a quoted title without its quotes", () => {
+    // Given - a record with a quoted title
+    const text = buildRecord(['title: "What every export promises"']);
+
+    // When/Then - the bare title comes back
+    expect(readRecordTitle(text)).toBe("What every export promises");
+  });
+
+  test.each([
+    { description: "no title line", text: buildRecord(["type: Decision"]) },
+    { description: "no frontmatter", text: "# Title\n" },
+  ])("returns undefined for $description", ({ text }) => {
+    // Given/When/Then - nothing to read
+    expect(readRecordTitle(text)).toBeUndefined();
   });
 });
