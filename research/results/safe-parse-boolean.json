@@ -88,6 +88,9 @@
       "true​"
     ],
     [
+      "true️"
+    ],
+    [
       "enabled"
     ],
     [
@@ -412,6 +415,12 @@
         },
         {
           "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
           "value": true
         },
         {
@@ -619,6 +628,10 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
         },
         {
           "error": "SyntaxError",
@@ -861,6 +874,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
         },
         {
           "error": "ValiError",
@@ -1220,6 +1237,12 @@
         },
         {
           "kind": "value",
+          "value": {
+            "$undefined": true
+          }
+        },
+        {
+          "kind": "value",
           "value": true
         },
         {
@@ -1427,6 +1450,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
         },
         {
           "error": "ZodError",
@@ -1757,6 +1784,10 @@
           "kind": "error"
         },
         {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -1997,6 +2028,10 @@
           "kind": "error"
         },
         {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": true
         },
@@ -2133,6 +2168,10 @@
         {
           "kind": "value",
           "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
         },
         {
           "kind": "value",
@@ -2492,6 +2531,10 @@
           "value": null
         },
         {
+          "kind": "value",
+          "value": null
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -2733,6 +2776,10 @@
           "kind": "error"
         },
         {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -2804,6 +2851,10 @@
       "locale": "en",
       "name": "Groovy",
       "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
         {
           "kind": "value",
           "value": true
@@ -3228,6 +3279,10 @@
         },
         {
           "kind": "value",
+          "value": false
+        },
+        {
+          "kind": "value",
           "value": true
         },
         {
@@ -3323,6 +3378,10 @@
         {
           "kind": "value",
           "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
         },
         {
           "kind": "value",
@@ -3722,6 +3781,10 @@
           "value": false
         },
         {
+          "kind": "value",
+          "value": false
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -3849,6 +3912,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "error": "IllegalArgumentException",
+          "kind": "error"
         },
         {
           "error": "IllegalArgumentException",
@@ -4203,6 +4270,10 @@
           "value": null
         },
         {
+          "kind": "value",
+          "value": null
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -4373,6 +4444,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
         },
         {
           "error": "ValueError",
@@ -4683,6 +4758,10 @@
           "kind": "error"
         },
         {
+          "error": "ValueError",
+          "kind": "error"
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -4809,6 +4888,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "error": "ParseBoolError",
+          "kind": "error"
         },
         {
           "error": "ParseBoolError",
@@ -5147,6 +5230,10 @@
           "kind": "error"
         },
         {
+          "error": "ConversionFailedException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": null
         },
@@ -5366,6 +5453,10 @@
         },
         {
           "kind": "value",
+          "value": "true️"
+        },
+        {
+          "kind": "value",
           "value": "enabled"
         },
         {
@@ -5492,6 +5583,10 @@
       "locale": "en-US",
       "name": "HTML (jsdom)",
       "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
         {
           "kind": "value",
           "value": true
@@ -5850,6 +5945,10 @@
         },
         {
           "kind": "value",
+          "value": "true️"
+        },
+        {
+          "kind": "value",
           "value": "enabled"
         },
         {
@@ -6071,6 +6170,10 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
         },
         {
           "error": "SyntaxError",
@@ -6344,6 +6447,10 @@
         },
         {
           "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
           "value": 1
         },
         {
@@ -6463,6 +6570,10 @@
       "locale": "simple",
       "name": "MongoDB",
       "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
         {
           "kind": "value",
           "value": true
@@ -6845,6 +6956,10 @@
         },
         {
           "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
           "value": 1
         },
         {
@@ -7071,6 +7186,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
         },
         {
           "error": "22P02",
@@ -7333,6 +7452,10 @@
           "kind": "error"
         },
         {
+          "kind": "value",
+          "value": true
+        },
+        {
           "error": "Msg 245",
           "kind": "error"
         },
@@ -7516,6 +7639,10 @@
         {
           "kind": "value",
           "value": 1
+        },
+        {
+          "kind": "value",
+          "value": 0
         },
         {
           "kind": "value",
@@ -7844,6 +7971,10 @@
           "kind": "error"
         },
         {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 2
         },
@@ -8124,6 +8255,10 @@
           "kind": "error"
         },
         {
+          "error": "SAXParseException",
+          "kind": "error"
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -8310,6 +8445,10 @@
         {
           "kind": "value",
           "value": "true​"
+        },
+        {
+          "kind": "value",
+          "value": "true️"
         },
         {
           "kind": "value",
@@ -8555,6 +8694,10 @@
         },
         {
           "kind": "value",
+          "value": "true️"
+        },
+        {
+          "kind": "value",
           "value": "enabled"
         },
         {
@@ -8734,6 +8877,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
         },
         {
           "error": "ValidationError",
@@ -9110,6 +9257,10 @@
           "value": false
         },
         {
+          "kind": "value",
+          "value": false
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -9350,6 +9501,10 @@
           "kind": "error"
         },
         {
+          "error": "EnvError",
+          "kind": "error"
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -9520,6 +9675,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "error": "exit 128",
+          "kind": "error"
         },
         {
           "error": "exit 128",
@@ -9830,6 +9989,10 @@
           "kind": "error"
         },
         {
+          "error": "ValidationError",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": true
         },
@@ -10022,6 +10185,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "kind": "value",
+          "value": true
         },
         {
           "kind": "value",
@@ -10284,6 +10451,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "kind": "value",
+          "value": null
         },
         {
           "kind": "value",
@@ -10600,6 +10771,10 @@
           "kind": "error"
         },
         {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": true
         },
@@ -10685,6 +10860,10 @@
       "locale": "invariant",
       "name": "PowerShell",
       "outcomes": [
+        {
+          "kind": "value",
+          "value": true
+        },
         {
           "kind": "value",
           "value": true
@@ -11108,6 +11287,10 @@
           "kind": "error"
         },
         {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": true
         },
@@ -11347,6 +11530,10 @@
         },
         {
           "kind": "value",
+          "value": true
+        },
+        {
+          "kind": "value",
           "value": null
         },
         {
@@ -11502,6 +11689,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "kind": "value",
+          "value": null
         },
         {
           "kind": "value",
@@ -11840,6 +12031,10 @@
           "kind": "error"
         },
         {
+          "error": "EINVAL",
+          "kind": "error"
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -11976,6 +12171,10 @@
         {
           "kind": "value",
           "value": true
+        },
+        {
+          "kind": "value",
+          "value": false
         },
         {
           "kind": "value",
@@ -12334,6 +12533,10 @@
           "kind": "error"
         },
         {
+          "error": "XMLSchemaDecodeError",
+          "kind": "error"
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -12504,6 +12707,10 @@
         {
           "kind": "value",
           "value": false
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
         },
         {
           "error": "ValidationError",

@@ -3,8 +3,8 @@ type: Decision
 title: How the case functions split words and which styles ship
 description: One splitter, `words`, breaks a string at separators, at a lower-to-upper change, and before the last capital of an acronym, keeping digits on the word before them unless `splitNumbers` is set and making a run of symbols a word of its own; `camelCase`, `pascalCase`, `snakeCase`, `constantCase`, `kebabCase`, `lowerCase`, `titleCase`, and `sentenceCase` join its words, each flattening a word's case locale-free, `keepOuterUnderscores` keeps a leading or trailing `_` run, and a non-string returns the `fallback` option, `""` by default.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T07:05:37Z }
-verified: { by: human:jjloneman, at: 2026-11-03T23:46:53Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T02:45:03Z }
+verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
 ---
 
 # How the case functions split words and which styles ship
@@ -28,7 +28,7 @@ verified: { by: human:jjloneman, at: 2026-11-03T23:46:53Z }
   | `sentenceCase` | `"Foo bar baz"`         |
 
 - **No umbrella `changeCase(value, { style })`.** Each style is its own function, as in every library measured; one subpath per function keeps an unused style out of the bundle, and a `style` string would be a lookup no call site needs.
-- **Seven measured styles are left out,** each a one-line `words(value).map(…).join(…)` for the caller who needs it: Train (`Foo-Bar-Baz`), Pascal snake (`Foo_Bar_Baz`), screaming kebab (`FOO-BAR-BAZ`), dot, path, flat (`foobarbaz`), and upper words (`FOO BAR BAZ`). #100 is to park them in [native-first-scope.md](native-first-scope.md).
+- **Seven measured styles are left out,** each a one-line `words(value).map(…).join(…)` for the caller who needs it: Train (`Foo-Bar-Baz`), Pascal snake (`Foo_Bar_Baz`), screaming kebab (`FOO-BAR-BAZ`), dot, path, flat (`foobarbaz`), and upper words (`FOO BAR BAZ`). [native-first-scope.md](native-first-scope.md) lists them with the other one-line compositions.
 - **`words` splits at three kinds of boundary,** and every style is built from its output:
   - **a separator:** any run of whitespace, punctuation (`_`, `-`, `.`, `/`, `,`), or other character that is neither a letter, a combining mark, a digit, nor a symbol, so `"foo__bar"` and `"  padded  "` lose their extra separators, and `"_private"` becomes `["private"]` unless `keepOuterUnderscores` is set;
   - **a lower-to-upper change:** `"fooBar"` → `["foo", "Bar"]`, and `"iPhone"` → `["i", "Phone"]`; a caseless letter counts as lower, so `"日本語Text"` → `["日本語", "Text"]`;

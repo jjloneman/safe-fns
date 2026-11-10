@@ -3,8 +3,8 @@ type: Decision
 title: How the storage wrappers behave
 description: safeStorageGetItem / SetItem / RemoveItem take an area option defaulting to local, plus six fixed-area aliases; a missing key reads as native null, unreachable storage returns the fallback, and writes report success as a boolean.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-19T01:17:13Z }
-verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
+verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
 ---
 
 # How the storage wrappers behave
@@ -37,7 +37,7 @@ The storage wrappers make `localStorage` and `sessionStorage` safe to touch in a
 - **No environment probe.** Each call reads `globalThis.localStorage` or `globalThis.sessionStorage` inside a `try`, every time, so a permission change between calls is seen.
 - **No coercion.** A non-string `key` or `value` at runtime returns the fallback or `false`, where native storage would store `"[object Object]"`.
 - **Stored JSON** is read with `safeParseJson(safeLocalStorageGetItem(key))`; these wrappers only handle strings.
-  - Dedicated JSON helpers, separate functions rather than an option here, are a part 2b candidate.
+  - [The JSON storage helpers](safe-storage-json.md), `safeStorageGetJson` and `safeStorageSetJson`, are separate functions rather than an option here.
 - **No `clear()`, `key(index)`, or `length` wrappers.** They're rarely needed, and `clear()` wipes data that other code on the same origin owns.
 
 ## Comparison

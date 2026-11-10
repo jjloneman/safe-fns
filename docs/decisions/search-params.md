@@ -3,8 +3,8 @@ type: Decision
 title: How getSearchParams and getSearchParamValues read a query
 description: "`getSearchParams(url, options?)` returns every key of a query as a null-prototype object of string lists, and `getSearchParamValues(url, key, options?)` returns one key's list; both read a URL or its query, as a string, a `URL`, or a `URLSearchParams`, find the query themselves, and decode it with the native `URLSearchParams`, so a runtime without one, such as Hermes, returns the fallback; each decoded value is split on the optional `separator`, each piece trimmed with `trimBlank`, and empty pieces dropped, while a key with no values stays as `[]`; a missing key is absent or `[]`, and an unreadable URL, a non-string key, an invalid separator, or a throw returns the `fallback` option, an empty result by default."
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-11-01T03:20:00Z }
-verified: { by: human:jjloneman, at: 2026-11-02T06:25:10Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
+verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
 ---
 
 # How getSearchParams and getSearchParamValues read a query
@@ -232,4 +232,4 @@ The tiers 0–2 summaries from [research/results/get-search-params.md](../../res
   - Hermes needs a `URLSearchParams` polyfill, without which every call returns the fallback.
 - Their tests cover each fallback case above, including a revoked proxy as the URL and as the options, and their type tests check that `fallback` widens the return type and that a key outside `K` is a compile error.
 - `getSearchParams` isn't in #120's scope as filed, so #120 is updated to include it.
-- [safeParseUrl](safe-parse-url.md)'s Consequences describe `getSearchParamValues`' settled details; they still hold, and #100 can add a pointer to `getSearchParams` there.
+- [safeParseUrl](safe-parse-url.md)'s Consequences describe `getSearchParamValues`' settled details; they still hold, and point here for `getSearchParams`.

@@ -3,8 +3,8 @@ type: Decision
 title: What safeParseBigInt accepts
 description: Bigints, safe-integer numbers, and trimmed integer strings parse to a bigint; fractions, exponents, an `n` suffix, separators, blanks, and unprefixed hex return the fallback, and `radix`, `min`, `max`, and `clamp` mirror safeParseInt's.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-20T17:41:11Z }
-verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
+verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
 ---
 
 # What safeParseBigInt accepts
@@ -23,7 +23,8 @@ verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
   - a bigint, returned as-is;
   - a number for which `Number.isSafeInteger` holds, converted exactly (`42` → `42n`, `-0` → `0n`);
   - a string that, after trimming, is an optional `+` / `-` and one or more ASCII digits (`"042"` → `42n`, `"-0"` → `0n`).
-    - Trimming uses the internal `trimBlank`, so it strips the same blank characters as `safeParseNumber` (whitespace, zero-width and other invisible characters, and the braille blank) from both ends: `"\u200B42"` parses.
+    - Trimming uses the public [`trimBlank`](trim-blank.md), so it strips the same blank characters as `safeParseNumber` (whitespace, zero-width and other invisible characters, and the braille blank) from both ends: `"\u200B42"` parses.
+      - A blank `Grapheme_Extend` modifier attached to the last character stays, so `"42\uFE0F"` returns the fallback.
 - **Everything else returns the fallback,** never a coercion:
   - blank and whitespace-only strings (`BigInt("")` and `BigInt("   ")` are `0n`);
   - a fraction or exponent (`"1.5"`, `"1.0"`, `"1e3"`), which no bigint parser measured accepts;
@@ -61,6 +62,7 @@ The tiers 0–2 summary from [research/results/safe-parse-big-int.md](../../rese
 | `"-0"` | `0n` | `0n` | `0n` | `0n` | `0n` | `0n` | `0n` | `0n` | `0n` | `0n` | `0n` | `0n` | `0n` | `0n` | `0` | `0n` | `0n` |
 | `" 7 "` | `7n` | 💥 `SchemaError` | `7n` | `7n` | `7n` | `7n` | `7n` | 💥 `NumberFormatException` | `null` | `null` | `7n` | `7n` | 💥 `NumberFormatException` | `null` | `7` | `7n` | `7n` |
 | `"\u{200B}42"` | `42n` | 💥 `SchemaError` | 💥 `SyntaxError` | 💥 `SyntaxError` | 💥 `ValiError` | 💥 `ZodError` | 💥 `FormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` |
+| `"42\u{FE0F}"` | `undefined` | 💥 `SchemaError` | 💥 `SyntaxError` | 💥 `SyntaxError` | 💥 `ValiError` | 💥 `ZodError` | 💥 `FormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` |
 | `""` | `undefined` | 💥 `SchemaError` | `0n` | `0n` | `0n` | `0n` | 💥 `FormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | 💥 `ValueError` | `null` | 💥 `NumberFormatException` |
 | `"   "` | `undefined` | 💥 `SchemaError` | `0n` | `0n` | `0n` | `0n` | 💥 `FormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` |
 | `"1.5"` | `undefined` | 💥 `SchemaError` | 💥 `SyntaxError` | 💥 `SyntaxError` | 💥 `ValiError` | 💥 `ZodError` | 💥 `FormatException` | 💥 `NumberFormatException` | `null` | `null` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | 💥 `ValueError` | 💥 `ConversionFailedException` | 💥 `NumberFormatException` |

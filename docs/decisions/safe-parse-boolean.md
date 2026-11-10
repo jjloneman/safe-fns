@@ -3,8 +3,8 @@ type: Decision
 title: What safeParseBoolean accepts
 description: Booleans, 1n / 0n, the numbers 1 and 0, and the strings true, t, yes, y, on, 1 and false, f, no, n, off, 0 (trimmed, any case) parse; everything else returns the fallback.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T02:22:39Z }
-verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
+verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
 ---
 
 # What safeParseBoolean accepts
@@ -20,7 +20,8 @@ verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
   - the boolean `false`, the numbers `0` and `-0`, and the bigint `0n`;
   - the strings `"false"`, `"f"`, `"no"`, `"n"`, `"off"`, and `"0"`.
 - **Strings are trimmed and compared case-insensitively,** so `" TRUE "`, `"Yes"`, and `"OFF"` parse.
-  - Trimming strips the same characters `isSafeEmpty` treats as blank, through the shared internal `trimBlank`, so `"true​"` is `true`.
+  - Trimming strips the same characters `isSafeEmpty` treats as blank, through the public [`trimBlank`](trim-blank.md), so `"true​"` is `true`.
+    - A blank `Grapheme_Extend` modifier attached to the last character stays, so `"true\uFE0F"` returns the fallback.
   - Case folding is ASCII-only, so the result doesn't depend on the engine's locale data.
 - **Only those exact spellings count.**
   - `"1.0"`, `"-0"`, `"01"`, `"tru"`, `"enabled"`, and full-width `"ｔｒｕｅ"` return the fallback.
@@ -68,6 +69,7 @@ The tiers 0–2 summary from [research/results/safe-parse-boolean.md](../../rese
 | `"\u{9}no\u{A}"` | `false` | 💥 `SyntaxError` | 💥 `ValiError` | `false` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | `false` | `null` | 💥 `strconv.ErrSyntax` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ParseBoolError` | `false` |
 | `"\u{A0}true\u{A0}"` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `true` | 💥 `ZodError` | `true` | `true` | `false` | `null` | 💥 `strconv.ErrSyntax` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ParseBoolError` | 💥 `ConversionFailedException` |
 | `"true\u{200B}"` | `true` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | `false` | `null` | 💥 `strconv.ErrSyntax` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ParseBoolError` | 💥 `ConversionFailedException` |
+| `"true\u{FE0F}"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | `false` | `null` | 💥 `strconv.ErrSyntax` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ParseBoolError` | 💥 `ConversionFailedException` |
 | `"enabled"` | `undefined` | 💥 `SyntaxError` | `true` | `undefined` | `true` | 💥 `FormatException` | 💥 `FormatException` | `false` | `null` | 💥 `strconv.ErrSyntax` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ParseBoolError` | 💥 `ConversionFailedException` |
 | `"disabled"` | `undefined` | 💥 `SyntaxError` | `false` | `undefined` | `false` | 💥 `FormatException` | 💥 `FormatException` | `false` | `null` | 💥 `strconv.ErrSyntax` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ParseBoolError` | 💥 `ConversionFailedException` |
 | `"tru"` | `undefined` | 💥 `SyntaxError` | 💥 `ValiError` | `undefined` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | `false` | `null` | 💥 `strconv.ErrSyntax` | `true` | `false` | `false` | `false` | 💥 `IllegalArgumentException` | `null` | 💥 `ValueError` | 💥 `ValueError` | 💥 `ParseBoolError` | 💥 `ConversionFailedException` |

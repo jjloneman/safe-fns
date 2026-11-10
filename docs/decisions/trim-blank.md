@@ -3,8 +3,8 @@ type: Decision
 title: What trimBlank trims
 description: trimBlank, trimBlankStart, and trimBlankEnd strip exactly the characters isSafeEmpty calls blank, never splitting a grapheme cluster; a non-string returns the `fallback` option, `""` by default.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T02:02:20Z }
-verified: { by: human:jjloneman, at: 2026-10-29T05:41:39Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
+verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
 ---
 
 # What trimBlank trims
@@ -106,7 +106,7 @@ The tiers 0–2 summary from [research/results/trim-blank.md](../../research/res
 ## Consequences
 
 - `trimBlank` moves from a planned internal helper to a public export, and the shared blank module under `src/internal/` exports it to both.
-- The parser records ([safeParseNumber](safe-parse-number.md), [safeParseBigInt](safe-parse-big-int.md), [safeParseBoolean](safe-parse-boolean.md), [safeParseString](safe-parse-string.md), [safeParseDate](safe-parse-date.md), [safeParseUrl](safe-parse-url.md)) and [is-safe-empty.md](is-safe-empty.md) call it "the internal `trimBlank`"; #100 rewords them.
+- The parser records ([safeParseNumber](safe-parse-number.md), [safeParseBigInt](safe-parse-big-int.md), [safeParseBoolean](safe-parse-boolean.md), [safeParseString](safe-parse-string.md), [safeParseDate](safe-parse-date.md), [safeParseUrl](safe-parse-url.md)) and [is-safe-empty.md](is-safe-empty.md) link to it as the public `trimBlank`.
 - The grapheme rule reaches the parsers too, and was chosen for them as well (owner, 2026-10-28): `safeParseNumber("42\uFE0F")` keeps the variation selector and returns the fallback rather than guessing `42`, as [What a parser returns when it can't parse](parser-fallbacks.md) asks, and `safeParseString("❤\uFE0F")` keeps the emoji.
-  - The parser records say they strip blank characters "from both ends"; #100 adds that a modifier attached to the last character stays.
+  - Each parser record says that a modifier attached to the last character stays.
 - Property escapes follow each engine's Unicode version; the tests pin the characters above, not the whole table.

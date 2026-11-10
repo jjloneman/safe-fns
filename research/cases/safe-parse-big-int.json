@@ -55,6 +55,12 @@
       }
     },
     {
+      "args": ["42\ufe0f"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
       "args": [""],
       "expected": {
         "$undefined": true

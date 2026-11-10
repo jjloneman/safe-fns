@@ -3,8 +3,8 @@ type: Decision
 title: What safeParseString accepts and returns
 description: Strings, finite numbers, bigints, and booleans come back as a trimmed, non-blank string; blank text and every other value return the fallback.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-15T02:22:39Z }
-verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
+verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
 ---
 
 # What safeParseString accepts and returns
@@ -14,7 +14,7 @@ verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ## Decision
 
 - **Accepted input, and what it becomes:**
-  - a string, trimmed of the same characters `isSafeEmpty` treats as blank (whitespace, zero-width and other invisible characters, and the braille blank), through the shared internal `trimBlank`;
+  - a string, trimmed of the same characters `isSafeEmpty` treats as blank (whitespace, zero-width and other invisible characters, and the braille blank), through the public [`trimBlank`](trim-blank.md), which keeps a blank `Grapheme_Extend` modifier attached to the last character (`"❤\uFE0F"` keeps its emoji);
   - a finite number, as `String(value)` (`1.5` → `"1.5"`, `1e21` → `"1e+21"`, `1e-7` → `"1e-7"`), except that `-0` keeps its sign as `"-0"`;
   - a bigint, as `String(value)` (`12n` → `"12"`);
   - a boolean, as `"true"` or `"false"`.
@@ -38,6 +38,7 @@ The tiers 0–2 summary from [research/results/safe-parse-string.md](../../resea
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` | `"hello"` |
 | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"hi"` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` | `"hi"` | `"  hi  "` |
+| `"❤\u{FE0F} "` | `"❤\u{FE0F}"` | `"❤\u{FE0F} "` | `"❤\u{FE0F} "` | `"❤\u{FE0F}"` | `"❤\u{FE0F} "` | `"❤\u{FE0F}"` | `"❤\u{FE0F} "` | `"❤\u{FE0F} "` | `"❤\u{FE0F} "` | `"❤\u{FE0F} "` | `"❤\u{FE0F}"` | `"❤\u{FE0F}"` | `"❤\u{FE0F}"` | `"❤\u{FE0F} "` | `"❤\u{FE0F}"` | `"❤\u{FE0F} "` | `"❤\u{FE0F} "` | `"❤\u{FE0F} "` | `"❤\u{FE0F} "` | `"❤\u{FE0F}"` | `"❤\u{FE0F} "` | `"❤\u{FE0F}"` | `"❤\u{FE0F} "` | `"❤\u{FE0F}"` | `"❤\u{FE0F} "` | `"❤\u{FE0F}"` | `"❤\u{FE0F} "` |
 | `""` | `undefined` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `null` | `null` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` | `""` |
 | `"   "` | `undefined` | `"   "` | `"   "` | `""` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `"   "` | `""` | `null` | `null` | `"   "` | `""` | `"   "` | `"   "` | `"   "` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` | `"   "` | `""` | `"   "` |
 | `"\u{9}\u{A}"` | `undefined` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `null` | `null` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` | `""` | `"\u{9}\u{A}"` |

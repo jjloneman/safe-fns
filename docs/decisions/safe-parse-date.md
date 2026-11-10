@@ -3,8 +3,8 @@ type: Decision
 title: What safeParseDate accepts
 description: The ECMAScript date-time format, RFC 3339's extras, and the formats Date writes itself, read by the package's own grammar and checked against the calendar, with `timeZone` deciding text that has no offset, plus Dates and epoch milliseconds; free-form text, impossible dates, and anything else return the fallback.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-21T14:57:42Z }
-verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
+verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
 ---
 
 # What safeParseDate accepts
@@ -19,7 +19,7 @@ verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
   safeParseDate(value: unknown, options?: { fallback?: F; timeZone?: "local" | "utc" }): Date | F
   ```
 
-- **Text is read by the package's own grammar, after trimming,** rather than by `Date.parse`, so every engine reads the same text the same way; trimming uses the internal `trimBlank`, as every parser does (`" 2024-01-01 "` and `"\u200B2024-01-01"` parse).
+- **Text is read by the package's own grammar, after trimming,** rather than by `Date.parse`, so every engine reads the same text the same way; trimming uses the public [`trimBlank`](trim-blank.md), as every parser does (`" 2024-01-01 "` and `"\u200B2024-01-01"` parse), and keeps a blank `Grapheme_Extend` modifier attached to the last character, so `"2024-01-01\uFE0F"` returns the fallback.
 - **Three families of text parse:**
   - **the ECMAScript date-time string format:** `YYYY`, `YYYY-MM`, or `YYYY-MM-DD`, optionally followed by `THH:mm`, `:ss`, and a fraction, then an optional offset; expanded `±YYYYYY` years included (`"+010000-01-01T00:00:00Z"`), and `-000000` rejected, as the format rejects it;
   - **RFC 3339's extras:** a space for the `T` (`"2024-01-01 12:34:56Z"`), as PostgreSQL and SQLite print, and a lowercase `t` or `z`;
@@ -64,6 +64,7 @@ The tiers 0–2 summary from [research/results/safe-parse-date.md](../../researc
 | `"2024-01-01T24:00:00Z"` | `"2024-01-02T00:00:00.000Z"` | `"2024-01-02T00:00:00.000Z"` | `"2024-01-02T00:00:00.000Z"` | `"2024-01-02T00:00:00.000Z"` | `"2024-01-02T00:00:00.000Z"` | `"2024-01-02T00:00:00.000Z"` | `"2024-01-02T00:00:00.000Z"` | `"2024-01-02T00:00:00.000Z"` | `"2024-01-02T00:00:00.000Z"` | 💥 `FormatException` | 💥 `*time.ParseError` | 💥 `DateTimeParseException` | `"2024-01-02T00:00:00.000+00:00"` |
 | `" 2024-01-01 "` | `"2024-01-01T00:00:00.000Z"` | 💥 `RangeError` | `"2024-01-01T00:00:00.000Z"` | 💥 `RangeError` | `"2024-01-01T00:00:00.000Z"` | `"2024-01-01T05:00:00.000Z"` | `null` | `null` | `"2024-01-01T00:00:00.000Z"` | `"2024-01-01T00:00:00.0000000Z"` | 💥 `*time.ParseError` | 💥 `DateTimeParseException` | 💥 `ValueError` |
 | `"\u{200B}2024-01-01"` | `"2024-01-01T00:00:00.000Z"` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | `null` | `null` | `null` | 💥 `FormatException` | 💥 `*time.ParseError` | 💥 `DateTimeParseException` | 💥 `ValueError` |
+| `"2024-01-01\u{FE0F}"` | `undefined` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | 💥 `RangeError` | `null` | `null` | `null` | 💥 `FormatException` | 💥 `*time.ParseError` | 💥 `DateTimeParseException` | 💥 `ValueError` |
 | `"2024-01-01T12:34:56"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T17:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.0000000Z"` | 💥 `*time.ParseError` | 💥 `DateTimeParseException` | `"2024-01-01T12:34:56.000+00:00"` |
 | `"2024-01-01 12:34:56"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T17:34:56.000Z"` | `null` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.0000000Z"` | 💥 `*time.ParseError` | 💥 `DateTimeParseException` | `"2024-01-01T12:34:56.000+00:00"` |
 | `"2024-01-01 12:34:56Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `null` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.000Z"` | `"2024-01-01T12:34:56.0000000Z"` | 💥 `*time.ParseError` | 💥 `DateTimeParseException` | `"2024-01-01T12:34:56.000+00:00"` |
