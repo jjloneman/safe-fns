@@ -70,6 +70,7 @@ verified: { by: human:jjloneman, at: 2026-09-28T09:00:00Z }
 - **`tags`** — one to four words from the vocabulary below, as a flow-style list right after `description`.
   - Name the subject, not the record type; `type` already says that.
   - Lowercase kebab-case, no `#`, no spaces.
+  - Sorted alphabetically, since the order carries no meaning.
 - **`status`** — the decision's lifecycle:
   - `draft` — proposed, not yet settled.
   - `stable` — in force (the default when `status` is absent).

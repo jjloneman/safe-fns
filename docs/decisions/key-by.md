@@ -2,7 +2,7 @@
 type: Decision
 title: How keyBy keys an array
 description: "`keyBy(items, key, options?)` returns a null-prototype object holding each item under its key, read by property name or a key function; only string, finite-number, and symbol keys count, and `invalidKeys` skips the rest, converts them with `String()`, or returns the fallback; `duplicates` keeps the last, the first, or returns the fallback; `mapValue` sets what is stored; a non-array or a throw returns the `fallback` option, `undefined` by default; a `Map` version would be a separate function."
-tags: [collections, api-shape, fallback]
+tags: [api-shape, collections, fallback]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-31T21:03:00Z }
 verified: { by: human:jjloneman, at: 2026-10-31T23:44:08Z }

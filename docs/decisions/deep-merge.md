@@ -2,7 +2,7 @@
 type: Decision
 title: How deepMerge combines defaults and overrides
 description: '`deepMerge(defaults, overrides)` returns a new value: it recurses where both sides are plain objects, and otherwise takes the override, copied as deepClone copies it; arrays are replaced unless `arrays` is `"concat"`, `undefined` keeps the default while `null` overrides it, an own `__proto__` key is dropped, symbol keys merge, cycles are kept, and a throw returns the `fallback` option, `undefined` by default, unless `unreadable` is `"omit"`.'
-tags: [collections, cloning, hostile-input, fallback]
+tags: [cloning, collections, fallback, hostile-input]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-31T01:48:00Z }
 verified: { by: human:jjloneman, at: 2026-10-31T23:44:08Z }

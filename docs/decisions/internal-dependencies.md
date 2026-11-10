@@ -2,7 +2,7 @@
 type: Decision
 title: How exports share code
 description: Shared logic lives in non-public modules under `src/internal/`; imports stay shallow, and each entry's size budget catches bloat.
-tags: [scope, performance]
+tags: [performance, scope]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-09-30T20:24:01Z }
 verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }

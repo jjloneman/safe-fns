@@ -2,7 +2,7 @@
 type: Decision
 title: What safeParseUrl accepts
 description: A string or URL, trimmed of blank characters and resolved against an optional base with the native URL parser, returning a new URL or the fallback; an opt-in protocols list rejects any other scheme.
-tags: [parsing, strings, fallback]
+tags: [fallback, parsing, strings]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T07:13:44Z }
 verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
