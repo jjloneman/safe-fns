@@ -3,7 +3,7 @@ type: Decision
 title: What safeParseNumber and safeParseInt accept
 description: Finite numbers, safe-range bigints, and trimmed decimal strings parse; hex, units, separators, blanks, and non-finite values return the fallback, a value outside min / max returns the fallback unless clamp is set, and safeParseInt takes a strict radix with JavaScript's matching 0x / 0o / 0b prefixes.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-21T01:00:50Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
 ---
 
@@ -24,7 +24,8 @@ Both parsers read a decimal number the same way on every engine, and return the 
   - a finite number primitive, returned as-is (including `-0`);
   - a bigint between `Number.MIN_SAFE_INTEGER` and `Number.MAX_SAFE_INTEGER`, converted exactly (`12n` → `12`);
   - a string that, after trimming, is a decimal: an optional `+` / `-`, digits with an optional fraction (`5`, `5.`, `.5`, `5.25`), and an optional exponent (`1e3`, `2.5E-4`).
-    - Trimming strips the same characters `isSafeEmpty` treats as blank (whitespace, zero-width and other invisible characters, and the braille blank) from both ends, through a shared internal `trimBlank`, so a number pasted with a zero-width space (`"\u200B42"`) parses.
+    - Trimming strips the same characters `isSafeEmpty` treats as blank (whitespace, zero-width and other invisible characters, and the braille blank) from both ends, through the public [`trimBlank`](trim-blank.md), so a number pasted with a zero-width space (`"\u200B42"`) parses.
+      - A blank `Grapheme_Extend` modifier attached to the last character stays, as `trimBlank` keeps it, so `safeParseNumber("42\uFE0F")` returns the fallback rather than guessing `42`.
     - Those characters inside the number (`"4\u200B2"`) still return the fallback.
     - Leading zeros parse (`"007"` → `7`), as do `"-0"`, `"5."`, and `".5"`; `"."`, `"+"`, `"e3"`, and `"1e"` don't.
 - **Everything else returns the fallback,** never a coercion:
@@ -77,6 +78,7 @@ The tiers 0–2 summary from [research/results/safe-parse-number.md](../../resea
 | `"1.5"` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `15` | 💥 `FormatException` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `‹BigDecimal(1.5)›` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` |
 | `" 1.5 "` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `1.5` | `15` | 💥 `FormatException` | `1.5` | 💥 `NumberFormatException` | `1.5` | 💥 `strconv.ErrSyntax` | `1.5` | `‹BigDecimal(1.5)›` | `1.5` | `null` | `1.5` | `1.5` | `1.5` | 💥 `ParseFloatError` | `1.5` |
 | `"\u{A0}42\u{A0}"` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | `42` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `NumberFormatException` | `0` | 💥 `strconv.ErrSyntax` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | 💥 `NumberFormatException` | `null` | `42` | 💥 `ParseFloatError` | 💥 `ConversionFailedException` |
+| `"42\u{FE0F}"` | `undefined` | `NaN` | `NaN` | `42` | `NaN` | `42` | `NaN` | `NaN` | `42` | 💥 `ValiError` | 💥 `ZodError` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `FormatException` | 💥 `NumberFormatException` | `0` | 💥 `strconv.ErrSyntax` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | 💥 `NumberFormatException` | `null` | 💥 `NumberFormatException` | `null` | 💥 `ValueError` | 💥 `ParseFloatError` | 💥 `ConversionFailedException` |
 | `".5"` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | 💥 `FormatException` | 💥 `FormatException` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `‹BigDecimal(0.5)›` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` | `0.5` |
 | `"5."` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | `5` | 💥 `FormatException` | `5` | `5` | `5` | `5` | `5` | `‹BigDecimal(5)›` | `5` | `5` | `5` | `5` | `5` | `5` | `5` |
 | `"1e3"` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `‹BigDecimal(1000)›` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` | `1000` |
@@ -164,5 +166,5 @@ The tiers 0–2 summary from [research/results/safe-parse-int.md](../../research
 ## Consequences
 
 - Callers that relied on `0` for bad input pass `{ fallback: 0 }`.
-- Integers beyond the safe range need a `bigint`; a separate `safeParseBigInt` is a part 2b candidate, since an option that switched the return type between `number` and `bigint` would be easy to mistype.
+- Integers beyond the safe range need a `bigint`; they go to a separate [`safeParseBigInt`](safe-parse-big-int.md), since an option that switched the return type between `number` and `bigint` would be easy to mistype.
 - Locale-formatted input (`"1,234.50"`, `"1.234,50"`) belongs to a separate amount parser, which is parked (see [What the package leaves to native APIs and other libraries](native-first-scope.md)).

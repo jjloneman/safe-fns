@@ -3,7 +3,7 @@ type: Decision
 title: When a name starts with `safe`
 description: "`safeParse` + what it reads for every parser, `safe` + the native API's path for any other wrapper of one native API, `isSafe*` against a same-named unsafe helper, and plain names otherwise."
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-21T01:00:50Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T07:13:44Z }
 verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
 ---
 
@@ -28,6 +28,8 @@ verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
   | `Storage.prototype.getItem` | `safeStorageGetItem`  |
   - Its shape stays close to the native API: the values the native call works on, in the native order, and the same result on success; the native call's optional configuration (`JSON.stringify`'s `replacer` and `space`) and anything extra go in an options object, per [the parameter rule](function-parameters.md).
   - `safeLocalStorageGetItem(key)` and `safeSessionStorageGetItem(key)` mirror `getItem(key)` exactly; the base `safeStorageGetItem(key, { area })` takes the area as configuration, per [the parameter rule](function-parameters.md).
+
+- **One exception keeps a family together:** the storage family's JSON variants, `safeStorageGetJson` and `safeStorageSetJson` and their fixed-area aliases, wrap two native calls, which would earn plain names, but keep the `safeStorage` prefix and swap `Item` for `Json`, so they sit beside the string wrappers in completions (see [the JSON storage helpers](safe-storage-json.md)).
 
 - **A predicate that shares a name with a well-known unsafe helper is `isSafe` + the name, and its positive twin keeps the same prefix:** `isSafeEmpty` (against lodash's and ramda's `isEmpty`) and its pair `isSafePopulated`.
   - The pair reads as mirror images, and the owner's existing call sites already use both names.

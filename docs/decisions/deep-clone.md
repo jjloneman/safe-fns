@@ -3,7 +3,7 @@ type: Decision
 title: What deepClone copies and what it shares
 description: deepClone copies data (plain objects, arrays, `Map`, `Set` and their keys and members, and the value-like built-ins) and shares everything it can't copy faithfully (class instances, functions, host objects) by reference; `mapSetKeys`, `uncopyable`, and `unreadable` opt into sharing keys, handing the rest to `structuredClone`, and omitting what throws; cycles and shared references are kept, it runs where `structuredClone` doesn't, and a throw returns the `fallback` option, `undefined` by default.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-30T00:01:46Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-10-30T02:54:00Z }
 ---
 
@@ -162,7 +162,7 @@ The tiers 0–2 summary from [research/results/deep-clone.md](../../research/res
 
 ## Consequences
 
-- [What the package leaves to native APIs and other libraries](native-first-scope.md) leaves lodash's `cloneDeep` to `structuredClone`, and [safeStructuredClone's record](safe-structured-clone.md) calls `deepClone` a candidate; both need updating once this record is verified, in the catalog wrap-up (#100).
+- [What the package leaves to native APIs and other libraries](native-first-scope.md) still leaves lodash's `cloneDeep` to `structuredClone`, and points here for a clone with rules of its own, as [safeStructuredClone's record](safe-structured-clone.md) does.
 - The docs lead with the difference from `safeStructuredClone`, since the two names alone don't say it.
 - A shared value is the original, so mutating a class instance inside a clone mutates it in the source too; the docs say so.
 - No tool compared has these options, so every column is `—` for the cases that set one.

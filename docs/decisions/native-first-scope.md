@@ -1,9 +1,9 @@
 ---
 type: Decision
 title: What the package leaves to native APIs and other libraries
-description: Excludes what native JavaScript already does and wrappers around native one-liners; parks newer native APIs, currency-amount parsing, and duration and byte formatting as future candidates; leaves validation, IndexedDB, and exact decimals to dedicated libraries.
+description: Excludes what native JavaScript already does and one-line wrappers or compositions; parks newer native APIs, currency-amount parsing, duration and byte formatting, and a few text helpers as future candidates; leaves validation, IndexedDB, and exact decimals to dedicated libraries.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-21T14:55:08Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T07:38:36Z }
 verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
 ---
 
@@ -23,12 +23,16 @@ Every candidate the catalog weighed against a native API or another library land
 - lodash's `cloneDeep` — use native `structuredClone`.
   - This package plans `safeStructuredClone`, which returns the caller's fallback where `structuredClone` throws.
   - That isn't a one-liner wrapper of the kind excluded below: making a native call that can throw safe is the package's purpose, like `safeJsonStringify`.
-  - A JavaScript `deepClone` with rules of its own is a part 2b candidate, weighed in [What safeStructuredClone returns when cloning fails](safe-structured-clone.md).
+  - A JavaScript clone with rules of its own is a separate export, [`deepClone`](deep-clone.md), which copies plain data and shares class instances rather than reproducing the native algorithm.
 - An error check — `Error.isError` (Node 24+ and current browsers, not Node 22).
   - A library can't reproduce it reliably across realms, so callers on older runtimes keep `instanceof Error` and its limits.
 - Wrappers around native one-liners:
   - `areAllSafeEmpty` / `areSomeSafeEmpty` — `values.every(isSafeEmpty)`;
   - `areAllDeepEqual` — `rest.every((value) => isDeepEqual(first, value))`.
+- One-line compositions of the package's own exports:
+  - seven more case styles — Train (`Foo-Bar-Baz`), Pascal snake (`Foo_Bar_Baz`), screaming kebab (`FOO-BAR-BAZ`), dot, path, flat (`foobarbaz`), and upper words (`FOO BAR BAZ`) — each a `words(value).map(…).join(…)` (see [How the case functions split words and which styles ship](case-conversion.md));
+  - `pascalCaseKeys`, `kebabCaseKeys`, and `constantCaseKeys` — `Object.fromEntries` over the entries with the style function (see [How camelCaseKeys and snakeCaseKeys convert an object's keys](case-keys.md)).
+- `stripBom` — `text.replace(/^\uFEFF/u, "")`.
 
 ### ⏸️ Parked — not now, but may become candidates
 
@@ -37,10 +41,16 @@ Every candidate the catalog weighed against a native API or another library land
 - `formatDuration` — [`Intl.DurationFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DurationFormat) (ES2025, Node 24+, not Node 22) already formats `{ minutes: 2, seconds: 34, milliseconds: 4 }` as `2m 34s 4ms` (`style: "narrow"`), `2 min, 34 sec, 4 ms`, or `0:02:34.004`.
   - What it doesn't do is balance units: `{ minutes: 150 }` prints `150m`, not `2h 30m`.
   - A `formatDuration` would balance milliseconds into mixed units — the inverse of `toMs` — and format them itself, so it returns the same string on every runtime.
+  - A consumer has one: the owner's app formats milliseconds as `"1h 20m"` or `"45m"`, at minute resolution, with no `0h` segment and `null` under a minute (2026-11-02). It's opinionated in ways a general version would need options for, so it stays in the app for now.
 - `formatBytes` — [`Intl.NumberFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) with `style: "unit"` formats a value you've already scaled (`2.5 megabytes`, `2.5 MB`, `2.5MB`), but doesn't pick the unit, and has no binary units (`kibibyte` throws a `RangeError`).
 - `safeParseAmount` — currency strings such as `"$1,234.50"`, `"(12.00)"`, or `"1.234,50"` need a documented format rule: which symbols, separators, and negative forms count, and which locale decides.
   - The owner's money parsers already disagree on negatives: one drops a leading `-`, one treats `-` anywhere as negative, and one reads `(…)` as a credit.
   - `safeParseNumber` stays a plain decimal parser rather than absorbing these formats.
+- Text helpers surveyed alongside the string helpers, none of which a consumer has asked for yet:
+  - `swapCase` — flips each letter's case; Voca and change-case already ship one;
+  - `escapeHtml` / `unescapeHtml` — frameworks escape text they render, and [`escape-html`](https://www.npmjs.com/package/escape-html) or lodash's `escape` covers the rest;
+  - `stripTags` — a regular expression can't strip real HTML safely, and `DOMParser` exists only in browsers; [`striptags`](https://www.npmjs.com/package/striptags) or a sanitizer such as [DOMPurify](https://www.npmjs.com/package/dompurify) is the better tool;
+  - grapheme reversal — `[...new Intl.Segmenter().segment(text)].map(({ segment }) => segment).reverse().join("")` where the runtime has `Intl.Segmenter`.
 - Why each is parked rather than excluded:
   - `groupBy`, the `Set` methods, and `Intl.DurationFormat` are newer than many consumers' targets — the owner's Angular apps among them still target ES2020–ES2022, where they're missing at runtime or in TypeScript's `lib`;
   - `formatDuration` and `formatBytes` would also fill gaps the native APIs leave (mixed units; picking the unit);

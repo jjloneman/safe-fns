@@ -3,7 +3,7 @@ type: Decision
 title: What "empty" means for isSafeEmpty and isSafePopulated
 description: Nullish values, blank strings (whitespace and invisible characters), and empty arrays, maps, sets, plain objects, typed arrays, buffers, and web data containers are empty; everything else, including anything that can't be inspected, is populated, and each predicate narrows the branch where the value is known to be non-nullish: isSafePopulated's true branch and isSafeEmpty's false branch.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-19T01:16:47Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
@@ -132,7 +132,7 @@ The tiers 0–2 summary from [research/results/is-safe-empty.md](../../research/
 
 ## Consequences
 
-- The blank characters live in one shared module under `src/internal/`, with `isBlankString` and `trimBlank`, so the parsers judge and strip blank text exactly the same way; the regex itself isn't exported, since a `RegExp` object carries mutable state.
+- The blank characters live in one shared module under `src/internal/`, with `isBlankString` and `trimBlank`, so the parsers judge and strip blank text exactly the same way; [`trimBlank`](trim-blank.md) is also a public export, but the regex itself isn't exported, since a `RegExp` object carries mutable state.
 - The README's migration row `value.trim() !== ""` → `isSafePopulated(value)` holds, and is stricter: `"\u200B"` now counts as blank too, which the migration note says.
 - The README's comparison table gains rows for `"\u200B"` and `new URLSearchParams("a=1")`.
 - The README's comparison table marks `null` as ✅ empty.

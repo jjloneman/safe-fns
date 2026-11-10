@@ -3,7 +3,7 @@ type: Decision
 title: How the JSON storage helpers read and write
 description: "`safeStorageGetJson(key, options?)` reads a key and parses it as `safeParseJson` does, with its `guard`, and `safeStorageSetJson(key, value, options?)` writes exactly what `safeJsonStringify` returns, with all its options but `fallback`, and returns whether it did; both take `area`, and four fixed-area aliases ship as the string wrappers' six do; a missing key, unreachable storage, text that isn't JSON, or a guard that rejects returns the `fallback` option, `undefined` by default; where `safeJsonStringify` would return its fallback, the write stores nothing, keeps the key's old value, and returns `false`."
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-11-02T00:30:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-11-02T06:25:10Z }
 ---
 
@@ -150,7 +150,7 @@ The tiers 0–2 summaries from [research/results/safe-storage-get-json.md](../..
 
   - or write a default the same way, though keeping the default in the read's `fallback` puts it in one place.
 
-- [How the storage wrappers behave](safe-storage.md) says that dedicated JSON helpers are a part 2b candidate; #100 rewords it to point here.
-- [The naming rule](safe-prefix-naming.md) lists one wrapper per native API; #100 adds these as the storage family's JSON variants.
+- [How the storage wrappers behave](safe-storage.md) points here for stored JSON.
+- [The naming rule](safe-prefix-naming.md) lists these as the storage family's JSON variants.
 - `size-limit` gives each alias its own budget, as it does the string wrappers'; an alias imports its base function.
 - Their tests cover each fallback and `false` case above, including unreachable storage, a revoked proxy as the key and as the options, and a guard that throws, and their type tests check that `guard` narrows the result, that `fallback` widens it, and that the write's options are `safeJsonStringify`'s, derived from its options type, less `fallback`.

@@ -3,7 +3,7 @@ type: Decision
 title: What safeParseUrl accepts
 description: A string or URL, trimmed of blank characters and resolved against an optional base with the native URL parser, returning a new URL or the fallback; an opt-in protocols list rejects any other scheme.
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-19T00:48:01Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T07:13:44Z }
 verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 ---
 
@@ -29,7 +29,7 @@ verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
 - **Accepted input:** a string, a boxed string, or a `URL` instance.
   - A boxed string is unwrapped first, identified by brand check, as every parser does.
   - A `URL` is copied, so the caller's object is never shared.
-- **Blank characters at both ends are trimmed first** with the shared `trimBlank`, so a pasted no-break space or zero-width space doesn't fail the parse; the native parser on its own strips only ASCII whitespace and control characters.
+- **Blank characters at both ends are trimmed first** with the public [`trimBlank`](trim-blank.md), so a pasted no-break space or zero-width space doesn't fail the parse, though a blank `Grapheme_Extend` modifier attached to the last character stays; the native parser on its own strips only ASCII whitespace and control characters.
 - **Parsing is the native WHATWG URL parser's,** run inside a `try`:
   - its normalization applies unchanged: lowercase scheme and host, default port dropped, spaces percent-encoded, Unicode hosts in punycode, `\` read as `/` in web URLs, and legacy IPv4 shorthand (`http://1.2.3/` → `http://1.2.0.3/`);
   - the query is kept as written, so a comma-separated list (`?filters=in-progress,to-do,done`) survives; `url.searchParams.get("filters")` returns the whole list as one string, and editing `searchParams` re-serializes the commas as `%2C`;
@@ -126,3 +126,4 @@ The tiers 0–2 summary from [research/results/safe-parse-url.md](../../research
   - repeated keys are merged (`getAll`), each piece is trimmed with `trimBlank`, and empty pieces are dropped.
 
 - `trimBlank` is shared with the other parsers, so a change to the blank set changes what `safeParseUrl` accepts too.
+- [`getSearchParams`](search-params.md) reads several keys at once with the same rules as `getSearchParamValues`.
