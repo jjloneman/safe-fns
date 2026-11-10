@@ -162,14 +162,20 @@ import { isSafeEmpty } from "safe-fns/is-safe-empty";
 
 _No functions have shipped yet._ The planned families are:
 
-| Family    | Functions                                                                                                                                                        |
-| :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Guards    | `isSafeEmpty`, `isSafePopulated`, `isPlainObject`, `safeObjectHasOwn`                                                                                            |
-| Parsers   | `safeParseBoolean`, `safeParseNumber`, `safeParseInt`, `safeParseBigInt`, `safeParseString`, `safeParseJson`, `safeParseUrl`, `safeParseRegExp`, `safeParseDate` |
-| Serialize | `safeJsonStringify`, `deepSortObject`, `safeStructuredClone`, `safeDateToIsoString`                                                                              |
-| Encoding  | `decodeBase64`, `decodeBase64ToBytes`, `encodeBase64`, `safeDecodeUriComponent`, `safeEncodeUriComponent`                                                        |
-| Errors    | `getErrorMessage`, `toError`                                                                                                                                     |
-| Storage   | `safeStorageGetItem`, `safeStorageSetItem`, `safeStorageRemoveItem`, plus `safeLocalStorage*` and `safeSessionStorage*` aliases                                  |
+| Family    | Functions                                                                                                                                                                   |
+| :-------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Guards    | `isSafeEmpty`, `isSafePopulated`, `isPlainObject`, `isDeepEqual`, `safeObjectHasOwn`                                                                                        |
+| Parsers   | `safeParseBoolean`, `safeParseNumber`, `safeParseInt`, `safeParseBigInt`, `safeParseString`, `safeParseJson`, `safeParseUrl`, `safeParseRegExp`, `safeParseDate`            |
+| URLs      | `getSearchParams`, `getSearchParamValues`                                                                                                                                   |
+| Serialize | `safeJsonStringify`, `deepSortObject`, `safeStructuredClone`, `safeDateToIsoString`                                                                                         |
+| Objects   | `deepClone`, `deepMerge`, `keyBy`, `camelCaseKeys`, `snakeCaseKeys`                                                                                                         |
+| Strings   | `trimBlank`, `trimBlankStart`, `trimBlankEnd`, `upperFirst`, `lowerFirst`, `toBasicAscii`, `pluralize`                                                                      |
+| Case      | `words`, `camelCase`, `pascalCase`, `snakeCase`, `constantCase`, `kebabCase`, `lowerCase`, `titleCase`, `sentenceCase`                                                      |
+| Encoding  | `decodeBase64`, `decodeBase64ToBytes`, `encodeBase64`, `safeDecodeUriComponent`, `safeEncodeUriComponent`                                                                   |
+| Errors    | `getErrorMessage`, `toError`                                                                                                                                                |
+| Storage   | `safeStorageGetItem`, `safeStorageSetItem`, `safeStorageRemoveItem`, `safeStorageGetJson`, `safeStorageSetJson`, plus `safeLocalStorage*` and `safeSessionStorage*` aliases |
+| Utilities | `createLogger`, `range`, `toMs`                                                                                                                                             |
+| Types     | `JsonValue`, `PlainObject`, `Empty`, `Populated`, `WithOwnProperty`, `PartialDeep`, `EnumLiteralsDeep`, `CamelCase`, `SnakeCase`, `CamelCaseKeys`, `SnakeCaseKeys`          |
 
 Parsers share one shape:
 
@@ -212,6 +218,7 @@ safe-fns replaces helpers that were copy-pasted between projects and had drifted
 | `JSON.stringify(value, null, 2)`                            | `safeJsonStringify(value, { space: 2 })`     |
 | A local `sortKeysRecursively`                               | `deepSortObject(value)`                      |
 | `localStorage.getItem(key)` inside a `try`                  | `safeLocalStorageGetItem(key)`               |
+| `JSON.parse(localStorage.getItem(key))` inside a `try`      | `safeLocalStorageGetJson(key)`               |
 
 - Check each old helper's edge cases against the new function's docs before you swap.
   - Copies that drifted may disagree on details such as case-sensitive key sorting.
@@ -222,6 +229,7 @@ safe-fns replaces helpers that were copy-pasted between projects and had drifted
   - `safeJsonStringify` takes `replacer` and `space` in its options object, not as positional arguments, and writes a cycle as `"[Circular]"` and a BigInt as a string where `JSON.stringify` throws.
   - `deepSortObject` sorts keys only; arrays keep their order unless `sortArrays` picks them.
   - `safeLocalStorageGetItem` still returns `null` for a missing key; only storage that can't be reached returns the fallback.
+  - `safeLocalStorageGetJson` returns the fallback for a missing key, unreadable storage, and invalid JSON alike, and takes a `guard` to check the parsed value's shape.
 
 ---
 
