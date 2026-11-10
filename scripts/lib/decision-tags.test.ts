@@ -111,12 +111,13 @@ describe("every decision record", () => {
       // When - reading its tags
       const tags = readRecordTags(text);
 
-      // Then - one to four distinct tags, all in the vocabulary
+      // Then - one to four distinct, sorted tags, all in the vocabulary
       expect(tags).toBeDefined();
       expect(tags?.length).toBeGreaterThan(0);
       expect(tags?.length).toBeLessThanOrEqual(MAX_TAGS);
       expect(new Set(tags).size).toBe(tags?.length);
       expect(tags?.filter((tag) => !isDecisionTag(tag))).toStrictEqual([]);
+      expect(tags).toStrictEqual([...(tags ?? [])].sort());
     }
   );
 });
