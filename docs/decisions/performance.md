@@ -2,6 +2,7 @@
 type: Decision
 title: How fast an export must be
 description: The common case runs cheap checks first and allocates nothing; each export is benchmarked against the fastest competitor, and robustness beats speed.
+tags: [performance]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-01T15:00:00Z }
 verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }

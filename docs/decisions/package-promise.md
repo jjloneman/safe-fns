@@ -2,6 +2,7 @@
 type: Decision
 title: What every export promises
 description: Every export is total and precisely typed; taking an `unknown` value is the common case, not a requirement.
+tags: [api-shape, fallback, hostile-input]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-01T15:00:00Z }
 verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }

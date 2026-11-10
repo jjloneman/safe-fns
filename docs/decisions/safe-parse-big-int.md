@@ -2,6 +2,7 @@
 type: Decision
 title: What safeParseBigInt accepts
 description: Bigints, safe-integer numbers, and trimmed integer strings parse to a bigint; fractions, exponents, an `n` suffix, separators, blanks, and unprefixed hex return the fallback, and `radix`, `min`, `max`, and `clamp` mirror safeParseInt's.
+tags: [parsing, numbers, fallback]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }

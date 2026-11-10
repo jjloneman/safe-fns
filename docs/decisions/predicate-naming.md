@@ -2,6 +2,7 @@
 type: Decision
 title: How predicates are named
 description: Predicates start with `is`, name the positive case, and come in positive/negative pairs rather than negated names.
+tags: [naming, predicates]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-09-30T20:24:01Z }
 verified: { by: human:jjloneman, at: 2026-10-05T15:38:06Z }

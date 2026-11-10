@@ -2,6 +2,7 @@
 type: Decision
 title: How getSearchParams and getSearchParamValues read a query
 description: "`getSearchParams(url, options?)` returns every key of a query as a null-prototype object of string lists, and `getSearchParamValues(url, key, options?)` returns one key's list; both read a URL or its query, as a string, a `URL`, or a `URLSearchParams`, find the query themselves, and decode it with the native `URLSearchParams`, so a runtime without one, such as Hermes, returns the fallback; each decoded value is split on the optional `separator`, each piece trimmed with `trimBlank`, and empty pieces dropped, while a key with no values stays as `[]`; a missing key is absent or `[]`, and an unreadable URL, a non-string key, an invalid separator, or a throw returns the `fallback` option, an empty result by default."
+tags: [parsing, strings, fallback]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }

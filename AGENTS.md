@@ -426,6 +426,9 @@ Semantic and design decisions — what "empty" means, how a function is named, w
 - Check a decision's `verified` field before changing the behavior it describes:
   - `verified` by `human:jjloneman` means the repo owner reviewed it — change it only with their agreement.
   - No `verified` means it is an unreviewed draft.
+- Every decision carries `tags` from the vocabulary in [docs/decisions/index.md](docs/decisions/index.md#tag-vocabulary):
+  - pick one to four that name the subject, and add a new tag to the vocabulary and to `DECISION_TAGS` in `scripts/lib/decision-tags.ts` in the same change;
+  - adding `tags` is not a change of substance, so leave `generated` and `verified` alone.
 - An agent that writes or edits a decision records itself in `generated` and **never** adds a `verified` entry.
 - **To verify records, run `pnpm okf:verify`** (or edit the two frontmatter lines by hand):
   - it lists the records changed on the branch, marks the ones you pick `status: stable` with a `verified` entry, and commits just those files;

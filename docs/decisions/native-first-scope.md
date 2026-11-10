@@ -2,6 +2,7 @@
 type: Decision
 title: What the package leaves to native APIs and other libraries
 description: Excludes what native JavaScript already does and one-line wrappers or compositions; parks newer native APIs, currency-amount parsing, duration and byte formatting, and a few text helpers as future candidates; leaves validation, IndexedDB, and exact decimals to dedicated libraries.
+tags: [scope]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T07:38:36Z }
 verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }

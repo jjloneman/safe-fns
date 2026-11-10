@@ -2,6 +2,7 @@
 type: Decision
 title: How toMs converts a duration
 description: "`toMs(duration, options?)` adds up a plain object of `weeks`, `days`, `hours`, `minutes`, `seconds`, and `milliseconds` into whole milliseconds, rounded half away from zero; fractions, negative values, and mixed signs add up, `{}` is `0`, and a missing or `undefined` unit counts as `0`; an unknown key (including `months`, `years`, and singular names), a value that isn't a finite number, a result past `Number.MAX_SAFE_INTEGER`, anything but a plain object, or a throw returns the `fallback` option, `undefined` by default."
+tags: [numbers, dates, fallback]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-01T05:10:00Z }
 verified: { by: human:jjloneman, at: 2026-11-02T06:25:10Z }

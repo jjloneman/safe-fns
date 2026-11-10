@@ -2,6 +2,7 @@
 type: Decision
 title: What safeParseRegExp accepts
 description: A pattern string, a boxed string, or a RegExp becomes a new RegExp through the native constructor, with optional `flags`; a pattern or flags the engine rejects, an empty pattern, and any other input return the fallback, nothing is trimmed, `matchLiterally` escapes text as RegExp.escape does, and engine differences are documented rather than smoothed over.
+tags: [parsing, strings, fallback]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-21T04:53:31Z }
 verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }

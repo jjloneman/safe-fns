@@ -59,6 +59,7 @@ Each decision opens with YAML frontmatter:
 type: Decision
 title: What "empty" means for strings
 description: Whitespace-only strings are empty; the check trims first.
+tags: [strings, predicates]
 status: stable
 generated: { by: <agent>/<model-id>, at: 2026-09-27T12:00:00Z }
 verified: { by: human:jjloneman, at: 2026-09-28T09:00:00Z }
@@ -66,6 +67,9 @@ verified: { by: human:jjloneman, at: 2026-09-28T09:00:00Z }
 ```
 
 - **`type`** — always `Decision`.
+- **`tags`** — one to four words from the vocabulary below, as a flow-style list right after `description`.
+  - Name the subject, not the record type; `type` already says that.
+  - Lowercase kebab-case, no `#`, no spaces.
 - **`status`** — the decision's lifecycle:
   - `draft` — proposed, not yet settled.
   - `stable` — in force (the default when `status` is absent).
@@ -78,3 +82,28 @@ verified: { by: human:jjloneman, at: 2026-09-28T09:00:00Z }
   - Agents never add a `verified` entry.
 
 A decision that compares other tools quotes the generated `research/results/<function>.md` from `pnpm research` ([research/README.md](../../research/README.md)), rather than a hand-built table.
+
+## Tag vocabulary
+
+A decision's `tags` come only from this list, kept in step with `DECISION_TAGS` in [scripts/lib/decision-tags.ts](../../scripts/lib/decision-tags.ts), which a test checks against every record. Add a tag in both places in the same change.
+
+- `api-shape` — How an export's signature, options, and types are laid out.
+- `cloning` — Copying values, deeply or through `structuredClone`.
+- `collections` — Arrays, objects, `Map`, and `Set`.
+- `comparison` — Equality and ordering of values.
+- `cross-realm` — Values from another realm, such as an iframe or `node:vm`.
+- `dates` — Dates, timestamps, and durations.
+- `encoding` — Text encodings and serialization formats.
+- `errors` — Thrown values and how they are read or repaired.
+- `fallback` — The caller's fallback returned instead of throwing or guessing.
+- `formatting` — Producing text from a value.
+- `hostile-input` — Proxies, throwing getters, cycles, and `__proto__` keys.
+- `naming` — How an export or a type is named.
+- `numbers` — Numeric parsing, rounding, and ranges.
+- `parsing` — Reading a value of a known type out of unknown input.
+- `performance` — Speed, allocation, and bundle size.
+- `predicates` — Functions that answer a yes-or-no question about a value.
+- `scope` — What the package does and does not ship.
+- `storage` — `localStorage`, `sessionStorage`, and the like.
+- `strings` — Text handling.
+- `unicode` — Code points, grapheme clusters, normalization, and case.
