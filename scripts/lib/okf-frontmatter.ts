@@ -16,7 +16,7 @@ export const RECORD_STATUSES = {
 } as const;
 
 /** A YAML comment: whitespace, then `#` through the end of the line. */
-const COMMENT = String.raw`\s+#.*`;
+export const COMMENT: string = String.raw`\s+#.*`;
 
 /** The keys of one `verified` or `generated` entry. */
 const ENTRY_KEYS = {
@@ -77,6 +77,30 @@ const AT_KEY = String.raw`\bat:\s*${QUOTE}`;
 const VERIFIED_CONTINUATION = new RegExp(
   `${LIST_ITEM_LINE.source}|${INDENTED_LINE.source}`
 );
+
+/** A record's text split around its frontmatter. */
+export type FrontmatterBlock = {
+  /**
+   * The line break the file uses, kept for every line written back.
+   *
+   * @example `"\n"`
+   */
+  lineBreak: string;
+
+  /**
+   * Frontmatter lines, without the `---` fences.
+   *
+   * @example ["status: draft"]
+   */
+  lines: string[];
+
+  /**
+   * Everything after the opening fence, including the closing one.
+   *
+   * @example ["---", "", "# Title"]
+   */
+  rest: string[];
+};
 
 /** What `readRecordSummary` needs: the record, and whose sign-off counts. */
 export type ReadRecordSummaryParams = Pick<
@@ -248,30 +272,6 @@ type FindKeyRangeParams = {
 /** What `findOwnEntry` needs: the lines, and whose entry to find. */
 type FindOwnEntryParams = LinesParams & Pick<VerifyRecordParams, "verifiedBy">;
 
-/** A record's text split around its frontmatter. */
-type FrontmatterBlock = {
-  /**
-   * The line break the file uses, kept for every line written back.
-   *
-   * @example `"\n"`
-   */
-  lineBreak: string;
-
-  /**
-   * Frontmatter lines, without the `---` fences.
-   *
-   * @example ["status: draft"]
-   */
-  lines: string[];
-
-  /**
-   * Everything after the opening fence, including the closing one.
-   *
-   * @example ["---", "", "# Title"]
-   */
-  rest: string[];
-};
-
 /** A frontmatter key this module reads or writes. */
 type FrontmatterKey = (typeof FRONTMATTER_KEYS)[keyof typeof FRONTMATTER_KEYS];
 
@@ -417,6 +417,35 @@ export function readRecordSummary(
     title: readScalar({ key: FRONTMATTER_KEYS.title, lines }),
     type: readScalar({ key: FRONTMATTER_KEYS.type, lines }),
     verifiedAt: findOwnEntry({ lines, verifiedBy })?.at,
+  };
+}
+
+/**
+ * Split a record around its frontmatter, remembering its line breaks.
+ *
+ * - The opening fence's line break decides the file's, so a stray CRLF in
+ *   the body of an LF record can't hide its frontmatter.
+ *
+ * @returns the parts, or `undefined` when there is no closed `---` block.
+ */
+export function splitFrontmatter(text: string): FrontmatterBlock | undefined {
+  const lineBreak = text.startsWith(`${FENCE}\r\n`) ? "\r\n" : "\n";
+  const [first, ...remaining] = text.split(lineBreak);
+
+  if (first !== FENCE) {
+    return undefined;
+  }
+
+  const closingIndex = remaining.indexOf(FENCE);
+
+  if (closingIndex === -1) {
+    return undefined;
+  }
+
+  return {
+    lineBreak,
+    lines: remaining.slice(0, closingIndex),
+    rest: remaining.slice(closingIndex),
   };
 }
 
@@ -678,32 +707,6 @@ function readStatus(lines: string[]): RecordStatus | undefined {
   const status = readScalar({ key: FRONTMATTER_KEYS.status, lines });
 
   return status !== undefined && isRecordStatus(status) ? status : undefined;
-}
-
-/**
- * Split a record around its frontmatter, remembering its line breaks.
- *
- * @returns the parts, or `undefined` when there is no closed `---` block.
- */
-function splitFrontmatter(text: string): FrontmatterBlock | undefined {
-  const lineBreak = text.includes("\r\n") ? "\r\n" : "\n";
-  const [first, ...remaining] = text.split(lineBreak);
-
-  if (first !== FENCE) {
-    return undefined;
-  }
-
-  const closingIndex = remaining.indexOf(FENCE);
-
-  if (closingIndex === -1) {
-    return undefined;
-  }
-
-  return {
-    lineBreak,
-    lines: remaining.slice(0, closingIndex),
-    rest: remaining.slice(closingIndex),
-  };
 }
 
 /** Split a value from a trailing YAML comment. */

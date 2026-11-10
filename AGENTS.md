@@ -39,6 +39,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Each function's tests sit beside it as `*.test.ts` and `*.test-d.ts`.
 - `test/` — shared test harnesses, imported as `#test/*` (see [Testing](#-testing)).
   - `test/consumer/` — fixtures run by `pnpm test:consumer` against the packed tarball (see [Build & package](#-build--package)).
+  - `test/okf-record.ts` — `buildRecord`, the stub OKF record the `scripts/lib` frontmatter tests build their fixtures with.
 - `scripts/` — repo scripts, run directly by Node (which strips their types), so they stick to erasable TypeScript syntax.
   - Relative imports name the `.ts` file (`./lib/publish-ci-report.ts`), since Node resolves only the real file name.
   - Every console log line a script prints starts with `[<script-name>]` (e.g. `[okf-verify] …`), including each line of a multi-line message, so its output is traceable in a log; an interactive prompt's own UI is exempt.
