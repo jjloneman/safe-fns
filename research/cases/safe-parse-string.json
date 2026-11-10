@@ -9,6 +9,10 @@
       "expected": "hi"
     },
     {
+      "args": ["\u2764\ufe0f "],
+      "expected": "\u2764\ufe0f"
+    },
+    {
       "args": [""],
       "expected": {
         "$undefined": true

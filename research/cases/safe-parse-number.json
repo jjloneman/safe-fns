@@ -35,6 +35,12 @@
       "expected": 42
     },
     {
+      "args": ["42\ufe0f"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
       "args": [".5"],
       "expected": 0.5
     },

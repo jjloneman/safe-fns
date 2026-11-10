@@ -117,6 +117,12 @@
       "expected": true
     },
     {
+      "args": ["true\ufe0f"],
+      "expected": {
+        "$undefined": true
+      }
+    },
+    {
       "args": ["enabled"],
       "expected": {
         "$undefined": true

@@ -28,6 +28,9 @@
       "​42"
     ],
     [
+      "42️"
+    ],
+    [
       ""
     ],
     [
@@ -203,6 +206,12 @@
           "kind": "value",
           "value": {
             "$bigint": "42"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
           }
         },
         {
@@ -584,6 +593,10 @@
         {
           "error": "SchemaError",
           "kind": "error"
+        },
+        {
+          "error": "SchemaError",
+          "kind": "error"
         }
       ],
       "service": "node",
@@ -644,6 +657,10 @@
           "value": {
             "$bigint": "7"
           }
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
         },
         {
           "error": "SyntaxError",
@@ -859,6 +876,10 @@
           "value": {
             "$bigint": "7"
           }
+        },
+        {
+          "error": "SyntaxError",
+          "kind": "error"
         },
         {
           "error": "SyntaxError",
@@ -1089,6 +1110,10 @@
           "kind": "error"
         },
         {
+          "error": "ValiError",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": {
             "$bigint": "0"
@@ -1307,6 +1332,10 @@
           "value": {
             "$bigint": "7"
           }
+        },
+        {
+          "error": "ZodError",
+          "kind": "error"
         },
         {
           "error": "ZodError",
@@ -1597,6 +1626,10 @@
           "kind": "error"
         },
         {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -1700,6 +1733,10 @@
           "value": {
             "$bigint": "0"
           }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
         },
         {
           "error": "NumberFormatException",
@@ -1880,6 +1917,10 @@
           "value": {
             "$bigint": "0"
           }
+        },
+        {
+          "kind": "value",
+          "value": null
         },
         {
           "kind": "value",
@@ -2133,6 +2174,10 @@
           "value": null
         },
         {
+          "kind": "value",
+          "value": null
+        },
+        {
           "kind": "n/a"
         },
         {
@@ -2242,6 +2287,10 @@
           "value": {
             "$bigint": "7"
           }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
         },
         {
           "error": "NumberFormatException",
@@ -2498,6 +2547,10 @@
           "kind": "error"
         },
         {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": {
             "$bigint": "42"
@@ -2640,6 +2693,10 @@
           "value": {
             "$bigint": "0"
           }
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
         },
         {
           "error": "NumberFormatException",
@@ -2872,6 +2929,10 @@
         },
         {
           "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
           "value": {
             "$bigint": "42"
           }
@@ -2982,6 +3043,10 @@
         {
           "kind": "value",
           "value": 7
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
         },
         {
           "error": "ValueError",
@@ -3174,6 +3239,10 @@
           "value": {
             "$bigint": "7"
           }
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
         },
         {
           "error": "ConversionFailedException",
@@ -3412,6 +3481,10 @@
           "kind": "error"
         },
         {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": {
             "$bigint": "26"
@@ -3572,6 +3645,12 @@
           "kind": "value",
           "value": {
             "$bigint": "0"
+          }
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$bigint": "42"
           }
         },
         {
@@ -3762,6 +3841,10 @@
         {
           "kind": "value",
           "value": 7
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
         },
         {
           "error": "ArgumentError",

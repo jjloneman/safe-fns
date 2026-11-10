@@ -25,6 +25,9 @@
       " 42 "
     ],
     [
+      "42️"
+    ],
+    [
       ".5"
     ],
     [
@@ -191,6 +194,12 @@
         {
           "kind": "value",
           "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$undefined": true
+          }
         },
         {
           "kind": "value",
@@ -434,6 +443,12 @@
         },
         {
           "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -641,6 +656,12 @@
         {
           "kind": "value",
           "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
         },
         {
           "kind": "value",
@@ -864,6 +885,10 @@
         },
         {
           "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -1085,6 +1110,12 @@
         },
         {
           "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -1295,6 +1326,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
         },
         {
           "kind": "value",
@@ -1523,6 +1558,12 @@
         {
           "kind": "value",
           "value": 42
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
         },
         {
           "kind": "value",
@@ -1746,6 +1787,12 @@
         },
         {
           "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -1966,6 +2013,10 @@
         },
         {
           "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -2161,6 +2212,10 @@
         {
           "kind": "value",
           "value": 42
+        },
+        {
+          "error": "ValiError",
+          "kind": "error"
         },
         {
           "kind": "value",
@@ -2363,6 +2418,10 @@
           "value": 42
         },
         {
+          "error": "ZodError",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 0.5
         },
@@ -2549,6 +2608,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
         },
         {
           "error": "FormatException",
@@ -2759,6 +2822,10 @@
           "kind": "error"
         },
         {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 5
         },
@@ -2919,6 +2986,10 @@
           "value": {
             "$number": "-0"
           }
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
         },
         {
           "error": "FormatException",
@@ -3111,6 +3182,10 @@
           "kind": "error"
         },
         {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 0.5
         },
@@ -3281,6 +3356,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
         },
         {
           "error": "NumberFormatException",
@@ -3471,6 +3550,10 @@
         },
         {
           "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -3643,6 +3726,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "error": "strconv.ErrSyntax",
+          "kind": "error"
         },
         {
           "error": "strconv.ErrSyntax",
@@ -3829,6 +3916,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
         },
         {
           "error": "NumberFormatException",
@@ -4047,6 +4138,10 @@
           "kind": "error"
         },
         {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": {
             "$repr": "BigDecimal(0.5)"
@@ -4257,6 +4352,10 @@
           "kind": "error"
         },
         {
+          "error": "NumberFormatException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 0.5
         },
@@ -4458,6 +4557,10 @@
         },
         {
           "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -4633,6 +4736,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "error": "NumberFormatException",
+          "kind": "error"
         },
         {
           "error": "NumberFormatException",
@@ -4822,6 +4929,10 @@
         },
         {
           "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -5001,6 +5112,10 @@
         {
           "kind": "value",
           "value": 42
+        },
+        {
+          "error": "ValueError",
+          "kind": "error"
         },
         {
           "kind": "value",
@@ -5205,6 +5320,10 @@
           "kind": "error"
         },
         {
+          "error": "ParseFloatError",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 0.5
         },
@@ -5383,6 +5502,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "error": "ConversionFailedException",
+          "kind": "error"
         },
         {
           "error": "ConversionFailedException",
@@ -5590,6 +5713,10 @@
         },
         {
           "kind": "value",
+          "value": "42️"
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -5757,6 +5884,12 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
         },
         {
           "kind": "value",
@@ -5976,6 +6109,10 @@
         },
         {
           "kind": "value",
+          "value": "42️"
+        },
+        {
+          "kind": "value",
           "value": ".5"
         },
         {
@@ -6157,6 +6294,10 @@
           "kind": "error"
         },
         {
+          "error": "SyntaxError",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 1000
         },
@@ -6321,6 +6462,10 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
         },
         {
           "kind": "value",
@@ -6492,6 +6637,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "error": "ConversionFailure",
+          "kind": "error"
         },
         {
           "error": "ConversionFailure",
@@ -6700,6 +6849,10 @@
         },
         {
           "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -6874,6 +7027,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "error": "22P02",
+          "kind": "error"
         },
         {
           "error": "22P02",
@@ -7077,6 +7234,10 @@
           "kind": "error"
         },
         {
+          "error": "Msg 8114",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 0.5
         },
@@ -7256,6 +7417,10 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
         },
         {
           "kind": "value",
@@ -7453,6 +7618,10 @@
           "kind": "error"
         },
         {
+          "error": "TomlError",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 1000
         },
@@ -7617,6 +7786,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "error": "SAXParseException",
+          "kind": "error"
         },
         {
           "error": "SAXParseException",
@@ -7802,6 +7975,10 @@
         },
         {
           "kind": "value",
+          "value": "42️"
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -7978,6 +8155,10 @@
         },
         {
           "kind": "value",
+          "value": "42️"
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -8151,6 +8332,10 @@
         {
           "kind": "value",
           "value": 42
+        },
+        {
+          "error": "ValidationError",
+          "kind": "error"
         },
         {
           "kind": "value",
@@ -8354,6 +8539,10 @@
         },
         {
           "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -8539,6 +8728,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": 42
         },
         {
           "kind": "value",
@@ -8738,6 +8931,10 @@
         },
         {
           "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -8919,6 +9116,10 @@
         {
           "kind": "value",
           "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 42
         },
         {
           "kind": "value",
@@ -9106,6 +9307,10 @@
         },
         {
           "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -9288,6 +9493,10 @@
         },
         {
           "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -9467,6 +9676,10 @@
           "kind": "error"
         },
         {
+          "error": "exit 1",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": "0.5"
         },
@@ -9633,6 +9846,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": false
         },
         {
           "kind": "value",
@@ -9826,6 +10043,10 @@
         },
         {
           "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -10013,6 +10234,10 @@
         {
           "kind": "value",
           "value": 15
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
         },
         {
           "error": "FormatException",
@@ -10221,6 +10446,10 @@
           "kind": "error"
         },
         {
+          "error": "FormatException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 1000
         },
@@ -10401,6 +10630,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "error": "FormatException",
+          "kind": "error"
         },
         {
           "error": "FormatException",
@@ -10605,6 +10838,10 @@
           "value": 42
         },
         {
+          "error": "RuntimeException",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 0.5
         },
@@ -10801,6 +11038,10 @@
         {
           "kind": "value",
           "value": 42
+        },
+        {
+          "kind": "value",
+          "value": null
         },
         {
           "kind": "value",
@@ -11004,6 +11245,10 @@
         },
         {
           "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -11197,6 +11442,10 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "error": "ArgumentError",
+          "kind": "error"
         },
         {
           "error": "ArgumentError",
@@ -11398,6 +11647,10 @@
         },
         {
           "kind": "value",
+          "value": 42
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -11592,6 +11845,10 @@
         },
         {
           "kind": "value",
+          "value": null
+        },
+        {
+          "kind": "value",
           "value": 0.5
         },
         {
@@ -11765,6 +12022,12 @@
         {
           "kind": "value",
           "value": 1.5
+        },
+        {
+          "kind": "value",
+          "value": {
+            "$number": "NaN"
+          }
         },
         {
           "kind": "value",
@@ -11983,6 +12246,10 @@
           "value": 42
         },
         {
+          "error": "XMLSchemaValidationError",
+          "kind": "error"
+        },
+        {
           "kind": "value",
           "value": 0.5
         },
@@ -12153,6 +12420,10 @@
         {
           "kind": "value",
           "value": "1.5"
+        },
+        {
+          "error": "exit 1",
+          "kind": "error"
         },
         {
           "error": "exit 1",
