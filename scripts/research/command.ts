@@ -115,12 +115,13 @@ export function runCommand({
     let stdout = "";
     let stderr = "";
 
-    child.stdout?.on("data", (chunk: Buffer) => {
-      stdout += chunk.toString("utf8");
-    });
-
     // Decoding across chunks keeps a character split between two reads whole.
+    child.stdout?.setEncoding("utf8");
     child.stderr?.setEncoding("utf8");
+
+    child.stdout?.on("data", (chunk: string) => {
+      stdout += chunk;
+    });
 
     child.stderr?.on("data", (chunk: string) => {
       stderr += chunk;
