@@ -263,14 +263,23 @@ safe-fns replaces helpers that were copy-pasted between projects and had drifted
 
 Every issue gets a type label (`✨ feature`, `🐞 bug`, `📝 documentation`, …) and, where one fits, an area label:
 
-| Label              | Covers                                                        |
-| :----------------- | :------------------------------------------------------------ |
-| `area: 🛡️ guards`  | Type guards and emptiness checks (`isSafeEmpty`, …)           |
-| `area: 🔍 parse`   | Parsers that turn `unknown` into a typed value (`safeParse*`) |
-| `area: 🚨 errors`  | Error helpers (`getErrorMessage`, `toError`)                  |
-| `area: 🔀 sort`    | Sorting helpers (`deepSortObject`)                            |
-| `area: 📝 docs`    | The README, community files, and the docs site                |
-| `area: 🛠️ tooling` | Build, lint, test, CI, and release tooling                    |
+| Label                | Covers                                                            |
+| :------------------- | :---------------------------------------------------------------- |
+| `area: 🛡️ guards`    | Type guards and emptiness checks (`isSafeEmpty`, …)               |
+| `area: 🔍 parse`     | Parsers that turn `unknown` into a typed value (`safeParse*`)     |
+| `area: 🚨 errors`    | Error helpers (`getErrorMessage`, `toError`)                      |
+| `area: 🔀 sort`      | Sorting helpers (`deepSortObject`)                                |
+| `area: 🔗 urls`      | Query-string readers (`getSearchParams`, `getSearchParamValues`)  |
+| `area: 📦 serialize` | Serializers, clones, and date writers (`safeJsonStringify`, …)    |
+| `area: 🧱 objects`   | Object copy, merge, keying, and key conversion (`deepClone`, …)   |
+| `area: 🔤 strings`   | String trimming, folding, and text helpers (`trimBlank`, …)       |
+| `area: 🔠 case`      | Word splitting and case conversion (`words`, `camelCase`, …)      |
+| `area: 🔐 encoding`  | Base64 and URI component encoding (`encodeBase64`, …)             |
+| `area: 💾 storage`   | Web storage wrappers (`safeStorageGetItem`, …)                    |
+| `area: 🧰 utilities` | Logger, range, durations, and other utilities (`createLogger`, …) |
+| `area: 🏷️ types`     | Types-only helpers (`PartialDeep`, `EnumLiteralsDeep`)            |
+| `area: 📝 docs`      | The README, community files, and the docs site                    |
+| `area: 🛠️ tooling`   | Build, lint, test, CI, and release tooling                        |
 
 New issues start as `📥 needs-triage` until the maintainer has looked at them.
 
