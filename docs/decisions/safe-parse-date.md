@@ -4,7 +4,7 @@ title: What safeParseDate accepts
 description: The ECMAScript date-time format, RFC 3339's extras, and the formats Date writes itself, read by the package's own grammar and checked against the calendar, with `timeZone` deciding text that has no offset, plus Dates and epoch milliseconds; free-form text, impossible dates, and anything else return the fallback.
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
-verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
+verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
 ---
 
 # What safeParseDate accepts

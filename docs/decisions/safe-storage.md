@@ -4,7 +4,7 @@ title: How the storage wrappers behave
 description: safeStorageGetItem / SetItem / RemoveItem take an area option defaulting to local, plus six fixed-area aliases; a missing key reads as native null, unreachable storage returns the fallback, and writes report success as a boolean.
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
-verified: { by: human:jjloneman, at: 2026-10-19T02:07:40Z }
+verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
 ---
 
 # How the storage wrappers behave

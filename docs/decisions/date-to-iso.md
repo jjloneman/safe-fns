@@ -4,7 +4,7 @@ title: How safeDateToIsoString writes a date
 description: A Date (from any realm) or a finite epoch-milliseconds number becomes `toISOString`'s text, expanded `±YYYYYY` years included; an invalid date, a time outside the Date range, a string, and any other input return the fallback.
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:58:45Z }
-verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }
+verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }
 ---
 
 # How safeDateToIsoString writes a date
