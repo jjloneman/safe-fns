@@ -22,6 +22,9 @@ export const TAG_INDEX_END = "<!-- tag-index:end -->";
 /** Starts the generated tag index in `docs/decisions/index.md`. */
 export const TAG_INDEX_START = "<!-- tag-index:start -->";
 
+/** Characters that would end or break a Markdown link's text. */
+const LINK_TEXT_SPECIAL = /[[\\\]]/g;
+
 /** The line under a tag that no record carries yet. */
 const NO_RECORDS_LINE = "  - _No records yet._";
 
@@ -137,6 +140,9 @@ const DECISION_TAG_NAMES: ReadonlySet<string> = new Set(
  *
  * - Records under a tag sort by file name, which follows the function name.
  *
+ * - Brackets and backslashes in a title are escaped, so it can't break its
+ *   link.
+ *
  * - A tag no record carries yet still appears, so the index doubles as the
  *   vocabulary.
  *
@@ -148,9 +154,11 @@ export function buildTagIndex(records: readonly TaggedRecord[]): string {
     .flatMap(([tag, meaning]) => {
       const links = records
         .filter((record) => record.tags.includes(tag))
-        .map(({ fileName, title }) => ({ fileName, title }))
         .sort((left, right) => left.fileName.localeCompare(right.fileName))
-        .map(({ fileName, title }) => `  - [${title}](${fileName})`);
+        .map(
+          ({ fileName, title }) =>
+            `  - [${title.replaceAll(LINK_TEXT_SPECIAL, String.raw`\$&`)}](${fileName})`
+        );
 
       return [
         `- \`${tag}\` — ${meaning}`,
@@ -204,7 +212,8 @@ export function readRecordTags(text: string): string[] | undefined {
 /**
  * Put a generated tag index between the markers in an index file's text.
  *
- * - Keeps the file's line break, so a CRLF checkout stays CRLF.
+ * - Takes the line break from the start marker's own line, so a CRLF
+ *   checkout stays CRLF and a stray CRLF elsewhere changes nothing.
  *
  * @returns the new text, or `undefined` when either marker is missing or the
  * end marker comes first.
@@ -214,12 +223,15 @@ export function replaceTagIndex(
 ): string | undefined {
   const { index, text } = params;
   const end = text.indexOf(TAG_INDEX_END);
-  const lineBreak = text.includes("\r\n") ? "\r\n" : "\n";
   const start = text.indexOf(TAG_INDEX_START);
 
   if (start === -1 || end < start) {
     return undefined;
   }
+
+  const lineBreak = text.startsWith("\r\n", start + TAG_INDEX_START.length)
+    ? "\r\n"
+    : "\n";
 
   const block = [TAG_INDEX_START, "", index, "", ""]
     .join("\n")

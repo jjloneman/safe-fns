@@ -4,6 +4,7 @@ import { buildRecord } from "#test/okf-record";
 
 import {
   getRecordState,
+  isRecordFileName,
   readRecordSummary,
   readRecordTitle,
   splitFrontmatter,
@@ -806,5 +807,16 @@ describe("readRecordTitle", () => {
   ])("returns undefined for $description", ({ text }) => {
     // Given/When/Then - nothing to read
     expect(readRecordTitle(text)).toBeUndefined();
+  });
+});
+
+describe("isRecordFileName", () => {
+  test.each([
+    { description: "a record", fileName: "range.md", isRecord: true },
+    { description: "the bundle index", fileName: "index.md", isRecord: false },
+    { description: "a non-Markdown file", fileName: "a.txt", isRecord: false },
+  ])("answers $isRecord for $description", ({ fileName, isRecord }) => {
+    // Given/When/Then - only Markdown files other than the index are records
+    expect(isRecordFileName(fileName)).toBe(isRecord);
   });
 });

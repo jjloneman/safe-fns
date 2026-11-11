@@ -427,8 +427,8 @@ Semantic and design decisions — what "empty" means, how a function is named, w
   - `verified` by `human:jjloneman` means the repo owner reviewed it — change it only with their agreement.
   - No `verified` means it is an unreviewed draft.
 - Every decision carries `tags` from the vocabulary in [docs/decisions/index.md](docs/decisions/index.md#tag-vocabulary):
-  - pick one to four, sorted alphabetically: the function's family tag, named as its `area:` label without the emoji, plus any cross-cutting concern the decision settles;
-  - a new tag goes into `DECISION_TAGS` in `scripts/lib/decision-tags.ts`;
+  - pick one to four, sorted alphabetically: the function's family tag if it has one, named as its `area:` label without the emoji, plus any cross-cutting concern the decision settles; a decision about a package-wide rule may have no family tag;
+  - a new tag goes into `DECISION_TAGS` in `scripts/lib/decision-tags.ts`; a family tag's meaning names its label, which a test checks against the README's label table;
   - after changing tags or the vocabulary, run `pnpm okf:tags` to regenerate the tag index in `docs/decisions/index.md`, since a test fails while it is stale;
   - adding `tags` is not a change of substance, so leave `generated` and `verified` alone.
 - An agent that writes or edits a decision records itself in `generated` and **never** adds a `verified` entry.

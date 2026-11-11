@@ -15,6 +15,9 @@ export const RECORD_STATUSES = {
   stable: "stable",
 } as const;
 
+/** The file in an OKF bundle that indexes it rather than recording a decision. */
+export const BUNDLE_INDEX_FILE = "index.md";
+
 /** A YAML comment: whitespace, then `#` through the end of the line. */
 export const COMMENT: string = String.raw`\s+#.*`;
 
@@ -392,6 +395,16 @@ export function getRecordState(summary: RecordSummary): RecordState {
 
   // Written so an unreadable timestamp (`NaN`) reads as "changed".
   return generatedTime <= verifiedTime ? "verified" : "changed";
+}
+
+/**
+ * Whether a file in an OKF bundle is a record, not the bundle's index.
+ *
+ * @param fileName - a file name inside the bundle directory.
+ * @returns `true` for a Markdown file other than `index.md`.
+ */
+export function isRecordFileName(fileName: string): boolean {
+  return fileName.endsWith(".md") && fileName !== BUNDLE_INDEX_FILE;
 }
 
 /**

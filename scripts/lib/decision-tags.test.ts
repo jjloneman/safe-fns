@@ -14,13 +14,17 @@ import {
   TAG_INDEX_START,
   toTaggedRecord,
 } from "./decision-tags.ts";
+import { BUNDLE_INDEX_FILE, isRecordFileName } from "./okf-frontmatter.ts";
 
 const DECISIONS_DIRECTORY = join(import.meta.dirname, "../../docs/decisions");
-const INDEX_FILE = "index.md";
 const MAX_TAGS = 4;
+const MEANING_AREA_LABEL = /`(?<label>area: \S+ [a-z-]+)`/u;
+const NON_FAMILY_AREAS: ReadonlySet<string> = new Set(["docs", "tooling"]);
+const README_AREA_LABEL = /^\| `(?<label>area: \S+ (?<name>[a-z-]+))`/gmu;
+const README_FILE = join(import.meta.dirname, "../../README.md");
 
-const RECORD_FILES = readdirSync(DECISIONS_DIRECTORY).filter(
-  (file) => file.endsWith(".md") && file !== INDEX_FILE
+const RECORD_FILES = readdirSync(DECISIONS_DIRECTORY).filter((file) =>
+  isRecordFileName(file)
 );
 
 describe("readRecordTags", () => {
@@ -103,6 +107,20 @@ describe("buildTagIndex", () => {
   });
 });
 
+describe("buildTagIndex escaping", () => {
+  test("escapes brackets and backslashes in a title", () => {
+    // Given - a title with link-breaking characters
+    const records = [
+      { fileName: "a.md", tags: ["parse"], title: "Keep [] \\ x" },
+    ];
+
+    // When/Then - each one is escaped inside the link text
+    expect(buildTagIndex(records)).toContain(
+      String.raw`  - [Keep \[\] \\ x](a.md)`
+    );
+  });
+});
+
 describe("replaceTagIndex", () => {
   test("replaces only the text between the markers", () => {
     // Given - an index file with a stale index
@@ -127,6 +145,19 @@ describe("replaceTagIndex", () => {
     // Then - every inserted line ends in CRLF
     expect(updated).toBe(
       `${TAG_INDEX_START}\r\n\r\n- a\r\n- b\r\n\r\n${TAG_INDEX_END}\r\n`
+    );
+  });
+
+  test("keeps LF when only another line has a stray CRLF", () => {
+    // Given - an LF index file with one CRLF line elsewhere
+    const text = `Intro\r\n${TAG_INDEX_START}\n${TAG_INDEX_END}\n`;
+
+    // When - putting in a two-line index
+    const updated = replaceTagIndex({ index: "- a\n- b", text });
+
+    // Then - the inserted lines stay LF
+    expect(updated).toBe(
+      `Intro\r\n${TAG_INDEX_START}\n\n- a\n- b\n\n${TAG_INDEX_END}\n`
     );
   });
 
@@ -175,7 +206,10 @@ describe("docs/decisions/index.md", () => {
         text: readFileSync(join(DECISIONS_DIRECTORY, fileName), "utf8"),
       })
     );
-    const text = readFileSync(join(DECISIONS_DIRECTORY, INDEX_FILE), "utf8");
+    const text = readFileSync(
+      join(DECISIONS_DIRECTORY, BUNDLE_INDEX_FILE),
+      "utf8"
+    );
 
     // When - regenerating the index into it
     const updated = replaceTagIndex({ index: buildTagIndex(records), text });
@@ -204,4 +238,38 @@ describe("every decision record", () => {
       expect(tags).toStrictEqual([...(tags ?? [])].sort());
     }
   );
+});
+
+describe("the family tags", () => {
+  test("match the area labels in the README's label table", () => {
+    // Given - the area labels the README lists, minus the non-family ones
+    const readme = readFileSync(README_FILE, "utf8");
+    const areaLabels = [...readme.matchAll(README_AREA_LABEL)].flatMap(
+      (match) => {
+        const label = match.groups?.label;
+        const name = match.groups?.name;
+
+        return label === undefined ||
+          name === undefined ||
+          NON_FAMILY_AREAS.has(name)
+          ? []
+          : [{ label, name }];
+      }
+    );
+
+    // When - reading the label each tag's meaning names
+    const namedLabels = Object.entries(DECISION_TAGS).flatMap(
+      ([tag, meaning]) => {
+        const label = MEANING_AREA_LABEL.exec(meaning)?.groups?.label;
+
+        return label === undefined ? [] : [{ label, name: tag }];
+      }
+    );
+
+    // Then - every family has exactly one tag, named after its label
+    expect(areaLabels.length).toBeGreaterThan(0);
+    expect(namedLabels).toStrictEqual(
+      areaLabels.sort((left, right) => left.name.localeCompare(right.name))
+    );
+  });
 });

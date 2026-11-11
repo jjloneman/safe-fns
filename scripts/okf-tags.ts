@@ -19,19 +19,17 @@ import {
   TAG_INDEX_START,
   toTaggedRecord,
 } from "./lib/decision-tags.ts";
+import { BUNDLE_INDEX_FILE, isRecordFileName } from "./lib/okf-frontmatter.ts";
 
 /** The decision bundle, relative to this script. */
 const BUNDLE_DIRECTORY = path.join(import.meta.dirname, "../docs/decisions");
 
-/** The bundle's index, which holds the generated tag index. */
-const INDEX_FILE = "index.md";
-
 /** Regenerate the index, writing the file only when it changed. */
 function main(): void {
-  const indexPath = path.join(BUNDLE_DIRECTORY, INDEX_FILE);
+  const indexPath = path.join(BUNDLE_DIRECTORY, BUNDLE_INDEX_FILE);
 
   const records = readdirSync(BUNDLE_DIRECTORY)
-    .filter((fileName) => fileName.endsWith(".md") && fileName !== INDEX_FILE)
+    .filter((fileName) => isRecordFileName(fileName))
     .map((fileName) =>
       toTaggedRecord({
         fileName,
