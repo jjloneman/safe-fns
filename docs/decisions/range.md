@@ -2,6 +2,7 @@
 type: Decision
 title: How range counts
 description: "`range(end, options?)` counts `0` up to `end`, and `range(start, end, options?)` counts from `start` toward `end` in either direction, as `Iterator.range` does; `end` is excluded unless `inclusive`, each value is `start + i * step`, and a step pointing away from `end` or a count of zero or less is `[]`; a bound or step that is not a finite number, a zero step, more than 2^24 items, a step too small to change the value, or a throw returns the `fallback` option, `[]` by default; there is no bigint range."
+tags: [numbers, utilities]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-31T23:34:00Z }
 verified: { by: human:jjloneman, at: 2026-10-31T23:44:08Z }

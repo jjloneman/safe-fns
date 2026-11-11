@@ -2,6 +2,7 @@
 type: Decision
 title: What createLogger writes to the console
 description: "`createLogger(scope, options?)` returns `debug`, `error`, `info`, `log`, `trace`, and `warn`, each the current `console` method bound with a `[scope]` prefix, so the call site devtools and stack traces show is the caller's line; every read re-binds, so a `console` method replaced later still applies and a `prefix` option runs on each call; the prefix fills a `%s` slot, so `%` in it prints as written; an empty or non-string scope means no prefix, a throwing or non-string `prefix` falls back to `[scope]`, and a missing `console`, a missing method, or a throwing lookup gives a no-op."
+tags: [api-shape, hostile-input, utilities]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-02T08:40:00Z }
 verified: { by: human:jjloneman, at: 2026-11-03T02:37:04Z }

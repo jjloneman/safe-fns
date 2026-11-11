@@ -2,6 +2,7 @@
 type: Decision
 title: What trimBlank trims
 description: trimBlank, trimBlankStart, and trimBlankEnd strip exactly the characters isSafeEmpty calls blank, never splitting a grapheme cluster; a non-string returns the `fallback` option, `""` by default.
+tags: [strings, unicode]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }

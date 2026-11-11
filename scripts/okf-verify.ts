@@ -34,6 +34,7 @@ import type { RecordState, RecordSummary } from "./lib/okf-frontmatter.ts";
 
 import {
   getRecordState,
+  isRecordFileName,
   readRecordSummary,
   verifyRecord,
 } from "./lib/okf-frontmatter.ts";
@@ -491,7 +492,7 @@ async function main(): Promise<void> {
   }
 
   const all = readdirSync(path.join(REPO_ROOT, bundleDir))
-    .filter((name) => name.endsWith(".md") && name !== "index.md")
+    .filter((name) => isRecordFileName(name))
     .sort()
     .map((name) => loadCandidate(path.posix.join(bundleDir, name)))
     .filter((candidate) => candidate !== undefined);

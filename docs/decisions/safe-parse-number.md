@@ -2,6 +2,7 @@
 type: Decision
 title: What safeParseNumber and safeParseInt accept
 description: Finite numbers, safe-range bigints, and trimmed decimal strings parse; hex, units, separators, blanks, and non-finite values return the fallback, a value outside min / max returns the fallback unless clamp is set, and safeParseInt takes a strict radix with JavaScript's matching 0x / 0o / 0b prefixes.
+tags: [numbers, parse]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }

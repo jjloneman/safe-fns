@@ -1,19 +1,19 @@
 import { describe, expect, test } from "vitest";
 
+import { buildRecord } from "#test/okf-record";
+
 import {
   getRecordState,
+  isRecordFileName,
   readRecordSummary,
+  readRecordTitle,
+  splitFrontmatter,
   verifyRecord,
 } from "./okf-frontmatter.ts";
 
 const AT = "2026-10-02T13:30:00Z";
-const BODY = "\n# Title\n\nBody text.\n";
 const VERIFIED_BY = "human:jjloneman";
 const VERIFY_OPTIONS = { at: AT, verifiedBy: VERIFIED_BY };
-
-function record(frontmatter: string[]): string {
-  return `---\n${frontmatter.join("\n")}\n---\n${BODY}`;
-}
 
 const DRAFT_LINES = [
   "type: Decision",
@@ -25,7 +25,7 @@ const DRAFT_LINES = [
 describe("verifyRecord", () => {
   test("turns a draft into stable and adds a verified line after generated", () => {
     // Given - a draft record without a verified entry
-    const text = record(DRAFT_LINES);
+    const text = buildRecord(DRAFT_LINES);
 
     // When - verifying it
     const result = verifyRecord({ ...VERIFY_OPTIONS, text });
@@ -33,7 +33,7 @@ describe("verifyRecord", () => {
     // Then - stable status and a verified line after generated
     expect(result).toStrictEqual({
       isOk: true,
-      text: record([
+      text: buildRecord([
         "type: Decision",
         'title: "What every export promises"',
         "status: stable",
@@ -45,7 +45,7 @@ describe("verifyRecord", () => {
 
   test("adds verified after status when there is no generated line", () => {
     // Given - a draft record with no generated line
-    const text = record(["title: T", "status: draft", "type: Decision"]);
+    const text = buildRecord(["title: T", "status: draft", "type: Decision"]);
 
     // When - verifying it
     const result = verifyRecord({ ...VERIFY_OPTIONS, text });
@@ -53,7 +53,7 @@ describe("verifyRecord", () => {
     // Then - the verified line follows status
     expect(result).toStrictEqual({
       isOk: true,
-      text: record([
+      text: buildRecord([
         "title: T",
         "status: stable",
         `verified: { by: ${VERIFIED_BY}, at: ${AT} }`,
@@ -64,7 +64,7 @@ describe("verifyRecord", () => {
 
   test("updates an existing inline entry instead of adding a second", () => {
     // Given - a stable record already verified by the owner
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES.slice(0, 2),
       "status: stable",
       DRAFT_LINES[3] ?? "",
@@ -83,7 +83,7 @@ describe("verifyRecord", () => {
 
   test("updates the owner's entry in the list form", () => {
     // Given - a list-form verified field holding the owner's entry
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified:",
       "  - { by: human:someone, at: 2026-09-01T00:00:00Z }",
@@ -105,7 +105,7 @@ describe("verifyRecord", () => {
 
   test("appends an entry to a list that lacks the owner's", () => {
     // Given - a list-form verified field without the owner's entry
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified:",
       "  - { by: human:someone, at: 2026-09-01T00:00:00Z }",
@@ -118,7 +118,7 @@ describe("verifyRecord", () => {
     // Then - the owner's entry is appended to the list
     expect(result).toStrictEqual({
       isOk: true,
-      text: record([
+      text: buildRecord([
         ...DRAFT_LINES.slice(0, 2),
         "status: stable",
         DRAFT_LINES[3] ?? "",
@@ -132,7 +132,7 @@ describe("verifyRecord", () => {
 
   test("keeps another person's inline entry as a list item", () => {
     // Given - another person's inline verified entry
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified: { by: human:someone, at: 2026-09-01T00:00:00Z }",
     ]);
@@ -143,7 +143,7 @@ describe("verifyRecord", () => {
     // Then - their entry becomes a list item beside the owner's
     expect(result).toStrictEqual({
       isOk: true,
-      text: record([
+      text: buildRecord([
         ...DRAFT_LINES.slice(0, 2),
         "status: stable",
         DRAFT_LINES[3] ?? "",
@@ -156,7 +156,7 @@ describe("verifyRecord", () => {
 
   test("adds verified after a nested generated block, not inside it", () => {
     // Given - a generated field written as a nested block
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES.slice(0, 3),
       "generated:",
       "  by: claude-code/model",
@@ -170,7 +170,7 @@ describe("verifyRecord", () => {
     // Then - the verified line follows the whole block
     expect(result).toStrictEqual({
       isOk: true,
-      text: record([
+      text: buildRecord([
         ...DRAFT_LINES.slice(0, 2),
         "status: stable",
         "generated:",
@@ -184,7 +184,7 @@ describe("verifyRecord", () => {
 
   test("does not mistake a longer actor name for the owner", () => {
     // Given - an entry by an actor whose name starts with the owner's
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       `verified: { by: ${VERIFIED_BY}2, at: 2026-09-01T00:00:00Z }`,
     ]);
@@ -195,7 +195,7 @@ describe("verifyRecord", () => {
     // Then - their timestamp is kept and the owner gets a separate entry
     expect(result).toStrictEqual({
       isOk: true,
-      text: record([
+      text: buildRecord([
         ...DRAFT_LINES.slice(0, 2),
         "status: stable",
         DRAFT_LINES[3] ?? "",
@@ -226,7 +226,7 @@ describe("verifyRecord", () => {
     "keeps the flow-sequence form for $description",
     ({ expected, verified }) => {
       // Given - a verified field in the flow-sequence form
-      const text = record([...DRAFT_LINES, `verified: ${verified}`]);
+      const text = buildRecord([...DRAFT_LINES, `verified: ${verified}`]);
 
       // When - verifying it
       const result = verifyRecord({ ...VERIFY_OPTIONS, text });
@@ -234,7 +234,7 @@ describe("verifyRecord", () => {
       // Then - the entry is added or renewed inside the same sequence
       expect(result).toStrictEqual({
         isOk: true,
-        text: record([
+        text: buildRecord([
           ...DRAFT_LINES.slice(0, 2),
           "status: stable",
           DRAFT_LINES[3] ?? "",
@@ -246,7 +246,7 @@ describe("verifyRecord", () => {
 
   test("renews the owner's timestamp in a block-style list item", () => {
     // Given - a list item written as a block, with at: on its own line
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified:",
       "  - by: human:someone",
@@ -270,7 +270,7 @@ describe("verifyRecord", () => {
 
   test("appends the owner after block-style items without splitting them", () => {
     // Given - a block-style list without the owner's entry
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified:",
       "  - by: human:someone",
@@ -284,7 +284,7 @@ describe("verifyRecord", () => {
     // Then - the new entry follows the whole item
     expect(result).toStrictEqual({
       isOk: true,
-      text: record([
+      text: buildRecord([
         ...DRAFT_LINES.slice(0, 2),
         "status: stable",
         DRAFT_LINES[3] ?? "",
@@ -299,7 +299,7 @@ describe("verifyRecord", () => {
 
   test("rejects a verified field that is a nested mapping without the owner", () => {
     // Given - a verified field written as one nested mapping
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified:",
       "  by: human:someone",
@@ -318,7 +318,7 @@ describe("verifyRecord", () => {
 
   test("still marks a draft that carries a trailing comment", () => {
     // Given - a status line with a trailing YAML comment
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES.slice(0, 2),
       "status: draft # not settled",
       DRAFT_LINES[3] ?? "",
@@ -336,7 +336,7 @@ describe("verifyRecord", () => {
 
   test("renews a quoted timestamp and keeps its quotes", () => {
     // Given - the owner's entry with a quoted timestamp
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       `verified: { by: ${VERIFIED_BY}, at: "2026-09-28T09:00:00Z" }`,
     ]);
@@ -355,7 +355,7 @@ describe("verifyRecord", () => {
 
   test("indents a new list item like the existing ones", () => {
     // Given - list items that start at column 0
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified:",
       "- { by: human:someone, at: 2026-09-01T00:00:00Z }",
@@ -375,7 +375,7 @@ describe("verifyRecord", () => {
 
   test("renews the owner's entry inside a multi-line flow sequence", () => {
     // Given - a flow sequence spread over several lines
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified: [",
       "    { by: human:someone, at: 2026-09-01T00:00:00Z },",
@@ -397,7 +397,7 @@ describe("verifyRecord", () => {
 
   test("rejects a multi-line flow sequence without the owner's entry", () => {
     // Given - a flow sequence spread over several lines, missing the owner
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified: [",
       "    { by: human:someone, at: 2026-09-01T00:00:00Z },",
@@ -416,7 +416,7 @@ describe("verifyRecord", () => {
 
   test("renews a block-style at: line that ends in a comment", () => {
     // Given - the owner's block entry with a trailing comment
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified:",
       `  - by: ${VERIFIED_BY}`,
@@ -437,7 +437,7 @@ describe("verifyRecord", () => {
 
   test("keeps a trailing comment on an inline flow sequence", () => {
     // Given - a one-line flow sequence with a comment
-    const text = record([...DRAFT_LINES, "verified: [] # none yet"]);
+    const text = buildRecord([...DRAFT_LINES, "verified: [] # none yet"]);
 
     // When - verifying it
     const result = verifyRecord({ ...VERIFY_OPTIONS, text });
@@ -453,7 +453,7 @@ describe("verifyRecord", () => {
 
   test("leaves a non-draft status alone", () => {
     // Given - a deprecated record
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES.slice(0, 2),
       "status: deprecated",
       DRAFT_LINES[3] ?? "",
@@ -471,7 +471,7 @@ describe("verifyRecord", () => {
 
   test("keeps the file's CRLF line breaks and everything after the frontmatter", () => {
     // Given - a record with CRLF line breaks
-    const text = record(DRAFT_LINES).replaceAll("\n", "\r\n");
+    const text = buildRecord(DRAFT_LINES).replaceAll("\n", "\r\n");
 
     // When - verifying it
     const result = verifyRecord({ ...VERIFY_OPTIONS, text });
@@ -479,7 +479,7 @@ describe("verifyRecord", () => {
     // Then - every line keeps its CRLF ending
     expect(result).toStrictEqual({
       isOk: true,
-      text: record([
+      text: buildRecord([
         ...DRAFT_LINES.slice(0, 2),
         "status: stable",
         DRAFT_LINES[3] ?? "",
@@ -507,7 +507,7 @@ describe("verifyRecord", () => {
 
   test("adds only verified to a record with no status line", () => {
     // Given - a record whose absent status counts as stable
-    const text = record(["type: Decision", "title: T"]);
+    const text = buildRecord(["type: Decision", "title: T"]);
 
     // When - verifying it
     const result = verifyRecord({ ...VERIFY_OPTIONS, text });
@@ -515,7 +515,7 @@ describe("verifyRecord", () => {
     // Then - the entry is added at the end and no status line appears
     expect(result).toStrictEqual({
       isOk: true,
-      text: record([
+      text: buildRecord([
         "type: Decision",
         "title: T",
         `verified: { by: ${VERIFIED_BY}, at: ${AT} }`,
@@ -527,7 +527,7 @@ describe("verifyRecord", () => {
     "promotes a quoted draft: %s",
     (statusLine) => {
       // Given - a draft status written with quotes
-      const text = record([...DRAFT_LINES.slice(0, 2), statusLine]);
+      const text = buildRecord([...DRAFT_LINES.slice(0, 2), statusLine]);
 
       // When - verifying it
       const result = verifyRecord({ ...VERIFY_OPTIONS, text });
@@ -544,7 +544,7 @@ describe("verifyRecord", () => {
     "replaces an empty verified value: %s",
     (emptyValue) => {
       // Given - a verified field with a null value
-      const text = record([...DRAFT_LINES, `verified: ${emptyValue}`]);
+      const text = buildRecord([...DRAFT_LINES, `verified: ${emptyValue}`]);
 
       // When - verifying it
       const result = verifyRecord({ ...VERIFY_OPTIONS, text });
@@ -552,7 +552,7 @@ describe("verifyRecord", () => {
       // Then - the null becomes the owner's inline entry
       expect(result).toStrictEqual({
         isOk: true,
-        text: record([
+        text: buildRecord([
           ...DRAFT_LINES.slice(0, 2),
           "status: stable",
           DRAFT_LINES[3] ?? "",
@@ -564,7 +564,7 @@ describe("verifyRecord", () => {
 
   test("adds a fresh entry beside a block-style owner entry that has no timestamp", () => {
     // Given - the owner's block entry lacks an at: line
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified:",
       `  - by: ${VERIFIED_BY}`,
@@ -587,7 +587,7 @@ describe("verifyRecord", () => {
 describe("readRecordSummary", () => {
   test("reads the fields the checklist shows", () => {
     // Given - a verified record
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       `verified: { by: ${VERIFIED_BY}, at: 2026-09-28T09:00:00Z }`,
     ]);
@@ -607,7 +607,7 @@ describe("readRecordSummary", () => {
 
   test("reads the owner's timestamp out of a list, ignoring other people's", () => {
     // Given - a list that holds another person's entry first
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       "verified:",
       "  - { by: human:someone, at: 2026-09-01T00:00:00Z }",
@@ -623,7 +623,7 @@ describe("readRecordSummary", () => {
 
   test("reads generated.at out of a nested generated block", () => {
     // Given - a generated field written as a nested block
-    const text = record([
+    const text = buildRecord([
       "status: draft",
       "generated:",
       "  by: claude-code/model",
@@ -639,7 +639,7 @@ describe("readRecordSummary", () => {
 
   test("ignores an actor whose name merely starts with the owner's", () => {
     // Given - only a longer actor name has verified the record
-    const text = record([
+    const text = buildRecord([
       ...DRAFT_LINES,
       `verified: { by: ${VERIFIED_BY}2, at: 2026-09-28T09:00:00Z }`,
     ]);
@@ -653,7 +653,7 @@ describe("readRecordSummary", () => {
 
   test("reads quoted timestamps without their quotes", () => {
     // Given - quoted generated and verified timestamps
-    const text = record([
+    const text = buildRecord([
       "status: stable",
       'generated: { by: claude-code/model, at: "2026-10-01T15:00:00Z" }',
       `verified: { by: ${VERIFIED_BY}, at: '2026-10-02T15:00:00Z' }`,
@@ -670,7 +670,7 @@ describe("readRecordSummary", () => {
 
   test("reads a quoted status that carries a trailing comment", () => {
     // Given - a quoted draft status with a comment after it
-    const text = record(['status: "draft" # wip']);
+    const text = buildRecord(['status: "draft" # wip']);
 
     // When - reading its summary
     const summary = readRecordSummary({ text, verifiedBy: VERIFIED_BY });
@@ -681,7 +681,7 @@ describe("readRecordSummary", () => {
 
   test("reads an unknown status as absent", () => {
     // Given - a status OKF doesn't define
-    const text = record(["status: stabel"]);
+    const text = buildRecord(["status: stabel"]);
 
     // When - reading its summary
     const summary = readRecordSummary({ text, verifiedBy: VERIFIED_BY });
@@ -692,7 +692,7 @@ describe("readRecordSummary", () => {
 
   test("leaves absent fields undefined", () => {
     // Given - a record with only a status
-    const text = record(["status: draft"]);
+    const text = buildRecord(["status: draft"]);
 
     // When - reading its summary
     const summary = readRecordSummary({ text, verifiedBy: VERIFIED_BY });
@@ -763,5 +763,60 @@ describe("getRecordState", () => {
 
     // Then - the state is $expected
     expect(state).toBe(expected);
+  });
+});
+
+describe("splitFrontmatter", () => {
+  test("keeps LF when only the body has a stray CRLF", () => {
+    // Given - an LF record whose body ends a line in CRLF
+    const text = `${buildRecord(["status: draft"])}Pasted line.\r\n`;
+
+    // When - splitting it
+    const block = splitFrontmatter(text);
+
+    // Then - the frontmatter still reads, with LF line breaks
+    expect(block?.lineBreak).toBe("\n");
+    expect(block?.lines).toStrictEqual(["status: draft"]);
+  });
+
+  test("uses CRLF when the opening fence ends in CRLF", () => {
+    // Given - a record written with Windows line breaks
+    const text = buildRecord(["status: draft"]).replaceAll("\n", "\r\n");
+
+    // When - splitting it
+    const block = splitFrontmatter(text);
+
+    // Then - the frontmatter reads, with CRLF line breaks
+    expect(block?.lineBreak).toBe("\r\n");
+    expect(block?.lines).toStrictEqual(["status: draft"]);
+  });
+});
+
+describe("readRecordTitle", () => {
+  test("reads a quoted title without its quotes", () => {
+    // Given - a record with a quoted title
+    const text = buildRecord(['title: "What every export promises"']);
+
+    // When/Then - the bare title comes back
+    expect(readRecordTitle(text)).toBe("What every export promises");
+  });
+
+  test.each([
+    { description: "no title line", text: buildRecord(["type: Decision"]) },
+    { description: "no frontmatter", text: "# Title\n" },
+  ])("returns undefined for $description", ({ text }) => {
+    // Given/When/Then - nothing to read
+    expect(readRecordTitle(text)).toBeUndefined();
+  });
+});
+
+describe("isRecordFileName", () => {
+  test.each([
+    { description: "a record", fileName: "range.md", isRecord: true },
+    { description: "the bundle index", fileName: "index.md", isRecord: false },
+    { description: "a non-Markdown file", fileName: "a.txt", isRecord: false },
+  ])("answers $isRecord for $description", ({ fileName, isRecord }) => {
+    // Given/When/Then - only Markdown files other than the index are records
+    expect(isRecordFileName(fileName)).toBe(isRecord);
   });
 });

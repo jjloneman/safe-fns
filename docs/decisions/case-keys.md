@@ -2,6 +2,7 @@
 type: Decision
 title: How camelCaseKeys and snakeCaseKeys convert an object's keys
 description: "`camelCaseKeys(value, options?)` and `snakeCaseKeys(value, options?)` return a copy whose string keys are converted with `camelCase` and `snakeCase`, at every depth unless `deep` is `false`, leaving any key named in `exclude` as it is; they walk only arrays and plain objects, keep everything else whole, copy symbol keys and an own `__proto__` key as data, keep cycles, let the later of two colliding keys win, and return the input unchanged when anything throws; `CamelCaseKeys<T, Leaf, Excluded>` and `SnakeCaseKeys<T, Leaf, Excluded>` type the default call and `exclude`, built on `CamelCase<S>` and `SnakeCase<S>`, which follow the splitter exactly on ASCII and widen to `string` beyond it."
+tags: [case, hostile-input, objects]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-05T04:17:36Z }
 verified: { by: human:jjloneman, at: 2026-11-05T04:20:53Z }

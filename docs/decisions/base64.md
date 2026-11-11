@@ -2,6 +2,7 @@
 type: Decision
 title: How decodeBase64 and encodeBase64 read and write Base64
 description: UTF-8 text and bytes, not atob's Latin-1 strings, by the grammar `atob` and `Uint8Array.fromBase64` share, built on `atob` / `btoa` with portable UTF-8 and no feature check; `decodeBase64ToBytes` returns bytes, `urlSafe` picks base64url, and bad input, invalid UTF-8, and lone surrogates return the fallback unless `replaceInvalidWith` is set.
+tags: [encoding]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-21T04:44:23Z }
 verified: { by: human:jjloneman, at: 2026-10-21T15:51:53Z }

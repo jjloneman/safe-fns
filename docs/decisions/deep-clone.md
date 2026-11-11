@@ -2,6 +2,7 @@
 type: Decision
 title: What deepClone copies and what it shares
 description: deepClone copies data (plain objects, arrays, `Map`, `Set` and their keys and members, and the value-like built-ins) and shares everything it can't copy faithfully (class instances, functions, host objects) by reference; `mapSetKeys`, `uncopyable`, and `unreadable` opt into sharing keys, handing the rest to `structuredClone`, and omitting what throws; cycles and shared references are kept, it runs where `structuredClone` doesn't, and a throw returns the `fallback` option, `undefined` by default.
+tags: [cross-realm, objects]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-11-10T01:57:53Z }
 verified: { by: human:jjloneman, at: 2026-11-10T07:41:00Z }

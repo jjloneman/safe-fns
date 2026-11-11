@@ -39,6 +39,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - Each function's tests sit beside it as `*.test.ts` and `*.test-d.ts`.
 - `test/` — shared test harnesses, imported as `#test/*` (see [Testing](#-testing)).
   - `test/consumer/` — fixtures run by `pnpm test:consumer` against the packed tarball (see [Build & package](#-build--package)).
+  - `test/okf-record.ts` — `buildRecord`, the stub OKF record the `scripts/lib` frontmatter tests build their fixtures with.
 - `scripts/` — repo scripts, run directly by Node (which strips their types), so they stick to erasable TypeScript syntax.
   - Relative imports name the `.ts` file (`./lib/publish-ci-report.ts`), since Node resolves only the real file name.
   - Every console log line a script prints starts with `[<script-name>]` (e.g. `[okf-verify] …`), including each line of a multi-line message, so its output is traceable in a log; an interactive prompt's own UI is exempt.
@@ -47,7 +48,7 @@ These bind every exported function. A change that breaks one is a bug, even if i
   - An error message says only what the error shows — read its `code` or `stderr` rather than guessing a cause.
   - Dates and durations go through luxon, a dev dependency: a duration constant is `Duration.fromObject({ minutes: 15 })`, ending in `.toMillis()` only where an API takes milliseconds, and date math uses `DateTime` and `Duration` methods rather than hand-multiplied numbers.
   - `scripts/post-ci-timings.ts` is the exception: its CI job runs it before `pnpm install`, so it imports nothing outside Node.
-  - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/lib/typescript-versions.ts` is the consumer TypeScript matrix that `pnpm test:consumer` and `pnpm research:types` both compile with; `scripts/**/*.test.ts` runs in the `node` project.
+  - `scripts/okf-verify.ts` is the interactive `pnpm okf:verify` flow, and `scripts/lib/okf-frontmatter.ts` holds the pure frontmatter functions it uses; `scripts/okf-tags.ts` is `pnpm okf:tags`, which regenerates the tag index in `docs/decisions/index.md` from the tag vocabulary and readers in `scripts/lib/decision-tags.ts`; `scripts/lib/typescript-versions.ts` is the consumer TypeScript matrix that `pnpm test:consumer` and `pnpm research:types` both compile with; `scripts/**/*.test.ts` runs in the `node` project.
   - `scripts/research/` is the comparison harness's host side: `run.ts` (`pnpm research`) orchestrates the containers through `command.ts` (runs a command and collects its output), `usage-search.ts` (`pnpm research:usage`) queries GitHub's code search and npm, `fold-audit.ts` (`pnpm research:audit`) writes the `toBasicAscii` fold audit, `type-checks.ts` (`pnpm research:types`) compiles the planned type helpers with every consumer TypeScript version from the cases in `type-check-cases.ts`, and `codec.ts`, `compose.ts`, `fold-audit-table.ts`, `images.ts`, `inputs.ts`, `results.ts`, `sources.ts`, `tables.ts`, `type-check-table.ts`, `usage-tally.ts`, `call-arguments.ts`, and `logging.ts` are the pure, tested parts.
 - `research/` — the cross-language comparison harness (see [Research harness](#-research-harness)), outside `files`, so never published.
 - `dist/` — build output (gitignored), the only directory published.
@@ -425,6 +426,11 @@ Semantic and design decisions — what "empty" means, how a function is named, w
 - Check a decision's `verified` field before changing the behavior it describes:
   - `verified` by `human:jjloneman` means the repo owner reviewed it — change it only with their agreement.
   - No `verified` means it is an unreviewed draft.
+- Every decision carries `tags` from the vocabulary in [docs/decisions/index.md](docs/decisions/index.md#tag-vocabulary):
+  - pick one to four, sorted alphabetically: the function's family tag if it has one, named as its `area:` label without the emoji, plus any cross-cutting concern the decision settles; a decision about a package-wide rule may have no family tag;
+  - a new tag goes into `DECISION_TAGS` in `scripts/lib/decision-tags.ts`; a family tag's meaning names its label, which a test checks against the README's label table;
+  - after changing tags or the vocabulary, run `pnpm okf:tags` to regenerate the tag index in `docs/decisions/index.md`, since a test fails while it is stale;
+  - adding `tags` is not a change of substance, so leave `generated` and `verified` alone.
 - An agent that writes or edits a decision records itself in `generated` and **never** adds a `verified` entry.
 - **To verify records, run `pnpm okf:verify`** (or edit the two frontmatter lines by hand):
   - it lists the records changed on the branch, marks the ones you pick `status: stable` with a `verified` entry, and commits just those files;
