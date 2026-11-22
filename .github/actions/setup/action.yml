@@ -11,7 +11,7 @@ runs:
   steps:
     # `cache: true` restores the pnpm store; the `pnpm install` below still has
     # to link node_modules out of it, which no store cache can remove.
-    - uses: pnpm/action-setup@v6.1.0
+    - uses: pnpm/action-setup@v6.1.1
       with:
         cache: true
 
