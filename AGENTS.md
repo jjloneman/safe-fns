@@ -395,8 +395,10 @@ No npm dependency may enter the lockfile until it has been published for **at le
 - **TypeScript stays on 6.0** until `typescript-eslint` supports TypeScript 7; upgrade it in its own `chore(deps)` change.
   - The `typescript-<version>` aliases are consumer-test fixtures, not the repo's compiler; bump them freely within their minor.
 - **`@types/node` tracks the `engines.node` floor (22)**, not the newest Node, so the typecheck rejects APIs that a supported Node doesn't have.
-- **Developing needs a newer Node than `engines.node`.**
+- **Develop on Node 26, a newer Node than `engines.node`.**
   - `engines.node` is the floor for code that imports the package; the dev tools set their own (jsdom 30 needs `^22.22.2 || ^24.15.0 || >=26`).
+  - CI's setup action defaults to 26.
+  - There's no `devEngines` floor: the test matrix's 22 and 24 legs run `pnpm install` and `pnpm test`, which a `>=26` floor would block.
 
 ## 🚀 Versioning & releases
 

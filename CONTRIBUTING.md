@@ -22,8 +22,9 @@ Thanks for helping out! This guide covers the dev loop and how to add a function
 
 ## ✅ Prerequisites
 
-- **Node** 22.22.2+, 24.15.0+, or 26+.
-  - The package supports Node 22 and newer, but the dev tools need a recent patch release.
+- **Node** 26 for development; CI lints, typechecks, and releases on it.
+  - The package supports Node 22 and newer, and CI tests it on 22, 24, and 26.
+  - The dev tools run on 22.22.2+ and 24.15.0+ too, which the older test legs rely on.
 - **pnpm**, installed once globally.
   - `package.json`'s `packageManager` field decides the version that actually runs.
 - **A Docker-compatible runtime**, only for `pnpm research` (OrbStack, Colima, or Docker Desktop); see [research/README.md](research/README.md).
