@@ -6,5 +6,5 @@
   "devDependencies": {
     "assemblyscript": "0.28.20"
   },
-  "packageManager": "pnpm@12.5.1"
+  "packageManager": "pnpm@12.22.0"
 }
