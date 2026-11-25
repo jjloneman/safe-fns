@@ -1,6 +1,6 @@
 {
   "name": "safe-fns",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "🛟 Zero-dependency, strongly typed helpers that never throw — bad input returns a fallback you choose.",
   "keywords": [
     "base64",
